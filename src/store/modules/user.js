@@ -41,7 +41,7 @@ const mutations = {
   },
   SET_showChatBox: (state,data) => {
     // if(!state.wss){
-    //   var ws = new WebSocket("wss://chao.fun/ws/v0/forumChat/1"); 
+    //   var ws = new WebSocket("wss://chao.fun/ws/v0/forumChat/1");
     //   ws.onopen = function() {
     //     ws.send("{\"type\":\"1\",\"message\":\"你好\"}");
     //   };
@@ -51,12 +51,12 @@ const mutations = {
     //   };
     //   state.wss = ws;
     // }
-    
+
     state.showChatBox = data
   },
   SET_wss: (state,fun) => {
     // if(!state.wss){
-    //   var ws = new WebSocket("wss://chao.fun/ws/v0/forumChat/1"); 
+    //   var ws = new WebSocket("wss://chao.fun/ws/v0/forumChat/1");
     //   ws.onopen = function() {
     //     ws.send("{\"type\":\"1\",\"message\":\"你好\"}");
     //   };
@@ -115,7 +115,7 @@ const actions = {
         // }else{
         //   resolve()
         // }
-        
+
       }).catch(error => {
         reject(error)
       })
@@ -136,6 +136,8 @@ const actions = {
         setTimeout(()=>{
           if (location.pathname.includes('/tuxun/')) {
             location.href = '/tuxun/'
+          } else if (location.pathname.includes('/scratch')) {
+            location.href = '/scratch'
           } else if(location.pathname == '/'){
             location.reload()
           }else{
@@ -190,7 +192,7 @@ const actions = {
       const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
 
       // dynamically add accessible routes
-      
+
       router.addRoutes(accessRoutes)
 
       // reset visited views and cached views

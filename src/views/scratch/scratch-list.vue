@@ -4,7 +4,6 @@
       <el-radio-button v-if="has1Day" label="1day">今日最热</el-radio-button>
       <el-radio-button label="hot">最热</el-radio-button>
       <el-radio-button label="new">最新</el-radio-button>
-      <el-radio-button  v-if="hasCreate" label="mine">我创建的</el-radio-button>
     </el-radio-group>
 
     <el-pagination

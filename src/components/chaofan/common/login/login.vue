@@ -5,7 +5,7 @@
         <img @click="cancelLogin" class="cancel" :src='cancelImg'/>
         <div class="tnames">
           <div @click="checkoutLoginType('scan')" :class="['tts',{'tts_act':loginType=='scan'}]">
-            <img class="codes" :src="imgOrigin+'biz/7303906d6ddbb39a3616ac81f9d9a46c.png'" alt="">
+            <img v-if="!ISPHONE" class="codes" :src="imgOrigin+'biz/7303906d6ddbb39a3616ac81f9d9a46c.png'" alt="">
             微信扫码
           </div>
           <div @click="checkoutLoginType('account')" :class="['tts',{'tts_act':loginType=='account'}]">账号登录</div>
@@ -494,8 +494,6 @@ import { Checkbox } from 'element-ui'
       .tts:nth-child(2){
         padding-left: 20px;
         padding-right: 20px;
-
-
       }
       .tts:nth-child(3){
         padding-left: 20px;
@@ -626,4 +624,34 @@ iframe{
   width: 350px;
   height: 400px;
 }
+
+
+@media only screen and (max-width: 768px) {
+  .ycovers{
+    .ycontainer {
+      .tnames {
+        .tts:nth-child(1) {
+          font-size: 16px;
+          padding-right: 8px;
+        }
+
+        .tts:nth-child(2) {
+          padding-right: 8px;
+          padding-left: 8px;
+          font-size: 16px;
+        }
+
+        .tts:nth-child(3) {
+          padding-left: 8px;
+          font-size: 16px;
+        }
+
+        .tts_act {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
 </style>

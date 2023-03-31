@@ -13,6 +13,7 @@
         <div class="id">
           (uid: {{userStats.userId}})
         </div>
+<!--        <el-button type="alte" v-if="userStats.userId = $store.state.user.userInfo.userId">退出登陆</el-button>-->
       </div>
 
       <div v-if="userStats"  class="stats">

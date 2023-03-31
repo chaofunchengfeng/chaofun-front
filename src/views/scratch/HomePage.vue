@@ -1,18 +1,25 @@
 <template>
   <div class="container">
-    <div style="text-align: center; width: 100%; font-size: 32px;font-weight: bold; padding-top: 1rem; padding-bottom: 2rem"> 炒饭小测验
-      <div v-if="totalTimes" style="font-size: 16px">做题也可以很快乐 -「炒饭社区」出品</div>
+    <div class="top-info">
+      炒饭小测验
+      <div style="position: absolute; right: 8px; top: 8px">
+        <el-button @click="toSelf">个人首页</el-button>
+        <div></div>
+        <el-button v-if="$store.state.user.islogin" @click="logout">退出登录</el-button>
+      </div>
+      <div v-if="totalTimes" style="font-size: 16px">做题也可以很快乐</div>
+      <div v-if="totalTimes" style="font-size: 16px">「炒饭社区」出品</div>
       <div v-if="totalTimes" style="font-size: 16px">交流QQ群号: <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=IuAqwN27">594837569</a></div>
       <div v-if="totalTimes" style="font-size: 16px">小测验文档: <a target="_blank" href="https://www.yuque.com/chaofun/scratch">文档地址</a> </div>
       <div v-if="totalTimes" style="font-size: 16px">总测验次数: {{totalTimes}}</div>
       <div class="top-right">
 <!--        <el-button type="primary" @click="toUserHome" round>个人首页</el-button>-->
         <el-button @click="toCreate" round>创建小测验</el-button>
-        <div></div>
         <el-button type="primary" @click="random" round>随机小测验</el-button>
       </div>
     </div>
 
+    <div ></div>
     <section v-if="list" class="list_container">
       <div>
         <el-button type="warning" @click="showHotTags=!showHotTags" round>热门标签</el-button>
@@ -33,6 +40,7 @@
 import * as api from '../../api/api'
 import page from "../permission/page";
 import ScratchList from "./scratch-list";
+import {tuxunJump} from "../tuxun/common";
 
 export default {
   name: "HomePage",
@@ -95,6 +103,19 @@ export default {
     },
     gotoSearch() {
       window.location.href = '/scratch/search'
+    },
+    toSelf() {
+      this.doLoginStatus().then((res) => {
+        if (res) {
+          window.location.href = '/scratch/user/' + this.$store.state.user.userInfo.userId;
+        }
+      });
+    },
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      setTimeout(() => {
+        window.location.href = '/scratch'
+      }, 1000);
     }
   },
 }
@@ -104,6 +125,16 @@ export default {
 .container {
   height: 100%;
   width: 100%;
+  .top-info {
+    text-align: left;
+    width: 40%;
+    margin: auto;
+    font-size: 32px;
+    font-weight: bold;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    position: relative;
+  }
   .list_container {
     max-width: 40%;
     margin: auto;
@@ -113,6 +144,9 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .container {
+    .top-info {
+      width: 90%;
+    }
     .list_container {
       max-width: 90%;
       margin: auto;
