@@ -32,8 +32,10 @@
       </tbody>
     </table>
     <el-button  size="mini" @click="addColumn">加一行</el-button>
+    <el-button  v-if="chooseIndex != null" size="mini" @click="addRowFront">上面加一行</el-button>
+    <el-button  v-if="chooseIndex != null" size="mini" @click="addRowBehind">下面加一行</el-button>
     <el-button  size="mini" @click="deleteColumn">删除最后一行</el-button>
-    <el-button  v-if="chooseIndex != null" size="mini" @click="deleteChooseColumn">删除选中行</el-button>
+    <el-button  v-if="chooseIndex != null" size="mini" @click="deleteChooseRow">删除选中行</el-button>
     <el-button  size="mini" @click="shuffle">打乱顺序</el-button>
     <div></div>
   </div>
@@ -66,7 +68,15 @@ export default {
         }
       });
     },
-    deleteChooseColumn() {
+    addRowFront() {
+      if (this.chooseIndex !== null) {
+        this.dataForm.splice(this.chooseIndex, 0, {});
+      }
+    },
+    addRowBehind() {
+      this.dataForm.splice(this.chooseIndex + 1, 0, {});
+    },
+    deleteChooseRow() {
       if (this.chooseIndex !== null) {
         this.dataForm.splice(this.chooseIndex, 1);
         this.chooseIndex = null;
