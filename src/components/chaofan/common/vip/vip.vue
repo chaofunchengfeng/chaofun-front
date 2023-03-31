@@ -12,12 +12,12 @@
           </div>
           <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
             <div>
-              <div style="font-size: 20px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">69.99</span>
-              </div>
+<!--              <div style="font-size: 20px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">69.99</span>-->
+<!--              </div>-->
               <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>39.99
+                <span style="font-size: 10px;">￥</span>69.99
               </div>
               <div>
                 一年
@@ -27,12 +27,12 @@
           </div>
           <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
             <div>
-              <div style="font-size: 20px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">9.99</span>
-              </div>
+<!--              <div style="font-size: 20px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">9.99</span>-->
+<!--              </div>-->
               <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>5.99
+                <span style="font-size: 10px;">￥</span>9.99
               </div>
               <div>
                 一个月
