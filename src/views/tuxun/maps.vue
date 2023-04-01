@@ -2,6 +2,9 @@
   <div class="container">
     <div class="back_home">
       <el-button @click="goHome" round>←首页</el-button>
+      <el-button type="primary" @click="randomTrain" round>随机练习赛</el-button>
+    </div>
+    <div class="top-right">
       <el-button type="primary" @click="goMapMakeHome" round>自建</el-button>
     </div>
     <div class="nav">
@@ -207,6 +210,13 @@ export default {
           tuxunJump('/tuxun/my_maps');
         }
       });
+    },
+    randomTrain() {
+      api.getByPath('/api/v0/tuxun/maps/randomTrain').then(res => {
+        if (res.success) {
+          tuxunJump('/tuxun/maps_detail?mapsId=' + res.data)
+        }
+      })
     }
   },
 }
@@ -234,6 +244,16 @@ export default {
     position: absolute;
     padding-top: 1rem;
     padding-left: 1rem;
+  }
+  .top-right {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  .back_home {
+    position: absolute;
+    padding-top: 1rem;
+    padding-right: 1rem;
   }
   section {
     padding-top: 3rem;
