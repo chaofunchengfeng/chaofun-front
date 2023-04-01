@@ -2,7 +2,7 @@
   <div class="container">
     <div class="back_home">
       <el-button @click="goHome" round>←首页</el-button>
-      <el-button type="primary" @click="randomTrain" round>随机练习赛</el-button>
+      <el-button type="primary" @click="randomTrain" round>随机</el-button>
     </div>
     <div class="top-right">
       <el-button type="primary" @click="goMapMakeHome" round>自建</el-button>

@@ -43,14 +43,9 @@ export default {
     }
   },
   mounted() {
-    this.getHotMaps();
+    this.search();
   },
   methods: {
-    getHotMaps(){
-      api.getByPath('/api/v0/tuxun/maps/list').then(res=>{
-        this.pagedata = res.data
-      })
-    },
     search() {
       api.getByPath('/api/v0/tuxun/maps/search', {keyword: this.keyword}).then(res=>{
         this.pagedata = res.data
