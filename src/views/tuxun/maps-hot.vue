@@ -52,6 +52,7 @@ export default {
     }
   },
   created() {
+    this.history = history;
     this.list();
   },
   methods: {

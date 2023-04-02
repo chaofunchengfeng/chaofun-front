@@ -37,28 +37,28 @@
         </div>
       </div>
 
-<!--      <div class="session_head">编辑推荐</div>-->
-<!--      <div class="line"></div>-->
-<!--      <div class="grid_main">-->
-<!--        <div v-for="(item, index) in newPagedata" @click.stop="toMapsDetail(item)" :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">-->
-<!--          <div class="title">-->
-<!--            {{item.name}}-->
-<!--          </div>-->
-<!--          <div class="players" v-if="item.pcount">-->
-<!--            地点: {{item.pcount}}-->
-<!--          </div>-->
-<!--          <div class="players">-->
-<!--            人次: {{item.players}}-->
-<!--          </div>-->
-<!--          <div v-if="item.difficulty" class="players">-->
-<!--            难度: {{item.difficulty}}-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定</el-button>-->
-<!--            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动</el-button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div class="session_head">编辑推荐</div>
+      <div class="line"></div>
+      <div class="grid_main">
+        <div v-for="(item, index) in recommend" @click.stop="toMapsDetail(item)" :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
+          <div class="title">
+            {{item.name}}
+          </div>
+          <div class="players" v-if="item.pcount">
+            地点: {{item.pcount}}
+          </div>
+          <div class="players">
+            人次: {{item.players}}
+          </div>
+          <div v-if="item.difficulty" class="players">
+            难度: {{item.difficulty}}
+          </div>
+          <div>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定</el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动</el-button>
+          </div>
+        </div>
+      </div>
 <!--      <el-button style="margin-top: 1rem">查看更多</el-button>-->
 
       <div class="session_head">最新发布</div>
@@ -128,6 +128,7 @@ export default {
       pagedata: [],
       newPagedata: [],
       recentPagedata: [],
+      recommend: [],
       search: false,
       keyword: '',
       timer: 0
@@ -164,6 +165,14 @@ export default {
       api.getByPath('/api/v0/tuxun/maps/listNew', {count: 6}).then(res=>{
         this.newPagedata = res.data.slice(0, 3);
         this.newPagedata.forEach(function (item) {
+          this.addDifficulty(item)
+        }.bind(this));
+      })
+    },
+    getRecommendMaps(){
+      api.getByPath('/api/v0/tuxun/maps/listEditorChoose', {count: 3}).then(res=>{
+        this.recommend = res.data.slice(0, 3);
+        this.recommend.forEach(function (item) {
           this.addDifficulty(item)
         }.bind(this));
       })
