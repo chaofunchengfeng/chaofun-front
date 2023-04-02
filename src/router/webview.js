@@ -256,6 +256,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/maps-hot',
+    component: () => import('@/views/tuxun/maps-hot'),
+    name: 'maps-hot',
+    meta: { title: '最热题库-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/wonders',
     component: () => import('@/views/tuxun/wonders'),
     name: 'tuxun-wonders',

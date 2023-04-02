@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="back_home" @click="goHome">
+    <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>
-      <el-button v-else @click="goHome"  round>←首页</el-button>
+      <el-button @click="goHome"  round>←首页</el-button>
     </div>
     <div class="nav">
       我的题库
@@ -91,6 +91,7 @@ export default {
       try {
         window.history.back();
       } catch (e) {
+        log.error(e);
         tuxunJump('/tuxun/')
       }
     },
@@ -117,6 +118,7 @@ export default {
     position: absolute;
     padding-top: 1rem;
     padding-left: 1rem;
+    text-align: left;
   }
   .game_entrance {
     box-sizing: border-box;

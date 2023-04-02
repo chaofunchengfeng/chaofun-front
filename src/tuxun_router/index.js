@@ -19,7 +19,7 @@ export const constantRoutes = [
   {
     path: '/wxPay',
     component: () => import('@/views/tuxun/pay'),
-    meta: { title: '图寻-支付'},
+    meta: { title: '支付-图寻'},
     hidden: true
   },
   {
@@ -58,7 +58,7 @@ export const constantRoutes = [
   {
     path: '/my_maps',
     component: () => import('@/views/tuxun/MyMaps'),
-    meta: { title: '图寻-练习赛'},
+    meta: { title: '练习赛-图寻'},
     hidden: true
   },
   {
@@ -130,6 +130,13 @@ export const constantRoutes = [
     component: () => import('@/views/tuxun/MapsDetail'),
     name: 'maps',
     meta: { title: '题库详情-图寻'},
+    hidden: true
+  },
+  {
+    path: '/maps-hot',
+    component: () => import('@/views/tuxun/maps-hot'),
+    name: 'maps-hot',
+    meta: { title: '最热题库-图寻'},
     hidden: true
   },
   {
