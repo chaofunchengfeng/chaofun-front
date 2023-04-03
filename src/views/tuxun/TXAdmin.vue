@@ -7,7 +7,7 @@
       <el-button @click="deleteQ"  style="white-space: pre-line;">删除题目(方向键下)</el-button>
     </div>
     <div v-if="this.mapsName" class="info">
-      用户投稿练习赛：{{this.mapsName}}
+      用户投稿练习题库：{{this.mapsName}}
     </div>
     <div v-if="this.nation" class="location" >
       {{this.nation}}

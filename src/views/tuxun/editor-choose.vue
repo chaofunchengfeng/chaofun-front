@@ -5,7 +5,7 @@
       <el-button @click="goHome" round>←首页</el-button>
     </div>
     <div class="nav">
-      练习题库-最热
+      练习题库-编辑推荐
     </div>
     <!--    <div class="tab-container">-->
     <!--      <div class="tab">-->
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     list() {
-      api.getByPath('/api/v0/tuxun/maps/list', {duration: 'all',count: 100}).then(res => {
+      api.getByPath('/api/v0/tuxun/maps/listEditorChoose', {count: 30}).then(res => {
         if (res.success) {
           this.pagedata = res.data;
           this.pagedata.forEach(function (item) {
@@ -90,26 +90,6 @@ export default {
       } catch (e) {
         tuxunJump('/tuxun/')
       }
-    },
-    toMaps(item, type) {
-      api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-      })
-      this.doLoginStatus().then((res) => {
-        if (res) {
-
-          api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
-            if (res.success) {
-              tuxunJump('/tuxun/challenge?challengeId=' + res.data);
-            } else {
-              if (res.errorCode === 'need_vip') {
-                this.$vip({})
-              }
-            }
-          })
-        }})
-    },
-    toMapsDetail(item, type) {
-      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id )
     },
   }
 }

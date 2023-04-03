@@ -31,7 +31,7 @@ export const constantRoutes = [
   {
     path: '/maps',
     component: () => import('@/views/tuxun/maps'),
-    meta: { title: '图寻-练习赛'},
+    meta: { title: '图寻-练习题库'},
     hidden: true
   },
   {
@@ -58,7 +58,7 @@ export const constantRoutes = [
   {
     path: '/my_maps',
     component: () => import('@/views/tuxun/MyMaps'),
-    meta: { title: '练习赛-图寻'},
+    meta: { title: '练习题库-图寻'},
     hidden: true
   },
   {

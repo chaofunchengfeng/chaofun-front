@@ -19,9 +19,9 @@
         </div>
         <div>
           <el-button style="background-color: unset; color: white"  type="primary" @click.stop="toMapsModify(item.id)" round>编辑</el-button>
-          <el-button style="background-color: unset; color: white"  v-if="item.publish" type="warning" @click="unPublish(item.id)" round>撤回</el-button>
-          <el-button style="background-color: unset; color: white"  v-if="!item.publish" type="primary" @click="publish(item.id)" round>发布</el-button>
-          <el-button style="background-color: unset; color: white"  type="danger" @click="deleteMaps(item.id)" round>删除</el-button>
+          <el-button style="background-color: unset; color: white"  v-if="item.publish" type="warning" @click.stop="unPublish(item.id)" round>撤回</el-button>
+          <el-button style="background-color: unset; color: white"  v-if="!item.publish" type="primary" @click.stop="publish(item.id)" round>发布</el-button>
+          <el-button style="background-color: unset; color: white"  type="danger" @click.stop="deleteMaps(item.id)" round>删除</el-button>
         </div>
       </div>
     </div>

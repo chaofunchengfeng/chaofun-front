@@ -8,10 +8,10 @@
       <el-button type="primary" @click="goMapMakeHome" round>自建</el-button>
     </div>
     <div class="nav">
-      练习赛题库
+      练习题库
     </div>
     <div @click="searchFocus">
-      <el-input v-model="keyword" id="input" placeholder="搜索练习赛" style="margin-top: 2rem; max-width: 60%;" round></el-input>
+      <el-input v-model="keyword" id="input" placeholder="搜索练习题库" style="margin-top: 2rem; max-width: 60%;" round></el-input>
     </div>
     <section class="game_entrance" v-if="!search">
       <div class="first_session_head" v-if="recentPagedata && recentPagedata.length >= 1">最近玩过</div>
@@ -135,7 +135,7 @@ export default {
     }
   },
   created(){
-    // document.title = "图寻-练习赛";
+    // document.title = "图寻-练习题库";
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
       window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun')
     }
@@ -144,6 +144,7 @@ export default {
     this.getHotMaps();
     this.getNewMaps();
     this.getRecentPageData();
+    this.getRecommendMaps();
 
     let _this = this;
     let timer = setInterval(()=>{
@@ -154,7 +155,7 @@ export default {
   },
   methods:{
     getHotMaps(){
-      api.getByPath('/api/v0/tuxun/maps/list').then(res=>{
+      api.getByPath('/api/v0/tuxun/maps/list', {duration: 'all', count: 9}).then(res=>{
         this.pagedata = res.data.slice(0, 9)
         this.pagedata.forEach(function (item) {
           this.addDifficulty(item)

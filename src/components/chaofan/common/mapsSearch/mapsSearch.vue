@@ -1,11 +1,11 @@
 <template>
   <div v-if="show" class="cover">
     <section class="section" style="display: block;overflow:scroll; overscroll-behavior: contain; height: 100%;    scrollbar-width: none;">
-      <div style="font-size: 20px; color: white; padding-top: 2rem">练习赛搜索<el-button type="primary" style="margin-left: 10px" @click="show=false" round>关闭</el-button></div>
+      <div style="font-size: 20px; color: white; padding-top: 2rem">练习题库搜索<el-button type="primary" style="margin-left: 10px" @click="show=false" round>关闭</el-button></div>
       <el-input v-model="keyword"
                 :autofocus="true"
                 @input="search"
-                placeholder="搜索练习赛"
+                placeholder="搜索练习题库"
                 style="margin-top: 2rem; max-width: 100%; margin-bottom: 20px"></el-input>
       <div v-for="(item, index) in this.pagedata" >
         <div @click.stop="toMapsDetail(item)" style="display: flex;  justify-content: space-between;">
