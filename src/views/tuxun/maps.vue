@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-<!--      <el-button style="margin-top: 1rem">查看更多</el-button>-->
+      <el-button style="margin-top: 1rem" @click="toNew">查看更多最新</el-button>
 
       <div class="session_head" >热度排序</div>
       <div class="line"></div>
@@ -254,6 +254,9 @@ export default {
     },
     toHot() {
       tuxunJump('/tuxun/maps-hot')
+    },
+    toNew() {
+      tuxunJump('/tuxun/maps-new')
     }
   },
 }

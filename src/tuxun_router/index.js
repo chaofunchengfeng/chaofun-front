@@ -140,6 +140,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/maps-new',
+    component: () => import('@/views/tuxun/maps-new'),
+    name: 'maps-hot',
+    meta: { title: '最新题库-图寻'},
+    hidden: true
+  },
+  {
     path: '/daily_challenge',
     component: () => import('@/views/tuxun/DailyChallenge'),
     name: '图寻-每日挑战',

@@ -263,6 +263,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/maps-new',
+    component: () => import('@/views/tuxun/maps-new'),
+    name: 'maps-new',
+    meta: { title: '最新题库-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/wonders',
     component: () => import('@/views/tuxun/wonders'),
     name: 'tuxun-wonders',
