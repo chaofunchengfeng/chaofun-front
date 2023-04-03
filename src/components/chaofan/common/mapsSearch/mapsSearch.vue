@@ -1,7 +1,7 @@
 <template>
   <div v-if="show" class="cover">
     <section class="section" style="display: block;overflow:scroll; overscroll-behavior: contain; height: 100%;    scrollbar-width: none;">
-      <div style="font-size: 20px; color: white; padding-top: 2rem">练习题库搜索<el-button type="primary" style="margin-left: 10px" @click="show=false" round>关闭</el-button></div>
+      <div style="font-size: 20px; color: white; padding-top: 2rem">练习题库搜索<el-button type="primary" style="margin-left: 10px" @click="close" round>关闭</el-button></div>
       <el-input v-model="keyword"
                 :autofocus="true"
                 @input="search"
@@ -44,6 +44,7 @@ export default {
   },
   mounted() {
     this.search();
+    document.body.style.overflow = 'hidden';
   },
   methods: {
     search() {
@@ -75,6 +76,10 @@ export default {
         this.show=false
         this.callBack(item.id, type)
       }
+    },
+    close() {
+      this.show = false;
+      document.body.style.overflow = 'auto';
     }
   }
 }

@@ -21,6 +21,7 @@
     </el-dialog>
 
     <div class="back_home" >
+      <el-button v-if="history && history.length !== 1" @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>←首页</el-button>
       <el-button type="primary" @click="publish" round>发布</el-button>
     </div>
@@ -80,6 +81,7 @@ export default {
     }
   },
   mounted() {
+    this.history = history;
     this.checkVip();
     this.mapsId = this.$route.query.mapsId;
     this.getMapsName();
@@ -175,7 +177,14 @@ export default {
     modify() {
       tuxunJump('/tuxun/maps_create?mapsId=' + this.mapsId);
 
-    }
+    },
+    goBack() {
+      try {
+        window.history.back();
+      } catch (e) {
+        tuxunJump('/tuxun/')
+      }
+    },
   }
 }
 </script>
