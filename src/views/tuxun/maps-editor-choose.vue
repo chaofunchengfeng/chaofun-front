@@ -7,14 +7,7 @@
     <div class="nav">
       练习题库-编辑推荐
     </div>
-    <!--    <div class="tab-container">-->
-    <!--      <div class="tab">-->
-    <!--        <div class="tab-item">一天</div>-->
-    <!--        <div class="tab-item">一周</div>-->
-    <!--        <div class="tab-item">一个月</div>-->
-    <!--        <div class="tab-item">所有时间</div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+
     <div class="game_entrance">
       <div class="grid_main">
         <div v-for="(item, index) in pagedata" @click.stop="toMapsDetail(item)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
@@ -57,7 +50,7 @@ export default {
   },
   methods: {
     list() {
-      api.getByPath('/api/v0/tuxun/maps/listEditorChoose', {count: 30}).then(res => {
+      api.getByPath('/api/v0/tuxun/maps/listEditorChoose', {count: 100}).then(res => {
         if (res.success) {
           this.pagedata = res.data;
           this.pagedata.forEach(function (item) {
@@ -90,6 +83,26 @@ export default {
       } catch (e) {
         tuxunJump('/tuxun/')
       }
+    },
+    toMaps(item, type) {
+      api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
+      })
+      this.doLoginStatus().then((res) => {
+        if (res) {
+
+          api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
+            if (res.success) {
+              tuxunJump('/tuxun/challenge?challengeId=' + res.data);
+            } else {
+              if (res.errorCode === 'need_vip') {
+                this.$vip({})
+              }
+            }
+          })
+        }})
+    },
+    toMapsDetail(item, type) {
+      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id )
     },
   }
 }
