@@ -7,14 +7,15 @@
     <div class="nav">
       练习题库-最热
     </div>
-    <!--    <div class="tab-container">-->
-    <!--      <div class="tab">-->
-    <!--        <div class="tab-item">一天</div>-->
-    <!--        <div class="tab-item">一周</div>-->
-    <!--        <div class="tab-item">一个月</div>-->
-    <!--        <div class="tab-item">所有时间</div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <div class="tab-container">
+      <div class="tab">
+        <div :class="duration!=='all'? 'tab-item': 'tab-item-choose'" @click="changeDuration('all')">所有时间</div>
+        <div :class="duration!=='1year'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1year')">一年</div>
+        <div :class="duration!=='1month'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1month')">一个月</div>
+        <div :class="duration!=='1week'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1week')">一周</div>
+        <div :class="duration!=='1day'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1day')">一天</div>
+      </div>
+    </div>
     <div class="game_entrance">
       <div class="grid_main">
         <div v-for="(item, index) in pagedata" @click.stop="toMapsDetail(item)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
@@ -48,6 +49,7 @@ export default {
   name: "maps-hot",
   data() {
     return {
+      duration: 'all',
       pagedata: null,
     }
   },
@@ -57,7 +59,7 @@ export default {
   },
   methods: {
     list() {
-      api.getByPath('/api/v0/tuxun/maps/list', {duration: 'all',count: 100}).then(res => {
+      api.getByPath('/api/v0/tuxun/maps/list', {duration: this.duration,count: 100}).then(res => {
         if (res.success) {
           this.pagedata = res.data;
           this.pagedata.forEach(function (item) {
@@ -111,6 +113,10 @@ export default {
     toMapsDetail(item, type) {
       tuxunJump('/tuxun/maps_detail?mapsId=' + item.id )
     },
+    changeDuration(type) {
+      this.duration = type;
+      this.list();
+    }
   }
 }
 </script>
@@ -159,10 +165,28 @@ export default {
     align-content: center;
     text-align: center;
     justify-items: center;
+    display: flex;
+    margin-top: 3rem;
     .tab {
+      background-color: white;
+      border-radius: .375rem;
       display: flex;
+      //height: 2rem;
       width: 40%;
-      align-self: center;
+      .tab-item {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 20px;
+        width: 25%;
+      }
+      .tab-item-choose {
+        color: gold;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background-color: #3590FF;
+        font-size: 20px;
+        width: 25%;
+      }
     }
   }
   .game_entrance {
@@ -172,7 +196,7 @@ export default {
     padding: 0 2rem;
     margin: 0 auto;
     max-width: 80rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
     margin-bottom: 5rem;
 
     .grid_main {
@@ -235,6 +259,17 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .container {
+    .tab-container {
+      .tab{
+        width: 90%;
+        .tab-item {
+          font-size: 10px;
+        }
+        .tab-item-choose {
+          font-size: 10px;
+        }
+      }
+    }
     .game_entrance {
       .grid_main {
         grid-template-columns: repeat(1, 1fr);
