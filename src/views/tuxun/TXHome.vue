@@ -338,6 +338,31 @@ export default {
         // console.log(this.centerHeading);
       })
     },
+    preloadImage(pano) {
+      var img=new Image();
+      img.src='https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
+    },
+    getCustomPanorama(pano, zoom,tileX,tileY,callback) {
+      console.log("getCustomPanorama")
+      if (pano.length === 27) {
+        return {
+          location: {
+            pano: pano,
+          },
+          links: [],
+          // The text for the copyright control.
+          copyright: "baidu",
+          // The definition of the tiles for this panorama.
+          tiles: {
+            tileSize: new google.maps.Size(512, 512),
+            worldSize: new google.maps.Size(8192, 4096),
+            // The heading in degrees at the origin of the panorama
+            centerHeading: this.headingMap[pano],
+            getTileUrl: this.getCustomPanoramaTileUrl,
+          },
+        };
+      }
+    },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
       zoom = zoom +=1;
       if (zoom === 1) {
