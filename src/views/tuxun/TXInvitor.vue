@@ -382,7 +382,7 @@
           ({{gameData.leftSkipTimes}})
         </span> </el-button>
         <el-button size="mini" v-if="gameData && (gameData.type === 'challenge' || gameData.type ==='country_streak' || gameData.type ==='province_streak')" @click="challengeAgain" round> 重开 </el-button>
-        <el-button v-if="ISPHONE" @click="reloadPage" size="mini" round>刷新页面</el-button>
+        <el-button v-if="ISPHONE" @click="reloadPage" size="mini" round>刷新</el-button>
       </div>
 
       <div :class="[{'confirm': !ISPHONE}, {'confirm-phone': ISPHONE}]">

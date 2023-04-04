@@ -188,7 +188,6 @@
           <forumMore :forum-id="params.forumId"></forumMore>
         </div>
       </div>
-
     </div>
     <fixedBottom></fixedBottom>
   </div>

@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <vue-danmaku :danmus="danmus" use-slot class="danmaku"  style="height:80%; width:100%; position: absolute; pointer-events: none" :speeds="120">
+      <vue-danmaku v-if="dialogShow" :danmus="danmus" use-slot class="danmaku"  style="height:80%; width:100%; position: absolute; pointer-events: none" :speeds="120">
         <template slot="dm" slot-scope="{ index, danmu }" >
           <div class="danmaku-title" style="color: white; font-size: 24px;   -webkit-text-stroke: 0.5px black;">{{ danmu }}</div>
         </template>
@@ -76,10 +76,10 @@
     </div>
     <div class="home">
       <el-button size="mini" @click="toHome" round> 首页 </el-button>
-      <el-button v-if="!this.isMaps" size="mini"  @click="toSend" round> 发送弹幕 </el-button>
+      <el-button v-if="!this.isMaps && dialogShow" size="mini"  @click="toSend" round> 发弹幕 </el-button>
+      <el-button v-if="dialogShow" size="mini"  @click="dialogShow=false" round> 关弹幕 </el-button>
       <el-button size="mini"  @click="toReport" round> 坏题反馈 </el-button>
-<!--      <el-button v-if="!ISPHONE && this.isMaps" size="mini"  @click="toSubmitPanorama" round> 提交街景 </el-button>-->
-      <el-button v-if="ISPHONE" @click="reloadPage" size="mini" round>刷新页面</el-button>
+      <el-button v-if="ISPHONE" @click="reloadPage" size="mini" round>刷新</el-button>
       <el-button v-if="this.$store.state.user.userInfo.userId === 1" size="mini"  @click="deleteTuxun" round> 删除该题 </el-button>
       <el-button v-if="this.$store.state.user.userInfo.userId === 1 && this.isMaps" size="mini"  @click="removeFromMaps" round> 移除该题 </el-button>
     </div>
@@ -172,6 +172,7 @@ export default {
       maxMapWidth: '40%',
       maxMapHeight: '60%',
       isMapSmall: true,
+      dialogShow: true,
       mapPin: false,
       headingMap: {},
       ranks: null,
@@ -795,6 +796,25 @@ export default {
 .el-button {
   touch-action: manipulation;
 }
+.more {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+
+  background-color: #D8DADB;
+  z-index: 500;
+  .more-item {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    font-size: 10px;
+    cursor: pointer;
+    &:hover {
+      color: -webkit-link;
+      text-decoration: underline;
+    }
+  }
+}
 
 .danmaku {
   -webkit-user-select:none;
@@ -893,16 +913,16 @@ export default {
 
 .confirm {
   position: absolute;
-  bottom: 30px;
-  right: 30px;
+  bottom: 60px;
+  right: 60px;
   width: 300px;
   z-index: 1000;
 }
 
 .confirm-phone {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 60px;
+  right: 60px;
   margin:auto;
   z-index: 1000;
 }

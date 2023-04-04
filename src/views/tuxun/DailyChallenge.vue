@@ -29,8 +29,19 @@
         <div class="total" v-if="this.total &&( !this.gameData ||  this.gameData.status !== 'finish')">已有 {{this.total}} 人完成挑战</div>
         <div v-if="this.gameData && this.gameData.status === 'finish'">
           <div class="score" >今日得分: {{this.gameData.player.totalScore}}</div>
+          <div v-if="this.gameData && this.gameData.player.roundResults" style="display: flex;justify-content: center; text-align: center; width: 100%">
+            <div v-for="(item, index) in this.gameData.player.roundResults">
+              <div v-if="item.score <= 1000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(240, 128, 128); border-radius: 4px"></div>
+              <div v-else-if="item.score <= 2000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(255, 215, 179);border-radius: 4px;"></div>
+              <div v-else-if="item.score <= 3000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(255, 255, 224);border-radius: 4px;"></div>
+              <div v-else-if="item.score <= 4000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(144, 238, 144);border-radius: 4px;"></div>
+              <div v-else-if="item.score < 5000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(135, 206, 250);border-radius: 4px;"></div>
+              <div v-else-if="item.score == 5000" style="width: 25px; height: 25px; margin: 8px; background-color: darkgoldenrod ;border-radius: 4px;"></div>
+            </div>
+          </div>
           <div class="score" v-if="this.dailyChallengeRank">排名: {{this.dailyChallengeRank}} / {{this.dailyChallengeTotalPlayers}}</div>
           <div class="score" v-if="this.dailyChallengePercent">超过：{{((1 - this.dailyChallengePercent) * 100).toFixed(2)}} % 选手</div>
+          <el-button style="margin-top: 8px" @click="share">分享</el-button>
         </div>
         <div class="rank">
           今日挑战排名
@@ -190,6 +201,47 @@ export default {
       str += date.getDate() + "日"; //获取日
       return str;
     },
+    share() {
+      // var input = document.createElement('textarea');
+
+      // document.body.appendChild(input);
+      // input.select();
+      // var result = document.execCommand('copy');
+      // document.body.removeChild(input);
+      // this.$toast("复制成功");
+
+      var textarea = document.createElement('textarea');
+      var text = "";
+      if (this.type === 'world') {
+        text ="图寻 " + this.getDate().replaceAll(" ", "") +"\r\n每日挑战-全球\r\n我的得分：" + this.gameData.player.totalScore + "\r\n" + this.getEmoji() + "\r\n排名: " +  this.dailyChallengeRank + "/" + this.dailyChallengeTotalPlayers + "\r\nhttps://tuxun.fun/daily_challenge?type=world"
+      } else {
+        text ="图寻 " + this.getDate().replaceAll(" ", "") +"\r\n每日挑战-中国\r\n我的得分：" + this.gameData.player.totalScore + "\r\n" + this.getEmoji() +  "\r\n排名: " +  this.dailyChallengeRank + "/" + this.dailyChallengeTotalPlayers + "\r\nhttps://tuxun.fun/daily_challenge?type=china"
+      }
+
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+
+    },
+    getEmoji() {
+      var emoji = "";
+      this.gameData.player.roundResults.forEach(v => {
+        if (v.score <= 1000) {
+          emoji += " 🟥";
+        } else if (v.score <= 2000) {
+          emoji += " 🟧";
+        } else if (v.score <= 3000) {
+          emoji += " 🟨";
+        } else if (v.score <= 4000) {
+          emoji += " 🟩";
+        } else if (v.score <= 5000) {
+          emoji += " 🟦"
+        }
+      })
+      return emoji;
+    }
   }
 
 }
@@ -244,7 +296,7 @@ export default {
         color: darkgray;
       }
       .tab_container {
-        width: 40%;
+        width: 50%;
         margin: auto;
         padding-top: 0rem;
         padding-bottom: 2rem;
@@ -295,7 +347,7 @@ export default {
         padding-top: 2rem;
         padding-bottom: 5rem;
         margin: auto;
-        width: 40%;
+        width: 50%;
 
         .item {
           display: flex;

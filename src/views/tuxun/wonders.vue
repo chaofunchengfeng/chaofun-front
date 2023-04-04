@@ -19,9 +19,6 @@
     <div id="map" class="container" style=""></div>
     <img v-if="panoId && panoId.length === 27" style="z-index: 5000; position: absolute; bottom: 10px; left: 10px; width: 100px; cursor: pointer;"  @click="toBaiduPano" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
     <div v-if="!ISPHONE" class="more">
-<!--      <div class="more-item">-->
-<!--        反馈问题-->
-<!--      </div>-->
       <div v-if="this.$store.state.user.userInfo.userId === 1" @click="deleteWonders()" class="more-item">
         删除街景
       </div>
