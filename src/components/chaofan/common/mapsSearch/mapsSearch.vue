@@ -39,11 +39,13 @@ export default {
     return {
       show: false,
       keyword: '',
+      overflow: null,
       pagedata: null
     }
   },
   mounted() {
     this.search();
+    this.overflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
   },
   methods: {
@@ -73,13 +75,13 @@ export default {
           }
         })
       } else {
-        this.show=false
+        this.close();
         this.callBack(item.id, type)
       }
     },
     close() {
       this.show = false;
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = this.overflow;
     }
   }
 }

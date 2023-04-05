@@ -31,12 +31,24 @@
           <div class="score" >今日得分: {{this.gameData.player.totalScore}}</div>
           <div v-if="this.gameData && this.gameData.player.roundResults" style="display: flex;justify-content: center; text-align: center; width: 100%">
             <div v-for="(item, index) in this.gameData.player.roundResults">
-              <div v-if="item.score <= 1000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(240, 128, 128); border-radius: 4px"></div>
-              <div v-else-if="item.score <= 2000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(255, 215, 179);border-radius: 4px;"></div>
-              <div v-else-if="item.score <= 3000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(255, 255, 224);border-radius: 4px;"></div>
-              <div v-else-if="item.score <= 4000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(144, 238, 144);border-radius: 4px;"></div>
-              <div v-else-if="item.score < 5000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(135, 206, 250);border-radius: 4px;"></div>
-              <div v-else-if="item.score == 5000" style="width: 25px; height: 25px; margin: 8px; background-color: darkgoldenrod ;border-radius: 4px;"></div>
+              <div v-if="item.score <= 1000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(240, 128, 128); border-radius: 4px;" class="hover-target">
+                <span class="tooltip">0-1000分</span>
+              </div>
+              <div v-else-if="item.score <= 2000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(255, 215, 179);border-radius: 4px;" class="hover-target">
+                <span class="tooltip">1001-2000分</span>
+              </div>
+              <div v-else-if="item.score <= 3000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(255, 255, 224);border-radius: 4px;" class="hover-target">
+                <span class="tooltip">2001-3000分</span>
+              </div>
+              <div v-else-if="item.score <= 4000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(144, 238, 144);border-radius: 4px;" class="hover-target">
+                <span class="tooltip">3001-4000分</span>
+              </div>
+              <div v-else-if="item.score <= 5000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(135, 206, 250);border-radius: 4px;" class="hover-target">
+                <span class="tooltip">4001-4999分</span>
+              </div>
+              <div v-else-if="item.score === 5000" style="width: 25px; height: 25px; margin: 8px; background: linear-gradient(45deg, #ff0000 0%, #ff7f00 17%, #ffff00 33%, #00ff00 50%, #0000ff 67%, #4b0082 83%, #8b00ff 100%);border-radius: 4px;" class="hover-target">
+                <span class="tooltip">5000分</span>
+              </div>
             </div>
           </div>
           <div class="score" v-if="this.dailyChallengeRank">排名: {{this.dailyChallengeRank}} / {{this.dailyChallengeTotalPlayers}}</div>
@@ -223,6 +235,7 @@ export default {
       textarea.select();
       document.execCommand('copy');
       document.body.removeChild(textarea);
+      this.$toast('复制成功，去分享吧！')
 
     },
     getEmoji() {
@@ -274,6 +287,28 @@ export default {
       }
       div {
         color: floralwhite;
+      }
+      .tooltip {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 5px;
+        padding: 8px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 4px;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+      .hover-target {
+        position: relative;
+      }
+
+      .hover-target:hover .tooltip,
+      .hover-target.active .tooltip {
+        display: block;
       }
       .score {
         font-size: 32px;

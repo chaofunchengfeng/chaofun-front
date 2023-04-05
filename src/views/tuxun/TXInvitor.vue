@@ -6,8 +6,9 @@
     <div class="" v-if="status==='need_join'">
     </div>
 
-    <div v-if="!gameData || (gameData.status !== 'ongoing' && gameData.status !== 'finish')" class="back_home" @click="goHome">
-      <el-button round>←首页</el-button>
+    <div v-if="!gameData || (gameData.status !== 'ongoing' && gameData.status !== 'finish')" class="back_home">
+      <el-button @click="goBack" round>←返回</el-button>
+      <el-button @click="goHome" round>首页</el-button>
     </div>
 
     <div class="prepare" v-if="status==='wait_join' || status === 'ready'">
@@ -291,6 +292,9 @@
             </div>
             <div>
               <el-button class="home_button"  type="primary" @click="toNew" round>进入最新局</el-button>
+            </div>
+            <div v-if="gameData">
+              <el-button class="home_button"  type="primary" @click="replay" round>题目复盘</el-button>
             </div>
             <div>
               <el-button class="home_button" type="warning" @click="goHome" round>回到首页</el-button>
