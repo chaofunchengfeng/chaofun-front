@@ -249,8 +249,10 @@ export default {
           emoji += " 🟨";
         } else if (v.score <= 4000) {
           emoji += " 🟩";
-        } else if (v.score <= 5000) {
+        } else if (v.score < 5000) {
           emoji += " 🟦"
+        } else if (v.score === 5000) {
+          emoji += " 🌈"
         }
       })
       return emoji;
