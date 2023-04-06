@@ -50,7 +50,7 @@ export default {
 
   methods: {
     forumLogList() {
-      api.getByPath('/api/v0/forum/listLogs', { 'forumId': this.forumId, 'pageSize': 100 }).then((res) => {
+      api.getByPath('/api/v0/forum/listLogs', { 'forumId': this.forumId, 'pageSize': 50 }).then((res) => {
         console.log('123');
         this.list = res.data;
       })
