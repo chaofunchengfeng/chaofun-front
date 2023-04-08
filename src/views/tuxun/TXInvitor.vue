@@ -512,8 +512,7 @@ export default {
     window.addEventListener(
         'keydown',
         (event) => {
-          if (
-              (
+          if (this.lastRound && !this.lastRound.move && (
                   // Change or remove this condition depending on your requirements.
                   event.key === 'ArrowUp' || // Move forward
                   event.key === 'ArrowDown' || // Move forward
@@ -597,7 +596,7 @@ export default {
       element.style.opacity = 1.0;
       setTimeout(() => {
         this.map.invalidateSize();
-      }, 50)
+      }, 5)
     },
     mapMouseOver() {
       if (!window.matchMedia("(hover: none)").matches && document.body.clientWidth > 678 && !this.mapPin) {

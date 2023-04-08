@@ -193,6 +193,30 @@ export default {
         this.confirm()
       }
     }.bind(this);
+
+    window.addEventListener(
+        'keydown',
+        (event) => {
+          if ((
+                  // Change or remove this condition depending on your requirements.
+                  event.key === 'ArrowUp' || // Move forward
+                  event.key === 'ArrowDown' || // Move forward
+                  event.key === 'ArrowLeft' || // Pan left
+                  event.key === 'ArrowRight' ||
+                  event.key === 'w' ||
+                  event.key === 'a' ||
+                  event.key === 's' ||
+                  event.key === 'd'
+              ) &&
+              !event.metaKey &&
+              !event.altKey &&
+              !event.ctrlKey
+          ) {
+            event.stopPropagation()
+          };
+        },
+        { capture: true },
+    );
   },
 
   destroyed() {
