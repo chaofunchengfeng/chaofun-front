@@ -43,7 +43,7 @@
               <div v-else-if="item.score <= 4000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(144, 238, 144);border-radius: 4px;" class="hover-target">
                 <span class="tooltip">3001-4000分</span>
               </div>
-              <div v-else-if="item.score <= 5000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(135, 206, 250);border-radius: 4px;" class="hover-target">
+              <div v-else-if="item.score < 5000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(135, 206, 250);border-radius: 4px;" class="hover-target">
                 <span class="tooltip">4001-4999分</span>
               </div>
               <div v-else-if="item.score === 5000" style="width: 25px; height: 25px; margin: 8px; background: linear-gradient(45deg, #ff0000 0%, #ff7f00 17%, #ffff00 33%, #00ff00 50%, #0000ff 67%, #4b0082 83%, #8b00ff 100%);border-radius: 4px;" class="hover-target">

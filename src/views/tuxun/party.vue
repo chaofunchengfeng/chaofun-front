@@ -1,7 +1,7 @@
 <template>
   <div class="game_container">
-    <div class="back_home" @click="goHome">
-      <el-button round>←首页</el-button>
+    <div class="back_home">
+      <el-button @click="goHome" round>←首页</el-button>
       <el-button v-if="partyData && $store.state.user.userInfo.userId === partyData.host.userId" @click="disband" round> 解散派对 </el-button>
       <el-button v-else @click="leave" round> 离开派对 </el-button>
     </div>
