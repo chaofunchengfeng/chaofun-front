@@ -450,6 +450,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/scratch/my',
+    component: () => import('@/views/scratch/my'),
+    name: 'scratch-my',
+    meta: { title: '我的-小测验'},
+    hidden: true
+  },
+  {
     path: '/scratch/guess',
     component: () => import('@/views/scratch/GamePage'),
     name: 'scratch_game',

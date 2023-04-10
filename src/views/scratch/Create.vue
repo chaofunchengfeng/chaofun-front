@@ -61,7 +61,11 @@
           :has-hint.sync="hasHint"
       ></click-create>
 
-      <el-button type="primary" style="margin-top: 20px" @click="submit">提交测验</el-button>
+      <div>
+        <el-button type="primary" style="margin-top: 20px" @click="submit">提交测验</el-button>
+        <el-button v-if="!modify || status === 'draft'" type="warning" style="margin-top: 20px" @click="saveDraft">保存草稿</el-button>
+      </div>
+
     </div>
 
   </div>
@@ -95,6 +99,7 @@ export default {
       id: null,
       type: 'image',
       slideshow: false,
+      status: null,
     }
   },
   mounted() {
@@ -133,6 +138,7 @@ export default {
     },
     getGuess() {
       api.getByPath('/api/v0/scratch/game/get', {'id': this.id}).then(res=>{
+        this.status = res.data.status;
         this.name = res.data.name;
         this.desc = res.data.desc;
         this.countdown = res.data.countdown;
@@ -161,14 +167,17 @@ export default {
         return;
       }
 
-      // if (this.answers === '') {
-      //   this.$toast('测验的答案不能为空')
-      //   return;
-      // }
-
       var data = {'version': 1.0,'hasHint': this.hasHint, data: this.dataForm, slideshow: this.slideshow};
       api.postByPath('/api/v0/scratch/game/create', {id: this.id, type: this.type, countdown: this.countdown, name: this.name, tags: this.tags, desc: this.desc, cover: this.coverOssName, hasHint: this.hasHint, data: JSON.stringify(data)}).then((res) => {
         window.location.href = '/scratch/guess?id=' + res.data.id;
+      })
+    },
+    saveDraft() {
+      var data = {'version': 1.0,'hasHint': this.hasHint, data: this.dataForm, slideshow: this.slideshow};
+      api.postByPath('/api/v0/scratch/draft/save', {id: this.id, type: this.type, countdown: this.countdown, name: this.name, tags: this.tags, desc: this.desc, cover: this.coverOssName, hasHint: this.hasHint, data: JSON.stringify(data)}).then((res) => {
+        if (res.success) {
+          this.$toast('保存成功');
+        }
       })
     },
     goHome() {

@@ -5,6 +5,12 @@
       <div>
         注：点击中问目会按顺序展示，答案会去重以后按字母序展示
       </div>
+<!--      <el-switch-->
+<!--          v-model="hasImage"-->
+<!--          @change="changeHasHint"-->
+<!--          active-color="#13ce66"-->
+<!--          inactive-color="#ff4949">-->
+<!--      </el-switch>-->
     </div>
 
     <table style="width: 100%">
