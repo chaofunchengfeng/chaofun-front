@@ -16,40 +16,51 @@
         {{partyData.host.userName}} 的派对
       </div>
 
-      <div class="header" v-if="partyData.gameType === 'solo' || partyData.gameType === 'solo_match'">
-        图寻1v1对决
+      <div class="header">
+        {{getGameTypeName(partyData.gameType)}}
       </div>
 
-      <div class="header" v-if="partyData.gameType === 'team'">
-        组队对战
-      </div>
-
-      <div class="vs" v-if=" partyData.status !== 'ongoing'">
-        <div class="player">
-          <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
-            <div class="user" v-for="(item, index) in partyData.teams[0].users">
-              <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
-              <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
+      <div v-if="partyData.status !== 'ongoing'">
+        <div v-if="partyData.gameType !== 'br'" class="vs">
+          <div class="player">
+            <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
+              <div class="user" v-for="(item, index) in partyData.teams[0].users">
+                <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
+                <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
+              </div>
+            </div>
+            <div v-if="partyData && (!partyData.teams || partyData.teams.length == 0  || partyData.gameType === 'team')">
+              <el-button @click="change2Player(0)" size="small">加入对决</el-button>
             </div>
           </div>
-          <div v-if="partyData && (!partyData.teams || partyData.teams.length == 0  || partyData.gameType === 'team')">
-            <el-button @click="change2Player(0)" size="small">加入对决</el-button>
+          <div>
+            <img class="vs_img"  :src="this.imgOrigin + 'biz/1658807128256_91c9df63c2d144359005b6f504a96a81.png'"></img>
+            <div></div>
+            <el-button @click="swapTeam"  type="primary" v-if="partyData.gameType==='team'" round>换队伍</el-button>
           </div>
-        </div>
-        <div>
-          <img class="vs_img"  :src="this.imgOrigin + 'biz/1658807128256_91c9df63c2d144359005b6f504a96a81.png'"></img>
-          <div></div>
-          <el-button @click="swapTeam"  type="primary" v-if="partyData.gameType==='team'" round>换队伍</el-button>
-        </div>
-        <div class="player">
-          <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 2">
-            <div class="user" v-for="(item, index) in partyData.teams[1].users">
-              <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
-              <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
+          <div class="player">
+            <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 2">
+              <div class="user" v-for="(item, index) in partyData.teams[1].users">
+                <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
+                <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
+              </div>
+            </div>
+            <div v-if="partyData && (!partyData.teams || partyData.teams.length <= 1  || partyData.gameType === 'team')">
+              <el-button @click="change2Player(1)" size="small">加入对决</el-button>
             </div>
           </div>
-          <div v-if="partyData && (!partyData.teams || partyData.teams.length <= 1  || partyData.gameType === 'team')">
-            <el-button @click="change2Player(1)" size="small">加入对决</el-button>
+        </div>
+        <div v-else>
+          <div class="player">
+            <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
+              <div class="user" v-for="(item, index) in partyData.teams">
+                <el-avatar :src="imgOrigin + item.users[0].icon" class="avatar"></el-avatar>
+                <div class="userName">{{item.users[0].userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
+              </div>
+            </div>
+            <div style="padding-top: 1rem">
+              <el-button @click="change2Player(0)" size="small">加入对决</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -69,6 +80,10 @@
 
       <div v-if="(partyData.gameType === 'team') && partyData.status === 'wait_join'" class="wait_game_start">
         等待其他玩家加入或队伍至少有一人....
+      </div>
+
+      <div v-if="(partyData.gameType === 'br') && partyData.status === 'wait_join'" class="wait_game_start">
+        淘汰赛至少有两人...
       </div>
 
       <div v-if="partyData.host && $store.state.user.userInfo.userId !== partyData.host.userId && partyData.status === 'ready' " class="wait_game_start">
@@ -91,16 +106,17 @@
         </div>
       </div>
 
-      <div v-if="(partyData.gameType === 'solo' || partyData.gameType === 'team') && partyData.gameMapsName " class="wait_game_start">
+      <div v-if=" partyData.gameMapsName " class="wait_game_start">
         <div class="separate-line"></div>
         <div style="padding-top: 10px; font-size: 24px">设置</div>
         <div  style="">
           <div style="font-size: 16px">
-            类型: <span v-if="$store.state.user.userInfo.userId !== partyData.host.userId"> {{this.partyData.gameType === 'solo'? '1v1对决' : '组队对决'}} </span>
+            类型: <span v-if="$store.state.user.userInfo.userId !== partyData.host.userId"> {{getGameTypeName(partyData.gameType)}} </span>
           </div>
           <div v-if="$store.state.user.userInfo.userId === partyData.host.userId" style="display: flex;   justify-content: center ">
             <div :class="partyData.gameType === 'solo' ? 'choose-type' : 'normal-type'" @click="changeGameType('solo')" >1v1对决</div>
             <div :class="partyData.gameType === 'team' ? 'choose-type' : 'normal-type'" @click="changeGameType('team')">组队对决</div>
+            <div :class="partyData.gameType === 'br' ? 'choose-type' : 'normal-type'" @click="changeGameType('br')">淘汰赛</div>
           </div>
         </div>
         <div  style="padding-top: 2rem;">
@@ -212,6 +228,16 @@ export default {
           })
     },
 
+    getGameTypeName(gameType) {
+      if (this.partyData.gameType === 'solo') {
+        return '1v1对决'
+      } else if (this.partyData.gameType === 'team') {
+        return '组队赛'
+      } else if (this.partyData.gameType === 'br') {
+        return '淘汰赛'
+      }
+    },
+
     change2Onlooker() {
       api.getByPath('/api/v0/tuxun/party/change2Onlooker').then(res=>{
         this.solvePartyData(res.data)
@@ -299,6 +325,12 @@ export default {
             if (res.success) {
               this.solvePartyData(res.data, null)
               this.initWS()
+            } else if (res.errorCode == "need_login") {
+              this.$login({
+                callBack: () => {
+                  this.$store.dispatch("user/getInfo");
+                },
+              });
             }
       })
     },
@@ -479,6 +511,7 @@ export default {
     .wait_game_start {
       padding-top: 2rem;
       font-size: 16px;
+      color: #FFFF00;
     }
 
     .choose-type {

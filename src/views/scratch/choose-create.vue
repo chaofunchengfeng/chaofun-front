@@ -8,19 +8,19 @@
       <div style="width: 100%; text-align: left; font-size: 22px;padding-top: 3em">选择创建类型</div>
       <div style="background-color: gray; height: 1px; width: 100%; margin-top: 0.5em"></div>
       <div style="display: flex; margin-top: 1rem">
-        <div @click="createText" class="text-create" style="padding: 2px 5px 2px 5px; cursor: pointer; border-radius: 4px; background-color: #DEF5D5">
-          <div style="text-align: center; font-size: 24px; font-weight: bold">
+        <div @click="createText" class="text-create" style="padding: 2px 10px 2px 10px; cursor: pointer; border-radius: 4px; background-color: #DEF5D5">
+          <div style="text-align: center; font-size: 20px;">
             文本
           </div>
         </div>
         <div></div>
-        <div @click="createImage" class="img-create" style="padding: 2px 5px 2px 5px; cursor: pointer; border-radius: 4px;margin-left: 1rem;  background-color: #027BFF">
-          <div style="text-align: center; font-size: 24px; font-weight: bold">
+        <div @click="createImage" class="img-create" style="padding: 2px 10px 2px 10px; cursor: pointer; border-radius: 4px;margin-left: 1rem;  background-color: #027BFF">
+          <div style="text-align: center; font-size: 20px; ">
             图片
           </div>
         </div>
-        <div @click="createClick" class="click-create" style="padding: 2px 5px 2px 5px; cursor: pointer; border-radius: 4px; margin-left: 1rem; background-color: #9B41F1">
-          <div style="text-align: center; font-size: 24px; font-weight: bold">
+        <div @click="createClick" class="click-create" style="padding: 2px 10px 2px 5px; cursor: pointer; border-radius: 4px; margin-left: 1rem; background-color: #9B41F1">
+          <div style="text-align: center; font-size: 20px; ">
             点击
           </div>
         </div>

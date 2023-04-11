@@ -291,7 +291,8 @@
               最终存活: {{winner.userName}}
             </div>
             <div>
-              <el-button class="home_button"  type="primary" @click="toNew" round>进入最新局</el-button>
+              <el-button v-if="!gameData || !gameData.partyId" class="home_button"  type="primary" @click="toNew" round>进入最新局</el-button>
+              <el-button v-else class="home_button"  type="primary" @click="backParty" round>回到派对</el-button>
             </div>
             <div v-if="gameData">
               <el-button class="home_button"  type="primary" @click="replay" round>题目复盘</el-button>
@@ -301,7 +302,6 @@
             </div>
           </div>
         </div>
-
 
         <div v-if="gameData && !gameData.player && gameData.type !== 'battle_royale' " class="game_hud">
           <div class="hub_left">
