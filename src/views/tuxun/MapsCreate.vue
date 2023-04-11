@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <div class="back_home" @click="goHome">
-      <el-button round>←首页</el-button>
+    <div class="back_home">
+      <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>
+      <el-button @click="goHome" round>首页</el-button>
     </div>
     <div v-if="!modify" class="nav">
       自建题库
@@ -46,10 +47,12 @@ export default {
       imageUrl: '',
       filedata: {},
       cover: null,
+      history: null,
       modify: false,
     }
   },
   mounted() {
+    this.history = history;
     this.mapsId = this.$route.query.mapsId;
     if (this.mapsId) {
       this.modify = true;
@@ -59,6 +62,13 @@ export default {
   methods: {
     goHome() {
       tuxunJump('/tuxun/')
+    },
+    goBack() {
+      try {
+        window.history.back();
+      } catch (e) {
+        tuxunJump('/tuxun/')
+      }
     },
     get() {
       api.getByPath('/api/v0/tuxun/maps/get', {mapsId: this.mapsId}).then(res=>{

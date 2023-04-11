@@ -1,7 +1,7 @@
 <template>
   <div class="game_container">
     <div class="back_home">
-      <el-button @click="goHome" round>←首页</el-button>
+      <el-button @click="goHome" round>首页</el-button>
       <el-button v-if="partyData && $store.state.user.userInfo.userId === partyData.host.userId" @click="disband" round> 解散派对 </el-button>
       <el-button v-else @click="leave" round> 离开派对 </el-button>
     </div>
@@ -133,7 +133,7 @@
             >切换题库</el-button>
           </div>
         </div>
-        <div style="padding-top: 2rem; font-size: 16px">
+        <div v-if="partyData && partyData.gameType !== 'br'" style="padding-top: 2rem; font-size: 16px">
           血量
           <el-input-number v-if="this.$store.state.user.userInfo.userId === this.partyData.host.userId" v-model="health" @change="changeHealth" :min=1000 :max=1000000 :step=1000 />
           <span v-else> : {{this.health}} </span>
