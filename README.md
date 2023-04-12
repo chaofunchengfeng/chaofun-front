@@ -32,6 +32,9 @@ npm install
 npm run dev
 ```
 
+> Install error: ls-remote -h -t git://github.com/adobe-webplatform/eve.git
+> git config --global url."https://".insteadOf git://
+
 ## 接口
 [后端接口文档](https://chao.fan/swagger-ui/index.html)
 
