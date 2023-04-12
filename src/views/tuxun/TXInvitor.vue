@@ -1567,13 +1567,39 @@ export default {
     setPanoId(round) {
       this.panoId = round.panoId;
       this.viewer.setPano(round.panoId);
-      if (!round.move) {
-        this.viewer.setOptions({
-          linksControl: false, clickToGo: false});
+
+      if (round.vheading) {
+        this.viewer.setPov({
+          heading: round.vheading,
+          pitch: round.vpitch,
+        });
+      }
+
+      if (!round.pan) {
+        document.getElementById("viewer").addEventListener('mousemove', function (event) {
+          event.preventDefault()
+          event.stopPropagation();
+        }, {capture: true});
+        document.getElementById("viewer").addEventListener('mousedown', function (event) {
+          event.preventDefault()
+          event.stopPropagation();
+        }, {capture: true});
       } else {
-        this.viewer.setOptions({
-          // scrollwheel: false,
-          linksControl: true, clickToGo: true});
+        document.getElementById("viewer").addEventListener('mousemove', function (event) {
+        }, {capture: true});
+        document.getElementById("viewer").addEventListener('mousedown', function (event) {
+        }, {capture: true});
+      }
+
+      // document.getElementById("viewer").style = "height: 100%; width: 100%; pointer-events: none;"
+      var scrollwheel = true;
+      if (!round.zoom) {
+        scrollwheel = false;
+      }
+      if (!round.move) {
+        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, clickToGo: false});
+      } else {
+        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, clickToGo: false});
       }
       this.viewer.setVisible(true);
       setTimeout(() => {
