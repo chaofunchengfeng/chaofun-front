@@ -93,6 +93,7 @@ export default {
             api.getByPath('/api/v0/scratch/draft/delete', {id: item.id}).then(res => {
               if (res.success) {
                 this.$toast('删除成功');
+                this.listDraft();
               }
             })
           }

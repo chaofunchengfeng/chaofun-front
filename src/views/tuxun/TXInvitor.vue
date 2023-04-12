@@ -854,6 +854,7 @@ export default {
                           scaleControl: false,
                           zoomControl: false,
                           keyboardShortcuts: false,
+                          dragging: false,
                           panControlOptions: {
                             position: google.maps.ControlPosition.BOTTOM_LEFT,
                           },
@@ -866,10 +867,10 @@ export default {
                         this.getPanoInfo(this.viewer.getPano());
                       }
                     });
-                    this.setGoogle(this.lastRound.panoId, this.lastRound.move);
+                    this.setPanoId(this.lastRound);
                   })
                 } else {
-                  this.setGoogle(this.lastRound.panoId, this.lastRound.move);
+                  this.setPanoId(this.lastRound);
                 }
               this.initMap();
             }.bind(this), 100);
@@ -1514,15 +1515,6 @@ export default {
         this.health = this.gameData.health;
       })
     },
-    setGoogle(panoId, move) {
-      this.panoId = panoId;
-      // 调整视角大小的
-      if (panoId.length === 27 ) {
-        this.setPanoId(panoId, move);
-      } else {
-        this.setPanoId(panoId, move);
-      }
-    },
     getCustomPanorama(pano) {
       console.log(pano)
       if (pano.length === 27) {
@@ -1572,12 +1564,16 @@ export default {
       );
 
     },
-    setPanoId(panoId, move) {
-      this.viewer.setPano(panoId);
-      if (!move) {
-        this.viewer.setOptions({linksControl: false, clickToGo: false});
+    setPanoId(round) {
+      this.panoId = round.panoId;
+      this.viewer.setPano(round.panoId);
+      if (!round.move) {
+        this.viewer.setOptions({
+          linksControl: false, clickToGo: false});
       } else {
-        this.viewer.setOptions({linksControl: true, clickToGo: true});
+        this.viewer.setOptions({
+          // scrollwheel: false,
+          linksControl: true, clickToGo: true});
       }
       this.viewer.setVisible(true);
       setTimeout(() => {
