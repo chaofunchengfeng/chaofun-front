@@ -1599,7 +1599,7 @@ export default {
       if (!round.move) {
         this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, clickToGo: false});
       } else {
-        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, clickToGo: false});
+        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: true, clickToGo: true});
       }
       this.viewer.setVisible(true);
       setTimeout(() => {
