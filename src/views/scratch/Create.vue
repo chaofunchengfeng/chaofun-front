@@ -176,6 +176,8 @@ export default {
       var data = {'version': 1.0,'hasHint': this.hasHint, data: this.dataForm, slideshow: this.slideshow};
       api.postByPath('/api/v0/scratch/draft/save', {id: this.id, type: this.type, countdown: this.countdown, name: this.name, tags: this.tags, desc: this.desc, cover: this.coverOssName, hasHint: this.hasHint, data: JSON.stringify(data)}).then((res) => {
         if (res.success) {
+          this.id = res.data.id;
+          this.$router.replace({query: {id: this.id}});
           this.$toast('保存成功');
         }
       })
