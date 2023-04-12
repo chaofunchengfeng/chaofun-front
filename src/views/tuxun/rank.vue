@@ -104,7 +104,7 @@ export default {
       });
     },
     toUser(item) {
-      tuxunOpen("/tuxun/user/" + item.userAO.userId);
+      tuxunJump("/tuxun/user/" + item.userAO.userId);
     },
 
     goHome() {
