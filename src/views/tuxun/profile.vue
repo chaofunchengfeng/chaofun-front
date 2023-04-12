@@ -115,7 +115,6 @@ export default {
       userProfile: null,
       endDate: null,
       activity: [],
-      historys: null,
       vipDue: null,
       isVip: false,
       history: null,
