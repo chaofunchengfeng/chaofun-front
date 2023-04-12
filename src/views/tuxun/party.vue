@@ -55,7 +55,7 @@
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
               <div class="user" v-for="(item, index) in partyData.teams">
                 <el-avatar :src="imgOrigin + item.users[0].icon" class="avatar"></el-avatar>
-                <div class="userName">{{item.users[0].userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
+                <div class="userName">{{item.users[0].userName}} <span v-if="item.users[0].userId === partyData.host.userId">(房主)</span></div>
               </div>
             </div>
             <div style="padding-top: 1rem">
