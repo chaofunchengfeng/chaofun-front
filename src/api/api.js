@@ -34,7 +34,8 @@ export function postByPath(path, params) {
   return request({
     url: path,
     method: 'post',
-    data: qs.stringify(params)
+    data: qs.stringify(params),
+    timeout: 180 * 1000 // 上传文件最大支持2分钟
   });
 }
 

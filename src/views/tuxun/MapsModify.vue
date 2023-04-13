@@ -70,6 +70,7 @@ export default {
       panos: [],
       mapsId: null,
       status: null,
+      history: null,
       submitPanoramaShow: false,
       mapsData: null,
       form: {
