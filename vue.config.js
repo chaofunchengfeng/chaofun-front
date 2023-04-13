@@ -43,6 +43,7 @@ module.exports = {
     }
 
   }, // 构建多页
+  lintOnSave: process.env.NODE_ENV !== 'production',
   productionSourceMap: false, // 开启 生产环境的 source map
   // css:  config => {
   //   config.extract.chunkFilename = `[name].33${Timestamp}.css`;
