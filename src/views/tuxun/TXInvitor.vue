@@ -1603,7 +1603,11 @@ export default {
       }
       this.viewer.setVisible(true);
       setTimeout(() => {
-        this.viewer.setZoom(0);
+        if (round.vzoom) {
+          this.viewer.setZoom(round.vzoom);
+        } else {
+          this.viewer.setZoom(0);
+        }
       }, 50);
     },
     preloadImage(pano) {
