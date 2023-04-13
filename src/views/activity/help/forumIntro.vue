@@ -93,7 +93,7 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 
 export default {
   name: 'Help',
@@ -103,10 +103,10 @@ export default {
   data(){
       return {
           listsData: []
-      }
+      };
   },
   created(){
-      this.getLists()
+      this.getLists();
   },
   mounted(){
     
@@ -114,12 +114,12 @@ export default {
   methods:{
     getLists(){
         api.listForumsByTag({tagId:'0'}).then(res=>{
-            console.log(res)
-            this.listsData = res.data
-        })
+            console.log(res);
+            this.listsData = res.data;
+        });
     }
   },
-}
+};
 </script>
 <style scoped lang="scss">
 @import './doc.scss';

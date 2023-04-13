@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 
 export default {
-  name: "analytics",
+  name: 'analytics',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
@@ -24,7 +24,7 @@ export default {
         past24HVotes: 0,
         rank: 0
       }
-    }
+    };
   },
   props: {
     forumId0: {
@@ -42,9 +42,9 @@ export default {
     }
     api.getModInfo({forumId: this.forumId}).then(res => {
       this.modInfo = res.data;
-    })
+    });
   }
-}
+};
 
 </script>
 

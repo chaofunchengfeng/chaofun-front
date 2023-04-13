@@ -117,21 +117,21 @@
 </template>
 
 <script>
-import 'moment/locale/zh-cn'
-import moment from 'moment'
-import noticeItemImages from "_c/chaofan/noticeItemImages";
+import 'moment/locale/zh-cn';
+import moment from 'moment';
+import noticeItemImages from '_c/chaofan/noticeItemImages';
 export default {
   name: '',
   data(){
     return {
       moment: moment,
-    }
+    };
   },
   props: {
     items: {
       type: Object,
       default(){
-        return {}
+        return {};
       }
     },
     humanizeTimeFormat0: {
@@ -152,16 +152,16 @@ export default {
   methods: {
 
     humanizeTimeFormatSwitch(){
-      this.$emit("call-father-humanizeTimeFormatSwitch");
+      this.$emit('call-father-humanizeTimeFormatSwitch');
     },
 
     toLinks(item){
       if(item.link){
-        window.open(item.link,'_blank')
+        window.open(item.link,'_blank');
       }
           // 复制FBi红包口令
       // 接口未返回链接，这里先做特殊判断，祈祷站长别打我...
-      else if("text_notice" == item.type && "FBi红包创建成功" == item.title){
+      else if('text_notice' == item.type && 'FBi红包创建成功' == item.title){
         let text = item.text;
         let regex = /密钥为 (\w*?) 的 \d*? FBi 红包/;
         let found = text.match(regex);
@@ -175,20 +175,20 @@ export default {
     toDetail(item){
       // this.$router.push({name: 'articleDetail',params:{postId: item.post.postId}})
       let routeData = this.$router.resolve({
-        name: "articleDetail",
+        name: 'articleDetail',
         params: {postId: item.post.postId},
       });
       window.open(routeData.href, '_blank');
     },
     toDetailComment(postId,commentId){
       let routeData = this.$router.resolve({
-        name: "articleDetail",
+        name: 'articleDetail',
         params: {postId: postId},
       });
-      window.open(routeData.href+"?commentId="+commentId, '_blank');
+      window.open(routeData.href + '?commentId=' + commentId, '_blank');
     },
     pastePasswordAndUrl(password) {
-      let str = "红包口令：" + password + "    " + "红包链接：https://chao.fan/webview/fbi/redPacket?password=" + password;
+      let str = '红包口令：' + password + '    ' + '红包链接：https://chao.fan/webview/fbi/redPacket?password=' + password;
       this.copy(str);
     },
 
@@ -199,11 +199,11 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制成功");
+      this.$toast('复制成功');
       return result;
     },
   }
-}
+};
 </script>
 
 <style type='text/scss' lang='scss' scoped>

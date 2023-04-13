@@ -25,17 +25,17 @@
 
 <script>
 
-import moment from "moment";
+import moment from 'moment';
 
-import * as api from "@/api/api";
+import * as api from '@/api/api';
 
 export default {
-  name: "FBiHistory",
+  name: 'FBiHistory',
   data() {
     return {
       history: [],
       moment: moment,
-    }
+    };
   },
 
   mounted() {
@@ -48,10 +48,10 @@ export default {
           row.dateStr = moment(row.date).format('MM-DD HH:mm');
           row.reasonStr = this.getReason(row.reason);
           if (row.value < 0) {
-            row.valueStr = "" + row.value;
+            row.valueStr = '' + row.value;
             row.isIncome = false;
           } else {
-            row.valueStr = "+" + row.value;
+            row.valueStr = '+' + row.value;
             row.isIncome = true;
           }
         });
@@ -59,9 +59,9 @@ export default {
         this.history = res.data;
 
       } else {
-        this.$toast(res.errorMessage)
+        this.$toast(res.errorMessage);
       }
-    })
+    });
   },
 
   computed: {
@@ -74,37 +74,37 @@ export default {
 
     getReason(reason) {
       if (reason === 'comment') {
-        return '评论'
+        return '评论';
       }
       if (reason === 'admin') {
-        return '管理员操作'
+        return '管理员操作';
       }
       if (reason === 'sub_comment') {
-        return '子评论'
+        return '子评论';
       }
       if (reason === 'be_comment') {
-        return '被评论'
+        return '被评论';
       }
       if (reason === 'secret') {
-        return '秘密花园'
+        return '秘密花园';
       }
       if (reason === 'badge') {
-        return '徽章'
+        return '徽章';
       }
       if (reason === 'crazy_friday') {
-        return '星期五登录'
+        return '星期五登录';
       }
 
       if (reason === 'inviter') {
-        return '邀请用户'
+        return '邀请用户';
       }
 
       if (reason === 'button_game_pay') {
-        return '春节小游戏点击'
+        return '春节小游戏点击';
       }
 
       if (reason === 'button_game_get') {
-        return '春节小游戏获奖'
+        return '春节小游戏获奖';
       }
 
       if (reason === 'send_red_packet') {
@@ -170,8 +170,8 @@ export default {
       }
 
       // 兼容
-      if (reason === "donate_fbi" || reason === "donate fbi for forum") {
-        return "版块众筹";
+      if (reason === 'donate_fbi' || reason === 'donate fbi for forum') {
+        return '版块众筹';
       }
 
       if (reason === 'lottery') {
@@ -203,7 +203,7 @@ export default {
     }
   }
 
-}
+};
 </script>
 
 <style scoped>

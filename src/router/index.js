@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
 // import store from '../store'
 // console.log('storestorestore',store)
-import * as api from '../api/api'
-Vue.use(Router)
+import * as api from '../api/api';
+Vue.use(Router);
 
-import visRoutes from './webview'
+import visRoutes from './webview';
 
 /* Layout */
-import Layout from '@/layout'
+import Layout from '@/layout';
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -36,7 +36,7 @@ import Layout from '@/layout'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-var visRoute = []
+var visRoute = [];
 // if(process.env.NODE_ENV !== 'production'&&process.env.VUE_APP_BASE_WEB){
   visRoute = visRoutes;
 // }
@@ -222,14 +222,14 @@ export const constantRoutes = [
         hidden: true
       },
       {
-        path: `/f/:forumId`,
+        path: '/f/:forumId',
         component: () => import('@/views/list/home'),
         name: '/f/:forumId',
         meta: { title: '',keepAlive: true,},
         hidden: true
       },
       {
-        path: `/f/:forumId/:type`,
+        path: '/f/:forumId/:type',
         component: () => import('@/views/list/home'),
         name: '/f/:forumId/:type',
         meta: { title: '',keepAlive: true,},
@@ -337,7 +337,7 @@ export const constantRoutes = [
       { path: '*', redirect: '/404', hidden: true }
     ]
   },
-]
+];
 
 /**
  * asyncRoutes
@@ -347,22 +347,22 @@ export const constantRoutes = [
 const asyncRoutesTest = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
-]
+];
 export const asyncRoutes = [
 
-]
+];
 const createRouter = () => new Router({
   mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: [...visRoute,...constantRoutes],
-})
+});
 
-const router = createRouter()
+const router = createRouter();
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
-  const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher; // reset router
 }
 
-export default router
+export default router;

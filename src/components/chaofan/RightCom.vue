@@ -108,10 +108,10 @@
 </template>
 
 <script>
-  import snake from '@/components/game/snake/snake3.vue'
-  import * as api from '@/api/api'
-  import ApplyMod from "./ApplyMod";
-  import ApplyForum from "./ApplyForum";
+  import snake from '@/components/game/snake/snake3.vue';
+  import * as api from '@/api/api';
+  import ApplyMod from './ApplyMod';
+  import ApplyForum from './ApplyForum';
   export default {
     name: '',
     data(){
@@ -137,7 +137,7 @@
         sticky: false,
         showAllAdmin: false,
         rightComHeight: '',
-      }
+      };
     },
     props: {
       islogin: {
@@ -155,34 +155,34 @@
       snake
     },
     created() {
-      console.log(this.$route.params)
+      console.log(this.$route.params);
       this.forumId = this.$route.params.forumId;
 
     },
     destroyed(){
-      this.$(".infinite-list")[0].removeEventListener('scroll', this.handleScroll)
+      this.$('.infinite-list')[0].removeEventListener('scroll', this.handleScroll);
     },
     mounted() {
       // this.getGameTop();
-      if(new Date().getDate()==1){
-        this.gamemodule = true
+      if(new Date().getDate() == 1){
+        this.gamemodule = true;
       }
       this.modlist();
 
       if(this.$route.params.forumId){
-        this.$(".infinite-list")[0].addEventListener('scroll',()=>{
+        this.$('.infinite-list')[0].addEventListener('scroll',()=>{
           if(!this.rightComHeight){
             this.rightComHeight = parseInt(window.getComputedStyle(document.getElementById('rright')).height);
-            console.log(this.rightComHeight)
+            console.log(this.rightComHeight);
           }
-          let top = this.$(".infinite-list").scrollTop();
-          if(top>this.rightComHeight+60){
+          let top = this.$('.infinite-list').scrollTop();
+          if(top > this.rightComHeight + 60){
             this.sticky = true;
           }else{
             this.sticky = false;
           }
           // console.log("top", top);
-        })
+        });
       }
 
     },
@@ -204,79 +204,79 @@
               this.$store.dispatch('user/SET_showChatBox',false);
               setTimeout(()=>{
                 this.$store.dispatch('user/SET_showChatBox',true);
-              },500)
+              },500);
             }else{
               this.$store.dispatch('user/SET_showChatBox',true);
             }
 
           }
-        })
+        });
       },
       modlist(){
         api.modlist({forumId: this.forumId}).then(res=>{
-          this.forumAdmin = res.data
-        })
+          this.forumAdmin = res.data;
+        });
       },
       gotoAddForum(){
-        this.showApplyForum=true;
+        this.showApplyForum = true;
       },
       getGameTop(){
         api.getGameTop({top: 10}).then(res=>{
-          this.gameRank = res.data
-        })
+          this.gameRank = res.data;
+        });
       },
       // gotologin(){
       //   this.showLogin('login')
       // },
       showLogin(v){
         this.$login({callBack:()=>{
-          this.$store.dispatch('user/getInfo')
+          this.$store.dispatch('user/getInfo');
         }});
       },
       manage() {
-        this.$router.push({path: this.forumInfo.id + '/setting'})
+        this.$router.push({path: this.forumInfo.id + '/setting'});
       },
       gotoSubmit2(){// 发帖
-        console.log(this.forumInfo)
+        console.log(this.forumInfo);
         // if(this.$store.state.user.islogin){
         //   this.$router.push({path: '/submit',query:{id: this.forumInfo.id,name: this.forumInfo.name}})
         // }else{
         //   this.showLogin('login')
         // }
-        this.toPost(this.forumInfo.id,this.forumInfo.name,this.forumInfo.imageName)
+        this.toPost(this.forumInfo.id,this.forumInfo.name,this.forumInfo.imageName);
       },
       sets(name,v){
         this[name] = v;
-        localStorage.removeItem(name)
+        localStorage.removeItem(name);
       },
       reload(){
-        location.reload()
+        location.reload();
       },
       gotologin(){
-        this.showLogin('login')
+        this.showLogin('login');
       },
       gotoSecret(){
         this.doLoginStatus().then(res=>{
           if(res){
-            this.$router.push({name: 'secret'})
+            this.$router.push({name: 'secret'});
           }
-        })
+        });
       },
 
       goto24HForumRank(){
-        this.$router.push({path: '/forumRank'})
+        this.$router.push({path: '/forumRank'});
       },
 
       goto24HUserRank(){
-        this.$router.push({path: '/userRank'})
+        this.$router.push({path: '/userRank'});
       },
 
       gotoSubmit(){
         this.doLoginStatus().then(res=>{
           if(res){
-            this.$router.push({name: 'submit'})
+            this.$router.push({name: 'submit'});
           }
-        })
+        });
       },
       hideApplyForum() {
         this.showApplyForum = false;
@@ -285,7 +285,7 @@
         this.showApplyMod = false;
       }
     }
-  }
+  };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

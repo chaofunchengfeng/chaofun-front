@@ -14,7 +14,7 @@
    data(){
      return {
         
-     }
+     };
    },
    
    props: {
@@ -34,7 +34,7 @@
    methods: {
     
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

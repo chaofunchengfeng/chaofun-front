@@ -37,13 +37,13 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import page from "../permission/page";
-import ScratchList from "./scratch-list";
-import {tuxunJump} from "../tuxun/common";
+import * as api from '../../api/api';
+import page from '../permission/page';
+import ScratchList from './scratch-list';
+import {tuxunJump} from '../tuxun/common';
 
 export default {
-  name: "HomePage",
+  name: 'HomePage',
   components: {ScratchList},
   data() {
     return {
@@ -55,17 +55,17 @@ export default {
       page: 1,
       tags: [],
       list: [],
-    }
+    };
   },
   created() {
     if (!location.host.includes('choa.fun') && !location.host.includes('8099')) {
-      window.location.href = window.location.href.replace(location.host, 'choa.fun')
+      window.location.href = window.location.href.replace(location.host, 'choa.fun');
     }
     if (this.$route.query.sort) {
       this.sort = this.$route.query.sort;
     }
 
-    console.log(this.$route.query.page)
+    console.log(this.$route.query.page);
     if (this.$route.query.page) {
       // console.log()
       this.current = parseInt(this.$route.query.page);
@@ -79,12 +79,12 @@ export default {
     getTotalGuessTimes() {
       api.getByPath('/api/v0/scratch/game/getTotalStartTimes' ).then(res=>{
         this.totalTimes = res.data;
-      })
+      });
     },
     listTag() {
       api.getByPath('/api/v0/scratch/tag/listHot', {size: 40} ).then(res=>{
         this.tags = res.data;
-      })
+      });
     },
     goTag(item) {
       window.location.href = '/scratch/tag?tagName=' + item;
@@ -92,17 +92,17 @@ export default {
     toCreate() {
       this.doLoginStatus().then((res) => {
         if (res) {
-          window.location.href = '/scratch/choose-create'
+          window.location.href = '/scratch/choose-create';
         }
       });
     },
     random() {
       api.getByPath('/api/v0/scratch/game/random').then(res=>{
         window.location.href = '/scratch/guess?id=' + res.data;
-      })
+      });
     },
     gotoSearch() {
-      window.location.href = '/scratch/search'
+      window.location.href = '/scratch/search';
     },
     toSelf() {
       this.doLoginStatus().then((res) => {
@@ -112,13 +112,13 @@ export default {
       });
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('user/logout');
       setTimeout(() => {
-        window.location.href = '/scratch'
+        window.location.href = '/scratch';
       }, 1000);
     }
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -6,22 +6,22 @@
 
 <script>
 export default {
-  name: "GoogleTest",
+  name: 'GoogleTest',
   mounted() {
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js??key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4')
+    let recaptchaScript = document.createElement('script');
+    recaptchaScript.setAttribute('src', 'https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js??key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4');
     // recaptchaScript.setAttribute('src', 'https://gac-geo.googlecnapps.cn/maps/api/js?key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4')
-    document.head.appendChild(recaptchaScript)
+    document.head.appendChild(recaptchaScript);
     setTimeout(() => {
       this.test();
-    }, 2000)
+    }, 2000);
   },
 
   methods: {
     test() {
 
       var panorama = new google.maps.StreetViewPanorama(
-          document.getElementById("map"), {
+          document.getElementById('map'), {
             fullscreenControl: false,
             panControl: false,
             addressControl: false,
@@ -41,7 +41,7 @@ export default {
     },
 
   }
-}
+};
 </script>
 
 <style scoped>

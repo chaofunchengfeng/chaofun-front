@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import {Circle2} from 'vue-loading-spinner'
-import {tuxunJump, tuxunOpen} from "./common";
+import {Circle2} from 'vue-loading-spinner';
+import {tuxunJump, tuxunOpen} from './common';
 
 export default {
-  name: "Matching",
+  name: 'Matching',
   components: {
     Circle2,
   },
@@ -28,7 +28,7 @@ export default {
       tuxunJump('/tuxun/');
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

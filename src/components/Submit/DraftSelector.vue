@@ -41,9 +41,9 @@
   
 </template>
 <script>
-import 'moment/locale/zh-cn'
-import moment from 'moment'
-import { nanoid } from 'nanoid'
+import 'moment/locale/zh-cn';
+import moment from 'moment';
+import { nanoid } from 'nanoid';
 
 export default ({
   props: {
@@ -56,7 +56,7 @@ export default ({
       moment: moment,
       drafts: [],
       visible: false,
-    }
+    };
   },
   created() {
     this.drafts = this.getDrafts();
@@ -65,11 +65,11 @@ export default ({
   methods: {
     // 获取所有草稿
     getDrafts() {
-      const userId = this.$store.state.user.userInfo.userId
+      const userId = this.$store.state.user.userInfo.userId;
       if (!userId) {
         return [];
       }
-      const key = `draft:${userId}:article`
+      const key = `draft:${userId}:article`;
       const articles = JSON.parse(localStorage.getItem(key) || '[]');
       if (articles && articles.length > 0) {
         // 检查
@@ -88,14 +88,14 @@ export default ({
         d: moment().unix(),
         ti: tagId || 0,
         ci: collectionId || 0,
-      })
-      const userId = this.$store.state.user.userInfo.userId
+      });
+      const userId = this.$store.state.user.userInfo.userId;
       if (!userId) {
         return false;
       }
-      const key = `draft:${userId}:article`
-      localStorage.setItem(key, JSON.stringify(this.drafts))
-      this.$toast('保存草稿成功！')
+      const key = `draft:${userId}:article`;
+      localStorage.setItem(key, JSON.stringify(this.drafts));
+      this.$toast('保存草稿成功！');
     },
     // 更新文章
     updateDraft(id, title, content, forumId = 0, formuName = '', tagId, collectionId) {
@@ -103,11 +103,11 @@ export default ({
       if (index === -1) {
         return false;
       }
-      const userId = this.$store.state.user.userInfo.userId
+      const userId = this.$store.state.user.userInfo.userId;
       if (!userId) {
         return false;
       }
-      const key = `draft:${userId}:article`
+      const key = `draft:${userId}:article`;
       this.drafts[index] = {
         i: id,
         f: forumId,
@@ -117,19 +117,19 @@ export default ({
         d: moment().unix(),
         ti: tagId || 0,
         ci: collectionId || 0,
-      }
-      localStorage.setItem(key, JSON.stringify(this.drafts))
-      this.$toast('更新草稿成功！')
+      };
+      localStorage.setItem(key, JSON.stringify(this.drafts));
+      this.$toast('更新草稿成功！');
     },
     // 移除草稿
     removeDraft(id) {
-      const userId = this.$store.state.user.userInfo.userId
+      const userId = this.$store.state.user.userInfo.userId;
       if (!userId) {
         return false;
       }
-      const key = `draft:${userId}:article`
-      this.drafts = this.drafts.filter(article => article.i !== id)
-      localStorage.setItem(key, JSON.stringify(this.drafts))
+      const key = `draft:${userId}:article`;
+      this.drafts = this.drafts.filter(article => article.i !== id);
+      localStorage.setItem(key, JSON.stringify(this.drafts));
     },
     // 设置父组件文章
     setContent(item) {

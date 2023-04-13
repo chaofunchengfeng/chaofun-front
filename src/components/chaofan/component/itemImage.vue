@@ -45,13 +45,13 @@ export default {
     data(){
       return {
         longImage: null,
-      }
+      };
     },
     props: {
       item: {
         type: Object,
         default(){
-          return {}
+          return {};
         }
       },
       isDetail: {
@@ -67,12 +67,12 @@ export default {
     },
     created() {
       var o_imgs = [];
-      if(this.item.imageNums>1){
+      if(this.item.imageNums > 1){
         this.item.images.forEach(item=>{
           if(!item.includes('.gif')){
-            o_imgs.push(this.imgOrigin+item+ '?x-oss-process=image/resize,h_512/quality,q_75')
+            o_imgs.push(this.imgOrigin + item + '?x-oss-process=image/resize,h_512/quality,q_75');
           }
-        })
+        });
       }
       this.item.o_imgs = o_imgs;
     },
@@ -96,95 +96,95 @@ export default {
           return url;
         }
         if (this.isLongImage(item.width, item.height)) {
-          return url + '?x-oss-process=image/crop,h_' + parseInt(512 * item.width / 568)
+          return url + '?x-oss-process=image/crop,h_' + parseInt(512 * item.width / 568);
         }
         return url + '?x-oss-process=image/resize,h_512/quality,q_75';
       },
       toUrls(item,params){
         this.postBehavior(item.postId,'jump');
-        this.toUrl(params)
+        this.toUrl(params);
       },
       doImgClass(imgs){
-        if(imgs.length==2||imgs.length==4){
-          return 'two_img'
+        if(imgs.length == 2 || imgs.length == 4){
+          return 'two_img';
         }else{
-          return 'three_img'
+          return 'three_img';
         }
       },
       doMoreImgStyle(item,item2){
         return {
           // 'width':
-          'height':parseInt((this.ISPHONE?(231*item.height/(item.width*2)):(231*item.height/item.width)))+'px',
-          'background-image':`url(${this.imgOrigin+item2+(item2.includes('.gif')? '': ('?x-oss-process=image/resize,h_'+(item.imageNums==2?750:400))  + '/quality,q_75' )}) `,//parseInt((this.ISPHONE?(231*item.height/(item.width)):(231*item.height/item.width)))
-        }
+          'height':parseInt((this.ISPHONE ? (231 * item.height / (item.width * 2)) : (231 * item.height / item.width))) + 'px',
+          'background-image':`url(${this.imgOrigin + item2 + (item2.includes('.gif') ? '' : ('?x-oss-process=image/resize,h_' + (item.imageNums == 2 ? 750 : 400))  + '/quality,q_75' )}) `,//parseInt((this.ISPHONE?(231*item.height/(item.width)):(231*item.height/item.width)))
+        };
       },
       getImageHeight(w,h){
         if(this.isDetail){
-          if(w<h&&h>512){
-            return '512'
+          if(w < h && h > 512){
+            return '512';
           }else{
-            return h == null ? '512': Math.min(Math.ceil(h),512).toString();
+            return h == null ? '512' : Math.min(Math.ceil(h),512).toString();
           }
         }else{
-          if(w<h&&h>512){
+          if(w < h && h > 512){
             let num;
             if(this.ISPHONE){
-              num = '375'
+              num = '375';
             }else{
-              num = '512'
+              num = '512';
             }
-            return '512'
+            return '512';
           }else{
             let num;
             if(this.ISPHONE){
-              num = '375'
+              num = '375';
             }else{
-              num = '512'
+              num = '512';
             }
-            return h == null ? num: Math.min(Math.ceil(h),num).toString();
+            return h == null ? num : Math.min(Math.ceil(h),num).toString();
           }
         }
       },
       doImgStyle(w,h,type){
-        if(document.body.clientWidth<700){
+        if(document.body.clientWidth < 700){
           // 适配移动端, 这里后续尽量封装成组件
           const temp = Math.ceil(document.body.clientWidth * 0.85);
-          if(w<h&&h>temp){
+          if(w < h && h > temp){
             return {
               height: this.imgMaxWidth + 'px'
-            }
+            };
           }else{
-            return {}
+            return {};
           }
         } else {
           if (this.isDetail) {
               if (!this.isLongImage(w, h)) {
                 return {
                   'maxHeight': '700px',
-                }
+                };
               } else {
                 return {
                   width: '350px',
-                }
+                };
               }
           } else {
             if (w < h && h > 512) {
               return {
                 height: '512px'
-              }
+              };
             } else {
-              return {}
+              return {};
             }
           }
         }
       },
       toPost(item) {
         if(!this.isDetail){
-          this.$emit('toDetail',item)
+          this.$emit('toDetail',item);
           }
       },
     }
-  }
+  };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

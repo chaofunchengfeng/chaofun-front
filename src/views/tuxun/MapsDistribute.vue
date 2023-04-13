@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import "./SmoothWheelZoom"
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '@/api/api';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import './SmoothWheelZoom';
+import {tuxunJump, tuxunOpen} from './common';
 export default {
-  name: "Replay",
+  name: 'Replay',
   data() {
     return {
       gameId: null,
@@ -35,7 +35,7 @@ export default {
       smoothSensitivity: 3,   // zoom speed. default is 1
       maxBoundsViscosity: 1.0,
       maxBounds: [[-90, -540], [90, 540]]
-    }).setView([38.8, 106.0], 2)
+    }).setView([38.8, 106.0], 2);
     map.scrollWheelZoom = true;
     map.attributionControl.setPosition('bottomleft');
     map.zoomControl.setPosition('bottomright');
@@ -55,10 +55,10 @@ export default {
   },
   methods: {
     get() {
-      api.getByPath("/api/v0/tuxun/maps/listSimplePano", {mapsId: this.mapsId}).then(res => {
+      api.getByPath('/api/v0/tuxun/maps/listSimplePano', {mapsId: this.mapsId}).then(res => {
         console.log(res.data);
         if (res.success) {
-          this.addMarker(res.data)
+          this.addMarker(res.data);
         }
       });
     },
@@ -67,16 +67,16 @@ export default {
 
       for (var i in data) {
         var latlng = data[i];
-        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options))
+        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
         options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
         options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
         var marker = L.marker([latlng.lat, latlng.lng], {icon: new L.Icon(options)}).addTo(this.map);
         marker.latlng = latlng;
-        marker.on("click", function (e) {
+        marker.on('click', function (e) {
           console.log(e);
           this.toPanorama(e.target.latlng);
         }.bind(this));
-        group.push([latlng.lat, latlng.lng])
+        group.push([latlng.lat, latlng.lng]);
       };
 
       this.map.fitBounds(group);
@@ -89,28 +89,28 @@ export default {
         return;
       }
       if (latlng.source === 'baidu_pano') {
-        tuxunOpen('https://maps.baidu.com/#panoid=' + latlng.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + latlng.panoId)
+        tuxunOpen('https://maps.baidu.com/#panoid=' + latlng.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + latlng.panoId);
       } else {
         if (latlng.panoId.indexOf('AF') === 0) {
-          tuxunOpen('https://www.google.com/maps/@0.0,0.0,3a,75y,90t/data=!3m7!1e1!3m5!1s' + latlng.panoId +  '!2e10!3e11!7i8192!8i4096')
+          tuxunOpen('https://www.google.com/maps/@0.0,0.0,3a,75y,90t/data=!3m7!1e1!3m5!1s' + latlng.panoId +  '!2e10!3e11!7i8192!8i4096');
         } else {
-          tuxunOpen('https://www.google.com/maps/@?api=1&map_action=pano&pano=' + latlng.panoId)
+          tuxunOpen('https://www.google.com/maps/@?api=1&map_action=pano&pano=' + latlng.panoId);
         }
       }
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
 
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import { getDonateHistory } from "@/api/api.js";
+import { getDonateHistory } from '@/api/api.js';
 
 export default {
-  name: "donateHistory",
+  name: 'donateHistory',
   props: {
     forumId: {
       type: String,
@@ -55,18 +55,18 @@ export default {
   created() {
     Date.prototype.format = function(fmt) {
       const o = {
-        "M+": this.getMonth() + 1,                 //月
-        "d+": this.getDate(),                    //日
-        "h+": this.getHours(),                   //时
-        "m+": this.getMinutes(),                 //分
-        "s+": this.getSeconds()                 //秒
+        'M+': this.getMonth() + 1,                 //月
+        'd+': this.getDate(),                    //日
+        'h+': this.getHours(),                   //时
+        'm+': this.getMinutes(),                 //分
+        's+': this.getSeconds()                 //秒
       };
       if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
       }
       for (const k in o) {
-        if (new RegExp("(" + k + ")").test(fmt)) {
-          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        if (new RegExp('(' + k + ')').test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
         }
       }
       return fmt;
@@ -107,17 +107,17 @@ export default {
     getReasonStr(item) {
       let subType = item.subType;
 
-      if ("donate" === subType) {
+      if ('donate' === subType) {
         if (item.reason) {
-          return "捐赠留言：" + item.reason;
+          return '捐赠留言：' + item.reason;
         } else {
-          return "";
+          return '';
         }
 
-      } else if ("manager" === subType) {
-        return "奖励给 【" + item.targetUserName + "】";
-      } else if ("badge" === subType) {
-        return "向 【" + item.targetUserName + "】 授予 【" + item.badgeName + "】 徽章";
+      } else if ('manager' === subType) {
+        return '奖励给 【' + item.targetUserName + '】';
+      } else if ('badge' === subType) {
+        return '向 【' + item.targetUserName + '】 授予 【' + item.badgeName + '】 徽章';
       }
       return subType;
     },
@@ -125,21 +125,21 @@ export default {
     getDateTimeStr(item) {
       let time = item.time;
       if (!time) {
-        return "";
+        return '';
       }
       const date = new Date(time);
-      return date.format("MM-dd hh:mm");
+      return date.format('MM-dd hh:mm');
     },
 
     getTypeStr(item) {
       let subType = item.subType;
 
-      if ("donate" === subType) {
-        return "捐赠";
-      } else if ("manager" === subType) {
-        return "版块奖励";
-      } else if ("badge" === subType) {
-        return "授予徽章";
+      if ('donate' === subType) {
+        return '捐赠';
+      } else if ('manager' === subType) {
+        return '版块奖励';
+      } else if ('badge' === subType) {
+        return '授予徽章';
       }
       return subType;
     },
@@ -148,12 +148,12 @@ export default {
       let type = item.type;
       let fbi = item.fbi;
 
-      if ("income" === type) {
-        return "+" + fbi;
-      } else if ("spend" === type) {
-        return "-" + fbi;
+      if ('income' === type) {
+        return '+' + fbi;
+      } else if ('spend' === type) {
+        return '-' + fbi;
       }
-      return "" + fbi;
+      return '' + fbi;
     },
 
     getFbiClass(item) {
@@ -163,10 +163,10 @@ export default {
       //   return "fbi-income";
       // } else
 
-      if ("spend" === type) {
-        return "fbi-spend";
+      if ('spend' === type) {
+        return 'fbi-spend';
       }
-      return "";
+      return '';
     }
 
   }

@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
+import * as api from '../../api/api';
  export default {
    name: '',
    data(){
      return {
 
-     }
+     };
    },
    components: {
 
@@ -22,7 +22,7 @@ import * as api from '../../api/api'
    },
    methods: {
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

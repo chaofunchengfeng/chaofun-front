@@ -28,11 +28,11 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import {banlist, forumAddBan} from "../../../api/api";
+  import * as api from '@/api/api';
+  import {banlist, forumAddBan} from '../../../api/api';
 
   export default {
-    name: "mod_manager",
+    name: 'mod_manager',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
@@ -45,7 +45,7 @@
         userIdToBan: null,
         lists:[],
         timeout:  null
-      }
+      };
     },
     props: {
       forumId0: {
@@ -61,7 +61,7 @@
       } else {
         this.forumId = this.$route.query.forumId;
       }
-      this.getBanList()
+      this.getBanList();
     },
 
     mounted() {
@@ -75,7 +75,7 @@
       toAdd() {
 
         if (this.keyword == null || this.keyword === '') {
-          this.$toast('敏感词不能为空')
+          this.$toast('敏感词不能为空');
         } else {
           api.getByPath('/api/v0/forum/addSensitiveWord', {
             'forumId': this.forumId,
@@ -99,7 +99,7 @@
               this.$toast(res.errorMessage);
             }
             this.getBanList();
-          })
+          });
       },
       cancelAdd() {
         this.displayAdd = false;
@@ -107,10 +107,10 @@
       getBanList() {
         api.getByPath('/api/v0/forum/getSensitiveWord', { forumId: this.forumId }).then((res) => {
           this.lists = res.data;
-        })
+        });
       }
     }
-  }
+  };
 
 </script>
 

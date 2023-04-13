@@ -57,11 +57,11 @@
 </template>
 
 <script>
-import noticeItem from "@/components/chaofan/noticeItem";
-import loadText from "@/components/chaofan/loadText";
-import * as api from "../../api/api";
+import noticeItem from '@/components/chaofan/noticeItem';
+import loadText from '@/components/chaofan/loadText';
+import * as api from '../../api/api';
 export default {
-  name: "",
+  name: '',
   data() {
     return {
       humanizeTimeFormat: true,
@@ -107,7 +107,7 @@ export default {
   },
   mounted() {
     let self = this;
-    this.$refs.container.addEventListener("scroll", function () {
+    this.$refs.container.addEventListener('scroll', function () {
       let scrollTop = self.$refs.container.scrollTop;
       let conTop = self.$refs.container.scrollTop;
       // 变量windowHeight是可视区的高度
@@ -120,7 +120,7 @@ export default {
         conTop + conHeight > scrollHeight ||
         conTop + conHeight == scrollHeight
       ) {
-        console.log("到底了");
+        console.log('到底了');
         if (self.ifcanget) {
           // self.load()
           self.messageList();
@@ -140,7 +140,7 @@ export default {
       this.params.marker = '';
       this.loadAll = false;
       this.loading = true;
-      this.message = []
+      this.message = [];
       this.messageList();
     },
     load() {

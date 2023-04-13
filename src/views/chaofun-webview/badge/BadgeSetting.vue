@@ -25,16 +25,16 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
-import badgeDetail from "@/views/chaofun-webview/badge/badgeDetail.vue";
+import * as api from '@/api/api';
+import badgeDetail from '@/views/chaofun-webview/badge/badgeDetail.vue';
 
 export default {
-  name: "badgeDetail.vue",
+  name: 'badgeDetail.vue',
   data() {
     return {
-      "lists": [],
-      "badgeId": null,
-      "badgeInfo": {}
+      'lists': [],
+      'badgeId': null,
+      'badgeInfo': {}
     };
   },
   props: {
@@ -61,15 +61,15 @@ export default {
 
   methods: {
     toDetail(item) {
-      window.open("/webview/badge?badgeId=" + item.badge.id, "_blank");
+      window.open('/webview/badge?badgeId=' + item.badge.id, '_blank');
     },
     switchBadgeShow(event, item) {
-      api.getByPath("/api/v0/badge/setShow", { badgeId: item.badge.id, show: event }).then(res =>
+      api.getByPath('/api/v0/badge/setShow', { badgeId: item.badge.id, show: event }).then(res =>
         this.getBadgeInfo()
       );
     },
     getBadgeInfo() {
-      api.getByPath("/api/v0/badge/list?settingPage=true").then(
+      api.getByPath('/api/v0/badge/list?settingPage=true').then(
         res => {
           if (res.success) {
             this.lists = res.data;

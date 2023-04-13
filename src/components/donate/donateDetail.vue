@@ -144,14 +144,14 @@
 
 <script>
 
-import * as api from "@/api/api";
-import donateHistory from "_c/donate/donateHistory";
+import * as api from '@/api/api';
+import donateHistory from '_c/donate/donateHistory';
 
 export default {
   props: {
     forumId: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   data() {
@@ -159,7 +159,7 @@ export default {
       historyDialogVisible: false,
       donateDialogVisible: false,
       fbi: 100,
-      reason: "",
+      reason: '',
 
       totalFbi: 0,
       remainFbi: 0,
@@ -178,7 +178,7 @@ export default {
     },
     donateDialogVisible() {
       this.fbi = 100;
-      this.reason = "";
+      this.reason = '';
       this.assistCalcRank(this.fbi);
     }
   },
@@ -280,7 +280,7 @@ export default {
         this.donateDialogVisible = false;
 
         if (res && res.success) {
-          this.$toast("捐赠成功！");
+          this.$toast('捐赠成功！');
         }
         this.init();
       });
@@ -289,17 +289,17 @@ export default {
 
     toUser(userId) {
       try {
-        window.flutter_inappwebview.callHandler("toAppUser", { userId: userId + "" });
+        window.flutter_inappwebview.callHandler('toAppUser', { userId: userId + '' });
       } catch (e) {
-        window.open(location.origin + "/user/" + userId, "_blank");
+        window.open(location.origin + '/user/' + userId, '_blank');
       }
     },
 
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex % 2) {
-        return "noRankStyle2";
+        return 'noRankStyle2';
       }
-      return "";
+      return '';
 
       // if (row.rank === 1) {
       //  return "rank1Style";

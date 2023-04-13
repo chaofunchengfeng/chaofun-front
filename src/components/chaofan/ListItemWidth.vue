@@ -405,41 +405,41 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
+import * as api from '@/api/api';
 // import "moment/locale/zh-cn";
-import moment from "moment";
-import VueClipboard from "vue-clipboard2";
-import forward from "./Forward";
-import Vue from "vue";
+import moment from 'moment';
+import VueClipboard from 'vue-clipboard2';
+import forward from './Forward';
+import Vue from 'vue';
 Vue.use(VueClipboard);
 
-import forwardH5 from "../h5/forward";
-import "vant/lib/image-preview/style";
-import { ImagePreview } from "vant";
+import forwardH5 from '../h5/forward';
+import 'vant/lib/image-preview/style';
+import { ImagePreview } from 'vant';
 Vue.use(ImagePreview);
-import { parseTime } from "@/utils";
+import { parseTime } from '@/utils';
 
-import itemTopTitle from "./component/itemTopTitle";
-import itemLink from "./component/itemLink";
-import itemImage from "./component/itemImage";
-import itemGif from "./component/itemGif";
-import itemVideo from "./component/itemVideo";
-import itemArticle from "./component/itemArticle";
-import itemAudio from "./component/itemAudio";
-import itemVote from "./component/itemVote";
-import itemForwardTitle from "./component/itemForwardTitle";
-import itemPrediction from "./component/itemPrediction";
+import itemTopTitle from './component/itemTopTitle';
+import itemLink from './component/itemLink';
+import itemImage from './component/itemImage';
+import itemGif from './component/itemGif';
+import itemVideo from './component/itemVideo';
+import itemArticle from './component/itemArticle';
+import itemAudio from './component/itemAudio';
+import itemVote from './component/itemVote';
+import itemForwardTitle from './component/itemForwardTitle';
+import itemPrediction from './component/itemPrediction';
 
 export default {
-  name: "list-item",
+  name: 'list-item',
   data() {
     return {
-      chooseImg: "",
-      imgs: ["", ""],
+      chooseImg: '',
+      imgs: ['', ''],
       positionX: 0,
       positionY: 0,
-      imgX: "",
-      imgY: "",
+      imgX: '',
+      imgY: '',
       size: 90,
       options: {
         steps: 10,
@@ -449,7 +449,7 @@ export default {
       showPhoneCover: false,
       moment: moment,
       centerDialogVisible: false,
-      message: "",
+      message: '',
       dialogs: {
         dialogVisible: false,
         data: {},
@@ -489,13 +489,13 @@ export default {
   },
   created() {},
   mounted() {
-    this.$EventBus.$on("refreshItemTag", (params) => {
+    this.$EventBus.$on('refreshItemTag', (params) => {
       //需要执行的代码
       console.log(params);
       if (params.type) {
         // this.lists[params.index].tags.push(params.tag);
         this.lists[params.index].tags.splice(0, 1, params.tag);
-      } else if(params&&params.index){
+      } else if(params && params.index){
         // this.lists[params.index].tags.splice(
         //   this.lists[params.index].tags.findIndex((i) => i.id == params.tag.id),
         //   1
@@ -507,7 +507,7 @@ export default {
   directives: {},
   methods: {
     updateList(index, item) {
-      this.$EventBus.$emit("updateItem", {
+      this.$EventBus.$emit('updateItem', {
         type: 'update',
         postId: item.postId,
         item: item,
@@ -549,7 +549,7 @@ export default {
         total += item.optionVote * 1;
         //  }
       });
-      return ((num * 100) / total).toFixed(2) + "%";
+      return ((num * 100) / total).toFixed(2) + '%';
     },
     checkoutVote(item, list) {
       var a = false;
@@ -563,8 +563,8 @@ export default {
     parseTime: parseTime,
     onChange() {},
     close() {
-      if (localStorage.getItem("storedata")) {
-        var obj = JSON.parse(localStorage.getItem("storedata"));
+      if (localStorage.getItem('storedata')) {
+        var obj = JSON.parse(localStorage.getItem('storedata'));
         let { params, query } = obj.from;
         query.time = new Date().getTime();
         this.$router.replace({ path: obj.from.path, params, query });
@@ -573,14 +573,14 @@ export default {
       }
     },
     deletePost(item, index) {
-      this.$confirm(`是否确定删除帖子 【${item.title}】？`, "提示", {
-        type: "warning",
-        position: "top",
+      this.$confirm(`是否确定删除帖子 【${item.title}】？`, '提示', {
+        type: 'warning',
+        position: 'top',
       }).then(() => {
         api.deletePost({ postId: item.postId }).then((res) => {
           if (res.success) {
-            this.$message.success("已删除");
-            this.$EventBus.$emit("updateItem", {
+            this.$message.success('已删除');
+            this.$EventBus.$emit('updateItem', {
               type: 'delete',
               postId: item.postId
             });
@@ -597,9 +597,9 @@ export default {
       });
     },
     handleCommand(data) {
-      if (data.type == "copy") {
+      if (data.type == 'copy') {
         this.share(data.item);
-      } else if (data.type == "share") {
+      } else if (data.type == 'share') {
         this.doLoginStatus().then((res) => {
           if (res) {
             this.dialogs.data = {
@@ -613,48 +613,48 @@ export default {
         });
       } else {
         let picurl =
-          "https://oss.meibbc.com/gw/img/3380CC9482F74FA89C118FB99F4CE5E7.jpg";
+          'https://oss.meibbc.com/gw/img/3380CC9482F74FA89C118FB99F4CE5E7.jpg';
         let url =
-          "https://chao.fan/p/" + (data.item.sourcePostId || data.item.postId);
+          'https://chao.fan/p/' + (data.item.sourcePostId || data.item.postId);
         var sharesinastring =
-          "http://service.weibo.com/share/share.php?title=" +
+          'http://service.weibo.com/share/share.php?title=' +
           data.item.title +
-          "&url=" +
+          '&url=' +
           url +
-          "（分享来自@炒饭社区）" +
-          "&content=utf-8&sourceUrl=" +
+          '（分享来自@炒饭社区）' +
+          '&content=utf-8&sourceUrl=' +
           url +
-          "&searchPic=true&ralateUid=炒饭社区";
+          '&searchPic=true&ralateUid=炒饭社区';
         // window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100');
-        window.open(sharesinastring, "_blank");
+        window.open(sharesinastring, '_blank');
       }
     },
     savePost(item) {
       api.savePost({ postId: item.postId }).then((res) => {
         if (res.success) {
           if (item.save) {
-            this.$toast("已取消收藏");
+            this.$toast('已取消收藏');
           } else {
-            this.$toast("收藏成功");
+            this.$toast('收藏成功');
           }
           item.save = !item.save;
-        } else if (res.errorCode == "need_login") {
+        } else if (res.errorCode == 'need_login') {
           this.$login({
             callBack: () => {
-              this.$store.dispatch("user/getInfo");
+              this.$store.dispatch('user/getInfo');
             },
           });
         }
       });
     },
     onCopy(e) {
-      this.$message.success("链接已复制到剪切板！");
+      this.$message.success('链接已复制到剪切板！');
     },
     share(item) {
-      this.message = location.origin + "/p/" + item.postId;
+      this.message = location.origin + '/p/' + item.postId;
     },
     toDetail(item) {
-      this.$router.push({ path: "/p/" + item.postId });
+      this.$router.push({ path: '/p/' + item.postId });
     },
     doZan(v, item, index) {
       if (v == 1) {
@@ -694,7 +694,7 @@ export default {
         }
       }
       this.updateList(index, item);
-      console.log('更新数据')
+      console.log('更新数据');
       // this.$EventBus.$emit("resetItem", {index: index,item: item});
       //  this.$EventBus.$emit('updateVote',{index: this.index,item: item});
     },

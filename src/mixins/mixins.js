@@ -1,7 +1,7 @@
 // 导出新组件
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
-import Vue from 'vue'
+import Vue from 'vue';
 // import login from '@/components/chaofan/common/login/login.js'
 
 // Vue.prototype.$login = login
@@ -41,7 +41,7 @@ export default {
 
     document.addEventListener('gesturestart', function (event) {
       event.preventDefault();
-      console.log('gesturestart')
+      console.log('gesturestart');
     });
 
     // console.log(document.getElementsByClassName('nav_con').clientHeight)
@@ -58,52 +58,52 @@ export default {
           return;
         }
         // 旧版
-        this.$router.push({ path: '/submit', query: { id: id, name: name, icon: icon } })
+        this.$router.push({ path: '/submit', query: { id: id, name: name, icon: icon } });
       } else {
         this.$login({
           callBack: () => {
-            this.$store.dispatch('user/getInfo')
+            this.$store.dispatch('user/getInfo');
           }
         });
       }
     },
     showLogin(logStatus) {
       this.$login({
-        logStatus: logStatus||'login',
+        logStatus: logStatus || 'login',
         callBack: () => {
-          this.$store.dispatch('user/getInfo')
+          this.$store.dispatch('user/getInfo');
         }
       });
     },
     reFresh() {
-      location.reload()
+      location.reload();
     },
     toUser(userInfo) {
-      localStorage.removeItem('storedata')
-      localStorage.removeItem('spage')
+      localStorage.removeItem('storedata');
+      localStorage.removeItem('spage');
       if (userInfo) {
         if (this.$route.path.includes('/user/')) {
           localStorage.setItem('whichOne', 'pub');
         }
-        window.open('/user/' + userInfo.userId.toString(), '_blank')
+        window.open('/user/' + userInfo.userId.toString(), '_blank');
         // this.$router.push({name: 'userhome',params:{id: userInfo.userId,userInfo}})
       }
     },
     toForum(item){
       try {
-        window.flutter_inappwebview.callHandler('toAppForum',{forumId: item.id+''})
+        window.flutter_inappwebview.callHandler('toAppForum',{forumId: item.id + ''});
       } catch (e) {
-        window.open(location.origin + '/f/'+item.id,"_blank");
+        window.open(location.origin + '/f/' + item.id,'_blank');
       }
     },
     toUserById(userInfo) {
-      localStorage.removeItem('storedata')
-      localStorage.removeItem('spage')
+      localStorage.removeItem('storedata');
+      localStorage.removeItem('spage');
       if (userInfo) {
         if (this.$route.path.includes('/user/')) {
           localStorage.setItem('whichOne', 'pub');
         }
-        window.open('/user/' + id, '_blank')
+        window.open('/user/' + id, '_blank');
         // this.$router.push({name: 'userhome',params:{id: userInfo.userId,userInfo}})
       }
     },
@@ -112,7 +112,7 @@ export default {
       if (this.$route.path == 'search') {
 
       } else {
-        this.$router.push({ name: 'search', query: { q: this.keyword } })
+        this.$router.push({ name: 'search', query: { q: this.keyword } });
       }
     },
     // doSpan(t) {
@@ -122,17 +122,17 @@ export default {
       if (this.$route.query.time) {
         this.$('.infinite-list').animate({ scrollTop: localStorage.getItem('storedata') ? JSON.parse(localStorage.getItem('storedata')).top : 0 }, 0);
         setTimeout(() => {
-          localStorage.removeItem('storedata')
-          localStorage.removeItem('spage')
-        }, 1000)
+          localStorage.removeItem('storedata');
+          localStorage.removeItem('spage');
+        }, 1000);
       } else {
-        localStorage.removeItem('storedata')
-        localStorage.removeItem('spage')
+        localStorage.removeItem('storedata');
+        localStorage.removeItem('spage');
       }
     },
     doTheme(v) {
-      let obj = {}
-      let styles = this.$store.state.settings.styles
+      let obj = {};
+      let styles = this.$store.state.settings.styles;
       if (styles.bodyStyle.type == 'open') {
         obj.backgroundColor = 'transparent';
       }
@@ -140,21 +140,21 @@ export default {
         return Object.assign(obj, styles.bodyStyle);
       } else if (v == 'contentStyle') {
         if (styles.contentStyle.type == 'open') {
-          return Object.assign({}, styles.contentStyle)
+          return Object.assign({}, styles.contentStyle);
         } else {
-          return Object.assign(obj)
+          return Object.assign(obj);
         }
       } else if (v == 'sidebarStyle') {
         if (styles.sidebarStyle.type == 'open') {
-          return Object.assign({}, styles.sidebarStyle)
+          return Object.assign({}, styles.sidebarStyle);
         } else {
-          return Object.assign(obj)
+          return Object.assign(obj);
         }
       } else if (v == 'navbarStyle') {
         if (styles.navbarStyle.type == 'open') {
-          return Object.assign({}, styles.navbarStyle)
+          return Object.assign({}, styles.navbarStyle);
         } else {
-          return Object.assign(obj)
+          return Object.assign(obj);
         }
       }
 
@@ -184,40 +184,40 @@ export default {
     doLoginStatus() { // 判断是否登录
       return new Promise((resolve, reject) => {
         if (this.$store.state.user.islogin) {
-          resolve(true)
+          resolve(true);
         } else {
           this.$login({
             callBack: () => {
-              this.$store.dispatch('user/getInfo')
+              this.$store.dispatch('user/getInfo');
             }
           });
-          resolve(false)
+          resolve(false);
         }
-      })
+      });
     },
     doSsoLogin() {
       return new Promise((resolve, reject) => {
         if (this.$store.state.user.islogin) {
-          resolve(true)
+          resolve(true);
         } else {
           this.$login({
             callBack: () => {
-              this.$store.dispatch('webview/oauth')
+              this.$store.dispatch('webview/oauth');
             },
           });
-          resolve(false)
+          resolve(false);
         }
-      })
+      });
     },
     toUrl(query) {
       if (query.routeType == 1) {
-        window.open(query.url, '_blank')
+        window.open(query.url, '_blank');
       } else {
         this.$router.push(query);
       }
     },
     doSpan() { // 主区域布局
-      let winWidth = document.body.clientWidth
+      let winWidth = document.body.clientWidth;
       if (winWidth > 1200 && winWidth < 1500) {
 
       }
@@ -225,18 +225,18 @@ export default {
     doSpanMain() {
       // let opened = Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true
       let opened = this.opened;
-      let winWidth = document.body.clientWidth
-      let sideBarWidth = opened ? 240 : 54
+      let winWidth = document.body.clientWidth;
+      let sideBarWidth = opened ? 240 : 54;
       let contentWidth = winWidth - sideBarWidth;
-      return Math.ceil(contentWidth / winWidth * 24)
+      return Math.ceil(contentWidth / winWidth * 24);
       // return Math.floor(((winWidth - this.doWidth() / 24.0 * contentWidth) / 2 - sideBarWidth) / (contentWidth) * 24)
     },
     doOffSet() {
-      let opened = Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true
-      let winWidth = document.body.clientWidth
-      let sideBarWidth = opened ? 240 : 54
+      let opened = Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true;
+      let winWidth = document.body.clientWidth;
+      let sideBarWidth = opened ? 240 : 54;
       let contentWidth = winWidth - sideBarWidth;
-      return Math.floor(((winWidth - this.doWidth() / 24.0 * contentWidth) / 2 - sideBarWidth) / (contentWidth) * 24)
+      return Math.floor(((winWidth - this.doWidth() / 24.0 * contentWidth) / 2 - sideBarWidth) / (contentWidth) * 24);
     },
     doWidth() {
       // let opened = Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true
@@ -244,10 +244,10 @@ export default {
       // let winWidth = document.body.clientWidth - sideBarWidth
       // return Math.ceil(640.0 / winWidth  * 24)
       let opened = this.$store.getters.sidebar.opened;
-      let winWidth = (opened ? document.body.clientWidth : (document.body.clientWidth - 54))
-      let sideBarWidth = opened ? 240 : (54)
+      let winWidth = (opened ? document.body.clientWidth : (document.body.clientWidth - 54));
+      let sideBarWidth = opened ? 240 : (54);
       let contentWidth = winWidth - sideBarWidth;
-      return Math.ceil(contentWidth / winWidth * 24)
+      return Math.ceil(contentWidth / winWidth * 24);
     },
     doRightStyle() {
       // let opened = Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true
@@ -255,7 +255,7 @@ export default {
       let right = (winWidth - 640) / 2 - 350 + 80;
       return {
         'right': right + 'px'
-      }
+      };
     },
     doLeftStyle() {
       // let opened = Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true
@@ -264,7 +264,7 @@ export default {
       let right = (winWidth - 640) / 2 - (opened ? 310 : 290) - 70;
       return {
         'left': right + 'px'
-      }
+      };
     },
     doTagLeftStyle() {
       // let opened = Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true
@@ -274,10 +274,10 @@ export default {
 
       return {
         'left': right - 170 + 'px'
-      }
+      };
     },
     doRightOffset() {
-      return (this.doOffSet() + this.doWidth())
+      return (this.doOffSet() + this.doWidth());
     }
   }
 };

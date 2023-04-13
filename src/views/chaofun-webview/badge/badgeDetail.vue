@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 
 export default {
-  name: "badgeDetail.vue",
+  name: 'badgeDetail.vue',
   data() {
     return {
       'badgeId': null,
       'badgeInfo': {}
-    }
+    };
   },
   props: {
     badgeInfo0: {
@@ -63,13 +63,13 @@ export default {
             if (res.success) {
               this.badgeInfo = res.data;
             } else {
-              this.$toast(res.errorMessage)
+              this.$toast(res.errorMessage);
             }
           }
       );
     }
   }
-}
+};
 </script>
 
 <style scoped>

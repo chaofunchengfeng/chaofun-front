@@ -73,8 +73,8 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import newDialog from '../../../layout/components/dialog/newDialog'
+  import * as api from '@/api/api';
+  import newDialog from '../../../layout/components/dialog/newDialog';
   export default {
     name: '',
     data(){
@@ -85,13 +85,13 @@
         userData: {},
         selectLine: {},
         ids: ''
-      }
+      };
     },
     props: {
       item: {
         type: Object,
         default(){
-          return {}
+          return {};
         }
       },
       index: {
@@ -114,7 +114,7 @@
     },
     methods: {
       blurs(){
-        if(this.nums>this.userData.restTokens){
+        if(this.nums > this.userData.restTokens){
           this.nums = this.userData.restTokens;
         }
       },
@@ -122,37 +122,37 @@
         switch (this.item.predictionStatus){
           case 'live': return '竞猜进行中（下注中)';break;
           case 'pause': return '比赛中（停止下注）';break;
-          case 'end':return '竞猜结束';break
+          case 'end':return '竞猜结束';break;
         }
       },
       toMore(){
-        this.$router.push('/f/' + this.item.forumId + '/predictions')
+        this.$router.push('/f/' + this.item.forumId + '/predictions');
       },
       sure(){
-        if(this.nums>0){
-          let params = {postId: this.item.postId,option: this.ids+1,tokens: this.nums};
+        if(this.nums > 0){
+          let params = {postId: this.item.postId,option: this.ids + 1,tokens: this.nums};
           api.toVote(params).then(res=>{
             if(res.success){
-              this.$toast('竞猜成功')
+              this.$toast('竞猜成功');
               this.selectLine = {};
-              this.$EventBus.$emit("new-dialog", false);
+              this.$EventBus.$emit('new-dialog', false);
               setTimeout(()=>{
                 api.getPostInfo({postId: this.item.postId}).then(res=>{
                   // this.item = res.data;
                   this.$emit('callBack',this.index,res.data);
                   this.$EventBus.$emit('eventRefresh');
-                })
-              },500)
+                });
+              },500);
             }else{
-              this.$toast(res.errorMessage)
+              this.$toast(res.errorMessage);
             }
-          })
+          });
         }
       },
       getScore(){
         let params = {
           predictionsTournamentId: this.item.predictionsTournament.id
-        }
+        };
         api.checkJoin(params).then(res=>{
           if(!res.data){
             this.$alert('你确定要参加本次竞猜吗', '参加本次竞猜默认会给你本次竞猜1000积分，只作用于本次有奖竞猜活动', {
@@ -161,8 +161,8 @@
                 if (action == 'confirm') {
                   // this.toSetTokens(item, index);
                   api.predictionsjoin(params).then(res=>{
-                    this.getScore()
-                  })
+                    this.getScore();
+                  });
                 }
               }
             });
@@ -172,21 +172,21 @@
             console.log(this.userData);
             console.log(this.selectLine);
             setTimeout(()=>{
-              this.$EventBus.$emit("new-dialog", true);
-            })
+              this.$EventBus.$emit('new-dialog', true);
+            });
           }
-        })
+        });
       },
       dealNum(v){
-        if(v==1){
-          if(this.nums-10>0){
+        if(v == 1){
+          if(this.nums - 10 > 0){
             this.nums -= 10;
           }else{
             this.nums = 0;
           }
         }else{
-           if((parseInt(this.nums)+10)<this.userData.restTokens||(parseInt(this.nums)+10)==this.userData.restTokens){
-            this.nums = parseInt(this.nums)+ 10;
+           if((parseInt(this.nums) + 10) < this.userData.restTokens || (parseInt(this.nums) + 10) == this.userData.restTokens){
+            this.nums = parseInt(this.nums) + 10;
            }else{
           //  this.nums = 0;
            }
@@ -194,37 +194,37 @@
       },
       chooseItem(v,vs){
         if (this.item.predictionStatus === 'pause') {
-          this.$confirm(`是否确定标记【${v.optionName}】正确 ？`, "提示", {
-            type: "warning",
+          this.$confirm(`是否确定标记【${v.optionName}】正确 ？`, '提示', {
+            type: 'warning',
             // position: center,
           }).then(() => {
-            let params = {postId: this.item.postId,option: vs +1};
+            let params = {postId: this.item.postId,option: vs + 1};
               api.markPredictionRight(params).then(r => {
                 api.getPostInfo({postId: this.item.postId}).then(res=>{
                   // this.item = res.data;
                   this.$emit('callBack',this.index,res.data);
                   this.$EventBus.$emit('eventRefresh');
-                })
-              })
-          })
+                });
+              });
+          });
         } else if (!this.checkoutVote(this.item.options) && this.item.predictionStatus !== 'end') {
-          console.log(v, vs)
+          console.log(v, vs);
           this.ids = vs;
           this.selectLine = v;
           this.doLoginStatus().then(r => {
             if (r) {
               if (this.item.predictionStatus == 'live') {
                 setTimeout(() => {
-                  this.getScore()
-                })
+                  this.getScore();
+                });
               }
             }
-          })
+          });
         }
       },
       close(){
         this.selectLine = {};
-        this.$EventBus.$emit("new-dialog", false);
+        this.$EventBus.$emit('new-dialog', false);
       },
       checkoutVote(list){
         var a = false;
@@ -232,11 +232,11 @@
           if(item.optionVote){
             a = true;
           }
-        })
+        });
         return a;
       },
       doBg(it,its){
-        console.log(it)
+        console.log(it);
         //  var num = it.optionVote;
         //  var total = 0;
         //  its.forEach(item=>{
@@ -244,18 +244,18 @@
         //    total += item.optionVote*1;
         //    //  }
         //  })
-        return (it.width).toFixed(2)+'%';
+        return (it.width).toFixed(2) + '%';
       },
       toPredictionsTournament(id) {
-        this.$toast('还未支持跳转')
+        this.$toast('还未支持跳转');
       },
 
       toPredict(item, index) {
         this.doLoginStatus().then(r=> {
           if (r) {
-            this.checkJoin(item, index)
+            this.checkJoin(item, index);
           }
-        })
+        });
       },
 
       joinConfirm(item, index) {
@@ -265,7 +265,7 @@
             if (action == 'confirm') {
               api.joinPredictionsTournament({predictionsTournamentId: item.predictionsTournament.id}).then(res => {
                 this.checkJoin(item, index);
-              })
+              });
             }
           }
         });
@@ -273,8 +273,8 @@
 
       checkJoin(item, index) {
         api.checkJoinTournament({predictionsTournamentId: item.predictionsTournament.id}).then(res=> {
-          console.log("get checkJoinTournament")
-          console.log(res)
+          console.log('get checkJoinTournament');
+          console.log(res);
           // 如果参加了，直接设置竞猜金额
           if (res.data !== null) {
             this.toSetTokens(item, index, res.data);
@@ -292,7 +292,7 @@
           inputPattern: /[0-9]/,
           inputErrorMessage: '必须是数字'
         }).then(({ value }) => {
-          this.toToup(item, index, value)
+          this.toToup(item, index, value);
         }).catch(() => {
           this.$message({
             type: 'info',
@@ -309,11 +309,11 @@
             this.$emit('callBack',index,res.data);
             this.$EventBus.$emit('eventRefresh');
             // this.lists.splice(index,1,res.data)
-          })
-        })
+          });
+        });
       },
     }
-  }
+  };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

@@ -16,18 +16,18 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { loadScript } from "vue-plugin-load-script";
+import Vue from 'vue';
+import { loadScript } from 'vue-plugin-load-script';
 
-import BaiduMap from 'vue-baidu-map'
-import { mapGetters } from 'vuex'
-import * as api from '../../api/api'
+import BaiduMap from 'vue-baidu-map';
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 Vue.use(BaiduMap, {
   // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
   ak: 'GZPIvvSbzgo188vmBGwPOtU2ZCHDhkry'
-})
+});
 export default {
-  name: "TXAmin",
+  name: 'TXAmin',
   data () {
     return {
       center: {lng: 0, lat: 0},
@@ -51,7 +51,7 @@ export default {
       totalCount: null,
       nation: null,
       mapsid: undefined
-    }
+    };
 
   },
   mounted() {
@@ -63,23 +63,23 @@ export default {
 
     console.log(this.queryId);
     let self = this;
-    document.onkeydown=function(event){
-      console.log("hahah");
+    document.onkeydown = function(event){
+      console.log('hahah');
       var e = event || window.event || arguments.callee.caller.arguments[0];
       console.log(e);
       //
       // if(e && e.keyCode==37){//左
       //     self.last()
       // }
-      if(e && e.keyCode==38){//上
-        self.check()
+      if(e && e.keyCode == 38){//上
+        self.check();
       }
       // if(e && e.keyCode==39){//右
       //     self.next()
       // }
 
-      if(e && e.keyCode==40){//下
-          self.deleteQ()
+      if(e && e.keyCode == 40){//下
+          self.deleteQ();
       }
     };
 
@@ -89,9 +89,9 @@ export default {
   },
   methods: {
     handler ({BMap, map}) {
-      console.log(BMap, map)
-      this.center.lng = 106.0
-      this.center.lat = 38.8
+      console.log(BMap, map);
+      this.center.lng = 106.0;
+      this.center.lat = 38.8;
       this.zoom = 5;
       this.map = map;
       this.BMap = BMap;
@@ -110,7 +110,7 @@ export default {
       }
     },
     deleteQ() {
-        api.getByPath("/api/v0/tuxun/game/delete", {panoId: this.panoId}).then(res => {
+        api.getByPath('/api/v0/tuxun/game/delete', {panoId: this.panoId}).then(res => {
           this.index = this.index - 1;
           if (this.queryId !== null && this.queryId) {
             window.close();
@@ -121,7 +121,7 @@ export default {
     },
 
     last() {
-      this.index  = this.index -2 ;
+      this.index  = this.index - 2 ;
       this.next();
     },
 
@@ -130,15 +130,15 @@ export default {
         window.close();
         return;
       }
-      api.getByPath("/api/v0/tuxun/game/check", {id: this.id}).then(res => {
-        this.index = this.index -1;
+      api.getByPath('/api/v0/tuxun/game/check', {id: this.id}).then(res => {
+        this.index = this.index - 1;
         this.next();
       });
     },
 
     next() {
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
           this.confirmed = false;
           this.returnResult = true;
@@ -151,7 +151,7 @@ export default {
           this.distance = null;
           this.index = this.index + 1;
           if (this.queryId !== null && this.queryId) {
-            api.getByPath("/api/v0/tuxun/game/getContent", {id: this.queryId}).then(res => {
+            api.getByPath('/api/v0/tuxun/game/getContent', {id: this.queryId}).then(res => {
                   this.image = res.data.content;
                   this.panoId = res.data.panoId;
                   this.id = res.data.id;
@@ -159,7 +159,7 @@ export default {
                 }
             );
           } else {
-            api.getByPath("/api/v0/tuxun/game/generateQueue", {index: this.index, mapsId: this.mapsid}).then(res => {
+            api.getByPath('/api/v0/tuxun/game/generateQueue', {index: this.index, mapsId: this.mapsid}).then(res => {
                   this.id = res.data.id;
                   this.panoId = res.data.panoId;
                   this.totalCount = res.data.totalCount;
@@ -175,11 +175,11 @@ export default {
 
     setPano() {
       if (!this.viewer) {
-        document.head.insertAdjacentHTML("beforeend", `<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>`)
+        document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
         this.sharePanoId = this.$route.query.pano;
         loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js').then(() => {
           this.viewer = new google.maps.StreetViewPanorama(
-              document.getElementById("viewer"), {
+              document.getElementById('viewer'), {
                 fullscreenControl: false,
                 panControl: true,
                 addressControl: false,
@@ -196,7 +196,7 @@ export default {
               }
           );
           this.setGoogle(this.panoId);
-        })
+        });
       } else {
         this.setGoogle(this.panoId);
       }
@@ -210,12 +210,12 @@ export default {
     },
 
     mapReady(e) {
-      console.log("hahah");
-      console.log(e)
+      console.log('hahah');
+      console.log(e);
       this.map = e;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

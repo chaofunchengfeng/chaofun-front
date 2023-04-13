@@ -36,19 +36,19 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
  export default {
    name: '',
    data(){
      return {
          
-     }
+     };
    },
    props: {
        item: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        },
        index: {
@@ -71,7 +71,7 @@ import * as api from '@/api/api'
          if(item.optionVote){
            a = true;
          }
-       })
+       });
        return a;
     },
     doBg(it,its){
@@ -79,25 +79,25 @@ import * as api from '@/api/api'
        var total = 0;
        its.forEach(item=>{
         //  if(item.optionVote){
-           total += item.optionVote*1;
+           total += item.optionVote * 1;
         //  }
-       })
-       return (num*100/total).toFixed(2)+'%';
+       });
+       return (num * 100 / total).toFixed(2) + '%';
     },
     toToup(item,index){
        this.doLoginStatus().then(r=>{
           if(r){
-            console.log(item.chooseOption)
+            console.log(item.chooseOption);
             api.toVote({postId: item.postId,option: item.chooseOption}).then(res=>{
               api.getPostInfo({postId: item.postId}).then(res=>{
                   this.item = res.data;
                   this.$emit('callBack',index,res.data);
                   this.$EventBus.$emit('eventRefresh');
                 // this.lists.splice(index,1,res.data)
-                })
-            })
+                });
+            });
           }
-        })
+        });
      },
      circusee(item,index){
        this.doLoginStatus().then(r=>{
@@ -107,13 +107,13 @@ import * as api from '@/api/api'
                   this.item = res.data;
                   this.$emit('callBack',index,res.data);
                     // this.lists.splice(index,1,res.data)
-                })
-            })
+                });
+            });
           }
-        })
+        });
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

@@ -192,17 +192,17 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
-import { Dialog } from "vant";
+import * as api from '@/api/api';
+import { Dialog } from 'vant';
 
 export default {
-  name: "fbi.vue",
+  name: 'fbi.vue',
 
   data() {
     return {
       'userInfo': {},
       'fbi': 0,
-    }
+    };
   },
   created() {
     this.getUserInfo();
@@ -216,13 +216,13 @@ export default {
       api.getUserInfo().then(
           res => {
             if (res.success) {
-              this.userInfo = res.data
+              this.userInfo = res.data;
               this.fbi = res.data.fbi;
             } else {
-              this.$toast(res.errorMessage)
+              this.$toast(res.errorMessage);
             }
           }
-      )
+      );
     },
     copyInviterLink() {
       var input = document.createElement('input');
@@ -231,28 +231,28 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制邀请地址成功");
+      this.$toast('复制邀请地址成功');
       return result;
     },
 
     history() {
-      window.open('/webview/fbi/history',"_blank");
+      window.open('/webview/fbi/history','_blank');
     },
 
     redPacketGet() {
-      window.open('/webview/fbi/redPacket',"_blank");
+      window.open('/webview/fbi/redPacket','_blank');
     },
 
     getWechatCover() {
       Dialog.confirm({
-        title: "是否确认兑换",
-        message: `兑换会扣除 99 FBi`,
-        messageAlign: "left",
+        title: '是否确认兑换',
+        message: '兑换会扣除 99 FBi',
+        messageAlign: 'left',
       })
           .then(() => {
             api.getByPath('/api/v0/gift/getWechatCover', {}).then((res) => {
               if (res.success) {
-                this.$message.success("已兑换, 请查看消息");
+                this.$message.success('已兑换, 请查看消息');
                 this.getUserInfo();
               } else{
                 this.$message.error(res.errorMessage);
@@ -267,10 +267,10 @@ export default {
     orderCup(type) {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/fbi/order?type=" + type,
+          url: 'https://chao.fan/webview/fbi/order?type=' + type,
           title: '下单',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/fbi/order?type=' + type);
       }
@@ -278,14 +278,14 @@ export default {
 
     getQQMusicPackage() {
       Dialog.confirm({
-        title: "是否确认兑换QQ音乐1个月绿钻",
-        message: `兑换会扣除 1500 FBi`,
-        messageAlign: "left",
+        title: '是否确认兑换QQ音乐1个月绿钻',
+        message: '兑换会扣除 1500 FBi',
+        messageAlign: 'left',
       })
           .then(() => {
             api.getByPath('/api/v0/gift/getQQMusic', {}).then((res) => {
               if (res.success) {
-                this.$message.success("已兑换, 请查看消息");
+                this.$message.success('已兑换, 请查看消息');
                 this.getUserInfo();
               } else{
                 this.$message.error(res.errorMessage);
@@ -299,14 +299,14 @@ export default {
 
     getMusicPackage() {
       Dialog.confirm({
-        title: "是否确认兑换网易云音乐1个月音乐包",
-        message: `兑换会扣除 800 FBi`,
-        messageAlign: "left",
+        title: '是否确认兑换网易云音乐1个月音乐包',
+        message: '兑换会扣除 800 FBi',
+        messageAlign: 'left',
       })
           .then(() => {
             api.getByPath('/api/v0/gift/getMusic', {}).then((res) => {
               if (res.success) {
-                this.$message.success("已兑换, 请查看消息");
+                this.$message.success('已兑换, 请查看消息');
                 this.getUserInfo();
               } else{
                 this.$message.error(res.errorMessage);
@@ -320,14 +320,14 @@ export default {
 
     getJDECard() {
       Dialog.confirm({
-        title: "是否确认兑换",
-        message: `兑换会扣除 1000 FBi`,
-        messageAlign: "left",
+        title: '是否确认兑换',
+        message: '兑换会扣除 1000 FBi',
+        messageAlign: 'left',
       })
           .then(() => {
             api.getByPath('/api/v0/gift/getJDECard', {}).then((res) => {
               if (res.success) {
-                this.$message.success("已兑换, 请查看消息");
+                this.$message.success('已兑换, 请查看消息');
                 this.getUserInfo();
               } else{
                 this.$message.error(res.errorMessage);
@@ -341,14 +341,14 @@ export default {
 
     getBilibili1Month() {
       Dialog.confirm({
-        title: "是否确认兑换",
-        message: `兑换会扣除 2500 FBi`,
-        messageAlign: "left",
+        title: '是否确认兑换',
+        message: '兑换会扣除 2500 FBi',
+        messageAlign: 'left',
       })
           .then(() => {
             api.getByPath('/api/v0/gift/getBilibili1Month', {}).then((res) => {
               if (res.success) {
-                this.$message.success("已兑换, 请查看消息");
+                this.$message.success('已兑换, 请查看消息');
                 this.getUserInfo();
               } else{
                 this.$message.error(res.errorMessage);
@@ -368,14 +368,14 @@ export default {
       }
 
       Dialog.confirm({
-        title: "是否确认兑换",
+        title: '是否确认兑换',
         message: '兑换会扣除 ' + fbi + ' FBi',
-        messageAlign: "left",
+        messageAlign: 'left',
       })
           .then(() => {
             api.getByPath('/api/v0/gift/getTuxunVip', {period: period}).then((res) => {
               if (res.success) {
-                this.$message.success("已兑换, 请查看消息");
+                this.$message.success('已兑换, 请查看消息');
                 this.getUserInfo();
               } else{
                 this.$message.error(res.errorMessage);
@@ -388,14 +388,14 @@ export default {
     },
     getBilibili1Year() {
       Dialog.confirm({
-        title: "是否确认兑换",
-        message: `兑换会扣除 16800 FBi`,
-        messageAlign: "left",
+        title: '是否确认兑换',
+        message: '兑换会扣除 16800 FBi',
+        messageAlign: 'left',
       })
           .then(() => {
             api.getByPath('/api/v0/gift/getBilibili1Year', {}).then((res) => {
               if (res.success) {
-                this.$message.success("已兑换, 请查看消息");
+                this.$message.success('已兑换, 请查看消息');
                 this.getUserInfo();
               } else{
                 this.$message.error(res.errorMessage);
@@ -407,7 +407,7 @@ export default {
           });
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: "scratchSearch"
-}
+  name: 'scratchSearch'
+};
 </script>
 
 <style scoped>

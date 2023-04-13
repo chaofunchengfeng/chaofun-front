@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      content: "",
+      content: '',
       loading: false,
       isFullscreen: false,
       editType: 'wysiwyg',
@@ -115,7 +115,7 @@ export default {
       button.className = 'toastui-editor-toolbar-icons fullscreen-icon';
       button.style.backgroundImage = 'none';
       button.style.margin = '0';
-      button.innerHTML = `<i class="el-icon-monitor" />`;
+      button.innerHTML = '<i class="el-icon-monitor" />';
       button.addEventListener('click', () => {
         // toggleEditorFullScreen(this.$refs.editor)
         this.isFullscreen = !this.isFullscreen;
@@ -124,7 +124,7 @@ export default {
       return button;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

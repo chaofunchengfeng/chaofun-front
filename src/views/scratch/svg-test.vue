@@ -7,8 +7,8 @@
 
 <script>
 export default {
-  name: "svg-test"
-}
+  name: 'svg-test'
+};
 </script>
 
 <style scoped>

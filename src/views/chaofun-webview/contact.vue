@@ -26,7 +26,7 @@ export default {
       return {
           showCover: false,
           version: 'new'
-      }
+      };
   },
   created(){
   },
@@ -38,29 +38,29 @@ export default {
           window.flutter_inappwebview.callHandler('viewImage',{
               data: ['https://i.chao-fan.com/biz/10c40905c46e8c9c65d8d95b9fb25bdf.jpg'],
               index: 0
-          })
+          });
           
       },
       toAdvice(){
         try{
-            window.flutter_inappwebview.callHandler('toAdvice',{})
+            window.flutter_inappwebview.callHandler('toAdvice',{});
         }catch(e){
-            this.$toast('请更新版本后尝试')
+            this.$toast('请更新版本后尝试');
         }
         
       },
       tot(v){
-          if(v==1){
-              this.$router.push({name: 'ios'})
+          if(v == 1){
+              this.$router.push({name: 'ios'});
           }else{
-              this.$router.push({name: 'android'})
+              this.$router.push({name: 'android'});
           }
       },
       cancel(){
           this.showCover = false;
       },
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

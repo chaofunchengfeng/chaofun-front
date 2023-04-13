@@ -14,7 +14,7 @@
    data(){
      return {
 
-     }
+     };
    },
    props: {
        ifcanget: {
@@ -40,7 +40,7 @@
    },
    methods: {
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

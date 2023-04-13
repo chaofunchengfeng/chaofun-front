@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import ScratchList from "./scratch-list";
-import * as api from '../../api/api'
+import ScratchList from './scratch-list';
+import * as api from '../../api/api';
 export default {
-  name: "profile",
+  name: 'profile',
   components: {ScratchList},
 
   data() {
@@ -52,31 +52,31 @@ export default {
       userId: null,
       userStats: null,
       history: null,
-    }
+    };
   },
   created() {
     this.history = history;
-    this.userId= this.$route.path.split("/")[this.$route.path.split("/").length - 1];
-    this.getUserStats()
+    this.userId = this.$route.path.split('/')[this.$route.path.split('/').length - 1];
+    this.getUserStats();
   },
   methods: {
     getUserStats() {
       api.getByPath('/api/v0/scratch/user/stats', {'userId': this.userId }).then(res=>{
         this.userStats = res.data;
-      })
+      });
     },
     goHome() {
-      window.location.href = '/scratch'
+      window.location.href = '/scratch';
     },
     goBack() {
       try {
         this.$router.go(-1);
       } catch (e) {
-        window.location.href = '/scratch'
+        window.location.href = '/scratch';
       }
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

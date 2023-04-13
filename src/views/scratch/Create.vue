@@ -72,12 +72,12 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import ImgCreate from './img-create'
-import TextCreate from './text-create'
-import ClickCreate from './click-create'
+import * as api from '../../api/api';
+import ImgCreate from './img-create';
+import TextCreate from './text-create';
+import ClickCreate from './click-create';
 export default {
-  name: "Create",
+  name: 'Create',
   components: {ImgCreate, TextCreate, ClickCreate},
   data() {
     return {
@@ -100,7 +100,7 @@ export default {
       type: 'image',
       slideshow: false,
       status: null,
-    }
+    };
   },
   mounted() {
     this.history = history;
@@ -109,7 +109,7 @@ export default {
       this.modify = true;
       this.getGuess();
     } else if (this.$route.query.type) {
-      this.type=this.$route.query.type;
+      this.type = this.$route.query.type;
     }
   },
   methods: {
@@ -120,17 +120,17 @@ export default {
       if (res.success) {
         this.imageUrl = URL.createObjectURL(file.raw);
         this.coverOssName = res.data;
-      } else if (res.errorCode == "invalid_content") {
+      } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
 
-      console.log()
+      console.log();
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.filedata.fileName = file.name;
@@ -143,22 +143,22 @@ export default {
         this.desc = res.data.desc;
         this.countdown = res.data.countdown;
         this.type = res.data.type;
-        this.answers = res.data.data.answers.join("\n");
+        this.answers = res.data.data.answers.join('\n');
         this.dataForm = res.data.data.data;
         this.hasHint = res.data.data.hasHint;
         this.coverOssName = res.data.cover;
         this.slideshow = res.data.data.slideshow;
         this.imageUrl = this.imgOrigin + this.coverOssName + '?x-oss-process=image/resize,h_300/quality,q_75';
         if (res.data.tags) {
-          this.tags = res.data.tags.join(",");
+          this.tags = res.data.tags.join(',');
         }
-      })
+      });
     },
     goBack() {
       try {
         this.$router.go(-1);
       } catch (e) {
-        window.location.href = '/scratch'
+        window.location.href = '/scratch';
       }
     },
     submit() {
@@ -170,7 +170,7 @@ export default {
       var data = {'version': 1.0,'hasHint': this.hasHint, data: this.dataForm, slideshow: this.slideshow};
       api.postByPath('/api/v0/scratch/game/create', {id: this.id, type: this.type, countdown: this.countdown, name: this.name, tags: this.tags, desc: this.desc, cover: this.coverOssName, hasHint: this.hasHint, data: JSON.stringify(data)}).then((res) => {
         window.location.href = '/scratch/guess?id=' + res.data.id;
-      })
+      });
     },
     saveDraft() {
       var data = {'version': 1.0,'hasHint': this.hasHint, data: this.dataForm, slideshow: this.slideshow};
@@ -180,26 +180,26 @@ export default {
           this.$router.replace({query: {id: this.id}});
           this.$toast('保存成功');
         }
-      })
+      });
     },
     goHome() {
       window.location.href = '/scratch';
     },
     deleteGame() {
-      this.$confirm(`是否确定删除该小测验？`, "提示", {
-        type: "warning",
+      this.$confirm('是否确定删除该小测验？', '提示', {
+        type: 'warning',
         // position: center,
       }).then(() => {
         api.getByPath('/api/v0/scratch/game/delete', {'id': this.id}).then(res=>{
           if (res.success) {
             window.location.href = '/scratch';
           }
-        })
-      })
+        });
+      });
 
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

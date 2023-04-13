@@ -87,38 +87,38 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 // import BaiduMap from 'vue-baidu-map'
-import { mapGetters } from 'vuex'
-import * as api from '../../api/api'
-import vueDanmaku from 'vue-danmaku'
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
+import vueDanmaku from 'vue-danmaku';
 
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import "./SmoothWheelZoom"
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import './SmoothWheelZoom';
 
 // Vue.use(BaiduMap, {
 //   // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
 //   ak: 'aibVGReAhMEtxu4Bj2aHixWprh28AhrT'
 // })
-import {Viewer} from 'photo-sphere-viewer'
+import {Viewer} from 'photo-sphere-viewer';
 import * as THREE from 'three';
-import 'photo-sphere-viewer/dist/photo-sphere-viewer.css'
-import { CompassPlugin} from 'photo-sphere-viewer/dist/plugins/compass'
-import { MarkersPlugin} from 'photo-sphere-viewer/dist/plugins/markers'
-import { VirtualTourPlugin } from 'photo-sphere-viewer/dist/plugins/virtual-tour'
-import 'photo-sphere-viewer/dist/plugins/compass.css'
-import 'photo-sphere-viewer/dist/plugins/virtual-tour.css'
-import 'photo-sphere-viewer/dist/plugins/markers.css'
-import BMapLoader from "../../utils/bmap-jsapi-loader";
-import {tuxunJump, tuxunOpen} from "./common";
-import { loadScript } from "vue-plugin-load-script";
+import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
+import { CompassPlugin} from 'photo-sphere-viewer/dist/plugins/compass';
+import { MarkersPlugin} from 'photo-sphere-viewer/dist/plugins/markers';
+import { VirtualTourPlugin } from 'photo-sphere-viewer/dist/plugins/virtual-tour';
+import 'photo-sphere-viewer/dist/plugins/compass.css';
+import 'photo-sphere-viewer/dist/plugins/virtual-tour.css';
+import 'photo-sphere-viewer/dist/plugins/markers.css';
+import BMapLoader from '../../utils/bmap-jsapi-loader';
+import {tuxunJump, tuxunOpen} from './common';
+import { loadScript } from 'vue-plugin-load-script';
 
 export default {
   components: {
     vueDanmaku,
   },
-  name: "TXHome",
+  name: 'TXHome',
   data () {
     return {
       danmus: [''],
@@ -150,7 +150,7 @@ export default {
       heading: null,
       id: null,
       showMap: false,
-      url: `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws/v0/tuxun`,
+      url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
       // url: `ws://127.0.0.1:8080/ws/v0/tuxun`,
       ws: null,
       onlineNums: 1,
@@ -176,7 +176,7 @@ export default {
       mapPin: false,
       headingMap: {},
       ranks: null,
-    }
+    };
   },
 
   created() {
@@ -186,11 +186,11 @@ export default {
 
     this.initWS();
     this.initMap();
-    document.onkeydown=function(event){
+    document.onkeydown = function(event){
       var e = event || window.event || arguments.callee.caller.arguments[0];
-      console.log(e.keyCode)
-      if(e && e.keyCode===32){//空格
-        this.confirm()
+      console.log(e.keyCode);
+      if(e && e.keyCode === 32){//空格
+        this.confirm();
       }
     }.bind(this);
 
@@ -212,7 +212,7 @@ export default {
               !event.altKey &&
               !event.ctrlKey
           ) {
-            event.stopPropagation()
+            event.stopPropagation();
           };
         },
         { capture: true },
@@ -233,7 +233,7 @@ export default {
         scrollWheelZoom: false, // disable original zoom function
         smoothWheelZoom: true,  // enable smooth zoom
         smoothSensitivity: 5,   // zoom speed. default is 1
-        maxBoundsViscosity: 1.0, maxBounds:  [[-90,-540],   [90,540]]}).setView([38.8, 106.0], 2)
+        maxBoundsViscosity: 1.0, maxBounds:  [[-90,-540],   [90,540]]}).setView([38.8, 106.0], 2);
       map.scrollWheelZoom = true;
       map.attributionControl.setPosition('bottomleft');
       map.attributionControl.setPrefix('华为地图');
@@ -264,38 +264,38 @@ export default {
       this.changeMapBig();
     },
     changeMapBig() {
-      this.isMapSmall = false
+      this.isMapSmall = false;
       this.needSmall = false;
-      var element = document.getElementById("map-container")
+      var element = document.getElementById('map-container');
       element.style.width = this.maxMapWidth;
       element.style.height = this.maxMapHeight;
       element.style.opacity = 1.0;
       this.map.invalidateSize();
       setTimeout(() => {
         this.map.invalidateSize();
-      }, 5)
+      }, 5);
     },
 
     mapMouseOver() {
-      if (!window.matchMedia("(hover: none)").matches && document.body.clientWidth > 678 && !this.mapPin) {
+      if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
         this.changeMapBig();
       }
     },
 
     mapMouseOut() {
-      if (!window.matchMedia("(hover: none)").matches && document.body.clientWidth > 678 && !this.mapPin) {
+      if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
         this.needSmall = true;
         setTimeout(() => {
           if (this.needSmall) {
             this.needSmall = false;
             this.isMapSmall = true;
-            var element = document.getElementById("map-container")
+            var element = document.getElementById('map-container');
             element.style.width = '25%';
             element.style.height = '35%';
             element.style.opacity = 0.7;
             this.map.invalidateSize();
           }
-        }, 750)
+        }, 750);
       }
     },
 
@@ -313,10 +313,10 @@ export default {
       console.log('initPanorama');
       try {
         if (!this.viewer) {
-          document.head.insertAdjacentHTML("beforeend", `<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>`)
+          document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
           loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js').then(() => {
             this.viewer = new google.maps.StreetViewPanorama(
-                document.getElementById("viewer"), {
+                document.getElementById('viewer'), {
                   fullscreenControl:false,
                   panControl:true,
                   addressControl: false,
@@ -333,20 +333,20 @@ export default {
                   },
                 }
             );
-            this.viewer.registerPanoProvider(this.getCustomPanorama)
-            this.viewer.addListener("pano_changed", () => {
-              console.log("pano_changed");
+            this.viewer.registerPanoProvider(this.getCustomPanorama);
+            this.viewer.addListener('pano_changed', () => {
+              console.log('pano_changed');
               if (this.viewer.getPano().length === 27) {
                 this.getPanoInfo(this.viewer.getPano());
               }
             });
             this.setGoogle(this.panoId);
-          })
+          });
         } else {
           this.setGoogle(this.panoId);
         }
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     },
     getPanoInfo(pano) {
@@ -358,17 +358,17 @@ export default {
           res.data.links.forEach((item) => {
             this.preloadImage(item.pano);
             this.headingMap[item.pano] = item.centerHeading;
-          })
+          });
         }
         // console.log(this.centerHeading);
-      })
+      });
     },
     preloadImage(pano) {
-      var img=new Image();
-      img.src='https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
+      var img = new Image();
+      img.src = 'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
     },
     getCustomPanorama(pano, zoom,tileX,tileY,callback) {
-      console.log("getCustomPanorama")
+      console.log('getCustomPanorama');
       if (pano.length === 27) {
         return {
           location: {
@@ -376,7 +376,7 @@ export default {
           },
           links: [],
           // The text for the copyright control.
-          copyright: "baidu",
+          copyright: 'baidu',
           // The definition of the tiles for this panorama.
           tiles: {
             tileSize: new google.maps.Size(512, 512),
@@ -389,7 +389,7 @@ export default {
       }
     },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-      zoom = zoom +=1;
+      zoom = zoom += 1;
       if (zoom === 1) {
         return (
             'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano
@@ -421,19 +421,19 @@ export default {
     },
 
     initBaiduPanorama() {
-      console.log("initBaiduPanorama_1");
+      console.log('initBaiduPanorama_1');
       if (!this.panorama || this.panorama === null) {
         var panorama = new BMap.Panorama('panorama',  {navigationControl: true, linksControl:true}); //默认为显示导航控件
         this.panorama = panorama;
-        console.log("initBaiduPanorama_2");
+        console.log('initBaiduPanorama_2');
       }
-      console.log("initBaiduPanorama_3");
+      console.log('initBaiduPanorama_3');
       this.panorama.setId(this.baiduPano);
       setTimeout(function () {
-        console.log("initBaiduPanorama_4");
+        console.log('initBaiduPanorama_4');
         try {
           var element = document.getElementById('panorama');
-          element.childNodes.item(3).style.display = 'none'
+          element.childNodes.item(3).style.display = 'none';
         } catch (e) {
 
         }
@@ -441,10 +441,10 @@ export default {
     },
 
     wsOnOpen(e) {
-      console.log("wsOnOpen");
+      console.log('wsOnOpen');
       // console.log(e);
 
-      this.wsSend("{\"scope\": \"tuxun\", \"data\": {\"type\": \"enter_main_game\"}}");
+      this.wsSend('{"scope": "tuxun", "data": {"type": "enter_main_game"}}');
 
       // 每3秒发送一次心跳
       setInterval(() => {
@@ -475,7 +475,7 @@ export default {
             this.contentType = data.data.contentType;
           }
 
-          if (this.contentType === "panorama") {
+          if (this.contentType === 'panorama') {
             setTimeout(function () {
               this.initPanorama();
             }.bind(this), 200);
@@ -529,7 +529,7 @@ export default {
             this.addChooseMarker();
             this.targetLat = data.data.lat;
             this.targetLng = data.data.lng;
-            this.addTargetMarker()
+            this.addTargetMarker();
             this.distance = data.data.distance / 1000;
 
             this.showMapTrue();
@@ -560,7 +560,7 @@ export default {
     },
     wsOnClose(e) {
       this.initWS();
-      console.log("wsOnClose");
+      console.log('wsOnClose');
     },
 
     clickDistance() {
@@ -582,7 +582,7 @@ export default {
       if (this.ranks) {
         this.ranks.forEach(item => {
           group.push([item.latLng.lat, item.latLng.lng]);
-        })
+        });
       }
       if (group.length === 1) {
         this.map.fitBounds(group, {maxZoom: 5});
@@ -600,7 +600,7 @@ export default {
 
     centerChoose() {
       if (this.showMap === false) {
-        this.showMap = true
+        this.showMap = true;
       }
       this.map.setView([this.lat, this.lng], 5);
     },
@@ -611,7 +611,7 @@ export default {
 
     // 发送心跳
     sendHeartBeat() {
-      this.wsSend(`{"scope": "heart_beat"}`);
+      this.wsSend('{"scope": "heart_beat"}');
     },
 
     removeChooseMarker() {
@@ -629,7 +629,7 @@ export default {
       if (this.chooseMarker) {
         this.chooseMarker.remove();
       }
-      var marker = L.marker([this.lat, this.lng], {icon: new L.Icon.Default()}).bindTooltip("你选择了",
+      var marker = L.marker([this.lat, this.lng], {icon: new L.Icon.Default()}).bindTooltip('你选择了',
           {
             permanent: true,
             direction: 'auto'
@@ -657,7 +657,7 @@ export default {
           opacity: 0.5,
           smoothFactor: 1
       });
-      console.log("12312");
+      console.log('12312');
       this.polylinePath.addTo(this.map);
     },
 
@@ -679,10 +679,10 @@ export default {
       if (this.targetMarker) {
         this.targetMarker.remove();
       }
-      var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options))
+      var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
       options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
       options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
-      var marker = L.marker([this.targetLat, this.targetLng], {icon: new L.Icon(options)}).bindTooltip("目标位置",
+      var marker = L.marker([this.targetLat, this.targetLng], {icon: new L.Icon(options)}).bindTooltip('目标位置',
           {
             permanent: true,
             direction: 'auto'
@@ -724,7 +724,7 @@ export default {
           this.lng = e.latlng.wrap().lng;
           this.lat = e.latlng.wrap().lat;
           this.addChooseMarker();
-          this.wsSend("{\"scope\": \"tuxun\", \"data\": {\"type\": \"pin\", \"lat\": " + this.lat + ", \"lng\": " + this.lng + "}}");
+          this.wsSend('{"scope": "tuxun", "data": {"type": "pin", "lat": ' + this.lat + ', "lng": ' + this.lng + '}}');
         }
       } else {
         this.$toast('暂不支持选择, 请等待结果或者下一题');
@@ -738,15 +738,15 @@ export default {
       }
       if (!this.isMaps) {
         this.confirmed = true;
-        this.wsSend("{\"scope\": \"tuxun\", \"data\": {\"type\": \"confirm\", \"lat\": " + this.lat + ", \"lng\": " + this.lng + "}}");
+        this.wsSend('{"scope": "tuxun", "data": {"type": "confirm", "lat": ' + this.lat + ', "lng": ' + this.lng + '}}');
       } else {
         if (!this.lng) {
           return;
         }
         this.zoom = 20;
-        this.$toast('确认成功！')
+        this.$toast('确认成功！');
         this.confirmed = true;
-        api.getByPath("/api/v0/tuxun/game/confirm", {id: this.id, lng: this.lng, lat: this.lat}).then(res => {
+        api.getByPath('/api/v0/tuxun/game/confirm', {id: this.id, lng: this.lng, lat: this.lat}).then(res => {
           this.confirmed = true;
           this.targetLng = res.data.lng;
           this.targetLat = res.data.lat;
@@ -759,44 +759,44 @@ export default {
     },
 
     wsSend(data) {
-      console.log("wsSend: " + data);
+      console.log('wsSend: ' + data);
       this.ws.send(data);
     },
 
     toForum(){
       try {
-        window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84+''})
+        window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84 + ''});
       } catch (e) {
-        window.open(location.origin + '/f/84',"_blank");
+        window.open(location.origin + '/f/84','_blank');
       }
     },
     toRank(){
-      window.open(location.origin + '/tuxun/rank',"_blank");
+      window.open(location.origin + '/tuxun/rank','_blank');
     },
 
     toReport() {
       api.getByPath('/api/v0/tuxun/game/report', {panoId: this.panoId}).then(res=>{
-        this.$toast("反馈成功");
-      })
+        this.$toast('反馈成功');
+      });
     },
     deleteTuxun() {
       api.getByPath('/api/v0/tuxun/game/delete', {panoId: this.panoId}).then(res=>{
-        this.$toast("删除成功");
-      })
+        this.$toast('删除成功');
+      });
     },
     toHome() {
       tuxunJump( '/tuxun/');
     },
     send() {
       this.dialogVisible = false;
-      this.wsSend("{\"scope\": \"tuxun\", \"data\": {\"type\": \"send_bullet\", \"text\": \"" + this.form.applyModReason + "\"}}");
+      this.wsSend('{"scope": "tuxun", "data": {"type": "send_bullet", "text": "' + this.form.applyModReason + '"}}');
       this.form.applyModReason = null;
-      this.$toast("发送成功");
+      this.$toast('发送成功');
     },
     toSend() {
       this.dialogVisible = true;
       setTimeout(function () {
-        document.getElementById("input").focus();
+        document.getElementById('input').focus();
       }, 500);
     },
     hide() {
@@ -804,13 +804,13 @@ export default {
     },
 
     mapReady(e) {
-      console.log("hahah");
-      console.log(e)
+      console.log('hahah');
+      console.log(e);
       this.map = e;
     },
 
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

@@ -77,21 +77,21 @@
 <script>
 // @ is an alias to /src
 
-import moment from "moment";
+import moment from 'moment';
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
-import { CalendarHeatmap } from 'vue-calendar-heatmap'
-import { use } from "echarts/core";
-import { CanvasRenderer } from "echarts/renderers";
-import { LineChart } from "echarts/charts";
+import * as api from '@/api/api';
+import { CalendarHeatmap } from 'vue-calendar-heatmap';
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LineChart } from 'echarts/charts';
 import {
   TitleComponent,
   GridComponent,
   TooltipComponent,
   LegendComponent
-} from "echarts/components";
-import VChart, { THEME_KEY } from "vue-echarts";
-import {tuxunJump, tuxunOpen} from "./common";
+} from 'echarts/components';
+import VChart, { THEME_KEY } from 'vue-echarts';
+import {tuxunJump, tuxunOpen} from './common';
 
 
 use([
@@ -131,11 +131,11 @@ export default {
           smooth: true
         }]
       }
-    }
+    };
   },
   created() {
     this.history = history;
-    this.userId= this.$route.path.split("/")[this.$route.path.split("/").length - 1];
+    this.userId = this.$route.path.split('/')[this.$route.path.split('/').length - 1];
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -148,52 +148,52 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('user/logout');
       setTimeout(() => {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }, 1000);
     },
     getUserProfile() {
       api.getByPath('/api/v0/tuxun/getProfile', {userId: this.userId}).then(res=>{
-        this.userProfile = res.data
-      })
+        this.userProfile = res.data;
+      });
     },
     getUserActivity() {
       api.getByPath('/api/v0/tuxun/getUserDailyActivity', {userId: this.userId}).then(res=>{
-        this.activity = res.data
-      })
+        this.activity = res.data;
+      });
     },
     getHistory() {
       api.getByPath('/api/v0/tuxun/getUserHistory', {userId: this.userId}).then(res=>{
-        this.historys = res.data
+        this.historys = res.data;
         console.log(this.historys);
         var data = [];
 
         this.historys = this.historys.reverse();
         for (let i = 0; i < this.historys.length; i++) {
           var history = this.historys[i];
-          data.push([history['gmt_create'], history['rating']])
+          data.push([history['gmt_create'], history['rating']]);
         }
         this.option.series = [{
           data:data,
           type: 'line',
           smooth: false
         }];
-      })
+      });
 
     },
     toUser(item){
       try {
-        window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId+''})
+        window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId + ''});
       } catch (e) {
-        window.open(location.origin + '/user/'+item.userAO.userId,"_blank");
+        window.open(location.origin + '/user/' + item.userAO.userId,'_blank');
       }
     },
     goHome() {
       tuxunJump('/tuxun/');
     },
     changeSetting() {
-      tuxunJump('/tuxun/settings')
+      tuxunJump('/tuxun/settings');
     },
     checkVip() {
       if (this.$store.state.user.userInfo.userId.toString() === this.userId) {
@@ -202,24 +202,24 @@ export default {
             this.isVip = true;
             this.vipDue = moment(res.data).format('YYYY年MM月DD日');
           }
-        })
+        });
       } else {
         api.getByPath('/api/v0/tuxun/vip/checkIsVip', {userId: this.userId}).then(res => {
           if (res.data) {
             this.isVip = true;
           }
-        })
+        });
       }
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
   }
-}
+};
 </script>
 <style scoped lang="scss">
 .container {

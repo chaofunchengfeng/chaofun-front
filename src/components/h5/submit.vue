@@ -17,14 +17,14 @@
 import Vue from 'vue';
 import { Form,Field,Button } from 'vant';
 import 'vant/lib/index.css';
-import * as api from '../../api/api'
+import * as api from '../../api/api';
 Vue.use(Form).use(Field).use(Button);
  export default {
    name: '',
    data(){
      return {
 
-     }
+     };
    },
    components: {
 
@@ -36,7 +36,7 @@ Vue.use(Form).use(Field).use(Button);
    },
    methods: {
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

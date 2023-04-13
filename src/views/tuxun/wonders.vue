@@ -42,12 +42,12 @@
 </template>
 
 <script>
-import { loadScript } from "vue-plugin-load-script";
-import * as api from '../../api/api'
-import {tuxunJump, tuxunOpen} from "./common";
+import { loadScript } from 'vue-plugin-load-script';
+import * as api from '../../api/api';
+import {tuxunJump, tuxunOpen} from './common';
 
 export default {
-  name: "RandomStreetView",
+  name: 'RandomStreetView',
   data() {
     return {
       panorama: null,
@@ -63,18 +63,18 @@ export default {
       panoramaSubmitForm: {
         links: '',
       },
-    }
+    };
   },
   mounted() {
-    document.head.insertAdjacentHTML("beforeend", `<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>`)
+    document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
     this.tuxunPid = this.$route.query.id;
     loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js').then(() => {
       this.init();
-    })
+    });
 
-    document.onkeydown=function(event){
+    document.onkeydown = function(event){
       var e = event || window.event || arguments.callee.caller.arguments[0];
-      if(e && e.keyCode===32){//空格
+      if(e && e.keyCode === 32){//空格
         this.change();
       }
     }.bind(this);
@@ -86,7 +86,7 @@ export default {
   methods: {
     init() {
       this.panorama = new google.maps.StreetViewPanorama(
-          document.getElementById("map"), {
+          document.getElementById('map'), {
             fullscreenControl:false,
             panControl: false,
             addressControl: false,
@@ -99,23 +99,23 @@ export default {
           }
       );
 
-      this.panorama.addListener("pano_changed", () => {
-        console.log("pano_changed");
+      this.panorama.addListener('pano_changed', () => {
+        console.log('pano_changed');
         if (this.panorama.getPano().length === 27) {
           this.getPanoInfo(this.panorama.getPano());
         }
       });
 
-      this.panorama.registerPanoProvider(this.getCustomPanorama)
+      this.panorama.registerPanoProvider(this.getCustomPanorama);
 
       if (this.tuxunPid) {
-        this.setSharePano(this.tuxunPid)
+        this.setSharePano(this.tuxunPid);
       } else {
-        this.change()
+        this.change();
       }
     },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-      zoom = zoom +=1;
+      zoom = zoom += 1;
       if (zoom === 1) {
         return (
             'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano
@@ -128,9 +128,9 @@ export default {
     },
     deleteWonders() {
       api.getByPath('/api/v0/tuxun/wonders/normalRemove', {tuxunPid: this.tuxunPid}).then(res => {
-        this.$message.success('删除成功')
-        this.change()
-      })
+        this.$message.success('删除成功');
+        this.change();
+      });
     },
     getPanoInfo(pano) {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
@@ -140,13 +140,13 @@ export default {
         if (res.data.links) {
           res.data.links.forEach((item) => {
             this.headingMap[item.pano] = item.centerHeading;
-          })
+          });
         }
         // console.log(this.centerHeading);
-      })
+      });
     },
     getCustomPanorama(pano, zoom,tileX,tileY,callback) {
-      console.log("getCustomPanorama")
+      console.log('getCustomPanorama');
       if (pano.length === 27) {
         return {
           location: {
@@ -154,7 +154,7 @@ export default {
           },
           links: [],
           // The text for the copyright control.
-          copyright: "baidu",
+          copyright: 'baidu',
           // The definition of the tiles for this panorama.
           tiles: {
             tileSize: new google.maps.Size(512, 512),
@@ -173,12 +173,12 @@ export default {
       api.getByPath('/api/v0/tuxun/wonders/get', {'tuxunPid': this.tuxunPid}).then(res=>{
         this.tuxunPid = tuxunPid;
         this.setPano(this.tuxunPid,res.data.panoId);
-      })
+      });
     },
     setPano(tuxunPid, panoId) {
       this.tuxunPid = tuxunPid;
       this.panoId = panoId;
-      this.getLocation(panoId)
+      this.getLocation(panoId);
       // 调整视角大小的
 
       if (panoId.length === 27) {
@@ -187,10 +187,10 @@ export default {
           if (res.data.links) {
             res.data.links.forEach((item) => {
               this.headingMap[item.pano] = item.centerHeading;
-            })
+            });
           }
           this.setPanoId(panoId);
-        })
+        });
       } else {
         this.setPanoId(panoId);
       }
@@ -210,20 +210,20 @@ export default {
           tuxunJump('/tuxun/wonders');
           return;
         }
-        api.getByPath("/api/v0/tuxun/wonders/random").then(res => {
+        api.getByPath('/api/v0/tuxun/wonders/random').then(res => {
           if (res.success) {
             this.setPano(res.data.tuxunPid, res.data.panoId);
           } else if (res.errorCode === 'need_vip') {
             this.$vip();
           }
-        })
+        });
       }
       });
     },
     getLocation(panoId) {
-      api.getByPath("/api/v0/tuxun/getLocation", {panoId: panoId}).then(res => {
+      api.getByPath('/api/v0/tuxun/getLocation', {panoId: panoId}).then(res => {
         this.location = res.data;
-      })
+      });
     },
     shareLink() {
       var input = document.createElement('input');
@@ -236,7 +236,7 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制街景地址成功");
+      this.$toast('复制街景地址成功');
     },
     submitPanorama() {
       api.postByPath('/api/v0/tuxun/wonders/submit',
@@ -244,13 +244,13 @@ export default {
         this.panoramaSubmitForm.links = '';
         this.$toast('提交成功, 谢谢你！');
         this.submitPanoramaShow = false;
-      })
+      });
     },
 
     toSubmitPanorama() {
       this.submitPanoramaShow = true;
       setTimeout(function () {
-        document.getElementById("input").focus();
+        document.getElementById('input').focus();
       }, 500);
     },
 
@@ -258,10 +258,10 @@ export default {
       this.submitPanoramaShow = false;
     },
     toBaiduPano() {
-      tuxunOpen('https://maps.baidu.com/#panoid=' + this.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + this.panoId)
+      tuxunOpen('https://maps.baidu.com/#panoid=' + this.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + this.panoId);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

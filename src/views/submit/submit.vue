@@ -222,43 +222,43 @@
 </template>
 
 <script>
-  import Vue from 'vue'
+  import Vue from 'vue';
   // import { mavonEditor } from 'mavon-editor'
   // import 'mavon-editor/dist/css/index.css'
-  import * as api from '../../api/api'
-  import request from '@/utils/request'
+  import * as api from '../../api/api';
+  import request from '@/utils/request';
   import md5 from 'js-md5';
   // import EditorBar from '../../components/wangEditor/editor'
-  import { quillEditor,Quill } from 'vue-quill-editor'
-  import {quillRedefine} from 'vue-quill-editor-upload'
-  import {container, ImageExtend} from '@/utils/quill-image-extend-module'
+  import { quillEditor,Quill } from 'vue-quill-editor';
+  import {quillRedefine} from 'vue-quill-editor-upload';
+  import {container, ImageExtend} from '@/utils/quill-image-extend-module';
   // import { addQuillTitle } from './modules/quill-title.js'
-  import '../../assets/quill/quill.core.css'
-  import '../../assets/quill/quill.snow.css'
-  import '../../assets/quill/quill.bubble.css'
+  import '../../assets/quill/quill.core.css';
+  import '../../assets/quill/quill.snow.css';
+  import '../../assets/quill/quill.bubble.css';
   import {
     Toast
   } from 'vant';
-  import errorLog from "../../store/modules/errorLog";
-   Quill.register('modules/ImageExtend', ImageExtend)
+  import errorLog from '../../store/modules/errorLog';
+   Quill.register('modules/ImageExtend', ImageExtend);
   const uploadConfig = {
     action: '/api/upload_image',  // 必填参数 图片上传地址
     res: (respnse) => {
-      console.log(respnse)
+      console.log(respnse);
       return respnse;//return图片url
     },
     name: 'file'  // 图片上传参数名
-  }
-  const vm=new Vue()
+  };
+  const vm = new Vue();
   const handlers = {
     image: function image() {
       var self = this;
       var fileInput = this.container.querySelector('input.ql-image[type=file]');
-      let loading=null;
+      let loading = null;
       if (fileInput === null) {
         fileInput = document.createElement('input');
         fileInput.setAttribute('type', 'file');
-        fileInput.setAttribute('multiple', 'multiple')
+        fileInput.setAttribute('multiple', 'multiple');
         // 设置图片参数名
         if (uploadConfig.name) {
           fileInput.setAttribute('name', uploadConfig.name);
@@ -270,20 +270,20 @@
         fileInput.addEventListener('change', function () {
           let pro = new Promise((resolve, rej) => {
             // 判断签名有没有过期
-            var res = JSON.parse(localStorage.getItem("sign"));
+            var res = JSON.parse(localStorage.getItem('sign'));
             var timestamp = Date.parse(new Date()) / 1000;
-            console.log(res)
+            console.log(res);
             resolve(res);
           });
           pro.then(success => {
-            let arr=Array.from(fileInput.files)
+            let arr = Array.from(fileInput.files);
             var data = success;
             // let file = fileInput.files[0];
             for(let file of arr){
               var ossData = new FormData();
-              ossData.append("fileName", file.name);
+              ossData.append('fileName', file.name);
               //key就代表文件层级和阿里云上的文件名
-              let imgType = file.type.split("/")[1];
+              let imgType = file.type.split('/')[1];
               let filename = file.name + file.size;
               // let keyValue = data.dir + "/" + md5(filename) + "." + imgType;
               // ossData.append("key", keyValue);
@@ -291,32 +291,32 @@
               // ossData.append("OSSAccessKeyId", data.accessid);
               // ossData.append("success_action_status", 201);
               // ossData.append("signature", data.signature);
-              ossData.append("file", file);
-              loading&&loading.close()
-              loading=vm.$loading({
+              ossData.append('file', file);
+              loading && loading.close();
+              loading = vm.$loading({
                 target:'.quill-editor',
                 fullscreen:false,
                 text:'uploading...'
-              })
+              });
               api.uploadImage(ossData).then(res=>{
-                console.log(res)
+                console.log(res);
                 if(res.success){
                   let length = self.quill.getSelection(true).index;
                   //图片上传成功后，img的src需要在这里添加
-                  let url = 'https://i.chao-fan.com/'+res.data
+                  let url = 'https://i.chao-fan.com/' + res.data;
                   self.quill.insertEmbed(length, 'image', url);
-                  self.quill.setSelection(length + 1)
+                  self.quill.setSelection(length + 1);
 
-                  fileInput.value = ''
-                }else if(res.errorCode=='invalid_content'){
-                   loading.close()
-                  Toast(res.errorMessage)
+                  fileInput.value = '';
+                }else if(res.errorCode == 'invalid_content'){
+                   loading.close();
+                  Toast(res.errorMessage);
                 }
 
-              })
+              });
             }
-            loading.close()
-          })
+            loading.close();
+          });
         });
         this.container.appendChild(fileInput);
       }
@@ -370,7 +370,7 @@
         html:'',    // 及时转的html
         configs: {},
         isClear: false,
-        detail:"",
+        detail:'',
         editorOption: {
 
         },
@@ -404,18 +404,18 @@
         //         }
         //     }
         // }
-      }
+      };
     },
     components: {
       // mavonEditor,
       quillEditor
     },
     beforeCreate(vm){
-      console.log('this.ISPHONE',this.ISPHONE)
+      console.log('this.ISPHONE',this.ISPHONE);
 
     },
     created(){
-      this.getForum('')
+      this.getForum('');
     },
     // beforeCreate() {
     // },
@@ -427,7 +427,7 @@
             name: 'img',
             action: '/api/upload_image',
             response: (res) => {
-              return 'https://i.chao-fan.com/' + res.data
+              return 'https://i.chao-fan.com/' + res.data;
             }
           },
           toolbar: {
@@ -462,12 +462,12 @@
             ],
           }
         }
-      }
+      };
     },
     mounted() {
       if(this.$route.query.id){
-        this.baseForm.forumId = '/f/'+this.$route.query.id;
-        this.baseFormName = this.options.filter(i=>i.forumId==this.$route.query.id)
+        this.baseForm.forumId = '/f/' + this.$route.query.id;
+        this.baseFormName = this.options.filter(i=>i.forumId == this.$route.query.id);
       }
       document.addEventListener('paste',this.toPaste);
 
@@ -478,11 +478,13 @@
     },
     methods: {
       imgClick(e){
-        if(e.target.localName!='img') return
-        let src=e.target.src
-        this.bigImaUrl=src
+        if(e.target.localName != 'img') {
+return;
+}
+        let src = e.target.src;
+        this.bigImaUrl = src;
         // this.srcList.push(src)
-        this.dialogVisible=true
+        this.dialogVisible = true;
         // this.$nextTick(()=>{
         //   this.$refs.preview.showViewer = true
         // })
@@ -494,22 +496,24 @@
         this.progressFlag = true; // 显示进度条
           this.loadProgress = parseInt(event.percent); // 动态获取文件上传进度
           if (this.loadProgress >= 100) {
-              this.loadProgress = 100
-              setTimeout( () => {this.progressFlag = false}, 1000) // 一秒后关闭进度条
+              this.loadProgress = 100;
+              setTimeout( () => {
+this.progressFlag = false;
+}, 1000); // 一秒后关闭进度条
           }
       },
       toDel(index){
-        this.voteList.splice(index,1)
+        this.voteList.splice(index,1);
       },
       toAdd(){
-        if(this.voteList.length<6){
+        if(this.voteList.length < 6){
           this.voteList.push({optionName:''});
         }
 
       },
       deleteImg(index){
         // this.baseForm.ossName = ''
-        this.fileLists.splice(index,1)
+        this.fileLists.splice(index,1);
       },
       changeEditor(val) {
         //   console.log(val)
@@ -522,8 +526,8 @@
         this.$upload.post('/上传接口地址', formdata).then(res => {
           this.$refs.md.$img2Url(pos, res.data);
         }).catch(err => {
-          console.log(err)
-        })
+          console.log(err);
+        });
       },
       // 所有操作都会被解析重新渲染
       change(value, render){
@@ -536,7 +540,7 @@
             this.baseForm.title = res.data;
           }
         }).catch(err => {
-        })
+        });
       },
       toPaste(e){
         console.log('begin to paste');
@@ -545,25 +549,25 @@
         if ( !(e.clipboardData && e.clipboardData.items) ) {
           return ;
         }
-        if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === "string" && cbd.items[1].kind === "file" && cbd.types && cbd.types.length === 2 && cbd.types[0] === "text/plain" && cbd.types[1] === "Files" && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49){
+        if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === 'string' && cbd.items[1].kind === 'file' && cbd.types && cbd.types.length === 2 && cbd.types[0] === 'text/plain' && cbd.types[1] === 'Files' && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49){
           return;
         }
         // for(var i = 0; i < cbd.items.length; i++) {
-        var item = cbd.items[cbd.items.length-1];
-        if (item.kind == "file") {
+        var item = cbd.items[cbd.items.length - 1];
+        if (item.kind == 'file') {
           var blob = item.getAsFile();
           if (blob.size === 0) {
             return;
           }
           var data = new FormData();
-          console.log(blob)
-          data.append("file", blob);
-          console.log("file.type",blob.type.split('/')[1]);
-          console.log('data---------',data)
+          console.log(blob);
+          data.append('file', blob);
+          console.log('file.type',blob.type.split('/')[1]);
+          console.log('data---------',data);
           let time = new Date().getTime();
-          time = md5(time+'');
+          time = md5(time + '');
           let fileName = time + '.' + blob.type.split('/')[1];
-          data.append("fileName", fileName);
+          data.append('fileName', fileName);
           request({
             url: '/api/upload_image',
             method: 'post',
@@ -572,10 +576,10 @@
           }).then(res=>{
             console.log(res);
             if (res.success) {
-              this.baseForm.ossName = res.data
+              this.baseForm.ossName = res.data;
               this.fileLists.push(res.data);
             }
-          })
+          });
         }
         // }
       },
@@ -586,20 +590,20 @@
         this.$message.success('提交成功，已打印至控制台！');
       },
       uploadSuccess(file){
-        console.log('file',file)
+        console.log('file',file);
         console.log(this.fileList);
         if(file.success){
-          this.baseForm.ossName = file.data
-          this.fileLists.push(file.data)
-        }else if(file.errorCode=='invalid_content'){
+          this.baseForm.ossName = file.data;
+          this.fileLists.push(file.data);
+        }else if(file.errorCode == 'invalid_content'){
           this.$toast(file.errorMessage);
-          this.filedata = {}
-          this.baseForm.ossName = ''
+          this.filedata = {};
+          this.baseForm.ossName = '';
         }
       },
       subs(){
-        console.log(this.voteList)
-        this.submitTitle = '发布中'
+        console.log(this.voteList);
+        this.submitTitle = '发布中';
         this.disableSubmit = true;
 
         this.doLoginStatus().then(res=>{
@@ -627,11 +631,11 @@
             }
             for(var i of Object.entries(this.baseForm)){
               if(!i[1]){
-                console.log(999)
-                this.$message.error(this.rules[i[0]][0].message)
-                this.submitTitle = '发布'
+                console.log(999);
+                this.$message.error(this.rules[i[0]][0].message);
+                this.submitTitle = '发布';
                 this.disableSubmit = false;
-                return
+                return;
               }
             }
             if(this.activeName == 'first'){
@@ -640,8 +644,8 @@
                 title: this.baseForm.title,
                 forumId: this.baseForm.forumId.split('/')[2],
                 anonymity: this.anonymity
-              }
-              if(this.fileLists.length==1){
+              };
+              if(this.fileLists.length == 1){
                 params.ossName = this.fileLists[0];
               }else{
                 params.ossNames = this.fileLists.join(',');
@@ -651,13 +655,13 @@
                   this.$message.success('发布成功');
                   setTimeout(()=>{
                     // window.location.reload()
-                    this.$router.replace({path: this.baseForm.forumId})
-                  },1500)
+                    this.$router.replace({path: this.baseForm.forumId});
+                  },1500);
                 } else {
-                  this.submitTitle = '发布'
+                  this.submitTitle = '发布';
                   this.disableSubmit = false;
                 }
-              })
+              });
             }else if(this.activeName == 'third'){
               let params = {
                 title: this.baseForm.title,
@@ -665,14 +669,14 @@
                 articleType: this.baseForm.articleType,
                 forumId: this.baseForm.forumId.split('/')[2],
                 anonymity: this.anonymity
-              }
+              };
               api.submitArticle(params).then(res=>{
                 if(res.success){
                   this.$message.success('发布成功');
                   setTimeout(()=>{
                     // window.location.reload()
-                    this.$router.replace({path: this.baseForm.forumId})
-                  },1500)
+                    this.$router.replace({path: this.baseForm.forumId});
+                  },1500);
                 } else {
                   this.submitTitle = '发布';
                   this.disableSubmit = false;
@@ -681,61 +685,61 @@
                 this.submitTitle = '发布';
                 this.disableSubmit = false;
                 this.$toast('发布失败，请联系开发同学查看');
-              })
+              });
             }else if(this.activeName == 'second'){
               let params = {
                 title: this.baseForm.title,
                 link: this.baseForm.link,
                 forumId: this.baseForm.forumId.split('/')[2],
                 anonymity: this.anonymity
-              }
+              };
               api.submitLink(params).then(res=>{
                 if(res.success){
                   this.$message.success('发布成功');
                   setTimeout(()=>{
                     // window.location.reload()
-                    this.$router.replace({path: this.baseForm.forumId})
-                  },1500)
+                    this.$router.replace({path: this.baseForm.forumId});
+                  },1500);
                 } else {
-                  this.submitTitle = '发布'
+                  this.submitTitle = '发布';
                   this.disableSubmit = false;
                 }
-              })
+              });
             }else if(this.activeName == 'fourth'){
               var c = true;
               this.voteList.forEach(item=>{
                 if(!item.optionName){
                   c = false;
                 }
-              })
+              });
               if(c){
                 let params = {
                   title: this.baseForm.title,
                   options: JSON.stringify(this.voteList),
                   forumId: this.baseForm.forumId.split('/')[2],
                   anonymity: this.anonymity
-                }
+                };
                 api.submitVote(params).then(res=>{
                   if(res.success){
                     this.$message.success('发布成功');
                     setTimeout(()=>{
                       // window.location.reload()
-                      this.$router.replace({path: this.baseForm.forumId})
-                    },1500)
+                      this.$router.replace({path: this.baseForm.forumId});
+                    },1500);
                   } else {
-                    this.submitTitle = '发布'
+                    this.submitTitle = '发布';
                     this.disableSubmit = false;
                   }
-                })
+                });
               }else{
                 this.$message.error('选项未填写完整');
               }
 
-              console.log(params)
+              console.log(params);
             }
             // document.getElementById(this.activeName).focus();
           }
-        })
+        });
 
 
       },
@@ -743,18 +747,22 @@
         const isLt2M = file.size / 1024 / 1024 < 1000;
         if (!isLt2M) {
           this.$message.error('上传图片大小不能超过 100MB!');
-          return false
+          return false;
         }
-        this.filedata.fileName = file.name
-        return true
+        this.filedata.fileName = file.name;
+        return true;
       },
       handleClick(tab, event){
-        if(tab.paneName=='third'){
+        if(tab.paneName == 'third'){
            this.$nextTick(()=>{
-            document.getElementsByClassName('quill-editor')[0].addEventListener('click',(e)=>{this.imgClick(e)})
-          })
+            document.getElementsByClassName('quill-editor')[0].addEventListener('click',(e)=>{
+this.imgClick(e);
+});
+          });
         }else{
-          document.getElementsByClassName('quill-editor')[0].removeEventListener('click',(e)=>{this.imgClick(e)})
+          document.getElementsByClassName('quill-editor')[0].removeEventListener('click',(e)=>{
+this.imgClick(e);
+});
         }
 
         // Title聚焦
@@ -763,25 +771,25 @@
         });
       },
       toOpen(v){
-        console.log(v)
-        this.$router.push({path: v})
+        console.log(v);
+        this.$router.push({path: v});
       },
       changes(v){
-        console.log(v)
-        this.getForum(v?v:'')
+        console.log(v);
+        this.getForum(v ? v : '');
       },
       changes2(v){
         console.log(v);
-        this.baseForm.forumId = v
+        this.baseForm.forumId = v;
       },
       getForum(keyword){
         api.searchForum({keyword}).then(res=>{
-          this.options = res.data
+          this.options = res.data;
            if(this.$route.query.id){
-            this.baseForm.forumId = '/f/'+this.$route.query.id;
-            let a = this.options.filter(i=>i.forumId==this.$route.query.id);
+            this.baseForm.forumId = '/f/' + this.$route.query.id;
+            let a = this.options.filter(i=>i.forumId == this.$route.query.id);
             if(a.length){
-              this.baseFormName = this.options.filter(i=>i.forumId==this.$route.query.id)[0]['title'];
+              this.baseFormName = this.options.filter(i=>i.forumId == this.$route.query.id)[0]['title'];
             }else{
               this.baseFormName = this.$route.query.name;
             }
@@ -791,14 +799,14 @@
             // }
             console.log(222,this.baseFormName);
           }
-        })
+        });
       },
       gotoV2() {
-        const path = this.baseForm.forumId ? `${this.baseForm.forumId}/submit` : `/f/submit`;
+        const path = this.baseForm.forumId ? `${this.baseForm.forumId}/submit` : '/f/submit';
         this.$router.push({ path });
       },
     }
-  }
+  };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

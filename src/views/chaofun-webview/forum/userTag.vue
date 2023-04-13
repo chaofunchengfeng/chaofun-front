@@ -72,11 +72,11 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import {getlistTag} from "../../../api/api";
+  import * as api from '@/api/api';
+  import {getlistTag} from '../../../api/api';
 
   export default {
-    name: "tag",
+    name: 'tag',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
@@ -100,7 +100,7 @@
           past24HVotes: 0,
           rank: 0
         }
-      }
+      };
     },
     props: {
       forumId0: {
@@ -116,7 +116,7 @@
       } else {
         this.forumId = this.$route.query.forumId;
       }
-      this.getTagList()
+      this.getTagList();
     },
 
     methods: {
@@ -125,7 +125,7 @@
         api.removeUserTag({userId: this.userIdToClean, forumId: this.forumId}).then((res) => {
           if (res.success) {
             this.userIdToClean = null;
-            this.state= '';
+            this.state = '';
             this.$toast('成功');
           } else {
             this.$toast(this.errorMessage);
@@ -159,7 +159,7 @@
             this.orderNumber = 0;
             this.displayAdd = false;
             this.getTagList();
-          })
+          });
         }
       },
 
@@ -167,7 +167,7 @@
         this.displayAdd = false;
       },
       cancelSet() {
-        this.displayAddUserTag= false;
+        this.displayAddUserTag = false;
       },
       cancelClean() {
         this.displayRemove = false;
@@ -177,21 +177,21 @@
       },
 
       toDelete(item, index) {
-        this.$confirm(`是否确定删除标签 【${item.data}】？`, "提示", {
-          type: "warning",
+        this.$confirm(`是否确定删除标签 【${item.data}】？`, '提示', {
+          type: 'warning',
           customClass:'el-message-custom-scroll',
           // position: center,
         }).then(() => {
           api.removeForumUserTag({tagId: item.id}).then((res) => {
               this.getTagList();
           });
-        })
+        });
       },
       getTagList() {
         api.listForumUserTag({ forumId: this.forumId }).then((res) => {
           this.lists = res.data;
           // this.load()
-        })
+        });
       },
       handleRemoveSelect(item) {
         this.userIdToClean = item.userId;
@@ -205,7 +205,7 @@
         api.getSearchUser({'keyword': queryString, 'pageNum': 1}).then((res) => {
 
           let result = res.data.data.map(value => {
-            value.value = value.userName
+            value.value = value.userName;
             return value;
           });
           clearTimeout(this.timeout);
@@ -215,7 +215,7 @@
         });
       },
     }
-  }
+  };
 
 </script>
 

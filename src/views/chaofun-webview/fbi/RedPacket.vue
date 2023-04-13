@@ -80,10 +80,10 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 
 export default {
-  name: "RedPacket",
+  name: 'RedPacket',
   components: {},
 
   data() {
@@ -92,7 +92,7 @@ export default {
       redPacket: null,
       showDialog: false,
 
-    }
+    };
   },
   created() {
 
@@ -113,7 +113,7 @@ export default {
     }
     this.password = passwd;
     if (this.password) {
-      this.getRedPacket()
+      this.getRedPacket();
     }
 
   },
@@ -132,9 +132,9 @@ export default {
     toUser(userId) {
       if (userId) {
         try {
-          window.flutter_inappwebview.callHandler('toAppUser', {userId: userId + ''})
+          window.flutter_inappwebview.callHandler('toAppUser', {userId: userId + ''});
         } catch (e) {
-          window.open(location.origin + '/user/' + userId, "_blank");
+          window.open(location.origin + '/user/' + userId, '_blank');
         }
       }
     },
@@ -202,14 +202,14 @@ export default {
     },
 
     history() {
-      this.$toast("暂不支持");
+      this.$toast('暂不支持');
     },
 
     create() {
       window.open('/webview/fbi/redPacket/create', '_blank');
     }
   }
-}
+};
 
 
 </script>

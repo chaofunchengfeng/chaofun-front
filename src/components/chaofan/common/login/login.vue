@@ -87,11 +87,11 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import * as api from '@/api/api'
-import { mapState } from 'vuex'
-import {deepClone,randomRange} from '@/utils'
-import { Checkbox } from 'element-ui'
+import Vue from 'vue';
+import * as api from '@/api/api';
+import { mapState } from 'vuex';
+import {deepClone,randomRange} from '@/utils';
+import { Checkbox } from 'element-ui';
 // import SlideVerify from 'vue-monoplasty-slide-verify';
 // Vue.use(SlideVerify);
  export default {
@@ -122,7 +122,7 @@ import { Checkbox } from 'element-ui'
           code: ''
         },
         isWxscan: false,
-     }
+     };
    },
    computed:{
     //  ...mapState({
@@ -144,37 +144,37 @@ import { Checkbox } from 'element-ui'
    },
    watch:{
     logStatus(v){
-      if(v=='login'){
+      if(v == 'login'){
         if(localStorage.getItem('u')){
           this.params = {
             userName: this.tils().decode(localStorage.getItem('u').split('||')[0]),
             password: this.tils().decode(localStorage.getItem('u').split('||')[1]),
-          }
-          this.ifRemember = true
+          };
+          this.ifRemember = true;
         }
       }
       if(v){
         let that = this;
-        document.onkeydown=function(event){
-          console.log('123123123')
+        document.onkeydown = function(event){
+          console.log('123123123');
             var e = event || window.event || arguments.callee.caller.arguments[0];
-            if(e.keyCode==13&&that.logStatus){//上
+            if(e.keyCode == 13 && that.logStatus){//上
                 if(that.logStatus == 'login'){
-                    that.logOrReg(1)
+                    that.logOrReg(1);
                 }else if(that.logStatus == 'register'){
-                    that.logOrReg(2)
+                    that.logOrReg(2);
                 }
             }
         };
       }else{
-        document.removeEventListener("keydown");
+        document.removeEventListener('keydown');
       }
     }
   },
    created() {
      if(this.callBack){
-       console.log('999')
-       this.callBack()
+       console.log('999');
+       this.callBack();
      }
 
      if(location.href.includes('code=')){
@@ -186,21 +186,21 @@ import { Checkbox } from 'element-ui'
      let self = this;
      if(document.getElementById('loginBox')){
        document.getElementById('loginBox').addEventListener('keyup',(e)=>{
-        if(e.code.toLowerCase()=='enter'){
-          if(self.logStatus=='login'){
+        if(e.code.toLowerCase() == 'enter'){
+          if(self.logStatus == 'login'){
             self.logOrReg(1);
           }else{
             self.logOrReg(1);
           }
         }
-      })
+      });
      }
 
    },
    methods: {
      enters(e){
-       if(e.code.toLowerCase()=='enter'){
-          if(this.logStatus=='login'){
+       if(e.code.toLowerCase() == 'enter'){
+          if(this.logStatus == 'login'){
             this.logOrReg(1);
           }else{
             this.logOrReg(1);
@@ -222,38 +222,40 @@ import { Checkbox } from 'element-ui'
            this.ticket = res.data;
            this.ticketTimer = setInterval(()=>{
              this.checkTicketLogin();
-           },2000)
+           },2000);
          }
-       })
+       });
      },
      checkTicketLogin() {
        api.getByPath('/api/v0/login/loginByPublicAccount', {'ticket': this.ticket}).then(res=>{
          if (res.data) {
-           clearInterval(this.ticketTimer)
-           this.getUserInfo()
+           clearInterval(this.ticketTimer);
+           this.getUserInfo();
            this.registerSuccess = true;
            this.$toast('扫码登陆成功');
          }
-       })
+       });
      },
     sendCode(){
-      if(this.time) return;
-      if(this.params.phone&&(/^1[3456789]\d{9}$/.test(this.params.phone))){
+      if(this.time) {
+return;
+}
+      if(this.params.phone && (/^1[3456789]\d{9}$/.test(this.params.phone))){
         // this.showSlider = true;
-        this.onSuccess()
+        this.onSuccess();
       }else{
-        this.$toast('请正确输入手机号')
+        this.$toast('请正确输入手机号');
       }
     },
     onSuccess(){
-      this.msg = 'login success'
+      this.msg = 'login success';
       api.getCode({phone: this.params.phone}).then(res=>{
         if(res.success){
-          this.$toast('发送验证码成功')
+          this.$toast('发送验证码成功');
           this.showSlider = false;
           this.time = 60;
           this.timer = setInterval(()=>{
-            if(this.time>1){
+            if(this.time > 1){
               this.time -= 1;
             }else{
               clearInterval(this.timer);
@@ -261,27 +263,27 @@ import { Checkbox } from 'element-ui'
               this.timer = null;
             }
 
-          },1000)
+          },1000);
         }else{
-          this.$toast(res.message)
+          this.$toast(res.message);
         }
-      })
+      });
 
       // getCode
     },
     onFail(){
-      this.msg = ''
+      this.msg = '';
     },
     onRefresh(){
-      this.msg = ''
+      this.msg = '';
     },
     toUrls(item,params){
        this.postBehavior(item.postId,'jump');
-       this.toUrl(params)
+       this.toUrl(params);
     },
     showLogin(v){
-      debugger
-      console.log('---------',v)
+      debugger;
+      console.log('---------',v);
       this.logStatus = v || 'login';
       this.show = true;
 
@@ -294,7 +296,7 @@ import { Checkbox } from 'element-ui'
     },
     cancelLogin(){
       // Vue.$store.dispatch('user/SET_logStatus','')
-      this.logStatus = 'login'
+      this.logStatus = 'login';
       this.show = false;
       if (this.ticketTimer) {
         clearInterval(this.ticketTimer);
@@ -302,74 +304,74 @@ import { Checkbox } from 'element-ui'
     },
     logOrReg(v){
       let params = deepClone(this.params);
-      if(v==1&&this.ifNull(v)){
-        if(this.loginType=='account'){
+      if(v == 1 && this.ifNull(v)){
+        if(this.loginType == 'account'){
           api.toLogin(params).then(res=>{
             if(res.success){
               if(this.ifRemember){
                 let random = randomRange(40);
                 let a = this.tils().encode(params.userName);
                 let p = this.tils().encode(params.password);
-                localStorage.setItem('u',a+'||'+p)
+                localStorage.setItem('u',a + '||' + p);
               } else {
-                localStorage.removeItem('u')
+                localStorage.removeItem('u');
               }
               // debugger
-              this.getUserInfo()
+              this.getUserInfo();
             }else{
               this.$toast(res.errorMessage);
             }
             // localStorage.setItem('userInfo',JSON.stringify(res.data))
-          })
+          });
         }else{
           let par = {
             phone: params.phone,
             code: params.code,
-          }
+          };
           api.phoneLogin(par).then(res=>{
             if(res.success){
               if(this.ifRemember){
                 let random = randomRange(40);
                 let a = this.tils().encode(params.userName);
                 let p = this.tils().encode(params.password);
-                localStorage.setItem('u',a+'||'+p)
+                localStorage.setItem('u',a + '||' + p);
               }else{
-                localStorage.removeItem('u')
+                localStorage.removeItem('u');
               }
               // debugger
-              this.getUserInfo()
+              this.getUserInfo();
             }else{
               this.$toast(res.errorMessage);
             }
-          })
+          });
         }
-      } else if(v==2&&this.ifNull(v)){
+      } else if(v == 2 && this.ifNull(v)){
         if(location.href.includes('code=')){
           params.platform = 'wechat';
         }
-        console.log("inviter " + localStorage.getItem('inviter'));
-        params.inviter=localStorage.getItem('inviter')
+        console.log('inviter ' + localStorage.getItem('inviter'));
+        params.inviter = localStorage.getItem('inviter');
         api.toRegister(params).then(res=>{
           if(res.success){
-            history.replaceState({ page: 3 }, "title 3", location.pathname);
-            this.getUserInfo()
-            this.registerSuccess = true
+            history.replaceState({ page: 3 }, 'title 3', location.pathname);
+            this.getUserInfo();
+            this.registerSuccess = true;
           }else{
             this.$toast(res.errorMessage);
-            console.log(123)
+            console.log(123);
           }
-        })
-      }else if(v==3){
+        });
+      }else if(v == 3){
         api.bindUserWithWeChatOAuthWithPassword(params).then(res=>{
           if(res.success){
-            history.replaceState({ page: 3 }, "title 3", location.pathname);
-            this.getUserInfo()
-            this.registerSuccess = true
+            history.replaceState({ page: 3 }, 'title 3', location.pathname);
+            this.getUserInfo();
+            this.registerSuccess = true;
           }else{
             this.$toast(res.errorMessage);
-            console.log(123)
+            console.log(123);
           }
-        })
+        });
 
       }
     },
@@ -377,52 +379,56 @@ import { Checkbox } from 'element-ui'
       let params = deepClone(this.params);
       // let phoneParams = deepClone(this.phoneParams);
       if(v == 1){
-        if(this.loginType=='account'){
-          if(params.userName&&params.password){
-            return true
+        if(this.loginType == 'account'){
+          if(params.userName && params.password){
+            return true;
           }else{
-            this.$toast('请输入用户名和密码')
-            return false
+            this.$toast('请输入用户名和密码');
+            return false;
           }
         }else{
-          if(params.phone&&params.code){
-            return true
+          if(params.phone && params.code){
+            return true;
           }else{
-            this.$toast('请输入手机号或验证码')
-            return false
+            this.$toast('请输入手机号或验证码');
+            return false;
           }
         }
 
       }else{
-        if(!params.phone||!(/^1[3456789]\d{9}$/.test(params.phone))||!params.code){
-          this.$toast('请完成手机号码验证')
+        if(!params.phone || !(/^1[3456789]\d{9}$/.test(params.phone)) || !params.code){
+          this.$toast('请完成手机号码验证');
           return false;
         }
-        if(params.userName&&params.password){
-          return true
+        if(params.userName && params.password){
+          return true;
 
         }else{
-          return false
+          return false;
         }
       }
     },
     getUserInfo(){
-      this.$toast('登录成功')
+      this.$toast('登录成功');
       this.callBack();
       // Vue.$store.dispatch('user/SET_logStatus','')
-      this.logStatus = 'login'
+      this.logStatus = 'login';
       setTimeout(()=>{
-        location.reload()
-      },10)
+        location.reload();
+      },10);
 
     },
     tils(){
       const randStr = () => Math.random().toString(36).substr(2);
       const supplyFunc = (str, len) => {
-        if(str.length > len) return str.substr(0, len);
-        if(str.length < len) return supplyFunc(str + randStr(), len);
+        if(str.length > len) {
+return str.substr(0, len);
+}
+        if(str.length < len) {
+return supplyFunc(str + randStr(), len);
+}
         return str;
-      }
+      };
       const str10 = () => supplyFunc(randStr(), 10);
       //加密函数
       const encode = str => str10() + escape(str) + str10();
@@ -430,10 +436,10 @@ import { Checkbox } from 'element-ui'
       const decode = str => unescape(str.substr(10, str.length - 20));
       return {
         encode,decode
-      }
+      };
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

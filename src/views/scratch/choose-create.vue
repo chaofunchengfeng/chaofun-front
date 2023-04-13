@@ -43,17 +43,17 @@
 </template>
 
 <script>
-import {tuxunJump} from "../tuxun/common";
-import * as api from '../../api/api'
+import {tuxunJump} from '../tuxun/common';
+import * as api from '../../api/api';
 export default {
-  name: "choose-create",
+  name: 'choose-create',
   data() {
     return {
       list: []
-    }
+    };
   },
   mounted() {
-    this.listDraft()
+    this.listDraft();
   },
   methods:{
     createText() {
@@ -66,13 +66,13 @@ export default {
       window.location.href = '/scratch/create?type=click';
     },
     goHome() {
-      window.location.href =  '/scratch/'
+      window.location.href =  '/scratch/';
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        window.location.href =  '/scratch/'
+        window.location.href =  '/scratch/';
       }
     },
     listDraft() {
@@ -80,10 +80,10 @@ export default {
         if (res.success) {
           this.list = res.data;
         }
-      })
+      });
     },
     modifyDraft(item) {
-      window.location.href = '/scratch/modify?id=' + item.id
+      window.location.href = '/scratch/modify?id=' + item.id;
     },
     deleteDraft(item) {
       this.$confirm('你确定要删除草稿吗？', '', {
@@ -95,13 +95,13 @@ export default {
                 this.$toast('删除成功');
                 this.listDraft();
               }
-            })
+            });
           }
         }
       });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

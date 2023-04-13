@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import * as api from "../../api/api";
-import { loadScript } from "vue-plugin-load-script";
+import * as api from '../../api/api';
+import { loadScript } from 'vue-plugin-load-script';
 
 export default {
-  name: "wonders-filter",
+  name: 'wonders-filter',
   data() {
     return {
       panorama: null,
@@ -28,24 +28,24 @@ export default {
       location: null,
       submitPanoramaShow: false,
       form: {
-        applyModReason: "",
+        applyModReason: '',
       },
       panoramaSubmitForm: {
-        links: "",
+        links: '',
       },
     };
   },
   created() {
-    document.head.insertAdjacentHTML("beforeend", `<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>`)
+    document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
     this.tuxunPid = this.$route.query.id;
     loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js').then(() => {
       this.init();
-    })
+    });
   },
   methods: {
     init() {
       this.panorama = new google.maps.StreetViewPanorama(
-          document.getElementById("map"), {
+          document.getElementById('map'), {
             fullscreenControl:false,
             panControl: false,
             addressControl: false,
@@ -56,7 +56,7 @@ export default {
             zoomControl: false,
           }
       );
-      this.panorama.registerPanoProvider(this.getCustomPanorama)
+      this.panorama.registerPanoProvider(this.getCustomPanorama);
 
       this.change();
     },
@@ -68,7 +68,7 @@ export default {
           },
           links: [],
           // The text for the copyright control.
-          copyright: "Imagery (c) 2010 Google",
+          copyright: 'Imagery (c) 2010 Google',
           // The definition of the tiles for this panorama.
           tiles: {
             tileSize: new google.maps.Size(512, 512),
@@ -82,7 +82,7 @@ export default {
       }
     },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-      zoom = zoom +=1;
+      zoom = zoom += 1;
       if (zoom === 1) {
         return (
             'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano
@@ -95,52 +95,52 @@ export default {
 
 
     change() {
-      api.getByPath("/api/v0/tuxun/wonders/checkSubmit").then(res => {
+      api.getByPath('/api/v0/tuxun/wonders/checkSubmit').then(res => {
         if (res.success) {
           this.setPano(res.data.tuxunPid, res.data.panoId);
         }
-      })
+      });
     },
     accept() {
-      api.getByPath("/api/v0/tuxun/wonders/accept", {tuxunPid: this.tuxunPid}).then(res => {
+      api.getByPath('/api/v0/tuxun/wonders/accept', {tuxunPid: this.tuxunPid}).then(res => {
         if (res.success) {
-          console.log(res.data)
+          console.log(res.data);
           this.setPano(res.data.tuxunPid, res.data.panoId);
         }
-      })
+      });
     },
     remove() {
-      api.getByPath("/api/v0/tuxun/wonders/remove", {tuxunPid: this.tuxunPid}).then(res => {
+      api.getByPath('/api/v0/tuxun/wonders/remove', {tuxunPid: this.tuxunPid}).then(res => {
         if (res.success) {
-          console.log(res.data)
-          console.log(res.data.tuxunPid, res.data.panoId)
+          console.log(res.data);
+          console.log(res.data.tuxunPid, res.data.panoId);
           this.setPano(res.data.tuxunPid, res.data.panoId);
         }
-      })
+      });
     },
     setPano(tuxunPid, panoId) {
-      console.log(tuxunPid, panoId)
+      console.log(tuxunPid, panoId);
       this.tuxunPid = tuxunPid;
       this.panorama.setPano(panoId);
       this.panorama.setVisible(true);
-      this.getLocation(panoId)
+      this.getLocation(panoId);
       // 调整视角大小的
       this.panorama.setZoom(0);
     },
     getLocation(panoId) {
-      api.getByPath("/api/v0/tuxun/getLocation", {panoId: panoId}).then(res => {
+      api.getByPath('/api/v0/tuxun/getLocation', {panoId: panoId}).then(res => {
         this.location = res.data;
-      })
+      });
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

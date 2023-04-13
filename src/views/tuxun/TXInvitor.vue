@@ -403,34 +403,34 @@
 
 <script>
 import * as THREE from 'three';
-import * as api from '../../api/api'
-import {Viewer} from 'photo-sphere-viewer'
-import 'photo-sphere-viewer/dist/photo-sphere-viewer.css'
-import { CompassPlugin} from 'photo-sphere-viewer/dist/plugins/compass'
-import { MarkersPlugin} from 'photo-sphere-viewer/dist/plugins/markers'
-import { VirtualTourPlugin } from 'photo-sphere-viewer/dist/plugins/virtual-tour'
-import 'photo-sphere-viewer/dist/plugins/compass.css'
-import 'photo-sphere-viewer/dist/plugins/virtual-tour.css'
-import 'photo-sphere-viewer/dist/plugins/markers.css'
-import BMapLoader from "../../utils/bmap-jsapi-loader";
-import {getByPathLongTimeout} from "../../api/api";
-import Matching from "./Matching";
-import EmojiSender from "./EmojiSender";
-import { loadScript } from "vue-plugin-load-script";
+import * as api from '../../api/api';
+import {Viewer} from 'photo-sphere-viewer';
+import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
+import { CompassPlugin} from 'photo-sphere-viewer/dist/plugins/compass';
+import { MarkersPlugin} from 'photo-sphere-viewer/dist/plugins/markers';
+import { VirtualTourPlugin } from 'photo-sphere-viewer/dist/plugins/virtual-tour';
+import 'photo-sphere-viewer/dist/plugins/compass.css';
+import 'photo-sphere-viewer/dist/plugins/virtual-tour.css';
+import 'photo-sphere-viewer/dist/plugins/markers.css';
+import BMapLoader from '../../utils/bmap-jsapi-loader';
+import {getByPathLongTimeout} from '../../api/api';
+import Matching from './Matching';
+import EmojiSender from './EmojiSender';
+import { loadScript } from 'vue-plugin-load-script';
 
 
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import "./SmoothWheelZoom"
-import {tuxunJump, tuxunOpen} from "./common";
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import './SmoothWheelZoom';
+import {tuxunJump, tuxunOpen} from './common';
 
 
 export default {
-  name: "TXInvitor",
+  name: 'TXInvitor',
   components: {EmojiSender, Matching},
   data() {
     return {
-      url: `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws/v0/tuxun`,
+      url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
       // url: `ws://127.0.0.1:8080/ws/v0/tuxun`,
       ws: null,
       status: 'wait',
@@ -488,7 +488,7 @@ export default {
       history: null,
 
       // gameData: {playerIds: [1, 2]}
-    }
+    };
   },
 
   mounted() {
@@ -501,11 +501,11 @@ export default {
     this.guoqingId = this.$route.query.guoqingId;
     this.init();
 
-    document.onkeydown=function(event){
+    document.onkeydown = function(event){
       var e = event || window.event || arguments.callee.caller.arguments[0];
-      console.log(e.keyCode)
-      if(e && e.keyCode===32){//空格
-        this.keyConfirm()
+      console.log(e.keyCode);
+      if(e && e.keyCode === 32){//空格
+        this.keyConfirm();
       }
     }.bind(this);
 
@@ -527,7 +527,7 @@ export default {
               !event.altKey &&
               !event.ctrlKey
           ) {
-            event.stopPropagation()
+            event.stopPropagation();
           };
         },
         { capture: true },
@@ -544,7 +544,7 @@ export default {
       if (Notification) {
         Notification.requestPermission(function (status) {
           this.notifyStatus = status;
-        }.bind(this))
+        }.bind(this));
       }
       if (this.gameId && this.gameId !== null && this.gameId !== '') {
         this.showMatch = false;
@@ -556,7 +556,7 @@ export default {
         this.match();
       } else if (this.challengeId) {
         this.doLoginStatus().then(res => {
-          console.log(res)
+          console.log(res);
           if (res) {
             this.showMatch = false;
             this.challengeInit();
@@ -588,32 +588,32 @@ export default {
       this.changeMapBig();
     },
     changeMapBig() {
-      this.isMapSmall = false
+      this.isMapSmall = false;
       this.needSmall = false;
-      var element = document.getElementById("map-container")
+      var element = document.getElementById('map-container');
       element.style.width = this.maxMapWidth;
       element.style.height = this.maxMapHeight;
       element.style.opacity = 1.0;
       setTimeout(() => {
         this.map.invalidateSize();
-      }, 5)
+      }, 5);
     },
     mapMouseOver() {
-      if (!window.matchMedia("(hover: none)").matches && document.body.clientWidth > 678 && !this.mapPin) {
+      if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
         this.changeMapBig();
       }
     },
     backParty() {
-      tuxunJump('/tuxun/party')
+      tuxunJump('/tuxun/party');
     },
     mapMouseOut() {
-      if (!window.matchMedia("(hover: none)").matches && document.body.clientWidth > 678 && !this.mapPin) {
+      if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
         this.needSmall = true;
         setTimeout(() => {
           if (this.needSmall) {
             this.needSmall = false;
             this.isMapSmall = true;
-            var element = document.getElementById("map-container")
+            var element = document.getElementById('map-container');
             element.style.width = '25%';
             element.style.height = '35%';
             element.style.opacity = 0.7;
@@ -621,7 +621,7 @@ export default {
               this.map.invalidateSize();
             }
           }
-        }, 750)
+        }, 750);
       }
     },
     hideEmojiSender() {
@@ -641,7 +641,7 @@ export default {
           smoothSensitivity: 3,   // zoom speed. default is 1
           maxBoundsViscosity: 1.0,
           maxBounds: [[-90, -540], [90, 540]]
-        }).setView([38.8, 106.0], 2)
+        }).setView([38.8, 106.0], 2);
         map.scrollWheelZoom = true;
         map.attributionControl.setPosition('bottomleft');
         map.attributionControl.setPrefix('华为地图');
@@ -666,11 +666,11 @@ export default {
       api.getByPath('/api/v0/tuxun/challenge/getGameInfo', {'challengeId': this.challengeId}).then(res => {
         if (res.data) {
           this.gameId = res.data.id;
-          this.solveGameData(res.data, null)
+          this.solveGameData(res.data, null);
           this.initWS();
           this.countDown();
         }
-      })
+      });
     },
     initWS() {
       if (this.ws) {
@@ -684,12 +684,12 @@ export default {
     },
 
     wsOnOpen(e) {
-      console.log("wsOnOpen");
+      console.log('wsOnOpen');
       // console.log(e);
-      this.wsSend("{\"scope\": \"tuxun\", \"data\": {\"type\": \"subscribe_solo\", \"text\": \"" + this.gameId + "\"}}");
+      this.wsSend('{"scope": "tuxun", "data": {"type": "subscribe_solo", "text": "' + this.gameId + '"}}');
       // 每3秒发送一次心跳
       setInterval(() => {
-        this.wsSend(`{"scope": "heart_beat"}`);
+        this.wsSend('{"scope": "heart_beat"}');
       }, 15000);
     },
 
@@ -698,7 +698,7 @@ export default {
       if (data.scope === 'tuxun_game') {
         this.solveGameData(data.data.game, data.data.code);
       } else if (data.scope === 'tuxun_emoji') {
-        this.showEmoji(data.data)
+        this.showEmoji(data.data);
       }
     },
     showEmoji(data) {
@@ -733,16 +733,16 @@ export default {
 
       if (this.gameData.status === 'match_fail') {
         this.$toast('匹配失败，重新匹配！');
-        tuxunJump('/tuxun/solo_game')
+        tuxunJump('/tuxun/solo_game');
         return;
       }
 
       if (code === 'game_start' && this.gameData.type === 'battle_royale') {
-        this.notify("淘汰赛开始了，点击进入");
+        this.notify('淘汰赛开始了，点击进入');
       }
 
       if (this.gameData.type === 'solo' && code === 'player_join' && this.$store.state.user.userInfo.userId === this.gameData.host.userId) {
-        this.notify("您的邀请Solo赛已经准备就绪，可以开始了！");
+        this.notify('您的邀请Solo赛已经准备就绪，可以开始了！');
       }
 
       if (this.gameData.rounds && this.gameData.rounds.length > 0) {
@@ -756,18 +756,18 @@ export default {
           this.gameData.teams.forEach(v => {
             if (v.health !== 0) {
               this.winner = v.users[0];
-              this.winTeam = v
+              this.winTeam = v;
             }
             if (v.users[0].userId === this.$store.state.user.userInfo.userId) {
               this.yourTeam = v;
             }
-          })
+          });
           this.isWin = false;
           this.winTeam.users.forEach(v => {
             if (v.userId === this.$store.state.user.userInfo.userId) {
               this.isWin = true;
             }
-          })
+          });
 
           if (!this.gameData.playerIds.includes(this.$store.state.user.userInfo.userId)) {
             this.isWin = true;
@@ -781,10 +781,10 @@ export default {
             if (v.health !== 0) {
               this.winner = v.users[0];
               this.isWin = true;
-              this.winTeam = v
+              this.winTeam = v;
               this.yourTeam = v;
             }
-          })
+          });
         }
       }
 
@@ -818,7 +818,7 @@ export default {
               }
             },interval);
 
-            this.removeChooseMarker()
+            this.removeChooseMarker();
             this.removeTargetMarker();
             this.removeLine();
             this.clearRanksMarker();
@@ -838,11 +838,11 @@ export default {
 
             setTimeout(function () {
                 if (!this.viewer) {
-                  document.head.insertAdjacentHTML("beforeend", `<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>`)
+                  document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
                   this.sharePanoId = this.$route.query.pano;
                   loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js').then(() => {
                     this.viewer = new google.maps.StreetViewPanorama(
-                        document.getElementById("viewer"), {
+                        document.getElementById('viewer'), {
                           fullscreenControl:false,
                           panControl:true,
                           addressControl: false,
@@ -860,15 +860,15 @@ export default {
                           },
                         }
                     );
-                    this.viewer.registerPanoProvider(this.getCustomPanorama)
-                    this.viewer.addListener("pano_changed", () => {
-                      console.log("pano_changed");
+                    this.viewer.registerPanoProvider(this.getCustomPanorama);
+                    this.viewer.addListener('pano_changed', () => {
+                      console.log('pano_changed');
                       if (this.viewer.getPano().length === 27) {
                         this.getPanoInfo(this.viewer.getPano());
                       }
                     });
                     this.setPanoId(this.lastRound);
-                  })
+                  });
                 } else {
                   this.setPanoId(this.lastRound);
                 }
@@ -882,7 +882,7 @@ export default {
           (this.lastRound && this.lastRound.endTime))
       ) {
         if (!this.showGameEnd) {
-          this.showMapTrue()
+          this.showMapTrue();
           this.showRoundResult = true;
         } else {
           this.showRoundResult = false;
@@ -893,10 +893,10 @@ export default {
               if (this.lastRound.obsoleteTeamIds.includes(v.id)) {
                 this.obsoleteUsers.push(v.users[0]);
               }
-            })
+            });
           }
 
-          this.addTargetMarker()
+          this.addTargetMarker();
           this.addRanksMarker();
           this.centerView();
 
@@ -919,7 +919,7 @@ export default {
 
 
     wsSend(data) {
-      console.log("wsSend: " + data);
+      console.log('wsSend: ' + data);
       this.ws.send(data);
     },
 
@@ -927,7 +927,7 @@ export default {
       setTimeout(function () {
         this.initWS();
       }.bind(this), 1000);
-      console.log("wsOnClose");
+      console.log('wsOnClose');
     },
 
     copyInviterLink() {
@@ -937,7 +937,7 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制邀请地址成功");
+      this.$toast('复制邀请地址成功');
       return result;
     },
 
@@ -945,7 +945,7 @@ export default {
       api.getByPath('/api/v0/tuxun/challenge/getDailyChallengeRank', {'challengeId': this.challengeId, 'gameId': this.gameId}).then(res=>{
         this.dailyChallengeRank = res.data.rank;
         this.dailyChallengePercent = res.data.percent;
-      })
+      });
     },
 
     get() {
@@ -954,14 +954,14 @@ export default {
     },
     join() {
       this.doLoginStatus().then((res) => {
-        api.getByPath("/api/v0/tuxun/game/join", {gameId: this.gameId}).then(res => {
+        api.getByPath('/api/v0/tuxun/game/join', {gameId: this.gameId}).then(res => {
           console.log(res.data);
           if (res.success) {
             this.solveGameData(res.data, null);
           } else if (res.errorCode === 'need_vip') {
             this.$vip();
           } else {
-            this.getGameInfo()
+            this.getGameInfo();
           }
         });
       });
@@ -969,14 +969,14 @@ export default {
 
     joinGuoqing() {
       this.doLoginStatus().then((res) => {
-        api.getByPath("/api/v0/tuxun/br/join", {gameId: this.gameId}).then(res => {
+        api.getByPath('/api/v0/tuxun/br/join', {gameId: this.gameId}).then(res => {
           console.log(res.data);
           if (res.success) {
             this.solveGameData(res.data, null);
           } else if (res.errorCode === 'need_vip') {
             this.$vip();
           } else {
-            this.getGameInfo()
+            this.getGameInfo();
           }
         });
       });
@@ -984,12 +984,12 @@ export default {
 
     swapTeam() {
       this.doLoginStatus().then((res) => {
-        api.getByPath("/api/v0/tuxun/team/swapTeam", {gameId: this.gameId}).then(res => {
+        api.getByPath('/api/v0/tuxun/team/swapTeam', {gameId: this.gameId}).then(res => {
           console.log(res.data);
           if (res.success) {
             this.solveGameData(res.data, undefined);
           } else {
-            this.getGameInfo()
+            this.getGameInfo();
           }
         });
       });
@@ -997,7 +997,7 @@ export default {
 
     getGameInfo() {
       this.doLoginStatus().then((res) => {
-        api.getByPath("/api/v0/tuxun/solo/get", {gameId: this.gameId}).then(res => {
+        api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
           console.log(res.data);
           if (res.success) {
             this.solveGameData(res.data, undefined);
@@ -1007,7 +1007,7 @@ export default {
     },
 
     start() {
-      api.getByPath("/api/v0/tuxun/solo/start", {gameId: this.gameId}).then(res => {
+      api.getByPath('/api/v0/tuxun/solo/start', {gameId: this.gameId}).then(res => {
         if (res.success) {
           this.solveGameData(res.data, undefined);
         }  else if (res.errorCode === 'need_vip') {
@@ -1021,18 +1021,18 @@ export default {
         var tType = 'country';
 
         if (this.gameData.move) {
-          tType = 'country_move'
+          tType = 'country_move';
         }
-        api.getByPath("/api/v0/tuxun/streak/create", {type: tType}).then(res => {
+        api.getByPath('/api/v0/tuxun/streak/create', {type: tType}).then(res => {
           tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
         });
       } else {
         var tType = 'province';
 
         if (this.gameData.move) {
-          tType = 'province_move'
+          tType = 'province_move';
         }
-        api.getByPath("/api/v0/tuxun/streak/create", {type: tType}).then(res => {
+        api.getByPath('/api/v0/tuxun/streak/create', {type: tType}).then(res => {
           tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
         });
       }
@@ -1044,13 +1044,13 @@ export default {
         this.lat = e.latlng.wrap().lat;
         this.addChooseMarker();
         if (this.gameData.type === 'team' || this.gameData.type === 'solo' || this.gameData.type === 'solo_match' ) {
-          api.getByPath("/api/v0/tuxun/game/pin", {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
+          api.getByPath('/api/v0/tuxun/game/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         } else if (this.gameData.type === 'daily_challenge') {
-          api.getByPath("/api/v0/tuxun/challenge/pin", {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
+          api.getByPath('/api/v0/tuxun/challenge/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         } else if (this.gameData.type === 'battle_royale') {
-          api.getByPath("/api/v0/tuxun/br/pin", {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
+          api.getByPath('/api/v0/tuxun/br/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         }
       }
@@ -1068,7 +1068,7 @@ export default {
         this.chooseMarker.remove();
       }
 
-      var marker = L.marker([this.lat, this.lng], {icon: this.getOptionUser(this.userId)}).bindTooltip("你选择了",
+      var marker = L.marker([this.lat, this.lng], {icon: this.getOptionUser(this.userId)}).bindTooltip('你选择了',
           {
             permanent: true,
             direction: 'auto'
@@ -1078,19 +1078,19 @@ export default {
 
 
     getOptionUser(userId) {
-      console.log(userId)
-      console.log(this.gameData.teams[1])
+      console.log(userId);
+      console.log(this.gameData.teams[1]);
       if (this.gameData && this.gameData.teams && this.gameData.teams.length === 2) {
         if (this.checkInTeams(this.gameData.teams[1], userId)) {
-          var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options))
+          var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
           options.iconUrl = this.imgOrigin + 'front/marker-icon-green.png';
           options.iconRetinaUrl = this.imgOrigin + 'front/marker-icon-2x-green.png';
-          return new L.Icon(options)
+          return new L.Icon(options);
         } else {
-          return new L.Icon.Default()
+          return new L.Icon.Default();
         }
       } else {
-        return new L.Icon.Default()
+        return new L.Icon.Default();
       }
     },
 
@@ -1139,17 +1139,17 @@ export default {
       }
 
       setTimeout(() => {
-        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options))
+        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
         options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
         options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
-        var marker = L.marker([this.targetLat, this.targetLng], {icon: new L.Icon(options)}).bindTooltip("目标位置",
+        var marker = L.marker([this.targetLat, this.targetLng], {icon: new L.Icon(options)}).bindTooltip('目标位置',
             {
               permanent: true,
               direction: 'auto'
             }).addTo(this.map);
         this.targetMarker = marker;
 
-      }, timeout)
+      }, timeout);
 
     },
 
@@ -1168,12 +1168,12 @@ export default {
         }
 
         if (this.timeLeft < 60) {
-          this.timeLeftStr = this.timeLeft.toString()
+          this.timeLeftStr = this.timeLeft.toString();
         } else {
           this.timeLeftStr = Math.floor(this.timeLeft / 60).toString().padStart(2, '0') + ':' + (this.timeLeft % 60).toString().padStart(2, '0');
         }
 
-        if (this.gameData && this.gameData.timerStartTime && this.gameData.status === "ready") {
+        if (this.gameData && this.gameData.timerStartTime && this.gameData.status === 'ready') {
           this.gameTimeLeft = Math.round( (this.gameData.startTimerPeriod - ((new Date().getTime()) - this.gameData.timerStartTime)) / 1000);
           if (this.gameTimeLeft < 0) {
             this.gameTimeLeft = 0;
@@ -1297,20 +1297,20 @@ export default {
     confirm() {
       if (!this.lng) {
         this.$toast('请在地图上选择位置');
-        return
+        return;
       }
       this.confirmed = true;
-      var path = "/api/v0/tuxun/solo/guess";
+      var path = '/api/v0/tuxun/solo/guess';
       if (this.gameData.type === 'daily_challenge' || this.gameData.type === 'challenge') {
-        path = "/api/v0/tuxun/challenge/guess";
+        path = '/api/v0/tuxun/challenge/guess';
       }
 
       if (this.gameData.type === 'battle_royale') {
-        path = "/api/v0/tuxun/br/guess";
+        path = '/api/v0/tuxun/br/guess';
       }
 
       if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak') {
-        path = "/api/v0/tuxun/streak/guess";
+        path = '/api/v0/tuxun/streak/guess';
       }
 
       api.getByPath(path, {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
@@ -1323,13 +1323,13 @@ export default {
     next() {
       this.confirmed = false;
       if (this.challengeId) {
-        api.getByPath("/api/v0/tuxun/challenge/next", {gameId: this.gameId}).then(res => {
+        api.getByPath('/api/v0/tuxun/challenge/next', {gameId: this.gameId}).then(res => {
           if(res.success) {
             this.solveGameData(res.data, undefined);
           }
         });
       } else {
-        api.getByPath("/api/v0/tuxun/streak/next", {gameId: this.gameId}).then(res => {
+        api.getByPath('/api/v0/tuxun/streak/next', {gameId: this.gameId}).then(res => {
           if (res.success) {
             this.solveGameData(res.data, undefined);
           }
@@ -1343,7 +1343,7 @@ export default {
       //   cancelButtonText: '取消',
       //   type: 'warning'
       // }).then(() => {
-      api.getByPath("/api/v0/tuxun/streak/skip", {gameId: this.gameId}).then(res => {
+      api.getByPath('/api/v0/tuxun/streak/skip', {gameId: this.gameId}).then(res => {
         this.solveGameData(res.data, undefined);
       });
       // }).catch(() => {});
@@ -1354,11 +1354,11 @@ export default {
     },
 
     toNew() {
-      var type = "noMove";
+      var type = 'noMove';
       if (this.gameData.move) {
-        type = "move"
+        type = 'move';
       }
-      api.getByPath("/api/v0/tuxun/br/get", {type: type}).then(res => {
+      api.getByPath('/api/v0/tuxun/br/get', {type: type}).then(res => {
         if (res.data.gameId) {
           tuxunJump('/tuxun/guoqing_game?guoqingId=' + res.data.gameId);
         }
@@ -1373,7 +1373,7 @@ export default {
             tuxunJump('/tuxun/solo_game?gameId=' + res.data.id);
           }
         }
-      })
+      });
     },
 
     replay() {
@@ -1386,7 +1386,7 @@ export default {
           if (this.gameData.type === 'challenge') {
             var type = 'noMove';
             if (this.gameData.move) {
-              type = 'move'
+              type = 'move';
             }
             api.getByPath('/api/v0/tuxun/challenge/create', {
               'mapsId': this.gameData.mapsId,
@@ -1395,7 +1395,7 @@ export default {
               if (res.success) {
                 tuxunJump('/tuxun/challenge?challengeId=' + res.data);
               }
-            })
+            });
           } else {
             this.createNew();
           }
@@ -1423,16 +1423,16 @@ export default {
 
     toReport() {
       api.getByPath('/api/v0/tuxun/game/report', {content: this.image}).then(res => {
-        this.$toast("反馈成功");
-      })
+        this.$toast('反馈成功');
+      });
     },
 
     notify(text) {
       var Notification = window.Notification || window.mozNotification || window.webkitNotification;
       if (Notification) {
-        if ("granted" !== this.notifyStatus) {
+        if ('granted' !== this.notifyStatus) {
         } else {
-          var notify = new Notification("图寻通知", {
+          var notify = new Notification('图寻通知', {
             dir: 'auto',
             data: '',
             lang: 'zh-CN',
@@ -1448,16 +1448,16 @@ export default {
           },
               notify.onshow = function () {
                 setTimeout(notify.close.bind(notify), 5000);
-              }
+              };
           notify.onerror = function () {
-            console.log("HTML5桌面消息出错！！！");
+            console.log('HTML5桌面消息出错！！！');
           };
           notify.onclose = function () {
-            console.log("HTML5桌面消息关闭！！！");
+            console.log('HTML5桌面消息关闭！！！');
           };
         }
       } else {
-        console.log("您的浏览器不支持桌面消息");
+        console.log('您的浏览器不支持桌面消息');
       }
     },
 
@@ -1471,7 +1471,7 @@ export default {
               this.continueSend = false;
               api.getByPathLongTimeout('/api/v0/tuxun/solo/joinRandom').then(res => {
                 if (res.data) {
-                  this.notify("您的图寻已匹配到对手，点击开始游戏");
+                  this.notify('您的图寻已匹配到对手，点击开始游戏');
                   tuxunJump( '/tuxun/solo_game?gameId=' + res.data);
                   this.gameId = res.data;
                   this.init();
@@ -1480,7 +1480,7 @@ export default {
                 } else {
                   this.continueSend = true;
                 }
-              })
+              });
             }
           } catch (e) {
             this.continueSend = true;
@@ -1498,25 +1498,25 @@ export default {
                   } else {
                     this.$vip();
                   }
-                })
+                });
               }
               this.changeMaps(mapsId, mapsType);
             }
-          })
+          });
     },
     changeMaps(mapsId, mapsType) {
       // this.$mapsSearch();
       api.getByPath('/api/v0/tuxun/game/changeMapsId', {gameId: this.gameData.id, mapsId: mapsId, type: mapsType}).then(res=>{
-        this.mapsData = res.data
-      })
+        this.mapsData = res.data;
+      });
     },
     changeHealth() {
       api.getByPath('/api/v0/tuxun/game/changeHealth', {gameId: this.gameData.id, health: this.health}).then(res=>{
         this.health = this.gameData.health;
-      })
+      });
     },
     getCustomPanorama(pano) {
-      console.log(pano)
+      console.log(pano);
       if (pano.length === 27) {
         return {
           location: {
@@ -1524,7 +1524,7 @@ export default {
           },
           links: [],
           // The text for the copyright control.
-          copyright: "baidu",
+          copyright: 'baidu',
           // The definition of the tiles for this panorama.
           tiles: {
             tileSize: new google.maps.Size(512, 512),
@@ -1546,14 +1546,14 @@ export default {
           res.data.links.forEach((item) => {
             this.preloadImage(item.pano);
             this.headingMap[item.pano] = item.centerHeading;
-          })
+          });
         }
         // console.log(this.centerHeading);
-      })
+      });
     },
 
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-      zoom = zoom +=1;
+      zoom = zoom += 1;
       if (zoom === 1) {
         return (
             'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano
@@ -1576,18 +1576,18 @@ export default {
       }
 
       if (!round.pan) {
-        document.getElementById("viewer").addEventListener('mousemove', function (event) {
-          event.preventDefault()
+        document.getElementById('viewer').addEventListener('mousemove', function (event) {
+          event.preventDefault();
           event.stopPropagation();
         }, {capture: true});
-        document.getElementById("viewer").addEventListener('mousedown', function (event) {
-          event.preventDefault()
+        document.getElementById('viewer').addEventListener('mousedown', function (event) {
+          event.preventDefault();
           event.stopPropagation();
         }, {capture: true});
       } else {
-        document.getElementById("viewer").addEventListener('mousemove', function (event) {
+        document.getElementById('viewer').addEventListener('mousemove', function (event) {
         }, {capture: true});
-        document.getElementById("viewer").addEventListener('mousedown', function (event) {
+        document.getElementById('viewer').addEventListener('mousedown', function (event) {
         }, {capture: true});
       }
 
@@ -1611,18 +1611,18 @@ export default {
       }, 50);
     },
     preloadImage(pano) {
-      var img=new Image();
-      img.src='https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
+      var img = new Image();
+      img.src = 'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
-import {getUserInfo} from "../../../api/api";
+import * as api from '@/api/api';
+import {getUserInfo} from '../../../api/api';
 import { Dialog } from 'vant';
 export default {
-  name: "RedPacket",
+  name: 'RedPacket',
   data() {
     return {
       fbiTotal: 0,
@@ -63,7 +63,7 @@ export default {
       creating: false,
       result: false,
       password: '',
-    }
+    };
   },
   created() {
   },
@@ -74,13 +74,13 @@ export default {
   methods: {
     create() {
       if (this.creating) {
-        this.$toast("红包创建中，请勿重复点击");
+        this.$toast('红包创建中，请勿重复点击');
       } else {
         this.creating = true;
         Dialog.confirm({
-          title: "确认创建口令红包吗",
+          title: '确认创建口令红包吗',
           // message: `暂时不支持 FBi 红包退回机制`,
-          messageAlign: "left",
+          messageAlign: 'left',
         }).then(() => {
           api.getByPath('/api/v0/red_packet/create', {type: 'password',
             fbiTotal: this.fbiTotal, userTotal: this.userTotal, blessing: this.blessing})
@@ -107,14 +107,14 @@ export default {
 
     close() {
       window.opener = null;
-      window.open("about:blank", "_top").close()
+      window.open('about:blank', '_top').close();
     },
 
     pastePassword() {
       this.copy(this.password);
     },
     pastePasswordAndUrl() {
-      let str = "炒饭红包口令：" + this.password + "    " + "红包链接：https://chao.fan/webview/fbi/redPacket?password=" + this.password;
+      let str = '炒饭红包口令：' + this.password + '    ' + '红包链接：https://chao.fan/webview/fbi/redPacket?password=' + this.password;
       this.copy(str);
     },
 
@@ -125,7 +125,7 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制成功");
+      this.$toast('复制成功');
       return result;
     },
     reloadPage(){
@@ -133,7 +133,7 @@ export default {
     }
 
   }
-}
+};
 
 
 </script>

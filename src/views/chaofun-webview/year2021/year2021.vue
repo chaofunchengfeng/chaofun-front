@@ -101,17 +101,17 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import moment from 'moment'
+  import * as api from '@/api/api';
+  import moment from 'moment';
   export default {
-    name: "Year2021.vue",
+    name: 'Year2021.vue',
 
     data() {
       return {
         userInfo: {},
         year2021: {},
         moment: moment,
-      }
+      };
     },
     created() {
       api.getUserInfo().then(
@@ -128,7 +128,7 @@
           this.year2021 = res.data;
         } else {
         }
-      })
+      });
     },
     mounted() {
 
@@ -136,10 +136,10 @@
 
     methods: {
       toBadge(badge) {
-        window.open('/webview/badge?badgeId=' + badge,"_blank");
+        window.open('/webview/badge?badgeId=' + badge,'_blank');
       },
     }
-  }
+  };
 </script>
 
 <style scoped>

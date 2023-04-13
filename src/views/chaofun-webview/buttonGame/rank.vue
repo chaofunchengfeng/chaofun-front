@@ -25,7 +25,7 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 export default {
   name: 'Home',
   components: {
@@ -35,34 +35,34 @@ export default {
       return {
           pagedata: [],
         timer: 0
-      }
+      };
   },
   created(){
   },
   mounted(){
-    this.getButtonRank()
-    document.title = "春节游戏排行榜";
+    this.getButtonRank();
+    document.title = '春节游戏排行榜';
 
     let _this = this;
     let timer = setInterval(()=>{
-      _this.getButtonRank()
-    },5000)
+      _this.getButtonRank();
+    },5000);
   },
   methods:{
     getButtonRank(){
         api.getButtonRank().then(res=>{
-            this.pagedata = res.data
-        })
+            this.pagedata = res.data;
+        });
     },
     toUser(item){
         try {
-            window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId+''})
+            window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId + ''});
         } catch (e) {
-            window.open(location.origin + '/user/'+item.userAO.userId,"_blank");
+            window.open(location.origin + '/user/' + item.userAO.userId,'_blank');
         }
     },
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

@@ -60,12 +60,12 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import "moment/locale/zh-cn";
-  import moment from "moment";
+  import * as api from '@/api/api';
+  import 'moment/locale/zh-cn';
+  import moment from 'moment';
 
   export default {
-    name: "notify",
+    name: 'notify',
     data() {
       return {
         value1: '',
@@ -75,7 +75,7 @@
         addNotifyTitle: '',
         addNotifyContent: '',
         addNotifyLink: ''
-      }
+      };
     },
     props: {
       forumId0: {
@@ -101,7 +101,7 @@
           api.forumNotify({forumId: this.forumId, title: this.addNotifyTitle, content: this.addNotifyContent, link: this.addNotifyLink, dateTime: this.value1}).then((res) => {
             this.displayAdd = false;
             this.getNotifyList();
-          })
+          });
         }
       },
       cancelAdd() {
@@ -114,10 +114,10 @@
         api.listNotify({ 'forumId': this.forumId }).then((res) => {
           this.lists = res.data;
           // this.load()
-        })
+        });
       },
     }
-  }
+  };
 
 
 </script>

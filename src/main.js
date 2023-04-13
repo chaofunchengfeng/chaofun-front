@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Cookies from 'js-cookie'
-import 'normalize.css/normalize.css' // a modern alternative to CSS resets
+import Vue from 'vue';
+import Cookies from 'js-cookie';
+import 'normalize.css/normalize.css'; // a modern alternative to CSS resets
 
 import Element from 'element-ui';
 
-import './styles/element-variables.scss'
-import '@/styles/index.scss' // global css
+import './styles/element-variables.scss';
+import '@/styles/index.scss'; // global css
 
-import App from './App'
-import store from './store'
-import router from './router'
+import App from './App';
+import store from './store';
+import router from './router';
 
 
 
@@ -21,12 +21,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // 图片开启懒加载
-import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload)
+import VueLazyload from 'vue-lazyload';
+Vue.use(VueLazyload);
 
-import Viewer from 'v-viewer'
-import './assets/css/viewer.css'
-Vue.use(Viewer)
+import Viewer from 'v-viewer';
+import './assets/css/viewer.css';
+Vue.use(Viewer);
 Viewer.setDefaults({
   zIndexInline: 9999,
   // 'inline': false,
@@ -42,17 +42,17 @@ Viewer.setDefaults({
   // "transition": true, //使用 CSS3 过度
   // "fullscreen": false, //播放时是否全屏
   // "keyboard": true, //是否支持键盘
-  "url": "data-source", // 原图的地址
-})
+  'url': 'data-source', // 原图的地址
+});
 
-import VueScroller from 'vue-scroller'
-Vue.use(VueScroller)
+import VueScroller from 'vue-scroller';
+Vue.use(VueScroller);
 
-import './icons' // icon
-import './permission' // permission control
-import './utils/error-log' // error log
-import * as filters from './filters' // global filters
-import i18n from './lang'
+import './icons'; // icon
+import './permission'; // permission control
+import './utils/error-log'; // error log
+import * as filters from './filters'; // global filters
+import i18n from './lang';
 // const {version} = require('./utils/version')
 
 
@@ -61,8 +61,8 @@ import i18n from './lang'
 import mixins from './mixins/mixins';
 Vue.mixin(mixins);
 
-import jquery from 'jquery'
-Vue.prototype.$ = jquery
+import jquery from 'jquery';
+Vue.prototype.$ = jquery;
 
 import {
   Toast,Dialog,Cell,NumberKeyboard,Field,Popup
@@ -84,24 +84,24 @@ Vue.use(Element, {
 
 // register global utility filters
 Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
+  Vue.filter(key, filters[key]);
+});
 
 // 版本检查
 // version()
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 // 加入百度统计
 router.beforeEach((to, from, next) => {
 
   if (to.path) {
     if (window._hmt) {
-      window._hmt.push(['_trackPageview', to.fullPath])
+      window._hmt.push(['_trackPageview', to.fullPath]);
     }
   }
-  console.log('路由切换')
-  if(to.path!='/lists'){
+  console.log('路由切换');
+  if(to.path != '/lists'){
     // console.log('aaa')
     store.state.settings.leftNav = 'normal';
     // console.log('aaa',store.state.settings.leftNav)
@@ -111,10 +111,10 @@ router.beforeEach((to, from, next) => {
   // }else if(from.path.includes('/p/')&&(to.path.includes('/f/')||to.path.includes('/all')||to.path.includes('/f/'))){
 
   // }
-  next()
-})
+  next();
+});
 
-import L from "leaflet"
+import L from 'leaflet';
 // import {pointCorrection} from '@shzl/shzl-leaflet';
 // pointCorrection(L)
 delete L.Icon.Default.prototype._getIconUrl;
@@ -130,4 +130,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-})
+});

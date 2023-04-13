@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import ListItem from '@/components/chaofan/ListItem.vue'
-import commentItem from "_c/chaofan/commentItem";
+import ListItem from '@/components/chaofan/ListItem.vue';
+import commentItem from '_c/chaofan/commentItem';
 
 export default {
-  name: "ListComment",
+  name: 'ListComment',
   data() {
     return {};
   },
@@ -41,7 +41,7 @@ export default {
   methods: {
 
     toTop() {
-      this.$(".infinite-list").animate({scrollTop: 0}, 200);
+      this.$('.infinite-list').animate({scrollTop: 0}, 200);
     },
 
   },

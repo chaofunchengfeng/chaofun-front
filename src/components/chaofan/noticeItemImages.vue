@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "noticeItemImages",
+  name: 'noticeItemImages',
   props: {
     imageNames: {
       type: String,
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       imageArray: [],
-    }
+    };
   },
   created() {
     this.init();
@@ -38,14 +38,14 @@ export default {
     init() {
       this.imageArray = [];
       if (this.imageNames) {
-        const imageArray = this.imageNames.split(",");
+        const imageArray = this.imageNames.split(',');
         imageArray.forEach(image => {
           this.imageArray.push(this.imgOrigin + image);
         });
       }
     },
   }
-}
+};
 </script>
 
 <style scoped>

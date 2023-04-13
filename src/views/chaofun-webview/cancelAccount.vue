@@ -4,8 +4,8 @@
 
 <script>
   export default {
-    name: "cancelAccount"
-  }
+    name: 'cancelAccount'
+  };
 </script>
 
 <style scoped>

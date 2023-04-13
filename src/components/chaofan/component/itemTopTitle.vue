@@ -267,17 +267,17 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
-import {Dialog} from "vant";
-import "vant/lib/dialog/style";
+import * as api from '@/api/api';
+import {Dialog} from 'vant';
+import 'vant/lib/dialog/style';
 // import "moment/locale/zh-cn";
-import moment from "moment";
+import moment from 'moment';
 
-import dialogs from "../common/dialogs.vue";
+import dialogs from '../common/dialogs.vue';
 import reportDialog from '@/components/report/report.vue';
 
 export default {
-  name: "",
+  name: '',
   data() {
     return {
       collectId: '',
@@ -317,7 +317,7 @@ export default {
     },
     order: {
       type: String,
-      default: "",
+      default: '',
     },
     isArticleDetail: {
       type: Boolean,
@@ -343,7 +343,7 @@ export default {
             this.collectList.push(res.data);
             this.collectName = '';
           }
-        })
+        });
       }else{
         this.$toast('请输入合集名称');
       }
@@ -353,14 +353,14 @@ export default {
         let params  = {
           postId: this.item.postId,
           collectionId: this.collectId
-        }
+        };
         api.addPostCollection(params).then(res=>{
           if(res.success){
             // document.getElementById('cocolse').click()
             this.$refs.cocolse.click();
             this.$toast('加入合集成功');
           }
-        })
+        });
       }else{
         this.$toast('还没有选中合集');
       }
@@ -368,8 +368,8 @@ export default {
     },
     addCollection(){
       api.addCollection({name: '测试合集_2'}).then(res=>{
-        this.userCollectionList()
-      })
+        this.userCollectionList();
+      });
     },
     toAddCol(){
       // this.dialogVisible = true;
@@ -404,7 +404,7 @@ export default {
             this.$refs.cocolse.click();
           });
       }
-      this.$EventBus.$emit("refreshItemTag", {
+      this.$EventBus.$emit('refreshItemTag', {
         index: this.index,
         tag: it,
         type: e,
@@ -418,7 +418,7 @@ export default {
       api.addTag(params).then((res) => {
         if (res.success) {
           this.$refs.cocolse.click();
-          this.$toast("添加标签成功");
+          this.$toast('添加标签成功');
         }
       });
     },
@@ -432,8 +432,8 @@ export default {
 
     onShowCopyCommentLinkClick() {
       this.isShowCopyCommentLink = !this.isShowCopyCommentLink;
-      this.$EventBus.$emit("isShowCopyCommentLink", this.isShowCopyCommentLink);
-      this.$EventBus.$emit("isShowReportComment", this.isShowCopyCommentLink);
+      this.$EventBus.$emit('isShowCopyCommentLink', this.isShowCopyCommentLink);
+      this.$EventBus.$emit('isShowReportComment', this.isShowCopyCommentLink);
       if (this.isShowCopyCommentLink) {
         this.$toast('更多操作已在下方评论区显示，可在评论区选择并继续！');
       } else {
@@ -457,8 +457,8 @@ export default {
     onReportCommentClick() {
       this.$refs.cocolse.click();
       this.isShowCopyCommentLink = true;
-      this.$EventBus.$emit("isShowCopyCommentLink", true);
-      this.$EventBus.$emit("isShowReportComment", true);
+      this.$EventBus.$emit('isShowCopyCommentLink', true);
+      this.$EventBus.$emit('isShowReportComment', true);
       this.$toast('举报评论操作已在下方评论区显示，可在评论区选择并继续！');
     },
 
@@ -478,7 +478,7 @@ export default {
         this.collectList = res.data;
         this.hasGetCollect = true;
         this.showCollect = !this.showCollect;
-      })
+      });
     },
     getForumTag() {
       api.getlistTag({ forumId: this.item.forum.id }).then((res) => {
@@ -489,42 +489,42 @@ export default {
     },
     handleCommand(command) {
       // this.$message('click on item ' + command);
-      if (command == "置顶") {
+      if (command == '置顶') {
         api.forumpin({ postId: this.item.postId }).then((res) => {
           if (res.success) {
-            this.$toast("帖子置顶成功，刷新可查看");
+            this.$toast('帖子置顶成功，刷新可查看');
           }
         });
-      } else if (command == "取消置顶") {
+      } else if (command == '取消置顶') {
         api.forumunpin({ postId: this.item.postId }).then((res) => {
           if (res.success) {
-            this.$toast("帖子已取消置顶");
-            this.$EventBus.$emit("unPin", this.index);
+            this.$toast('帖子已取消置顶');
+            this.$EventBus.$emit('unPin', this.index);
             // this.$emit('deletePost',this.index)
           } else {
             this.$toast(res.message);
           }
         });
-      } else if (command == "编辑") {
+      } else if (command == '编辑') {
         this.modifyArticle(this.item, this.index);
-      } else if (command == "删除") {
+      } else if (command == '删除') {
         this.deletePost(this.item, this.index);
-      } else if (command == "操作评论") {
+      } else if (command == '操作评论') {
         this.onShowCopyCommentLinkClick();
-      } else if(command == "关闭评论") {
+      } else if(command == '关闭评论') {
         this.disableComment('close');
-      }else if(command == "开启评论") {
+      }else if(command == '开启评论') {
         this.disableComment('open');
       }else if(command == '暂停下注') {
-        this.pausePrediction(this.item)
-      }else if (command =='推荐') {
-        this.addToRecommend(this.item)
+        this.pausePrediction(this.item);
+      }else if (command == '推荐') {
+        this.addToRecommend(this.item);
       } else if (command == 'trans') {
         this.transPost(this.item, this.index);
-      } else if (command == "举报帖子") {
+      } else if (command == '举报帖子') {
         this.onReportPostClick();
       } else if (command == 'download_gif') {
-        window.open(this.imgOrigin + this.item.imageName.replace('.mp4', '.gif'))
+        window.open(this.imgOrigin + this.item.imageName.replace('.mp4', '.gif'));
       }
     },
     pausePrediction(item) {
@@ -546,33 +546,33 @@ export default {
       });
     },
     disableComment(v){
-      if(v=='close'){
+      if(v == 'close'){
         api.disableComment({postId: this.item.postId}).then(res=>{
           this.item.disableComment = true;
-          this.$toast('该帖已关闭评论')
+          this.$toast('该帖已关闭评论');
           if(res.success){
-            this.$EventBus.$emit("resetItem", {index: this.index,item: this.item});
+            this.$EventBus.$emit('resetItem', {index: this.index,item: this.item});
           }
-        })
+        });
       }else{
         api.enableComment({postId: this.item.postId}).then(res=>{
-          this.$toast('该帖已开启评论')
+          this.$toast('该帖已开启评论');
           this.item.disableComment = false;
           if(res.success){
-            this.$EventBus.$emit("resetItem", {index: this.index,item: this.item});
+            this.$EventBus.$emit('resetItem', {index: this.index,item: this.item});
           }
-        })
+        });
       }
 
     },
     toForum(item) {
-      localStorage.removeItem("storedata");
-      localStorage.removeItem("spage");
-      this.toUrls(item, { url: "/f/" + item.forumId, routeType: 1 });
+      localStorage.removeItem('storedata');
+      localStorage.removeItem('spage');
+      this.toUrls(item, { url: '/f/' + item.forumId, routeType: 1 });
     },
     transPost(item, index) {
       // if (this.)
-      this.displayTrans = true
+      this.displayTrans = true;
     },
 
     handleAddSelect(item) {
@@ -580,37 +580,37 @@ export default {
     },
 
     cancelSet() {
-      this.displayTrans= false;
+      this.displayTrans = false;
     },
 
     transPostRequest() {
       api.getByPath('/api/v0/post/transForum', {'postId': this.item.postId, 'forumId': this.forumToTrans.forumId}).then((res) => {
         if (res.success) {
-          this.displayTrans= false;
-          this.$toast('转移成功')
+          this.displayTrans = false;
+          this.$toast('转移成功');
         } else {
-          this.$toast(res.errorMessage)
+          this.$toast(res.errorMessage);
         }
       });
     },
 
     modifyArticle(item, index) {
-      this.$router.push({ path: "/modifyArticle/"+item.postId });
+      this.$router.push({ path: '/modifyArticle/' + item.postId });
     },
 
     deletePost(item, index) {
       if (this.ISPHONE) {
         Dialog.confirm({
-          title: "删除确认",
+          title: '删除确认',
           message: `是否确定删除帖子 【${item.title}】？`,
-          messageAlign: "left",
+          messageAlign: 'left',
         })
           .then(() => {
             api.deletePost({ postId: item.postId }).then((res) => {
               if (res.success) {
-                this.$message.success("已删除");
+                this.$message.success('已删除');
                 // this.lists.splice(index,1)
-                this.$emit("deletePost", index);
+                this.$emit('deletePost', index);
               }
             });
           })
@@ -618,23 +618,23 @@ export default {
             // on cancel
           });
       } else {
-        this.$confirm(`是否确定删除帖子 【${item.title}】？`, "提示", {
-          type: "warning",
+        this.$confirm(`是否确定删除帖子 【${item.title}】？`, '提示', {
+          type: 'warning',
           // center: true,
-          position: "top",
+          position: 'top',
         }).then(() => {
           api.deletePost({ postId: item.postId }).then((res) => {
             if (res.success) {
-              this.$message.success("已删除");
+              this.$message.success('已删除');
               // this.lists.splice(index,1)
-              this.$emit("deletePost", index);
+              this.$emit('deletePost', index);
             }
           });
         });
       }
     },
     toUrls(item, params) {
-      this.postBehavior(item.postId, "jump");
+      this.postBehavior(item.postId, 'jump');
       this.toUrl(params);
     },
     postBehavior(postId, action) {
@@ -654,7 +654,7 @@ export default {
           }
         });
       }
-      this.$emit("doFocued", bool, id);
+      this.$emit('doFocued', bool, id);
     },
     // 修改时间格式
     changeTimeFormat() {

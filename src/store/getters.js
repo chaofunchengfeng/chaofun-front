@@ -18,5 +18,5 @@ const getters = {
   formName: state => state.var.formName,
   backgroundManage: state => state.settings.backgroundManage,
   leftNav: state => state.settings.leftNav,
-}
-export default getters
+};
+export default getters;

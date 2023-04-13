@@ -31,17 +31,17 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
-import {tuxunJump} from "../../../../views/tuxun/common";
+import * as api from '@/api/api';
+import {tuxunJump} from '../../../../views/tuxun/common';
 export default {
-  name: "mapsSearch",
+  name: 'mapsSearch',
   data() {
     return {
       show: false,
       keyword: '',
       overflow: null,
       pagedata: null
-    }
+    };
   },
   mounted() {
     this.search();
@@ -51,32 +51,32 @@ export default {
   methods: {
     search() {
       api.getByPath('/api/v0/tuxun/maps/search', {keyword: this.keyword}).then(res=>{
-        this.pagedata = res.data
-      })
+        this.pagedata = res.data;
+      });
     },
     toMapsDetail(item) {
       // console.log(this.callBack)
       if (!this.callBack) {
-        tuxunJump('/tuxun/maps_detail?mapsId=' + item.id)
+        tuxunJump('/tuxun/maps_detail?mapsId=' + item.id);
       }
     },
     toMaps(item, type) {
       if (!this.callBack) {
         api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-        })
+        });
 
         api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
           if (res.success) {
             tuxunJump('/tuxun/challenge?challengeId=' + res.data);
           } else {
             if (res.errorCode === 'need_vip') {
-              this.$vip({})
+              this.$vip({});
             }
           }
-        })
+        });
       } else {
         this.close();
-        this.callBack(item.id, type)
+        this.callBack(item.id, type);
       }
     },
     close() {
@@ -84,7 +84,7 @@ export default {
       document.body.style.overflow = this.overflow;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

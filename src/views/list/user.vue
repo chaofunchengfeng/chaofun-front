@@ -95,45 +95,45 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as api from "../../api/api";
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 
-import listComment from "@/views/list/ListComment";
-import ListItem from "../../components/chaofan/ListItem.vue";
-import attentionItem from "../../components/chaofan/attentionItem.vue";
-import loadText from "@/components/chaofan/loadText";
-import badgeDetail from "@/views/chaofun-webview/badge/badgeDetail.vue";
-import { startSingle } from "@/utils/chatJoin";
+import listComment from '@/views/list/ListComment';
+import ListItem from '../../components/chaofan/ListItem.vue';
+import attentionItem from '../../components/chaofan/attentionItem.vue';
+import loadText from '@/components/chaofan/loadText';
+import badgeDetail from '@/views/chaofun-webview/badge/badgeDetail.vue';
+import { startSingle } from '@/utils/chatJoin';
 
 export default {
-  name: "user",
+  name: 'user',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
-      currentRole: "adminDashboard",
+      currentRole: 'adminDashboard',
       count: 5,
       lists: [],
       commentLists: [],
-      forumId: "",
+      forumId: '',
       params: {
-        marker: "",
+        marker: '',
         pageSize: 40,
         // order: localStorage.getItem('chao.fun.timeline.order') == null ? 'hot': localStorage.getItem('chao.fun.timeline.order')
       },
       options: [
         {
-          label: "最热",
-          value: "hot",
+          label: '最热',
+          value: 'hot',
         },
         {
-          label: "最新",
-          value: "new",
+          label: '最新',
+          value: 'new',
         },
       ],
       isPhone: false,
       forumInfo: null,
       ifcanget: true,
-      whichOne: "pub",
+      whichOne: 'pub',
       loadAll: false,
       userInfo: {},
       usersData: [],
@@ -148,13 +148,13 @@ export default {
     listComment,
   },
   watch: {
-    "$route.params"(v) {
+    '$route.params'(v) {
       console.log(v);
       console.log(2);
     },
   },
   computed: {
-    ...mapGetters(["roles", "islogin"]),
+    ...mapGetters(['roles', 'islogin']),
   },
   activated() {
     if (this.$route.query.time) {
@@ -164,17 +164,17 @@ export default {
       let data = JSON.parse(localStorage.getItem('simple'));
       this.lists.forEach((its, index) => {
         if (data.postId == its.postId) {
-          this.lists.splice(index, 1, data)
+          this.lists.splice(index, 1, data);
         }
-      })
-      localStorage.removeItem('simple')
+      });
+      localStorage.removeItem('simple');
     }
   },
   beforeRouteEnter(to, from, next) {
     // console.log("from", from);
-    if (from.path.includes("/p/")) {
+    if (from.path.includes('/p/')) {
     } else {
-      localStorage.setItem("whichOne", "pub");
+      localStorage.setItem('whichOne', 'pub');
     }
     // if(from.path.includes('/f/')||from.path.includes('/user/')){
     //   localStorage.setItem('whichOne','pub')
@@ -187,7 +187,7 @@ export default {
     }
     this.toPosition();
     let self = this;
-    this.$refs.container.addEventListener("scroll", function () {
+    this.$refs.container.addEventListener('scroll', function () {
       let scrollTop = self.$refs.container.scrollTop;
       let conTop = self.$refs.container.scrollTop;
       // 变量windowHeight是可视区的高度
@@ -199,7 +199,7 @@ export default {
           conTop + conHeight > scrollHeight ||
           conTop + conHeight == scrollHeight
       ) {
-        console.log("到底了");
+        console.log('到底了');
         if (self.ifcanget) {
           // self.load()
           self.getLists();
@@ -208,7 +208,7 @@ export default {
     });
   },
   created() {
-    let id = this.$route.path.split("/")[2];
+    let id = this.$route.path.split('/')[2];
     if (!isNaN(id)) {
       this.params.forumId = id;
       // this.getLists()
@@ -216,8 +216,8 @@ export default {
     this.params.userId = this.$route.params.id;
     this.userinfo();
     this.getUserBadgeList();
-    if (localStorage.getItem("whichOne")) {
-      this.whichOne = localStorage.getItem("whichOne");
+    if (localStorage.getItem('whichOne')) {
+      this.whichOne = localStorage.getItem('whichOne');
     }
     this.load();
   },
@@ -239,15 +239,15 @@ export default {
       api.userinfo({userId: this.params.userId}).then((res) => {
         if (res.success) {
           this.userInfo = res.data;
-          document.title = res.data.userName + "的主页 - 炒饭";
+          document.title = res.data.userName + '的主页 - 炒饭';
 
           if (res.data.desc) {
             document
                 .querySelector('meta[name="description"]')
-                .setAttribute("content", res.data.desc);
+                .setAttribute('content', res.data.desc);
           }
         } else {
-          this.$router.push("/404");
+          this.$router.push('/404');
         }
       });
     },
@@ -269,8 +269,8 @@ export default {
     checkout(v) {
       this.loadAll = false;
       if (this.whichOne != v) {
-        localStorage.setItem("whichOne", v);
-        this.params.marker = "";
+        localStorage.setItem('whichOne', v);
+        this.params.marker = '';
         this.whichOne = v;
         this.lists = [];
         this.commentLists = [];
@@ -285,8 +285,8 @@ export default {
           api.joinForum({forumId: this.params.forumId}).then((res) => {
             if (res.success) {
               this.$message({
-                message: "加入成功",
-                type: "success",
+                message: '加入成功',
+                type: 'success',
                 offset: 20,
               });
               this.getForumInfo();
@@ -296,8 +296,8 @@ export default {
           api.leaveForum({forumId: this.params.forumId}).then((res) => {
             if (res.success) {
               this.$message({
-                message: "退出成功",
-                type: "success",
+                message: '退出成功',
+                type: 'success',
                 offset: 20,
               });
               this.getForumInfo();
@@ -305,11 +305,11 @@ export default {
           });
         }
       } else {
-        this.showLogin("login");
+        this.showLogin('login');
       }
     },
     changes() {
-      localStorage.setItem("chao.fun.timeline.order", this.params.order);
+      localStorage.setItem('chao.fun.timeline.order', this.params.order);
       this.params.pageNum = 1;
       this.lists = [];
       this.commentLists = [];
@@ -323,7 +323,7 @@ export default {
     getLists() {
       let params = this.params;
       this.ifcanget = false;
-      if (this.whichOne == "love") {
+      if (this.whichOne == 'love') {
         api.getUserUpvotes(params).then((res) => {
           if (res.data.marker) {
             this.params.marker = res.data.marker;
@@ -342,16 +342,16 @@ export default {
           if (res.data.marker) {
             this.params.marker = res.data.marker;
             if (res.data.length < this.params.pageSize) {
-              this.ifcanget = false
+              this.ifcanget = false;
             } else {
-              this.ifcanget = true
+              this.ifcanget = true;
             }
           } else {
-            this.loadAll = true
+            this.loadAll = true;
           }
-          this.commentLists.push(...res.data.comments)
-        })
-      } else if (this.whichOne == "pub") {
+          this.commentLists.push(...res.data.comments);
+        });
+      } else if (this.whichOne == 'pub') {
         api.getUserPosts(params).then((res) => {
           if (res.data.marker) {
             this.params.marker = res.data.marker;
@@ -366,7 +366,7 @@ export default {
           // this.userInfo = res.data.posts[0].userInfo;
           this.lists.push(...res.data.posts);
         });
-      } else if (this.whichOne == "listFans") {
+      } else if (this.whichOne == 'listFans') {
         params = {
           marker: this.params.marker,
           pageSize: this.params.pageSize,
@@ -386,7 +386,7 @@ export default {
           }
           this.usersData.push(...res.data.users);
         });
-      } else if (this.whichOne == "listFocus") {
+      } else if (this.whichOne == 'listFocus') {
         params = {
           marker: this.params.marker,
           pageSize: this.params.pageSize,

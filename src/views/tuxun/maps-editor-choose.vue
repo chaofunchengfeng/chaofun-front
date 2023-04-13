@@ -34,15 +34,15 @@
 </template>
 
 <script>
-import {tuxunJump, tuxunOpen} from "./common";
-import * as api from '../../api/api'
-import {countBy} from "lodash";
+import {tuxunJump, tuxunOpen} from './common';
+import * as api from '../../api/api';
+import {countBy} from 'lodash';
 export default {
-  name: "maps-hot",
+  name: 'maps-hot',
   data() {
     return {
       pagedata: null,
-    }
+    };
   },
   created() {
     this.history = history;
@@ -54,10 +54,10 @@ export default {
         if (res.success) {
           this.pagedata = res.data;
           this.pagedata.forEach(function (item) {
-            this.addDifficulty(item)
+            this.addDifficulty(item);
           }.bind(this));
         }
-      })
+      });
     },
     addDifficulty(item){
       if (item.avgScore === null) {
@@ -75,18 +75,18 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
     toMaps(item, type) {
       api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-      })
+      });
       this.doLoginStatus().then((res) => {
         if (res) {
 
@@ -95,17 +95,18 @@ export default {
               tuxunJump('/tuxun/challenge?challengeId=' + res.data);
             } else {
               if (res.errorCode === 'need_vip') {
-                this.$vip({})
+                this.$vip({});
               }
             }
-          })
-        }})
+          });
+        }
+});
     },
     toMapsDetail(item, type) {
-      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id )
+      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id );
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -4,8 +4,8 @@
 
 <script>
   export default {
-    name: "ForumActivity"
-  }
+    name: 'ForumActivity'
+  };
 </script>
 
 <style scoped>

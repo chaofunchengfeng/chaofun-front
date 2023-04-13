@@ -4,8 +4,8 @@ $END$
 
 <script>
 export default {
-name: "ChangeLog"
-}
+name: 'ChangeLog'
+};
 </script>
 
 <style scoped>

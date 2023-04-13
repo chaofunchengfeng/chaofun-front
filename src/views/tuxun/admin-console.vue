@@ -23,42 +23,42 @@
 </template>
 
 <script>
-import {tuxunJump, tuxunOpen} from "./common";
-import {init} from "../../components/game/snake/snake3";
-import * as api from "../../api/api";
+import {tuxunJump, tuxunOpen} from './common';
+import {init} from '../../components/game/snake/snake3';
+import * as api from '../../api/api';
 
 export default {
-  name: "admin-console",
+  name: 'admin-console',
   data() {
     return {
       restPano: 0,
       restWonders: 0
-    }
+    };
   },
   created() {
     this.init();
   },
   methods: {
     init() {
-      api.getByPath("/api/v0/tuxun/admin/getTotalUncheckWonders", {tuxunPid: this.tuxunPid}).then(res => {
+      api.getByPath('/api/v0/tuxun/admin/getTotalUncheckWonders', {tuxunPid: this.tuxunPid}).then(res => {
         if (res.success) {
           this.restWonders = res.data;
         }
       });
-      api.getByPath("/api/v0/tuxun/admin/getTotalUncheckPano", {tuxunPid: this.tuxunPid}).then(res => {
+      api.getByPath('/api/v0/tuxun/admin/getTotalUncheckPano', {tuxunPid: this.tuxunPid}).then(res => {
         if (res.success) {
           this.restPano = res.data;
         }
       });
     },
     toPano() {
-      tuxunJump('/tuxun/pano-filter')
+      tuxunJump('/tuxun/pano-filter');
     },
     toWonders() {
-      tuxunJump('/tuxun/wonders-filter')
+      tuxunJump('/tuxun/wonders-filter');
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -110,7 +110,7 @@ export default {
           showBottom: true
         },
       ]
-    }
+    };
   },
   created(){
 
@@ -121,7 +121,7 @@ export default {
   methods:{
     toDetail(item){
       try {
-        window.flutter_inappwebview.callHandler('toViewPage',{url: location.origin+item.path,title:item.title,showHeader: true})
+        window.flutter_inappwebview.callHandler('toViewPage',{url: location.origin + item.path,title:item.title,showHeader: true});
       } catch (e) {
         window.open(location.origin + item.path);
       }
@@ -153,13 +153,13 @@ export default {
       if(this.version == 'new'){
         params = {
           method: 'viewImage',
-          data: {imgSrc: ['https://i.chao-fan.com/'+'biz/10c40905c46e8c9c65d8d95b9fb25bdf.jpg'],index:0},
-        }
+          data: {imgSrc: ['https://i.chao-fan.com/' + 'biz/10c40905c46e8c9c65d8d95b9fb25bdf.jpg'],index:0},
+        };
       }else{
         params = {
           type: 'viewImage',
-          query: {imgSrc: 'https://i.chao-fan.com/'+'biz/10c40905c46e8c9c65d8d95b9fb25bdf.jpg'},
-        }
+          query: {imgSrc: 'https://i.chao-fan.com/' + 'biz/10c40905c46e8c9c65d8d95b9fb25bdf.jpg'},
+        };
       }
 
       chaofanJsChannel.postMessage(JSON.stringify(params));
@@ -173,27 +173,27 @@ export default {
             url: 'articlepublish',
             query: {}
           }
-        }
+        };
       }else{
         params = {
           type: 'advice',
           query: {a:111},
-        }
+        };
       }
       chaofanJsChannel.postMessage(JSON.stringify(params));
     },
     tot(v){
-      if(v==1){
-        this.$router.push({name: 'ios'})
+      if(v == 1){
+        this.$router.push({name: 'ios'});
       }else{
-        this.$router.push({name: 'android'})
+        this.$router.push({name: 'android'});
       }
     },
     cancel(){
       this.showCover = false;
     },
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

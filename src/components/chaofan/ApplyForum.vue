@@ -19,10 +19,10 @@
 </template>
 
 <script>
-  import * as api from '../../api/api'
-  import {createArticle} from "../../api/article";
+  import * as api from '../../api/api';
+  import {createArticle} from '../../api/article';
   export default {
-    name: "ApplyForum",
+    name: 'ApplyForum',
     data() {
       return {
         // dialogTableVisible: false,
@@ -31,7 +31,7 @@
           submitForumReason: ''
         },
         show: false
-      }
+      };
     },
     props: {
       dialogTableVisible: {
@@ -52,13 +52,13 @@
         api.applyForum({'name': this.form.submitForum, 'reason': this.form.submitForumReason}).then(res=>{
           if(res.success){
             this.$toast('申请提交成功，请等待审批通知');
-            this.$emit('hideFunc')
+            this.$emit('hideFunc');
             // this.getForumInfo()
           }
-        })
+        });
       }
     }
-  }
+  };
 
 </script>
 

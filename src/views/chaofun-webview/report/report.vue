@@ -189,22 +189,22 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 
-import Vue from 'vue'
-import Vue2TouchEvents from 'vue2-touch-events'
+import Vue from 'vue';
+import Vue2TouchEvents from 'vue2-touch-events';
 
 export default {
-  name: "report",
+  name: 'report',
 
   data() {
     return {
       lists: [],
-    }
+    };
   },
 
   mounted(){
-    this.init()
+    this.init();
   },
 
   methods: {
@@ -214,20 +214,20 @@ export default {
       // })
 
       api.getByPath('/api/v0/report/list', {desc: true}).then(res=>{
-        this.lists = res.data
-      })
+        this.lists = res.data;
+      });
     },
     doCommentType(item) {
       var t = item.type;
       switch (t) {
-        case "media":
-          return "有图";
+        case 'media':
+          return '有图';
           break;
-        case "audio":
-          return "音频";
+        case 'audio':
+          return '音频';
           break;
         default:
-          return ""
+          return '';
       }
 
     },
@@ -235,48 +235,48 @@ export default {
       var a = item.split(',');
       a.forEach(it => {
         it = this.imgOrigin + it;
-      })
+      });
       this.is = a;
     },
     doType(item) {
       var t = item.type;
       switch (t) {
-        case "link":
-          return "链接";
+        case 'link':
+          return '链接';
           break;
-        case "gif":
-          return "GIF";
+        case 'gif':
+          return 'GIF';
           break;
-        case "image":
-          return "图片";
+        case 'image':
+          return '图片';
           break;
-        case "inner_video":
-          return "视频";
+        case 'inner_video':
+          return '视频';
           break;
-        case "article":
-          return "文章";
+        case 'article':
+          return '文章';
           break;
-        case "vote":
-          return "投票";
+        case 'vote':
+          return '投票';
           break;
-        case "prediction":
-          return "竞猜";
+        case 'prediction':
+          return '竞猜';
           break;
-        case "forward":
-          return "转发";
+        case 'forward':
+          return '转发';
           break;
-        case "audio":
-          return "语音";
+        case 'audio':
+          return '语音';
           break;
         default:
-          return "其他";
+          return '其他';
       }
     },
     toPost(id) {
       try {
         window.flutter_inappwebview.callHandler('toAppPost', {postId: id.toString()});
       } catch (e) {
-        window.open('/p/' + id.toString(), "_blank");
+        window.open('/p/' + id.toString(), '_blank');
       }
     },
 
@@ -284,7 +284,7 @@ export default {
       try {
         window.flutter_inappwebview.callHandler('toAppPost', {postId: pid.toString()});
       } catch (e) {
-        window.open('/p/' + pid.toString() + '?commentId=' + cid.toString(), "_blank");
+        window.open('/p/' + pid.toString() + '?commentId=' + cid.toString(), '_blank');
       }
     },
 
@@ -292,79 +292,79 @@ export default {
 
 
       if (action === 'delete') {
-        this.$confirm(`是否确定删除内容？`, "提示", {
-          type: "warning",
+        this.$confirm('是否确定删除内容？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
       } else if (action === 'malicious') {
-        this.$confirm(`是否判定为恶意举报？`, "提示", {
-          type: "warning",
+        this.$confirm('是否判定为恶意举报？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
       } else if (action === 'publish_sex') {
-        this.$confirm(`是否执行色情处罚(封禁3天)并删除内容？`, "提示", {
-          type: "warning",
+        this.$confirm('是否执行色情处罚(封禁3天)并删除内容？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
 
       } else if (action === 'punish_politic') {
-        this.$confirm(`是否执行政治处罚（永久封禁）并删除内容？`, "提示", {
-          type: "warning",
+        this.$confirm('是否执行政治处罚（永久封禁）并删除内容？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
       } else if (action === 'clear_user_thing') {
-        this.$confirm(`是否清除用户所有信息？`, "提示", {
-          type: "warning",
+        this.$confirm('是否清除用户所有信息？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
       } else if (action === 'clear_user_name') {
-        this.$confirm(`是否清除用户名？`, "提示", {
-          type: "warning",
+        this.$confirm('是否清除用户名？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
       } else if (action === 'clear_user_icon') {
 
-        this.$confirm(`是否清除用户头像？`, "提示", {
-          type: "warning",
+        this.$confirm('是否清除用户头像？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
       } else if (action === 'clear_user_desc') {
-        this.$confirm(`是否清除用户签名？`, "提示", {
-          type: "warning",
+        this.$confirm('是否清除用户签名？', '提示', {
+          type: 'warning',
         }).then(() => {
           api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
             this.init();
-          })
-        })
+          });
+        });
       } else {
         api.getByPath('/api/v0/report/solve', {'id': id, 'action': action}).then(res => {
           this.init();
-        })
+        });
       }
     }
   }
-}
+};
 
 
 </script>

@@ -15,10 +15,10 @@
 </template>
 
 <script>
-  import * as api from '../../api/api'
-  import {createArticle} from "../../api/article";
+  import * as api from '../../api/api';
+  import {createArticle} from '../../api/article';
   export default {
-    name: "ApplyMod",
+    name: 'ApplyMod',
     data() {
       return {
         // dialogTableVisible: false,
@@ -26,7 +26,7 @@
           applyModReason: '',
         },
         show: false
-      }
+      };
     },
     props: {
       dialogTableVisible: {
@@ -51,13 +51,13 @@
         api.applyMod({'forumId':this.forumId, 'reason': this.form.applyModReason}).then(res=>{
           if(res.success){
             this.$toast('申请提交成功，请等待审批通知');
-            this.$emit('hideFunc')
+            this.$emit('hideFunc');
             // this.getForumInfo()
           }
-        })
+        });
       }
     }
-  }
+  };
 
 </script>
 

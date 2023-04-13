@@ -42,10 +42,10 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
+  import * as api from '@/api/api';
 
   export default {
-    name: "tag",
+    name: 'tag',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
@@ -64,7 +64,7 @@
           past24HVotes: 0,
           rank: 0
         }
-      }
+      };
     },
     props: {
       forumId0: {
@@ -80,7 +80,7 @@
       } else {
         this.forumId = this.$route.query.forumId;
       }
-      this.getTagList()
+      this.getTagList();
     },
 
     methods: {
@@ -93,7 +93,7 @@
             this.backgroundColor = null;
             this.tagId = null;
             this.getTagList();
-          })
+          });
         }
       },
 
@@ -116,24 +116,24 @@
         this.displayAdd = true;
       },
       toDelete(item, index) {
-        this.$confirm(`是否确定删除标签 【${item.name}】？`, "提示", {
-          type: "warning",
+        this.$confirm(`是否确定删除标签 【${item.name}】？`, '提示', {
+          type: 'warning',
           // position: center,
         }).then(() => {
           api.forumRemoveTag({forumId: this.forumId, tagId: item.id}).then((res) => {
             this.getTagList();
-          })
+          });
 
-        })
+        });
       },
       getTagList() {
         api.getlistTag({ forumId: this.forumId }).then((res) => {
           this.lists = res.data;
           // this.load()
-        })
+        });
       }
     }
-  }
+  };
 
 </script>
 

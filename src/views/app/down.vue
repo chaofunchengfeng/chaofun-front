@@ -35,7 +35,7 @@ import Vue from 'vue';
          show: false,
          value: '',
          showCover: false
-     }
+     };
    },
    components: {
 
@@ -60,9 +60,9 @@ import Vue from 'vue';
             var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
             var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
             if(isAndroid){
-                location.href = 'https://chao.fan/chaofan.apk'
+                location.href = 'https://chao.fan/chaofan.apk';
             }else{
-                location.href = 'https://testflight.apple.com/join/YWXpW03v'
+                location.href = 'https://testflight.apple.com/join/YWXpW03v';
             }
         }else{
             this.showCover = true;
@@ -76,7 +76,7 @@ import Vue from 'vue';
       Toast('删除');
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

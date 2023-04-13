@@ -166,7 +166,7 @@
   </div>
 </template>
 <script>
-  import * as api from '../../api/api'
+  import * as api from '../../api/api';
   import { Dialog } from 'vant';
 
   export default {
@@ -214,7 +214,7 @@
           reason: '',
         }
 
-      }
+      };
     },
     mounted(){
       api.getWebsiteInfo({}).then(res => {
@@ -272,7 +272,7 @@
             if (res.success) {
               this.listApplys();
             } else {
-              this.$toast(res.errorMessage)
+              this.$toast(res.errorMessage);
             }
           });
         }).catch(() => {
@@ -293,9 +293,9 @@
         api.refuseApply({'applyId': applyId, 'reason': this.form.reason}).then(res => {
           if (res.success) {
             this.listApplys();
-            this.$toast('拒绝成功')
+            this.$toast('拒绝成功');
           } else {
-            this.$toast(res.errorMessage)
+            this.$toast(res.errorMessage);
           }
         }).bind(this);
       },
@@ -314,7 +314,7 @@
             if (res.success) {
               location.reload();
             } else {
-              this.$toast(res.errorMessage)
+              this.$toast(res.errorMessage);
             }
           });
         }).catch(() => {
@@ -330,7 +330,7 @@
               if (res.success) {
                 this.listNotify();
               } else {
-                this.$toast(res.errorMessage)
+                this.$toast(res.errorMessage);
               }
             });
           }).catch(() => {
@@ -338,7 +338,7 @@
           });
       },
       toggleTabs:function(index){
-        this.nowIndex=index;
+        this.nowIndex = index;
       },
       push() {
         Dialog.confirm({
@@ -350,7 +350,7 @@
             if (res.success) {
               location.reload();
             } else {
-              this.$toast(res.errorMessage)
+              this.$toast(res.errorMessage);
             }
           });
         }).catch(() => {
@@ -374,12 +374,12 @@
           if (res.success) {
             location.reload();
           } else {
-            this.$toast(res.errorMessage)
+            this.$toast(res.errorMessage);
           }
         });
       }
     }
-  }
+  };
 
 </script>
 

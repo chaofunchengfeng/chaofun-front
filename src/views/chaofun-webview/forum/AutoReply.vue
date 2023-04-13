@@ -56,11 +56,11 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
-import {forumRemoveRule} from "../../../api/api";
+import * as api from '@/api/api';
+import {forumRemoveRule} from '../../../api/api';
 
 export default {
-  name: "tag",
+  name: 'tag',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
@@ -78,7 +78,7 @@ export default {
         past24HVotes: 0,
         rank: 0
       }
-    }
+    };
   },
   props: {
     forumId0: {
@@ -102,13 +102,13 @@ export default {
       if (this.checkWord !== '') {
         api.postByPath('/api/v0/forum/addResponseWord', {forumId: this.forumId, containType: this.containType, checkWord: this.checkWord, responseText: this.responseText}).then((res) => {
           if (res.success) {
-            this.$toast('添加成功')
+            this.$toast('添加成功');
             this.displayAdd = false;
             this.getForumRules();
           } else {
-            this.$toast(res.errorMessage)
+            this.$toast(res.errorMessage);
           }
-        })
+        });
       }
     },
     cancelAdd() {
@@ -121,23 +121,23 @@ export default {
       this.$toast('暂不支持');
     },
     toDelete(item, index) {
-      this.$confirm(`是否确定删除该规范吗？`, "提示", {
-        type: "warning",
+      this.$confirm('是否确定删除该规范吗？', '提示', {
+        type: 'warning',
         // position: center,
       }).then(() => {
         api.getByPath('/api/v0/forum/removeResponseWord', {forumId: this.forumId, id: item.id}).then((res) => {
           this.getForumRules();
-        })
-      })
+        });
+      });
     },
     getForumRules() {
       api.getByPath('/api/v0/forum/listResponseWords', { forumId: this.forumId }).then((res) => {
         this.lists = res.data;
         // this.load()
-      })
+      });
     }
   }
-}
+};
 
 </script>
 

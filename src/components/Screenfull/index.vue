@@ -5,20 +5,20 @@
 </template>
 
 <script>
-import screenfull from 'screenfull'
+import screenfull from 'screenfull';
 
 export default {
   name: 'Screenfull',
   data() {
     return {
       isFullscreen: false
-    }
+    };
   },
   mounted() {
-    this.init()
+    this.init();
   },
   beforeDestroy() {
-    this.destroy()
+    this.destroy();
   },
   methods: {
     click() {
@@ -29,23 +29,23 @@ export default {
       //   })
       //   return false
       // }
-      screenfull.toggle()
+      screenfull.toggle();
     },
     change() {
-      this.isFullscreen = screenfull.isFullscreen
+      this.isFullscreen = screenfull.isFullscreen;
     },
     init() {
       if (screenfull.enabled) {
-        screenfull.on('change', this.change)
+        screenfull.on('change', this.change);
       }
     },
     destroy() {
       if (screenfull.enabled) {
-        screenfull.off('change', this.change)
+        screenfull.off('change', this.change);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

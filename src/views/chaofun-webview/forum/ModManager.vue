@@ -32,10 +32,10 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
+  import * as api from '@/api/api';
 
   export default {
-    name: "mod_manager",
+    name: 'mod_manager',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
@@ -48,7 +48,7 @@
         userIdToAdd: null,
         lists:[],
         timeout:  null
-      }
+      };
     },
     props: {
       forumId0: {
@@ -64,7 +64,7 @@
       } else {
         this.forumId = this.$route.query.forumId;
       }
-      this.getModList()
+      this.getModList();
     },
 
     mounted() {
@@ -75,14 +75,14 @@
         this.displayAdd = true;
       },
       handleSelect(item) {
-        this.userIdToAdd= item.userId;
+        this.userIdToAdd = item.userId;
         console.log(item);
       },
 
       querySearchAsync(queryString, cb) {
         api.getSearchUser({'keyword': queryString, 'pageNum': 1}).then((res) => {
           let result = res.data.data.map(value => {
-            value.value = value.userName
+            value.value = value.userName;
             return value;
           });
 
@@ -106,8 +106,8 @@
         });
       },
       toDelete(item, index) {
-        this.$confirm(`是否确定移除版主 【${item.userName}】？`, "提示", {
-          type: "warning",
+        this.$confirm(`是否确定移除版主 【${item.userName}】？`, '提示', {
+          type: 'warning',
           // position: center,
         }).then(() => {
           api.forumRemoveMod({forumId: this.forumId, userId: item.userId}).then((res) => {
@@ -117,9 +117,9 @@
               this.$toast(res.errorMessage);
             }
             this.getModList();
-          })
+          });
 
-        })
+        });
       },
       cancelAdd() {
         this.displayAdd = false;
@@ -127,10 +127,10 @@
       getModList() {
         api.modlist({ forumId: this.forumId }).then((res) => {
           this.lists = res.data;
-        })
+        });
       }
     }
-  }
+  };
 
 </script>
 

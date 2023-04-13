@@ -33,11 +33,11 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import {forumRemoveRule} from "../../../api/api";
+  import * as api from '@/api/api';
+  import {forumRemoveRule} from '../../../api/api';
 
   export default {
-    name: "tag",
+    name: 'tag',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
@@ -53,7 +53,7 @@
           past24HVotes: 0,
           rank: 0
         }
-      }
+      };
     },
     props: {
       forumId0: {
@@ -80,7 +80,7 @@
             this.orderNumber = 0;
             this.displayAdd = false;
             this.getForumRules();
-          })
+          });
         }
       },
       cancelAdd() {
@@ -93,24 +93,24 @@
         this.$toast('暂不支持');
       },
       toDelete(item, index) {
-        this.$confirm(`是否确定删除该规范吗？`, "提示", {
-          type: "warning",
+        this.$confirm('是否确定删除该规范吗？', '提示', {
+          type: 'warning',
           // position: center,
         }).then(() => {
           api.forumRemoveRule({forumId: this.forumId, ruleId: item.id}).then((res) => {
             this.getForumRules();
-          })
+          });
 
-        })
+        });
       },
       getForumRules() {
         api.getForumRules({ forumId: this.forumId }).then((res) => {
           this.lists = res.data;
           // this.load()
-        })
+        });
       }
     }
-  }
+  };
 
 </script>
 

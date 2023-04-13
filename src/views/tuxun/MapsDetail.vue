@@ -58,10 +58,10 @@
 </template>
 
 <script>
-import {tuxunJump, tuxunOpen} from "./common";
-import * as api from '@/api/api'
+import {tuxunJump, tuxunOpen} from './common';
+import * as api from '@/api/api';
 export default {
-  name: "MapsDetail",
+  name: 'MapsDetail',
   data() {
     return {
       mapsId: null,
@@ -71,7 +71,7 @@ export default {
       history: null,
       rank: [],
       type: 'noMove'
-    }
+    };
   },
   mounted() {
     this.history = history;
@@ -86,7 +86,7 @@ export default {
         this.mapsData = res.data;
         this.addDifficulty(this.mapsData);
         this.getUserInfo(res.data.userId);
-      })
+      });
     },
     addDifficulty(item){
       if (item.avgScore === null) {
@@ -104,7 +104,7 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     getRank() {
       this.rank = [];
@@ -112,7 +112,7 @@ export default {
         if (res.success) {
           this.rank = res.data;
         }
-      })
+      });
     },
     getUserInfo(userId) {
       api.getByPath('/api/v0/user/info',{userId: userId}).then((res) => {
@@ -123,7 +123,7 @@ export default {
     },
     toMaps(item, type) {
       api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-      })
+      });
       this.doLoginStatus().then((res) => {
         if (res) {
 
@@ -132,11 +132,12 @@ export default {
               tuxunJump('/tuxun/challenge?challengeId=' + res.data);
             } else {
               if (res.errorCode === 'need_vip') {
-                this.$vip({})
+                this.$vip({});
               }
             }
-          })
-        }})
+          });
+        }
+});
     },
     share() {
       var input = document.createElement('input');
@@ -145,7 +146,7 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制练习题库地址成功");
+      this.$toast('复制练习题库地址成功');
       return result;
     },
     toUser(user) {
@@ -155,20 +156,20 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
     randomTrain() {
       api.getByPath('/api/v0/tuxun/maps/randomTrain').then(res => {
         if (res.success) {
-          tuxunJump('/tuxun/maps_detail?mapsId=' + res.data)
+          tuxunJump('/tuxun/maps_detail?mapsId=' + res.data);
         }
-      })
+      });
     }
   }
 
 
-}
+};
 </script>
 
 <style lang="scss" scoped>

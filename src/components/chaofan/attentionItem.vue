@@ -19,21 +19,21 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import 'moment/locale/zh-cn'
-import moment from 'moment'
+import * as api from '../../api/api';
+import 'moment/locale/zh-cn';
+import moment from 'moment';
  export default {
    name: '',
    data(){
      return {
          moment: moment,
-     }
+     };
    },
    props: {
        item: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        }
    },
@@ -50,30 +50,30 @@ import moment from 'moment'
         if(bool){
             api.toUnfocus({focusId: id}).then(res=>{
                 if(res.success){
-                    this.$set(this.item,'focused',!bool)
+                    this.$set(this.item,'focused',!bool);
                     // this.item.focused = !bool;
                 }
-            })
+            });
         }else{
             api.toFocus({focusId: id}).then(res=>{
                 if(res.success){
-                    this.$set(this.item,'focused',!bool)
+                    this.$set(this.item,'focused',!bool);
                     // this.item.focused = !bool;
                 }
-            })
+            });
         }
 
        },
        toDetail(item){
             // this.$router.push({name: 'articleDetail',params:{postId: item.post.postId}})
             let routeData = this.$router.resolve({
-                name: "articleDetail",
+                name: 'articleDetail',
                 params: {postId: item.post.postId},
             });
             window.open(routeData.href, '_blank');
         },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

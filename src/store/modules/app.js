@@ -1,66 +1,66 @@
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 const state = {
   sidebar: {
-    opened: document.body.clientWidth<1500?false:(Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus'):true),// Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
+    opened: document.body.clientWidth < 1500 ? false : (Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true),// Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
   },
   device: 'desktop',
   size: Cookies.get('size') || 'medium'
-}
+};
 
 const mutations = {
   TOGGLE_SIDEBAR: state => {
-    state.sidebar.opened = !state.sidebar.opened
-    state.sidebar.withoutAnimation = false
+    state.sidebar.opened = !state.sidebar.opened;
+    state.sidebar.withoutAnimation = false;
     // debugger
     if (state.sidebar.opened) {
       // debugger
-      Cookies.set('sidebarStatus', 1)
+      Cookies.set('sidebarStatus', 1);
     } else {
-      Cookies.set('sidebarStatus', 0)
+      Cookies.set('sidebarStatus', 0);
     }
   },
   CLOSE_SIDEBAR: (state, withoutAnimation) => {
-    Cookies.set('sidebarStatus', 0)
-    state.sidebar.opened = false
-    state.sidebar.withoutAnimation = withoutAnimation
+    Cookies.set('sidebarStatus', 0);
+    state.sidebar.opened = false;
+    state.sidebar.withoutAnimation = withoutAnimation;
   },
   EXPAND_SIDEBAR: (state, withoutAnimation) => {
-    Cookies.set('sidebarStatus', 1)
-    state.sidebar.opened = true
-    state.sidebar.withoutAnimation = withoutAnimation
+    Cookies.set('sidebarStatus', 1);
+    state.sidebar.opened = true;
+    state.sidebar.withoutAnimation = withoutAnimation;
   },
   TOGGLE_DEVICE: (state, device) => {
-    state.device = device
+    state.device = device;
   },
   SET_SIZE: (state, size) => {
-    state.size = size
-    Cookies.set('size', size)
+    state.size = size;
+    Cookies.set('size', size);
   }
-}
+};
 
 const actions = {
   toggleSideBar({ commit }) {
-    commit('TOGGLE_SIDEBAR')
+    commit('TOGGLE_SIDEBAR');
   },
   closeSideBar({ commit }, { withoutAnimation }) {
-    commit('CLOSE_SIDEBAR', withoutAnimation)
+    commit('CLOSE_SIDEBAR', withoutAnimation);
   },
   expandSideBar({ commit }, { withoutAnimation }) {
-    commit('EXPAND_SIDEBAR', withoutAnimation)
+    commit('EXPAND_SIDEBAR', withoutAnimation);
   },
   toggleDevice({ commit }, device) {
-    commit('TOGGLE_DEVICE', device)
+    commit('TOGGLE_DEVICE', device);
   },
   setSize({ commit }, size) {
-    commit('SET_SIZE', size)
+    commit('SET_SIZE', size);
   }
-}
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
   actions
-}
+};

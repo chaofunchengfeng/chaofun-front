@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
+import * as api from '@/api/api';
 export default {
-  name: "",
+  name: '',
   data() {
     return {
-      handle: "",
+      handle: '',
     };
   },
   props: {
@@ -45,53 +45,53 @@ export default {
   },
   components: {},
   mounted() {
-    if (document.getElementById("container")) {
+    if (document.getElementById('container')) {
       let self = this;
       document
-        .getElementById("container")
-        .addEventListener("scroll", self.handlerScroll);
+        .getElementById('container')
+        .addEventListener('scroll', self.handlerScroll);
     }
   },
   destroyed() {
     let self = this;
-    if (document.getElementById("container")) {
+    if (document.getElementById('container')) {
       document
-        .getElementById("container")
-        .removeEventListener("scroll", self.handlerScroll, false);
+        .getElementById('container')
+        .removeEventListener('scroll', self.handlerScroll, false);
     }
   },
   methods: {
     handlerScroll(e) {
-      var el = document.getElementById("video" + this.item.postId);
+      var el = document.getElementById('video' + this.item.postId);
       if (el) {
         var top = el.getBoundingClientRect().top;
         if (top < -50) {
           if (!this.isDetail) {
-            this.$emit("toPause", "", this.item, 0);
+            this.$emit('toPause', '', this.item, 0);
           }
         }
       } else {
-        console.log("取消滚动监听------------------");
+        console.log('取消滚动监听------------------');
         let self = this;
         document
-          .getElementById("container")
-          .removeEventListener("scroll", self.handlerScroll, false);
+          .getElementById('container')
+          .removeEventListener('scroll', self.handlerScroll, false);
       }
     },
     unloadHandler(e) {},
     doHeight() {
       if (this.isDetail) {
         if (this.ISPHONE) {
-          return "video3";
+          return 'video3';
         } else {
-          return "video2";
+          return 'video2';
         }
       } else {
-        return "";
+        return '';
       }
     },
     toUrls(item, params) {
-      this.postBehavior(item.postId, "jump");
+      this.postBehavior(item.postId, 'jump');
       this.toUrl(params);
     },
   },

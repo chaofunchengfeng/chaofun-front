@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
+import * as api from '../../api/api';
 
 export default {
-  name: "EmojiSender",
+  name: 'EmojiSender',
   props: {
     gameId: String,
   },
@@ -65,15 +65,15 @@ export default {
       this.$emit('hide');
     },
     sendEmoji(emojiId) {
-      this.hide()
+      this.hide();
       api.getByPath('/api/v0/tuxun/solo/sendEmoji', {gameId: this.gameId, emojiId: emojiId}).then(res=>{
         if (res.success) {
           this.$toast('发送成功');
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

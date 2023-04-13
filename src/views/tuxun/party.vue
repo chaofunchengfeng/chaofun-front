@@ -156,22 +156,22 @@
 </template>
 
 <script>
-import * as api from "../../api/api";
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '../../api/api';
+import {tuxunJump, tuxunOpen} from './common';
 export default {
-  name: "party",
+  name: 'party',
   data() {
     return {
-      url: `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws/v0/tuxun`,
+      url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
       status: 'wait',
       ws: null,
       partyData: null,
       health: 6000,
-    }
+    };
   },
   created() {
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
-      window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun')
+      window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun');
     }
     this.joinByParty();
   },
@@ -187,28 +187,28 @@ export default {
     },
 
     wsOnOpen(e) {
-      console.log("wsOnOpen");
+      console.log('wsOnOpen');
       // console.log(e);
-      this.wsSend("{\"scope\": \"tuxun\", \"data\": {\"type\": \"subscribe_party\", \"text\": \"" + this.partyData.id + "\"}}");
+      this.wsSend('{"scope": "tuxun", "data": {"type": "subscribe_party", "text": "' + this.partyData.id + '"}}');
       // 每3秒发送一次心跳
       setInterval(() => {
-        this.wsSend(`{"scope": "heart_beat"}`);
+        this.wsSend('{"scope": "heart_beat"}');
       }, 15000);
     },
 
     leave() {
       api.getByPath('/api/v0/tuxun/party/leave').then(res=>{
         if (res.success) {
-          tuxunJump('/tuxun/')
+          tuxunJump('/tuxun/');
         }
-      })
+      });
     },
     disband() {
       api.getByPath('/api/v0/tuxun/party/disband').then(res=>{
         if (res.success) {
-          tuxunJump('/tuxun/')
+          tuxunJump('/tuxun/');
         }
-      })
+      });
     },
 
     showMapsSearch()  {
@@ -221,33 +221,33 @@ export default {
                   } else {
                     this.$vip();
                   }
-                })
+                });
               }
               this.changeMaps(mapsId, mapsType);
             }
-          })
+          });
     },
 
     getGameTypeName(gameType) {
       if (this.partyData.gameType === 'solo') {
-        return '1v1对决'
+        return '1v1对决';
       } else if (this.partyData.gameType === 'team') {
-        return '组队赛'
+        return '组队赛';
       } else if (this.partyData.gameType === 'br') {
-        return '淘汰赛'
+        return '淘汰赛';
       }
     },
 
     change2Onlooker() {
       api.getByPath('/api/v0/tuxun/party/change2Onlooker').then(res=>{
-        this.solvePartyData(res.data)
-      })
+        this.solvePartyData(res.data);
+      });
     },
 
     swapTeam() {
       api.getByPath('/api/v0/tuxun/party/swapTeam').then(res=>{
-        this.solvePartyData(res.data)
-      })
+        this.solvePartyData(res.data);
+      });
     },
     change2Player(teamIndex) {
       var teamId = null;
@@ -260,35 +260,35 @@ export default {
       }
       api.getByPath('/api/v0/tuxun/party/change2Player', {teamId: teamId}).then(res=>{
         if (res.success) {
-          this.solvePartyData(res.data)
+          this.solvePartyData(res.data);
         }
-      })
+      });
     },
     changeHealth() {
       api.getByPath('/api/v0/tuxun/party/changeHealth', {health: this.health}).then(res=>{
         if (res.success) {
-          this.solvePartyData(res.data)
+          this.solvePartyData(res.data);
         }
-      })
+      });
     },
     changeGameType(type) {
       api.getByPath('/api/v0/tuxun/party/changeType', {type: type}).then(res=>{
         if (res.success) {
-          this.solvePartyData(res.data)
+          this.solvePartyData(res.data);
         }
-      })
+      });
     },
     changeMaps(mapsId, mapsType) {
       // this.$mapsSearch();
       api.getByPath('/api/v0/tuxun/party/changeMaps', {mapsId: mapsId, type: mapsType}).then(res=>{
         if (res.success) {
-          this.solvePartyData(res.data)
+          this.solvePartyData(res.data);
         }
-      })
+      });
     },
 
     wsSend(data) {
-      console.log("wsSend: " + data);
+      console.log('wsSend: ' + data);
       this.ws.send(data);
     },
 
@@ -302,10 +302,10 @@ export default {
       setTimeout(function () {
         this.initWS();
       }.bind(this), 1000);
-      console.log("wsOnClose");
+      console.log('wsOnClose');
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
 
     solvePartyData(partyData, code) {
@@ -316,42 +316,42 @@ export default {
       this.status = this.partyData.status;
       this.health = this.partyData.gameHealth;
       if (code === 'start_game') {
-        tuxunJump('/tuxun/solo_game?gameId=' + this.partyData.gameId)
+        tuxunJump('/tuxun/solo_game?gameId=' + this.partyData.gameId);
       }
     },
 
     joinByParty() {
       api.getByPath('/api/v0/tuxun/party/joinByParty').then(res=>{
             if (res.success) {
-              this.solvePartyData(res.data, null)
-              this.initWS()
-            } else if (res.errorCode == "need_login") {
+              this.solvePartyData(res.data, null);
+              this.initWS();
+            } else if (res.errorCode == 'need_login') {
               this.$login({
                 callBack: () => {
-                  this.$store.dispatch("user/getInfo");
+                  this.$store.dispatch('user/getInfo');
                 },
               });
             }
-      })
+      });
     },
 
 
     getPartyInfo() {
       api.getByPath('/api/v0/tuxun/party/get').then(res=>{
         if (res.success) {
-          this.solvePartyData(res.data, null)
+          this.solvePartyData(res.data, null);
         }
-      })
+      });
     },
 
     start() {
       api.getByPath('/api/v0/tuxun/party/start').then(res=>{
         if (res.success) {
-          tuxunJump('/tuxun/solo_game?gameId=' + res.data.id)
+          tuxunJump('/tuxun/solo_game?gameId=' + res.data.id);
         } else {
-          this.getPartyInfo()
+          this.getPartyInfo();
         }
-      })
+      });
     },
 
     gotoGame() {
@@ -364,11 +364,11 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制邀请地址成功");
+      this.$toast('复制邀请地址成功');
       return result;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

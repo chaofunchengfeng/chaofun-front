@@ -26,25 +26,25 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
  export default {
    name: '',
    data(){
      return {
 
-     }
+     };
    },
    props: {
        lists:{
            type: Array,
            default(){
-               return []
+               return [];
            }
        },
        item: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        },
        index: {
@@ -67,12 +67,12 @@ import * as api from '@/api/api'
    methods: {
     toUrls(item,params){
        this.postBehavior(item.postId,'jump');
-       this.toUrl(params)
+       this.toUrl(params);
     },
     playVideo(index,item,t){
        this.lists.forEach(i=>{
          i.play = false;
-       })
+       });
        item.play = true;
        var i = this.lists[index];
        if(t){
@@ -80,40 +80,40 @@ import * as api from '@/api/api'
        }else{
          i = item;
        }
-       this.lists.splice(index,1,i)
-       if(item.type=='video'){
+       this.lists.splice(index,1,i);
+       if(item.type == 'video'){
         //  document.getElementById('ACPlayer-re').click();
        }
      },
     doImgStyle(w,h,type){
-       if(document.body.clientWidth<700){
+       if(document.body.clientWidth < 700){
          // 适配移动端, 这里后续尽量封装成组件
          const temp = Math.ceil(document.body.clientWidth * 0.85);
          if(type == 'video'){
                 return {
                   height: '235px'
-                }
+                };
           }else{
-            if(w<h&&h>temp){
+            if(w < h && h > temp){
                   return {
                     height: this.imgMaxWidth + 'px'
-                  }
+                  };
             }else{
-              return {}
+              return {};
             }
           }
        } else {
-         if(w<h&&h>512){
+         if(w < h && h > 512){
            return {
              height: '512px'
-           }
+           };
          }else{
-           return {}
+           return {};
          }
        }
      },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

@@ -81,19 +81,19 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '../../api/api';
+import {tuxunJump, tuxunOpen} from './common';
 
 export default {
-  name: "TXStreak",
+  name: 'TXStreak',
   data(){
     return {
       rank: null,
       type: 'province',
-    }
+    };
   },
   mounted() {
-    this.type = this.$route.query.type || 'province'
+    this.type = this.$route.query.type || 'province';
     this.init();
   },
   methods: {
@@ -110,9 +110,9 @@ export default {
     createNew() {
 
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
-          api.getByPath("/api/v0/tuxun/streak/create", {type: this.type}).then(res => {
+          api.getByPath('/api/v0/tuxun/streak/create', {type: this.type}).then(res => {
             if (res.success) {
               tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
             } else if (res.errorCode === 'need_vip') {
@@ -125,15 +125,15 @@ export default {
     },
 
     listRank() {
-      api.getByPath("/api/v0/tuxun/streak/listRank", {type: this.type}).then(res => {
-        this.rank = res.data
+      api.getByPath('/api/v0/tuxun/streak/listRank', {type: this.type}).then(res => {
+        this.rank = res.data;
       });
     },
     toUser(user) {
       tuxunJump( '/tuxun/user/' + user.userId);
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

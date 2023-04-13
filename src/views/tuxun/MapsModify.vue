@@ -59,11 +59,11 @@
 </template>
 
 <script>
-import {tuxunJump, tuxunOpen} from "./common";
-import * as api from '@/api/api'
+import {tuxunJump, tuxunOpen} from './common';
+import * as api from '@/api/api';
 
 export default {
-  name: "MapsCreate",
+  name: 'MapsCreate',
   data() {
     return {
       name: '',
@@ -78,7 +78,7 @@ export default {
       panoramaSubmitForm: {
         links: '',
       },
-    }
+    };
   },
   mounted() {
     this.history = history;
@@ -99,7 +99,7 @@ export default {
         } else {
           this.$vip();
         }
-      })
+      });
     },
     goHome() {
       tuxunJump('/tuxun/');
@@ -108,24 +108,24 @@ export default {
       api.getByPath('/api/v0/tuxun/maps/get', {mapsId: this.mapsId}).then(res=>{
         this.name = res.data.name;
         this.mapsData = res.data;
-      })
+      });
     },
     getStauts() {
       api.getByPath('/api/v0/tuxun/maps/status', {mapsId: this.mapsId}).then(res=>{
         this.status = res.data;
-      })
+      });
     },
     getPanos() {
       api.getByPath('/api/v0/tuxun/maps/listPano', {mapsId: this.mapsId}).then(res=>{
         this.panos = res.data;
-      })
+      });
     },
     publish() {
       api.getByPath('/api/v0/tuxun/maps/publish', {mapsId: this.mapsId}).then(res=>{
         if (res.success) {
           tuxunJump('/tuxun/my_maps');
         }
-      })
+      });
     },
     toDistribute() {
       tuxunJump('/tuxun/maps_distribute?mapsId=' + this.mapsId);
@@ -145,7 +145,7 @@ export default {
         this.panoramaSubmitForm.links = '';
         this.submitPanoramaShow = false;
         this.getPanos();
-      })
+      });
     },
     deletePano(id) {
       this.$confirm('此操作将删除该街景, 是否继续?', '提示', {
@@ -155,24 +155,24 @@ export default {
       }).then(() => {
         api.getByPath('/api/v0/tuxun/maps/deletePano', {containId: id}).then(res=>{
           this.getPanos();
-        })
+        });
       }).catch(() => {
 
       });
     },
     toPano(item) {
       if (item.source === 'baidu_pano') {
-        tuxunOpen('https://maps.baidu.com/#panoid=' + item.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + item.panoId)
+        tuxunOpen('https://maps.baidu.com/#panoid=' + item.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + item.panoId);
       } else {
         if (item.panoId.indexOf('AF') === 0) {
-          tuxunOpen('https://www.google.com/maps/@0.0,0.0,3a,75y,90t/data=!3m7!1e1!3m5!1s' + item.panoId +  '!2e10!3e11!7i8192!8i4096')
+          tuxunOpen('https://www.google.com/maps/@0.0,0.0,3a,75y,90t/data=!3m7!1e1!3m5!1s' + item.panoId +  '!2e10!3e11!7i8192!8i4096');
         } else {
-          tuxunOpen('https://www.google.com/maps/@?api=1&map_action=pano&pano=' + item.panoId)
+          tuxunOpen('https://www.google.com/maps/@?api=1&map_action=pano&pano=' + item.panoId);
         }
       }
     },
     toGuid() {
-      tuxunOpen('https://www.yuque.com/ucun5p/kfw26e/ttqiucknz7sifo5u')
+      tuxunOpen('https://www.yuque.com/ucun5p/kfw26e/ttqiucknz7sifo5u');
     },
     modify() {
       tuxunJump('/tuxun/maps_create?mapsId=' + this.mapsId);
@@ -182,11 +182,11 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -225,7 +225,7 @@ export default {
   data(){
       return {
           
-      }
+      };
   },
   created(){
 
@@ -236,7 +236,7 @@ export default {
   methods:{
       
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{
