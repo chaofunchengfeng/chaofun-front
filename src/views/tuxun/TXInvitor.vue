@@ -914,7 +914,7 @@ export default {
     },
 
     reset() {
-      this.setGoogle(this.lastRound.panoId, this.lastRound.move);
+      this.setPanoId(this.lastRound);
     },
 
 
