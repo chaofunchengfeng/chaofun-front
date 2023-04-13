@@ -1,12 +1,12 @@
-import defaultSettings from '@/settings'
+import defaultSettings from '@/settings';
 
-const title = defaultSettings.title || 'Vue Element Admin'
+const title = defaultSettings.title || 'Vue Element Admin';
 
 export default function getPageTitle(pageTitle) {
-  console.log(pageTitle)
+  console.log(pageTitle);
   if (pageTitle) {
     // return `${pageTitle} - ${title}`
-    return `${pageTitle}`
+    return `${pageTitle}`;
   }
-  return `${title}`
+  return `${title}`;
 }

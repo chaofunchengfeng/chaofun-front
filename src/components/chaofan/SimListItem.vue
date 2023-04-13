@@ -332,40 +332,40 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
+import * as api from '@/api/api';
 
-import VueClipboard from "vue-clipboard2";
-import forward from "./Forward";
-import Vue from "vue";
-import { Dialog } from "vant";
-import videoDialog from "./videoDialog";
-import "vant/lib/dialog/style";
+import VueClipboard from 'vue-clipboard2';
+import forward from './Forward';
+import Vue from 'vue';
+import { Dialog } from 'vant';
+import videoDialog from './videoDialog';
+import 'vant/lib/dialog/style';
 Vue.use(VueClipboard);
 
 // import itemTopTitle from "./component/itemTopTitle";
-import itemLink from "./component/itemLink";
-import itemImage from "./component/itemImage";
-import itemGif from "./component/itemGif";
-import itemVideo from "./component/itemVideo";
-import itemIframeVideo from "./component/itemIframeVideo";
-import itemArticle from "./component/itemArticle";
-import itemVote from "./component/itemVote";
+import itemLink from './component/itemLink';
+import itemImage from './component/itemImage';
+import itemGif from './component/itemGif';
+import itemVideo from './component/itemVideo';
+import itemIframeVideo from './component/itemIframeVideo';
+import itemArticle from './component/itemArticle';
+import itemVote from './component/itemVote';
 // import itemForwardTitle from "./component/itemForwardTitle";
 
 // import "moment/locale/zh-cn";
-import moment from "moment";
+import moment from 'moment';
 
-import forwardH5 from "../h5/forward";
+import forwardH5 from '../h5/forward';
 export default {
-  name: "list-item",
+  name: 'list-item',
   data() {
     return {
-      imgs: ["", "", "", "", ""],
+      imgs: ['', '', '', '', ''],
       shows: false,
-      videoData: "",
+      videoData: '',
       top: 0,
       canTo: true,
-      message: "",
+      message: '',
       dialogs: {
         dialogVisible: false,
         data: {},
@@ -390,11 +390,11 @@ export default {
     },
     marker: {
       type: String,
-      default: "",
+      default: '',
     },
     keys: {
       type: String,
-      default: "",
+      default: '',
     },
     isMy: {
       type: Boolean,
@@ -402,7 +402,7 @@ export default {
     },
     whichOne: {
       type: String,
-      default: "",
+      default: '',
     },
     datas: {
       type: Object,
@@ -412,7 +412,7 @@ export default {
     },
     order: {
       type: String,
-      default: "",
+      default: '',
     }
   },
   components: {
@@ -430,140 +430,140 @@ export default {
     itemVideo,
   },
   created() {
-    this.top = localStorage.getItem("storedata")
-      ? JSON.parse(localStorage.getItem("storedata")).top
+    this.top = localStorage.getItem('storedata')
+      ? JSON.parse(localStorage.getItem('storedata')).top
       : 0;
     this.lists.forEach((item) => {
-      if (item.type == "video") {
+      if (item.type == 'video') {
         item.play = false;
       }
     });
   },
   mounted() {
     if (this.$route.query.time) {
-      console.log("this.top", this.top);
-      this.$(".infinite-list").animate({ scrollTop: this.top }, 10);
+      console.log('this.top', this.top);
+      this.$('.infinite-list').animate({ scrollTop: this.top }, 10);
       setTimeout(() => {
-        localStorage.removeItem("storedata");
-        localStorage.removeItem("spage");
+        localStorage.removeItem('storedata');
+        localStorage.removeItem('spage');
       }, 1000);
     } else {
-      localStorage.removeItem("storedata");
-      localStorage.removeItem("spage");
+      localStorage.removeItem('storedata');
+      localStorage.removeItem('spage');
     }
   },
   destroyed() {},
   methods: {
     doLookType(item) {
-      if (item.type == "image") {
-        return "查看图片";
-      } else if (item.type == "gif") {
-        return "查看GIF";
-      } else if (item.type == "inner_video") {
-        return "查看视频";
-      } else if (item.type == "link") {
-        return "跳转链接";
+      if (item.type == 'image') {
+        return '查看图片';
+      } else if (item.type == 'gif') {
+        return '查看GIF';
+      } else if (item.type == 'inner_video') {
+        return '查看视频';
+      } else if (item.type == 'link') {
+        return '跳转链接';
       } else {
-        return "查看";
+        return '查看';
       }
     },
     topreview(item, index) {
-      if (item.type != "link") {
+      if (item.type != 'link') {
         item.showPreview = !item.showPreview;
         this.lists.splice(index, 1, item);
       } else {
-        window.open(item.link, "_blank");
+        window.open(item.link, '_blank');
       }
     },
     doType(item) {
       var t = item.type;
       switch (t) {
-        case "link":
-          return "链接";
+        case 'link':
+          return '链接';
           break;
-        case "gif":
-          return "GIF";
+        case 'gif':
+          return 'GIF';
           break;
-        case "image":
-          return "图片";
+        case 'image':
+          return '图片';
           break;
-        case "inner_video":
-          return "视频";
+        case 'inner_video':
+          return '视频';
           break;
-        case "article":
-          return "文章";
+        case 'article':
+          return '文章';
           break;
-        case "vote":
-          return "投票";
+        case 'vote':
+          return '投票';
           break;
-        case "prediction":
-          return "竞猜";
+        case 'prediction':
+          return '竞猜';
           break;
-        case "forward":
-          return "转发";
+        case 'forward':
+          return '转发';
           break;
-        case "audio":
-          return "语音";
+        case 'audio':
+          return '语音';
           break;
         default:
-          return "其他";
+          return '其他';
       }
     },
     doImageUrl(item) {
       var t = item.type;
       switch (t) {
-        case "link":
-        case "gif":
+        case 'link':
+        case 'gif':
           return this.doLink(item);
           break;
-        case "inner_video":
+        case 'inner_video':
           return (
             this.imgOrigin +
-            item["video"] +
-            "?x-oss-process=video/snapshot,t_0,m_fast,ar_auto,h_500"
+            item['video'] +
+            '?x-oss-process=video/snapshot,t_0,m_fast,ar_auto,h_500'
           );
           break;
-        case "article":
+        case 'article':
           return (
             this.imgOrigin + (item.imageName ? item.imageName : 'biz/b64193b7beca6ae243341273adddf494.png') + '?x-oss-process=image/resize,h_120/quality,q_75'
           );
           break;
-        case "audio":
+        case 'audio':
           return (
               this.imgOrigin + 'biz/bc5c86c96e84a798930542444ceffcc5.webp?x-oss-process=image/resize,h_125/quality,q_75'
           );
           break;
-        case "image":
+        case 'image':
           return (
             this.imgOrigin +
             item.imageName +
-            "?x-oss-process=image/resize,h_120/quality,q_75"
+            '?x-oss-process=image/resize,h_120/quality,q_75'
           );
           break;
-        case "vote":
-        case "prediction":
+        case 'vote':
+        case 'prediction':
           return (
-            this.imgOrigin + "biz/fea4efce4437040479d1a0452160f2fd.png?x-oss-process=image/resize,h_120/quality,q_75"
+            this.imgOrigin + 'biz/fea4efce4437040479d1a0452160f2fd.png?x-oss-process=image/resize,h_120/quality,q_75'
           );
           break;
-        case "forward":
+        case 'forward':
           return this.doImageUrl(item.sourcePost);
           break;
       }
     },
     doLink(item) {
       if (item.cover) {
-        if (item.cover.includes(".ico")) {
+        if (item.cover.includes('.ico')) {
           return this.imgOrigin + item.cover;
         } else {
           return (
-            this.imgOrigin + item.cover + "?x-oss-process=image/resize,h_120/quality,q_75"
+            this.imgOrigin + item.cover + '?x-oss-process=image/resize,h_120/quality,q_75'
           );
         }
       } else {
         return (
           this.imgOrigin +
-          "biz/b06148ccba2c8b527d979942131a9fd9.png?x-oss-process=image/resize,h_120/quality,q_75"
+          'biz/b06148ccba2c8b527d979942131a9fd9.png?x-oss-process=image/resize,h_120/quality,q_75'
         );
       }
     },
@@ -588,15 +588,15 @@ export default {
     doMoreImgStyle(item, item2) {
       return {
         // 'width':
-        height: (231 * item.height) / item.width + "px",
-        "background-image": `url(${this.imgOrigin + item2})`,
+        height: (231 * item.height) / item.width + 'px',
+        'background-image': `url(${this.imgOrigin + item2})`,
       };
     },
     doImgClass(imgs) {
       if (imgs.length == 2 || imgs.length == 4) {
-        return "two_img";
+        return 'two_img';
       } else {
-        return "three_img";
+        return 'three_img';
       }
     },
     doPlay(e) {
@@ -616,7 +616,7 @@ export default {
         }
         this.lists.splice(index, 1, i);
       } else {
-        console.log("开始暂停------------------------");
+        console.log('开始暂停------------------------');
         this.lists.forEach((i) => {
           i.play = false;
         });
@@ -625,9 +625,9 @@ export default {
       }
     },
     handleCommand(data) {
-      if (data.type == "copy") {
+      if (data.type == 'copy') {
         this.share(data.item);
-      } else if (data.type == "share") {
+      } else if (data.type == 'share') {
         this.doLoginStatus().then((res) => {
           if (res) {
             this.dialogs.data = {
@@ -641,20 +641,20 @@ export default {
         });
       } else {
         let picurl =
-          "https://oss.meibbc.com/gw/img/3380CC9482F74FA89C118FB99F4CE5E7.jpg";
+          'https://oss.meibbc.com/gw/img/3380CC9482F74FA89C118FB99F4CE5E7.jpg';
         let url =
-          "https://chao.fan/p/" + (data.item.sourcePostId || data.item.postId);
+          'https://chao.fan/p/' + (data.item.sourcePostId || data.item.postId);
         var sharesinastring =
-          "http://v.t.sina.com.cn/share/share.php?title=" +
+          'http://v.t.sina.com.cn/share/share.php?title=' +
           data.item.title +
-          "&url=" +
+          '&url=' +
           url +
-          "（分享来自@炒饭社区）" +
-          "&content=utf-8&sourceUrl=" +
+          '（分享来自@炒饭社区）' +
+          '&content=utf-8&sourceUrl=' +
           url +
-          "&ralateUid=炒饭社区";
+          '&ralateUid=炒饭社区';
         // window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100');
-        window.open(sharesinastring, "_blank");
+        window.open(sharesinastring, '_blank');
       }
     },
     deletePost(index) {
@@ -664,40 +664,40 @@ export default {
       api.savePost({ postId: item.postId }).then((res) => {
         if (res.success) {
           if (item.save) {
-            this.$toast("已取消收藏");
+            this.$toast('已取消收藏');
           } else {
-            this.$toast("收藏成功");
+            this.$toast('收藏成功');
           }
           item.save = !item.save;
           //  this.$message.success("收藏成功")
-        } else if (res.errorCode == "need_login") {
+        } else if (res.errorCode == 'need_login') {
           this.$login({
             callBack: () => {
-              this.$store.dispatch("user/getInfo");
+              this.$store.dispatch('user/getInfo');
             },
           });
         }
       });
     },
     onCopy(e) {
-      this.$message.success("内容已复制到剪切板！");
+      this.$message.success('内容已复制到剪切板！');
     },
     share(item) {
-      this.message = location.origin + "/p/" + item.postId;
+      this.message = location.origin + '/p/' + item.postId;
     },
     toDetail(item, bool) {
       if (this.canTo) {
-        if (bool || item.type != "link") {
+        if (bool || item.type != 'link') {
           if (this.whichOne) {
-            localStorage.setItem("whichOne", this.whichOne);
+            localStorage.setItem('whichOne', this.whichOne);
           }
           this.canTo = false;
           let obj = {
             // list: this.lists,
           };
-          let top = this.$(".infinite-list").scrollTop();
-          console.log("top", top);
-          this.$(".infinite-list").animate({ scrollTop: top || "+=0" }, 1000);
+          let top = this.$('.infinite-list').scrollTop();
+          console.log('top', top);
+          this.$('.infinite-list').animate({ scrollTop: top || '+=0' }, 1000);
           obj.top = top;
           obj.forumId = item.forumId;
           obj.from = {
@@ -708,38 +708,38 @@ export default {
           obj.pagenum = this.pagenum;
           obj.marker = this.marker;
           obj.key = this.keys;
-          this.postBehavior(item.postId, "detail");
+          this.postBehavior(item.postId, 'detail');
           try {
-            localStorage.setItem("storedata", JSON.stringify(obj));
-            localStorage.setItem("spage", this.$route.path);
+            localStorage.setItem('storedata', JSON.stringify(obj));
+            localStorage.setItem('spage', this.$route.path);
           } catch (e) {
             console.log(e);
           }
 
-          this.$EventBus.$emit("refreshItemTag", {
+          this.$EventBus.$emit('refreshItemTag', {
             way: 'saveTagId'
           });
           this.$router.push({
-            name: "articleDetail",
+            name: 'articleDetail',
             params: { postId: item.postId },
           });
           setTimeout(() => {
             this.canTo = true;
           }, 1000);
         } else {
-          window.open(item.link, "_blank");
+          window.open(item.link, '_blank');
         }
       }
     },
     toUrls(item, params) {
-      this.postBehavior(item.postId, "jump");
+      this.postBehavior(item.postId, 'jump');
       this.toUrl(params);
     },
     postBehavior(postId, action) {
       api.postBehavior({ postId, action }).then((res) => {});
     },
     toTop() {
-      this.$(".infinite-list").animate({ scrollTop: 0 }, 200);
+      this.$('.infinite-list').animate({ scrollTop: 0 }, 200);
     },
     doZan(v, item, index) {
       if (v == 1) {

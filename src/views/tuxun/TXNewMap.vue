@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 // import "https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise";
 export default {
-  name: "TuxunNewMap",
+  name: 'TuxunNewMap',
   mounted() {
-    var map = L.map('map').setView([51.505, -0.09], 3)
+    var map = L.map('map').setView([51.505, -0.09], 3);
     var url = 'https://map.chao-fan.com/tile/s2_z{z}_x{x}_y{y}.png';
     if(this.ISPHONE){
       url = 'https://map.chao-fan.com/tile/s1_z{z}_x{x}_y{y}.png';
@@ -57,9 +57,9 @@ export default {
     L.circle([75.67219739055291, 58.15234375], {color: 'red', radius: 1000000}).addTo(map);
 
     map.on('click', (e) => {
-      this.$toast( e.latlng.wrap().lat + ", " + e.latlng.wrap().lng);
+      this.$toast( e.latlng.wrap().lat + ', ' + e.latlng.wrap().lng);
         var input = document.createElement('input');
-        input.setAttribute('value', e.latlng.wrap().lat + ", " + e.latlng.wrap().lng);
+        input.setAttribute('value', e.latlng.wrap().lat + ', ' + e.latlng.wrap().lng);
         document.body.appendChild(input);
         input.select();
         var result = document.execCommand('copy');
@@ -72,7 +72,7 @@ export default {
   methods: {
 
   }
-}
+};
 
 </script>
 

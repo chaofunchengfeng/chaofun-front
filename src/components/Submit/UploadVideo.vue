@@ -60,7 +60,7 @@ export default {
       }).catch(() => {});
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

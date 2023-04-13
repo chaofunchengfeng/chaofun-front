@@ -135,40 +135,40 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as api from "../../api/api";
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 
-import ListItem from "../../components/chaofan/ListItem.vue";
-import RightCom from "@/components/chaofan/RightCom";
-import loadText from "@/components/chaofan/loadText";
-import attentionItem from "@/components/chaofan/attentionItem.vue";
+import ListItem from '../../components/chaofan/ListItem.vue';
+import RightCom from '@/components/chaofan/RightCom';
+import loadText from '@/components/chaofan/loadText';
+import attentionItem from '@/components/chaofan/attentionItem.vue';
 
 export default {
-  name: "Dashboard",
+  name: 'Dashboard',
   // components: { adminDashboard, editorDashboard },
   props:['q'],
   data() {
     return {
       hasContent: true,
-      currentRole: "adminDashboard",
+      currentRole: 'adminDashboard',
       count: 5,
       lists: [],
-      forumId: "",
+      forumId: '',
       params: {
         pageNum: 0,
       },
       options: [
         {
-          label: "最热",
-          value: "hot",
+          label: '最热',
+          value: 'hot',
         },
         {
-          label: "最新",
-          value: "new",
+          label: '最新',
+          value: 'new',
         },
         {
-          label: "新评",
-          value: "comment",
+          label: '新评',
+          value: 'comment',
         },
       ],
       isPhone: false,
@@ -176,8 +176,8 @@ export default {
       ifcanget: true,
       loadText: false,
       loadAll: false,
-      keyword: "",
-      searchType: "post",
+      keyword: '',
+      searchType: 'post',
     };
   },
   components: {
@@ -196,7 +196,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["roles", "islogin"]),
+    ...mapGetters(['roles', 'islogin']),
   },
   mounted() {
     if (document.body.clientWidth < 700) {
@@ -207,7 +207,7 @@ export default {
     //   console.log(res)
     // })
     let self = this;
-    this.$refs.container.addEventListener("scroll", function () {
+    this.$refs.container.addEventListener('scroll', function () {
       let scrollTop = self.$refs.container.scrollTop;
       let conTop = self.$refs.container.scrollTop;
       // 变量windowHeight是可视区的高度
@@ -220,7 +220,7 @@ export default {
         conTop + conHeight > scrollHeight ||
         conTop + conHeight == scrollHeight
       ) {
-        console.log("到底了");
+        console.log('到底了');
         if (self.ifcanget) {
           // self.load()
           self.getLists();
@@ -229,7 +229,7 @@ export default {
     });
   },
   created() {
-    let id = this.$route.path.split("/")[2];
+    let id = this.$route.path.split('/')[2];
     this.params.keyword = this.$route.query.q;
     this.keyword = this.$route.query.q;
     this.load();
@@ -248,8 +248,8 @@ export default {
           api.joinForum({ forumId: this.params.forumId }).then((res) => {
             if (res.success) {
               this.$message({
-                message: "加入成功",
-                type: "success",
+                message: '加入成功',
+                type: 'success',
                 offset: 20,
               });
               this.getForumInfo();
@@ -259,8 +259,8 @@ export default {
           api.leaveForum({ forumId: this.params.forumId }).then((res) => {
             if (res.success) {
               this.$message({
-                message: "退出成功",
-                type: "success",
+                message: '退出成功',
+                type: 'success',
                 offset: 20,
               });
               this.getForumInfo();
@@ -268,11 +268,11 @@ export default {
           });
         }
       } else {
-        this.showLogin("login");
+        this.showLogin('login');
       }
     },
     changes() {
-      localStorage.setItem("chao.fun.timeline.order", this.params.order);
+      localStorage.setItem('chao.fun.timeline.order', this.params.order);
       this.params.pageNum = 1;
       this.lists = [];
       this.getLists();
@@ -285,7 +285,7 @@ export default {
     getLists() {
       let params = this.params;
       this.ifcanget = false;
-      if (this.searchType == "post") {
+      if (this.searchType == 'post') {
         api.getSearch(params).then((res) => {
           console.log(res);
           this.ifcanget = true;

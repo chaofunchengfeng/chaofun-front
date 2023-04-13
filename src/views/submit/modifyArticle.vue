@@ -218,13 +218,13 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable'
-import Editor from '@/components/Submit/Editor'
-import Uploader from '@/components/Submit/Uploader'
+import draggable from 'vuedraggable';
+import Editor from '@/components/Submit/Editor';
+import Uploader from '@/components/Submit/Uploader';
 
-import {getForumRules, getPostInfo, getUrlTitle, modifyArticle} from '@/api/api'
+import {getForumRules, getPostInfo, getUrlTitle, modifyArticle} from '@/api/api';
 
-import {logo} from '@/settings'
+import {logo} from '@/settings';
 
 export default {
   name: 'modifyArticle',
@@ -245,7 +245,7 @@ export default {
 
       ossNames: [], // 图片
       loading: false, // 发布中
-    }
+    };
   },
   created() {
     if (!this.userId) {
@@ -278,11 +278,11 @@ export default {
 
         // TODO
         // image、article需要特殊处理
-        if ("article" === this.type) {
+        if ('article' === this.type) {
           setTimeout(() => {
             this.$refs.editor.set(this.post.article);
           }, 1);
-        } else if ("image" === this.type) {
+        } else if ('image' === this.type) {
           setTimeout(() => {
             if (this.post.imageNums === 1) {
               this.ossNames.push(this.post.imageName);
@@ -304,7 +304,7 @@ export default {
 
     goToIndex() {
       setTimeout(() => {
-        this.$router.push({path: "/"})
+        this.$router.push({path: '/'});
       }, 1500);
     },
 
@@ -352,7 +352,7 @@ export default {
         this.$message.error('非本人帖子，无法修改！');
         return;
       }
-      if ("article" !== this.type) {
+      if ('article' !== this.type) {
         this.$message.error('暂不支持！');
         return;
       }
@@ -368,7 +368,7 @@ export default {
         if (res.success) {
           this.$message.success('修改成功');
           setTimeout(() => {
-            this.$router.push({path: "/p/" + res.data.postId})
+            this.$router.push({path: '/p/' + res.data.postId});
           }, 1500);
         } else {
           this.$message.error('修改失败，尝试联系下开发同学！');
@@ -414,7 +414,7 @@ export default {
         forumId: post.forumId,
         title: post.title,
         anonymity: post.anonymity,
-      }
+      };
       if (post.tagId) {
         params.tagId = post.tagId;
       }
@@ -451,7 +451,7 @@ export default {
 
         this.$message.success('修改成功');
         setTimeout(() => {
-          this.$router.push({path: "/p/" + result.data.postId})
+          this.$router.push({path: '/p/' + result.data.postId});
         }, 1500);
       } catch (error) {
         console.error(error);
@@ -462,7 +462,7 @@ export default {
     },
 
   }
-}
+};
 </script>
 
 <style lang='scss' scoped type='text/scss'>

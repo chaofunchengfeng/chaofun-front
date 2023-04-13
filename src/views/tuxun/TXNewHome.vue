@@ -200,16 +200,16 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '../../api/api';
+import {tuxunJump, tuxunOpen} from './common';
 
 export default {
-  name: "TXNewHome",
+  name: 'TXNewHome',
   data() {
     return {
       times: null,
       backgroundImage: 'front/IMG_3101.jpg?x-oss-process=image/quality,q_80'
-    }
+    };
   },
   created() {
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
@@ -221,32 +221,32 @@ export default {
     var Notification = window.Notification || window.mozNotification || window.webkitNotification;
     if (Notification) {
       Notification.requestPermission(function (status) {
-      })
+      });
     }
     this.getTimesInterval();
   },
   methods:{
     getTimesInterval() {
-      this.getTimes()
+      this.getTimes();
       setInterval(() => {
         this.getTimes();
-      }, 5000)
+      }, 5000);
     },
     getTimes() {
       api.getByPath('/api/v0/tuxun/getTotalGuess').then(res=>{
         this.times = res.data;
-      })
+      });
     },
     toPage(title, path) {
       try {
-        window.flutter_inappwebview.callHandler('toViewPage',{url: location.origin+path,title:title,showHeader: true})
+        window.flutter_inappwebview.callHandler('toViewPage',{url: location.origin + path,title:title,showHeader: true});
       } catch (e) {
         tuxunJump(location.origin + path);
       }
     },
     toForum(){
       try {
-        window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84+''})
+        window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84 + ''});
       } catch (e) {
         tuxunOpen('https://chao.fan/f/84');
       }
@@ -255,20 +255,20 @@ export default {
     toParty() {
       this.doLoginStatus().then((res) => {
         tuxunJump('/tuxun/party');
-      })
+      });
     },
 
     redirectPage(path) {
-      console.log(path)
-      tuxunJump(path)
+      console.log(path);
+      tuxunJump(path);
       // window.location.href = path
     },
 
     soloMatch() {
-      tuxunJump('/tuxun/solo_game')
+      tuxunJump('/tuxun/solo_game');
     },
     toRank() {
-      tuxunJump(  '/tuxun/rank')
+      tuxunJump(  '/tuxun/rank');
     },
     toUserHome() {
       this.doLoginStatus().then((res) => {
@@ -278,16 +278,16 @@ export default {
       });
     },
     toBilibili() {
-      tuxunOpen('https://search.bilibili.com/all?keyword=%E5%9B%BE%E5%AF%BB')
+      tuxunOpen('https://search.bilibili.com/all?keyword=%E5%9B%BE%E5%AF%BB');
     },
     toScratch() {
-      tuxunOpen('https://choa.fun/scratch')
+      tuxunOpen('https://choa.fun/scratch');
     },
     toUpdate() {
-      tuxunOpen('https://www.yuque.com/ucun5p/kfw26e/dp7hvxnm7tes88g7')
+      tuxunOpen('https://www.yuque.com/ucun5p/kfw26e/dp7hvxnm7tes88g7');
     },
     toDocument() {
-      tuxunOpen('https://www.yuque.com/ucun5p/tuxun')
+      tuxunOpen('https://www.yuque.com/ucun5p/tuxun');
     },
     toFirstTournament() {
       try {
@@ -300,7 +300,7 @@ export default {
       this.$vip();
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

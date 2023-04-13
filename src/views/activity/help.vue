@@ -15,7 +15,7 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 export default {
   name: 'Help',
   components: {
@@ -24,7 +24,7 @@ export default {
   data(){
       return {
           pagedata: []
-      }
+      };
   },
   created(){
   },
@@ -34,7 +34,7 @@ export default {
   methods:{
     
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

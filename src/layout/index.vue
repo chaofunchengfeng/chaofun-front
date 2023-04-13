@@ -29,36 +29,36 @@
 </template>
 
 <script>
-import RightPanel from '@/components/RightPanel'
-import BackgroundSet from '@/components/chaofan/BackgroundSet'
-import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
-import ResizeMixin from './mixin/ResizeHandler'
-import { mapState } from 'vuex'
-import Vue from 'vue'
-import login from '@/components/chaofan/common/login/login.js'
-import vip from '@/components/chaofan/common/vip/vip.js'
-import mapsSearch from '@/components/chaofan/common/mapsSearch/mapsSearch.js'
+import RightPanel from '@/components/RightPanel';
+import BackgroundSet from '@/components/chaofan/BackgroundSet';
+import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components';
+import ResizeMixin from './mixin/ResizeHandler';
+import { mapState } from 'vuex';
+import Vue from 'vue';
+import login from '@/components/chaofan/common/login/login.js';
+import vip from '@/components/chaofan/common/vip/vip.js';
+import mapsSearch from '@/components/chaofan/common/mapsSearch/mapsSearch.js';
 // Vue.use(login);
-Vue.prototype.$login=login
-Vue.prototype.$vip=vip
-Vue.prototype.$mapsSearch=mapsSearch
+Vue.prototype.$login = login;
+Vue.prototype.$vip = vip;
+Vue.prototype.$mapsSearch = mapsSearch;
 
-import * as api from '@/api/api'
-import RightDescribe from '@/components/chaofan/RightDescribe'
+import * as api from '@/api/api';
+import RightDescribe from '@/components/chaofan/RightDescribe';
 
-import chat from './components/chat/chat'
-import newDialog from './components/dialog/newDialog'
+import chat from './components/chat/chat';
+import newDialog from './components/dialog/newDialog';
 
 
-console.log("探寻这里的秘密，\n找到自己的最爱，\n成为这里的主人，\n炒饭-新趣、分享、交流");
-console.log("%c我们的网址是: ","color:red", "https://chao.fan");
-console.log("%c欢迎参与我们的Web开源: ","color:red", "https://github.com/www-chao-fun/chaofun-front/");
-if(process.env.NODE_ENV != "development"){
-  console.log=function(text,type=''){}
+console.log('探寻这里的秘密，\n找到自己的最爱，\n成为这里的主人，\n炒饭-新趣、分享、交流');
+console.log('%c我们的网址是: ','color:red', 'https://chao.fan');
+console.log('%c欢迎参与我们的Web开源: ','color:red', 'https://github.com/www-chao-fun/chaofun-front/');
+if(process.env.NODE_ENV != 'development'){
+  console.log = function(text,type = ''){};
 }
 
 // 活动
-import lottery from '@/components/chaofan/activity/51/lottery'
+import lottery from '@/components/chaofan/activity/51/lottery';
 
 export default {
   name: 'Layout',
@@ -80,7 +80,7 @@ export default {
       // logStatus: ''
       aoData: [],
       times: 1,
-    }
+    };
   },
   mixins: [ResizeMixin],
   computed: {
@@ -100,20 +100,20 @@ export default {
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
-      }
+      };
     },
   },
   mounted(){
   },
   methods: {
     cancelRegisterSuccess(){
-      this.getUserInfo()
+      this.getUserInfo();
     },
     handleClickOutside() {
-      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -190,7 +190,7 @@ export default {
         let file = {};
         file.uid = index;
         file.url = imgOrigin + item;
-        file.status = "success";
+        file.status = 'success';
         file.percentage = 100;
         file.response = {};
         file.response.data = item;
@@ -224,7 +224,9 @@ export default {
     // === Upload ===
     handleChange(ev) {
       const files = ev.target.files;
-      if (!files) return;
+      if (!files) {
+return;
+}
       this.uploadFiles(files);
     },
     async uploadFiles(files) {
@@ -233,8 +235,12 @@ export default {
         return;
       }
       let postFiles = Array.prototype.slice.call(files);
-      if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
-      if (postFiles.length === 0) { return; }
+      if (!this.multiple) {
+ postFiles = postFiles.slice(0, 1); 
+}
+      if (postFiles.length === 0) {
+ return; 
+}
 
       // 检测图片
       for (let index = 0; index < postFiles.length; index++) {
@@ -250,7 +256,9 @@ export default {
           // 视频上传模式
           this.isVideo = true;
           this.handleStart(rawFile);
-          if (this.autoUpload) this.upload(rawFile);
+          if (this.autoUpload) {
+this.upload(rawFile);
+}
           break;
         }
 
@@ -266,7 +274,9 @@ export default {
         }
        
         this.handleStart(rawFile);
-        if (this.autoUpload) this.upload(rawFile);
+        if (this.autoUpload) {
+this.upload(rawFile);
+}
       }
     },
     upload(rawFile) {
@@ -369,7 +379,7 @@ export default {
           file.response = res;
           // 转换格式图片后缀不一致更换图片地址
           if (rawFile.name.split('.').pop().toLowerCase() !== res.data.split('.').pop().toLowerCase()) {
-            file.url = `${this.imgOrigin}${res.data}`
+            file.url = `${this.imgOrigin}${res.data}`;
           }
           this.fileList.push(res.data);
           this.$emit('input',  this.fileList);
@@ -436,7 +446,9 @@ export default {
       }
     },
     handleKeydown(e) {
-      if (e.target !== e.currentTarget) return;
+      if (e.target !== e.currentTarget) {
+return;
+}
       if (e.keyCode === 13 || e.keyCode === 32) {
         this.handleClick();
       }
@@ -454,13 +466,17 @@ export default {
       const { reqs } = this;
       if (file) {
         let uid = file;
-        if (file.uid) uid = file.uid;
+        if (file.uid) {
+uid = file.uid;
+}
         if (reqs[uid]) {
           reqs[uid].abort();
         }
       } else {
         Object.keys(reqs).forEach((uid) => {
-          if (reqs[uid]) reqs[uid].abort();
+          if (reqs[uid]) {
+reqs[uid].abort();
+}
           delete reqs[uid];
         });
       }
@@ -496,7 +512,7 @@ export default {
       this.uploadFiles([ file ]);
     }
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

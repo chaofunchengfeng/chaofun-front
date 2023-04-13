@@ -12,20 +12,20 @@
 
 <script>
 import * as THREE from 'three';
-import * as api from '../../api/api'
-import {Viewer} from 'photo-sphere-viewer'
-import 'photo-sphere-viewer/dist/photo-sphere-viewer.css'
-import { CompassPlugin} from 'photo-sphere-viewer/dist/plugins/compass'
-import { MarkersPlugin} from 'photo-sphere-viewer/dist/plugins/markers'
-import { VirtualTourPlugin } from 'photo-sphere-viewer/dist/plugins/virtual-tour'
-import 'photo-sphere-viewer/dist/plugins/compass.css'
-import 'photo-sphere-viewer/dist/plugins/virtual-tour.css'
-import 'photo-sphere-viewer/dist/plugins/markers.css'
-import { loadScript } from "vue-plugin-load-script";
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '../../api/api';
+import {Viewer} from 'photo-sphere-viewer';
+import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
+import { CompassPlugin} from 'photo-sphere-viewer/dist/plugins/compass';
+import { MarkersPlugin} from 'photo-sphere-viewer/dist/plugins/markers';
+import { VirtualTourPlugin } from 'photo-sphere-viewer/dist/plugins/virtual-tour';
+import 'photo-sphere-viewer/dist/plugins/compass.css';
+import 'photo-sphere-viewer/dist/plugins/virtual-tour.css';
+import 'photo-sphere-viewer/dist/plugins/markers.css';
+import { loadScript } from 'vue-plugin-load-script';
+import {tuxunJump, tuxunOpen} from './common';
 
 export default {
-  name: "ReplayPanorama",
+  name: 'ReplayPanorama',
   data() {
     return {
       gameId: null,
@@ -33,46 +33,46 @@ export default {
       gameData: null,
       image: null,
       viewer: null
-    }
+    };
   },
   mounted() {
     THREE.Cache.enabled = false;
     this.gameId = this.$route.query.gameId;
     this.round = this.$route.query.round;
-    document.title = "第" + this.round + "轮复盘";
+    document.title = '第' + this.round + '轮复盘';
     this.get();
   },
   methods: {
     get() {
-      api.getByPath("/api/v0/tuxun/solo/get", {gameId: this.gameId}).then(res => {
+      api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
         console.log(res.data);
         if (res.success) {
-          this.render(res.data.rounds[this.round-1]);
+          this.render(res.data.rounds[this.round - 1]);
         }
       });
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     goBack() {
       window.history.back();
     },
     toReport() {
       api.getByPath('/api/v0/tuxun/game/report', {content: this.image}).then(res => {
-        this.$toast("反馈成功");
-      })
+        this.$toast('反馈成功');
+      });
     },
     goReplay() {
-      tuxunJump('/tuxun/replay?gameId='+ this.gameId);
+      tuxunJump('/tuxun/replay?gameId=' + this.gameId);
     },
     render(round) {
       console.log(round);
       if (!this.viewer) {
-        document.head.insertAdjacentHTML("beforeend", `<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>`)
+        document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
         this.sharePanoId = this.$route.query.pano;
         loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js').then(() => {
           this.viewer = new google.maps.StreetViewPanorama(
-              document.getElementById("viewer"), {
+              document.getElementById('viewer'), {
                 fullscreenControl: false,
                 panControl: true,
                 addressControl: false,
@@ -89,7 +89,7 @@ export default {
               }
           );
           this.setGoogle(round.panoId);
-        })
+        });
       } else {
         this.setGoogle(round.panoId);
       }
@@ -102,7 +102,7 @@ export default {
       }, 50);
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

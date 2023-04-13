@@ -54,8 +54,8 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '@/api/api';
+import {tuxunJump, tuxunOpen} from './common';
 export default {
   name: 'tuxunRank',
   components: {
@@ -179,7 +179,7 @@ export default {
         {name:'美国加拿大独门秘笈（不完全教程） Geoguessr图寻游戏教学',cover: 'biz/1665573905878_ab983dfaa6b14416be4085e1bd63c99c_0.webp', url: 'https://www.bilibili.com/video/BV1sR4y1R7J1' },
       ],
       timer: 0
-    }
+    };
   },
   created(){
   },
@@ -194,7 +194,7 @@ export default {
       tuxunJump('/tuxun/');
     },
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

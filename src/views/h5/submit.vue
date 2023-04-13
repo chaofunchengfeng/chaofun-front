@@ -53,7 +53,7 @@
 import Vue from 'vue';
 import vant from 'vant';
 import 'vant/lib/index.css';
-import * as api from '../../api/api'
+import * as api from '../../api/api';
 Vue.use(vant);
  export default {
    name: '',
@@ -75,13 +75,13 @@ Vue.use(vant);
         baseForm: {
 
         }
-     }
+     };
    },
    watch: {
      keyword(n,o){
-       this.indexs = ''
-       this.chooseItem = {}
-       this.getForum(n)
+       this.indexs = '';
+       this.chooseItem = {};
+       this.getForum(n);
      }
    },
    components: {
@@ -89,11 +89,11 @@ Vue.use(vant);
    },
    created() {
        if(this.$route.query.id){
-         this.addForm.targetForumId = '/f/'+this.$route.query.id
+         this.addForm.targetForumId = '/f/' + this.$route.query.id;
         }
    },
    mounted() {
-     this.getForum()
+     this.getForum();
    },
    methods: {
     choose(item,index){
@@ -107,29 +107,29 @@ Vue.use(vant);
             if(res.data.length){
                 this.options = res.data;
                 this.chooseItem = res.data[0];
-                this.addForm.targetForumId = this.options[0].link
+                this.addForm.targetForumId = this.options[0].link;
             }
             
-        })
+        });
     },
     sub(){
-        let params = {}
+        let params = {};
         if(this.radio == 1){
             params = {
                 title: this.baseForm.title,
                 ossName: this.baseForm.ossName,
                 forumId: this.addForm.targetForumId.split('/')[2]
-            }
-            if(params.title&&params.ossName&&params.forumId){
+            };
+            if(params.title && params.ossName && params.forumId){
                 api.submitImage(params).then(res=>{
                     if(res.success){
                         this.$message.success('发布成功');
                         setTimeout(()=>{
                             // window.location.reload()
-                            this.$router.replace({path: this.addForm.targetForumId})
-                        },1500)
+                            this.$router.replace({path: this.addForm.targetForumId});
+                        },1500);
                     }
-                })
+                });
             }else{
                 this.$toast('请填写完整');
             }
@@ -139,16 +139,16 @@ Vue.use(vant);
                 title: this.baseForm.title,
                 link: this.baseForm.link,
                 forumId: this.addForm.targetForumId.split('/')[2]
-            }
-            if(params.title&&params.link&&params.forumId){
+            };
+            if(params.title && params.link && params.forumId){
                 api.submitLink(params).then(res=>{
                     if(res.success){
                         this.$message.success('发布成功');
                         setTimeout(()=>{
-                            this.$router.replace({path: this.addForm.targetForumId})
-                        },1500)
+                            this.$router.replace({path: this.addForm.targetForumId});
+                        },1500);
                     }
-                })
+                });
             }else{
                 this.$toast('请填写完整');
             }
@@ -160,26 +160,26 @@ Vue.use(vant);
     afterRead(files){
         files.status = 'uploading';
         files.message = '上传中...';
-        console.log(files)
+        console.log(files);
         let formdata = new FormData();
-        formdata.append('file',files.file)
-        formdata.append('fileName',files.file.name)
+        formdata.append('file',files.file);
+        formdata.append('fileName',files.file.name);
         api.uploadImage(formdata).then(res=>{
-            console.log(res)
+            console.log(res);
             files.status = 'done';
             if(res.success){
                 files.message = '';
-                this.baseForm.ossName = res.data
-            }else if(res.errorCode=="invalid_content"){
-                this.$toast(res.errorMessage)
-                this.fileList = []
-                this.baseForm.ossName = ''
+                this.baseForm.ossName = res.data;
+            }else if(res.errorCode == 'invalid_content'){
+                this.$toast(res.errorMessage);
+                this.fileList = [];
+                this.baseForm.ossName = '';
             }
             
-        })
+        });
     }
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

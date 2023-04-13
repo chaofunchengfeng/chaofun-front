@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import donateDetail from "_c/donate/donateDetail";
+import donateDetail from '_c/donate/donateDetail';
 
 export default {
-  name: "donate",
+  name: 'donate',
   data() {
     return {
-      forumId: ""
+      forumId: ''
     };
   },
   components: { donateDetail },

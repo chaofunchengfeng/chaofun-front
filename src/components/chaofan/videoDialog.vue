@@ -24,13 +24,13 @@
          loading: false,
          targetForumId: '',
          autoplay: false
-     }
+     };
    },
    props: {
        datas: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        },
        videoData: {
@@ -49,7 +49,7 @@
    methods: {
     
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

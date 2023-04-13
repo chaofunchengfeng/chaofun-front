@@ -148,36 +148,36 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as api from "../../api/api";
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 
-import ListItem from "../../components/chaofan/ListItem.vue";
-import loadText from "@/components/chaofan/loadText";
-import badgeSetting from "@/views/chaofun-webview/badge/BadgeSetting";
-import listManageForums from "@/views/chaofun-webview/mySetting/listManageForums";
+import ListItem from '../../components/chaofan/ListItem.vue';
+import loadText from '@/components/chaofan/loadText';
+import badgeSetting from '@/views/chaofun-webview/badge/BadgeSetting';
+import listManageForums from '@/views/chaofun-webview/mySetting/listManageForums';
 
 export default {
-  name: "user",
+  name: 'user',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
-      tabActiveName: "baseInfo",
-      expandSidebar:"",
-      commentOrderType: "hot",
-      submitDefaultType: "image",
+      tabActiveName: 'baseInfo',
+      expandSidebar:'',
+      commentOrderType: 'hot',
+      submitDefaultType: 'image',
       isStoragePostOwnerCommentHighlight: false,
-      type: "",
-      title: "",
-      time: "",
+      type: '',
+      title: '',
+      time: '',
       timer: null,
       params: {
-        phone: "",
-        code: ""
+        phone: '',
+        code: ''
       },
       logStatus: false,
-      imageUrl: "",
+      imageUrl: '',
       filedata: {},
-      desc: "",
+      desc: '',
       userInfo: {}
     };
   },
@@ -187,8 +187,8 @@ export default {
   watch: {},
   computed: {
     ...mapGetters([
-      "roles",
-      "islogin"
+      'roles',
+      'islogin'
     ]),
     sss() {
       // if((/^1[3456789]\d{9}$/.test(this.params.phone))){
@@ -202,18 +202,18 @@ export default {
     }
   },
   mounted() {
-    this.expandSidebar = ("1" == localStorage.getItem("chao.fun.localSetting.expandSidebar"))?"1":"";
-    localStorage.setItem("chao.fun.localSetting.expandSidebar", this.expandSidebar);
+    this.expandSidebar = ('1' == localStorage.getItem('chao.fun.localSetting.expandSidebar')) ? '1' : '';
+    localStorage.setItem('chao.fun.localSetting.expandSidebar', this.expandSidebar);
 
-    this.isStoragePostOwnerCommentHighlight = ("true" == localStorage.getItem("chao.fun.localSetting.isStoragePostOwnerCommentHighlight"));
-    localStorage.setItem("chao.fun.localSetting.isStoragePostOwnerCommentHighlight", this.isStoragePostOwnerCommentHighlight);
+    this.isStoragePostOwnerCommentHighlight = ('true' == localStorage.getItem('chao.fun.localSetting.isStoragePostOwnerCommentHighlight'));
+    localStorage.setItem('chao.fun.localSetting.isStoragePostOwnerCommentHighlight', this.isStoragePostOwnerCommentHighlight);
 
 
-    this.commentOrderType = ("new" == localStorage.getItem("chao.fun.localSetting.commentOrderType")) ? "new"
-      : (("old" == localStorage.getItem("chao.fun.localSetting.commentOrderType")) ? "old" : "hot");
-    localStorage.setItem("chao.fun.localSetting.commentOrderType", this.commentOrderType);
+    this.commentOrderType = ('new' == localStorage.getItem('chao.fun.localSetting.commentOrderType')) ? 'new'
+      : (('old' == localStorage.getItem('chao.fun.localSetting.commentOrderType')) ? 'old' : 'hot');
+    localStorage.setItem('chao.fun.localSetting.commentOrderType', this.commentOrderType);
 
-    var tType = localStorage.getItem("chao.fun.localSetting.submitDefaultType");
+    var tType = localStorage.getItem('chao.fun.localSetting.submitDefaultType');
     if (tType && tType !== null) {
       this.submitDefaultType = tType;
     } else {
@@ -233,7 +233,7 @@ export default {
       this.tabActiveName = tab;
     }
 
-    console.log("a", this.$store.state.user.userInfo);
+    console.log('a', this.$store.state.user.userInfo);
     this.userInfo = this.$store.state.user.userInfo;
     this.desc = this.$store.state.user.userInfo.desc;
     this.imageUrl = this.imgOrigin + this.$store.state.user.userInfo.icon;
@@ -244,30 +244,30 @@ export default {
   methods: {
 
     expandSidebarChange(val) {
-      localStorage.setItem("chao.fun.localSetting.expandSidebar", val);
-      this.$toast("设置成功！");
+      localStorage.setItem('chao.fun.localSetting.expandSidebar', val);
+      this.$toast('设置成功！');
     },
 
     commentOrderTypeChange(val) {
-      localStorage.setItem("chao.fun.localSetting.commentOrderType", val);
-      this.$toast("设置成功！");
+      localStorage.setItem('chao.fun.localSetting.commentOrderType', val);
+      this.$toast('设置成功！');
     },
 
     submitDefaultTypeOnChange(val) {
-      localStorage.setItem("chao.fun.localSetting.submitDefaultType", val);
-      this.$toast("设置成功！");
+      localStorage.setItem('chao.fun.localSetting.submitDefaultType', val);
+      this.$toast('设置成功！');
     },
 
     storagePostOwnerCommentHighlightCheckboxChange(val) {
-      localStorage.setItem("chao.fun.localSetting.isStoragePostOwnerCommentHighlight", val);
-      this.$toast("设置成功！");
+      localStorage.setItem('chao.fun.localSetting.isStoragePostOwnerCommentHighlight', val);
+      this.$toast('设置成功！');
     },
 
     toSendCode() {
 
       if (!this.time) {
         if (!(/^1[3456789]\d{9}$/.test(this.params.phone))) {
-          this.$toast("手机号码有误，请重填");
+          this.$toast('手机号码有误，请重填');
           return false;
         } else {
           api.getCode({ phone: this.params.phone }).then(res => {
@@ -295,7 +295,7 @@ export default {
       if (!this.sss) {
         api.setPhone(this.params).then(res => {
           if (res.success) {
-            this.$toast("绑定成功");
+            this.$toast('绑定成功');
             this.logStatus = false;
             this.userInfo.phone = this.params.phone;
           }
@@ -304,12 +304,12 @@ export default {
     },
     toBindPhone() {
       // this.params.phone = this.userInfo.phone.splice(3,7,'xxxx');
-      this.title = "";
-      this.type = "bind";
+      this.title = '';
+      this.type = 'bind';
       this.logStatus = true;
     },
     handleUserName() {
-      console.log("123");
+      console.log('123');
       // this.title = '验证手机号';
       // this.type = 'edit';
       // this.params.phone = (this.userInfo.phone.slice(0,3)+'****'+this.userInfo.phone.slice(7));
@@ -318,8 +318,8 @@ export default {
       if (this.userInfo.userName) {
         api.changeUserName({ userName: this.userInfo.userName }).then(res => {
           if (res.success) {
-            this.$toast("用户名修改成功");
-            this.$store.dispatch("user/SET_userInfo", this.userInfo);
+            this.$toast('用户名修改成功');
+            this.$store.dispatch('user/SET_userInfo', this.userInfo);
           }
         });
       }
@@ -328,7 +328,7 @@ export default {
     toSign() {
       api.setDesc({ desc: this.desc }).then(res => {
         if (res.success) {
-          this.$toast("设置签名成功");
+          this.$toast('设置签名成功');
         }
       });
     },
@@ -341,7 +341,7 @@ export default {
         api.setIcon({ imageName: res.data }).then(res => {
 
         });
-      } else if (res.errorCode == "invalid_content") {
+      } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
@@ -350,7 +350,7 @@ export default {
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.filedata.fileName = file.name;

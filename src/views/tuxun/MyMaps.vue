@@ -30,15 +30,15 @@
 </template>
 
 <script>
-import {tuxunJump, tuxunOpen} from "./common";
-import * as api from '@/api/api'
+import {tuxunJump, tuxunOpen} from './common';
+import * as api from '@/api/api';
 export default {
-  name: "MyMaps",
+  name: 'MyMaps',
   data() {
     return {
       pagedata: [],
       history: null,
-    }
+    };
   },
   mounted() {
     this.history = history;
@@ -46,11 +46,11 @@ export default {
   },
   methods: {
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     toMapsCreate() {
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
           tuxunJump('/tuxun/maps_create');
         }
@@ -58,45 +58,45 @@ export default {
     },
     getMapsList() {
       api.getByPath('/api/v0/tuxun/maps/listOwn').then(res=>{
-        this.pagedata = res.data
-      })
+        this.pagedata = res.data;
+      });
     },
     unPublish(id) {
       api.getByPath('/api/v0/tuxun/maps/unpublish', {mapsId: id}).then(res=>{
         this.getMapsList();
-      })
+      });
     },
     publish(id) {
       api.getByPath('/api/v0/tuxun/maps/publish', {mapsId: id}).then(res=>{
         this.getMapsList();
-      })
+      });
     },
     toMapDetail(item) {
-      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id )
+      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id );
     },
     deleteMaps(id) {
-      this.$confirm(`是否确定删除该题库吗？`, "提示", {
-        type: "warning",
-        position: "top",
+      this.$confirm('是否确定删除该题库吗？', '提示', {
+        type: 'warning',
+        position: 'top',
       }).then(() => {
             api.getByPath('/api/v0/tuxun/maps/delete', {mapsId: id}).then(res => {
               this.getMapsList();
-            })
+            });
       });
     },
     toMapsModify(id) {
-      tuxunJump('/tuxun/maps_modify?mapsId=' + id)
+      tuxunJump('/tuxun/maps_modify?mapsId=' + id);
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
         log.error(e);
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

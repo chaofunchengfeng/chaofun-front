@@ -1,17 +1,19 @@
-import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
-import { Toast } from 'vant'
-import store from '@/store'
-import { getToken } from '@/utils/auth'
-import router from 'vue-router'
+import axios from 'axios';
+import { MessageBox, Message } from 'element-ui';
+import { Toast } from 'vant';
+import store from '@/store';
+import { getToken } from '@/utils/auth';
+import router from 'vue-router';
 
 console.log('-------------------');
 function IsPC(){
   var userAgentInfo = navigator.userAgent;
-  var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+  var Agents = new Array('Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod');
   var flag = true;
   for (var v = 0; v < Agents.length; v++) {
-      if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+ flag = false; break; 
+}
   }
   return flag;
 }
@@ -21,32 +23,32 @@ const service = axios.create({
   baseURL: location.origin, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
-})
+});
 
 // request interceptor
 service.interceptors.request.use(
   config => {
     // do something before request is sent
     if(IsPC()){
-      config.headers['fun-device'] = 'web'
+      config.headers['fun-device'] = 'web';
     }else{
-      config.headers['fun-device'] = 'h5'
+      config.headers['fun-device'] = 'h5';
     }
 
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      config.headers['X-Token'] = getToken();
     }
-    return config
+    return config;
   },
   error => {
     // do something with request error
-    console.log(error) // for debug
-    return Promise.reject(error)
+    console.log(error); // for debug
+    return Promise.reject(error);
   }
-)
+);
 
 // response interceptor
 service.interceptors.response.use(
@@ -61,16 +63,16 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    const res = response.data
+    const res = response.data;
     if (res.hintCode) {
-      Toast(res.hintMessage)
+      Toast(res.hintMessage);
     }
     // if the custom code is not 20000, it is judged as an error.
     if (!res.success) {
-      Toast(res.errorMessage)
-      if(res.errorCode&&res.errorCode!='need_login'){
+      Toast(res.errorMessage);
+      if(res.errorCode && res.errorCode != 'need_login'){
 
-        if(res.message&&res.message.includes('timeout')){
+        if(res.message && res.message.includes('timeout')){
           // errorMessage
         }else{
           // Message({
@@ -79,11 +81,11 @@ service.interceptors.response.use(
           //   duration: 5 * 1000
           // })
         }
-        console.log(res)
+        console.log(res);
         return res;
         // return Promise.reject(new Error(res.message || 'Error'))
       }else{
-        return res
+        return res;
       }
 
 
@@ -96,24 +98,24 @@ service.interceptors.response.use(
           type: 'warning'
         }).then(() => {
           store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
+            location.reload();
+          });
+        });
       }
 
     } else {
-      return res
+      return res;
     }
   },
   error => {
-    console.log('err' + error) // for debug
+    console.log('err' + error); // for debug
     // Message({
     //   message: error.message,
     //   type: 'error',
     //   duration: 5 * 1000
     // })
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);
 
-export default service
+export default service;

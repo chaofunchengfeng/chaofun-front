@@ -28,15 +28,15 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 
 export default {
-  name: "ForumLog",
+  name: 'ForumLog',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
       list: [],
-    }
+    };
   },
 
   created() {
@@ -53,18 +53,18 @@ export default {
       api.getByPath('/api/v0/forum/listLogs', { 'forumId': this.forumId, 'pageSize': 50 }).then((res) => {
         console.log('123');
         this.list = res.data;
-      })
+      });
     },
     toDetail(item){
       // this.$router.push({name: 'articleDetail',params:{postId: item.post.postId}})
       let routeData = this.$router.resolve({
-        name: "articleDetail",
+        name: 'articleDetail',
         params: {postId: item.post.postId},
       });
       window.open(routeData.href, '_blank');
     },
   }
-}
+};
 </script>
 
 <style scoped>

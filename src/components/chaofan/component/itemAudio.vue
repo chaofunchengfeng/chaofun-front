@@ -20,19 +20,19 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
  export default {
    name: '',
    data(){
      return {
          showCover: false,
-     }
+     };
    },
    props: {
        item: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        },
        isDetail: {
@@ -54,11 +54,11 @@ import * as api from '@/api/api'
    methods: {
     toDetail(){
       if(!this.isDetail){
-        this.$emit('toDetail',this.item)
+        this.$emit('toDetail',this.item);
       }
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

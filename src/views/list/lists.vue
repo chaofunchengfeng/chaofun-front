@@ -98,12 +98,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import * as api from '../../api/api'
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 
-import ListItem from '../../components/chaofan/ListItem.vue'
-import RightCom from '@/components/chaofan/RightCom'
-import loadText from '@/components/chaofan/loadText'
+import ListItem from '../../components/chaofan/ListItem.vue';
+import RightCom from '@/components/chaofan/RightCom';
+import loadText from '@/components/chaofan/loadText';
 
 
 export default {
@@ -140,7 +140,7 @@ export default {
       keyword: '',
       listsData: [],
       cateId: ''
-    }
+    };
   },
   components: {
     ListItem,loadText
@@ -158,17 +158,17 @@ export default {
     ])
   },
   mounted(){
-    if(document.body.clientWidth<700){
-      this.isPhone = true
+    if(document.body.clientWidth < 700){
+      this.isPhone = true;
     }
-    this.toPosition()
+    this.toPosition();
     // api.getMenu({pageNum:1,order:'new'}).then(res=>{
     //   console.log(res)
     // })
     let self = this;
-    this.$refs.container.addEventListener("scroll", function() {
+    this.$refs.container.addEventListener('scroll', function() {
         let scrollTop = self.$refs.container.scrollTop;
-      let conTop = self.$refs.container.scrollTop
+      let conTop = self.$refs.container.scrollTop;
       // 变量windowHeight是可视区的高度
       let conHeight = self.$refs.container.clientHeight;
       // 变量scrollHeight是滚动条的总高度
@@ -176,21 +176,21 @@ export default {
       //  console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
       // console.log(conTop,conHeight,scrollHeight)
       if (conTop + conHeight > scrollHeight || conTop + conHeight == scrollHeight) {
-        console.log('到底了')
+        console.log('到底了');
         if(self.ifcanget){
           // self.load()
-          self.getLists()
+          self.getLists();
         }
       }
     });
   },
   created() {
     let id = this.$route.path.split('/')[2];
-    this.params.keyword = this.$route.query.q
+    this.params.keyword = this.$route.query.q;
     this.keyword = this.$route.query.q;
-    this.getListTag()
+    this.getListTag();
 
-    console.log(this.$store.state.settings.leftNav)
+    console.log(this.$store.state.settings.leftNav);
   },
   methods:{
     toAttent(item,index){
@@ -200,23 +200,23 @@ export default {
             // 加入
             api.joinForum({forumId: item.id}).then(res=>{
 
-            })
+            });
           }else{
             api.leaveForum({forumId: item.id}).then(res=>{
 
-            })
+            });
           }
         }else{
-          this.showLogin('login')
+          this.showLogin('login');
         }
     },
     toSubs(item){
       console.log(item);
-      this.toPost(item.id,item.name,item.imageName)
+      this.toPost(item.id,item.name,item.imageName);
     },
     chooseCate(item){
         this.cateId = item.id;
-        this.load()
+        this.load();
     },
     getListTag(){
 
@@ -224,24 +224,24 @@ export default {
             // this.$store.dispatch('settings/SET_leftNav','allForm')
             // this.$store.dispatch('permission/SET_formRoute',res.data)
             this.lists = res.data;
-            this.load()
-        })
+            this.load();
+        });
     },
     getLists(){
       let params = this.params;
-      this.ifcanget = false
-      api.listForumsByTag({tagId:this.cateId||'0'}).then(res=>{
-        console.log(res)
-        this.ifcanget = true
+      this.ifcanget = false;
+      api.listForumsByTag({tagId:this.cateId || '0'}).then(res=>{
+        console.log(res);
+        this.ifcanget = true;
         this.params.pageNum += 1;
-        this.listsData = res.data
-      })
+        this.listsData = res.data;
+      });
     },
     load () {
-        this.getLists()
+        this.getLists();
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 

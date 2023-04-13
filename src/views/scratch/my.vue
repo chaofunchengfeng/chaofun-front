@@ -9,11 +9,11 @@
 
 <script>
 export default {
-  name: "my",
+  name: 'my',
   data() {
     return {
       history: null,
-    }
+    };
   },
 
   mounted() {
@@ -22,11 +22,11 @@ export default {
 
   methods: {
     goHome() {
-      window.location.href = '/scratch'
+      window.location.href = '/scratch';
     },
   }
 
-}
+};
 </script>
 
 <style scoped>

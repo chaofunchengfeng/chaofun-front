@@ -46,11 +46,11 @@
 </template>
 
 <script lang="js">
-import noticeItemImages from "_c/chaofan/noticeItemImages";
-import {reportPostComment} from '@/api/api.js'
+import noticeItemImages from '_c/chaofan/noticeItemImages';
+import {reportPostComment} from '@/api/api.js';
 
 export default {
-  name: "report",
+  name: 'report',
   props: {},
   components: {
     noticeItemImages,
@@ -60,14 +60,14 @@ export default {
       reportCause: '政治敏感',
       reportText: '',
 
-      dialogTitle: "举报",
-      type: "",
+      dialogTitle: '举报',
+      type: '',
       reportData: null,
       dialogVisible: false,
-    }
+    };
   },
   created() {
-    this.$EventBus.$on("reportDialog_data", (data) => {
+    this.$EventBus.$on('reportDialog_data', (data) => {
       this.init(data);
     });
   },
@@ -75,19 +75,19 @@ export default {
     init(data) {
       this.type = data.type;
 
-      if (!this.type || ("comment" !== this.type && "post" !== this.type)) {
+      if (!this.type || ('comment' !== this.type && 'post' !== this.type)) {
         return;
       }
 
-      if ("comment" === this.type) {
-        this.dialogTitle = "举报评论";
+      if ('comment' === this.type) {
+        this.dialogTitle = '举报评论';
       } else {
-        this.dialogTitle = "举报帖子";
+        this.dialogTitle = '举报帖子';
       }
 
       //
-      this.reportCause = "政治敏感";
-      this.reportText = "";
+      this.reportCause = '政治敏感';
+      this.reportText = '';
 
       this.reportData = data.reportData;
       this.dialogVisible = data.dialogVisible;
@@ -95,10 +95,10 @@ export default {
 
     onSubmitButtonClick() {
 
-      let reportedId = "";
-      if ("comment" === this.type) {
+      let reportedId = '';
+      if ('comment' === this.type) {
         reportedId = this.reportData.id;
-      } else if ("post" === this.type) {
+      } else if ('post' === this.type) {
         reportedId = this.reportData.postId;
       } else {
         return;
@@ -107,7 +107,7 @@ export default {
       reportPostComment({
         contentType: this.type,
         id: reportedId,
-        reason: this.reportCause + " " + this.reportText,
+        reason: this.reportCause + ' ' + this.reportText,
       }).then(res => {
         if (res.success) {
           this.$toast('举报已提交！');
@@ -120,7 +120,7 @@ export default {
   },
   watch: {},
 
-}
+};
 </script>
 
 <style scoped>

@@ -28,7 +28,7 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 export default {
   name: 'Home',
   components: {
@@ -40,7 +40,7 @@ export default {
           params : {
             predictionsTournamentId: '1'
           }
-      }
+      };
   },
   props: {
     id: {
@@ -57,23 +57,23 @@ export default {
   mounted(){
     this.params.predictionsTournamentId = this.$route.query.id;
     this.getButtonRank();
-    document.title = (this.$route.query.name ? this.$route.query.name : '')  + "竞猜排名";
+    document.title = (this.$route.query.name ? this.$route.query.name : '')  + '竞猜排名';
   },
   methods:{
     getButtonRank(){
       api.getPredictionRank(this.params).then(res=>{
-            this.pagedata = res.data
-      })
+            this.pagedata = res.data;
+      });
     },
     toUser(item){
         try {
-                window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId+''})
+                window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId + ''});
         } catch (e) {
-                window.open(location.origin + '/user/'+item.userAO.userId,"_blank");
+                window.open(location.origin + '/user/' + item.userAO.userId,'_blank');
         }
     }
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

@@ -48,12 +48,12 @@
 
 <script>
 
-import * as api from '../../api/api'
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '../../api/api';
+import {tuxunJump, tuxunOpen} from './common';
 
 
 export default {
-  name: "TuxunGuoQing",
+  name: 'TuxunGuoQing',
 
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
       rank: null,
       type: 'noMove',
       history: null
-    }
+    };
   },
 
   created() {
@@ -96,11 +96,11 @@ export default {
         if (time % 5 == 0) {
           this.get();
         }
-      }.bind(this), 1000)
+      }.bind(this), 1000);
     },
 
     get() {
-      api.getByPath("/api/v0/tuxun/br/get", {type: this.type}).then(res => {
+      api.getByPath('/api/v0/tuxun/br/get', {type: this.type}).then(res => {
         this.gameId = res.data.gameId;
       });
     },
@@ -108,22 +108,22 @@ export default {
       tuxunJump('/tuxun/guoqing_game?guoqingId=' + this.gameId);
     },
     listResult() {
-      api.getByPath("/api/v0/tuxun/br/listResult", {type: this.type}).then(res => {
+      api.getByPath('/api/v0/tuxun/br/listResult', {type: this.type}).then(res => {
         this.rank = res.data;
       });
     },
     toUser(item) {
-      tuxunOpen("/tuxun/user/" + item.userId);
+      tuxunOpen('/tuxun/user/' + item.userId);
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

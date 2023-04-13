@@ -18,24 +18,24 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import {banlist, forumAddBan, postByPath} from "../../../api/api";
+  import * as api from '@/api/api';
+  import {banlist, forumAddBan, postByPath} from '../../../api/api';
 
   export default {
-    name: "mod_manager",
+    name: 'mod_manager',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
         type: '',
         address: '',
         canOrder: true,
-      }
+      };
     },
     props: {
 
     },
     created() {
-      this.type= this.$route.query.type;
+      this.type = this.$route.query.type;
     },
 
     mounted() {
@@ -46,7 +46,7 @@
         if (this.type === 'cup') {
           return '马克杯 (1500fbi)';
         } else if (this.type == 'tshirt') {
-          return 'Tshirt (7500fbi)'
+          return 'Tshirt (7500fbi)';
         }
       },
       order() {
@@ -55,10 +55,10 @@
           return;
         }
         if (this.type == null || this.type === '') {
-          this.$toast('兑换类型不能为空')
+          this.$toast('兑换类型不能为空');
           return;
         } else if (this.address === '' || this.address === null) {
-          this.$toast('地址不能为空')
+          this.$toast('地址不能为空');
           return;
         } else {
           this.canOrder = false;
@@ -75,7 +75,7 @@
       },
 
     }
-  }
+  };
 
 </script>
 

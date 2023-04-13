@@ -31,6 +31,8 @@ npm install
 ```
 npm run dev
 ```
+> http://localhost:8099/
+> http://localhost:8099/tuxun
 
 > Install error: ls-remote -h -t git://github.com/adobe-webplatform/eve.git
 > git config --global url."https://".insteadOf git://

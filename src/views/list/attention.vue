@@ -31,13 +31,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import * as api from '@/api/api'
+import { mapGetters } from 'vuex';
+import * as api from '@/api/api';
 
-import ListItem from '@/components/chaofan/trends.vue'
-import attentionItem from '@/components/chaofan/attentionItem.vue'
-import RightDescribe from '@/components/chaofan/RightDescribe'
-import loadText from '@/components/chaofan/loadText'
+import ListItem from '@/components/chaofan/trends.vue';
+import attentionItem from '@/components/chaofan/attentionItem.vue';
+import RightDescribe from '@/components/chaofan/RightDescribe';
+import loadText from '@/components/chaofan/loadText';
 
 export default {
   name: 'Dashboard',
@@ -75,7 +75,7 @@ export default {
       whichOne: 'love',
       loadAll: false,
       usersData: []
-    }
+    };
   },
   components: {
     ListItem,loadText,attentionItem,RightDescribe
@@ -94,14 +94,14 @@ export default {
     ])
   },
   mounted(){
-    if(document.body.clientWidth<700){
-      this.isPhone = true
+    if(document.body.clientWidth < 700){
+      this.isPhone = true;
     }
     this.toPosition();
     let self = this;
-    this.$refs.container.addEventListener("scroll", function() {
+    this.$refs.container.addEventListener('scroll', function() {
         let scrollTop = self.$refs.container.scrollTop;
-      let conTop = self.$refs.container.scrollTop
+      let conTop = self.$refs.container.scrollTop;
       // 变量windowHeight是可视区的高度
       let conHeight = self.$refs.container.clientHeight;
       // 变量scrollHeight是滚动条的总高度
@@ -109,10 +109,10 @@ export default {
       //  console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
       // console.log(conTop,conHeight,scrollHeight)
       if (conTop + conHeight > scrollHeight || conTop + conHeight == scrollHeight) {
-        console.log('到底了')
+        console.log('到底了');
         if(self.ifcanget){
           // self.load()
-          self.getLists()
+          self.getLists();
         }
       }
     });
@@ -120,34 +120,34 @@ export default {
   created() {
     let id = this.$route.path.split('/')[2];
     if(!isNaN(id)){
-      this.params.forumId = id
+      this.params.forumId = id;
       // this.getLists()
     }
     if(localStorage.getItem('whichOne')){
-      this.whichOne = localStorage.getItem('whichOne')
+      this.whichOne = localStorage.getItem('whichOne');
     }
     this.forumInfo = {
       imageName: '3de7839782b923ea34f0a10af5766072.png',
       name: '关注',
       desc: '您关注人的动态'
-    }
-    this.load()
+    };
+    this.load();
   },
   methods:{
     checkout(v){
-      this.loadAll = false
-      if(this.whichOne!=v){
-        localStorage.setItem('whichOne',v)
-        this.params.marker = ''
+      this.loadAll = false;
+      if(this.whichOne != v){
+        localStorage.setItem('whichOne',v);
+        this.params.marker = '';
         this.whichOne = v;
-        this.lists = []
-        this.usersData = []
-        this.getLists()
+        this.lists = [];
+        this.usersData = [];
+        this.getLists();
       }
     },
     inout(v){
       if(this.$store.state.user.islogin){
-        if(v==1){
+        if(v == 1){
           // 加入
           api.joinForum({forumId: this.params.forumId}).then(res=>{
             if(res.success){
@@ -156,10 +156,10 @@ export default {
                 type: 'success',
                 offset: 20
               });
-              this.getForumInfo()
+              this.getForumInfo();
             }
-          })
-        }else if(v==2){
+          });
+        }else if(v == 2){
           api.leaveForum({forumId: this.params.forumId}).then(res=>{
             if(res.success){
               this.$message({
@@ -167,33 +167,33 @@ export default {
                 type: 'success',
                 offset: 20
               });
-              this.getForumInfo()
+              this.getForumInfo();
             }
-          })
+          });
         }
       }else{
-        this.showLogin('login')
+        this.showLogin('login');
       }
     },
     gotologin(){
-      this.showLogin('login')
+      this.showLogin('login');
     },
     showLogin(v){
       this.$login({callBack:()=>{
-        this.$store.dispatch('user/getInfo')
+        this.$store.dispatch('user/getInfo');
       }});
     },
     gotoSubmit(){// 发帖
       if(this.$store.state.user.islogin){
 
       }else{
-        this.showLogin('login')
+        this.showLogin('login');
       }
     },
     changes(){
       localStorage.setItem('chao.fun.timeline.order', this.params.order);
       this.params.pageNum = 1;
-      this.lists = []
+      this.lists = [];
       this.getLists();
     },
     getForumInfo(){
@@ -204,16 +204,16 @@ export default {
       api.listTrends(params).then(res=>{
             if(res.data.marker){
             this.params.marker = res.data.marker;
-              if(res.data.length<this.params.pageSize){
-                  this.ifcanget = false
+              if(res.data.length < this.params.pageSize){
+                  this.ifcanget = false;
               }else{
-                  this.ifcanget = true
+                  this.ifcanget = true;
               }
             }else{
-              this.loadAll = true
+              this.loadAll = true;
             }
-            this.lists.push(...res.data.trends)
-        })
+            this.lists.push(...res.data.trends);
+        });
       
     },
     load () {
@@ -228,11 +228,11 @@ export default {
           
         // }
         if(this.ifcanget){
-            this.getLists()
+            this.getLists();
           }
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 

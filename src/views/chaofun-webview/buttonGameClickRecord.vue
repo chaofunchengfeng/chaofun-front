@@ -28,7 +28,7 @@ export default {
     return {
       onlyGetPrice: false,
       moment: moment,
-    }
+    };
   },
   props: {
     clickRecordArray: {
@@ -50,9 +50,9 @@ export default {
     toUser(userId) {
       if (userId) {
         try {
-          window.flutter_inappwebview.callHandler('toAppUser', {userId: userId + ''})
+          window.flutter_inappwebview.callHandler('toAppUser', {userId: userId + ''});
         } catch (e) {
-          window.open(location.origin + '/user/' + userId, "_blank");
+          window.open(location.origin + '/user/' + userId, '_blank');
         }
       }
     },
@@ -65,7 +65,7 @@ export default {
       }, 100);
     },
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .main {

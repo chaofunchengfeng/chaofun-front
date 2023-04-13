@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import "./SmoothWheelZoom"
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '@/api/api';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import './SmoothWheelZoom';
+import {tuxunJump, tuxunOpen} from './common';
 export default {
-  name: "Replay",
+  name: 'Replay',
   data() {
     return {
       gameId: null,
@@ -36,7 +36,7 @@ export default {
       smoothSensitivity: 3,   // zoom speed. default is 1
       maxBoundsViscosity: 1.0,
       maxBounds: [[-90, -540], [90, 540]]
-    }).setView([38.8, 106.0], 2)
+    }).setView([38.8, 106.0], 2);
     map.scrollWheelZoom = true;
     map.attributionControl.setPosition('bottomleft');
     map.zoomControl.setPosition('bottomright');
@@ -56,33 +56,33 @@ export default {
   },
   methods: {
     get() {
-      api.getByPath("/api/v0/tuxun/solo/get", {gameId: this.gameId}).then(res => {
+      api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
         console.log(res.data);
         if (res.success) {
-          this.addMarker(res.data)
+          this.addMarker(res.data);
         }
       });
     },
     addMarker(gameData) {
-      console.log(gameData.rounds)
+      console.log(gameData.rounds);
       var group = [];
 
       for (var i in gameData.rounds) {
         var round = gameData.rounds[i];
-        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options))
+        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
         options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
         options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
-        var marker = L.marker([round.lat, round.lng], {icon: new L.Icon(options)}).bindTooltip("第" + round.round + "轮",
+        var marker = L.marker([round.lat, round.lng], {icon: new L.Icon(options)}).bindTooltip('第' + round.round + '轮',
             {
               permanent: true,
               direction: 'auto'
             }).addTo(this.map);
         marker.round = round;
-        marker.on("click", function (e) {
+        marker.on('click', function (e) {
           console.log(e);
-          this.toPanorama(gameData.id, e.target.round)
+          this.toPanorama(gameData.id, e.target.round);
         }.bind(this));
-        group.push([round.lat, round.lng])
+        group.push([round.lat, round.lng]);
       };
 
       var user = null;
@@ -93,18 +93,18 @@ export default {
       if (gameData.teams && gameData.teams.length >= 1) {
         gameData.teams.forEach(team => {
           team.teamUsers.forEach(teamUser => {
-            console.log(teamUser)
+            console.log(teamUser);
             if (gameData.requestUserId === teamUser.user.userId) {
               user = teamUser;
             }
-          })
+          });
         });
       }
 
       console.log(user);
 
       user.guesses.forEach(guess => {
-        var marker = L.marker([guess.lat, guess.lng], {icon: new L.Icon.Default()}).bindTooltip("你的选择",
+        var marker = L.marker([guess.lat, guess.lng], {icon: new L.Icon.Default()}).bindTooltip('你的选择',
             {
               permanent: true,
               direction: 'auto'
@@ -112,7 +112,7 @@ export default {
 
         var latlngs = [
           [guess.lat, guess.lng],
-          [gameData.rounds[guess.round-1].lat, gameData.rounds[guess.round-1].lng],
+          [gameData.rounds[guess.round - 1].lat, gameData.rounds[guess.round - 1].lng],
         ];
 
         this.polylinePath = new L.Polyline(latlngs, {
@@ -123,8 +123,8 @@ export default {
         });
         this.polylinePath.addTo(this.map);
 
-        group.push([guess.lat, guess.lng])
-      })
+        group.push([guess.lat, guess.lng]);
+      });
 
       this.map.fitBounds(group);
     },
@@ -135,26 +135,26 @@ export default {
         return;
       }
       if (round.source === 'baidu_pano') {
-        console.log(round.panoId)
-        tuxunOpen('https://maps.baidu.com/#panoid=' + round.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + round.panoId)
+        console.log(round.panoId);
+        tuxunOpen('https://maps.baidu.com/#panoid=' + round.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + round.panoId);
       } else {
-        tuxunJump('/tuxun/replay_pano?gameId=' + gameId + '&round=' + round.round)
+        tuxunJump('/tuxun/replay_pano?gameId=' + gameId + '&round=' + round.round);
       }
       console.log('123');
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
 
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -215,19 +215,19 @@
 </template>
 
 <script lang="js">
-import { getJoinedChatList } from "@/api/api";
-import { Message } from "element-ui";
-import emojiSelect from "@/views/newChat/emojiSelect.vue";
+import { getJoinedChatList } from '@/api/api';
+import { Message } from 'element-ui';
+import emojiSelect from '@/views/newChat/emojiSelect.vue';
 
 export default {
-  name: "chat",
+  name: 'chat',
   data() {
     return {
       chatHistoryMap: new Map(),
       currentChannelId: 0,
-      inputText: "",
+      inputText: '',
 
-      url: `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws/v0/all`,
+      url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/all`,
       ws: null,
 
       fileData: {},
@@ -240,22 +240,22 @@ export default {
   components: { emojiSelect },
   created() {
 
-    document.title = "炒饭 - 聊天";
+    document.title = '炒饭 - 聊天';
 
     Date.prototype.format = function(fmt) {
       const o = {
-        "M+": this.getMonth() + 1,                 //月
-        "d+": this.getDate(),                    //日
-        "h+": this.getHours(),                   //时
-        "m+": this.getMinutes(),                 //分
-        "s+": this.getSeconds()                 //秒
+        'M+': this.getMonth() + 1,                 //月
+        'd+': this.getDate(),                    //日
+        'h+': this.getHours(),                   //时
+        'm+': this.getMinutes(),                 //分
+        's+': this.getSeconds()                 //秒
       };
       if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
       }
       for (const k in o) {
-        if (new RegExp("(" + k + ")").test(fmt)) {
-          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        if (new RegExp('(' + k + ')').test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
         }
       }
       return fmt;
@@ -273,7 +273,7 @@ export default {
       if (success) {
 
         // 新建的聊天
-        let newSingleChatChannelStr = localStorage.getItem("chao.fun.chat.newSingleChatChannel");
+        let newSingleChatChannelStr = localStorage.getItem('chao.fun.chat.newSingleChatChannel');
         let newSingleChatChannel = JSON.parse(newSingleChatChannelStr);
 
         if (newSingleChatChannel && newSingleChatChannel.id && !this.chatHistoryMap.has(newSingleChatChannel.id)) {
@@ -289,7 +289,7 @@ export default {
             item.chatMessagesArr = [];
             // 头像有为空的情形，做特殊处理
             if (!item.avatar) {
-              item.avatar = "biz/08a2d3a676f4f520cb99910496e48b4e.png";
+              item.avatar = 'biz/08a2d3a676f4f520cb99910496e48b4e.png';
             }
             this.chatHistoryMap.set(item.id, item);
           }
@@ -320,16 +320,16 @@ export default {
   },
   mounted() {
     // 添加监听事件
-    addEventListener("keydown", this.keyDown);
-    addEventListener("paste", this.toPaste);
+    addEventListener('keydown', this.keyDown);
+    addEventListener('paste', this.toPaste);
 
     // 输入框获取焦点
     this.$refs.textInputMark.focus();
   },
   destroyed() {
     // 移除监听事件
-    removeEventListener("keydown", this.keyDown);
-    removeEventListener("paste", this.toPaste);
+    removeEventListener('keydown', this.keyDown);
+    removeEventListener('paste', this.toPaste);
 
     // 关闭ws连接
     this.ws.close();
@@ -354,7 +354,7 @@ export default {
 
     //
     toUser(userid) {
-      window.open(location.origin + "/user/" + userid, "_blank");
+      window.open(location.origin + '/user/' + userid, '_blank');
     },
 
     // 上传图片处理
@@ -366,7 +366,7 @@ export default {
         // 发送图片
         this.onSendImage(res.data);
 
-      } else if (res.errorCode == "invalid_content") {
+      } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
@@ -379,7 +379,7 @@ export default {
     beforeImageUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.imagesNum++;
@@ -402,11 +402,11 @@ export default {
       if (!(e.clipboardData && e.clipboardData.items)) {
         return;
       }
-      if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === "string" && cbd.items[1].kind === "file" && cbd.types && cbd.types.length === 2 && cbd.types[0] === "text/plain" && cbd.types[1] === "Files" && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49) {
+      if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === 'string' && cbd.items[1].kind === 'file' && cbd.types && cbd.types.length === 2 && cbd.types[0] === 'text/plain' && cbd.types[1] === 'Files' && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49) {
         return;
       }
       const item = cbd.items[cbd.items.length - 1];
-      if (item.kind == "file" && (/^image\/[a-z]*$/.test(item.type))) {
+      if (item.kind == 'file' && (/^image\/[a-z]*$/.test(item.type))) {
         const blob = item.getAsFile();
         if (blob.size === 0) {
           return;
@@ -445,13 +445,13 @@ export default {
     },
 
     onClickSetting() {
-      Message.info("暂未开放");
+      Message.info('暂未开放');
     },
 
     // 发送图片
     onSendImage(imageUrl) {
       if (!this.currentChannelId || this.currentChannelId === 0) {
-        Message.info("暂无聊天，请先加入");
+        Message.info('暂无聊天，请先加入');
         return;
       }
 
@@ -469,7 +469,7 @@ export default {
       }
 
       if (!this.currentChannelId || this.currentChannelId === 0) {
-        Message.info("暂无聊天，请先加入");
+        Message.info('暂无聊天，请先加入');
         return;
       }
 
@@ -478,26 +478,26 @@ export default {
         return;
       }
       this.sendText(this.currentChannelId, text);
-      this.inputText = "";
+      this.inputText = '';
     },
 
     // 处理最新消息内容
     calcLastMessageContent(type, lastMessageType, lastMessageContent, lastMessageSender) {
       if (!lastMessageContent) {
-        lastMessageContent = "";
+        lastMessageContent = '';
       }
 
-      let returnStr = "";
-      if ("group" === type && lastMessageSender) {
-        returnStr = lastMessageSender.userName + ":";
+      let returnStr = '';
+      if ('group' === type && lastMessageSender) {
+        returnStr = lastMessageSender.userName + ':';
       }
 
-      if ("image" === lastMessageType) {
-        returnStr += "[图片]";
-      } else if ("text" === lastMessageType) {
-        returnStr += lastMessageContent.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\r", "").replaceAll("\n\n", "\n").replaceAll("\n", " ").trim();
+      if ('image' === lastMessageType) {
+        returnStr += '[图片]';
+      } else if ('text' === lastMessageType) {
+        returnStr += lastMessageContent.replaceAll(' ', '').replaceAll('\t', '').replaceAll('\r', '').replaceAll('\n\n', '\n').replaceAll('\n', ' ').trim();
       } else {
-        returnStr += "";
+        returnStr += '';
       }
 
       // if (returnStr.length > 11) {
@@ -510,16 +510,16 @@ export default {
     // 处理最新消息时间
     calcMessageTime(lastMessageTime) {
       if (!lastMessageTime) {
-        return "";
+        return '';
       }
 
       const date = new Date(lastMessageTime);
       const dateNow = new Date();
 
       if (date.getMonth() === dateNow.getMonth() && date.getDay() === dateNow.getDay()) {
-        return date.format("hh:mm");
+        return date.format('hh:mm');
       } else {
-        return date.format("MM-dd hh:mm");
+        return date.format('MM-dd hh:mm');
       }
 
     },
@@ -538,34 +538,34 @@ export default {
     modifyDocumentTitle() {
       setTimeout(() => {
         if (this.currentChannelId && this.chatHistoryMap.get(this.currentChannelId)) {
-          document.title = "炒饭 - 聊天 - " + this.chatHistoryMap.get(this.currentChannelId).name;
+          document.title = '炒饭 - 聊天 - ' + this.chatHistoryMap.get(this.currentChannelId).name;
         }
       }, 1);
     },
 
     // 弹出错误提示
     showMessageError() {
-      Message.error("未知错误！");
+      Message.error('未知错误！');
     },
 
     // 发送心跳
     sendHeartBeat() {
-      this.wsSend(`{"scope": "heart_beat"}`);
+      this.wsSend('{"scope": "heart_beat"}');
     },
 
     // 发送文字
     sendText(channelId, text) {
-      this.wsSend("{\"scope\": \"chat\", \"data\": {\"type\": \"text\", \"channelId\": " + channelId + ", \"content\": \"" + text + "\"}}");
+      this.wsSend('{"scope": "chat", "data": {"type": "text", "channelId": ' + channelId + ', "content": "' + text + '"}}');
     },
 
     // 发送图片
     sendImage(channelId, imageUrl) {
-      this.wsSend("{\"scope\": \"chat\", \"data\": {\"type\": \"image\", \"channelId\": " + channelId + ", \"content\": \"" + imageUrl + "\"}}");
+      this.wsSend('{"scope": "chat", "data": {"type": "image", "channelId": ' + channelId + ', "content": "' + imageUrl + '"}}');
     },
 
     // 发送：加载聊天记录
     sendLoadChatHistory(channelId) {
-      this.wsSend("{\"scope\": \"chat\", \"data\": {\"type\": \"load\", \"channelId\":" + channelId + "}}");
+      this.wsSend('{"scope": "chat", "data": {"type": "load", "channelId":' + channelId + '}}');
     },
 
     // 发送权限验证信息
@@ -578,23 +578,23 @@ export default {
 
     // 发送数据
     wsSend(data) {
-      console.log("wsSend: " + data);
+      console.log('wsSend: ' + data);
       this.ws.send(data);
     },
 
     // 接收数据
     handleReceiveMessage: function(data) {
-      if ("chat" !== data.scope) {
+      if ('chat' !== data.scope) {
         return;
       }
 
       const dataType = data.data.type.toString();
-      if ("load_result" === dataType) {
+      if ('load_result' === dataType) {
         const { channelId, chatMessages } = data.data.data;
         this.handleLoadResult(channelId, chatMessages);
-      } else if ("message" === dataType) {
+      } else if ('message' === dataType) {
         this.handleNewMessage(data.data.data);
-      } else if ("need_login" === dataType) {
+      } else if ('need_login' === dataType) {
         this.handleNeedLogin();
       } else {
         this.showMessageError();
@@ -606,7 +606,7 @@ export default {
     handleNeedLogin() {
       this.$login({
         callBack: () => {
-          this.$store.dispatch("user/getInfo");
+          this.$store.dispatch('user/getInfo');
         }
       });
     },
@@ -654,13 +654,13 @@ export default {
 
     // 强制页面渲染
     viewForceUpdate() {
-      console.log("viewForceUpdate...");
+      console.log('viewForceUpdate...');
       this.$forceUpdate();
     },
 
     //
     wsOnMessage(e) {
-      console.log("wsOnMessage");
+      console.log('wsOnMessage');
       // console.log(e);
       const data = JSON.parse(e.data);
       // console.log(data);
@@ -668,7 +668,7 @@ export default {
     },
 
     wsOnOpen(e) {
-      console.log("wsOnOpen");
+      console.log('wsOnOpen');
       // console.log(e);
 
       // 每3秒发送一次心跳
@@ -684,7 +684,7 @@ export default {
     },
 
     wsOnError(e) {
-      console.log("wsOnError");
+      console.log('wsOnError');
       // console.log(e);
 
       // TODO
@@ -692,12 +692,12 @@ export default {
     },
 
     wsOnClose(e) {
-      console.log("wsOnClose");
+      console.log('wsOnClose');
     },
 
     // 初始化
     wsInit() {
-      console.log("wsInit");
+      console.log('wsInit');
 
       if (this.ws) {
         this.ws.close();

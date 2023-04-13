@@ -221,13 +221,13 @@
 </template>
 
 <script>
-import {mapGetters, mapState} from "vuex";
-import * as api from "../../api/api";
-import ListItem from "../../components/chaofan/ListItemWidth.vue";
-import RightCom from "@/components/chaofan/RightCom";
+import {mapGetters, mapState} from 'vuex';
+import * as api from '../../api/api';
+import ListItem from '../../components/chaofan/ListItemWidth.vue';
+import RightCom from '@/components/chaofan/RightCom';
 // import "moment/locale/zh-cn";
-import moment from "moment";
-import commentitem from "@/components/chaofan/commentItem";
+import moment from 'moment';
+import commentitem from '@/components/chaofan/commentItem';
 
 export default {
   name: 'Dashboard',
@@ -247,8 +247,8 @@ export default {
         pageNum: 0,
         pageSize: 100,
         //order: 'hot'
-        order: ("new" == localStorage.getItem("chao.fun.localSetting.commentOrderType"))?"new":
-            (("old" == localStorage.getItem("chao.fun.localSetting.commentOrderType"))?"old":"hot"),
+        order: ('new' == localStorage.getItem('chao.fun.localSetting.commentOrderType')) ? 'new' :
+            (('old' == localStorage.getItem('chao.fun.localSetting.commentOrderType')) ? 'old' : 'hot'),
         // order: localStorage.getItem('chao.fun.timeline.order') == null ? 'hot': localStorage.getItem('chao.fun.timeline.order')
       },
       options: [
@@ -291,7 +291,7 @@ export default {
       searchkey: '',
       atUserName: [],
       jumpCommentId:0,
-    }
+    };
   },
   components: {
     ListItem,RightCom,commentitem
@@ -299,32 +299,32 @@ export default {
   watch: {
   },
   computed: {
-    ...mapGetters(["roles", "islogin"]),
+    ...mapGetters(['roles', 'islogin']),
     ...mapState(['var'])
   },
   mounted(){
     if (!location.host.includes('choa.fun') && !location.host.includes('8099')) {
-      window.location.href = window.location.href.replace(location.host, 'choa.fun')
+      window.location.href = window.location.href.replace(location.host, 'choa.fun');
     }
 
-    if("true" == localStorage.getItem("chao.fun.localSetting.isStoragePostOwnerCommentHighlight")){
-        this.isPostOwnerCommentHighlight = ("true" == localStorage.getItem("chao.fun.localSetting.isPostOwnerCommentHighlight"));
+    if('true' == localStorage.getItem('chao.fun.localSetting.isStoragePostOwnerCommentHighlight')){
+        this.isPostOwnerCommentHighlight = ('true' == localStorage.getItem('chao.fun.localSetting.isPostOwnerCommentHighlight'));
     }
 
-    if(document.body.clientWidth<700){
-      this.isPhone = true
+    if(document.body.clientWidth < 700){
+      this.isPhone = true;
     }
     if (window.history && window.history.pushState) {
-      console.log(this.var.path404==this.$route.fullPath)
+      console.log(this.var.path404 == this.$route.fullPath);
       if (this.var.path404 == this.$route.fullPath) {
         history.pushState(null, null, '/');
-        window.addEventListener("popstate", this.onCloseModal, false);
+        window.addEventListener('popstate', this.onCloseModal, false);
       }
     }
     this.$EventBus.$on('eventRefresh', ()=>{
         //需要执行的代码
       this.getDetail();
-    })
+    });
     // 创建键盘监听事件
     addEventListener('keydown', this.keyDown);
 
@@ -350,12 +350,12 @@ export default {
     this.getLists();
   },
   beforeMount () {
-    this.inputBlur()
+    this.inputBlur();
   },
   methods:{
 
     jumpCommentById(commentId) {
-      const elementById = document.getElementById("commentItem_" + commentId);
+      const elementById = document.getElementById('commentItem_' + commentId);
       if (elementById && elementById.offsetTop) {
         this.$refs.dialogMainMark.scrollTop = elementById.offsetTop - 40;
       }
@@ -378,33 +378,33 @@ export default {
     },
 
     postOwnerCommentHighlightCheckboxChange(val){
-      if("true" == localStorage.getItem("chao.fun.localSetting.isStoragePostOwnerCommentHighlight")){
-        localStorage.setItem("chao.fun.localSetting.isPostOwnerCommentHighlight",val);
+      if('true' == localStorage.getItem('chao.fun.localSetting.isStoragePostOwnerCommentHighlight')){
+        localStorage.setItem('chao.fun.localSetting.isPostOwnerCommentHighlight',val);
       }
     },
 
     checkoutOrder(){
-      if(this.params.order=='hot'){
-        this.params.order= 'new'
-      }else if(this.params.order=='new'){
-        this.params.order= 'old'
+      if(this.params.order == 'hot'){
+        this.params.order = 'new';
+      }else if(this.params.order == 'new'){
+        this.params.order = 'old';
       }else{
-        this.params.order= 'hot'
+        this.params.order = 'hot';
       }
-      this.getLists()
+      this.getLists();
     },
     chooseAt(e,it){
       // this.comment = this.comment+it.userName+' ';
       if(this.searchkey){
-        this.comment = this.comment.replace('@'+this.searchkey,'@'+it.userName+' ')
+        this.comment = this.comment.replace('@' + this.searchkey,'@' + it.userName + ' ');
       }else{
-        this.comment = this.comment+it.userName+' ';
+        this.comment = this.comment + it.userName + ' ';
       }
       this.searchkey = '';
       this.showAt = false;
       this.ats.push(it.userId);
-      this.atUserName.push('@'+it.userName);
-      console.log('this.atUserName',this.atUserName)
+      this.atUserName.push('@' + it.userName);
+      console.log('this.atUserName',this.atUserName);
       console.log(this.$(this.curInput));
       this.$(this.curInput).focus();
       // this.curInput
@@ -416,7 +416,7 @@ export default {
       // document.getElementById('')
       let index = e.target.selectionStart;//光标位置
       this.pointIndex = index;
-      if(this.comment[index-1]!='@'){
+      if(this.comment[index - 1] != '@'){
         this.showAt = false;
       }
       if(this.comment.includes('@')){
@@ -425,18 +425,18 @@ export default {
 
         let i = s.lastIndexOf('@');
         // if(index==i){return false}
-        let str = this.comment.slice(i+1,index);
+        let str = this.comment.slice(i + 1,index);
         let isHave = str.includes(' ');
         if(!isHave){
           this.atIndex = i;
           let params = {
             keyword: str
-          }
+          };
           this.searchkey = str;
           if(this.canSearch){
             this.canSearch = false;
             api.searchUserForAt(params).then(res=>{
-              if(res.success&&res.data.length){
+              if(res.success && res.data.length){
 
                 this.canSearch = true;
                 this.showAt = true;
@@ -448,130 +448,132 @@ export default {
               }
             }).catch((e)=>{
               this.canSearch = true;
-            })
+            });
           }
 
         }
-        if(e.code=='Backspace'&&this.atUserName.length){
+        if(e.code == 'Backspace' && this.atUserName.length){
           this.atUserName.forEach((item,ins)=>{
-            if(item.includes('@'+str)&&item.slice(0,-1)=='@'+str){
+            if(item.includes('@' + str) && item.slice(0,-1) == '@' + str){
               this.ats.splice(ins,1);
               this.atUserName.splice(ins,1);
               console.log(this.ats,this.atUserName);
             }
-          })
+          });
         }
-        console.log(str)
+        console.log(str);
       }
 
     },
     doType(item) {
       var t = item.type;
       switch (t) {
-        case "link":
-          return "链接";
+        case 'link':
+          return '链接';
           break;
-        case "gif":
-          return "GIF";
+        case 'gif':
+          return 'GIF';
           break;
-        case "image":
-          return "图片";
+        case 'image':
+          return '图片';
           break;
-        case "inner_video":
-          return "视频";
+        case 'inner_video':
+          return '视频';
           break;
-        case "article":
-          return "文章";
+        case 'article':
+          return '文章';
           break;
-        case "vote":
-          return "投票";
+        case 'vote':
+          return '投票';
           break;
-        case "forward":
-          return "转发";
+        case 'forward':
+          return '转发';
           break;
-        case "audio":
-          return "语音";
+        case 'audio':
+          return '语音';
           break;
         default:
-          return "其他";
+          return '其他';
       }
     },
     toDetail(item){
       this.$router.push({
-          name: "articleDetail",
+          name: 'articleDetail',
           params: { postId: item.postId },
         });
     },
     doColBg(it){
       // imgOrigin+it.imageName
-      return this.doImageUrl(it)
+      return this.doImageUrl(it);
     },
     listPosts(){
-      if(!this.pagedata.collection){return;}
+      if(!this.pagedata.collection){
+return;
+}
       let params = {
         collectionId: this.pagedata.collection.id
-      }
+      };
       api.listPosts(params).then(res=>{
         this.collectList = res.data;
-      })
+      });
     },
     doImageUrl(item) {
       var t = item.type;
       // debugger
       switch (t) {
-        case "link":
-        case "gif":
+        case 'link':
+        case 'gif':
           return this.doLink(item);
           break;
-        case "inner_video":
+        case 'inner_video':
           return (
             this.imgOrigin +
-            item["video"] +
-            "?x-oss-process=video/snapshot,t_0,m_fast,ar_auto,h_500"
+            item['video'] +
+            '?x-oss-process=video/snapshot,t_0,m_fast,ar_auto,h_500'
           );
           break;
-        case "article":
+        case 'article':
             if (item.imageName) {
              return this.imgOrigin +
               item.imageName +
-              "?x-oss-process=image/resize,h_150/quality,q_75"
+              '?x-oss-process=image/resize,h_150/quality,q_75';
             } else {
               return (
                   this.imgOrigin +
-                  "biz/b64193b7beca6ae243341273adddf494.png?x-oss-process=image/resize,h_150/quality,q_75"
+                  'biz/b64193b7beca6ae243341273adddf494.png?x-oss-process=image/resize,h_150/quality,q_75'
               );
             }
           break;
-        case "audio":
+        case 'audio':
           return (
               this.imgOrigin + 'biz/bc5c86c96e84a798930542444ceffcc5.webp?x-oss-process=image/resize,h_120/quality,q_75'
           );
           break;
-        case "image":
+        case 'image':
           return (
             this.imgOrigin +
             item.imageName +
-            "?x-oss-process=image/resize,h_150/quality,q_75"
+            '?x-oss-process=image/resize,h_150/quality,q_75'
           );
           break;
-        case "forward":
+        case 'forward':
           return this.doImageUrl(item.sourcePost);
           break;
       }
     },
     doLink(item) {
       if (item.cover) {
-        if (item.cover.includes(".ico")) {
+        if (item.cover.includes('.ico')) {
           return this.imgOrigin + item.cover;
         } else {
           return (
-            this.imgOrigin + item.cover + "?x-oss-process=image/resize,h_150/quality,q_75"
+            this.imgOrigin + item.cover + '?x-oss-process=image/resize,h_150/quality,q_75'
           );
         }
       } else {
         return (
           this.imgOrigin +
-          "biz/b06148ccba2c8b527d979942131a9fd9.png?x-oss-process=image/resize,h_150/quality,q_75"
+          'biz/b06148ccba2c8b527d979942131a9fd9.png?x-oss-process=image/resize,h_150/quality,q_75'
         );
       }
     },
@@ -579,25 +581,25 @@ export default {
         if(res.success){
             this.imageUrl = URL.createObjectURL(file.raw);
             this.images.push(res.data);
-        }else if(res.errorCode=='invalid_content'){
+        }else if(res.errorCode == 'invalid_content'){
             // this.imageUrl = ''
-            this.$toast(res.errorMessage)
+            this.$toast(res.errorMessage);
         }
-        this.imagesNum--
+        this.imagesNum--;
         if (!this.imagesNum) {
-          this.imagesUploading = false
+          this.imagesUploading = false;
         }
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
         this.$message.error('上传图片大小不能超过 20MB!');
-        return false
+        return false;
       }
-      this.imagesNum++
-      this.imagesUploading = true
-      this.filedata.fileName = file.name
-      return true
+      this.imagesNum++;
+      this.imagesUploading = true;
+      this.filedata.fileName = file.name;
+      return true;
     },
     handleAvatarExceed (files, fileList) {
       this.$message.warning({
@@ -607,16 +609,16 @@ export default {
     },
     refreshDelete(item){
       console.log('item',item);
-      let idx=-1;
-      item.text = '[已删除]'
+      let idx = -1;
+      item.text = '[已删除]';
       this.lists.forEach((it,index)=>{
         console.log(it);
         console.log(index);
-        if(it.id==item.id){
+        if(it.id == item.id){
           idx = index;
-          this.lists.splice(index,1,item)
+          this.lists.splice(index,1,item);
         }
-      })
+      });
       this.treeData = this.transformTree(this.lists);
     },
     refreshComment(obj){
@@ -624,7 +626,7 @@ export default {
       this.treeData = this.transformTree(this.lists);
     },
     cancelReplay(){
-      this.replayItem = null
+      this.replayItem = null;
     },
     toReplay2(item){
       this.replayItem = item;
@@ -635,25 +637,25 @@ export default {
           if(res){
 
           }else{
-              console.log('未登录',res)
+              console.log('未登录',res);
           }
-      })
+      });
     },
     showIcons(){
-      this.showIcon = true
+      this.showIcon = true;
     },
     chooseEmoji(item){
-      if(!this.pagedata.disableComment||this.pagedata.forumAdmin){
+      if(!this.pagedata.disableComment || this.pagedata.forumAdmin){
         this.comment += item;
-        this.showIcon = false
+        this.showIcon = false;
       }
 
     },
     manage() {
-      this.$router.push({path:'/f/' + this.forumInfo.id + '/setting'})
+      this.$router.push({path:'/f/' + this.forumInfo.id + '/setting'});
     },
     doZan(v,item){
-       if(v==1){
+       if(v == 1){
          if (item.vote != 1) {
             if (item.vote == -1) {
               item.ups += 2;
@@ -720,8 +722,8 @@ export default {
       }
     },
     inout(v){
-        let self = this
-        this.$router.replace({path: `/f/${this.forumInfo.id}`})
+        let self = this;
+        this.$router.replace({path: `/f/${this.forumInfo.id}`});
         // this.doLoginStatus().then(resolve=>{
         //     if(resolve){
         //         if(v==1){
@@ -752,15 +754,15 @@ export default {
         // })
     },
     gotologin(){
-      this.showLogin('login')
+      this.showLogin('login');
     },
     showLogin(v){
       this.$login({callBack:()=>{
-        this.$store.dispatch('user/getInfo')
+        this.$store.dispatch('user/getInfo');
       }});
     },
     gotoSubmit(){// 发帖
-      this.toPost(this.forumInfo.id, this.forumInfo.name, this.forumInfo.imageName)
+      this.toPost(this.forumInfo.id, this.forumInfo.name, this.forumInfo.imageName);
       // if(this.$store.state.user.islogin){
       //   this.$router.push({path: '/submit',query:{id: this.forumInfo.id,name:this.forumInfo.name}})
       // }else{
@@ -770,28 +772,28 @@ export default {
     changes(){
       localStorage.setItem('chao.fun.timeline.order', this.params.order);
       this.params.pageNum = 1;
-      this.lists = []
+      this.lists = [];
       this.getLists();
     },
     getForumInfo(){
       api.getForumInfo({forumId: this.params.forumId}).then(res=>{
-        this.forumInfo = res.data
-      })
+        this.forumInfo = res.data;
+      });
     },
     format(jsonData) {
-      var result = [], temp = {}, i = 0, j = 0, len = jsonData.length
-      for (var i=0; i < len; i++) {
+      var result = [], temp = {}, i = 0, j = 0, len = jsonData.length;
+      for (var i = 0; i < len; i++) {
         console.log(temp);
-        temp[jsonData[i]['id']] = jsonData[i].parentId // 以id作为索引存储元素，可以无需遍历直接定位元素
+        temp[jsonData[i]['id']] = jsonData[i].parentId; // 以id作为索引存储元素，可以无需遍历直接定位元素
       }
-      for (var j=0; j < len; j++) {
-        var currentElement = jsonData[j]
-        var tempCurrentElementParent = temp[currentElement['parentId']] // 临时变量里面的当前元素的父元素 parentId 父级ID
+      for (var j = 0; j < len; j++) {
+        var currentElement = jsonData[j];
+        var tempCurrentElementParent = temp[currentElement['parentId']]; // 临时变量里面的当前元素的父元素 parentId 父级ID
         if (tempCurrentElementParent) { // 如果存在父元素
           if (!tempCurrentElementParent['children']) { // 如果父元素没有chindren键
-            tempCurrentElementParent['children'] = [] // 设上父元素的children键
+            tempCurrentElementParent['children'] = []; // 设上父元素的children键
           }
-          tempCurrentElementParent['children'].push(currentElement) // 给父元素加上当前元素作为子元素
+          tempCurrentElementParent['children'].push(currentElement); // 给父元素加上当前元素作为子元素
         } else { // 不存在父元素，意味着当前元素是一级元素
           result.push(currentElement);
         }
@@ -800,16 +802,16 @@ export default {
       return result;
     },
     transformTree (list) {
-      const tree = []
+      const tree = [];
 
       for (let i = 0, len = list.length; i < len; i++) {
         if (!list[i].parentId) {
-        const item = this.queryChildren(list[i], list)
-        tree.push(item)
+        const item = this.queryChildren(list[i], list);
+        tree.push(item);
         }
       }
 
-      return tree
+      return tree;
     },
     gotoChat(){
       this.doLoginStatus().then(res=>{
@@ -819,30 +821,30 @@ export default {
             this.$store.dispatch('user/SET_showChatBox',false);
             setTimeout(()=>{
               this.$store.dispatch('user/SET_showChatBox',true);
-            },500)
+            },500);
           }else{
             this.$store.dispatch('user/SET_showChatBox',true);
           }
         }
-      })
+      });
     },
 
 queryChildren (parent, list) {
- const children = []
+ const children = [];
 
  for (let i = 0, len = list.length; i < len; i++) {
   if (list[i].parentId === parent.id) {
-   const item = this.queryChildren(list[i], list)
+   const item = this.queryChildren(list[i], list);
 
-   children.push(item)
+   children.push(item);
   }
  }
 
  if (children.length) {
-  parent.children = children
+  parent.children = children;
  }
 
- return parent
+ return parent;
 },
     getDetail(){
       api.getPostInfo({postId: this.params.postId}).then(res=>{
@@ -851,15 +853,15 @@ queryChildren (parent, list) {
           let data = res.data;
           this.pagedata = data;
           this.forumInfo = res.data.forum;
-          console.log(res.data.forum,'res')
-          document.title = res.data.title + " - 炒饭";
-          this.listPosts()
+          console.log(res.data.forum,'res');
+          document.title = res.data.title + ' - 炒饭';
+          this.listPosts();
         } else {
           this.hasData = false;
-          this.$store.commit('var/SET_PATH',this.$route.fullPath)
+          this.$store.commit('var/SET_PATH',this.$route.fullPath);
         }
 
-      })
+      });
     },
 
     async getNewLists() {
@@ -870,7 +872,7 @@ queryChildren (parent, list) {
       let params = this.params;
       api.listCommentsV0(params).then(res=>{
         if(res.data.length){
-          this.lists = []
+          this.lists = [];
 
           // 跳转高亮
           if (this.jumpCommentId) {
@@ -885,14 +887,14 @@ queryChildren (parent, list) {
           let data = this.lists;
           this.treeData = this.transformTree(data);
         }
-      })
+      });
     },
 
     back() {
-      if(this.forumInfo&&this.forumInfo.id){
+      if(this.forumInfo && this.forumInfo.id){
         this.centerDialogVisible = false;
       }else{
-        location.href = 'https://chao.fan'
+        location.href = 'https://chao.fan';
       }
     },
     close(e){
@@ -901,7 +903,7 @@ queryChildren (parent, list) {
         this.back();
         return;
       }
-      localStorage.setItem("simple", JSON.stringify(this.pagedata));
+      localStorage.setItem('simple', JSON.stringify(this.pagedata));
       if (localStorage.getItem('storedata')) {
         const obj = JSON.parse(localStorage.getItem('storedata'));
         // TODO: 优化缓存方式
@@ -911,21 +913,21 @@ queryChildren (parent, list) {
           return;
         }
         const { params, query } = obj.from;
-        query.time = new Date().getTime()
+        query.time = new Date().getTime();
         this.$router.replace({path: obj.from.path,params, query});
       } else {
         this.$router.replace({path: `/f/${this.forumInfo.id}`});
       }
     },
     doZanComment(v,item){
-        if(v==1){
+        if(v == 1){
             api.upvoteComment({commentId:item.id}).then(res=>{
-                item.ups += 1
-            })
+                item.ups += 1;
+            });
         }else{
             api.downvoteComment({commentId:item.id}).then(res=>{
-            item.ups -= 1
-            })
+            item.ups -= 1;
+            });
        }
     },
     toSub(){
@@ -944,42 +946,42 @@ queryChildren (parent, list) {
             }
             let reg = new RegExp(/@[^(\s)]+/g);
             let a = comment.match(reg);
-            console.log(a)
+            console.log(a);
             var ats = [];
             if(a){
               a.forEach((item,index)=>{
                 if(this.atUserName.includes(item)){
-                  let i = this.atUserName.findIndex(it=>it==item);
+                  let i = this.atUserName.findIndex(it=>it == item);
                   ats.push(this.ats[i]);
                 }
               });
-              console.log('atc',ats)
+              console.log('atc',ats);
               console.log(this.ats);
-              console.log(this.atUserName)
+              console.log(this.atUserName);
             }
 
             let params = {
-              parentId: this.replayItem&&this.replayItem.id?this.replayItem.id:'',
+              parentId: this.replayItem && this.replayItem.id ? this.replayItem.id : '',
               postId: this.params.postId,
               comment: this.comment,
               imageNames: this.images.join(','),
               ats: ats.join(',')
-            }
+            };
             this.canSub = false;
-            console.log(params)
+            console.log(params);
             api.addComments(params).then(res=> {
               this.canSub = true;
               if (res.success) {
                 this.images = [];
                 this.comment = '';
                 setTimeout(() => {
-                  this.getLists()
-                }, 1500)
+                  this.getLists();
+                }, 1500);
 
                 if (res.hintCode) {
-                  this.$toast(res.hintMessage)
+                  this.$toast(res.hintMessage);
                 } else {
-                  this.$toast('评论成功')
+                  this.$toast('评论成功');
                 }
               } else {
                 this.$toast(res.errorMessage);
@@ -987,13 +989,13 @@ queryChildren (parent, list) {
             }).catch(err => {
               this.canSub = true;
               this.$toast('未知错误');
-            })
+            });
             // }).error(res => {
             // })
           }else{
-                console.log('未登录',res)
+                console.log('未登录',res);
             }
-        })
+        });
       }else{
         this.$toast('正在提交评论...');
         return;
@@ -1003,21 +1005,21 @@ queryChildren (parent, list) {
     toPaste(e){
       var cbd = e.clipboardData;
       var ua = window.navigator.userAgent;
-      console.log(this.$refs.imageUpload)
+      console.log(this.$refs.imageUpload);
       if ( !(e.clipboardData && e.clipboardData.items) ) {
         return ;
       }
-      if(cbd.items && cbd.items.length === 2 && cbd.items[0].kind === "string" && cbd.items[1].kind === "file" && cbd.types && cbd.types.length === 2 && cbd.types[0] === "text/plain" && cbd.types[1] === "Files" && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49){
+      if(cbd.items && cbd.items.length === 2 && cbd.items[0].kind === 'string' && cbd.items[1].kind === 'file' && cbd.types && cbd.types.length === 2 && cbd.types[0] === 'text/plain' && cbd.types[1] === 'Files' && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49){
         return;
       }
       // for(var i = 0; i < cbd.items.length; i++) {
-      var item = cbd.items[cbd.items.length-1];
-      if(item.kind == "file" && (/^image\/[a-z]*$/.test(item.type))){
+      var item = cbd.items[cbd.items.length - 1];
+      if(item.kind == 'file' && (/^image\/[a-z]*$/.test(item.type))){
         var blob = item.getAsFile();
         if (blob.size === 0) {
           return;
         }
-        this.$refs.imageUpload.$children[0].uploadFiles([blob])
+        this.$refs.imageUpload.$children[0].uploadFiles([blob]);
       }
       // }
     },
@@ -1096,7 +1098,7 @@ queryChildren (parent, list) {
       }
     },
   }
-}
+};
 </script>
 <style lang="scss" scoped>
   .asa{

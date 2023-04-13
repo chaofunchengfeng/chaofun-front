@@ -1,5 +1,5 @@
-import variables from '@/styles/element-variables.scss'
-const defaultSettings = require('../../settings')
+import variables from '@/styles/element-variables.scss';
+const defaultSettings = require('../../settings');
 // {
 //   title: '炒饭-新趣、分享、交流',
 
@@ -36,7 +36,7 @@ const defaultSettings = require('../../settings')
 //   errorLog: 'production'
 // }
 
-const { showSettings, tagsView, fixedHeader, sidebarLogo } = defaultSettings
+const { showSettings, tagsView, fixedHeader, sidebarLogo } = defaultSettings;
 
 const state = {
   styles: defaultSettings.styles,
@@ -46,32 +46,32 @@ const state = {
   fixedHeader: fixedHeader,
   sidebarLogo: sidebarLogo,
   leftNav: 'normal'
-}
+};
 
 const mutations = {
   CHANGE_SETTING: (state, { key, value }) => {
     if (state.hasOwnProperty(key)) {
-      state[key] = value
+      state[key] = value;
     }
   },
   SET_leftNav: (state,data) => {
-    state.leftNav = data
+    state.leftNav = data;
   }
-}
+};
 
 const actions = {
   changeSetting({ commit }, data) {
-    commit('CHANGE_SETTING', data)
+    commit('CHANGE_SETTING', data);
   },
   SET_leftNav({ commit }, data) {
-    commit('SET_leftNav', data)
+    commit('SET_leftNav', data);
   },
-}
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
   actions
-}
+};
 

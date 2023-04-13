@@ -653,6 +653,6 @@ routes = [
     meta: { title: '炒饭用户协议'},
     hidden: true
   },
-]
+];
 
 export default  routes;

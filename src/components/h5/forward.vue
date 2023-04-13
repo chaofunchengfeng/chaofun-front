@@ -70,7 +70,7 @@
 import Vue from 'vue';
 import { ActionSheet,Form,Field,Button } from 'vant';
 // import 'vant/lib/index.css';
-import * as api from '../../api/api'
+import * as api from '../../api/api';
 Vue.use(ActionSheet);
 Vue.use(Form).use(Field).use(Button);
  export default {
@@ -83,7 +83,7 @@ Vue.use(Form).use(Field).use(Button);
        datas: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        }
    },
@@ -101,13 +101,13 @@ Vue.use(Form).use(Field).use(Button);
       options: [],
       indexs: '',
       chooseItem: {}
-     }
+     };
    },
    watch: {
      keyword(n,o){
-       this.indexs = ''
-       this.chooseItem = {}
-       this.getForum(n)
+       this.indexs = '';
+       this.chooseItem = {};
+       this.getForum(n);
      }
    },
    components: {
@@ -116,15 +116,15 @@ Vue.use(Form).use(Field).use(Button);
    created() {
    },
    mounted() {
-     this.getForum()
+     this.getForum();
    },
    methods: {
      cancel(){
-       this.datas.dialogVisible = false
+       this.datas.dialogVisible = false;
      },
      toClear(){
        this.indexs = '';
-       this.$refs.newinput.click()
+       this.$refs.newinput.click();
      },
     choose(item,index){
       this.indexs = index;
@@ -136,37 +136,37 @@ Vue.use(Form).use(Field).use(Button);
         api.searchForum({keyword}).then(res=>{
             this.options = res.data;
             this.chooseItem = res.data[0];
-            this.addForm.targetForumId = this.options[0].link
-        })
+            this.addForm.targetForumId = this.options[0].link;
+        });
     },
     onSub(){
         let params = {
             sourcePostId: this.datas.data.sourcePostId,
             targetForumId: this.addForm.targetForumId.split('/')[2],
             title: this.addForm.title
-        }
+        };
         if(params.title){
             api.submitForward(params).then(res=>{
-                this.$message.success('转发成功')
+                this.$message.success('转发成功');
                 setTimeout(()=>{
                     // this.$router.push({path: this.addForm.targetForumId})
                     let routeData = this.$router.resolve({
                         path: this.addForm.targetForumId
                     });
                     window.open(routeData.href, '_blank');
-                },1500)
-            })
+                },1500);
+            });
         }else{
             // this.$message.error('请输入分享标题')
         }
-        console.log(params)
+        console.log(params);
     },
      onSubmit(values) {
-       this.onSub()
+       this.onSub();
       console.log('submit', values);
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

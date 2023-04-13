@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import * as api from "../../api/api";
-import {some} from "lodash";
+import * as api from '../../api/api';
+import {some} from 'lodash';
 
 export default {
-  name: "scratch-list",
+  name: 'scratch-list',
   data() {
     return {
       total: 10000,
@@ -58,7 +58,7 @@ export default {
       innerCurrent: 1,
       // sort: 'new',
       // current: 1;
-    }
+    };
   },
   props: {
     sort: {
@@ -85,9 +85,9 @@ export default {
     console.log(this.sort);
     this.innerSort = this.sort;
     if (!this.has1Day) {
-      this.innerSort = 'hot'
+      this.innerSort = 'hot';
     }
-    this.innerCurrent = this.current
+    this.innerCurrent = this.current;
     this.getList();
   },
   methods: {
@@ -95,7 +95,7 @@ export default {
       api.getByPath('/api/v0/scratch/game/listV1', {order: this.innerSort, pageSize: 50, pageNum: this.innerCurrent, userId: this.userId, tag: this.tag}).then(res=>{
         this.list = res.data.games;
         this.total = res.data.total;
-      })
+      });
     },
     gotoGuess(item) {
       window.location.href = '/scratch/guess?id=' + item.id;
@@ -104,19 +104,19 @@ export default {
     changeSort(tab, event) {
       this.list = [];
       this.innerCurrent = 1;
-      this.$router.replace({query: {tagName: this.tag, sort: this.innerSort, page: this.innerCurrent  }})
+      this.$router.replace({query: {tagName: this.tag, sort: this.innerSort, page: this.innerCurrent  }});
       this.getList();
     },
 
     handleCurrentChange(current) {
-      this.$router.replace({query: {tagName: this.tag, sort: this.innerSort, page: this.innerCurrent}})
-      this.getList()
+      this.$router.replace({query: {tagName: this.tag, sort: this.innerSort, page: this.innerCurrent}});
+      this.getList();
     },
     gotoSearch() {
-      window.location.href = '/scratch/search'
+      window.location.href = '/scratch/search';
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

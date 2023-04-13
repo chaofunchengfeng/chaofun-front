@@ -290,12 +290,12 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
-  import Editor from '@/components/Submit/Editor'
-  import TagSelector from '@/components/Submit/TagSelector'
-  import CollectionSelector from '@/components/Submit/CollectionSelector'
-  import Uploader from '@/components/Submit/Uploader'
-  import DraftSelector from '@/components/Submit/DraftSelector'
+  import draggable from 'vuedraggable';
+  import Editor from '@/components/Submit/Editor';
+  import TagSelector from '@/components/Submit/TagSelector';
+  import CollectionSelector from '@/components/Submit/CollectionSelector';
+  import Uploader from '@/components/Submit/Uploader';
+  import DraftSelector from '@/components/Submit/DraftSelector';
 
   import {
     getForumInfo,
@@ -307,11 +307,11 @@
     submitVote,
     submitPrediction,
     getPredictionsTournament,
-  } from '@/api/api'
+  } from '@/api/api';
 
 
-  import { logo } from '@/settings'
-  import {getForumRules} from "../../api/api";
+  import { logo } from '@/settings';
+  import {getForumRules} from '../../api/api';
 
   export default {
     name: 'submitV2',
@@ -358,11 +358,11 @@
         filedata: {}, // 文件参数
         loading: false, // 发布中
         draftId: null, // 草稿箱
-      }
+      };
     },
     mounted() {
 
-      var tType = localStorage.getItem("chao.fun.localSetting.submitDefaultType");
+      var tType = localStorage.getItem('chao.fun.localSetting.submitDefaultType');
       if (tType && tType !== null) {
         this.type = tType;
       }
@@ -371,7 +371,7 @@
         this.getForumCategories();
         this.getForumRules();
         this.getPredictionsTournament();
-        this.get
+        this.get;
       });
 
       // 自动聚焦标题
@@ -389,7 +389,7 @@
           {},
           null,
           `/f/${forumId}/submit`
-        )
+        );
       },
       async getForum() {
         if (this.forum.id) {
@@ -414,7 +414,7 @@
       },
 
       async getPredictionsTournament() {
-        this.post.prediction= 'false';
+        this.post.prediction = 'false';
         if (this.forum.id) {
           const result = await getPredictionsTournament({ forumId: this.forum.id });
           if (result.success) {
@@ -481,8 +481,7 @@
           if (type === 'image' && (!post.ossNames || post.ossNames.length < 1)) {
             // 如果直接改this.type会造成UI变化
             this.doSubmit('article');
-          }
-          else {
+          } else {
             this.doSubmit(this.type);
           }
         });
@@ -502,7 +501,7 @@
           title: post.title,
           anonymity: post.anonymity,
           watermark: post.watermark,
-        }
+        };
         if (post.tagId) {
           params.tagId = post.tagId;
         }
@@ -529,7 +528,7 @@
             params.article = post.content;
             params.options = JSON.stringify(post.options);
             if (post.prediction == 'true' && this.predictionsTournament.id) {
-              params.predictionsTournamentId= this.predictionsTournament.id;
+              params.predictionsTournamentId = this.predictionsTournament.id;
               result = await submitPrediction(params);
             } else {
               result = await submitVote(params);
@@ -548,7 +547,7 @@
 
           this.$message.success('发布成功');
           setTimeout(() => {
-            this.$router.push({ path: "/p/"+result.data.postId })
+            this.$router.push({ path: '/p/' + result.data.postId });
           }, 1500);
         } catch (error) {
           console.error(error);
@@ -559,46 +558,46 @@
       },
       // 保存草稿箱
       saveDraft() {
-        const { post } = this
-        const content = this.$refs.editor.get()
+        const { post } = this;
+        const content = this.$refs.editor.get();
         if (this.draftId) {
-          this.$refs.draft.updateDraft(this.draftId, post.title, content, this.forum.id, this.forum.name, this.post.tagId, this.post.collectionId)
+          this.$refs.draft.updateDraft(this.draftId, post.title, content, this.forum.id, this.forum.name, this.post.tagId, this.post.collectionId);
         } else {
-          this.$refs.draft.saveDraft(post.title, content, this.forum.id, this.forum.name, this.post.tagId, this.post.collectionId)
+          this.$refs.draft.saveDraft(post.title, content, this.forum.id, this.forum.name, this.post.tagId, this.post.collectionId);
         }
       },
       // 返回旧版
       gotoOld() {
-        this.toPost(this.forum.id, this.forum.name, this.forum.imageName, false)
+        this.toPost(this.forum.id, this.forum.name, this.forum.imageName, false);
       },
       // 设置草稿内容
       async setDraftContent(draftArticle) {
         // 版块
         if (draftArticle.f) {
-          this.forum.id = draftArticle.f
-          this.post.forumId = draftArticle.f
-          await this.forumSelectOnChange(draftArticle.f)
+          this.forum.id = draftArticle.f;
+          this.post.forumId = draftArticle.f;
+          await this.forumSelectOnChange(draftArticle.f);
         }
 
-        this.draftId = draftArticle.i
-        this.post.title = draftArticle.t
-        this.post.content = draftArticle.c
+        this.draftId = draftArticle.i;
+        this.post.title = draftArticle.t;
+        this.post.content = draftArticle.c;
         if (draftArticle.ti) {
           this.post.tagId = draftArticle.ti;
-          this.$refs.tag.setTag(draftArticle.ti)
+          this.$refs.tag.setTag(draftArticle.ti);
         }
         if (draftArticle.ci) {
-          this.post.collectionId = draftArticle.ci
-          this.$refs.collection.setCollection(draftArticle.ci)
+          this.post.collectionId = draftArticle.ci;
+          this.$refs.collection.setCollection(draftArticle.ci);
         }
         this.$refs.editor.set(draftArticle.c);
         this.$refs.form.clearValidate();
       },
       unsupported() {
-        this.$toast('暂不支持，尽请期待')
+        this.$toast('暂不支持，尽请期待');
       }
     }
-  }
+  };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

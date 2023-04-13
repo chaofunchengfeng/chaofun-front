@@ -83,7 +83,7 @@
 
 <script>
 import Vue from 'vue';
-import * as api from '../../api/api'
+import * as api from '../../api/api';
 // import
  export default {
    name: '',
@@ -109,13 +109,13 @@ import * as api from '../../api/api'
              action: 'check',
              platform: 'android',
          }
-     }
+     };
    },
    components: {
 
    },
    created() {
-     document.title = "炒饭App-炒饭社区";
+     document.title = '炒饭App-炒饭社区';
 
      var u = navigator.userAgent, app = navigator.appVersion;
         var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
@@ -123,12 +123,12 @@ import * as api from '../../api/api'
    },
    mounted() {
      if (this.$route.query.inviter != null) {
-       localStorage.setItem("inviter", this.$route.query.inviter);
+       localStorage.setItem('inviter', this.$route.query.inviter);
      }
      api.getLatestAppVersion({'platform': 'ios'}).then(res => {
            if (res.success && res.data != null) {
                this.iosVersion = res.data.ios;
-               this.androidVersion= res.data.android;
+               this.androidVersion = res.data.android;
            }
      });
    },
@@ -143,8 +143,8 @@ import * as api from '../../api/api'
        document.body.removeChild(input);
      },
        back(){
-          this.copyLink()
-           this.$router.push({path: '/'})
+          this.copyLink();
+           this.$router.push({path: '/'});
        },
     isWeiXin(){
         var ua = window.navigator.userAgent.toLowerCase();
@@ -173,45 +173,47 @@ import * as api from '../../api/api'
             //     location.href = 'https://apps.apple.com/cn/app/%E7%82%92%E9%A5%AD%E8%B6%85fun/id1526950194'
             // }
             if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-              location.href = 'https://apps.apple.com/cn/app/%E7%82%92%E9%A5%AD%E8%B6%85fun/id1526950194'
+              location.href = 'https://apps.apple.com/cn/app/%E7%82%92%E9%A5%AD%E8%B6%85fun/id1526950194';
               // } else if (/(Android)/i.test(navigator.userAgent)) {
             } else {
                 // location.href = 'vivoMarket://details?id=com.chao.app'
-                if(type==2) {window.open('https://chaofun.oss-cn-hangzhou.aliyuncs.com/packages/chaofan.apk',"_blank"); return;}
+                if(type == 2) {
+window.open('https://chaofun.oss-cn-hangzhou.aliyuncs.com/packages/chaofan.apk','_blank'); return;
+}
                 //跳转到安卓商城地址
                 let ua = u.toLowerCase();
-                let isVivo = ua.indexOf("vivo") != -1;
-                let isHuawei = ua.indexOf("huawei") != -1;
-                let isMi = ua.indexOf("redmi") != -1 || ua.indexOf("xiaomi") != -1;
-                let isMeizu = ua.indexOf("meizu") != -1;
-                let isOppo = ua.indexOf("oppo") != -1;
+                let isVivo = ua.indexOf('vivo') != -1;
+                let isHuawei = ua.indexOf('huawei') != -1;
+                let isMi = ua.indexOf('redmi') != -1 || ua.indexOf('xiaomi') != -1;
+                let isMeizu = ua.indexOf('meizu') != -1;
+                let isOppo = ua.indexOf('oppo') != -1;
 
-                let hreff = "";
+                let hreff = '';
                 if (isVivo) {
-                    hreff = "vivoMarket://details?id=com.chao.app";
+                    hreff = 'vivoMarket://details?id=com.chao.app';
                 } else if (isHuawei) {
-                    hreff = "appmarket://details?id=com.chao.app";
+                    hreff = 'appmarket://details?id=com.chao.app';
                     // hreff = 'http://www.baidu.com'
                 } else if (isMi) {
-                    hreff = "mimarket://details?id=com.chao.app";
+                    hreff = 'mimarket://details?id=com.chao.app';
                 } else if (isMeizu) {
-                    hreff = "mstore://details?id=com.chao.app";
+                    hreff = 'mstore://details?id=com.chao.app';
                 } else if(isOppo){
-                    hreff = "market://details?id=com.chao.app";
+                    hreff = 'market://details?id=com.chao.app';
                 }else {
-                    hreff = "market://details?id=com.chao.app"; // 官网下载地址  也可以跳到应用宝
+                    hreff = 'market://details?id=com.chao.app'; // 官网下载地址  也可以跳到应用宝
                 }
                 try{
                     window.location.href = hreff;
                 }catch(e){
-                    window.open('https://chaofun.oss-cn-hangzhou.aliyuncs.com/packages/chaofan.apk',"_blank");
+                    window.open('https://chaofun.oss-cn-hangzhou.aliyuncs.com/packages/chaofan.apk','_blank');
                 }
 
             //   window.open('https://chao.fun/chaofan.apk',"_blank");
             }
         }else{
             if(isiOS){
-                location.href = 'https://apps.apple.com/cn/app/%E7%82%92%E9%A5%AD%E8%B6%85fun/id1526950194'
+                location.href = 'https://apps.apple.com/cn/app/%E7%82%92%E9%A5%AD%E8%B6%85fun/id1526950194';
             }else{
                 this.showCover = true;
             }
@@ -226,7 +228,7 @@ import * as api from '../../api/api'
       Toast('删除');
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

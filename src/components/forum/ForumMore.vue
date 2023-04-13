@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import { getForumRules, listForumBadges } from "@/api/api";
-import badgeDetail from "@/views/chaofun-webview/badge/badgeDetail.vue";
+import { getForumRules, listForumBadges } from '@/api/api';
+import badgeDetail from '@/views/chaofun-webview/badge/badgeDetail.vue';
 
 export default {
-  name: "ForumMore",
+  name: 'ForumMore',
   props: {
     forumId: {
       type: String,

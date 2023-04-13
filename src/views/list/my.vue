@@ -89,14 +89,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as api from "@/api/api";
+import { mapGetters } from 'vuex';
+import * as api from '@/api/api';
 
-import ListItem from "@/components/chaofan/ListItem.vue";
-import listComment from "@/views/list/ListComment";
-import attentionItem from "@/components/chaofan/attentionItem.vue";
-import loadText from "@/components/chaofan/loadText";
-import badgeDetail from "@/views/chaofun-webview/badge/badgeDetail.vue";
+import ListItem from '@/components/chaofan/ListItem.vue';
+import listComment from '@/views/list/ListComment';
+import attentionItem from '@/components/chaofan/attentionItem.vue';
+import loadText from '@/components/chaofan/loadText';
+import badgeDetail from '@/views/chaofun-webview/badge/badgeDetail.vue';
 
 export default {
   name: 'Dashboard',
@@ -135,7 +135,7 @@ export default {
       usersData: [],
       userInfo: {},
       badgeList: [],
-    }
+    };
   },
   components: {
     ListItem, loadText, attentionItem, badgeDetail,listComment,
@@ -147,7 +147,7 @@ export default {
     // }
   },
   activated() {
-    console.log('666', this.$route.query)
+    console.log('666', this.$route.query);
     if (this.$route.query.time) {
       this.toPosition();
     }
@@ -155,10 +155,10 @@ export default {
       let data = JSON.parse(localStorage.getItem('simple'));
       this.lists.forEach((its, index) => {
         if (data.postId == its.postId) {
-          this.lists.splice(index, 1, data)
+          this.lists.splice(index, 1, data);
         }
-      })
-      localStorage.removeItem('simple')
+      });
+      localStorage.removeItem('simple');
     }
   },
   computed: {
@@ -169,15 +169,15 @@ export default {
   },
   mounted() {
     if (document.body.clientWidth < 700) {
-      this.isPhone = true
+      this.isPhone = true;
     }
     this.toPosition();
     this.userInfo = this.$store.state.user.userInfo;
-    document.title = "我的主页 - 炒饭";
+    document.title = '我的主页 - 炒饭';
     let self = this;
-    this.$refs.container.addEventListener("scroll", function () {
+    this.$refs.container.addEventListener('scroll', function () {
       let scrollTop = self.$refs.container.scrollTop;
-      let conTop = self.$refs.container.scrollTop
+      let conTop = self.$refs.container.scrollTop;
       // 变量windowHeight是可视区的高度
       let conHeight = self.$refs.container.clientHeight;
       // 变量scrollHeight是滚动条的总高度
@@ -185,10 +185,10 @@ export default {
       //  console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
       // console.log(conTop,conHeight,scrollHeight)
       if (conTop + conHeight > scrollHeight || conTop + conHeight == scrollHeight) {
-        console.log('到底了')
+        console.log('到底了');
         if (self.ifcanget) {
           // self.load()
-          self.getLists()
+          self.getLists();
         }
       }
     });
@@ -196,19 +196,19 @@ export default {
   created() {
     let id = this.$route.path.split('/')[2];
     if (!isNaN(id)) {
-      this.params.forumId = id
+      this.params.forumId = id;
       // this.getLists()
     }
     if (localStorage.getItem('whichOne')) {
-      this.whichOne = localStorage.getItem('whichOne')
+      this.whichOne = localStorage.getItem('whichOne');
     }
     this.getUserBadgeList();
-    this.load()
+    this.load();
   },
   methods: {
 
     onBadgeSettingClick() {
-      window.open("/setting?tab=badge", "_blank");
+      window.open('/setting?tab=badge', '_blank');
     },
 
     getUserBadgeList() {
@@ -219,15 +219,15 @@ export default {
       });
     },
     checkout(v) {
-      this.loadAll = false
+      this.loadAll = false;
       if (this.whichOne != v) {
-        localStorage.setItem('whichOne', v)
-        this.params.marker = ''
+        localStorage.setItem('whichOne', v);
+        this.params.marker = '';
         this.whichOne = v;
-        this.lists = []
-        this.commentLists=[]
-        this.usersData = []
-        this.getLists()
+        this.lists = [];
+        this.commentLists = [];
+        this.usersData = [];
+        this.getLists();
       }
     },
     inout(v) {
@@ -241,9 +241,9 @@ export default {
                 type: 'success',
                 offset: 20
               });
-              this.getForumInfo()
+              this.getForumInfo();
             }
-          })
+          });
         } else if (v == 2) {
           api.leaveForum({forumId: this.params.forumId}).then(res => {
             if (res.success) {
@@ -252,22 +252,22 @@ export default {
                 type: 'success',
                 offset: 20
               });
-              this.getForumInfo()
+              this.getForumInfo();
             }
-          })
+          });
         }
       } else {
-        this.showLogin('login')
+        this.showLogin('login');
       }
     },
     gotologin() {
-      this.showLogin('login')
+      this.showLogin('login');
     },
     showLogin(v) {
       // this.$store.dispatch('user/SET_logStatus',v)
       this.$login({
         callBack: () => {
-          this.$store.dispatch('user/getInfo')
+          this.$store.dispatch('user/getInfo');
         }
       });
     },
@@ -275,20 +275,20 @@ export default {
       if (this.$store.state.user.islogin) {
 
       } else {
-        this.showLogin('login')
+        this.showLogin('login');
       }
     },
     changes() {
       localStorage.setItem('chao.fun.timeline.order', this.params.order);
       this.params.pageNum = 1;
-      this.lists = []
-      this.commentLists=[]
+      this.lists = [];
+      this.commentLists = [];
       this.getLists();
     },
     getForumInfo() {
       api.getForumInfo({forumId: this.params.forumId}).then(res => {
-        this.forumInfo = res.data
-      })
+        this.forumInfo = res.data;
+      });
     },
     getLists() {
       let params = this.params;
@@ -298,99 +298,99 @@ export default {
           if (res.data.marker) {
             this.params.marker = res.data.marker;
             if (res.data.length < this.params.pageSize) {
-              this.ifcanget = false
+              this.ifcanget = false;
             } else {
-              this.ifcanget = true
+              this.ifcanget = true;
             }
           } else {
-            this.loadAll = true
+            this.loadAll = true;
           }
-          this.lists.push(...res.data.posts)
-        })
+          this.lists.push(...res.data.posts);
+        });
       } else if (this.whichOne == 'comment') {
         api.getComments(params).then(res => {
           if (res.data.marker) {
             this.params.marker = res.data.marker;
             if (res.data.length < this.params.pageSize) {
-              this.ifcanget = false
+              this.ifcanget = false;
             } else {
-              this.ifcanget = true
+              this.ifcanget = true;
             }
           } else {
-            this.loadAll = true
+            this.loadAll = true;
           }
-          this.commentLists.push(...res.data.comments)
-        })
+          this.commentLists.push(...res.data.comments);
+        });
       } else if (this.whichOne == 'pub') {
         api.getListPosts(params).then(res => {
 
           if (res.data.marker) {
             this.params.marker = res.data.marker;
             if (res.data.length < this.params.pageSize) {
-              this.ifcanget = false
+              this.ifcanget = false;
             } else {
-              this.ifcanget = true
+              this.ifcanget = true;
             }
           } else {
-            this.loadAll = true
+            this.loadAll = true;
           }
-          this.lists.push(...res.data.posts)
-        })
+          this.lists.push(...res.data.posts);
+        });
       } else if (this.whichOne == 'save') {
         api.listSaved(params).then(res => {
 
           if (res.data.marker) {
             this.params.marker = res.data.marker;
             if (res.data.length < this.params.pageSize) {
-              this.ifcanget = false
+              this.ifcanget = false;
             } else {
-              this.ifcanget = true
+              this.ifcanget = true;
             }
           } else {
-            this.loadAll = true
+            this.loadAll = true;
           }
-          this.lists.push(...res.data.posts)
-        })
+          this.lists.push(...res.data.posts);
+        });
       } else if (this.whichOne == 'listFans') {
         params = {
           marker: this.params.marker,
           pageSize: this.params.pageSize,
           focusId: this.$store.state.user.userInfo.userId
-        }
+        };
         api.listFans(params).then(res => {
           // var res = {"success":true,"data":{"marker":"16","users":[{"userId":2,"userName":"yzc","icon":"f65dbe1941a8c0547dbb52710f61f957.jpg","ups":431,"followers":null,"focused":false,"gmtCreate":null,"gmtModified":null,"desc":"尘世的繁华掩盖不住心里那一抹伤，满目的浮云带不走隐痛的过往"}],"size":1}};
           if (res.data.marker) {
             this.params.marker = res.data.marker;
             if (res.data.length < this.params.pageSize) {
-              this.ifcanget = false
+              this.ifcanget = false;
             } else {
-              this.ifcanget = true
+              this.ifcanget = true;
             }
           } else {
-            this.loadAll = true
+            this.loadAll = true;
           }
-          this.usersData.push(...res.data.users)
-        })
+          this.usersData.push(...res.data.users);
+        });
       } else if (this.whichOne == 'listFocus') {
         params = {
           marker: this.params.marker,
           pageSize: this.params.pageSize,
           userId: this.$store.state.user.userInfo.userId
-        }
+        };
         api.listFocus(params).then(res => {
 
           if (res.data.marker) {
             this.params.marker = res.data.marker;
             if (res.data.length < this.params.pageSize) {
-              this.ifcanget = false
+              this.ifcanget = false;
             } else {
-              this.ifcanget = true
+              this.ifcanget = true;
             }
           } else {
-            this.loadAll = true
+            this.loadAll = true;
           }
-          this.usersData.push(...res.data.users)
-        })
+          this.usersData.push(...res.data.users);
+        });
       }
 
     },
@@ -406,11 +406,11 @@ export default {
 
       // }
       if (this.ifcanget) {
-        this.getLists()
+        this.getLists();
       }
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 

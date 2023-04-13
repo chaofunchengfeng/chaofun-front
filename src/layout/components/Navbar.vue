@@ -99,10 +99,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import * as api from '../../api/api'
+import { mapGetters } from 'vuex';
+import Breadcrumb from '@/components/Breadcrumb';
+import Hamburger from '@/components/Hamburger';
+import * as api from '../../api/api';
 
 
 export default {
@@ -115,13 +115,13 @@ export default {
       keyword: '',
       isPhone: false,
       message: {}
-    }
+    };
   },
   props:{
     userinfo:{
       type: Object,
       default(){
-        return {}
+        return {};
       }
     },
     islogin:{
@@ -142,13 +142,13 @@ export default {
     }
   },
   created(){
-    if(document.body.clientWidth<700){
-      this.isPhone = true
+    if(document.body.clientWidth < 700){
+      this.isPhone = true;
     }
     if(this.$route.query.q){
       this.keyword = this.$route.query.q;
     }
-    this.messageCheck()
+    this.messageCheck();
   },
   methods: {
     // ttt(){
@@ -166,25 +166,25 @@ export default {
     //   }
     // },
     toUrls(params){
-      this.message.hasNewMessage = false
-      this.message.unreadMessage = 0
-      this.$router.push(params)
+      this.message.hasNewMessage = false;
+      this.message.unreadMessage = 0;
+      this.$router.push(params);
     },
     messageCheck(){
       api.messageCheck().then(res=>{
-        this.message = res.data
-      })
+        this.message = res.data;
+      });
     },
     showLogin(){
       this.$login({callBack:()=>{
-        this.$store.dispatch('user/getInfo')
+        this.$store.dispatch('user/getInfo');
       }});
     },
     toSearch(){
       if(this.$route.path == 'search'){
 
       }else{
-        this.$router.push({name: 'search',query:{q:this.keyword}})
+        this.$router.push({name: 'search',query:{q:this.keyword}});
       }
     },
     searchs(v){
@@ -193,11 +193,11 @@ export default {
       this.$store.dispatch('app/toggleSideBar');
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('user/logout');
       // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

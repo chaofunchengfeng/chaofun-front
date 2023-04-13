@@ -74,12 +74,12 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '@/api/api';
+import {tuxunJump, tuxunOpen} from './common';
 
 
 export default {
-  name: "tuxunRank",
+  name: 'tuxunRank',
   components: {},
   data() {
     return {
@@ -99,12 +99,12 @@ export default {
   },
   methods: {
     getButtonRank() {
-      api.getByPath("/api/v0/tuxun/getRank").then(res => {
+      api.getByPath('/api/v0/tuxun/getRank').then(res => {
         this.pagedata = res.data;
       });
     },
     toUser(item) {
-      tuxunJump("/tuxun/user/" + item.userAO.userId);
+      tuxunJump('/tuxun/user/' + item.userAO.userId);
     },
 
     goHome() {

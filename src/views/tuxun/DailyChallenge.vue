@@ -80,11 +80,11 @@
 </template>
 
 <script>
-import {tuxunJump, tuxunOpen} from "./common";
-import * as api from '../../api/api'
+import {tuxunJump, tuxunOpen} from './common';
+import * as api from '../../api/api';
 
 export default {
-  name: "DailyChallenge",
+  name: 'DailyChallenge',
 
   data() {
     return {
@@ -98,19 +98,19 @@ export default {
       type: 'china',
       total: null,
 
-    }
+    };
   },
 
   created() {
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
-      window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun')
+      window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun');
     }
     this.type = this.$route.query.type;
     if (this.type === 'move' || this.type === 'noMove') {
       this.type = 'world';
     }
     if (!this.type) {
-      this.type = 'china'
+      this.type = 'china';
     }
     this.init();
   },
@@ -118,17 +118,17 @@ export default {
   methods: {
     initSelfRank() {
       api.getByPath('/api/v0/tuxun/challenge/getGameInfo', {'day': '1', type: this.type}).then(res => {
-        console.log(res.data)
+        console.log(res.data);
         if (res.success) {
           if (res.data) {
             this.gameData = res.data;
             this.challengeId = res.data.challengeId;
-            this.getDailyChallengeRank()
+            this.getDailyChallengeRank();
           }
         } else {
           this.showBegin = true;
         }
-      })
+      });
     },
     reload() {
       // tuxunJump('/tuxun/daily_challenge?type=' + this.type);
@@ -156,33 +156,33 @@ export default {
           this.challengeId = res.data;
           this.getRank();
         }
-      })
+      });
     },
     getDailyChallengeRank() {
       api.getByPath('/api/v0/tuxun/challenge/getDailyChallengeRank', {'challengeId': this.challengeId, 'gameId': this.gameData ? this.gameData.id : null }).then(res=>{
         this.dailyChallengeRank = res.data.rank;
         this.dailyChallengePercent = res.data.percent;
         this.dailyChallengeTotalPlayers = res.data.total;
-      })
+      });
     },
     goHome() {
       tuxunJump('/tuxun/');
     },
     beginCall() {
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
 
           api.getByPath('/api/v0/tuxun/challenge/start', {'gameId': this.gameData.id}).then(res => {
             this.gameData = res.data;
             tuxunJump('/tuxun/challenge?challengeId=' + this.gameData.challengeId);
-          })
+          });
         }
       });
     },
     begin() {
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
           this.beginCall();
         }
@@ -199,7 +199,7 @@ export default {
           this.rank = res.data.rank;
           this.total = res.data.total;
         }
-      })
+      });
     },
     toUser(user) {
       tuxunJump( '/tuxun/user/' + user.userId);
@@ -208,9 +208,9 @@ export default {
     getDate() {  //当前时间格式化处理
       var str = '';
       var date = new Date();
-      str += date.getFullYear() + "年 "; //获取年份
-      str += date.getMonth() + 1  + "月 "; //获取月份
-      str += date.getDate() + "日"; //获取日
+      str += date.getFullYear() + '年 '; //获取年份
+      str += date.getMonth() + 1  + '月 '; //获取月份
+      str += date.getDate() + '日'; //获取日
       return str;
     },
     share() {
@@ -223,11 +223,11 @@ export default {
       // this.$toast("复制成功");
 
       var textarea = document.createElement('textarea');
-      var text = "";
+      var text = '';
       if (this.type === 'world') {
-        text ="图寻 " + this.getDate().replaceAll(" ", "") +"\r\n每日挑战-全球\r\n我的得分：" + this.gameData.player.totalScore + "\r\n" + this.getEmoji() + "\r\n排名: " +  this.dailyChallengeRank + "/" + this.dailyChallengeTotalPlayers + "\r\nhttps://tuxun.fun/daily_challenge?type=world"
+        text = '图寻 ' + this.getDate().replaceAll(' ', '') + '\r\n每日挑战-全球\r\n我的得分：' + this.gameData.player.totalScore + '\r\n' + this.getEmoji() + '\r\n排名: ' +  this.dailyChallengeRank + '/' + this.dailyChallengeTotalPlayers + '\r\nhttps://tuxun.fun/daily_challenge?type=world';
       } else {
-        text ="图寻 " + this.getDate().replaceAll(" ", "") +"\r\n每日挑战-中国\r\n我的得分：" + this.gameData.player.totalScore + "\r\n" + this.getEmoji() +  "\r\n排名: " +  this.dailyChallengeRank + "/" + this.dailyChallengeTotalPlayers + "\r\nhttps://tuxun.fun/daily_challenge?type=china"
+        text = '图寻 ' + this.getDate().replaceAll(' ', '') + '\r\n每日挑战-中国\r\n我的得分：' + this.gameData.player.totalScore + '\r\n' + this.getEmoji() +  '\r\n排名: ' +  this.dailyChallengeRank + '/' + this.dailyChallengeTotalPlayers + '\r\nhttps://tuxun.fun/daily_challenge?type=china';
       }
 
       textarea.value = text;
@@ -235,31 +235,31 @@ export default {
       textarea.select();
       document.execCommand('copy');
       document.body.removeChild(textarea);
-      this.$toast('复制成功，去分享吧！')
+      this.$toast('复制成功，去分享吧！');
 
     },
     getEmoji() {
-      var emoji = "";
+      var emoji = '';
       this.gameData.player.roundResults.forEach(v => {
         if (v.score <= 1000) {
-          emoji += " 🟥";
+          emoji += ' 🟥';
         } else if (v.score <= 2000) {
-          emoji += " 🟧";
+          emoji += ' 🟧';
         } else if (v.score <= 3000) {
-          emoji += " 🟨";
+          emoji += ' 🟨';
         } else if (v.score <= 4000) {
-          emoji += " 🟩";
+          emoji += ' 🟩';
         } else if (v.score < 5000) {
-          emoji += " 🟦"
+          emoji += ' 🟦';
         } else if (v.score === 5000) {
-          emoji += " 🌈"
+          emoji += ' 🌈';
         }
-      })
+      });
       return emoji;
     }
   }
 
-}
+};
 </script>
 
 <style lang="scss" scoped>

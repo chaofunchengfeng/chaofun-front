@@ -10,18 +10,18 @@ export default {
   data(){
       return {
           show: false,
-      }
+      };
   },
   computed: {
     
   },
   mounted(){
-    this.$EventBus.$on("new-dialog", (data) => {
+    this.$EventBus.$on('new-dialog', (data) => {
       //需要执行的代码
       this.show = data;
     });
   },
-}
+};
 </script>
 
 

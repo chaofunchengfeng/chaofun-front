@@ -22,7 +22,7 @@ Vue.use(ActionSheet);
    data(){
      return {
 
-     }
+     };
    },
    components: {
 
@@ -34,7 +34,7 @@ Vue.use(ActionSheet);
    },
    methods: {
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

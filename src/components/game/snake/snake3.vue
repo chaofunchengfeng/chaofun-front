@@ -41,17 +41,17 @@
 </template>
 
 <script>
-import snake from './snake3.js'
+import snake from './snake3.js';
 const width = 260,height = 180;
-import * as api from '@/api/api'
-import {randomRange} from '@/utils'
+import * as api from '@/api/api';
+import {randomRange} from '@/utils';
 var data = {
         // 初始头位置
         x: 2,
         y: 2,
         size: 10, //大小
         timeout: 200, // 每隔多久刷新
-    }
+    };
     // var score = 0;
     // var canvas,ctx,snake,food,isover = false;
  export default {
@@ -66,7 +66,7 @@ var data = {
         //  speeds: [200,150,100],
          copyDatas: {},
          score: 0
-     }
+     };
    },
    props: {
        datas: {
@@ -83,7 +83,7 @@ var data = {
                             size: 10, //大小
                             timeout: 200, // 每隔多久刷新
                         }
-                }
+                };
            }
        }
    },
@@ -93,11 +93,11 @@ var data = {
    created() {
        this.width = this.datas.width;
        this.height = this.datas.height;
-       this.copyDatas = JSON.parse(JSON.stringify(this.datas))
+       this.copyDatas = JSON.parse(JSON.stringify(this.datas));
    },
    mounted() {
        snake.init(this.datas,this.doBackScore,this.gameOver);
-       console.log(randomRange(40))
+       console.log(randomRange(40));
    },
    methods: {
        gameOver(score){
@@ -106,44 +106,44 @@ var data = {
             
             randomStr = Array.from(randomStr);
             console.log(randomStr);
-            randomStr[8] = parseInt(this.score/1000)
-            randomStr[18] = parseInt((this.score%1000)/100)
-            randomStr[28] = parseInt((this.score%1000%100)/10)
-            randomStr[38] = parseInt(this.score%1000%100%10)
-            randomStr[6] = 'x'
-            randomStr[16] = 'y'
-            randomStr[26] = 'z'
-            console.log(randomStr[7],randomStr[17],randomStr[27],randomStr[37],randomStr.join(''))
-            randomStr = randomStr.join('')
+            randomStr[8] = parseInt(this.score / 1000);
+            randomStr[18] = parseInt((this.score % 1000) / 100);
+            randomStr[28] = parseInt((this.score % 1000 % 100) / 10);
+            randomStr[38] = parseInt(this.score % 1000 % 100 % 10);
+            randomStr[6] = 'x';
+            randomStr[16] = 'y';
+            randomStr[26] = 'z';
+            console.log(randomStr[7],randomStr[17],randomStr[27],randomStr[37],randomStr.join(''));
+            randomStr = randomStr.join('');
            api.submitScore({score: randomStr}).then(res=>{
 
-           })
+           });
        },
        bigModel(){
-           this.$router.push({name: 'gamePage'})
+           this.$router.push({name: 'gamePage'});
        },
        speed(v){
            this.level = v;
-           snake.changeLevel(this.datas.speeds[v-1])
+           snake.changeLevel(this.datas.speeds[v - 1]);
        },
        doBackScore(v){
            this.score = v;
-           console.log(v)
+           console.log(v);
        },
        doScore(v){
-           console.log(v)
-           if(v==this.lavelScore[this.level]){
-               console.log('this.datas.timeout',this.datas.data.timeout)
+           console.log(v);
+           if(v == this.lavelScore[this.level]){
+               console.log('this.datas.timeout',this.datas.data.timeout);
                this.level += 1;
-               this.datas.data.timeout -= 100
-               snake.changeLevel(this.datas.data.timeout)
+               this.datas.data.timeout -= 100;
+               snake.changeLevel(this.datas.data.timeout);
            }
        },
        restart(){
-           this.datas = this.copyDatas
+           this.datas = this.copyDatas;
        }
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

@@ -16,13 +16,13 @@
 </template>
 
 <script>
-  import fbi from '@/views/chaofun-webview/fbi/fbi.vue'
+  import fbi from '@/views/chaofun-webview/fbi/fbi.vue';
   export default {
     components: {
       fbi
     },
     mounted() {
-      document.title = "饭币（FBi）";
+      document.title = '饭币（FBi）';
     }
-  }
+  };
 </script>

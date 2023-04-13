@@ -150,8 +150,8 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import moment from 'moment'
+import * as api from '../../api/api';
+import moment from 'moment';
 import reportDialog from '@/components/report/report.vue';
 
 export default {
@@ -187,13 +187,13 @@ export default {
       __viewer: null,
       isShowCopyCommentLinkTmp: this.isShowCopyCommentLink,
       isShowReportCommentTmp: this.isShowReportComment,
-    }
+    };
   },
   props: {
     treeData: {
       type: Array,
       default() {
-        return []
+        return [];
       }
     },
     showRep: {
@@ -203,7 +203,7 @@ export default {
     postInfo: {
       type: Object,
       default() {
-        return {}
+        return {};
       }
     },
     withoutSubComment: {
@@ -226,11 +226,11 @@ export default {
   },
   mounted() {
     // 监听是否显示操作事件
-    this.$EventBus.$on("isShowCopyCommentLink", (data) => {
+    this.$EventBus.$on('isShowCopyCommentLink', (data) => {
       this.isShowCopyCommentLinkTmp = data;
     });
     // 监听是否显示举报事件
-    this.$EventBus.$on("isShowReportComment", (data) => {
+    this.$EventBus.$on('isShowReportComment', (data) => {
       this.isShowReportCommentTmp = data;
     });
 
@@ -238,7 +238,7 @@ export default {
   watch: {
     showRep: function (val) {
       if (val === false) {
-        this.replayItem = null
+        this.replayItem = null;
       }
     }
   },
@@ -341,9 +341,9 @@ export default {
         item.atUsers.forEach((it, ins) => {
           let b = it.userName;
           if (m.includes(it.userName)) {
-            m = m.replace('@' + b, '<span key="' + it.userId + '" class="light" style="color:rgba(24, 144, 255,0.8);font-size:14px;">@' + b + '</span>')
+            m = m.replace('@' + b, '<span key="' + it.userId + '" class="light" style="color:rgba(24, 144, 255,0.8);font-size:14px;">@' + b + '</span>');
           }
-        })
+        });
 
       }
       return m;
@@ -351,7 +351,7 @@ export default {
     chooseAt(e, it) {
       // this.comment = this.comment+it.userName+' ';
       if (this.searchkey) {
-        this.comment = this.comment.replace('@' + this.searchkey, '@' + it.userName + ' ')
+        this.comment = this.comment.replace('@' + this.searchkey, '@' + it.userName + ' ');
       } else {
         this.comment = this.comment + it.userName + ' ';
       }
@@ -359,7 +359,7 @@ export default {
       this.showAt = false;
       this.ats.push(it.userId);
       this.atUserName.push('@' + it.userName);
-      console.log('this.atUserName', this.atUserName)
+      console.log('this.atUserName', this.atUserName);
       console.log(this.$(this.curInput));
       this.$(this.curInput).focus();
       // this.curInput
@@ -386,7 +386,7 @@ export default {
           this.atIndex = i;
           let params = {
             keyword: str
-          }
+          };
           this.searchkey = str;
           if (this.canSearch) {
             this.canSearch = false;
@@ -403,7 +403,7 @@ export default {
               }
             }).catch((e) => {
               this.canSearch = true;
-            })
+            });
           }
         }
         if (e.code == 'Backspace' && this.atUserName.length) {
@@ -413,9 +413,9 @@ export default {
               this.atUserName.splice(ins, 1);
               console.log(this.ats, this.atUserName);
             }
-          })
+          });
         }
-        console.log(str)
+        console.log(str);
       }
 
     },
@@ -423,7 +423,7 @@ export default {
       var a = item.split(',');
       a.forEach(it => {
         it = this.imgOrigin + it;
-      })
+      });
       this.is = a;
     },
     handleAvatarSuccess(res, file) {
@@ -432,23 +432,23 @@ export default {
         this.images.push(res.data);
       } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
-        this.$toast(res.errorMessage)
+        this.$toast(res.errorMessage);
       }
-      this.imagesNum--
+      this.imagesNum--;
       if (!this.imagesNum) {
-        this.imagesUploading = false
+        this.imagesUploading = false;
       }
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
         this.$message.error('上传图片大小不能超过 20MB!');
-        return false
+        return false;
       }
-      this.imagesNum++
-      this.imagesUploading = true
-      this.filedata.fileName = file.name
-      return true
+      this.imagesNum++;
+      this.imagesUploading = true;
+      this.filedata.fileName = file.name;
+      return true;
     },
     handleAvatarExceed(files, fileList) {
       this.$message.warning({
@@ -457,33 +457,35 @@ export default {
       });
     },
     showIcons() {
-      this.showIcon = true
+      this.showIcon = true;
     },
     toReplay2(item) {
-      this.$emit('toReplay2', item)
+      this.$emit('toReplay2', item);
     },
     toReplay(item) {
       //    this.replayItem = null;
-      if (this.replayItem === item) return
-      this.images = []
-      this.$set(this, 'replayItem', item)
+      if (this.replayItem === item) {
+return;
+}
+      this.images = [];
+      this.$set(this, 'replayItem', item);
       // this.replayItem = item;
-      this.$emit('rep', item, true)
-      this.showR = false
+      this.$emit('rep', item, true);
+      this.showR = false;
     },
     cancelReplay() {
-      this.replayItem = null
-      this.$emit('rep', null, false)
+      this.replayItem = null;
+      this.$emit('rep', null, false);
     },
     rep(item, bool) {
       this.replayItem = item;
-      this.showR = bool
+      this.showR = bool;
     },
     refreshComment(obj) {
-      this.$emit('refreshComment', obj)
+      this.$emit('refreshComment', obj);
     },
     refreshDelete(item) {
-      this.$emit('refreshDelete', item)
+      this.$emit('refreshDelete', item);
     },
     deleteComment(item) {
       this.$confirm('此操作将删除此评论, 是否继续?', '温馨提示', {
@@ -498,7 +500,7 @@ export default {
             this.refreshDelete(item);
             // this.treeData.splice(index,1);
           }
-        })
+        });
       }).catch(() => {
       });
 
@@ -534,7 +536,7 @@ export default {
     },
 
     copyCommentLink(item) {
-      const url = "https://chao.fan/p/" + item.postId + "?commentId=" + item.id;
+      const url = 'https://chao.fan/p/' + item.postId + '?commentId=' + item.id;
       this.copy2Clipboard(url);
       this.$toast('复制链接成功！');
     },
@@ -557,7 +559,7 @@ export default {
             }
             let reg = new RegExp(/@[^(\s)]+/g);
             let a = comment.match(reg);
-            console.log(a)
+            console.log(a);
             var ats = [];
             if (a) {
               a.forEach((item, index) => {
@@ -566,9 +568,9 @@ export default {
                   ats.push(this.ats[i]);
                 }
               });
-              console.log('atc', ats)
+              console.log('atc', ats);
               console.log(this.ats);
-              console.log(this.atUserName)
+              console.log(this.atUserName);
             }
             let params = {
               parentId: this.replayItem && this.replayItem.id ? this.replayItem.id : '',
@@ -576,7 +578,7 @@ export default {
               comment: this.comment,
               imageNames: this.images.join(','),
               ats: ats.join(',')
-            }
+            };
             console.log(this.comment);
             this.canSub = false;
             api.addComments(params).then(res => {
@@ -592,11 +594,11 @@ export default {
                     ups: 0,
                     userInfo: this.userinfo
                   };
-                  this.$emit('refreshComment', res.data)
-                  this.replayItem = null
-                  this.comment = ''
+                  this.$emit('refreshComment', res.data);
+                  this.replayItem = null;
+                  this.comment = '';
                   this.canSub = true;
-                }, 1500)
+                }, 1500);
               } else {
                 this.$toast(res.errorMessage);
                 this.canSub = true;
@@ -604,12 +606,12 @@ export default {
             }).catch(err => {
               this.canSub = true;
               this.$toast('未知错误');
-            })
+            });
 
           } else {
-            console.log('未登录', res)
+            console.log('未登录', res);
           }
-        })
+        });
       } else {
         this.$toast('正在提交评论...');
         return;
@@ -629,7 +631,7 @@ export default {
           item.ups -= 1;
         }
         api.upvoteComment({commentId: item.id}).then(res => {
-        })
+        });
       } else {
         // 在我评论的列表里item.vote传的是null
         if (!item.vote || item.vote == 0) {
@@ -644,12 +646,12 @@ export default {
         }
         api.downvoteComment({commentId: item.id}).then(res => {
 
-        })
+        });
       }
     },
     chooseEmoji(item) {
       this.comment += item;
-      this.showIcon = false
+      this.showIcon = false;
     },
     toPaste(e) {
       var cbd = e.clipboardData;
@@ -657,17 +659,17 @@ export default {
       if (!(e.clipboardData && e.clipboardData.items)) {
         return;
       }
-      if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === "string" && cbd.items[1].kind === "file" && cbd.types && cbd.types.length === 2 && cbd.types[0] === "text/plain" && cbd.types[1] === "Files" && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49) {
+      if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === 'string' && cbd.items[1].kind === 'file' && cbd.types && cbd.types.length === 2 && cbd.types[0] === 'text/plain' && cbd.types[1] === 'Files' && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49) {
         return;
       }
       // for(var i = 0; i < cbd.items.length; i++) {
       var item = cbd.items[cbd.items.length - 1];
-      if (item.kind == "file" && (/^image\/[a-z]*$/.test(item.type))) {
+      if (item.kind == 'file' && (/^image\/[a-z]*$/.test(item.type))) {
         var blob = item.getAsFile();
         if (blob.size === 0) {
           return;
         }
-        this.$refs.replyImageUpload[0].$children[0].uploadFiles([blob])
+        this.$refs.replyImageUpload[0].$children[0].uploadFiles([blob]);
       }
       // }
     },
@@ -682,7 +684,7 @@ export default {
       this.humanizeTimeFormat = !this.humanizeTimeFormat;
     },
   }
-}
+};
 </script>
 
 <style lang='scss' scoped type='text/scss'>

@@ -28,7 +28,7 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 export default {
   name: 'Home',
   components: {
@@ -37,30 +37,30 @@ export default {
   data(){
       return {
           pagedata: []
-      }
+      };
   },
   created(){
   },
   mounted(){
-    this.getForumTopUps()
-    document.title = "24 小时版块排名";
+    this.getForumTopUps();
+    document.title = '24 小时版块排名';
   },
   methods:{
     getForumTopUps(){
-        console.log("cijianzy")
+        console.log('cijianzy');
         api.getForumTopUps({'pageSize': 100}).then(res=>{
-            this.pagedata = res.data
-        })
+            this.pagedata = res.data;
+        });
     },
     toUser(item){
         try {
-            window.flutter_inappwebview.callHandler('toAppForum',{forumId: item.id+''})
+            window.flutter_inappwebview.callHandler('toAppForum',{forumId: item.id + ''});
         } catch (e) {
-            window.open(location.origin + '/f/'+item.id,"_blank");
+            window.open(location.origin + '/f/' + item.id,'_blank');
         }
     }
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

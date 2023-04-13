@@ -10,11 +10,11 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import {banlist, forumAddBan, postByPath} from "../../../api/api";
+  import * as api from '@/api/api';
+  import {banlist, forumAddBan, postByPath} from '../../../api/api';
 
   export default {
-    name: "mod_manager",
+    name: 'mod_manager',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
@@ -31,7 +31,7 @@
         tableData: '',
         tableDesc: '',
         tableId: null,
-      }
+      };
     },
     props: {
       forumId0: {
@@ -47,7 +47,7 @@
       } else {
         this.forumId = this.$route.query.forumId;
       }
-      this.getTable()
+      this.getTable();
     },
 
     mounted() {
@@ -56,9 +56,9 @@
     methods: {
       add() {
         if (this.tableName == null || this.tableName === '') {
-          this.$toast('标题不能为空')
+          this.$toast('标题不能为空');
         } else  if (this.tableData == null || this.tableData === '') {
-          this.$toast('表格内容不能为空')
+          this.$toast('表格内容不能为空');
         } else {
           api.postByPath('/api/v0/forum/table/set', {'forumId': this.forumId, 'id': this.tableId, 'name': this.tableName, 'data': this.tableData, 'desc': this.tableDesc}
           ).then((res) => {
@@ -80,15 +80,15 @@
           }
 
           this.tableName = res.data[0]['name'];
-          this.tableId = res.data[0]['id']
+          this.tableId = res.data[0]['id'];
           api.getByPath('/api/v0/forum/table/get', { tableId: res.data[0]['id'] }).then((res1) => {
             this.tableData = res1.data.data;
             this.tableDesc = res1.data.desc;
           });
-        })
+        });
       }
     }
-  }
+  };
 
 </script>
 

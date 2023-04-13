@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { getlistTag } from '@/api/api'
+import { getlistTag } from '@/api/api';
 export default {
   props: {
     forumId: {
@@ -70,7 +70,7 @@ export default {
       tagId: null, // 预选Tag
       tagSearch: '', // Tag 搜索
       tagModalVisible: false, // Tag Modal是否显示
-    }
+    };
   },
   mounted() {
     this.forumId && this.getForumTag(this.forumId);
@@ -126,7 +126,7 @@ export default {
       }
     },
   }
-}
+};
 </script>
 
 <style type='text/scss' lang='scss' scoped>

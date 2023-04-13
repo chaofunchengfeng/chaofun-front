@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
 export default {
   components: {
     draggable,
@@ -99,7 +99,7 @@ export default {
       return parseInt(val, 10);
     },
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .image-uploader-sort-list {

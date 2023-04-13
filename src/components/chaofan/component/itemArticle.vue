@@ -49,13 +49,13 @@ export default {
   data(){
   return {
     imgsArr: []
-  }
+  };
   },
   props: {
     item: {
       type: Object,
       default(){
-        return {}
+        return {};
       }
     },
     isDetail: {
@@ -72,7 +72,7 @@ export default {
   mounted() {
     var el = document.getElementById('detail_line');
     if (el) {
-      var imgs = el.getElementsByTagName("img");
+      var imgs = el.getElementsByTagName('img');
       for (let index = 0; index < imgs.length; index++) {
         const element = imgs[index];
         this.imgsArr.push(element.src);
@@ -103,7 +103,7 @@ export default {
   methods: {
     toUrls(item,params){
       this.postBehavior(item.postId,'jump');
-      this.toUrl(params)
+      this.toUrl(params);
     },
     // 过滤内容
     filterContent(content) {
@@ -121,7 +121,7 @@ export default {
       return content;
     }
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

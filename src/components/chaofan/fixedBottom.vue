@@ -23,7 +23,7 @@
    data(){
      return {
 
-     }
+     };
    },
    computed:{
        show(){
@@ -43,10 +43,10 @@
    methods: {
     cancelDown(){
         // this.show = false;
-        this.$store.dispatch('user/SET_showDownApp',false)
+        this.$store.dispatch('user/SET_showDownApp',false);
     }
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

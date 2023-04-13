@@ -28,11 +28,11 @@
 
 <script>
 
-import * as api from "@/api/api";
-import { listManageForums } from "@/api/api";
+import * as api from '@/api/api';
+import { listManageForums } from '@/api/api';
 
 export default {
-  name: "listManageForums",
+  name: 'listManageForums',
   data() {
     return {
       manageForumsList: []
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     toForum(forumId) {
-      window.open("/f/" + forumId, "_blank");
+      window.open('/f/' + forumId, '_blank');
     },
 
     getList() {

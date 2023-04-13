@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
+import * as api from '../../api/api';
  export default {
    name: '',
    data(){
@@ -95,13 +95,13 @@ import * as api from '../../api/api'
          options: [],
          loading: false,
          targetForumId: ''
-     }
+     };
    },
    props: {
        datas: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        }
    },
@@ -111,71 +111,71 @@ import * as api from '../../api/api'
    created() {
    },
    mounted() {
-    this.getForum()
+    this.getForum();
    },
    methods: {
     getForum(keyword){
         api.searchForum({keyword}).then(res=>{
-            this.options = res.data
+            this.options = res.data;
             // if(keyword){
             //     this.addForm.targetForumId = this.options[0].link
             // }
             
-        })
+        });
     },
     blurs(v){
-        console.log(v)
-        let bool = false
+        console.log(v);
+        let bool = false;
         if(this.addForm.targetForumId){
             this.options.forEach(item=>{
                 if(this.addForm.targetForumId == item.title){
-                    this.addForm.targetForumId = item.link
-                    bool = true
+                    this.addForm.targetForumId = item.link;
+                    bool = true;
                 }
-            })
+            });
             if(!bool){
-                this.addForm.targetForumId = this.options.length?this.options[0].link:''
+                this.addForm.targetForumId = this.options.length ? this.options[0].link : '';
             }
         }
     },
     toOpen(v){
-      console.log(v)
-      this.$set(this.addForm,'targetForumId',v)
+      console.log(v);
+      this.$set(this.addForm,'targetForumId',v);
     },
     changes(v){
     //   this.getForum(v?v:'')
-        console.log(v)
-        this.getForum(v?v:'')
-        this.addForm.targetForumId = v
+        console.log(v);
+        this.getForum(v ? v : '');
+        this.addForm.targetForumId = v;
     },
     onSub(){
         let params = {
             sourcePostId: this.datas.data.sourcePostId,
             targetForumId: this.addForm.targetForumId.split('/')[2],
             title: this.addForm.title
-        }
-        if(params.title&&this.addForm.targetForumId){
+        };
+        if(params.title && this.addForm.targetForumId){
             api.submitForward(params).then(res=>{
-                this.$message.success('转发成功')
+                this.$message.success('转发成功');
                 setTimeout(()=>{
                     // this.$router.push({path: this.addForm.targetForumId})
-                    this.datas.dialogVisible = false
+                    this.datas.dialogVisible = false;
                     let routeData = this.$router.resolve({
                         path: this.addForm.targetForumId
                     });
                     window.open(routeData.href, '_blank');
-                },1500)
-            })
+                },1500);
+            });
         }else{
-            this.$message.error('请填写完整')
+            this.$message.error('请填写完整');
         }
-        console.log(params)
+        console.log(params);
     },
        handleClose(){
-           this.datas.dialogVisible = false
+           this.datas.dialogVisible = false;
        }
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

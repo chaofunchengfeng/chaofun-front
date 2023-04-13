@@ -132,14 +132,14 @@
           },
         ],
         keyword: ''
-     }
+     };
    },
    
    props: {
        params:{
            type: Object,
            default(){
-               return {}
+               return {};
            }
        }
    },
@@ -154,18 +154,18 @@
    },
    methods: {
     doRange(){
-      let range = this.ranges.find(item=>item.value==this.params.range);
+      let range = this.ranges.find(item=>item.value == this.params.range);
       return range.label;
     },
     checkoutMode(v){
-      this.$store.dispatch('user/SET_listMode',v)
+      this.$store.dispatch('user/SET_listMode',v);
     },
     changes() {
         localStorage.setItem('chao.fun.timeline.order', this.params.order);
         localStorage.setItem('chao.fun.timeline.range', this.params.range);
         delete this.params.marker;
         delete this.params.key;
-        this.$emit('updateList',this.params)
+        this.$emit('updateList',this.params);
     },
     chooseRange(item){
       this.params.range = item.value;
@@ -173,17 +173,17 @@
       localStorage.setItem('chao.fun.timeline.range', this.params.range);
       delete this.params.marker;
       delete this.params.key;
-      this.$emit('updateList',this.params)
+      this.$emit('updateList',this.params);
     },
     checkoutOk(){
       this.doLoginStatus().then((res) => {
         if (res) {
           delete this.params.marker;
           delete this.params.key;
-          this.params.onlyNew = !this.params.onlyNew
-          localStorage.setItem('onlyNew',this.params.onlyNew)
-          console.log(this.params)
-          this.$emit('updateList',this.params)
+          this.params.onlyNew = !this.params.onlyNew;
+          localStorage.setItem('onlyNew',this.params.onlyNew);
+          console.log(this.params);
+          this.$emit('updateList',this.params);
         }
       });
       
@@ -191,7 +191,7 @@
     chooseNav(index,item){
         this.options.forEach(i=>{
           i.choose = false;
-        })
+        });
         item.choose = true;
         this.options.splice(index,1,item);
         localStorage.setItem('chao.fun.timeline.order', item.value);
@@ -199,12 +199,12 @@
         delete this.params.marker;
         delete this.params.key;
         this.params.order = item.value;
-        this.$emit('updateList',this.params)
+        this.$emit('updateList',this.params);
         // this.lists = []
         // this.getLists();
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

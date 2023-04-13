@@ -27,7 +27,7 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 export default {
   name: 'Home',
   components: {
@@ -36,30 +36,30 @@ export default {
   data(){
       return {
           pagedata: []
-      }
+      };
   },
   created(){
   },
   mounted(){
-    this.getTopUps()
-    document.title = "24 小时用户排名";
+    this.getTopUps();
+    document.title = '24 小时用户排名';
   },
   methods:{
     getTopUps(){
-        console.log("cijianzy")
+        console.log('cijianzy');
         api.getUserTopUps({'pageSize': 100}).then(res=>{
-            this.pagedata = res.data
-        })
+            this.pagedata = res.data;
+        });
     },
     toUser(item){
         try {
-            window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userId+''})
+            window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userId + ''});
         } catch (e) {
-          window.open(location.origin + '/user/'+item.userId,"_blank");
+          window.open(location.origin + '/user/' + item.userId,'_blank');
         }
     }
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

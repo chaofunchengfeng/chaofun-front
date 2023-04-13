@@ -70,10 +70,10 @@
 </template>
 
 <script>
-  import snake from '@/components/game/snake/snake3.vue'
-  import * as api from '@/api/api'
-  import App from "../../App";
-  import ApplyForum from "./ApplyForum";
+  import snake from '@/components/game/snake/snake3.vue';
+  import * as api from '@/api/api';
+  import App from '../../App';
+  import ApplyForum from './ApplyForum';
   export default {
     name: '',
     data(){
@@ -97,7 +97,7 @@
           }
         },
         activity: {}
-      }
+      };
     },
     props: {
       islogin: {
@@ -115,19 +115,19 @@
       snake
     },
     created() {
-      console.log(this.$route.params)
-      this.forumId = this.$route.params.forumId
+      console.log(this.$route.params);
+      this.forumId = this.$route.params.forumId;
     },
     mounted() {
       // this.getGameTop();
       this.getActivity();
-      if(new Date().getDate()==1){
-        this.gamemodule = true
+      if(new Date().getDate() == 1){
+        this.gamemodule = true;
       }
     },
     methods: {
       toActivity(){
-        window.open(this.activity.url)
+        window.open(this.activity.url);
       },
       getActivity(){
         api.getActivity({}).then(res => {
@@ -142,12 +142,12 @@
       },
       getGameTop(){
         api.getGameTop({top: 10}).then(res=>{
-          this.gameRank = res.data
-        })
+          this.gameRank = res.data;
+        });
       },
       inout(v){
         if(this.$store.state.user.islogin){
-          if(v==1){
+          if(v == 1){
             // 加入
             api.joinForum({forumId: this.forumId}).then(res=>{
               if(res.success){
@@ -156,11 +156,11 @@
                   type: 'success',
                   offset: 20
                 });
-                this.$emit('getForumInfo')
+                this.$emit('getForumInfo');
                 // this.getForumInfo()
               }
-            })
-          }else if(v==2){
+            });
+          }else if(v == 2){
             api.leaveForum({forumId: this.forumId}).then(res=>{
               if(res.success){
                 this.$message({
@@ -169,24 +169,24 @@
                   offset: 20
                 });
                 // this.getForumInfo()
-                this.$emit('getForumInfo')
+                this.$emit('getForumInfo');
               }
-            })
+            });
           }
         }else{
-          this.showLogin('login')
+          this.showLogin('login');
         }
       },
       gotologin(){
-        this.showLogin('login')
+        this.showLogin('login');
       },
       showLogin(v){
         this.$login({callBack:()=>{
-            this.$store.dispatch('user/getInfo')
+            this.$store.dispatch('user/getInfo');
           }});
       },
       gotoSubmit2(){// 发帖
-        this.toPost(this.forumInfo.id,this.forumInfo.name,this.forumInfo.imageName)
+        this.toPost(this.forumInfo.id,this.forumInfo.name,this.forumInfo.imageName);
 
         // console.log(this.forumInfo)
         // if(this.$store.state.user.islogin){
@@ -197,10 +197,10 @@
       },
       sets(name,v){
         this[name] = v;
-        localStorage.removeItem(name)
+        localStorage.removeItem(name);
       },
       reload(){
-        location.reload()
+        location.reload();
       },
       // gotologin(){
       //   this.showLogin('login')
@@ -208,31 +208,31 @@
       gotoSecret(){
         this.doLoginStatus().then(res=>{
           if(res){
-            this.$router.push({name: 'secret'})
+            this.$router.push({name: 'secret'});
           }
-        })
+        });
       },
 
       goto24HForumRank(){
-        this.$router.push({path: '/forumRank'})
+        this.$router.push({path: '/forumRank'});
       },
 
       goto24HUserRank(){
-        this.$router.push({path: '/userRank'})
+        this.$router.push({path: '/userRank'});
       },
       gotoSubmit(){
         this.doLoginStatus().then(res=>{
           if(res){
-            this.$router.push({name: 'submit'})
+            this.$router.push({name: 'submit'});
           }
-        })
+        });
 
       },
       hideApplyForum() {
         this.dialogTableVisible = false;
       }
     }
-  }
+  };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

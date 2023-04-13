@@ -1,5 +1,5 @@
 // vue.config.js
-const path = require("path");
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -7,11 +7,11 @@ const resolve = dir => {
   return path.join(__dirname, dir);
 };
 
-const port = process.env.port || process.env.npm_config_port || 8099
+const port = process.env.port || process.env.npm_config_port || 8099;
 const isProduction = process.env.NODE_ENV === 'production';
 
 // 线上打包路径，请根据项目实际线上情况
-const BASE_URL = process.env.NODE_ENV === "production" ? "https://s.chao-fan.com/" : "/";
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://s.chao-fan.com/' : '/';
 // const BASE_URL =  "/";
 // const BASE_URL = "/";
 const fs = require('fs');
@@ -25,9 +25,9 @@ const Timestamp = new Date().getTime();
 
 module.exports = {
   publicPath: BASE_URL,
-  outputDir: "dist", // 打包生成的生产环境构建文件的目录
-  assetsDir: "", // 放置生成的静态资源路径，默认在outputDir
-  indexPath: "index.html", // 指定生成的 index.html 输入路径，默认outputDir
+  outputDir: 'dist', // 打包生成的生产环境构建文件的目录
+  assetsDir: '', // 放置生成的静态资源路径，默认在outputDir
+  indexPath: 'index.html', // 指定生成的 index.html 输入路径，默认outputDir
   pages: {
     index: {
       entry: './src/main.js',
@@ -43,6 +43,7 @@ module.exports = {
     }
 
   }, // 构建多页
+  lintOnSave: process.env.NODE_ENV !== 'production',
   productionSourceMap: false, // 开启 生产环境的 source map
   // css:  config => {
   //   config.extract.chunkFilename = `[name].33${Timestamp}.css`;
@@ -68,8 +69,8 @@ module.exports = {
 
     // 配置路径别名
     config.resolve.alias
-      .set("@", resolve("src"))
-      .set("_c", resolve("src/components"));
+      .set('@', resolve('src'))
+      .set('_c', resolve('src/components'));
     // set svg-sprite-loader
     config.module.rule('svg').exclude.add(resolve('src/icons')).end();
     config.module.rule('icons').test(/\.svg$/).include.add(resolve('src/icons')).end().use('svg-sprite-loader')
@@ -83,16 +84,16 @@ module.exports = {
       .use('vue-loader')
       .loader('vue-loader')
       .tap(options => {
-        options.compilerOptions.preserveWhitespace = true
-        return options
+        options.compilerOptions.preserveWhitespace = true;
+        return options;
       })
-      .end()
+      .end();
 
     config
     // https://webpack.js.org/configuration/devtool/#development
       .when(process.env.NODE_ENV === 'development',
         config => config.devtool('cheap-source-map')
-      )
+      );
 
       /** add */
       // 生产环境配置
@@ -101,7 +102,7 @@ module.exports = {
       config.plugins.delete('preload');
       config.plugins.delete('prefetch');
       // 删除多余moment语言包
-      config.plugin("ignore")
+      config.plugin('ignore')
         .use(
           new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/)
         );
@@ -136,7 +137,7 @@ module.exports = {
       sass: {
         //引入全局变量样式
         // data: `@import "@/assets/common/index.sass"`
-        prependData: `@import "~@/styles/variables.scss";`
+        prependData: '@import "~@/styles/variables.scss";'
       },
       postcss: {
         plugins: [
@@ -148,12 +149,12 @@ module.exports = {
 
   // 反向代理的配置
   devServer: {
-    host: "0.0.0.0", // ip
+    host: '0.0.0.0', // ip
     port: port, // 端口
     proxy: {
       '/api':{
         // target: `http://localhost:8080/api`,
-        target: `https://choa.fun/api`,
+        target: 'https://choa.fun/api',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
@@ -161,7 +162,7 @@ module.exports = {
       },
       '/ws': {
         // target: `ws://localhost:8080/ws`,
-        target: `wss://choa.fun/ws`,
+        target: 'wss://choa.fun/ws',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

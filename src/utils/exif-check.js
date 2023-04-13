@@ -8,7 +8,7 @@ const dataURLtoFile = (dataurl, filename) => {
       u8arr[n] = bstr.charCodeAt(n);
   }
   return new File([u8arr], filename, {type:mime});
-}    
+};    
 
 export default (file, $createElement) => {
   return new Promise((resolve, reject) => {
@@ -81,5 +81,5 @@ export default (file, $createElement) => {
       resolve(true);
     };
 
-  })
-}
+  });
+};

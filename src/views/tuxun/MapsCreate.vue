@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import {tuxunJump, tuxunOpen} from "./common";
-import * as api from '@/api/api'
-import {postByPath} from "../../api/api";
+import {tuxunJump, tuxunOpen} from './common';
+import * as api from '@/api/api';
+import {postByPath} from '../../api/api';
 export default {
-  name: "MapsCreate",
+  name: 'MapsCreate',
   data() {
     return {
       name: '',
@@ -49,7 +49,7 @@ export default {
       cover: null,
       history: null,
       modify: false,
-    }
+    };
   },
   mounted() {
     this.history = history;
@@ -61,13 +61,13 @@ export default {
   },
   methods: {
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/')
+        tuxunJump('/tuxun/');
       }
     },
     get() {
@@ -75,7 +75,7 @@ export default {
         this.name = res.data.name;
         this.desc = res.data.desc;
         this.cover = res.data.cover;
-      })
+      });
     },
     addMap() {
       api.getByPath('/api/v0/tuxun/maps/add', {name: this.name, desc: this.desc, cover: this.cover}).then(res => {
@@ -84,7 +84,7 @@ export default {
         } else if (res.errorCode === 'need_vip') {
           this.$vip();
         }
-      })
+      });
     },
     modifyMap() {
       api.getByPath('/api/v0/tuxun/maps/modify', {mapsId: this.mapsId, name: this.name, desc: this.desc, cover: this.cover}).then(res => {
@@ -93,27 +93,27 @@ export default {
         } else if (res.errorCode === 'need_vip') {
           this.$vip();
         }
-      })
+      });
     },
     handleAvatarSuccess(res) {
       if (res.success) {
         this.cover = res.data;
       } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
-        this.$toast(res.errorMessage)
+        this.$toast(res.errorMessage);
       }
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.filedata.fileName = file.name;
       return true;
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

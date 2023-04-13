@@ -86,8 +86,8 @@
 
 <script>
 
-  import { mapGetters } from 'vuex'
-  import * as api from '../../api/api'
+  import { mapGetters } from 'vuex';
+  import * as api from '../../api/api';
   function ClearSubmit(e) {
             if (e.keyCode == 39) {
                 return false;
@@ -117,7 +117,7 @@
         defaultName: '',
         activeId: '',
         isSend:false
-      }
+      };
     },
     watch: {
       // 'params.forumId'(v){
@@ -126,9 +126,9 @@
       // }
       keyword(v){
         if(v){
-          this.getForum(v)
+          this.getForum(v);
         }else{
-          this.getDefaultForum()
+          this.getDefaultForum();
         }
 
       }
@@ -146,10 +146,10 @@
           let name;
           this.forums.forEach(i=>{
             if(i.id == this.activeId){
-              name = i.name
+              name = i.name;
             }
-          })
-          return name
+          });
+          return name;
         },
         set(newVal){
           // this.message = newVal
@@ -170,19 +170,19 @@
         this.imageSource = this.$route.query.type;
       }
 
-      document.onkeydown=function(event){
+      document.onkeydown = function(event){
           var e = event || window.event || arguments.callee.caller.arguments[0];
-          if(e && e.keyCode==39){//右
+          if(e && e.keyCode == 39){//右
               if(self.keyNext){
-                self.skip()
-                console.log(2)
+                self.skip();
+                console.log(2);
               }
           }
 
-        if(e && e.keyCode==38){//上
+        if(e && e.keyCode == 38){//上
           if(self.keyNext){
-            self.submit()
-            console.log(3)
+            self.submit();
+            console.log(3);
           }
         }
       };
@@ -192,7 +192,7 @@
     },
     created() {
       this.generate();
-      this.getDefaultForum()
+      this.getDefaultForum();
       // this.getForum('')
     },
     methods:{
@@ -206,86 +206,86 @@
         this.defaultId = res.data.submitForum;
         this.activeId = res.data.submitForum;
         this.ossName = res.data.imageName;
-        this.getForumById(this.secret.submitForum)
+        this.getForumById(this.secret.submitForum);
       },
       getForumById(forumId) {
         api.getForumInfo({'forumId': forumId}).then(res => {
-              var isAdd =true;
+              var isAdd = true;
               this.forums.forEach(i=>{
-                if(i.id==res.data.id){
+                if(i.id == res.data.id){
                   isAdd = false;
                 }
-              })
+              });
               if (isAdd) {
                 this.forums.unshift(res.data);
               }
-        })
+        });
       },
       generate() {
         api.generate_secret_image({'prefix': this.imageSource}).then(res=>{
             this.secret = null;
-            this.dealResponse(res)
-        })
+            this.dealResponse(res);
+        });
       },
       reset(){
         this.activeId = this.defaultId;
-        this.keyword = ''
+        this.keyword = '';
       },
       chooseItem(item){
         this.activeId = item.id;
-        this.forumsName = item.name
+        this.forumsName = item.name;
       },
       getDefaultForum(){
         api.list_forums().then(res=>{
 
           res.data.forEach(i=>{
-            if(i.id==this.defaultId){
-              this.defaultName = i.name
+            if(i.id == this.defaultId){
+              this.defaultName = i.name;
             }
-          })
+          });
           this.forums = res.data;
-        })
+        });
       },
       doFocus(v){
-        if(v==1){
-          this.keyNext = false
+        if(v == 1){
+          this.keyNext = false;
         }else{
-          this.keyNext = true
+          this.keyNext = true;
         }
       },
       getForum(keyword){
         api.searchForum({keyword}).then(res=>{
           if(res.data.length){
             res.data.forEach(item=>{
-              item.name = item.title
-              item.imageName = item.icon
-              item.id = item.link.split('/')[2]
-            })
-            this.activeId = res.data[0].id
-            this.forums = res.data
-            console.log(this.forums)
+              item.name = item.title;
+              item.imageName = item.icon;
+              item.id = item.link.split('/')[2];
+            });
+            this.activeId = res.data[0].id;
+            this.forums = res.data;
+            console.log(this.forums);
           }
 
-        })
+        });
       },
       doImgStyle(w,h){
-        if(document.body.clientWidth<700){
+        if(document.body.clientWidth < 700){
           // 适配移动端, 这里后续尽量封装成组件
           const temp = Math.ceil(document.body.clientWidth * 0.85);
-          if(w<h&&h>temp){
+          if(w < h && h > temp){
             return {
               height: this.imgMaxWidth + 'px'
-            }
+            };
           }else{
-            return {}
+            return {};
           }
         } else {
-          if(w<h&&h>512){
+          if(w < h && h > 512){
             return {
               height: '512px'
-            }
+            };
           }else{
-            return {}
+            return {};
           }
         }
       },
@@ -297,18 +297,18 @@
           //   type: 'warn',
           //   duration: 2000
           // });
-          this.secret.cnTitle = ''
+          this.secret.cnTitle = '';
         };
         if(!this.isSend){
-          this.isSend=true
+          this.isSend = true;
           api.submit_secret_image({'imageUrl': this.secret.imageUrl, 'title': this.secret.cnTitle, 'forumId': parseInt(this.activeId), 'prefix': this.imageSource}).then(res=>{
             this.secret.imageUrl = null ;
-            this.isSend=false
-            this.dealResponse(res)
+            this.isSend = false;
+            this.dealResponse(res);
             this.$toast('发布成功');
           }).catch(e=>{
-            this.isSend=false
-          })
+            this.isSend = false;
+          });
         }
 
       },
@@ -316,11 +316,11 @@
       skip() {
         api.delete_secret_image({'imageUrl': this.secret.imageUrl, 'prefix': this.imageSource}).then(res=>{
           this.secret.imageUrl = null ;
-          this.dealResponse(res)
-        })
+          this.dealResponse(res);
+        });
       }
     }
-  }
+  };
 </script>
 <style lang="scss" scoped>
 

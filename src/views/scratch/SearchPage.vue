@@ -24,14 +24,14 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 export default {
-  name: "SearchPage",
+  name: 'SearchPage',
   data() {
     return {
       keyword: '',
       list: []
-    }
+    };
   },
 
   mounted() {
@@ -40,8 +40,8 @@ export default {
   methods: {
     input() {
       api.getByPath('/api/v0/scratch/game/search', {keyword: this.keyword}).then(res=>{
-        this.list = res.data
-      })
+        this.list = res.data;
+      });
     },
     goHome() {
       window.location.href = '/scratch';
@@ -50,14 +50,14 @@ export default {
       try {
         this.$router.go(-1);
       } catch (e) {
-        window.location.href = '/scratch'
+        window.location.href = '/scratch';
       }
     },
     gotoGuess(item) {
       window.open('/scratch/guess?id=' + item.id);
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

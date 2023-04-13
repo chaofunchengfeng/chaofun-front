@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { addCollection, userCollectionList } from '@/api/api'
+import { addCollection, userCollectionList } from '@/api/api';
 export default {
   props: {
     forumId: {
@@ -70,7 +70,7 @@ export default {
       newCollection: {
         name: null,
       }, // 新增合集
-    }
+    };
   },
   mounted() {
     this.getCollection();
@@ -84,14 +84,14 @@ export default {
     },
     // 修改Collection
     changeCollection(label) {
-      this.collection = this.collections.find(collection => collection.id === label)
+      this.collection = this.collections.find(collection => collection.id === label);
       this.$emit('input', label);
       this.confirmCollection();
     },
     // 设置Collection Id
     setCollection(label) {
-      this.collection = this.collections.find(collection => collection.id === label)
-      this.collectionId = label
+      this.collection = this.collections.find(collection => collection.id === label);
+      this.collectionId = label;
       this.dataCollectionId = label;
     },
     // 清除Collection
@@ -132,7 +132,7 @@ export default {
       // TODO: 提示新增错误
     },
   }
-}
+};
 </script>
 
 <style lang="scss">

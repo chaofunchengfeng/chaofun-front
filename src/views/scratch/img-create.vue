@@ -42,14 +42,14 @@
 
 <script>
 export default {
-  name: "img-create",
+  name: 'img-create',
   data() {
     return {
       chooseIndex: null,
       filedata: {},
       cardClass: 'card',
       // innerSlideshow: false,
-    }
+    };
   },
   props: {
     hasHint: Boolean,
@@ -81,13 +81,13 @@ export default {
         this.dataForm.__ob__.dep.notify();
       } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
-        this.$toast(res.errorMessage)
+        this.$toast(res.errorMessage);
       }
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.filedata.fileName = file.name;
@@ -98,13 +98,13 @@ export default {
     },
     addColumn() {
       if (this.dataForm.length >= 16) {
-        this.$toast('图片小测验最多支持16个题')
+        this.$toast('图片小测验最多支持16个题');
       } else {
         this.dataForm.push({});
       }
     },
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

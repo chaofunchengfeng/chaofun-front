@@ -362,7 +362,7 @@ export default {
 
 
       ]
-    }
+    };
   },
   created(){
 
@@ -373,7 +373,7 @@ export default {
   methods:{
 
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

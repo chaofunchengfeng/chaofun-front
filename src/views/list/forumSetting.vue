@@ -93,37 +93,37 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as api from "../../api/api";
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 
-import ListItem from "../../components/chaofan/ListItem.vue";
-import loadText from "@/components/chaofan/loadText";
-import analytics from "@/views/chaofun-webview/forum/analytics.vue";
-import forumTag from "@/views/chaofun-webview/forum/tag.vue";
-import forumRule from "@/views/chaofun-webview/forum/rule.vue";
-import userTag from "@/views/chaofun-webview/forum/userTag.vue";
-import notify from "@/views/chaofun-webview/forum/notify.vue";
-import ModManager from "@/views/chaofun-webview/forum/ModManager.vue";
-import BanManager from "@/views/chaofun-webview/forum/BanManager";
-import SensitiveWord from "@/views/chaofun-webview/forum/SensitiveWord";
-import TableManager from "@/views/chaofun-webview/forum/TableManager";
-import AutoReply from "@/views/chaofun-webview/forum/AutoReply";
-import badgeManager from "@/views/chaofun-webview/forum/BadgeManager";
+import ListItem from '../../components/chaofan/ListItem.vue';
+import loadText from '@/components/chaofan/loadText';
+import analytics from '@/views/chaofun-webview/forum/analytics.vue';
+import forumTag from '@/views/chaofun-webview/forum/tag.vue';
+import forumRule from '@/views/chaofun-webview/forum/rule.vue';
+import userTag from '@/views/chaofun-webview/forum/userTag.vue';
+import notify from '@/views/chaofun-webview/forum/notify.vue';
+import ModManager from '@/views/chaofun-webview/forum/ModManager.vue';
+import BanManager from '@/views/chaofun-webview/forum/BanManager';
+import SensitiveWord from '@/views/chaofun-webview/forum/SensitiveWord';
+import TableManager from '@/views/chaofun-webview/forum/TableManager';
+import AutoReply from '@/views/chaofun-webview/forum/AutoReply';
+import badgeManager from '@/views/chaofun-webview/forum/BadgeManager';
 
 
 // 版块设置
 export default {
-  name: "user",
+  name: 'user',
   data() {
     return {
       params: {
-        forumId: ""
+        forumId: ''
       },
-      forumId: "",
-      imageUrl: "",
+      forumId: '',
+      imageUrl: '',
       filedata: {},
-      desc: "",
-      forumInfo: "",
+      desc: '',
+      forumInfo: '',
       anonymity: true,
       isOpenDonate: false
     };
@@ -146,8 +146,8 @@ export default {
   watch: {},
   computed: {
     ...mapGetters([
-      "roles",
-      "islogin"
+      'roles',
+      'islogin'
     ])
   },
   mounted() {
@@ -159,8 +159,8 @@ export default {
   created() {
     this.forumId = this.params.forumId;
 
-    if (this.forumId === "" || this.forumId === undefined) {
-      this.forumId = this.$route.path.split("/")[2];
+    if (this.forumId === '' || this.forumId === undefined) {
+      this.forumId = this.$route.path.split('/')[2];
     }
     this.getForumInfo();
     // console.log('a',this.$store.state.user.userInfo)
@@ -181,7 +181,7 @@ export default {
       });
 
       //匿名发帖
-      api.getByPath("/api/v0/forum/getAnonymity", { forumId: this.forumId }).then(res => {
+      api.getByPath('/api/v0/forum/getAnonymity', { forumId: this.forumId }).then(res => {
         this.anonymity = res.data;
       });
 
@@ -190,7 +190,7 @@ export default {
     },
 
     setAnonymity(value) {
-      api.getByPath("/api/v0/forum/setAnonymity", { forumId: this.forumId, anonymity: value }).then(res => {
+      api.getByPath('/api/v0/forum/setAnonymity', { forumId: this.forumId, anonymity: value }).then(res => {
         this.getForumInfo();
       });
     },
@@ -216,9 +216,9 @@ export default {
 
       api.setForumDesc({ forumId: this.forumId, desc: this.desc }).then(res => {
         if (res.data) {
-          this.$toast("设置签名成功");
+          this.$toast('设置签名成功');
         } else {
-          this.$toast("设置签名失败，您还不是管理员?");
+          this.$toast('设置签名失败，您还不是管理员?');
         }
       });
     },
@@ -229,12 +229,12 @@ export default {
         this.imageUrl = URL.createObjectURL(file.raw);
         api.setForumIcon({ forumId: this.forumId, imageName: res.data }).then(res => {
           if (res.data) {
-            this.$toast("设置版块 ICON 成功");
+            this.$toast('设置版块 ICON 成功');
           } else {
-            this.$toast("设置版块 ICON 失败，您还不是管理员?");
+            this.$toast('设置版块 ICON 失败，您还不是管理员?');
           }
         });
-      } else if (res.errorCode == "invalid_content") {
+      } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
@@ -243,7 +243,7 @@ export default {
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.filedata.fileName = file.name;

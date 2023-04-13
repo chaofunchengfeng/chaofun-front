@@ -1,9 +1,9 @@
-import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import router, { resetRouter } from '@/router'
-import * as api from '../../api/api'
-import Vue from 'vue'
-import * as permit from './permission'
+import { login, logout, getInfo } from '@/api/user';
+import { getToken, setToken, removeToken } from '@/utils/auth';
+import router, { resetRouter } from '@/router';
+import * as api from '../../api/api';
+import Vue from 'vue';
+import * as permit from './permission';
 
 const state = {
   token: getToken(),
@@ -12,32 +12,32 @@ const state = {
   roles: ['admin'],
   logStatus: '',
   showDownApp: true,
-  listMode: localStorage.getItem('listMode')||'normal',
+  listMode: localStorage.getItem('listMode') || 'normal',
   showChatBox: false,
   wss: null,
-}
+};
 
 const mutations = {
   SET_TOKEN: (state, token) => {
-    state.token = token
+    state.token = token;
   },
   SET_userInfo: (state, userInfo) => {
-    state.userInfo = userInfo
+    state.userInfo = userInfo;
   },
   SET_islogin: (state, islogin) => {
-    state.islogin = islogin
+    state.islogin = islogin;
   },
   SET_ROLES: (state, roles) => {
-    state.roles = roles
+    state.roles = roles;
   },
   SET_logStatus: (state,logStatus) => {
-    state.logStatus = logStatus
+    state.logStatus = logStatus;
   },
   SET_showDownApp: (state,showDownApp) => {
-    state.showDownApp = showDownApp
+    state.showDownApp = showDownApp;
   },
   SET_listMode: (state,listMode) => {
-    state.listMode = listMode
+    state.listMode = listMode;
   },
   SET_showChatBox: (state,data) => {
     // if(!state.wss){
@@ -52,7 +52,7 @@ const mutations = {
     //   state.wss = ws;
     // }
 
-    state.showChatBox = data
+    state.showChatBox = data;
   },
   SET_wss: (state,fun) => {
     // if(!state.wss){
@@ -68,32 +68,32 @@ const mutations = {
     // }
     state.wss = fun();
   },
-}
+};
 
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
         const data = {
           token: 'admin-token'
-        }
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
+        };
+        commit('SET_TOKEN', data.token);
+        setToken(data.token);
+        resolve();
       }).catch(error => {
-        reject(error)
-      })
+        reject(error);
+      });
   },
   SET_showDownApp({ commit }, showDownApp) {
-    commit('SET_showDownApp', showDownApp)
+    commit('SET_showDownApp', showDownApp);
   },
 
   SET_islogin({ commit }, islogin) {
-    commit('SET_islogin', islogin)
+    commit('SET_islogin', islogin);
   },
   SET_userInfo({ commit }, userInfo){
-    commit('SET_userInfo', res.data)
+    commit('SET_userInfo', res.data);
   },
 
   // get user info
@@ -105,20 +105,20 @@ const actions = {
           api.getUserInfo().then(res=>{
             // console.log('permit',permit);
             if(res.data){
-              commit('SET_userInfo', res.data)
-              commit('SET_islogin', true)
+              commit('SET_userInfo', res.data);
+              commit('SET_islogin', true);
             }else{
-              commit('SET_islogin', false)
+              commit('SET_islogin', false);
             }
-            resolve(res)
-          })
+            resolve(res);
+          });
         // }else{
         //   resolve()
         // }
 
       }).catch(error => {
-        reject(error)
-      })
+        reject(error);
+      });
     // })
   },
 
@@ -135,18 +135,18 @@ const actions = {
         // });
         setTimeout(()=>{
           if (location.pathname.includes('/tuxun/')) {
-            location.href = '/tuxun/'
+            location.href = '/tuxun/';
           } else if (location.pathname.includes('/scratch')) {
-            location.href = '/scratch'
+            location.href = '/scratch';
           } else if(location.pathname == '/'){
-            location.reload()
+            location.reload();
           }else{
-            location.href = '/'
+            location.href = '/';
           }
 
-        },100)
+        },100);
       }
-    })
+    });
     // return new Promise((resolve, reject) => {
 
     //   // logout(state.token).then(() => {
@@ -169,37 +169,37 @@ const actions = {
   // remove token
   resetToken({ commit }) {
     return new Promise(resolve => {
-      commit('SET_TOKEN', '')
-      commit('SET_ROLES', [])
-      removeToken()
-      resolve()
-    })
+      commit('SET_TOKEN', '');
+      commit('SET_ROLES', []);
+      removeToken();
+      resolve();
+    });
   },
 
   // dynamically modify permissions
   changeRoles({ commit, dispatch }, role) {
     return new Promise(async resolve => {
-      const token = role + '-token'
+      const token = role + '-token';
 
-      commit('SET_TOKEN', token)
-      setToken(token)
+      commit('SET_TOKEN', token);
+      setToken(token);
 
-      const { roles } = await dispatch('getInfo')
+      const { roles } = await dispatch('getInfo');
 
-      resetRouter()
+      resetRouter();
 
       // generate accessible routes map based on roles
-      const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
+      const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true });
 
       // dynamically add accessible routes
 
-      router.addRoutes(accessRoutes)
+      router.addRoutes(accessRoutes);
 
       // reset visited views and cached views
       // dispatch('tagsView/delAllViews', null, { root: true })
 
-      resolve()
-    })
+      resolve();
+    });
   },
   SET_logStatus({ commit, state }, data){
     commit('SET_logStatus',data);
@@ -215,11 +215,11 @@ const actions = {
   SET_wss: ({ commit, state }, fun) => {
     commit('SET_wss',fun);
   }
-}
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
   actions
-}
+};

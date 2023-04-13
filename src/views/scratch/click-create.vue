@@ -39,12 +39,12 @@
 
 <script>
 export default {
-  name: "click-create",
+  name: 'click-create',
   data() {
     return {
       chooseIndex: null,
       hint: false,
-    }
+    };
   },
   props: {
     // hasHint: Boolean,
@@ -52,7 +52,7 @@ export default {
   },
   created() {
     this.hasHint = true;
-    this.updatehin
+    this.updatehin;
     this.hint = this.hasHint;
   },
   methods: {
@@ -76,12 +76,12 @@ export default {
       if (this.cleanTimer) {
         clearTimeout(this.cleanTimer);
       }
-      this.chooseIndex = index
+      this.chooseIndex = index;
     },
     cleanChoose() {
       this.cleanTimer = setTimeout(()=> {
         this.chooseIndex = null;
-      }, 200)
+      }, 200);
     },
     deleteColumn() {
       this.dataForm.pop();
@@ -93,7 +93,7 @@ export default {
       this.$emit('update:hasHint', e);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

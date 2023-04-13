@@ -236,13 +236,13 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import moment from 'moment'
-import StarRating from 'vue-star-rating'
+import * as api from '../../api/api';
+import moment from 'moment';
+import StarRating from 'vue-star-rating';
 
 
 export default {
-  name: "GamePage",
+  name: 'GamePage',
   components: {
     StarRating,
   },
@@ -276,11 +276,11 @@ export default {
       clickIndex: 0,
       shuffleAnswers: [],
       innerCurrent: 1,
-    }
+    };
   },
   mounted() {
     this.history = history;
-    document.title = '炒饭小测验 - 一起来做小测验吧'
+    document.title = '炒饭小测验 - 一起来做小测验吧';
     this.id =  this.$route.query.id;
     this.getGuessInfo();
     this.getRate();
@@ -290,20 +290,20 @@ export default {
   },
   methods: {
     goUser(userId) {
-      window.location.href = '/scratch/user/' + userId
+      window.location.href = '/scratch/user/' + userId;
     },
     modify() {
-      window.location.href = '/scratch/modify?id=' + this.id
+      window.location.href = '/scratch/modify?id=' + this.id;
     },
     endGame() {
       if (!this.giveUp) {
         api.getByPath('/api/v0/scratch/game/end', {'id': this.id, 'score': this.right}).then(res => {
           this.endStatus = res.data;
-        })
+        });
       }
 
-      this.inputClass='input-container'
-      this.nameClass = 'name'
+      this.inputClass = 'input-container';
+      this.nameClass = 'name';
       this.start = false;
       this.giveUp = true;
     },
@@ -311,8 +311,8 @@ export default {
       this.giveUp = false;
       this.start = true;
       if (this.ISPHONE) {
-        this.inputClass = "input-container-phone"
-        this.nameClass = 'name-phone-click'
+        this.inputClass = 'input-container-phone';
+        this.nameClass = 'name-phone-click';
       }
       this.right = 0;
       this.wrong = 0;
@@ -322,7 +322,7 @@ export default {
       this.guessInfo.data.data.forEach(item => {
         item.guessd = false;
         item.right = false;
-      })
+      });
       this.showResult = false;
       this.right = 0;
       this.endStatus = null;
@@ -332,7 +332,7 @@ export default {
       this.timeLeftStr = Math.floor(this.timeLeft / 60).toString().padStart(2, '0') + ':' + (this.timeLeft % 60).toString().padStart(2, '0');
       clearInterval(this.countdownTimer);
       api.getByPath('/api/v0/scratch/game/start', {'id': this.id}).then(res=>{
-      })
+      });
 
       if (this.guessInfo.countdown) {
         this.countdownTimer =  setInterval(() => {
@@ -364,17 +364,17 @@ export default {
         this.shuffleAnswers = Array.from(new Set(this.guessInfo.data.answers)).sort(function (a,b){
           var c = isFinite(a), // 如果 number 是有限数字（或可转换为有限数字），那么返回 true。
           d = isFinite(b);
-          return (c != d && d - c) || (c && d ? a -b : a.localeCompare(b));
+          return (c != d && d - c) || (c && d ? a - b : a.localeCompare(b));
         });
-      })
+      });
     },
     getRate() {
       api.getByPath('/api/v0/scratch/game/getRate', {'id': this.id}).then(res=>{
         this.rating = res.data;
-      })
+      });
     },
     goHome() {
-      window.location.href = '/scratch'
+      window.location.href = '/scratch';
     },
     goTag(item) {
       window.location.href = '/scratch/tag?tagName=' + item;
@@ -382,7 +382,7 @@ export default {
     login() {
       this.$login({
         callBack: () => {
-          this.$store.dispatch("user/getInfo");
+          this.$store.dispatch('user/getInfo');
         },
       });
     },
@@ -423,11 +423,11 @@ export default {
       setTimeout(() => {
         this.cleanClickStatus();
       }, 500);
-      console.log(this.clickIndex)
+      console.log(this.clickIndex);
       for (let i = this.clickIndex + 1; i < this.guessInfo.data.data.length; i++) {
         if (!this.guessInfo.data.data[i].guessd) {
           this.clickIndex = i;
-          console.log(this.clickIndex)
+          console.log(this.clickIndex);
           return;
         }
       }
@@ -463,9 +463,9 @@ export default {
           if (this.palindrome(item.answer.toLowerCase()) === this.palindrome(e.toLowerCase())) {
             return true;
           }
-        })
+        });
         if (isRight && !this.matched.has(this.innerCurrent - 1)) {
-          this.matched.add(this.innerCurrent -1)
+          this.matched.add(this.innerCurrent - 1);
           this.right = this.right + 1;
           this.inputResult = '';
           if (this.innerCurrent !== this.guessInfo.data.data.length) {
@@ -486,7 +486,7 @@ export default {
               matchValue = item.answer;
               return true;
             }
-          })
+          });
           // console.log(isRight);
           if (isRight && (matchValue || (!matchValue && !e))) {
             this.right = this.right + 1;
@@ -507,7 +507,7 @@ export default {
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast("复制测验地址成功");
+      this.$toast('复制测验地址成功');
       return result;
     },
     palindrome(str) {
@@ -516,23 +516,23 @@ export default {
     random() {
       api.getByPath('/api/v0/scratch/game/random').then(res=>{
         window.location.href = '/scratch/guess?id=' + res.data;
-      })
+      });
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        window.location.href = '/scratch'
+        window.location.href = '/scratch';
       }
     },
     setRating(rating) {
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
           this.rating = rating;
           api.getByPath('/api/v0/scratch/game/rate', {id: this.id, rate: this.rating}).then(res=>{
-            this.pagedata = res.data
-          })
+            this.pagedata = res.data;
+          });
 
         } else {
           this.rating = null;
@@ -540,7 +540,7 @@ export default {
       });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

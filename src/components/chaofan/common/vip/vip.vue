@@ -120,11 +120,11 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import * as api from '@/api/api'
-import { mapState } from 'vuex'
-import {deepClone,randomRange} from '@/utils'
-import { Checkbox } from 'element-ui'
+import Vue from 'vue';
+import * as api from '@/api/api';
+import { mapState } from 'vuex';
+import {deepClone,randomRange} from '@/utils';
+import { Checkbox } from 'element-ui';
 // import SlideVerify from 'vue-monoplasty-slide-verify';
 // Vue.use(SlideVerify);
  export default {
@@ -138,7 +138,7 @@ import { Checkbox } from 'element-ui'
        orderId: null,
        totalTryTimes: null,
        payImageUrl: null,
-     }
+     };
    },
    computed:{
    },
@@ -163,7 +163,7 @@ import { Checkbox } from 'element-ui'
      },
 
      getTryTimes() {
-       api.getByPath("/api/v0/tuxun/vip/getTotalTry").then(res => {
+       api.getByPath('/api/v0/tuxun/vip/getTotalTry').then(res => {
          this.totalTryTimes = res.data;
        });
      },
@@ -177,7 +177,7 @@ import { Checkbox } from 'element-ui'
                location.reload();
              }, 200 );
            }
-         })
+         });
        } else {
          var period = '1month';
          if (this.choose === 'year') {
@@ -188,12 +188,12 @@ import { Checkbox } from 'element-ui'
              this.orderId = res.data.orderId;
              this.payImageUrl = res.data.qrCodeUrl;
            }
-         })
+         });
        }
      },
      paySuccess() {
        api.getByPath('/api/v0/tuxun/vip/confirm', {orderId: this.orderId}).then(res=>{
-       })
+       });
 
        this.show = false;
        setTimeout(() => {
@@ -201,7 +201,7 @@ import { Checkbox } from 'element-ui'
          }, 200 );
      }
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

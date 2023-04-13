@@ -24,13 +24,13 @@
    data(){
      return {
 
-     }
+     };
    },
    props: {
        item: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        },
    },
@@ -44,14 +44,14 @@
    },
    methods: {
      openLink(item){
-       window.open(item.link,"_blank");
+       window.open(item.link,'_blank');
      },
     toUrls(item,params){
        this.postBehavior(item.postId,'jump');
-       this.toUrl(params)
+       this.toUrl(params);
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

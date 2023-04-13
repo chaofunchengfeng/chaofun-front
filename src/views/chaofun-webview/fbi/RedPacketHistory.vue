@@ -3,22 +3,22 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
-import {getUserInfo} from "../../../api/api";
+import * as api from '@/api/api';
+import {getUserInfo} from '../../../api/api';
 export default {
-  name: "RedPacket",
+  name: 'RedPacket',
   data() {
     return {
       input: '',
       showDetail: false,
       redPacket: null,
       fbi: 0,
-    }
+    };
   },
   created() {
-    this.password= this.$route.query.password;
+    this.password = this.$route.query.password;
     if (this.password) {
-      this.getRedPacket()
+      this.getRedPacket();
     }
   },
   mounted() {
@@ -34,7 +34,7 @@ export default {
             this.showDetail = true;
           }
         } else {
-          this.redPacket = null
+          this.redPacket = null;
           if (res.errorMessage) {
             this.$toast(res.errorMessage);
           } else {
@@ -52,7 +52,7 @@ export default {
             this.showDetail = true;
           }
         } else {
-          this.redPacket = null
+          this.redPacket = null;
           if (res.errorMessage) {
             this.$toast(res.errorMessage);
           } else {
@@ -68,10 +68,10 @@ export default {
     },
 
     history() {
-      window.open('/webview/fbi/history',"_blank");
+      window.open('/webview/fbi/history','_blank');
     }
   }
-}
+};
 
 
 </script>

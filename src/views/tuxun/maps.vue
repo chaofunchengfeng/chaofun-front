@@ -115,8 +115,8 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
-import {tuxunJump, tuxunOpen} from "./common";
+import * as api from '@/api/api';
+import {tuxunJump, tuxunOpen} from './common';
 
 export default {
   name: 'tuxunRank',
@@ -132,12 +132,12 @@ export default {
       search: false,
       keyword: '',
       timer: 0
-    }
+    };
   },
   created(){
     // document.title = "图寻-练习题库";
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
-      window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun')
+      window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun');
     }
   },
   mounted(){
@@ -151,43 +151,43 @@ export default {
       // _this.getHotMaps();
       // _this.getNewMaps();
       _this.getRecentPageData();
-    },10000)
+    },10000);
   },
   methods:{
     getHotMaps(){
       api.getByPath('/api/v0/tuxun/maps/list', {duration: 'all', count: 9}).then(res=>{
-        this.pagedata = res.data.slice(0, 9)
+        this.pagedata = res.data.slice(0, 9);
         this.pagedata.forEach(function (item) {
-          this.addDifficulty(item)
+          this.addDifficulty(item);
         }.bind(this));
-      })
+      });
     },
     getNewMaps(){
       api.getByPath('/api/v0/tuxun/maps/listNew', {count: 6}).then(res=>{
         this.newPagedata = res.data.slice(0, 3);
         this.newPagedata.forEach(function (item) {
-          this.addDifficulty(item)
+          this.addDifficulty(item);
         }.bind(this));
-      })
+      });
     },
     getRecommendMaps(){
       api.getByPath('/api/v0/tuxun/maps/listEditorChoose', {count: 3}).then(res=>{
         this.recommend = res.data.slice(0, 3);
         this.recommend.forEach(function (item) {
-          this.addDifficulty(item)
+          this.addDifficulty(item);
         }.bind(this));
-      })
+      });
     },
     getRecentPageData(){
       api.getByPath('/api/v0/tuxun/maps/listRecent').then(res=>{
-        this.recentPagedata = res.data.slice(0, 3)
+        this.recentPagedata = res.data.slice(0, 3);
         this.recentPagedata.forEach(function (item) {
-          this.addDifficulty(item)
+          this.addDifficulty(item);
         }.bind(this));
-      })
+      });
     },
     addDifficulty(item){
-      console.log(item.avgScore)
+      console.log(item.avgScore);
       if (item.avgScore === null) {
         item.difficulty = '中等';
       } else if (item.avgScore <= 5000) {
@@ -201,7 +201,7 @@ export default {
       } else {
         item.difficulty = '非常简单';
       }
-      console.log(item.difficulty)
+      console.log(item.difficulty);
     },
     searchFocus() {
       document.getElementById('input').blur();
@@ -210,15 +210,15 @@ export default {
     },
 
     toMapsDetail(item, type) {
-      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id )
+      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id );
     },
 
     toMaps(item, type){
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
           api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res=>{
-          })
+          });
 
           api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
             if (res.success) {
@@ -226,10 +226,10 @@ export default {
             } else {
               if (res.errorCode === 'need_vip') {
                 this.$vip({
-                })
+                });
               }
             }
-          })
+          });
         }
       });
     },
@@ -239,7 +239,7 @@ export default {
     },
     goMapMakeHome() {
       this.doLoginStatus().then(res => {
-        console.log(res)
+        console.log(res);
         if (res) {
           tuxunJump('/tuxun/my_maps');
         }
@@ -248,18 +248,18 @@ export default {
     randomTrain() {
       api.getByPath('/api/v0/tuxun/maps/randomTrain').then(res => {
         if (res.success) {
-          tuxunJump('/tuxun/maps_detail?mapsId=' + res.data)
+          tuxunJump('/tuxun/maps_detail?mapsId=' + res.data);
         }
-      })
+      });
     },
     toHot() {
-      tuxunJump('/tuxun/maps-hot')
+      tuxunJump('/tuxun/maps-hot');
     },
     toNew() {
-      tuxunJump('/tuxun/maps-new')
+      tuxunJump('/tuxun/maps-new');
     }
   },
-}
+};
 </script>
 <style scoped lang="scss">
 

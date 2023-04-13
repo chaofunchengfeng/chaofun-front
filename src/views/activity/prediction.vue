@@ -60,41 +60,41 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as api from "../../api/api";
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 
-import ListItem from "../../components/chaofan/ListItem.vue";
-import attentionItem from "../../components/chaofan/attentionItem.vue";
-import RightCom from "@/components/chaofan/RightCom";
-import loadText from "@/components/chaofan/loadText";
+import ListItem from '../../components/chaofan/ListItem.vue';
+import attentionItem from '../../components/chaofan/attentionItem.vue';
+import RightCom from '@/components/chaofan/RightCom';
+import loadText from '@/components/chaofan/loadText';
 
 export default {
-  name: "user",
+  name: 'user',
   data() {
     return {
       ISPHONE: document.body.clientWidth > 800 && !navigator.userAgent.includes('iPad') ? false : true,
-      currentRole: "adminDashboard",
+      currentRole: 'adminDashboard',
       count: 5,
       lists: [],
       params: {
-        marker: "",
+        marker: '',
         pageSize: 40,
         // order: localStorage.getItem('chao.fun.timeline.order') == null ? 'hot': localStorage.getItem('chao.fun.timeline.order')
       },
       options: [
         {
-          label: "最热",
-          value: "hot",
+          label: '最热',
+          value: 'hot',
         },
         {
-          label: "最新",
-          value: "new",
+          label: '最新',
+          value: 'new',
         },
       ],
       isPhone: false,
       forumInfo: null,
       ifcanget: true,
-      whichOne: "pub",
+      whichOne: 'pub',
       loadAll: false,
       userInfo: {},
       userData: null,
@@ -110,13 +110,13 @@ export default {
     attentionItem,
   },
   watch: {
-    "$route.params"(v) {
+    '$route.params'(v) {
       console.log(v);
       console.log(2);
     },
   },
   computed: {
-    ...mapGetters(["roles", "islogin"]),
+    ...mapGetters(['roles', 'islogin']),
   },
   activated(){
     
@@ -132,17 +132,17 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    if (from.path.includes("/p/")) {
+    if (from.path.includes('/p/')) {
     } else {
-      localStorage.setItem("whichOne", "pub");
+      localStorage.setItem('whichOne', 'pub');
     }
     next();
   },
   mounted() {
     this.$EventBus.$on('eventRefresh', ()=>{
         //需要执行的代码
-      this.getScore()
-    })
+      this.getScore();
+    });
     this.getSelfRank();
   },
   created() {
@@ -155,7 +155,7 @@ export default {
         if(res.data){
           this.selfRank = res.data;
         }
-      })
+      });
     },
     joinConfirm(item, index) {
       this.doLoginStatus().then((res) => {
@@ -166,7 +166,7 @@ export default {
               if (action == 'confirm') {
                 api.joinPredictionsTournament({predictionsTournamentId: this.predictionsTournamentId}).then(res => {
                   this.getScore(item, index);
-                })
+                });
               }
             }
           });
@@ -176,28 +176,28 @@ export default {
       },
     getScore(){
       if(this.$route.params.id){
-        this.predictionsTournamentId = this.$route.params.id
+        this.predictionsTournamentId = this.$route.params.id;
       }
       
       let params = {
         predictionsTournamentId: this.predictionsTournamentId
-      }
+      };
       api.checkJoin(params).then(res=>{
         if(!res.data){
-          this.userData = {}
+          this.userData = {};
 
         }else{
           this.userData = res.data;
         }
-      })
+      });
     },
     getTotalRank(){
       let params = {
             predictionsTournamentId: this.predictionsTournamentId
-        }
+        };
       api.getTotalRank(params).then(res=>{
-        this.ranks = res.data
-      })
+        this.ranks = res.data;
+      });
     },
     toRank(){
       window.open(location.origin + '/webview/prediction/rank?id=' + this.GameInfo.id + '&name=' + this.GameInfo.name);
@@ -205,7 +205,7 @@ export default {
     getGameInfo(){
       api.predictionsGet({forumId: this.params.forumId}).then(res=>{
 
-      })
+      });
     },
     getList(){
         api.predictionsGet({forumId: this.params.forumId}).then(res=>{
@@ -214,7 +214,7 @@ export default {
             this.predictionsTournamentId = res.data.id;
             let params = {
                 predictionsTournamentId: res.data.id,
-            }
+            };
             
             api.predictionsTournament(params).then(res=>{
                 if (res.data.marker && res.data.length != 0) {
@@ -230,19 +230,19 @@ export default {
                 if (res.data.length === 0) {
                     this.loadAll = true;
                 }
-                if (params.order == "hot") {
+                if (params.order == 'hot') {
                     params.key = res.data.key;
                 } else {
                     delete params.key;
                 }
                 this.lists.push(...res.data);
-            })
+            });
             this.getScore();
             this.getTotalRank();
             this.getSelfRank();
           }
           
-        })
+        });
         
     }
   },

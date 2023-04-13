@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import { loadScript } from "vue-plugin-load-script";
+import * as api from '../../api/api';
+import { loadScript } from 'vue-plugin-load-script';
 
 export default {
 
-  name: "TuxunFilter",
+  name: 'TuxunFilter',
   data() {
     return {
       type: null,
@@ -33,7 +33,7 @@ export default {
       panos: [],
       challengeId: null,
       current: 0,
-    }
+    };
   },
 
   mounted() {
@@ -51,20 +51,20 @@ export default {
           this.challengeId = res.data.id;
           this.panos.forEach(v => {
             this.headingMap[v.panoId] = v.heading;
-          })
+          });
           this.initContainer();
         }
-      })
+      });
     },
 
     initContainer() {
       setTimeout(function () {
         if (!this.viewer) {
-          document.head.insertAdjacentHTML("beforeend", `<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>`)
+          document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
           this.sharePanoId = this.$route.query.pano;
           loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-test.js').then(() => {
             this.viewer = new google.maps.StreetViewPanorama(
-                document.getElementById("viewer"), {
+                document.getElementById('viewer'), {
                   fullscreenControl:false,
                   panControl:true,
                   addressControl: false,
@@ -80,15 +80,15 @@ export default {
                   },
                 }
             );
-            this.viewer.registerPanoProvider(this.getCustomPanorama)
-            this.viewer.addListener("pano_changed", () => {
-              console.log("pano_changed");
+            this.viewer.registerPanoProvider(this.getCustomPanorama);
+            this.viewer.addListener('pano_changed', () => {
+              console.log('pano_changed');
               if (this.viewer.getPano().length === 27) {
                 this.getPanoInfo(this.viewer.getPano());
               }
             });
             this.setPanoId(this.panos[this.current].panoId);
-          })
+          });
         } else {
           this.setPanoId(this.panos[this.current].panoId);
         }
@@ -107,7 +107,7 @@ export default {
           },
           links: [],
           // The text for the copyright control.
-          copyright: "Imagery (c) 2010 Google",
+          copyright: 'Imagery (c) 2010 Google',
           // The definition of the tiles for this panorama.
           tiles: {
             tileSize: new google.maps.Size(512, 512),
@@ -121,7 +121,7 @@ export default {
       }
     },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-      zoom = zoom +=1;
+      zoom = zoom += 1;
       if (zoom === 1) {
         return (
             'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano
@@ -140,23 +140,23 @@ export default {
           res.data.links.forEach((item) => {
             this.preloadImage(item.pano);
             this.headingMap[item.pano] = item.centerHeading;
-          })
+          });
         }
         // console.log(this.centerHeading);
-      })
+      });
     },
     preloadImage(pano) {
-      var img=new Image();
-      img.src='https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
+      var img = new Image();
+      img.src = 'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
     },
     bindDaily() {
-      console.log()
+      console.log();
       this.getDate();
       api.getByPath('/api/v0/tuxun/challenge/bindDaily', {day: this.getDate(), type: this.type, challengeId: this.challengeId}).then(res => {
         if (res.success) {
           tuxunJump( '/tuxun/challenge?challengeId=' + res.data);
         }
-      })
+      });
     },
     getDate() {
       const currentDate = new Date();
@@ -169,12 +169,12 @@ export default {
 
       const dateString = `${year}${month}${day}`;
       console.log(dateString);
-      return dateString
+      return dateString;
     }
 
   }
 
-}
+};
 </script>
 
 <style lang="scss" scoped>

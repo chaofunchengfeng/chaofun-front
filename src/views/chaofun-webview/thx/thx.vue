@@ -29,21 +29,21 @@
 
 <script>
   export default {
-    name: "thx",
+    name: 'thx',
     methods: {
       toUser(userId){
         try {
-          window.flutter_inappwebview.callHandler('toAppUser',{userId: userId+''})
+          window.flutter_inappwebview.callHandler('toAppUser',{userId: userId + ''});
         } catch (e) {
-          window.open(location.origin + '/user/'+userId,"_blank");
+          window.open(location.origin + '/user/' + userId,'_blank');
         }
       },
 
       toGithub() {
-        window.open('https://github.com/www-chao-fun/',"_blank");
+        window.open('https://github.com/www-chao-fun/','_blank');
       }
     }
-  }
+  };
 </script>
 
 <style scoped>

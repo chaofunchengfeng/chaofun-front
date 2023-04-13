@@ -41,7 +41,9 @@ L.Map.SmoothWheelZoom = L.Handler.extend({
         this._zooming = true;
 
         map._stop();
-        if (map._panAnim) map._panAnim.stop();
+        if (map._panAnim) {
+map._panAnim.stop();
+}
 
         this._goalZoom = map.getZoom();
         this._prevCenter = map.getCenter();
@@ -75,15 +77,17 @@ L.Map.SmoothWheelZoom = L.Handler.extend({
     _updateWheelZoom: function () {
         var map = this._map;
 
-        if ((!map.getCenter().equals(this._prevCenter)) || map.getZoom() != this._prevZoom)
-            return;
+        if ((!map.getCenter().equals(this._prevCenter)) || map.getZoom() != this._prevZoom) {
+return;
+}
 
         this._zoom = map.getZoom() + (this._goalZoom - map.getZoom()) * 0.3;
         this._zoom = Math.floor(this._zoom * 100) / 100;
 
         var delta = this._wheelMousePosition.subtract(this._centerPoint);
-        if (delta.x === 0 && delta.y === 0)
-            return;
+        if (delta.x === 0 && delta.y === 0) {
+return;
+}
 
         if (map.options.smoothWheelZoom === 'center') {
             this._center = this._startLatLng;

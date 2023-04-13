@@ -124,11 +124,11 @@
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
 import Vue from 'vue';
-import * as api from '@/api/api'
+import * as api from '@/api/api';
 import {Circle} from 'vant';
 import moment from 'moment';
-import buttonGameClickRecord from "@/views/chaofun-webview/buttonGameClickRecord";
-import VueClipboard from 'vue-clipboard2'
+import buttonGameClickRecord from '@/views/chaofun-webview/buttonGameClickRecord';
+import VueClipboard from 'vue-clipboard2';
 
 Vue.use(VueClipboard);
 
@@ -179,7 +179,7 @@ export default {
         speed: ''//加载的快慢就靠它了
       }
 
-    }
+    };
   },
   computed: {
     //   value(){
@@ -198,10 +198,10 @@ export default {
     this.initWebSocket();
   },
   destroyed() {
-    this.websock.close() //离开路由之后断开websocket连接
+    this.websock.close(); //离开路由之后断开websocket连接
   },
   mounted() {
-    document.title = "炒饭春节游戏";
+    document.title = '炒饭春节游戏';
 
     var cons = document.getElementById('canvas');
     this.canvas = {
@@ -211,14 +211,14 @@ export default {
       centerY: canvas.height / 2,//Canvas中心点y轴坐标
       rad: Math.PI * 2 / 6000,//将360度分成100份，那么每一份就是rad度
       speed: 0//加载的快慢就靠它了
-    }
+    };
 
     function text(n) {
       context.save(); //save和restore可以保证样式属性只运用于该段canvas元素
-      context.strokeStyle = "#fff"; //设置描边样式
-      context.font = "40px Arial"; //设置字体大小和字体
+      context.strokeStyle = '#fff'; //设置描边样式
+      context.font = '40px Arial'; //设置字体大小和字体
       //绘制字体，并且指定位置
-      context.strokeText(n.toFixed(0) + "%", centerX - 25, centerY + 10);
+      context.strokeText(n.toFixed(0) + '%', centerX - 25, centerY + 10);
       context.stroke(); //执行绘制
       context.restore();
     }
@@ -227,32 +227,32 @@ export default {
     toUser(userId) {
       if (userId) {
         try {
-          window.flutter_inappwebview.callHandler('toAppUser', {userId: userId + ''})
+          window.flutter_inappwebview.callHandler('toAppUser', {userId: userId + ''});
         } catch (e) {
-          window.open(location.origin + '/user/' + userId, "_blank");
+          window.open(location.origin + '/user/' + userId, '_blank');
         }
       }
     },
     onCopy(e) {
-      this.$toast("链接复制成功！")
+      this.$toast('链接复制成功！');
     },
     toIndex() {
       try {
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: "1081032"});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1081032'});
       } catch (e) {
-        window.open('/p/1081032', "_blank");
+        window.open('/p/1081032', '_blank');
       }
     },
     toHome() {
       try {
         // window.flutter_inappwebview.callHandler('toAppIndex', {})
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/all",
+          url: 'https://chao.fan/all',
           title: '炒饭网页首页',
           showHeader: true
-        })
+        });
       } catch (e) {
-        window.open('/all', "_blank");
+        window.open('/all', '_blank');
       }
     },
 
@@ -263,9 +263,9 @@ export default {
           url: 'https://live.bilibili.com/23919989',
           title: 'TheButtonB站直播',
           showHeader: true
-        })
+        });
       } catch (e) {
-        window.open('https://live.bilibili.com/23919989', "_blank");
+        window.open('https://live.bilibili.com/23919989', '_blank');
       }
     },
     toFbi() {
@@ -275,12 +275,12 @@ export default {
           url: 'https://chao.fan/webview/fbi',
           title: '饭币 (FBi)',
           showHeader: true
-        })
+        });
       } catch (e) {
         if (this.ISPHONE) {
-          window.open('/webview/fbi', "_blank");
+          window.open('/webview/fbi', '_blank');
         } else {
-          window.open('/my/fbi', "_blank");
+          window.open('/my/fbi', '_blank');
         }
       }
     },
@@ -293,12 +293,12 @@ export default {
         api.toLogin(params).then(res => {
           if (res.success) {
             // debugger
-            this.getUserInfo()
+            this.getUserInfo();
           } else {
             this.$toast('登录失败，用户名或密码错误');
           }
           // localStorage.setItem('userInfo',JSON.stringify(res.data))
-        })
+        });
       } else {
         let params = {
           userName: this.baseForm.userName,
@@ -307,22 +307,22 @@ export default {
 
         api.toRegister(params).then(res => {
           if (res.success) {
-            this.getUserInfo()
+            this.getUserInfo();
           } else {
             this.$toast(res.errorMessage);
-            console.log(123)
+            console.log(123);
           }
-        })
+        });
       }
     },
     getUserInfo() {
-      this.$toast('登录成功')
+      this.$toast('登录成功');
       // debugger
-      const res = this.$store.dispatch('user/getInfo')
-      this.$store.dispatch('user/getInfo', '')
+      const res = this.$store.dispatch('user/getInfo');
+      this.$store.dispatch('user/getInfo', '');
       setTimeout(() => {
-        location.reload()
-      }, 10)
+        location.reload();
+      }, 10);
 
     },
     toRank() {
@@ -331,9 +331,9 @@ export default {
           url: location.origin + '/webview/buttonGame/rank',
           title: '排行榜',
           showHeader: true
-        })
+        });
       } catch (e) {
-        window.open(location.origin + '/webview/buttonGame/rank', "_blank");
+        window.open(location.origin + '/webview/buttonGame/rank', '_blank');
       }
 
     },
@@ -343,8 +343,8 @@ export default {
     reset() {
       // if(this.selfInfo.timesLeft*1>0){
       this.init();
-      let actions = {"test": "12545"};
-      this.toSend(JSON.stringify(actions))
+      let actions = {'test': '12545'};
+      this.toSend(JSON.stringify(actions));
       // }else{
 
       // }
@@ -353,19 +353,19 @@ export default {
       this.canvas.speed = 0;
       this.blueCircle(0);
       clearInterval(this.timer);
-      this.timer = null
+      this.timer = null;
     },
     initInterval() {
       this.timer = setInterval(() => {
-        this.drawFrame()
+        this.drawFrame();
         if (this.speed == 6000) {
           clearInterval(this.timer);
-          this.timer = null
+          this.timer = null;
         }
-      }, 10)
+      }, 10);
     },
     drawFrame() {
-      var context = this.canvas.context
+      var context = this.canvas.context;
       // window.requestAnimationFrame(drawFrame);
       context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.whiteCircle();
@@ -378,9 +378,9 @@ export default {
     },
     //绘制5像素宽的运动外圈 灰原
     blueCircle(n) {
-      var context = this.canvas.context
+      var context = this.canvas.context;
       context.save();
-      context.strokeStyle = "#ddd"; //设置描边样式
+      context.strokeStyle = '#ddd'; //设置描边样式
       context.lineWidth = 90; //设置线宽
       context.beginPath(); //路径开始
       context.arc(this.canvas.centerX, this.canvas.centerY, 45, -Math.PI / 2, -Math.PI / 2 + n * this.canvas.rad, false); //用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
@@ -389,28 +389,28 @@ export default {
       context.restore();
     },
     whiteCircle() {// 黑圆
-      var context = this.canvas.context
+      var context = this.canvas.context;
       context.save();
       context.beginPath();
       context.lineWidth = 90; //设置线宽
-      context.strokeStyle = "#666";
+      context.strokeStyle = '#666';
       context.arc(this.canvas.centerX, this.canvas.centerY, 45, 0, Math.PI * 2, false);
       context.stroke();
       context.closePath();
       context.restore();
     },
     timeRect() {// 黑圆
-      var context = this.canvas.context
+      var context = this.canvas.context;
       context.save();
       context.fillStyle = '#ddd';
       context.fillRect(this.canvas.centerX - 30, 40, 150, 80);
       context.restore();
     },
     toSend() {
-      this.websocketsend('test')
+      this.websocketsend('test');
     },
     initWebSocket() { //初始化weosocket
-      const wsuri = "wss://chao.fun/ws/v0/game/theButton";
+      const wsuri = 'wss://chao.fun/ws/v0/game/theButton';
       this.websock = new WebSocket(wsuri);
       this.websock.onmessage = this.websocketonmessage;
       this.websock.onopen = this.websocketonopen;
@@ -418,9 +418,9 @@ export default {
       this.websock.onclose = this.websocketclose;
     },
     websocketonopen(e) { //连接建立之后执行send方法发送数据
-      let actions = {"test": "12545"};
-      console.log('链接成功')
-      console.log('1', e)
+      let actions = {'test': '12545'};
+      console.log('链接成功');
+      console.log('1', e);
       // this.websocketsend(JSON.stringify(actions));
     },
     websocketonerror() {//连接建立失败重连
@@ -432,10 +432,10 @@ export default {
       const redata = JSON.parse(e.data);
       if (redata.type == 'ticking') {
         if (redata.seconds_left == '0.0') {
-          this.blueCircle(6000)
+          this.blueCircle(6000);
           this.canvas.speed = 6000;
           clearInterval(this.timer);
-          this.timer = null
+          this.timer = null;
         } else {
           this.canvas.speed = 6000 - parseInt(redata.seconds_left.toFixed(2) * 100);
           if (!this.timer) {
@@ -460,13 +460,13 @@ export default {
       } else if (redata.type == 'needLogin') {
         this.doLoginStatus().then(res => {
           this.initWebSocket();
-        })
+        });
       } else if (redata.type == 'getPrice') {
-        this.$toast("太强了，你获得奖励了~")
+        this.$toast('太强了，你获得奖励了~');
       } else if (redata.type == 'gameOver') {
-        this.$toast("春节游戏结束，感谢参与，可以访问炒饭首页到处逛逛")
+        this.$toast('春节游戏结束，感谢参与，可以访问炒饭首页到处逛逛');
       } else if (redata.type == 'hasNoFBi') {
-        this.$toast("您没有FBi, 请查看游戏规则！")
+        this.$toast('您没有FBi, 请查看游戏规则！');
       }
     },
     websocketsend(Data) {//数据发送
@@ -475,8 +475,8 @@ export default {
     },
     websocketclose(e) {  //关闭
       setTimeout(() => {
-        this.initWebSocket()
-      }, 1000)
+        this.initWebSocket();
+      }, 1000);
     },
 
     showNotificationAndRecord(redata) {
@@ -522,7 +522,7 @@ export default {
     }
 
   },
-}
+};
 </script>
 <style scoped lang="scss">
 

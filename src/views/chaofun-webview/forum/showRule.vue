@@ -22,11 +22,11 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
-  import {forumRemoveRule} from "../../../api/api";
+  import * as api from '@/api/api';
+  import {forumRemoveRule} from '../../../api/api';
 
   export default {
-    name: "tag",
+    name: 'tag',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {
@@ -44,12 +44,12 @@
           past24HVotes: 0,
           rank: 0
         }
-      }
+      };
     },
 
     created() {
       this.forumId = this.$route.query.forumId;
-      this.getForumInfo()
+      this.getForumInfo();
       this.getForumRules();
     },
 
@@ -58,16 +58,16 @@
 
         api.getForumInfo({forumId: this.forumId}).then(res => {
           this.forumInfo = res.data;
-        })
+        });
       },
       getForumRules() {
         api.getForumRules({ forumId: this.forumId }).then((res) => {
           this.rules = res.data;
-          this.load()
-        })
+          this.load();
+        });
       }
     }
-  }
+  };
 
 </script>
 

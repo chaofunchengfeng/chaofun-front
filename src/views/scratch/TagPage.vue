@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import * as api from '../../api/api'
-import ScratchList from "./scratch-list";
+import * as api from '../../api/api';
+import ScratchList from './scratch-list';
 
 export default {
-  name: "TagPage",
+  name: 'TagPage',
   components: {ScratchList},
   data() {
     return {
@@ -35,7 +35,7 @@ export default {
       current: 1,
       list: [],
       history: null
-    }
+    };
   },
   created() {
     this.history = history;
@@ -44,7 +44,7 @@ export default {
       this.sort = this.$route.query.sort;
     }
 
-    console.log(this.$route.query.page)
+    console.log(this.$route.query.page);
     if (this.$route.query.page) {
       // console.log()
       this.current = parseInt(this.$route.query.page);
@@ -59,18 +59,18 @@ export default {
     toCreate() {
       this.doLoginStatus().then((res) => {
         if (res) {
-          window.location.href = '/scratch/create'
+          window.location.href = '/scratch/create';
         }
       });
     },
     random() {
       api.getByPath('/api/v0/scratch/game/random').then(res=>{
         window.location.href = '/scratch/guess?id=' + res.data;
-      })
+      });
     },
 
     goHome() {
-      window.location.href = '/scratch'
+      window.location.href = '/scratch';
     },
 
 
@@ -78,12 +78,12 @@ export default {
       try {
         this.$router.go(-1);
       } catch (e) {
-        window.location.href = '/scratch'
+        window.location.href = '/scratch';
       }
     },
 
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -13,19 +13,19 @@
 </template>
 
 <script>
-import * as api from '@/api/api'
+import * as api from '@/api/api';
  export default {
    name: '',
    data(){
      return {
 
-     }
+     };
    },
    props: {
        item: {
            type: Object,
            default(){
-               return {}
+               return {};
            }
        },
    },
@@ -40,10 +40,10 @@ import * as api from '@/api/api'
    methods: {
     toUrls(item,params){
        this.postBehavior(item.postId,'jump');
-       this.toUrl(params)
+       this.toUrl(params);
     },
    }
- }
+ };
 </script>
 
 <style type='text/scss' lang='scss' scoped>

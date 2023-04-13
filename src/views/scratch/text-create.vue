@@ -43,12 +43,12 @@
 
 <script>
 export default {
-  name: "text-create",
+  name: 'text-create',
   data() {
     return {
       chooseIndex: null,
       hint: false,
-    }
+    };
   },
   props: {
     hasHint: Boolean,
@@ -86,12 +86,12 @@ export default {
       if (this.cleanTimer) {
         clearTimeout(this.cleanTimer);
       }
-      this.chooseIndex = index
+      this.chooseIndex = index;
     },
     cleanChoose() {
       this.cleanTimer = setTimeout(()=> {
         this.chooseIndex = null;
-      }, 200)
+      }, 200);
     },
     deleteColumn() {
       this.dataForm.pop();
@@ -103,7 +103,7 @@ export default {
       this.$emit('update:hasHint', e);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
