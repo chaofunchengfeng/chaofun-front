@@ -6,8 +6,11 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "analyzer": "vue-cli-service build --report",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --fix & eslint src --cache --fix"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "@toast-ui/editor": "^3.2.1",
     "@toast-ui/vue-editor": "^3.1.1",
@@ -104,6 +107,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.10.0",
     "html-webpack-plugin": "^4.0.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.19.1",
     "quill-image-extend-module": "^1.1.2",
     "regenerator-runtime": "^0.13.7",
