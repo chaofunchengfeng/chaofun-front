@@ -914,7 +914,7 @@ export default {
     },
 
     reset() {
-      this.setGoogle(this.lastRound.panoId, this.lastRound.move);
+      this.setPanoId(this.lastRound);
     },
 
 
@@ -1599,11 +1599,15 @@ export default {
       if (!round.move) {
         this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, clickToGo: false});
       } else {
-        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, clickToGo: false});
+        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: true, clickToGo: true});
       }
       this.viewer.setVisible(true);
       setTimeout(() => {
-        this.viewer.setZoom(0);
+        if (round.vzoom) {
+          this.viewer.setZoom(round.vzoom);
+        } else {
+          this.viewer.setZoom(0);
+        }
       }, 50);
     },
     preloadImage(pano) {
