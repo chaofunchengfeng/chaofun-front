@@ -14,7 +14,7 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div @click="toFirstTournament" class="info">全新地图！玩家第三届组队赛</div>
+      <div @click="toFirstTournament" class="info">全新题库！玩家第三届组队赛开始报名～，周日下午两点开赛</div>
       <div class="second-info"> 提示：黑屏的用户 过30分钟/切换5G 访问就会正常了 </div>
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
