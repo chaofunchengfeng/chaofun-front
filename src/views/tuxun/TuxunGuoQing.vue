@@ -13,7 +13,7 @@
           固定
         </div>
         <div @click="type='move';init()" :class="{'normal': type!=='move', 'choose': type==='move'}">
-          移动(VIP)
+          移动<span style="color: gold">(VIP)</span>
         </div>
       </div>
     </div>
