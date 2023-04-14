@@ -1,23 +1,23 @@
 <template>
-  <agora v-if="token" :appid="appid" channel="test_channel" :token="token" :uid="uid">
-    <agora-audio-sender/>
-    <agora-audio-receiver/>
-<!--    <agora-video-sender/>-->
-<!--    <agora-video-receiver/>-->
-  </agora>
+<!--  <agora v-if="token" :appid="appid" channel="test_channel" :token="token" :uid="uid">-->
+<!--    <agora-audio-sender/>-->
+<!--    <agora-audio-receiver/>-->
+<!--&lt;!&ndash;    <agora-video-sender/>&ndash;&gt;-->
+<!--&lt;!&ndash;    <agora-video-receiver/>&ndash;&gt;-->
+<!--  </agora>-->
 </template>
 
 <script>
 import Vue from 'vue';
 
-import AgoraRtcVue from 'agora-rtc-vue';
-import 'agora-rtc-vue/lib/agora-rtc-vue.css';
-import { AudioSender, AudioReceiver } from 'agora-rtc-vue';
+// // // import AgoraRtcVue from 'agora-rtc-vue';
+// // import 'agora-rtc-vue/lib/agora-rtc-vue.css';
+// import { AudioSender, AudioReceiver } from 'agora-rtc-vue';
 import * as api from '../../api/api';
 
 
-Vue.use(AgoraRtcVue,{
-});
+// Vue.use(AgoraRtcVue,{
+// });
 
 export default {
   name: 'test.vue',
