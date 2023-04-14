@@ -14,8 +14,8 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div class="info">提示：黑屏的用户 过30分钟/切换5G 访问就会正常了</div>
-<!--      <div class="second-info" @click="raiseVIP" v-if="$store.state.user.userInfo.userId !== 54242 && $store.state.user.islogin"> 会员费用下月即将停止优惠，将会调至「9.99/月」「69.99/年」欲购从速 </div>-->
+      <div @click="toFirstTournament" class="info">全新地图！玩家第三届组队赛</div>
+      <div class="second-info"> 提示：黑屏的用户 过30分钟/切换5G 访问就会正常了 </div>
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -291,9 +291,10 @@ export default {
     },
     toFirstTournament() {
       try {
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1250152'});
+
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1253071'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1250152');
+        tuxunOpen('https://choa.fun/p/1253071');
       }
     },
     raiseVIP() {
@@ -333,18 +334,18 @@ export default {
     margin: 0 auto;
     max-width: 80rem;
     .info {
-      //cursor: pointer;
-      color: white;
-      font-size: medium;
-      padding-top: 1rem;
-      //text-decoration:underline;
-    }
-    .second-info {
       cursor: pointer;
       color: white;
       font-size: medium;
-      padding-top: 8px;
+      padding-top: 1rem;
       text-decoration:underline;
+    }
+    .second-info {
+      //cursor: pointer;
+      color: white;
+      font-size: medium;
+      padding-top: 8px;
+      //text-decoration:underline;
     }
     .times {
       color: white;
