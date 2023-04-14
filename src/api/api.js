@@ -26,7 +26,7 @@ export function getByPathLongTimeout(path, params) {
     url: path,
     method: 'get',
     params,
-    timeout: 60 * 1000 // 上传文件最大支持2分钟
+    timeout: 180 * 1000 // 上传文件最大支持2分钟
   });
 }
 /** 发布预测帖子 */

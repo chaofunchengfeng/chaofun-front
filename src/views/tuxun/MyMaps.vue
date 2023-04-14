@@ -67,7 +67,7 @@ export default {
       });
     },
     publish(id) {
-      api.getByPath('/api/v0/tuxun/maps/publish', {mapsId: id}).then(res=>{
+      api.getByPathLongTimeout('/api/v0/tuxun/maps/publish', {mapsId: id}).then(res=>{
         this.getMapsList();
       });
     },

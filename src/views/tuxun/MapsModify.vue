@@ -122,7 +122,7 @@ export default {
       });
     },
     publish() {
-      api.getByPath('/api/v0/tuxun/maps/publish', {mapsId: this.mapsId}).then(res=>{
+      api.getByPathLongTimeout('/api/v0/tuxun/maps/publish', {mapsId: this.mapsId}).then(res=>{
         if (res.success) {
           tuxunJump('/tuxun/my_maps');
         }
