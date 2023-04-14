@@ -32,8 +32,8 @@
             难度: {{item.difficulty}}
           </div>
           <div>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定</el-button>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动</el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定<span style="color: gold">(VIP)</span></el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动<span style="color: gold">(VIP)</span></el-button>
           </div>
         </div>
       </div>
