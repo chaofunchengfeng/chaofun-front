@@ -222,8 +222,9 @@ export default {
                     this.$vip();
                   }
                 });
+              } else {
+                this.changeMaps(mapsId, mapsType);
               }
-              this.changeMaps(mapsId, mapsType);
             }
           });
     },
