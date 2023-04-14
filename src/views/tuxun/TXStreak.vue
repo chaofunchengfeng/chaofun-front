@@ -21,7 +21,7 @@
           <div>
             <div style="line-height: 1">
               省份连胜
-              <p>移动</p>
+              <p>移动<span style="color: gold">(VIP)</span></p>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
           <div>
             <div style="line-height: 1">
               国家连胜
-              <p>移动</p>
+              <p><span style="color: gold">(VIP)</span></p>
             </div>
           </div>
         </div>

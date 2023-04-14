@@ -10,10 +10,10 @@
     <div class="tab_container">
       <div class="tab">
         <div @click="type='noMove';init();" :class="{'normal': type!=='noMove', 'choose': type==='noMove'}">
-          固定街景
+          固定
         </div>
         <div @click="type='move';init()" :class="{'normal': type!=='move', 'choose': type==='move'}">
-          移动街景
+          移动(VIP)
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@
           </div>
         </div>
         <div v-if="choose==='student'">
-          <div>注：2小时免费会员，可循环使用，建议学生使用</div>
+          <div>注：15分钟免费会员，可循环使用，建议学生使用</div>
           <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>
         </div>
         <div v-if="choose==='month'">
@@ -68,7 +68,10 @@
 
         <div>
           <div>
-            - 可移动街景
+            - 可移动街景(每日挑战除外)
+          </div>
+          <div>
+            - 练习题库
           </div>
           <div>
             - 街景奇观

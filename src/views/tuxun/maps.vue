@@ -8,7 +8,7 @@
       <el-button type="primary" @click="goMapMakeHome" round>自建</el-button>
     </div>
     <div class="nav">
-      练习题库
+      练习题库<span style="color: gold">(VIP)</span>
     </div>
     <div @click="searchFocus">
       <el-input v-model="keyword" id="input" placeholder="搜索练习题库" style="margin-top: 2rem; max-width: 60%;" round></el-input>
@@ -31,8 +31,8 @@
             难度: {{item.difficulty}}
           </div>
           <div>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定</el-button>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动</el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定<span style="color: gold">(VIP)</span></el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动<span style="color: gold">(VIP)</span></el-button>
           </div>
         </div>
       </div>
@@ -54,8 +54,8 @@
             难度: {{item.difficulty}}
           </div>
           <div>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定</el-button>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动</el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定<span style="color: gold">(VIP)</span></el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动<span style="color: gold">(VIP)</span></el-button>
           </div>
         </div>
       </div>
@@ -78,8 +78,8 @@
             难度: {{item.difficulty}}
           </div>
           <div>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定</el-button>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动</el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定<span style="color: gold">(VIP)</span></el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动<span style="color: gold">(VIP)</span></el-button>
           </div>
         </div>
       </div>
@@ -102,8 +102,8 @@
             难度: {{item.difficulty}}
           </div>
           <div>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定</el-button>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动</el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定<span style="color: gold">(VIP)</span></el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动<span style="color: gold">(VIP)</span></el-button>
           </div>
         </div>
       </div>
