@@ -30,7 +30,7 @@
         <div v-if="this.gameData && this.gameData.status === 'finish'">
           <div class="score" >今日得分: {{this.gameData.player.totalScore}}</div>
           <div v-if="this.gameData && this.gameData.player.roundResults" style="display: flex;justify-content: center; text-align: center; width: 100%">
-            <div v-for="(item, index) in this.gameData.player.roundResults">
+            <div v-for="(item, index) in this.gameData.player.roundResults" :key="index">
               <div v-if="item.score <= 1000" style="width: 25px; height: 25px; margin: 8px; background-color: rgba(240, 128, 128); border-radius: 4px;" class="hover-target">
                 <span class="tooltip">0-1000分</span>
               </div>

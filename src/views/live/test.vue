@@ -1,12 +1,3 @@
-<template>
-<!--  <agora v-if="token" :appid="appid" channel="test_channel" :token="token" :uid="uid">-->
-<!--    <agora-audio-sender/>-->
-<!--    <agora-audio-receiver/>-->
-<!--&lt;!&ndash;    <agora-video-sender/>&ndash;&gt;-->
-<!--&lt;!&ndash;    <agora-video-receiver/>&ndash;&gt;-->
-<!--  </agora>-->
-</template>
-
 <script>
 import Vue from 'vue';
 
@@ -20,7 +11,7 @@ import * as api from '../../api/api';
 // });
 
 export default {
-  name: 'test.vue',
+  name: 'test-vue',
   components: {
     // 'agora-audio-sender': AudioSender,
   },

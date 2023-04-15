@@ -18,7 +18,7 @@
     </div>
     <div class="game_entrance">
       <div class="grid_main">
-        <div v-for="(item, index) in pagedata" @click.stop="toMapsDetail(item)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
+        <div v-for="(item, index) in pagedata" :key="index" @click.stop="toMapsDetail(item)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover || 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
           <div class="title">
             {{item.name}}
           </div>

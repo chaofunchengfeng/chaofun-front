@@ -61,7 +61,7 @@ import noticeItem from '@/components/chaofan/noticeItem';
 import loadText from '@/components/chaofan/loadText';
 import * as api from '../../api/api';
 export default {
-  name: '',
+  name: 'users-message',
   data() {
     return {
       humanizeTimeFormat: true,

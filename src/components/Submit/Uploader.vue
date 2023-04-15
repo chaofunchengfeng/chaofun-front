@@ -49,6 +49,7 @@ import exif from '@/utils/exif-check';
 function noop() {}
 
 export default {
+  name: 'submit-uploader',
   components: {
     UploadList,
     UploadVideo,

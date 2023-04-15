@@ -123,17 +123,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import * as api from '@/api/api'
-
-import ListItem from '@/components/chaofan/ListItem.vue'
-import RightCom from '@/components/chaofan/RightCom'
-import loadText from '@/components/chaofan/loadText'
-import {getByPath} from "../../../api/api";
+import { mapGetters } from 'vuex';
+import * as api from '@/api/api';
 
 export default {
-  name: 'user',
-  // components: { adminDashboard, editorDashboard },
+  name: 'forum-setting',
   data() {
     return {
       state: '',
@@ -151,10 +145,7 @@ export default {
       forumInfo: '',
       fbi: 5,
       modInfo: ''
-    }
-  },
-  components: {
-    ListItem,loadText
+    };
   },
   watch: {
   },
@@ -170,14 +161,14 @@ export default {
         window.setUploadImage = function (message) {
           self.$toast('ICON更新成功，点击保存生效');
           self.forumInfo.imageName = message;
-        }
-      }catch{
-
+        };
+      }catch(e){
+        console.warn(e);
       }
-    if(document.body.clientWidth<700){
-      this.isPhone = true
+    if(document.body.clientWidth < 700){
+      this.isPhone = true;
     }
-    this.toPosition()
+    this.toPosition();
   },
   created() {
     this.forumId = this.$route.query.forumId;
@@ -206,14 +197,14 @@ export default {
       this.displayAdd = false;
     },
     handleSelect(item) {
-      this.userIdToAdd= item.userId;
+      this.userIdToAdd = item.userId;
       console.log(item);
     },
 
     querySearchAsync(queryString, cb) {
       api.getSearchUser({'keyword': queryString, 'pageNum': 1}).then((res) => {
         let result = res.data.data.map(value => {
-          value.value = value.userName
+          value.value = value.userName;
           return value;
         });
 
@@ -227,10 +218,10 @@ export default {
     toAutoReplaySetting() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/auto_replay" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/auto_replay' + '?forumId=' + this.forumId,
           title: '自动回复管理',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/auto_replay?forumId=' + this.forumId);
       }
@@ -238,10 +229,10 @@ export default {
     toBan() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/ban_manager" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/ban_manager' + '?forumId=' + this.forumId,
           title: '用户封禁',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/ban_manager?forumId=' + this.forumId);
       }
@@ -250,10 +241,10 @@ export default {
     toSensitiveWord() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/sensitive_word_manager" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/sensitive_word_manager' + '?forumId=' + this.forumId,
           title: '敏感词',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/sensitive_word_manager?forumId=' + this.forumId);
       }
@@ -262,10 +253,10 @@ export default {
     toManagerBadge() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/badge" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/badge' + '?forumId=' + this.forumId,
           title: '徽章管理',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/badge?forumId=' + this.forumId);
       }
@@ -274,10 +265,10 @@ export default {
     toTableManager() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/table_manager" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/table_manager' + '?forumId=' + this.forumId,
           title: '表格管理',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/table_manager?forumId=' + this.forumId);
       }
@@ -286,10 +277,10 @@ export default {
     toTuxun() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/tuxunAdmin",
+          url: 'https://chao.fan/tuxunAdmin',
           title: '图寻审核',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/tuxunAdmin');
       }
@@ -301,10 +292,10 @@ export default {
     toNotify() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/notify" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/notify' + '?forumId=' + this.forumId,
           title: '发送通知',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/notify?forumId=' + this.forumId);
       }
@@ -312,20 +303,22 @@ export default {
     toManageTag() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/tag" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/tag' + '?forumId=' + this.forumId,
           title: '标签管理',
           showHeader: true
-        })      } catch (e) {
+        });      
+} catch (e) {
         window.open(location.origin + '/webview/forum/tag?forumId=' + this.forumId);
       }
     },
     toManageUserTag() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/user_tag" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/user_tag' + '?forumId=' + this.forumId,
           title: '标签管理',
           showHeader: true
-        })      } catch (e) {
+        });      
+} catch (e) {
         window.open(location.origin + '/webview/forum/user_tag?forumId=' + this.forumId);
       }
     },
@@ -333,10 +326,11 @@ export default {
     toManageRule() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/rule" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/rule' + '?forumId=' + this.forumId,
           title: '版块规范管理',
           showHeader: true
-        })      } catch (e) {
+        });      
+} catch (e) {
         window.open(location.origin + '/webview/forum/rule?forumId=' + this.forumId);
       }
     },
@@ -344,10 +338,11 @@ export default {
     toAnalytics() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/analytics" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/analytics' + '?forumId=' + this.forumId,
           title: '版块统计',
           showHeader: true
-        })      } catch (e) {
+        });      
+} catch (e) {
         window.open(location.origin + '/webview/forum/analytics?forumId=' + this.forumId);
       }
     },
@@ -355,10 +350,10 @@ export default {
     toForumLog() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/log?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/log?forumId=' + this.forumId,
           title: '版块日志',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/log?forumId=' + this.forumId);
       }
@@ -367,10 +362,10 @@ export default {
     toModManager() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: "https://chao.fan/webview/forum/mod_manager" + "?forumId=" + this.forumId,
+          url: 'https://chao.fan/webview/forum/mod_manager' + '?forumId=' + this.forumId,
           title: '版主管理',
           showHeader: true
-        })
+        });
       } catch (e) {
         window.open(location.origin + '/webview/forum/mod_manager?forumId=' + this.forumId);
       }
@@ -393,44 +388,44 @@ export default {
       api.getForumInfo({forumId: this.forumId}).then(res => {
         this.forumInfo = res.data;
         this.desc = this.forumInfo.desc;
-      })
+      });
 
       api.getModInfo({forumId: this.forumId}).then(res => {
         this.modInfo = res.data;
-      })
+      });
 
       api.getByPath('/api/v0/forum/getAnonymity',{forumId: this.forumId}).then( res => {
-        this.anonymity = res.data
-      })
+        this.anonymity = res.data;
+      });
 
       api.getByPath('/api/v0/donate/isOpen',{forumId: this.forumId}).then( res => {
-        this.donate = res.data
-      })
+        this.donate = res.data;
+      });
     },
 
     setAnonymity(value) {
       console.log(value);
       api.getByPath('/api/v0/forum/setAnonymity',{forumId: this.forumId, anonymity: value}).then( res => {
         this.getForumInfo();
-      })
+      });
     },
 
     setDonate(value) {
       console.log(value);
       api.getByPath('/api/v0/donate/set',{forumId: this.forumId, donate: value}).then( res => {
         this.getForumInfo();
-      })
+      });
     },
 
     toSign(){
       api.setForumDesc({forumId: this.forumId, desc: this.desc}).then(res=>{
         api.setForumIcon({forumId: this.forumId, imageName: this.forumInfo.imageName}).then(res=>{
             this.$toast('保存成功');
-        })
-      })
+        });
+      });
     },
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .avatar-uploader .el-upload {

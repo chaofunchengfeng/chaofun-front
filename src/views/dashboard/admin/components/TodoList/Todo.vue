@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'Todo',
+  name: 'todilist-todo',
   directives: {
     focus(el, { value }, { context }) {
       if (value) {

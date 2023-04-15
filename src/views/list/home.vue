@@ -194,45 +194,45 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import * as api from "../../api/api";
+import { mapGetters } from 'vuex';
+import * as api from '../../api/api';
 
-import ListItem from "../../components/chaofan/ListItem.vue";
-import SimListItem from "../../components/chaofan/SimListItem.vue";
-import RightCom from "@/components/chaofan/RightCom";
-import loadText from "@/components/chaofan/loadText";
-import fixedBottom from "@/components/chaofan/fixedBottom";
+import ListItem from '../../components/chaofan/ListItem.vue';
+import SimListItem from '../../components/chaofan/SimListItem.vue';
+import RightCom from '@/components/chaofan/RightCom';
+import loadText from '@/components/chaofan/loadText';
+import fixedBottom from '@/components/chaofan/fixedBottom';
 
-import selectList from "@/components/chaofan/common/selectList";
+import selectList from '@/components/chaofan/common/selectList';
 
-import prediction from "@/views/activity/prediction";
-import donateDetail from "_c/donate/donateDetail";
-import forumMore from "_c/forum/ForumMore";
+import prediction from '@/views/activity/prediction';
+import donateDetail from '_c/donate/donateDetail';
+import forumMore from '_c/forum/ForumMore';
 
 export default {
-  name: "Dashboard",
+  name: 'list-dashboard',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
-      tab: "post",
+      tab: 'post',
       hasGetData: false,
       pinList: [],
-      currentRole: "adminDashboard",
+      currentRole: 'adminDashboard',
       count: 5,
       lists: [],
-      forumId: "",
+      forumId: '',
       params: {
         onlyNew: false,
-        forumId: "",
+        forumId: '',
         pageSize: 30,
         order:
-          localStorage.getItem("chao.fun.timeline.order") == null
-            ? "hot"
-            : localStorage.getItem("chao.fun.timeline.order"),
+          localStorage.getItem('chao.fun.timeline.order') == null
+            ? 'hot'
+            : localStorage.getItem('chao.fun.timeline.order'),
         range:
-          localStorage.getItem("chao.fun.timeline.range") == null
-            ? "1day"
-            : localStorage.getItem("chao.fun.timeline.range")
+          localStorage.getItem('chao.fun.timeline.range') == null
+            ? '1day'
+            : localStorage.getItem('chao.fun.timeline.range')
       },
 
       isPhone: false,
@@ -241,55 +241,55 @@ export default {
       loadAll: false,
       options: [
         {
-          label: "最新",
-          value: "new",
+          label: '最新',
+          value: 'new',
           choose: true
         },
         {
-          label: "最热",
-          value: "hot",
+          label: '最热',
+          value: 'hot',
           choose: false
         },
         {
-          label: "新评",
-          value: "comment",
+          label: '新评',
+          value: 'comment',
           choose: false
         },
         {
-          label: "最赞",
-          value: "ups",
+          label: '最赞',
+          value: 'ups',
           choose: false
         }
       ],
       ranges: [
         {
-          label: "现在",
-          value: "1hour"
+          label: '现在',
+          value: '1hour'
         },
         {
-          label: "一天",
-          value: "1day"
+          label: '一天',
+          value: '1day'
         },
         {
-          label: "一周",
-          value: "1week"
+          label: '一周',
+          value: '1week'
         },
         {
-          label: "一个月",
-          value: "1month"
+          label: '一个月',
+          value: '1month'
         },
         {
-          label: "一年",
-          value: "1year"
+          label: '一年',
+          value: '1year'
         },
         {
-          label: "全部",
-          value: "all"
+          label: '全部',
+          value: 'all'
         }
       ],
       tagList: [],
       tagCountList: [],
-      GameInfo: "",
+      GameInfo: '',
       tableList: [],
       tables: {
         table: []
@@ -316,30 +316,30 @@ export default {
     // }
   },
   computed: {
-    ...mapGetters(["roles", "islogin"])
+    ...mapGetters(['roles', 'islogin'])
   },
   activated() {
     if (this.$route.query.time) {
       this.toPosition();
     }
     this.getForumInfo();
-    if (localStorage.getItem("simple")) {
-      let data = JSON.parse(localStorage.getItem("simple"));
+    if (localStorage.getItem('simple')) {
+      let data = JSON.parse(localStorage.getItem('simple'));
 
       this.lists.forEach((its, index) => {
         if (data.postId == its.postId) {
           this.lists.splice(index, 1, data);
         }
       });
-      localStorage.removeItem("simple");
+      localStorage.removeItem('simple');
     }
 
   },
   mounted() {
     if (!location.host.includes('choa.fun') && !location.host.includes('8099')) {
-      window.location.href = window.location.href.replace(location.host, 'choa.fun')
+      window.location.href = window.location.href.replace(location.host, 'choa.fun');
     }
-    if (this.$store.state.user.listMode == "normal" && this.params.pageSize != 20) {
+    if (this.$store.state.user.listMode == 'normal' && this.params.pageSize != 20) {
       this.params.pageSize = 20;
     } else {
       this.params.pageSize = 30;
@@ -356,11 +356,11 @@ export default {
       this.isPhone = true;
     }
     if (this.$route.query.game) {
-      localStorage.setItem("gamemodule", true);
+      localStorage.setItem('gamemodule', true);
     }
 
     let self = this;
-    this.$refs.container.addEventListener("scroll", function() {
+    this.$refs.container.addEventListener('scroll', function() {
       let scrollTop = self.$refs.container.scrollTop;
       let conTop = self.$refs.container.scrollTop;
       // 变量windowHeight是可视区的高度
@@ -372,7 +372,7 @@ export default {
       if (
         conTop + conHeight >= scrollHeight
       ) {
-        console.log("到底了");
+        console.log('到底了');
         if (self.ifcanget) {
           // self.load()
           self.getLists();
@@ -381,11 +381,11 @@ export default {
     });
     // document.querySelector('meta[name="keywords"]').setAttribute("content", '111')
     // document.querySelector('meta[name="description"]').setAttribute("content", '222')
-    this.$EventBus.$on("unPin", (index) => {
+    this.$EventBus.$on('unPin', (index) => {
       //需要执行的代码
       this.lists.splice(index, 1);
     });
-    this.$EventBus.$on("refreshItemTag", (params) => {
+    this.$EventBus.$on('refreshItemTag', (params) => {
       //需要执行的代码
       console.log(params);
       if (params.way) {
@@ -404,16 +404,16 @@ export default {
         }
       }
     });
-    this.$EventBus.$on("resetItem", (params) => {
+    this.$EventBus.$on('resetItem', (params) => {
       //需要执行的代码
       this.lists.splice(params.index, 1, params.item);
     });
-    this.$EventBus.$on("updateItem", (params) => {
+    this.$EventBus.$on('updateItem', (params) => {
       //需要执行的代码
-      if (params.type == "delete") {
+      if (params.type == 'delete') {
         let index = this.lists.findIndex(i => i.postId == params.postId);
         this.lists.splice(index, 1);
-      } else if (params.type == "update") {
+      } else if (params.type == 'update') {
         let index = this.lists.findIndex(i => i.postId == params.postId);
         this.lists.splice(index, 1, params.item);
       }
@@ -421,8 +421,8 @@ export default {
   },
 
   created() {
-    this.params.onlyNew = localStorage.getItem("onlyNew") == "true" ? true : false;
-    let id = this.$route.path.split("/")[2];
+    this.params.onlyNew = localStorage.getItem('onlyNew') == 'true' ? true : false;
+    let id = this.$route.path.split('/')[2];
     if (!isNaN(id)) {
       this.params.forumId = id;
       // if(!localStorage.getItem('storedata')){
@@ -468,20 +468,20 @@ export default {
     },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex % 2 == 1) {
-        return "warning-row success-row";
+        return 'warning-row success-row';
       } else if (rowIndex === 3) {
-        return "success-row";
+        return 'success-row';
       }
-      return "";
+      return '';
     },
     toggleTable() {
 
       if (this.tableList.length) {
         api.tableGet({ tableId: this.tableList[this.tableIndex].id }).then(res => {
-          let lines = res.data.data.split("\n"); // 1️⃣
-          let header = lines[0].split(","); // 2️⃣
+          let lines = res.data.data.split('\n'); // 1️⃣
+          let header = lines[0].split(','); // 2️⃣
           let output = lines.slice(1).map(line => {
-            let fields = line.split(","); // 3️⃣
+            let fields = line.split(','); // 3️⃣
             return Object.fromEntries(header.map((h, i) => [h, fields[i]])); // 4️⃣
           });
 
@@ -519,7 +519,7 @@ export default {
       history.pushState(
         {},
         null,
-        `/f/${this.params.forumId}${v == "post" ? "" : "/" + this.tab}`
+        `/f/${this.params.forumId}${v == 'post' ? '' : '/' + this.tab}`
       );
       // if(v=='table'&&!this.tableList.length){
       //   api.forumtablelist({forumId: this.params.forumId}).then(res=>{
@@ -539,8 +539,8 @@ export default {
           api.joinForum({ forumId: this.params.forumId }).then(res => {
             if (res.success) {
               this.$message({
-                message: "加入成功",
-                type: "success",
+                message: '加入成功',
+                type: 'success',
                 offset: 20
               });
               this.forumInfo.joined = true;
@@ -551,8 +551,8 @@ export default {
           api.leaveForum({ forumId: this.params.forumId }).then(res => {
             if (res.success) {
               this.$message({
-                message: "退出成功",
-                type: "success",
+                message: '退出成功',
+                type: 'success',
                 offset: 20
               });
               this.forumInfo.joined = false;
@@ -561,21 +561,21 @@ export default {
           });
         }
       } else {
-        this.showLogin("login");
+        this.showLogin('login');
       }
     },
     doTagCount(item) {
       let count;
       try {
         count = this.tagCountList[this.tagCountList.findIndex(it => it.tag_id == item.id)].count;
-      } catch {
+      } catch(e) {
         count = 0;
       }
 
       if (count) {
-        return "(" + count + ")";
+        return '(' + count + ')';
       } else {
-        return "";
+        return '';
       }
 
     },
@@ -586,7 +586,7 @@ export default {
     },
     saveTagId() {
       if (this.params.tagId) {
-        localStorage.setItem("tagInfo", JSON.stringify(this.params));
+        localStorage.setItem('tagInfo', JSON.stringify(this.params));
       }
     },
     listPins() {
@@ -604,44 +604,44 @@ export default {
       });
       item.choose = true;
       this.options.splice(index, 1, item);
-      localStorage.setItem("chao.fun.timeline.order", item.value);
-      localStorage.setItem("chao.fun.timeline.range", this.params.range);
+      localStorage.setItem('chao.fun.timeline.order', item.value);
+      localStorage.setItem('chao.fun.timeline.range', this.params.range);
       delete this.params.marker;
       delete this.params.key;
       // delete this.params.tagId;
       this.params.order = item.value;
       this.lists = [];
-      this.getLists("first");
+      this.getLists('first');
     },
     updateList(params) {
       this.params = params;
       // delete this.params.tagId;
       this.lists = [];
-      this.getLists("first");
+      this.getLists('first');
     },
     changes() {
-      localStorage.setItem("chao.fun.timeline.order", this.params.order);
-      localStorage.setItem("chao.fun.timeline.range", this.params.range);
+      localStorage.setItem('chao.fun.timeline.order', this.params.order);
+      localStorage.setItem('chao.fun.timeline.range', this.params.range);
       delete this.params.marker;
       delete this.params.key;
       // delete this.params.tagId;
       this.lists = [];
-      this.getLists("first");
+      this.getLists('first');
     },
     getForumInfo() {
 
       api.getForumInfo({ forumId: this.params.forumId }).then((res) => {
         if (res.success) {
           this.forumInfo = res.data;
-          document.title = "【" + res.data.name + "】- " + document.title;
-          this.$store.dispatch("var/SET_formName", this.forumInfo.name);
+          document.title = '【' + res.data.name + '】- ' + document.title;
+          this.$store.dispatch('var/SET_formName', this.forumInfo.name);
           if (res.data.desc) {
             document
-              .querySelector("meta[name=\"description\"]")
-              .setAttribute("content", res.data.desc);
+              .querySelector('meta[name="description"]')
+              .setAttribute('content', res.data.desc);
           }
         } else {
-          this.$router.push("/404");
+          this.$router.push('/404');
         }
       });
     },
@@ -650,7 +650,7 @@ export default {
       delete this.params.marker;
       delete this.params.key;
       this.lists = [];
-      this.getLists("first");
+      this.getLists('first');
     },
     getForumTag() {
       api.getlistTag({ forumId: this.params.forumId }).then((res) => {
@@ -659,21 +659,21 @@ export default {
       });
     },
     getLists(v) {
-      if (this.$store.state.user.listMode == "normal" && this.params.pageSize != 20) {
+      if (this.$store.state.user.listMode == 'normal' && this.params.pageSize != 20) {
         this.params.pageSize = 20;
       } else {
         this.params.pageSize = 30;
       }
       let params = this.params;
       this.ifcanget = false;
-      if (v == "first") {
+      if (v == 'first') {
         if (!this.tagList.length) {
           //获取置顶帖子
 
           //获取标签列表
           this.getForumTag();
         }
-        if (params.order == "hot" && !params.tagId) {
+        if (params.order == 'hot' && !params.tagId) {
           this.listPins();
         }
       }
@@ -697,11 +697,11 @@ export default {
             return;
           }
           // 情况1 - 2
-          if(!res.data.key.startsWith("tag_"+this.params.tagId)){
+          if(!res.data.key.startsWith('tag_' + this.params.tagId)){
             // console.log("情况1 - 2 or 情况3");
             return;
           }
-        }else if(res.data.key && res.data.key.startsWith("tag_")){
+        }else if(res.data.key && res.data.key.startsWith('tag_')){
           // 情况2
           // console.log("情况2");
           return;
@@ -721,7 +721,7 @@ export default {
         if (res.data.posts.length === 0) {
           this.loadAll = true;
         }
-        if (params.order == "hot" || params.order == "comment") {
+        if (params.order == 'hot' || params.order == 'comment') {
           params.key = res.data.key;
         } else {
           delete params.key;
@@ -731,7 +731,7 @@ export default {
     },
     load() {
       if (this.ifcanget) {
-        this.getLists("first");
+        this.getLists('first');
       }
       // if (
       //   localStorage.getItem("storedata") &&

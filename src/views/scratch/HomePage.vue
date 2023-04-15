@@ -26,7 +26,7 @@
         <el-button type="warning" @click="gotoSearch" round>搜索</el-button>
       </div>
       <div v-if="showHotTags" style="display: flex; flex-wrap: wrap; border: 1px solid gray ">
-        <div v-for="(item,index) in tags" @click="goTag(item)" style="display: block; padding-right: 10px; color: blue; font-size: 20px;">{{item}}</div>
+        <div v-for="(item,index) in tags" :key="index" @click="goTag(item)" style="display: block; padding-right: 10px; color: blue; font-size: 20px;">{{item}}</div>
       </div>
       <scratch-list
           :sort="sort"

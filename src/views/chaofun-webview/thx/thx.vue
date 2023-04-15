@@ -29,7 +29,7 @@
 
 <script>
   export default {
-    name: 'thx',
+    name: 'thx-index',
     methods: {
       toUser(userId){
         try {

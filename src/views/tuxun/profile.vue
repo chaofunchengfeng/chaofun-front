@@ -105,6 +105,7 @@ use([
 
 
 export default {
+  name: 'tuxun-profile',
   components: {
     CalendarHeatmap,
     VChart

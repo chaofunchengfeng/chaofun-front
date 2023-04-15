@@ -113,7 +113,7 @@
   import ApplyMod from './ApplyMod';
   import ApplyForum from './ApplyForum';
   export default {
-    name: '',
+    name: 'right-com',
     data(){
       return {
         showApplyMod: false,

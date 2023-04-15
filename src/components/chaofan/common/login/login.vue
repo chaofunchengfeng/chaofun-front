@@ -91,11 +91,10 @@ import Vue from 'vue';
 import * as api from '@/api/api';
 import { mapState } from 'vuex';
 import {deepClone,randomRange} from '@/utils';
-import { Checkbox } from 'element-ui';
 // import SlideVerify from 'vue-monoplasty-slide-verify';
 // Vue.use(SlideVerify);
  export default {
-   name: '',
+   name: 'login-index',
    data(){
      return {
        showSlider: false,
@@ -138,9 +137,6 @@ import { Checkbox } from 'element-ui';
     //     console.log('aaa')
     //    }
     //  }
-   },
-   components: {
-     'el-checkbox': Checkbox,
    },
    watch:{
     logStatus(v){

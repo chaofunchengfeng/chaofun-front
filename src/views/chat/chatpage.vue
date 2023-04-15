@@ -170,12 +170,11 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
-import ThemePicker from "@/components/ThemePicker";
+import * as api from '@/api/api';
 // import 'moment/locale/zh-cn'
-import moment from "moment";
+import moment from 'moment';
 export default {
-  components: { ThemePicker },
+  name: 'chat-chatpage',
   data() {
     return {
       isApp: false,
@@ -183,13 +182,13 @@ export default {
       connectCount: 0,
       onlineCount: 0,
       filedata: {},
-      realImageUrl: "",
-      imgSendType: "upload",
-      prevblob: "",
-      prevImg: "",
+      realImageUrl: '',
+      imgSendType: 'upload',
+      prevblob: '',
+      prevImg: '',
       showTips: false,
       unread: 0,
-      content: "",
+      content: '',
       msgList: [
         // {
         //   type: 'text',
@@ -208,13 +207,13 @@ export default {
   computed: {},
   created() {
     this.getForumInfo();
-    if(this.$route.query.source=='app'){
+    if(this.$route.query.source == 'app'){
       this.isApp = true;
     }
   },
   destroyed() {
     if (this.websock) {
-      console.log("关闭原连接");
+      console.log('关闭原连接');
       clearTimeout(this.timeoutObj);
       clearTimeout(this.serverTimeoutObj);
       this.websock.close();
@@ -231,38 +230,34 @@ export default {
     if(document.getElementById('chatBox')){
       document.getElementById('chatBox').addEventListener('keyup',(e)=>{
         console.log(111222,e);
-        if(e.code.toLowerCase()=='enter'&&self.prevImg){
+        if(e.code.toLowerCase() == 'enter' && self.prevImg){
           self.sendImage();
         }
-      })
+      });
     }
     try{
       let self = this;
       window.setUploadImage = function (message) {
-        self.imgSendType = "upload";
+        self.imgSendType = 'upload';
         self.realImageUrl = message;
         self.prevImg = self.imgOrigin + message;
         // self.sendImage();
-      }
-    }catch{
-
+      };
+    } catch (e) {
+      consle.warn(e);
     }
   },
   methods: {
     islink(txtContent){
-        var check_www='w{3}'+'[^\\s]*';
-        var check_http='(https|http|ftp|rtsp|mms)://'+'[^(\\s|(\\u4E00-\\u9FFF)))]*';
-        var strRegex=check_http;
-        var httpReg=new RegExp(strRegex,'gi');
-        var  formatTxtContent = txtContent.replace(httpReg, function (httpText)
-            {
-                if(httpText.search('http')<0&&httpText.search('HTTP')<0)
-                {
+        var check_www = 'w{3}' + '[^\\s]*';
+        var check_http = '(https|http|ftp|rtsp|mms)://' + '[^(\\s|(\\u4E00-\\u9FFF)))]*';
+        var strRegex = check_http;
+        var httpReg = new RegExp(strRegex,'gi');
+        var  formatTxtContent = txtContent.replace(httpReg, function (httpText) {
+                if(httpText.search('http') < 0 && httpText.search('HTTP') < 0) {
                     return '<a class="link" href="' + 'http://' + httpText + '" target="_blank">' + httpText + '</a>';
-                }
-                else
-                {
-                    return '<a class="link" href="'+ httpText + '" target="_blank">' + httpText + '</a>';
+                } else {
+                    return '<a class="link" href="' + httpText + '" target="_blank">' + httpText + '</a>';
                 }
             });
         return formatTxtContent;
@@ -280,7 +275,7 @@ export default {
                     this.forumInfo = res.data;
 
                 } else {
-                    this.$router.push("/404");
+                    this.$router.push('/404');
                 }
             });
         }
@@ -295,14 +290,14 @@ export default {
     scrollToBottom() {
       this.unread = 0;
       this.showTips = false;
-      document.getElementById("msg_end").scrollIntoView();
+      document.getElementById('msg_end').scrollIntoView();
     },
     // WebSocket
     //建立连接
     initWebSocket() {
       //初始化weosocket
       //const wsuri = "ws://sms.填写您的地址.com/websocket/" + this.charId; //ws地址
-      const wsuri = "wss://chao.fan/ws/v0/forumChat/" + this.$route.params.id;
+      const wsuri = 'wss://chao.fan/ws/v0/forumChat/' + this.$route.params.id;
       //建立连接
       this.websock = new WebSocket(wsuri);
       //连接成功
@@ -332,7 +327,7 @@ export default {
         that.initWebSocket();
         that.lockReconnect = false;
       }, 5000);
-      console.log('第'+this.connectCount+'次重连');
+      console.log('第' + this.connectCount + '次重连');
     },
     //重置心跳
     reset() {
@@ -350,7 +345,7 @@ export default {
       self.serverTimeoutObj && clearTimeout(self.serverTimeoutObj);
       self.timeoutObj = setTimeout(function () {
         //这里发送一个心跳，后端收到后，返回一个心跳消息，
-        console.log("查看readyState", self.websock.readyState, self.websock);
+        console.log('查看readyState', self.websock.readyState, self.websock);
         if (self.websock.readyState == 1) {
            //0        CONNECTING        连接尚未建立
           //1        OPEN            WebSocket的链接已经建立
@@ -358,11 +353,11 @@ export default {
           //3        CLOSED            连接已经关闭或不可用
           //如果连接正常
           let params = {
-            type: "heartbeat",
-            content: "",
+            type: 'heartbeat',
+            content: '',
           };
           self.websock.send(JSON.stringify(params));
-          console.log("发送心跳消息");
+          console.log('发送心跳消息');
           self.start();
         } else {
           //否则重连
@@ -377,12 +372,12 @@ export default {
     //连接成功事件
     websocketonopen() {
       //提示成功
-      console.log("创建连接成功");
+      console.log('创建连接成功');
       //开启心跳
       this.start();
       let params = {
-        type: "load",
-        content: "",
+        type: 'load',
+        content: '',
       };
       this.websocketsend(JSON.stringify(params));
 
@@ -390,30 +385,30 @@ export default {
     //连接失败事件
     websocketonerror(e) {
       //错误
-      console.log("WebSocket连接发生错误");
+      console.log('WebSocket连接发生错误');
       //错误提示
-      console.log("Websocket error, Check you internet!");
+      console.log('Websocket error, Check you internet!');
       //重连
       this.reconnect();
     },
     //连接关闭事件
     websocketclose(e) {
       //关闭
-      console.log(e)
+      console.log(e);
 
       //提示关闭
-      console.log("连接已关闭", 3);
+      console.log('连接已关闭', 3);
       // this.reconnect();
       //重连
       let curArr = e.target.url.split('/');
-      let id = curArr[curArr.length-1];
+      let id = curArr[curArr.length - 1];
       this.reconnect();
-      if(e.code!=1000&&e.type!='close'){
+      if(e.code != 1000 && e.type != 'close'){
         //&&JSON.parse(localStorage.getItem("wsForum")).id==id
 
         // this.reset()
       }else{
-        console.log('链接真正关闭')
+        console.log('链接真正关闭');
       }
       // //重连
       // if(e.code!=1000&&e.type!='close'){
@@ -430,20 +425,20 @@ export default {
       let that = this;
       const redata = JSON.parse(event.data);
       let data = JSON.parse(event.data);
-      if (data.data !== undefined && data.data !== null && data.data.type != "heartbeat" && data.data.content) {
+      if (data.data !== undefined && data.data !== null && data.data.type != 'heartbeat' && data.data.content) {
         that.msgList.push(data.data);
-        let chat_con = document.getElementById("chat_con");
+        let chat_con = document.getElementById('chat_con');
         if (
           chat_con.scrollHeight - chat_con.scrollTop > 200 &&
           chat_con.scrollHeight - chat_con.scrollTop < 1500
         ) {
           //===this.clientHeight
-          console.log("到达底部");
+          console.log('到达底部');
           that.unread = 0;
           that.showTips = false;
           setTimeout(()=>{
-            document.getElementById("msg_end").scrollIntoView();
-          },10)
+            document.getElementById('msg_end').scrollIntoView();
+          },10);
         } else {
           that.unread += 1;
           that.showTips = true;
@@ -455,21 +450,21 @@ export default {
           this.showDeskTopNotice('chao.fun',this.forumInfo.name,data.data);
         }
       }
-      if (data.type == "load_result" && data.data && data.data.length) {
+      if (data.type == 'load_result' && data.data && data.data.length) {
         data.data.forEach(item=>{
-          item.content = that.islink(item.content)
-        })
+          item.content = that.islink(item.content);
+        });
         this.msgList = data.data;
         setTimeout(() => {
-          document.getElementById("msg_end").scrollIntoView();
+          document.getElementById('msg_end').scrollIntoView();
         }, 500);
       }
-      if (redata.type == "user_count") {
+      if (redata.type == 'user_count') {
         this.onlineCount = redata.data;
       }
 
-      if (redata.type == "need_login") {
-        this.$toast("请先登录");
+      if (redata.type == 'need_login') {
+        this.$toast('请先登录');
         this.$login({
           callBack: () => {
             // this.$store.dispatch("user/getInfo");
@@ -483,25 +478,25 @@ export default {
     //向服务器发送信息
     websocketsend(msg) {
       //数据发送
-      console.log(this.websock)
-      if(this.websock.readyState==3){
+      console.log(this.websock);
+      if(this.websock.readyState == 3){
         this.initWebSocket();
         return;
       }
 
       this.websock.send(msg);
-      this.content = "";
+      this.content = '';
       this.unread = 0;
       this.showTips = false;
       setTimeout(()=>{
-        document.getElementById("msg_end").scrollIntoView();
-      },10)
+        document.getElementById('msg_end').scrollIntoView();
+      },10);
     },
     inputFocus() {
-      document.addEventListener("paste", this.toPaste);
+      document.addEventListener('paste', this.toPaste);
     },
     inputBlur() {
-      document.removeEventListener("paste", this.toPaste);
+      document.removeEventListener('paste', this.toPaste);
     },
     toPaste(e) {
       var cbd = e.clipboardData;
@@ -512,25 +507,25 @@ export default {
       if (
         cbd.items &&
         cbd.items.length === 2 &&
-        cbd.items[0].kind === "string" &&
-        cbd.items[1].kind === "file" &&
+        cbd.items[0].kind === 'string' &&
+        cbd.items[1].kind === 'file' &&
         cbd.types &&
         cbd.types.length === 2 &&
-        cbd.types[0] === "text/plain" &&
-        cbd.types[1] === "Files" &&
+        cbd.types[0] === 'text/plain' &&
+        cbd.types[1] === 'Files' &&
         ua.match(/Macintosh/i) &&
         Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49
       ) {
         return;
       }
       var item = cbd.items[cbd.items.length - 1];
-      if (item.kind == "file" && /^image\/[a-z]*$/.test(item.type)) {
+      if (item.kind == 'file' && /^image\/[a-z]*$/.test(item.type)) {
         var blob = item.getAsFile();
         if (blob.size === 0) {
           return;
         }
         console.log(blob);
-        this.imgSendType = "paste";
+        this.imgSendType = 'paste';
         this.prevImg = URL.createObjectURL(blob);
         console.log(URL.createObjectURL(blob));
         this.prevblob = blob;
@@ -544,22 +539,22 @@ export default {
 
     },
     closeImage() {
-      this.prevImg = "";
-      this.prevblob = "";
-      this.realImageUrl = "";
+      this.prevImg = '';
+      this.prevblob = '';
+      this.realImageUrl = '';
       this.$refs.replyImageUpload.clearFiles();
     },
     sendImage() {
       if(!this.isApp){
-        if (this.imgSendType == "upload") {
+        if (this.imgSendType == 'upload') {
           let params = {
-            type: "image",
+            type: 'image',
             content: this.realImageUrl,
           };
           this.websocketsend(JSON.stringify(params));
-          this.prevImg = "";
-          this.prevblob = "";
-          this.realImageUrl = "";
+          this.prevImg = '';
+          this.prevblob = '';
+          this.realImageUrl = '';
           this.$refs.replyImageUpload.clearFiles();
         } else {
           // this.imgSendType = 'upload';
@@ -567,13 +562,13 @@ export default {
         }
       }else{
         let params = {
-            type: "image",
+            type: 'image',
             content: this.realImageUrl,
         };
         this.websocketsend(JSON.stringify(params));
-        this.prevImg = "";
-        this.prevblob = "";
-        this.realImageUrl = "";
+        this.prevImg = '';
+        this.prevblob = '';
+        this.realImageUrl = '';
       }
 
     },
@@ -586,8 +581,8 @@ export default {
         // this.imgSendType = 'upload';
         this.prevImg = URL.createObjectURL(file.raw);
         this.prevblob = file.raw;
-        if (this.imgSendType == "paste") {
-          this.imgSendType = "upload";
+        if (this.imgSendType == 'paste') {
+          this.imgSendType = 'upload';
           this.sendImage();
         } else {
           // let params = {
@@ -596,7 +591,7 @@ export default {
           // }
           // this.websocketsend(JSON.stringify(params));
         }
-      } else if (res.errorCode == "invalid_content") {
+      } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
@@ -605,7 +600,7 @@ export default {
       console.log(file);
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.filedata.fileName = file.name;
@@ -613,10 +608,10 @@ export default {
     },
     send() {
       console.log(1);
-      this.$refs.inputs.focus()
+      this.$refs.inputs.focus();
       if (this.content) {
         let params = {
-          type: "text",
+          type: 'text',
           content: this.content,
         };
         this.websocketsend(JSON.stringify(params));
@@ -633,7 +628,7 @@ export default {
       // }
     },
     closeWS() {
-      this.$store.dispatch("user/SET_showChatBox", false);
+      this.$store.dispatch('user/SET_showChatBox', false);
     },
     ccc() {},
     showDeskTopNotice(id, title, data){
@@ -642,20 +637,20 @@ export default {
         if(Notification){
             Notification.requestPermission(function(status){
                 //status默认值'default'等同于拒绝 'denied' 意味着用户不想要通知 'granted' 意味着用户同意启用通知
-                if("granted" != status){
+                if('granted' != status){
                     return;
                 }else{
-                    var tag = "sds"+Math.random();
+                    var tag = 'sds' + Math.random();
                     var notify = new Notification( title, {
                         dir:'auto',
                         data: {forumId: data.forumId},
                                 lang:'zh-CN',
                                 requireInteraction: false,
                                 tag: id,//实例化的notification的id
-                                icon:data.type=='image'?(self.imgOrigin+data.content):('https://i.chao-fan.com/biz/08a2d3a676f4f520cb99910496e48b4e.png?x-oss-process=image/resize,h_80/quality,q_75'),//通知的缩略图,//icon 支持ico、png、jpg、jpeg格式
-                                body: data.type=='text'? (data.sender.userName+'说：'+data.content):(data.type=='image'?data.sender.userName+'【发来一张图片】':data.sender.userName+'-发来未知类型消息') //通知的具体内容
+                                icon:data.type == 'image' ? (self.imgOrigin + data.content) : ('https://i.chao-fan.com/biz/08a2d3a676f4f520cb99910496e48b4e.png?x-oss-process=image/resize,h_80/quality,q_75'),//通知的缩略图,//icon 支持ico、png、jpg、jpeg格式
+                                body: data.type == 'text' ? (data.sender.userName + '说：' + data.content) : (data.type == 'image' ? data.sender.userName + '【发来一张图片】' : data.sender.userName + '-发来未知类型消息') //通知的具体内容
                         });
-                        notify.onclick=function(val){
+                        notify.onclick = function(val){
                             //如果通知消息被点击,通知窗口将被激活
                             console.log(val);
                             window.focus();
@@ -664,17 +659,17 @@ export default {
                         },
                         notify.onshow = function () {
                             setTimeout(notify.close.bind(notify), 5000);
-                        }
+                        };
                         notify.onerror = function () {
-                            console.log("HTML5桌面消息出错！！！");
+                            console.log('HTML5桌面消息出错！！！');
                         };
                         notify.onclose = function () {
-                            console.log("HTML5桌面消息关闭！！！");
+                            console.log('HTML5桌面消息关闭！！！');
                         };
                     }
             });
         }else{
-            console.log("您的浏览器不支持桌面消息");
+            console.log('您的浏览器不支持桌面消息');
         }
     },
   },

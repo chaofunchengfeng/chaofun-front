@@ -24,7 +24,7 @@
         <div v-if="partyData.gameType !== 'br'" class="vs">
           <div class="player">
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
-              <div class="user" v-for="(item, index) in partyData.teams[0].users">
+              <div class="user" v-for="(item, index) in partyData.teams[0].users" :key="index">
                 <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
                 <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
               </div>
@@ -34,13 +34,13 @@
             </div>
           </div>
           <div>
-            <img class="vs_img"  :src="this.imgOrigin + 'biz/1658807128256_91c9df63c2d144359005b6f504a96a81.png'"></img>
+            <img class="vs_img"  :src="this.imgOrigin + 'biz/1658807128256_91c9df63c2d144359005b6f504a96a81.png'"/>
             <div></div>
             <el-button @click="swapTeam"  type="primary" v-if="partyData.gameType==='team'" round>换队伍</el-button>
           </div>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 2">
-              <div class="user" v-for="(item, index) in partyData.teams[1].users">
+              <div class="user" v-for="(item, index) in partyData.teams[1].users" :key="index">
                 <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
                 <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
               </div>
@@ -53,7 +53,7 @@
         <div v-else>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
-              <div class="user" v-for="(item, index) in partyData.teams">
+              <div class="user" v-for="(item, index) in partyData.teams" :key="index">
                 <el-avatar :src="imgOrigin + item.users[0].icon" class="avatar"></el-avatar>
                 <div class="userName">{{item.users[0].userName}} <span v-if="item.users[0].userId === partyData.host.userId">(房主)</span></div>
               </div>
@@ -97,7 +97,7 @@
         <div>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.onlookers">
-              <div class="user-small" v-for="(item, index) in partyData.onlookers">
+              <div class="user-small" v-for="(item, index) in partyData.onlookers" :key="index">
                 <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
                 <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
               </div>
@@ -159,7 +159,7 @@
 import * as api from '../../api/api';
 import {tuxunJump, tuxunOpen} from './common';
 export default {
-  name: 'party',
+  name: 'tuxun-party',
   data() {
     return {
       url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,

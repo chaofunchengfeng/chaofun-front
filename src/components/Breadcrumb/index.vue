@@ -44,6 +44,7 @@ import pathToRegexp from 'path-to-regexp';
 import * as api from '../../api/api';
 
 export default {
+  name: 'breadcrumb-index',
   data() {
     return {
       levelList: null,

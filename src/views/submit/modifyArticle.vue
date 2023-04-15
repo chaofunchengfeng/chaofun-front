@@ -179,7 +179,7 @@
               <span>版块规范</span>
             </p>
             <ol>
-              <li v-for="item in this.rules">{{ item.rule }}</li>
+              <li v-for="(item, index) in this.rules" :key="index">{{ item.rule }}</li>
             </ol>
           </div>
         </el-card>

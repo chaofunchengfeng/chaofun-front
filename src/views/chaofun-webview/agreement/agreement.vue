@@ -323,7 +323,7 @@
 // import Header from '@/components/common/Header.vue'
 
 export default {
-  name: 'Home',
+  name: 'webview-agreement',
   components: {
 
   },

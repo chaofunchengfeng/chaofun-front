@@ -324,7 +324,7 @@
     }
   };
   export default {
-    name: 'submit',
+    name: 'submit-submit',
     data(){
       return {
         voteList: [{optionName: ''},{optionName: ''},],

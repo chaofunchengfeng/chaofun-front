@@ -22,7 +22,7 @@
       </div>
       <div v-if="guessInfo && guessInfo.tags" style="align-items: center;justify-items: center;margin: auto; text-align: center; font-size: 16px; display: flex;justify-content: center;text-align: center;">
         标签：
-        <div v-for="(item, index) in guessInfo.tags" @click="goTag(item)" style="padding: 2px; margin-right: 10px; color: #333fff; text-decoration:underline;cursor: pointer;">
+        <div v-for="(item, index) in guessInfo.tags" :key="index" @click="goTag(item)" style="padding: 2px; margin-right: 10px; color: #333fff; text-decoration:underline;cursor: pointer;">
           {{item}}
         </div>
       </div>
@@ -41,7 +41,7 @@
         <div style="display: flex; align-items: center;justify-content: center">
           我的打分：
           <div>
-            <StarRating @rating-selected ="setRating" :show-rating="false" v-model:rating="rating" :star-size="25"></StarRating>
+            <StarRating @rating-selected ="setRating" :show-rating="false" v-model="rating" :star-size="25"></StarRating>
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
             <th v-if="guessInfo.data.hasHint" style="background-color: #eee">提示</th>
             <th style="background-color: #eee">答案</th>
           </tr>
-          <tr v-for="(item, index) in guessInfo.data.data">
+          <tr v-for="(item, index) in guessInfo.data.data" :key="index">
             <td v-if="guessInfo.data.hasHint" style="width: 50%">
               <div style="text-align: center;">
                 {{item.hint}}
@@ -134,9 +134,9 @@
         </table>
       </div>
       <viewer v-else-if="guessInfo && guessInfo.type === 'image' && !guessInfo.data.slideshow" class="grid-main">
-        <div v-for="(item,index) in guessInfo.data.data" class="card">
+        <div v-for="(item,index) in guessInfo.data.data" class="card" :key="index">
           <div class="card-image-contain">
-            <img :data-source="imgOrigin + item.image" :src="imgOrigin + item.image + '?x-oss-process=image/resize,h_300/format,jpeg/quality,q_75'" class="test-image" ></img>
+            <img :data-source="imgOrigin + item.image" :src="imgOrigin + item.image + '?x-oss-process=image/resize,h_300/format,jpeg/quality,q_75'" class="test-image"/>
           </div>
           <div style="width: 100%; border: 1px solid black;">
             <div v-if="matched.has(index)" style="text-align: center; color: green">
@@ -163,7 +163,7 @@
             :total="guessInfo.data.data.length">
         </el-pagination>
         <viewer style="border: 1px dashed black;">
-          <img :data-source="imgOrigin + guessInfo.data.data[innerCurrent-1].image" :src="imgOrigin + guessInfo.data.data[innerCurrent-1].image + '?x-oss-process=image/format,jpeg/quality,q_30'" class="slideshow-img"  ></img>
+          <img :data-source="imgOrigin + guessInfo.data.data[innerCurrent-1].image" :src="imgOrigin + guessInfo.data.data[innerCurrent-1].image + '?x-oss-process=image/format,jpeg/quality,q_30'" class="slideshow-img"/>
         </viewer>
         <div style="width: 100%; border: 1px solid black; margin-bottom: 5px">
           <div v-if="matched.has(innerCurrent-1)" style="font-size: 24px; text-align: center; color: green">
@@ -192,7 +192,7 @@
           {{guessInfo.data.data[clickIndex].hint}}
         </div>
         <div class="answer-grid" >
-          <div v-for="(item, index) in shuffleAnswers"  @click="clickMatch(index)">
+          <div v-for="(item, index) in shuffleAnswers" :key="index" @click="clickMatch(index)">
             <div v-if="rightClickIndex === index" class="answer-right">
               {{item}}
             </div>
@@ -211,7 +211,7 @@
             <th style="background-color: #eee">问题</th>
             <th style="background-color: #eee">答案</th>
           </tr>
-          <tr v-for="(item, index) in guessInfo.data.data">
+          <tr v-for="(item, index) in guessInfo.data.data" :key="index">
             <td v-if="guessInfo.data" style="width: 50%">
               <div style="text-align: center;">
                 {{item.hint}}

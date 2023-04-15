@@ -220,7 +220,7 @@ import { Message } from 'element-ui';
 import emojiSelect from '@/views/newChat/emojiSelect.vue';
 
 export default {
-  name: 'chat',
+  name: 'new-chat',
   data() {
     return {
       chatHistoryMap: new Map(),

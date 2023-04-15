@@ -86,7 +86,7 @@
 <script>
 import * as api from '../../api/api';
  export default {
-   name: '',
+   name: 'forward-index',
    data(){
      return {
          addForm: {

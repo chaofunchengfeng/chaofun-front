@@ -144,7 +144,7 @@ CanvasRenderingContext2D.prototype.sector = function (x, y, radius, sAngle, eAng
   return this;
 };
 export default {
-  name: 'Home',
+  name: 'button-game',
   components: {buttonGameClickRecord,},
   data() {
     return {

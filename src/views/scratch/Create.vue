@@ -77,7 +77,7 @@ import ImgCreate from './img-create';
 import TextCreate from './text-create';
 import ClickCreate from './click-create';
 export default {
-  name: 'Create',
+  name: 'scratch-create',
   components: {ImgCreate, TextCreate, ClickCreate},
   data() {
     return {

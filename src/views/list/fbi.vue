@@ -18,6 +18,7 @@
 <script>
   import fbi from '@/views/chaofun-webview/fbi/fbi.vue';
   export default {
+    name: 'list-fbi',
     components: {
       fbi
     },

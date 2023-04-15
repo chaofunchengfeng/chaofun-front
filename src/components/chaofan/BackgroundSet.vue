@@ -10,7 +10,7 @@
 
 <script>
  export default {
-   name: '',
+   name: 'background-set',
    data(){
      return {
        show: false

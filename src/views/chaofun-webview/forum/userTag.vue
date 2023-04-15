@@ -76,7 +76,7 @@
   import {getlistTag} from '../../../api/api';
 
   export default {
-    name: 'tag',
+    name: 'user-tag',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {

@@ -59,7 +59,7 @@
         <img :src="imgOrigin+  'biz/1657789683976_d8ce47d3156c437f8ab54e2008daf398.png'" alt="" style="width: 100%;">
       </div>
 
-      <div v-for="(item,index) in pagedata" v-if="index>2" :key="index" class="list" @click="toUser(item)">
+      <div v-for="(item,index) in pagedataGratherThan2" :key="index" class="list" @click="toUser(item)">
         <span style="width: 28px;text-align: center;">{{ item.rank }}</span>
         <img :src="imgOrigin+item.userAO.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt=""
              style="width: 40px; height: 40px; border-radius: 100%;margin: 0 5px;">
@@ -88,6 +88,13 @@ export default {
     };
   },
   created() {
+  },
+  computed: {
+    pagedataGratherThan2: {
+      get() {
+        return [...this.pagedata].slice(3);
+      }
+    }
   },
   mounted() {
     this.getButtonRank();

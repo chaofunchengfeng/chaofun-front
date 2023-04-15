@@ -144,7 +144,7 @@ import loadText from '@/components/chaofan/loadText';
 import attentionItem from '@/components/chaofan/attentionItem.vue';
 
 export default {
-  name: 'Dashboard',
+  name: 'list-search',
   // components: { adminDashboard, editorDashboard },
   props:['q'],
   data() {

@@ -44,10 +44,7 @@
               </div>
             </div>
             <div v-if="badgeList.length" class="badgeList">
-              <div v-for="badgeInfo in badgeList" style="position:relative;margin-left: 20px;margin-right: 20px;">
-<!--                <img-->
-<!--                  :src="imgOrigin +  'biz/f30227f819eda710024f0f6c99fa60eb.png?x-oss-process=image/resize,h_42/quality,q_75'"-->
-<!--                  style="position:absolute;left: -21px;" />-->
+              <div v-for="(badgeInfo,index) in badgeList" style="position:relative;margin-left: 20px;margin-right: 20px;" :key="index">
                 <el-popover placement="bottom" trigger="hover" width="300">
                   <badgeDetail :badgeInfo0="badgeInfo.badge" />
                   <img slot="reference"
@@ -106,7 +103,7 @@ import badgeDetail from '@/views/chaofun-webview/badge/badgeDetail.vue';
 import { startSingle } from '@/utils/chatJoin';
 
 export default {
-  name: 'user',
+  name: 'list-user',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {

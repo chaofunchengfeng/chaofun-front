@@ -7,7 +7,7 @@
             </div>
             <div  v-touch:start="startHandler" v-touch:end="endHandler" class="content">
                 <div v-if="secret.imageUrl" class="img">
-                    <div v-viewer=""  v-if="!secret.imageUrl.includes('.mp4')">
+                    <div v-if="!secret.imageUrl.includes('.mp4')">
                     <img class="ims" v-if="!secret.imageUrl.includes('.mp4')" :src="secret.imageUrl + '?x-oss-process=image/resize,h_768/quality,q_75'" :data-source="secret.imageUrl">
                     </div>
                     <video class="ims video" v-if="secret.imageUrl.includes('.mp4')" controls autoplay loop :src="secret.imageUrl" alt="">
@@ -65,13 +65,12 @@
 <script>
 // @ is an alias to /src
 // import Header from '@/components/common/Header.vue'
-import * as api from '@/api/api'
-import Vue from 'vue'
-import Vue2TouchEvents from 'vue2-touch-events'
-Vue.use(Vue2TouchEvents)
-import {delete_secret_image} from "../../../api/api";
+import * as api from '@/api/api';
+import Vue from 'vue';
+import Vue2TouchEvents from 'vue2-touch-events';
+Vue.use(Vue2TouchEvents);
 export default {
-  name: 'Home',
+  name: 'secret-index',
   components: {
 
   },
@@ -88,30 +87,30 @@ export default {
           touchstartY:0,
         touchendX:0,
         touchendY:0,
-      }
+      };
   },
   created(){
 
   },
   mounted(){
-    this.init()
+    this.init();
   },
   methods:{
       clearsss(){
-          this.title = ''
+          this.title = '';
       },
       init(){
         if(!this.$store.state.user.islogin){
-            console.log(777)
+            console.log(777);
             let self = this;
             window.callChaoFun = function(code,_sysv){
-                if(res=='10001'){
-                    self.toLogin()
+                if(res == '10001'){
+                    self.toLogin();
                 }
-                console.log(code)
+                console.log(code);
                 console.log(_sys);
-                self.version = _sys
-            }
+                self.version = _sys;
+            };
 
         }else{
             this.getData();
@@ -121,20 +120,20 @@ export default {
         //   window.flutter_inappwebview.callHandler('toLoginPage');
         try{
             window.flutter_inappwebview.callHandler('toLoginPage').then(res=>{}).catch(err=>{
-                this.$toast('当前版本不支持功能，更新后重试')
+                this.$toast('当前版本不支持功能，更新后重试');
             });
-        }catch{
+        } catch (e) {
             // if(this.version<'2.17.5'){
             //     this.$toast('当前版本不支持功能，请更新后重试')
             // }
-            this.$toast('当前版本不支持功能，更新后重试')
+            this.$toast('当前版本不支持功能，更新后重试');
         }
         //   window.flutter_inappwebview.callHandler('toUpgradePage');
       },
       submit() {
 
-        console.log(this.secret)
-        api.submit_secret_image({'imageUrl': this.secret.imageUrl, 'title': this.title, 'forumId': this.chooseId*1}).then(res=>{
+        console.log(this.secret);
+        api.submit_secret_image({'imageUrl': this.secret.imageUrl, 'title': this.title, 'forumId': this.chooseId * 1}).then(res=>{
           this.show = false;
           if(res.success){
             this.$toast('发布成功');
@@ -145,62 +144,62 @@ export default {
               this.$toast(res.errorMessage);
           }
 
-        })
+        });
       },
     choose(item){
         this.chooseId = item.id;
     },
     getTagLists(){
       let params = this.params;
-      this.ifcanget = false
+      this.ifcanget = false;
       api.listForumsByTag({tagId: '0'}).then(res=>{
-        console.log(res)
-        var obj = res.data[res.data.findIndex((value)=>value.id==this.secret.submitForum)]
+        console.log(res);
+        var obj = res.data[res.data.findIndex((value)=>value.id == this.secret.submitForum)];
         res.data.unshift(obj);
         this.tags = this.unique(res.data);
 
-      })
+      });
     },
     unique(arr) {
-        return Array.from(new Set(arr))
+        return Array.from(new Set(arr));
     },
     doList(child,parent){
         child.forEach(item=>{
             var id = item.id;
 
-        })
+        });
     },
     toPost(){
         this.show = true;
     },
 
     getData(){
-      api.delete_secret_image(this.secret.imageUrl?{'imageUrl': this.secret.imageUrl}:{}).then(res=>{
+      api.delete_secret_image(this.secret.imageUrl ? {'imageUrl': this.secret.imageUrl} : {}).then(res=>{
         this.secret = res.data;
         this.title = res.data.cnTitle;
         this.chooseId = res.data.submitForum;
-        this.getTagLists()
-      })
+        this.getTagLists();
+      });
     },
     getButtonRank(){
         api.getTOpUps().then(res=>{
-            this.pagedata = res.data
-        })
+            this.pagedata = res.data;
+        });
     },
     toUser(item){
         try {
-            window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId+''})
+            window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userAO.userId + ''});
         } catch (e) {
-                window.open(location.origin + '/user/'+item.userAO.userId,"_blank");
+                window.open(location.origin + '/user/' + item.userAO.userId,'_blank');
         }
     },
     startHandler (event) {
-      console.log(event)
+      console.log(event);
       this.touchstartX = event.changedTouches[0].screenX;
       this.touchstartY = event.changedTouches[0].screenY;
     },
     endHandler (event) {
-        console.log(event)
+        console.log(event);
       this.touchendX = event.changedTouches[0].screenX;
       this.touchendY = event.changedTouches[0].screenY;      // if (touchEvent.changedTouches[0].screenX )
 
@@ -211,7 +210,7 @@ export default {
       }
     }
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .container{

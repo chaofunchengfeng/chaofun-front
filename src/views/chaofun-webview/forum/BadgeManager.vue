@@ -101,11 +101,11 @@
 </template>
 
 <script>
-import * as api from "@/api/api";
-import badgeDetail from "@/views/chaofun-webview/badge/badgeDetail.vue";
+import * as api from '@/api/api';
+import badgeDetail from '@/views/chaofun-webview/badge/badgeDetail.vue';
 
 export default {
-  name: "tag",
+  name: 'forum-tag',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
@@ -135,7 +135,7 @@ export default {
         past24HVotes: 0,
         rank: 0
       }
-    }
+    };
   },
   props: {
     forumId0: {
@@ -152,9 +152,9 @@ export default {
       window.setUploadImage = function (message) {
         self.$toast('ICON 上传成功');
         self.imageName = message;
-      }
-    }catch{
-
+      };
+    }catch(e){
+      console.warn(e);
     }
   },
   created() {
@@ -172,7 +172,7 @@ export default {
     handleImageUploadSuccess(res, file) {
       if (res.success) {
         this.imageName = res.data;
-      } else if (res.errorCode == "invalid_content") {
+      } else if (res.errorCode == 'invalid_content') {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
@@ -185,7 +185,7 @@ export default {
     beforeImageUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 20MB!");
+        this.$message.error('上传图片大小不能超过 20MB!');
         return false;
       }
       this.imagesNum++;
@@ -201,8 +201,8 @@ export default {
     },
 
     toAdd() {
-      this.$confirm(`是否确定添加徽章？`, "提示", {
-        type: "warning",
+      this.$confirm('是否确定添加徽章？', '提示', {
+        type: 'warning',
         // position: center,
       }).then(() => {
         api.getByPath('/api/v0/badge/create', {
@@ -213,18 +213,18 @@ export default {
           integral: this.fbi
         }).then((res) => {
           if (res.success) {
-            this.$toast('添加成功')
+            this.$toast('添加成功');
             this.displayAdd = false;
             this.getForumBadges();
           } else {
-            this.$toast(res.errorMessage)
+            this.$toast(res.errorMessage);
           }
-        })
+        });
       });
     },
     confirmModify() {
-      this.$confirm(`是否确定修改徽章？`, "提示", {
-        type: "warning",
+      this.$confirm('是否确定修改徽章？', '提示', {
+        type: 'warning',
         // position: center,
       }).then(() => {
         api.getByPath('/api/v0/badge/update', {
@@ -235,16 +235,16 @@ export default {
           id: this.id,
         }).then((res) => {
           if (res.success) {
-            this.$toast('修改成功')
+            this.$toast('修改成功');
             this.displayModify = false;
             this.desc = '';
             this.name = '';
             this.badgeId = null;
             this.getForumBadges();
           } else {
-            this.$toast(res.errorMessage)
+            this.$toast(res.errorMessage);
           }
-        })
+        });
       });
     },
 
@@ -273,17 +273,17 @@ export default {
         window.flutter_inappwebview.callHandler('uploadImage').then(function(result) {
         });
       }catch (e){
-        this.$refs.imageUpload.$children[0].$refs.input.click()
+        this.$refs.imageUpload.$children[0].$refs.input.click();
       }
     },
     getForumBadges() {
       api.getByPath('/api/v0/badge/listForumBadges', { forumId: this.forumId }).then((res) => {
         this.lists = res.data;
         // this.load()
-      })
+      });
     }
   }
-}
+};
 
 </script>
 

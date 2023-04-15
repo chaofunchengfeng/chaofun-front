@@ -6,10 +6,6 @@
 
 <script>
 export default {
-  name: 'Tuxun'
+  name: 'tuxun-index'
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -2,7 +2,7 @@
 <div class="container">
   <div id="viewer" style="position: absolute; width: 100%; height: 100%"></div>
   <div v-if="panos && panos.length !== 0" style="position: absolute;display: flex; z-index: 5000; width: 100%">
-    <div :class="index == current ? 'choose' : 'normal'" @click="current=index; setPanoId(panos[index].panoId)" v-for="(item, index) in panos">
+    <div :class="index == current ? 'choose' : 'normal'" @click="current=index; setPanoId(panos[index].panoId)" v-for="(item, index) in panos" :key="index">
       <div>
         <div>
           第 {{index + 1}} 题

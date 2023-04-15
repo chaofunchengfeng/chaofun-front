@@ -31,6 +31,7 @@ Editor.setLanguage('zh-CN', {
 });
 
 export default {
+  name: 'submit-editor',
   components: {
     editor: VueEditor
   },

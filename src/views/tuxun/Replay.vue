@@ -16,7 +16,7 @@ import L from 'leaflet';
 import './SmoothWheelZoom';
 import {tuxunJump, tuxunOpen} from './common';
 export default {
-  name: 'Replay',
+  name: 'tuxun-replay',
   data() {
     return {
       gameId: null,

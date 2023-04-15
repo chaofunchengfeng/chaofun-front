@@ -23,20 +23,20 @@
       <div class="vs" v-if="gameData.type !== 'battle_royale'">
         <div class="player">
           <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="gameData && gameData.teams && gameData.teams.length >= 1">
-            <div class="user" v-for="(item, index) in gameData.teams[0].users">
+            <div class="user" v-for="(item, index) in gameData.teams[0].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}} <span v-if="gameData.type === 'team' && item.userId === gameData.host.userId">(房主)</span></div>
             </div>
           </div>
         </div>
         <div>
-          <img class="vs_img"  :src="this.imgOrigin + 'biz/1658807128256_91c9df63c2d144359005b6f504a96a81.png'"></img>
+          <img class="vs_img"  :src="this.imgOrigin + 'biz/1658807128256_91c9df63c2d144359005b6f504a96a81.png'"/>
           <div></div>
           <el-button @click="swapTeam"  type="primary" v-if="gameData.type==='team'" round>换队伍</el-button>
         </div>
         <div class="player">
           <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="gameData && gameData.teams && gameData.teams.length >= 2">
-            <div class="user" v-for="(item, index) in gameData.teams[1].users">
+            <div class="user" v-for="(item, index) in gameData.teams[1].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}} <span v-if="gameData.type === 'team' && item.userId === gameData.host.userId">(房主)</span></div>
             </div>
@@ -100,7 +100,7 @@
         满3人开始游戏, 选手列表：
       </div>
       <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_user">
-        <div v-for="(item, index) in gameData.players"> {{item.userName }}</div>
+        <div v-for="(item, index) in gameData.players" :key="index"> {{item.userName }}</div>
       </div>
       <div class="invite" v-if="status !== 'ready' && ((gameData.type !== 'battle_royale' && gameData.type !== 'solo_match')  || gameData.type == 'team')">
         <div class="separate-line"></div>
@@ -108,8 +108,7 @@
           邀请链接
         </div>
         <div class="body">
-          <input class="invite_input" placeholder readonly :value="origin + this.$route.fullPath" >
-          </input>
+          <input class="invite_input" placeholder readonly :value="origin + this.$route.fullPath" />
           <el-button class="button" type="success" @click="copyInviterLink" round>复制分享</el-button>
         </div>
       </div>
@@ -164,7 +163,7 @@
           </div>
 
           <div class="round_result_center" v-if="gameData.type === 'battle_royale'">
-            <div v-for="(item, index) in obsoleteUsers">
+            <div v-for="(item, index) in obsoleteUsers" :key="index">
               {{item.userName}}
             </div>
           </div>
@@ -314,9 +313,11 @@
             <div class="user_blod_left">
               血量：{{gameData.teams[0].health}}
             </div>
-            <div class="sub_user_name" v-for="(item, index) in gameData.teams[0].users"  v-if="gameData.type === 'team'">
-              {{item.userName}}
-            </div>
+            <template v-if="gameData.type === 'team'">
+              <div class="sub_user_name" v-for="(item, index) in gameData.teams[0].users" :key="index">
+                {{item.userName}}
+              </div>
+            </template>
             <div v-if="team1Emoji" class="emoji">
               <img :src="imgOrigin+team1Emoji +'?x-oss-process=image/resize,h_120'"/>
             </div>
@@ -332,9 +333,11 @@
             <div class="user_blod_right">
               血量：{{gameData.teams[1].health}}
             </div>
-            <div class="sub_user_name" v-for="(item, index) in gameData.teams[1].users"  v-if="gameData.type === 'team'">
-              {{item.userName}}
-            </div>
+            <template v-if="gameData.type === 'team'">
+              <div class="sub_user_name" v-for="(item, index) in gameData.teams[1].users" :key="index">
+                <template >{{item.userName}}</template>
+              </div>
+            </template>
             <div v-if="this.team2Emoji" class="emoji">
               <img :src="imgOrigin+team2Emoji +'?x-oss-process=image/resize,h_120'"/>
             </div>
@@ -343,7 +346,7 @@
       </div>
       <!--    TODO: 这里有个问题，不能在中间加 v-if 的DIV，一加在 v-if 条件触发的时候（特别是 hide）就会影响 map 的布局，原理未知，-->
 
-      <div id="map-container" :class="[{'bm-view-container': !ISPHONE}, {'bm-view-container-phone': ISPHONE && showMap}, {'bm-view-container-phone-hidden': ISPHONE && !showMap}]"@mouseover="mapMouseOver" @mouseout="mapMouseOut">
+      <div id="map-container" :class="[{'bm-view-container': !ISPHONE}, {'bm-view-container-phone': ISPHONE && showMap}, {'bm-view-container-phone-hidden': ISPHONE && !showMap}]" @mouseover="mapMouseOver" @mouseout="mapMouseOut">
         <div v-if="!this.isMapSmall && !ISPHONE" style="text-align: left">
           <el-button size="small" @click="mapBig" round>放大</el-button>
           <el-button size="small" @click="mapSmall" round>缩小</el-button>

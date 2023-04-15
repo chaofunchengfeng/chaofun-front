@@ -17,7 +17,7 @@ import * as api from '../../api/api';
 import {tuxunJump} from './common';
 
 export default {
-  name: 'join',
+  name: 'tuxun-join',
   data() {
     return {
       joinCode: null,

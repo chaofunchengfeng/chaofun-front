@@ -10,7 +10,7 @@
     <el-button type="primary" @click.stop="toMapsCreate">创建</el-button>
     <div class="game_entrance">
     <div class="grid_main" v-if="pagedata && pagedata.length >= 1">
-      <div v-for="(item, index) in pagedata" :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" @click="toMapDetail(item)" class="card">
+      <div v-for="(item, index) in pagedata" :key="index" :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover || 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" @click="toMapDetail(item)" class="card">
         <div class="title">
           {{item.name}}
         </div>

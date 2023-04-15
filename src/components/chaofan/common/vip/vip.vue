@@ -125,13 +125,8 @@
 <script>
 import Vue from 'vue';
 import * as api from '@/api/api';
-import { mapState } from 'vuex';
-import {deepClone,randomRange} from '@/utils';
-import { Checkbox } from 'element-ui';
-// import SlideVerify from 'vue-monoplasty-slide-verify';
-// Vue.use(SlideVerify);
  export default {
-   name: '',
+   name: 'vip-index',
    data(){
      return {
        cancelImg: require('@/assets/images/icon/cancel1.png'),
@@ -146,9 +141,6 @@ import { Checkbox } from 'element-ui';
    computed:{
    },
    props: {
-   },
-   components: {
-     'el-checkbox': Checkbox,
    },
    created() {
 

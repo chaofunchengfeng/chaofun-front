@@ -35,12 +35,11 @@ import { mapGetters } from 'vuex';
 import * as api from '@/api/api';
 
 import ListItem from '@/components/chaofan/trends.vue';
-import attentionItem from '@/components/chaofan/attentionItem.vue';
 import RightDescribe from '@/components/chaofan/RightDescribe';
 import loadText from '@/components/chaofan/loadText';
 
 export default {
-  name: 'Dashboard',
+  name: 'list-dashboard',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
@@ -78,7 +77,7 @@ export default {
     };
   },
   components: {
-    ListItem,loadText,attentionItem,RightDescribe
+    ListItem,loadText,RightDescribe
   },
   watch: {
     // 'params.forumId'(v){

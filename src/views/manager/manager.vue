@@ -20,7 +20,7 @@
         <div class="main_center">
           <div style="font-weight: bold; font-size: 28px">做国内最好的内容社区</div>
           <ul class="tabs">
-            <li class="li-tab" v-for="(item,index) in tabsParam"
+            <li class="li-tab" v-for="(item,index) in tabsParam" :key="index"
                 @click="toggleTabs(index)"
                 :class="{active:index==nowIndex}">{{item}}</li>
           </ul>
@@ -126,7 +126,7 @@
           </div>
         </div>
         <div style="display: flex; width: 100%" v-show="nowIndex===3">
-          <div v-for="(item,lists) in notifyList"  class="item">
+          <div v-for="(item,index) in notifyList"  class="item" :key="index">
             <div>
               <div>标题: {{item.title}} </div>
               <div>内容: {{item.content}} </div>
@@ -141,7 +141,7 @@
           </div>
         </div>
         <div  v-show="nowIndex===4">
-          <div v-for="(item,lists) in applyList"  style="width: 100%; padding-top: 10px">
+          <div v-for="(item,index) in applyList"  style="width: 100%; padding-top: 10px" :key="index">
             <div v-if="item.type == 'apply_mod'">
               <div> 用户 <a :href="'https://chao.fan/user/' + item.applyUserInfo.userId" >{{item.applyUserInfo.userName}} (赞: {{item.applyUserInfo.ups}})</a> 申请版块 <a :href="'https://chao.fan/f/' + item.forumInfo.id">{{item.forumInfo.name}}</a> 版主 </div>
               <div> 原因为 {{item.arg1}}</div>
@@ -170,6 +170,7 @@
   import { Dialog } from 'vant';
 
   export default {
+    name: 'manager-index',
     data() {
       return {
         websiteInfo: '1',

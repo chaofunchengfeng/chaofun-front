@@ -29,7 +29,7 @@
     <div class="draft-container">
       <div style="width: 100%; text-align: left; font-size: 22px;padding-top: 3em">编辑草稿</div>
       <div style="background-color: gray; height: 1px; width: 100%; margin-top: 0.5em;"></div>
-      <div v-for="(item, index) in list" class="draft-item">
+      <div v-for="(item, index) in list" :key="index" class="draft-item">
         <div class="name" @click="modifyDraft(item)">
           {{item.name}}
         </div>
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import {tuxunJump} from '../tuxun/common';
 import * as api from '../../api/api';
 export default {
   name: 'choose-create',

@@ -21,12 +21,12 @@
         <th v-if="hasHint" style="background-color: #eee">提示</th>
         <th style="background-color: #eee">答案</th>
       </tr>
-      <tr v-for="(item, index) in dataForm">
+      <tr v-for="(item, index) in dataForm" :key="index">
         <td  v-if="hasHint" style=" width: 50%; border: 1px solid black; ">
-          <input @focus="columnChoose(index)" @blur="cleanChoose" v-model="item.hint" style="width: 100%" ></input>
+          <input @focus="columnChoose(index)" @blur="cleanChoose" v-model="item.hint" style="width: 100%" />
         </td>
         <td style=" width: 50%; border: 1px solid black;">
-          <input @focus="columnChoose(index)" @blur="cleanChoose" v-model="item.answer" style="width: 100%" ></input>
+          <input @focus="columnChoose(index)" @blur="cleanChoose" v-model="item.answer" style="width: 100%" />
         </td>
       </tr>
       </tbody>

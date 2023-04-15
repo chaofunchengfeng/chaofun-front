@@ -10,7 +10,7 @@
       <div class="first_session_head" v-if="recommendPagedata && recommendPagedata.length >= 1">推荐</div>
       <div class="line" v-if="recommendPagedata && recommendPagedata.length >= 1"></div>
       <div class="grid_main" v-if="recommendPagedata && recommendPagedata.length >= 1">
-        <div v-for="(item, index) in recommendPagedata" @click="toLink(item.url)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
+        <div v-for="(item, index) in recommendPagedata" :key="index" @click="toLink(item.url)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover || 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
           <div class="title">
             {{item.name}}
           </div>
@@ -24,7 +24,7 @@
         <div class="first_session_head" v-if="recentPagedata && recentPagedata.length >= 1">最新</div>
         <div class="line" v-if="recentPagedata && recentPagedata.length >= 1"></div>
         <div class="grid_main" v-if="recentPagedata && recentPagedata.length >= 1">
-          <div v-for="(item, index) in recentPagedata" @click="toLink(item.url)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
+          <div v-for="(item, index) in recentPagedata" :key="index" @click="toLink(item.url)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover || 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
             <div class="title">
               {{item.name}}
             </div>
@@ -38,7 +38,7 @@
       <div class="first_session_head" v-if="coursePagedata && coursePagedata.length >= 1">教程</div>
       <div class="line" v-if="coursePagedata && coursePagedata.length >= 1"></div>
       <div class="grid_main" v-if="coursePagedata && coursePagedata.length >= 1">
-        <div v-for="(item, index) in coursePagedata" @click="toLink(item.url)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover ?? 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
+        <div v-for="(item, index) in coursePagedata" :key="index" @click="toLink(item.url)"  :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover || 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}" class="card">
           <div class="title">
             {{item.name}}
           </div>

@@ -121,7 +121,7 @@ import 'moment/locale/zh-cn';
 import moment from 'moment';
 import noticeItemImages from '_c/chaofan/noticeItemImages';
 export default {
-  name: '',
+  name: 'notice-item',
   data(){
     return {
       moment: moment,
@@ -158,10 +158,9 @@ export default {
     toLinks(item){
       if(item.link){
         window.open(item.link,'_blank');
-      }
-          // 复制FBi红包口令
-      // 接口未返回链接，这里先做特殊判断，祈祷站长别打我...
-      else if('text_notice' == item.type && 'FBi红包创建成功' == item.title){
+      } else if('text_notice' == item.type && 'FBi红包创建成功' == item.title){
+        // 复制FBi红包口令
+        // 接口未返回链接，这里先做特殊判断，祈祷站长别打我...
         let text = item.text;
         let regex = /密钥为 (\w*?) 的 \d*? FBi 红包/;
         let found = text.match(regex);

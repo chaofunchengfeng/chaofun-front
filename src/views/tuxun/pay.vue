@@ -17,7 +17,7 @@
 <script>
 import * as api from '@/api/api';
 export default {
-  name: 'pay',
+  name: 'tuxun-pay',
   data() {
     return {
       code: null,

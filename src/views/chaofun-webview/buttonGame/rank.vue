@@ -27,7 +27,7 @@
 // import Header from '@/components/common/Header.vue'
 import * as api from '@/api/api';
 export default {
-  name: 'Home',
+  name: 'game-rank',
   components: {
 
   },

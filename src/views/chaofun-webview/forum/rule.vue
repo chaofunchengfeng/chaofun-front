@@ -37,7 +37,7 @@
   import {forumRemoveRule} from '../../../api/api';
 
   export default {
-    name: 'tag',
+    name: 'forum-tag',
     // components: { adminDashboard, editorDashboard },
     data() {
       return {

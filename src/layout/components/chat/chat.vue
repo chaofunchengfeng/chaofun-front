@@ -157,11 +157,9 @@
 </template>
 
 <script>
-import ThemePicker from '@/components/ThemePicker';
-// import 'moment/locale/zh-cn'
 import moment from 'moment';
 export default {
-  components: { ThemePicker },
+  name: 'layout-chat',
   data() {
     return {
       moment: moment,

@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'redirect-index',
   created() {
     const { params, query } = this.$route;
     const { path } = params;

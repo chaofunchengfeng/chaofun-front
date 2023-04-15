@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'my',
+  name: 'scratch-my',
   data() {
     return {
       history: null,

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="lists != null && lists.length > 0">
-      <div  v-for="(item,index) in lists" >
+      <div  v-for="(item,index) in lists" :key="index">
         <div style="border-bottom: 1px solid #f1f1f1;" v-if="item.type === 'post'" >
           <div @click="toPost(item.postInfo.postId)" style="font-size: 20px; font-weight: bold">
             帖子: {{doType(item.postInfo)}}
@@ -195,7 +195,7 @@ import Vue from 'vue';
 import Vue2TouchEvents from 'vue2-touch-events';
 
 export default {
-  name: 'report',
+  name: 'report-index',
 
   data() {
     return {

@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'effect-mallki',
   props: {
     className: {
       type: String,

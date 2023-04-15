@@ -56,7 +56,7 @@ import 'vant/lib/index.css';
 import * as api from '../../api/api';
 Vue.use(vant);
  export default {
-   name: '',
+   name: 'h5-submit',
    data(){
      return {
          radio: '1',

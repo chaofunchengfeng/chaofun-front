@@ -52,3 +52,8 @@
   }
 }
 </style>
+<script>
+export default {
+  name: 'github-corner',
+};
+</script>

@@ -70,12 +70,10 @@
 </template>
 
 <script>
-  import snake from '@/components/game/snake/snake3.vue';
   import * as api from '@/api/api';
-  import App from '../../App';
   import ApplyForum from './ApplyForum';
   export default {
-    name: '',
+    name: 'right-describe',
     data(){
       return {
         gamemodule: localStorage.getItem('gamemodule'),
@@ -111,8 +109,6 @@
     },
     components: {
       ApplyForum,
-      App,
-      snake
     },
     created() {
       console.log(this.$route.params);

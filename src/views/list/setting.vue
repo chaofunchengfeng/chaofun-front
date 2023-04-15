@@ -151,13 +151,11 @@
 import { mapGetters } from 'vuex';
 import * as api from '../../api/api';
 
-import ListItem from '../../components/chaofan/ListItem.vue';
-import loadText from '@/components/chaofan/loadText';
 import badgeSetting from '@/views/chaofun-webview/badge/BadgeSetting';
 import listManageForums from '@/views/chaofun-webview/mySetting/listManageForums';
 
 export default {
-  name: 'user',
+  name: 'user-setting',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {
@@ -182,7 +180,7 @@ export default {
     };
   },
   components: {
-    ListItem, loadText, badgeSetting,listManageForums
+    badgeSetting,listManageForums
   },
   watch: {},
   computed: {

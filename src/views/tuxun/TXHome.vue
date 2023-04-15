@@ -17,7 +17,7 @@
       <div v-if="status === 'rank'" style="z-index: 500; position: absolute; width: 100%; height: 100%; background: white; opacity: 80%; overflow:auto;">
         <div style="padding-top: 40px; font-weight: bold; font-size: 20px;">排行榜:</div>
         <div v-if="this.rank" style="padding-top: 10px; font-weight: bold; font-size: 20px">你的本场次排名:{{this.rank}}</div>
-        <div v-for="item in this.ranks" class="item">
+        <div v-for="(item, index) in this.ranks" class="item" :key="index">
           <div class="left">
             <img :src="imgOrigin+item.userAO.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="">
             <div class="info">
@@ -34,7 +34,7 @@
         </div>
       </div>
       <vue-danmaku v-if="dialogShow" :danmus="danmus" use-slot class="danmaku"  style="height:80%; width:100%; position: absolute; pointer-events: none" :speeds="120">
-        <template slot="dm" slot-scope="{ index, danmu }" >
+        <template slot="dm" slot-scope="{ danmu }" >
           <div class="danmaku-title" style="color: white; font-size: 24px;   -webkit-text-stroke: 0.5px black;">{{ danmu }}</div>
         </template>
       </vue-danmaku>
@@ -42,7 +42,7 @@
 
 <!--    TODO: 这里有个问题，不能在中间加 v-if 的DIV，一加在 v-if 条件触发的时候（特别是 hide）就会影响 map 的布局，原理未知，-->
 
-    <div id="map-container" :class="[{'bm-view-container': !ISPHONE}, {'bm-view-container-phone': ISPHONE && showMap}, {'bm-view-container-phone-hidden': ISPHONE && !showMap}]"@mouseover="mapMouseOver" @mouseout="mapMouseOut">
+    <div id="map-container" :class="[{'bm-view-container': !ISPHONE}, {'bm-view-container-phone': ISPHONE && showMap}, {'bm-view-container-phone-hidden': ISPHONE && !showMap}]" @mouseover="mapMouseOver" @mouseout="mapMouseOut">
       <div v-if="!this.isMapSmall && !ISPHONE">
         <el-button size="small" @click="mapBig" round>放大</el-button>
         <el-button size="small" @click="mapSmall" round>缩小</el-button>

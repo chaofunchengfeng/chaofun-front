@@ -12,7 +12,7 @@
 import * as api from '@/api/api';
 
 export default {
-  name: 'analytics',
+  name: 'forum-analytics',
   // components: { adminDashboard, editorDashboard },
   data() {
     return {

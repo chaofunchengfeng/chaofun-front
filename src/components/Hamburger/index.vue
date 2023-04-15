@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'Hamburger',
+  name: 'hamburger-index',
   props: {
     isActive: {
       type: Boolean,

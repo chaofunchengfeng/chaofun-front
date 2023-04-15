@@ -19,7 +19,7 @@ import {Circle2} from 'vue-loading-spinner';
 import {tuxunJump, tuxunOpen} from './common';
 
 export default {
-  name: 'Matching',
+  name: 'tuxun-matching',
   components: {
     Circle2,
   },

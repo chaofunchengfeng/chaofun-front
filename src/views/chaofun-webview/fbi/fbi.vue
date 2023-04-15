@@ -196,7 +196,7 @@ import * as api from '@/api/api';
 import { Dialog } from 'vant';
 
 export default {
-  name: 'fbi.vue',
+  name: 'fbi-vue',
 
   data() {
     return {

@@ -6,7 +6,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "analyzer": "vue-cli-service build --report",
-    "lint": "vue-cli-service lint --fix & eslint src --fix"
+    "lint": "vue-cli-service lint --fix src"
   },
   "pre-commit": [
     "lint"

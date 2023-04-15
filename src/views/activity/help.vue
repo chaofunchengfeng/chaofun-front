@@ -17,7 +17,7 @@
 // import Header from '@/components/common/Header.vue'
 import * as api from '@/api/api';
 export default {
-  name: 'Help',
+  name: 'activity-help',
   components: {
     
   },

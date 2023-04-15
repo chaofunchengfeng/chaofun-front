@@ -96,8 +96,6 @@
 import { mapGetters } from 'vuex';
 import * as api from '../../api/api';
 
-import ListItem from '../../components/chaofan/ListItem.vue';
-import loadText from '@/components/chaofan/loadText';
 import analytics from '@/views/chaofun-webview/forum/analytics.vue';
 import forumTag from '@/views/chaofun-webview/forum/tag.vue';
 import forumRule from '@/views/chaofun-webview/forum/rule.vue';
@@ -113,7 +111,7 @@ import badgeManager from '@/views/chaofun-webview/forum/BadgeManager';
 
 // 版块设置
 export default {
-  name: 'user',
+  name: 'list-user',
   data() {
     return {
       params: {
@@ -129,8 +127,6 @@ export default {
     };
   },
   components: {
-    ListItem,
-    loadText,
     analytics,
     forumTag,
     forumRule,

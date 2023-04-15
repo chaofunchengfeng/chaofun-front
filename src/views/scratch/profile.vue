@@ -43,7 +43,7 @@
 import ScratchList from './scratch-list';
 import * as api from '../../api/api';
 export default {
-  name: 'profile',
+  name: 'scratch-profile',
   components: {ScratchList},
 
   data() {

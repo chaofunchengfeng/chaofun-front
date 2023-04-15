@@ -104,7 +104,7 @@
   import * as api from '@/api/api';
   import moment from 'moment';
   export default {
-    name: 'Year2021.vue',
+    name: 'year-2021',
 
     data() {
       return {
