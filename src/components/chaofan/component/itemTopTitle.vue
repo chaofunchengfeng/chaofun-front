@@ -502,7 +502,7 @@ export default {
             this.$EventBus.$emit('unPin', this.index);
             // this.$emit('deletePost',this.index)
           } else {
-            this.$toast(res.message);
+            this.$toast(res.errorMessage);
           }
         });
       } else if (command == '编辑') {
