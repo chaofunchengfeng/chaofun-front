@@ -72,7 +72,7 @@ export default {
   mounted() {
     document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
     this.tuxunPid = this.$route.query.id;
-    loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-tuxun.js').then(() => {
+    loadScript('https://i.chao-fan.com/streetview/js-tuxun.js').then(() => {
       this.init();
     });
 

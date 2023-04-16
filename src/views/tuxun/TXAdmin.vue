@@ -5,6 +5,7 @@
       剩余 {{totalCount}}
       <el-button @click="check" style="white-space: pre-line;">加入题库(方向键上)</el-button>
       <el-button @click="deleteQ"  style="white-space: pre-line;">删除题目(方向键下)</el-button>
+      <el-button @click="next"  style="white-space: pre-line;">黑屏刷新</el-button>
     </div>
     <div v-if="this.mapsName" class="info">
       用户投稿练习题库：{{this.mapsName}}
@@ -177,7 +178,7 @@ export default {
       if (!this.viewer) {
         document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
         this.sharePanoId = this.$route.query.pano;
-        loadScript('https://chaofun-test.oss-cn-hangzhou.aliyuncs.com/google/js-tuxun.js').then(() => {
+        loadScript('https://i.chao-fan.com/streetview/js-tuxun.js').then(() => {
           this.viewer = new google.maps.StreetViewPanorama(
               document.getElementById('viewer'), {
                 fullscreenControl: false,
