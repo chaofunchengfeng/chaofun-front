@@ -14,7 +14,8 @@
     <div v-if="this.location" class="location" >
       {{this.location}}
     </div>
-    <div id="map" class="container" style=""></div>
+    <div id="viewer" class="container" style=""></div>
+    <TXMap :marker="marker"/>
   </div>
 </template>
 
@@ -22,6 +23,7 @@
 import { loadScript } from 'vue-plugin-load-script';
 import * as api from '../../api/api';
 import {tuxunJump, tuxunOpen} from './common';
+import TXMap from './TXMap';
 
 export default {
   name: 'RandomStreetView',
@@ -30,8 +32,10 @@ export default {
       panorama: null,
       tuxunPid: null,
       location: null,
+      marker: null,
     };
   },
+  components: {TXMap},
   mounted() {
     document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
     this.tuxunPid = this.$route.query.id;
@@ -53,7 +57,7 @@ export default {
   methods: {
     init() {
       this.panorama = new google.maps.StreetViewPanorama(
-          document.getElementById('map'), {
+          document.getElementById('viewer'), {
             fullscreenControl:false,
             panControl:true,
             addressControl: false,
@@ -116,10 +120,14 @@ export default {
         }
         api.getByPath('/api/v0/tuxun/random', {mapsId: this.mapsId}).then(res => {
           if (res.success) {
-            this.setPano(res.data.tuxunPid, res.data.panoId);
+            const { data: { lat, lng, tuxunPid, panoId } } = res;
+            this.setPano(tuxunPid, panoId);
+            // 地图初始化
+            this.marker = { lat, lng };
           } else if (res.errorCode === 'need_vip') {
             this.$vip();
           }
+          this.$EventBus.$emit('setMapVisible', false);
         });
       }
       });
