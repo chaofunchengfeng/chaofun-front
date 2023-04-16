@@ -9,7 +9,7 @@
       </div>
       <div id="map" :class="[{'bm-view': !ISPHONE}, {'bm-view-phone': ISPHONE}]" @mouseover="mapMouseOver" @mouseout="mapMouseOut"></div>
     </div>
-    <div style="position: absolute; right: 20px; bottom: 20px;z-index: 5000">
+    <div class="map-position">
       <el-button v-if="showMap" @click="setMapVisible(false)" round>隐藏位置</el-button>
       <el-button v-else @click="setMapVisible(true)" round>显示位置</el-button>
     </div>
@@ -217,5 +217,11 @@ export default {
     height: 40%;
     opacity: 1;
   }
+}
+.map-position {
+  position: absolute; 
+  right: 20px; 
+  bottom: 20px;
+  z-index: 5000;
 }
 </style>

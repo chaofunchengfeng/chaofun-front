@@ -111,9 +111,13 @@ export default {
     } else if (this.$route.query.type) {
       this.type = this.$route.query.type;
     }
+    window.onbeforeunload = () => {
+      if (this.name || this.desc || this.tags || this.imageUrl) {
+        return false;
+      }
+    };
   },
   methods: {
-
     handleAvatarSuccess(res, file) {
       console.log(this.filedata);
       console.log(res);
@@ -124,8 +128,6 @@ export default {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
-
-      console.log();
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;

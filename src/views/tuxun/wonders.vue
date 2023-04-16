@@ -177,6 +177,9 @@ export default {
       api.getByPath('/api/v0/tuxun/wonders/get', {'tuxunPid': this.tuxunPid}).then(res=>{
         this.tuxunPid = tuxunPid;
         this.setPano(this.tuxunPid,res.data.panoId);
+        // 地图初始化
+        this.marker = { lat, lng };
+        this.$EventBus.$emit('setMapVisible', false);
       });
     },
     setPano(tuxunPid, panoId) {
@@ -220,10 +223,10 @@ export default {
             this.setPano(tuxunPid, panoId);
             // 地图初始化
             this.marker = { lat, lng };
+            this.$EventBus.$emit('setMapVisible', false);
           } else if (res.errorCode === 'need_vip') {
             this.$vip();
           }
-          this.$EventBus.$emit('setMapVisible', false);
         });
       }
       });

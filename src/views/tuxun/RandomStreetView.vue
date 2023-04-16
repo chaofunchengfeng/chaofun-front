@@ -63,7 +63,7 @@ export default {
             addressControl: false,
             imageDateControl: true,
             motionTrackingControl:false,
-            streetViewControl:true
+            streetViewControl:true,
           }
       );
 
@@ -93,6 +93,9 @@ export default {
       api.getByPath('/api/v0/tuxun/random/get', {'tuxunPid': this.tuxunPid}).then(res=>{
         this.tuxunPid = tuxunPid;
         this.setPano(this.tuxunPid,res.data.panoId);
+        // 地图初始化
+        this.marker = { lat, lng };
+        this.$EventBus.$emit('setMapVisible', false);
       });
     },
     goHome() {
@@ -124,10 +127,10 @@ export default {
             this.setPano(tuxunPid, panoId);
             // 地图初始化
             this.marker = { lat, lng };
+            this.$EventBus.$emit('setMapVisible', false);
           } else if (res.errorCode === 'need_vip') {
             this.$vip();
           }
-          this.$EventBus.$emit('setMapVisible', false);
         });
       }
       });
