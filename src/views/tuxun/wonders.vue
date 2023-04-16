@@ -16,7 +16,8 @@
     <div v-if="this.location" class="location" >
       {{this.location}}
     </div>
-    <div id="map" class="container" style=""></div>
+    <div id="viewer" class="container" style=""></div>
+    <TXMap :marker="marker"/>
     <img v-if="panoId && panoId.length === 27" style="z-index: 5000; position: absolute; bottom: 10px; left: 10px; width: 100px; cursor: pointer;"  @click="toBaiduPano" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
     <div v-if="!ISPHONE" class="more">
       <div v-if="this.$store.state.user.userInfo.userId === 1" @click="deleteWonders()" class="more-item">
@@ -45,9 +46,11 @@
 import { loadScript } from 'vue-plugin-load-script';
 import * as api from '../../api/api';
 import {tuxunJump, tuxunOpen} from './common';
+import TXMap from './TXMap';
 
 export default {
   name: 'RandomStreetView',
+  components: {TXMap},
   data() {
     return {
       panorama: null,
@@ -63,6 +66,7 @@ export default {
       panoramaSubmitForm: {
         links: '',
       },
+      marker: null,
     };
   },
   mounted() {
@@ -86,7 +90,7 @@ export default {
   methods: {
     init() {
       this.panorama = new google.maps.StreetViewPanorama(
-          document.getElementById('map'), {
+          document.getElementById('viewer'), {
             fullscreenControl:false,
             panControl: false,
             addressControl: false,
@@ -212,10 +216,14 @@ export default {
         }
         api.getByPath('/api/v0/tuxun/wonders/random').then(res => {
           if (res.success) {
-            this.setPano(res.data.tuxunPid, res.data.panoId);
+            const { data: { lat, lng, tuxunPid, panoId } } = res;
+            this.setPano(tuxunPid, panoId);
+            // 地图初始化
+            this.marker = { lat, lng };
           } else if (res.errorCode === 'need_vip') {
             this.$vip();
           }
+          this.$EventBus.$emit('setMapVisible', false);
         });
       }
       });

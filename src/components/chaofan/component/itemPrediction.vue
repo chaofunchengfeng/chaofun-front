@@ -76,7 +76,7 @@
   import * as api from '@/api/api';
   import newDialog from '../../../layout/components/dialog/newDialog';
   export default {
-    name: '',
+    name: 'item-prediction',
     data(){
       return {
         tokens: null,
