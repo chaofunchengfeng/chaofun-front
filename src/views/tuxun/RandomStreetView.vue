@@ -11,9 +11,9 @@
         <el-button  @click="shareLink" size="large" round>分享街景</el-button>
       </div>
     </div>
-    <div v-if="this.location" class="location" >
+    <!-- <div v-if="this.location" class="location" >
       {{this.location}}
-    </div>
+    </div> -->
     <div id="viewer" class="container" style=""></div>
     <TXMap :marker="marker"/>
   </div>
@@ -60,10 +60,12 @@ export default {
           document.getElementById('viewer'), {
             fullscreenControl:false,
             panControl:true,
+            panControlOptions: { position: google.maps.ControlPosition.LEFT_BOTTOM},
             addressControl: false,
             imageDateControl: true,
             motionTrackingControl:false,
             streetViewControl:true,
+            zoomControlOptions: { style: google.maps.ZoomControlStyle.BIG, position: google.maps.ControlPosition.LEFT_BOTTOM },
           }
       );
 
