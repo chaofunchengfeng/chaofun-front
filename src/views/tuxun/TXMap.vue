@@ -148,7 +148,10 @@ export default {
       options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
       this.currentMarker = L.marker([marker.lat, marker.lng], {icon: new L.Icon(options)}).addTo(this.map);
       this.map.panTo([marker.lat, marker.lng]);
-      // this.map.setZoomAround(10);
+      this.map.setZoomAround(5);
+      setTimeout(() => {
+        this.map.invalidateSize();
+      }, 50);
     },
   }
 };
