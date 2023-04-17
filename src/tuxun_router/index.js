@@ -106,6 +106,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/pano-gallary',
+    component: () => import('@/views/tuxun/pano-gallary'),
+    name: 'pano-gallary',
+    meta: { title: '炒饭宇宙-图寻'},
+    hidden: true
+  },
+  {
     path: '/wonders',
     component: () => import('@/views/tuxun/wonders'),
     meta: { title: '图寻-街景奇观'},
