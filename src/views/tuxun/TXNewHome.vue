@@ -14,7 +14,7 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div @click="toFirstTournament" class="info">全新题库！玩家第三届组队赛开始报名～，周日下午两点开赛</div>
+      <div @click="toFirstTournament" class="info">玩家第三届组队赛圆满结束</div>
 <!--      <div class="second-info"> 提示：黑屏的用户 过30分钟/切换5G 访问就会正常了 </div>-->
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
@@ -92,7 +92,7 @@
         <div class="first_session_head">其他</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="$toast('尽请期待')">
+          <div class="card" @click="redirectPage('/tuxun/pano-gallary')">
             <div class="title">
               实验室
             </div>
@@ -292,9 +292,9 @@ export default {
     toFirstTournament() {
       try {
 
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1253071'});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1253579'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1253071');
+        tuxunOpen('https://choa.fun/p/1253579');
       }
     },
     raiseVIP() {

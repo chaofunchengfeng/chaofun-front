@@ -256,6 +256,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/pano-gallary',
+    component: () => import('@/views/tuxun/pano-gallary'),
+    name: 'pano-gallary',
+    meta: { title: '炒饭宇宙-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/maps-hot',
     component: () => import('@/views/tuxun/maps-hot'),
     name: 'maps-hot',
