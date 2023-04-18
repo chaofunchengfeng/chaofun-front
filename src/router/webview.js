@@ -263,6 +263,21 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/pano-create',
+    component: () => import('@/views/tuxun/pano-create'),
+    name: 'pano-create',
+    meta: { title: '炒饭宇宙创造-图寻'},
+    hidden: true
+  },
+
+  {
+    path: '/tuxun/pano-preview',
+    component: () => import('@/views/tuxun/pano-preview'),
+    name: 'pano-preview',
+    meta: { title: '预览-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/maps-hot',
     component: () => import('@/views/tuxun/maps-hot'),
     name: 'maps-hot',

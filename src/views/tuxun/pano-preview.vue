@@ -1,16 +1,8 @@
 <template>
   <div   style="width: 100%; height: 100%; display: flex;flex-direction: column; ">
     <div class="back_home">
-      <div v-if="!ISPHONE" class="middle-title">炒饭宇宙</div>
-      <div @click="goHome" class="left-title">
-        <div >图寻</div>
-        <div v-if="ISPHONE" class="desc">炒饭宇宙</div>
-      </div>
-      <div class="button">
-        <!--      <el-button type="primary" @click="goHome" size="mini" round>首页</el-button>-->
-        <el-button type="primary" @click="change" size="large" round>换一个</el-button>
-        <el-button  @click="create" size="large" round>创造</el-button>
-      </div>
+      <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
+      <el-button @click="goHome" size="small" round>首页</el-button>
     </div>
     <div id="viewer" class="container" style=""></div>
   </div>
@@ -24,14 +16,18 @@ export default {
   name: 'pano-gallary',
   data() {
     return {
+      history: null,
       panorama: null,
       tuxunPid: null,
       location: null,
       marker: null,
+      id: null,
       url: null
     };
   },
   mounted() {
+    this.history = history;
+    this.id = this.$route.query.id;
     document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
     this.tuxunPid = this.$route.query.id;
     loadScript('https://i.chao-fan.com/streetview/js-tuxun.js').then(() => {
@@ -39,7 +35,13 @@ export default {
     });
   },
   methods: {
-
+    goBack() {
+      try {
+        window.history.back();
+      } catch (e) {
+        tuxunJump('/tuxun/')
+      }
+    },
     init() {
       this.panorama = new google.maps.StreetViewPanorama(
           document.getElementById('viewer'), {
@@ -52,7 +54,7 @@ export default {
           }
       );
       this.panorama.registerPanoProvider(this.getCustomPanorama);
-      this.change();
+      this.getId();
 
     },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
@@ -81,14 +83,10 @@ export default {
       tuxunJump('/tuxun/');
     },
     create() {
-      this.doLoginStatus().then(res=>{
-        if(res){
-          tuxunJump('/tuxun/pano-create');
-        }
-      });
+      tuxunJump('/tuxun/pano-create');
     },
-    change() {
-      api.getByPath('/api/v0/pano/random', ).then(res => {
+    getId() {
+      api.getByPath('/api/v0/pano/preview', {id: this.id}).then(res => {
         if (res.success) {
           this.url = res.data.imageName;
         }
@@ -102,50 +100,15 @@ export default {
 
 <style lang="scss" scoped>
 .back_home {
-  background-color: #1C1C2E;
-  width: 100%;
-  //position: absolute;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-
-  .left-title {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 0.5rem;
-    cursor: pointer;
-    .desc {
-      font-weight: normal;
-      font-size: 16px;
-    }
-    &:hover {
-      transform: scale(1.03);
-    }
-  }
-  .middle-title {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 0.5rem;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    justify-items: center;
-    pointer-events: none;
-  }
-  .button {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    float: right;
-    padding-right: 1rem;
-  }
+  z-index: 5000;
+  position: absolute;
+  padding-top: 1rem;
+  padding-left: 1rem;
 }
 .container {
-  align-items: stretch;
-  flex-grow: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 .location {
   font-size: 24px;

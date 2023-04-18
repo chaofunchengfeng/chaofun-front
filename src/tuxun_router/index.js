@@ -113,6 +113,20 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/pano-create',
+    component: () => import('@/views/tuxun/pano-create'),
+    name: 'pano-create',
+    meta: { title: '炒饭宇宙创造-图寻'},
+    hidden: true
+  },
+  {
+    path: '/pano-preview',
+    component: () => import('@/views/tuxun/pano-preview'),
+    name: 'pano-preview',
+    meta: { title: '预览-图寻'},
+    hidden: true
+  },
+  {
     path: '/wonders',
     component: () => import('@/views/tuxun/wonders'),
     meta: { title: '图寻-街景奇观'},
