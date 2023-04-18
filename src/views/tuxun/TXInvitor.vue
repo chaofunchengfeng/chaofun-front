@@ -1571,10 +1571,10 @@ export default {
       this.panoId = round.panoId;
       this.viewer.setPano(round.panoId);
 
-      if (round.vheading) {
+      if (round.vHeading) {
         this.viewer.setPov({
-          heading: round.vheading,
-          pitch: round.vpitch,
+          heading: round.vHeading,
+          pitch: round.vPitch,
         });
       }
 
@@ -1606,8 +1606,8 @@ export default {
       }
       this.viewer.setVisible(true);
       setTimeout(() => {
-        if (round.vzoom) {
-          this.viewer.setZoom(round.vzoom);
+        if (round.vZoom) {
+          this.viewer.setZoom(round.vZoom);
         } else {
           this.viewer.setZoom(0);
         }
