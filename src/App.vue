@@ -6,6 +6,17 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    new MutationObserver(() => {
+      const querys = ['a[href^="https://maps.google.com/maps/"][title="在 Google 地图中打开此区域（会打开一个新窗口）"]', '.gm-iv-address'];
+      querys.forEach(query => {
+        const all = document.querySelectorAll(query);
+        all.forEach(item => {
+          item.remove();
+        });
+      });
+    }).observe(document.getElementById('app'), { attributes: false, childList: true, subtree: true });
+  }
 };
 </script>
