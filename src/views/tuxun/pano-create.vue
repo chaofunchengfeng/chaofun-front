@@ -78,8 +78,8 @@ export default {
     this.history = history;
     this.getPanos();
     setTimeout(() => {
-      this.getPanos()
-    }, 10000)
+      this.getPanos();
+    }, 10000);
   },
   methods: {
     checkVip() {
@@ -148,7 +148,7 @@ export default {
         api.getByPath('/api/v0/pano/delete', {id: id}).then(res=>{
           if (res.success) {
             this.$toast('删除成功');
-            this.getPanos()
+            this.getPanos();
           }
         });
       }).catch(() => {
