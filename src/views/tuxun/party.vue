@@ -24,10 +24,7 @@
         <div v-if="partyData.gameType !== 'br'" class="vs">
           <div class="player">
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
-              <div class="user" v-for="(item, index) in partyData.teams[0].users" :key="index">
-                <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
-                <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
-              </div>
+              <User v-for="(item, index) in partyData.teams[0].users" :key="index" :user="item" :is-owner="item.userId === partyData.host.userId"/>
             </div>
             <div v-if="partyData && (!partyData.teams || partyData.teams.length == 0  || partyData.gameType === 'team')">
               <el-button @click="change2Player(0)" size="small">加入对决</el-button>
@@ -40,10 +37,7 @@
           </div>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 2">
-              <div class="user" v-for="(item, index) in partyData.teams[1].users" :key="index">
-                <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
-                <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
-              </div>
+              <User v-for="(item, index) in partyData.teams[1].users" :key="index" :user="item" :is-owner="item.userId === partyData.host.userId"/>
             </div>
             <div v-if="partyData && (!partyData.teams || partyData.teams.length <= 1  || partyData.gameType === 'team')">
               <el-button @click="change2Player(1)" size="small">加入对决</el-button>
@@ -53,10 +47,8 @@
         <div v-else>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
-              <div class="user" v-for="(item, index) in partyData.teams" :key="index">
-                <el-avatar :src="imgOrigin + item.users[0].icon" class="avatar"></el-avatar>
-                <div class="userName">{{item.users[0].userName}} <span v-if="item.users[0].userId === partyData.host.userId">(房主)</span></div>
-              </div>
+              <User v-for="(item, index) in partyData.teams" :key="index" :user="item.users[0]" :is-owner="item.users[0].userId === partyData.host.userId"/>
+
             </div>
             <div style="padding-top: 1rem">
               <el-button @click="change2Player(0)" size="small">加入对决</el-button>
@@ -97,10 +89,7 @@
         <div>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.onlookers">
-              <div class="user-small" v-for="(item, index) in partyData.onlookers" :key="index">
-                <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
-                <div class="userName">{{item.userName}} <span v-if="item.userId === partyData.host.userId">(房主)</span></div>
-              </div>
+              <User size="small" v-for="(item, index) in partyData.onlookers" :key="index" :user="item" :is-owner="item.userId === partyData.host.userId"/>
             </div>
           </div>
         </div>
@@ -158,6 +147,7 @@
 <script>
 import * as api from '../../api/api';
 import {tuxunJump, tuxunOpen} from './common';
+import User from './user.vue';
 export default {
   name: 'tuxun-party',
   data() {
@@ -168,6 +158,9 @@ export default {
       partyData: null,
       health: 6000,
     };
+  },
+  components: {
+    User,
   },
   created() {
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
@@ -416,38 +409,6 @@ export default {
       color: silver;
       font-size: 3rem;
       margin-bottom: 1rem;;
-    }
-    .user {
-      display: block;
-      margin: 10px;
-      .avatar {
-        width: 75px;
-        height: 75px;
-        margin: 0 auto;
-        justify-content: center;
-        display: flex;
-      }
-
-      .userName {
-        margin-top: 1rem;
-        font-size: 12px;
-      }
-    }
-    .user-small {
-      display: block;
-      margin: 10px;
-      .avatar {
-        width: 50px;
-        height: 50px;
-        margin: 0 auto;
-        justify-content: center;
-        display: flex;
-      }
-
-      .userName {
-        margin-top: 1rem;
-        font-size: 10px;
-      }
     }
   }
   .prepare {
