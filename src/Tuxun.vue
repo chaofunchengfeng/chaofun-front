@@ -16,7 +16,7 @@ export default {
           item.remove();
         });
       });
-    }).observe(document.getElementById('app'), { attributes: false, childList: true, subtree: true });
+    }).observe(document.getElementById('tuxun'), { attributes: false, childList: true, subtree: true });
   }
 };
 </script>
