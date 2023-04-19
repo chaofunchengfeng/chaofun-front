@@ -77,7 +77,7 @@ export default {
 
     this.history = history;
     this.getPanos();
-    setTimeout(() => {
+    setInterval(() => {
       this.getPanos();
     }, 10000);
   },
