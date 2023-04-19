@@ -9,7 +9,7 @@ export default {
   name: 'App',
   mounted() {
     new MutationObserver(() => {
-      const querys = ['a[href^="https://maps.google.com/maps/"][title="在 Google 地图中打开此区域（会打开一个新窗口）"]', '.gm-iv-address', '.gm-style-cc'];
+      const querys = ['a[href^="https://maps.google.com/maps"]', 'a[href^="http://maps.google.com/maps"]', 'a[href^="http://www.google.com/maps"]', '.gm-iv-address', '.gm-style-cc'];
       querys.forEach(query => {
         const all = document.querySelectorAll(query);
         all.forEach(item => {
