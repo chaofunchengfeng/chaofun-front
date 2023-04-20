@@ -79,7 +79,7 @@ export default {
         copyright: 'Imagery (c) 2010 Google',
         // The definition of the tiles for this panorama.
         tiles: {
-          tileSize: new google.maps.Size(6144, 3072),
+          tileSize: new google.maps.Size(768, 384),
           worldSize: new google.maps.Size(6144, 3072),
           // The heading in degrees at the origin of the panorama
           // tile set.

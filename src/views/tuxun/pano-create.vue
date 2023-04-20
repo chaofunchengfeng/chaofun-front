@@ -227,7 +227,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .container {
     .list_container {
-      max-width: 90%;
+      width: 90%;
       margin: auto;
     }
   }
