@@ -56,7 +56,19 @@ export default {
 
     },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-      return this.url;
+
+      console.log(zoom, tileX, tileY);
+      if (zoom == 0) {
+        var oss = '&zoom=' + zoom + '&x-oss-process=image/resize,m_fill,h_384,w_768';
+      } else if (zoom === 2) {
+        var oss = '&zoom=' + zoom + '&x-oss-process=image/crop,x_' + (tileX * 1536) + ',y_' + (tileY * 768) + ',h_768,w_1536/resize,m_fill,h_384,w_768';
+      } else if (zoom === 3) {
+        var oss = '&zoom=' + zoom + '&x-oss-process=image/crop,x_' + (tileX * 768) + ',y_' + (tileY * 384) + ',h_384,w_768';
+      } else {
+        return ;
+      }
+
+      return this.url + oss;
     },
     getCustomPanorama(pano) {
       return {
@@ -68,7 +80,8 @@ export default {
         copyright: 'Imagery (c) 2010 Google',
         // The definition of the tiles for this panorama.
         tiles: {
-          tileSize: new google.maps.Size(6144, 3072),
+          tileSize: new google.maps.Size(768, 384),
+          // tileSize: new google.maps.Size(3072, 1536),
           worldSize: new google.maps.Size(6144, 3072),
           // The heading in degrees at the origin of the panorama
           // tile set.
