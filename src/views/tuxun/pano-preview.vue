@@ -58,7 +58,16 @@ export default {
 
     },
     getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-      return this.url;
+      if (zoom == 0) {
+        var oss = '&zoom=' + zoom + '&x-oss-process=image/resize,m_fill,h_384,w_768';
+      } else if (zoom === 2) {
+        var oss = '&zoom=' + zoom + '&x-oss-process=image/crop,x_' + (tileX * 1536) + ',y_' + (tileY * 768) + ',h_768,w_1536/resize,m_fill,h_384,w_768';
+      } else if (zoom === 3) {
+        var oss = '&zoom=' + zoom + '&x-oss-process=image/crop,x_' + (tileX * 768) + ',y_' + (tileY * 384) + ',h_384,w_768';
+      } else {
+        return ;
+      }
+      return this.url + oss;
     },
     getCustomPanorama(pano) {
       return {
