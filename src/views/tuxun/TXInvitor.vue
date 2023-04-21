@@ -808,18 +808,6 @@ export default {
         this.status = data.status;
         if (data.status === 'ongoing' || data.status === 'finish') {
           if (this.panoId !== this.lastRound.panoId || this.round !== this.lastRound.round) {
-            var interval = 0;
-            if (!this.map) {
-              interval = 500;
-            }
-
-            setTimeout(() => {
-              if (this.gameData.centerLat) {
-                this.map.setView([this.gameData.centerLat, this.gameData.centerLng], this.gameData.mapZoom);
-              } else {
-                this.map.setView([38.8, 106.0], 2);
-              }
-            },interval);
 
             this.removeChooseMarker();
             this.removeTargetMarker();
@@ -839,6 +827,18 @@ export default {
             this.heading = this.lastRound.heading;
             this.headingMap[this.panoId] = this.heading;
 
+            var interval = 100;
+            if (!this.map) {
+              interval = 500;
+            }
+
+            setTimeout(() => {
+              if (this.gameData.centerLat) {
+                this.map.setView([this.gameData.centerLat, this.gameData.centerLng], this.gameData.mapZoom);
+              } else {
+                this.map.setView([38.8, 106.0], 2);
+              }
+            },interval);
             setTimeout(function () {
                 if (!this.viewer) {
                   document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
