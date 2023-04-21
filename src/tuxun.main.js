@@ -10,6 +10,8 @@ import '@/styles/index.scss'; // global css
 import store from './store';
 import router from './tuxun_router';
 import getPageTitle from '@/utils/get-page-title';
+import './sentry';
+
 
 Vue.prototype.$EventBus = new Vue();
 
