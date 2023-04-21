@@ -30,12 +30,14 @@ export default {
     return {
       gameId: null,
       round: null,
+      history: null,
       gameData: null,
       image: null,
       viewer: null
     };
   },
   mounted() {
+    this.history = history;
     THREE.Cache.enabled = false;
     this.gameId = this.$route.query.gameId;
     this.round = this.$route.query.round;
