@@ -24,7 +24,7 @@
         <div v-if="partyData.gameType !== 'br'" class="vs">
           <div class="player">
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
-              <User v-for="(item, index) in partyData.teams[0].users" :key="index" :user="item" :is-owner="item.userId === partyData.host.userId"/>
+              <User v-for="(item, index) in partyData.teams[0].users" :key="index" :partyData="partyData" :user="item"/>
             </div>
             <div v-if="partyData && (!partyData.teams || partyData.teams.length == 0  || partyData.gameType === 'team')">
               <el-button @click="change2Player(0)" size="small">加入对决</el-button>
@@ -37,7 +37,7 @@
           </div>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 2">
-              <User v-for="(item, index) in partyData.teams[1].users" :key="index" :user="item" :is-owner="item.userId === partyData.host.userId"/>
+              <User v-for="(item, index) in partyData.teams[1].users" :key="index" :partyData="partyData" :user="item"/>
             </div>
             <div v-if="partyData && (!partyData.teams || partyData.teams.length <= 1  || partyData.gameType === 'team')">
               <el-button @click="change2Player(1)" size="small">加入对决</el-button>
@@ -47,7 +47,7 @@
         <div v-else>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="partyData && partyData.teams && partyData.teams.length >= 1">
-              <User v-for="(item, index) in partyData.teams" :key="index" :user="item.users[0]" :is-owner="item.users[0].userId === partyData.host.userId"/>
+              <User v-for="(item, index) in partyData.teams" :key="index" :user="item.users[0]" :partyData="partyData"/>
 
             </div>
             <div style="padding-top: 1rem">
@@ -89,7 +89,7 @@
         <div>
           <div class="player">
             <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="partyData && partyData.onlookers">
-              <User size="small" v-for="(item, index) in partyData.onlookers" :key="index" :user="item" :is-owner="item.userId === partyData.host.userId"/>
+              <User size="small" v-for="(item, index) in partyData.onlookers" :key="index" :partyData="partyData" :user="item"/>
             </div>
           </div>
         </div>
