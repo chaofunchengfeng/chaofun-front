@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/vue';
 import Vue from 'vue';
+import router from './tuxun_router';
 
 try {
   Sentry.init({
