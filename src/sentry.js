@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/vue';
+import Vue from 'vue';
 
 try {
   Sentry.init({
