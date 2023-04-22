@@ -1559,7 +1559,7 @@ export default {
       zoom = zoom += 1;
       if (zoom === 1) {
         return (
-            'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano
+            'https://map.chao-fan.com/bd/thumb/' + pano
         );
       }
       return (
@@ -1615,7 +1615,7 @@ export default {
     },
     preloadImage(pano) {
       var img = new Image();
-      img.src = 'https://tuxun.fun/api/v0/tuxun/mapProxy/bd?pano=' + pano;
+      img.src = 'https://map.chao-fan.com/bd/thumb/' + pano;
     },
     goBack() {
       try {
