@@ -1576,6 +1576,11 @@ export default {
           heading: round.vHeading,
           pitch: round.vPitch,
         });
+      } else if (!round.pan) {
+        this.viewer.setPov({
+          heading: 0,
+          pitch: round.vPitch,
+        });
       }
 
       if (!round.pan) {
