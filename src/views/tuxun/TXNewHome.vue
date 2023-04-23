@@ -208,7 +208,7 @@ export default {
   data() {
     return {
       times: null,
-      backgroundImage: 'front/IMG_3101.jpg?x-oss-process=image/quality,q_80'
+      backgroundImage: 'front/IMG_3101.jpg?x-oss-process=image/quality,q_50'
     };
   },
   created() {
