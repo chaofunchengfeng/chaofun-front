@@ -6,10 +6,12 @@
         <viewer :images="[imgOrigin+item.imageName]">
           <img v-if="isDetail" :alt="item.title" :data-source="imgOrigin+item.imageName"
                :data-src="imgOrigin+item.imageName" :src="imgOrigin+item.imageName"
+               @error.once="imgLoadError($event.target, imgOrigin+item.imageName)"
                :style="doImgStyle(item.width,item.height)" :title="item.title" class="lazyload">
           <img v-if="!isDetail" :alt="item.title"
                :data-source="imgOrigin+item.imageName" :data-src="dealImageUrl(imgOrigin+item.imageName, item)"
                :src="dealImageUrl(imgOrigin+item.imageName, item)" :style="doImgStyle(item.width,item.height)"
+               @error.once="imgLoadError($event.target, imgOrigin+item.imageName)"
                :title="item.title"
                class="lazyload">
         </viewer>
@@ -183,6 +185,15 @@ export default {
           this.$emit('toDetail',item);
           }
       },
+
+      // 图片加载失败
+      imgLoadError(imgEl, imgUrl) {
+        let newUrl = imgUrl + "?x-oss-process=image/format,png";
+        imgEl.setAttribute("src", newUrl);
+        imgEl.setAttribute("data-source", newUrl);
+        imgEl.setAttribute("data-src", newUrl);
+      }
+
     }
   };
 </script>
