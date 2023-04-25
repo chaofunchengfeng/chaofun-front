@@ -57,6 +57,15 @@
         <span>{{this.userProfile.longestWinningStreak}}</span>
       </div>
 
+      <div>
+        <span>匹配Solo目前连败:  </span>
+        <span>{{this.userProfile.loseStreak}}</span>
+      </div>
+
+      <div>
+        <span>匹配Solo最长连败:  </span>
+        <span>{{this.userProfile.longestLoseStreak}}</span>
+      </div>
     </div>
     <div style="padding-left: 20px; padding-top: 20px; padding-right: 20px">
       <div style="font-size: 20px">
