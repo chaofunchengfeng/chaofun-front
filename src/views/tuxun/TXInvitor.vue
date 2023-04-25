@@ -1181,7 +1181,7 @@ export default {
           if (this.gameTimeLeft < 0) {
             this.gameTimeLeft = 0;
           }
-        } else {
+        } else if (this.gameData.startTimerPeriod) {
           this.gameTimeLeft = Math.round( this.gameData.startTimerPeriod / 1000);
         }
       }, 1000);
