@@ -27,7 +27,7 @@
 
         <!-- 第1名 -->
         <div
-            v-if="pagedata && pagedata.length >= 0"
+            v-if="pagedata && pagedata.length >= 1"
             class="podium" style="position: relative;"
             @click="toUser(pagedata[0])">
           <span style="display: block;color: #FFD700;font-weight: bold;font-size: 120%;">{{ pagedata[0].rating }}</span>
