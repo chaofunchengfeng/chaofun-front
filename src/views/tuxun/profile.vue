@@ -206,7 +206,7 @@ export default {
       tuxunJump('/tuxun/settings');
     },
     checkVip() {
-      if (this.$store.state.user.userInfo.userId.toString() === this.userId) {
+      if (this.$store.state.user.userInfo.userId == this.userId) {
         api.getByPath('/api/v0/tuxun/vip/check').then(res=>{
           if (res.data) {
             this.isVip = true;
