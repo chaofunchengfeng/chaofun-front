@@ -1176,7 +1176,7 @@ export default {
           this.timeLeftStr = Math.floor(this.timeLeft / 60).toString().padStart(2, '0') + ':' + (this.timeLeft % 60).toString().padStart(2, '0');
         }
 
-        if (this.gameData && this.gameData.timerStartTime && this.gameData.status === 'ready') {
+        if (this.gameData && this.gameData.timerStartTime && this.gameData.startTimerPeriod && this.gameData.status === 'ready') {
           this.gameTimeLeft = Math.round( (this.gameData.startTimerPeriod - ((new Date().getTime()) - this.gameData.timerStartTime)) / 1000);
           if (this.gameTimeLeft < 0) {
             this.gameTimeLeft = 0;
