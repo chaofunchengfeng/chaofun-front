@@ -214,16 +214,18 @@ export default {
   created() {
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
       window.location.href = 'https://tuxun.fun';
+      return;
     }
-  },
-
-  mounted() {
     var Notification = window.Notification || window.mozNotification || window.webkitNotification;
     if (Notification) {
       Notification.requestPermission(function (status) {
       });
     }
     this.getTimesInterval();
+  },
+
+  mounted() {
+
   },
   methods:{
     getTimesInterval() {
