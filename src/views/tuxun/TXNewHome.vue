@@ -14,8 +14,8 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div @click="toFirstTournament" class="info">玩家第三届组队赛圆满结束</div>
-<!--      <div class="second-info"> 提示：黑屏的用户 过30分钟/切换5G 访问就会正常了 </div>-->
+      <div @click="toFirstTournament" class="info">图寻五一比赛，全新的赛制 ，欢迎大家报名!</div>
+      <div @click="raiseVIP" class="second-info"> 图寻五一会员限时特价 39.99/年 5.99/月 </div>
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -293,14 +293,17 @@ export default {
     },
     toFirstTournament() {
       try {
-
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1253579'});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1255560'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1253579');
+        tuxunOpen('https://choa.fun/p/1255560');
       }
     },
     raiseVIP() {
-      this.$vip();
+      this.doLoginStatus().then(res=>{
+        if(res){
+          this.$vip();
+        }
+      });
     }
   }
 };
@@ -343,11 +346,11 @@ export default {
       text-decoration:underline;
     }
     .second-info {
-      //cursor: pointer;
+      cursor: pointer;
       color: white;
       font-size: medium;
       padding-top: 8px;
-      //text-decoration:underline;
+      text-decoration:underline;
     }
     .times {
       color: white;

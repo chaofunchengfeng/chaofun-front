@@ -12,12 +12,12 @@
           </div>
           <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
             <div>
-<!--              <div style="font-size: 20px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">69.99</span>-->
-<!--              </div>-->
+              <div style="font-size: 20px;">
+                <span style="font-size: 10px; text-decoration: none">￥</span>
+                <span style="text-decoration: line-through">69.99</span>
+              </div>
               <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>69.99
+                <span style="font-size: 10px;">￥</span>39.99
               </div>
               <div>
                 一年
@@ -27,12 +27,12 @@
           </div>
           <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
             <div>
-<!--              <div style="font-size: 20px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">9.99</span>-->
-<!--              </div>-->
+              <div style="font-size: 20px;">
+                <span style="font-size: 10px; text-decoration: none">￥</span>
+                <span style="text-decoration: line-through">9.99</span>
+              </div>
               <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>9.99
+                <span style="font-size: 10px;">￥</span>5.99
               </div>
               <div>
                 一个月
@@ -46,20 +46,20 @@
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose==='month'">
+          <div style="color: indianred">
+            4月27日18点-5月3日18点 五一活动限时特价
+          </div>
           <div>
             注：感谢探索者您的支持！
           </div>
-<!--          <div>-->
-<!--            双十二特惠价，12月13日0点会调整到9.99元-->
-<!--          </div>-->
         </div>
         <div v-if="choose==='year'">
+          <div style="color: indianred">
+            4月27日18点-5月3日18点 五一活动限时特价
+          </div>
           <div>
             注：冲冲冲！探索者，去征服世界吧！！！
           </div>
-<!--          <div>-->
-<!--            双十二特惠价，12月13日0点会调整到66.99元-->
-<!--          </div>-->
         </div>
 
         <div style="padding-top: 10px; font-weight: bold; font-size: 16px">
