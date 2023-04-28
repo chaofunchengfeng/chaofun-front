@@ -15,6 +15,7 @@
         </div>
       </div>
       <div @click="toFirstTournament" class="info">图寻五一比赛，全新的赛制 ，欢迎大家报名!</div>
+<!--      <div class="normal-info ">图寻磁盘满，正在恢复中，可以别处逛逛</div>-->
       <div @click="raiseVIP" class="second-info" v-if="this.$store.state.user.userInfo.userId !== 58469 && this.$store.state.user.userInfo.userId !== 71377 && this.$store.state.user.userInfo.userId !== 54242"> 图寻五一会员限时特价 39.99/年 5.99/月 </div>
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
@@ -351,6 +352,11 @@ export default {
       font-size: medium;
       padding-top: 8px;
       text-decoration:underline;
+    }
+    .normal-info {
+      color: white;
+      font-size: medium;
+      padding-top: 8px;
     }
     .times {
       color: white;

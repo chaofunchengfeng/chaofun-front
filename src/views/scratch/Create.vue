@@ -95,6 +95,7 @@ export default {
       cleanTimer: null,
       tags: '',
       hasHint: false,
+      submited: false,
       coverOssName: 'biz/1667921710402_beb8f2eaccb1482d87deb7816fd3baef_0.jpeg',
       id: null,
       type: 'image',
@@ -112,7 +113,9 @@ export default {
       this.type = this.$route.query.type;
     }
     window.onbeforeunload = () => {
-      if (this.name || this.desc || this.tags || this.imageUrl) {
+      if (this.submited) {
+        // return true;
+      } else if (this.name || this.desc || this.tags || this.imageUrl) {
         return false;
       }
     };
@@ -171,6 +174,7 @@ export default {
 
       var data = {'version': 1.0,'hasHint': this.hasHint, data: this.dataForm, slideshow: this.slideshow};
       api.postByPath('/api/v0/scratch/game/create', {id: this.id, type: this.type, countdown: this.countdown, name: this.name, tags: this.tags, desc: this.desc, cover: this.coverOssName, hasHint: this.hasHint, data: JSON.stringify(data)}).then((res) => {
+        this.submited = true
         window.location.href = '/scratch/guess?id=' + res.data.id;
       });
     },
@@ -194,6 +198,7 @@ export default {
       }).then(() => {
         api.getByPath('/api/v0/scratch/game/delete', {'id': this.id}).then(res=>{
           if (res.success) {
+            this.submited = true;
             window.location.href = '/scratch';
           }
         });

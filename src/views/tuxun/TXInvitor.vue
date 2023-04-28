@@ -1542,7 +1542,6 @@ export default {
 
     getPanoInfo(pano) {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
-        this.viewer.setLinks(res.data.links);
         // this.centerHeading = res.data.heading;
         this.headingMap[res.data.pano] = res.data.heading;
         if (res.data.links) {
@@ -1551,6 +1550,9 @@ export default {
             this.headingMap[item.pano] = item.centerHeading;
           });
         }
+        setTimeout(() => {
+          this.viewer.setLinks(res.data.links);
+        }, 100)
         // console.log(this.centerHeading);
       });
     },
