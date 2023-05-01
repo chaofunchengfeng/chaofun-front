@@ -14,7 +14,7 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div @click="toFirstTournament" class="info">图寻五一比赛，全新的赛制 ，欢迎大家报名!</div>
+      <div @click="toFirstTournament" class="info">图寻第三届个人赛圆满结束!</div>
 <!--      <div class="normal-info ">图寻磁盘满，正在恢复中，可以别处逛逛</div>-->
       <div @click="raiseVIP" class="second-info" v-if="this.$store.state.user.userInfo.userId !== 58469 && this.$store.state.user.userInfo.userId !== 71377 && this.$store.state.user.userInfo.userId !== 54242"> 图寻五一会员限时特价 39.99/年 5.99/月 </div>
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
@@ -294,9 +294,9 @@ export default {
     },
     toFirstTournament() {
       try {
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1255560'});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1256801'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1255560');
+        tuxunOpen('https://choa.fun/p/1256801');
       }
     },
     raiseVIP() {
