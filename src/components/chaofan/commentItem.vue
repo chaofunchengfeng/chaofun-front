@@ -321,6 +321,9 @@ export default {
       }
     },
     islink(txtContent) {
+      if (!txtContent) {
+        return "";
+      }
       var check_www = 'w{3}' + '[^\\s]*';
       var check_http = '(https|http|ftp|rtsp|mms)://' + '[^(\\，|\\s|(\\u4E00-\\u9FFF)))]*';
       var strRegex = check_http;
