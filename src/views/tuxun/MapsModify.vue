@@ -43,6 +43,18 @@
         街景列表
       </div>
       <div v-if="status" style="font-size: 12px; color: white; padding-bottom: 6px"> (总数: {{status.total ? status.total : 0 }}, 已发布: {{status.publish ? status.publish : 0 }}, 待发布: {{status.ready ? status.ready: 0 }}, 待审核: {{status.wait_check ? status.wait_check: 0 }} 准备中: {{status.crawling ? status.crawling : 0 }}, 准备失败: {{status.crawler_fail ? status.crawler_fail : 0 }})</div>
+      <div style="width: 100%; justify-items: left; align-content: flex-start">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            style="padding-bottom: 20px;"
+            :current-page.sync="current"
+            @current-change="handleCurrentChange"
+            :page-size="1000"
+            :total="total">
+        </el-pagination>
+      </div>
+
       <div v-for="(item, index) in panos" :key="index" class="list_item" style="display: flex;justify-content: space-between ">
         <div style="display: flex; color: white">
           <div @click="toPano(item)">{{item.panoId}}</div>
@@ -71,6 +83,9 @@ export default {
       mapsId: null,
       status: null,
       history: null,
+      total: 1000,
+      current: 1,
+      pageCount: 1,
       submitPanoramaShow: false,
       mapsData: null,
       form: {
@@ -117,8 +132,9 @@ export default {
       });
     },
     getPanos() {
-      api.getByPath('/api/v0/tuxun/maps/listPano', {mapsId: this.mapsId}).then(res=>{
-        this.panos = res.data;
+      api.getByPath('/api/v0/tuxun/maps/listPanoV1', {mapsId: this.mapsId, page: this.current}).then(res=>{
+        this.panos = res.data.list;
+        this.total = res.data.total;
       });
     },
     publish() {
@@ -136,6 +152,9 @@ export default {
     },
     hideSubmitPanorama() {
       this.submitPanoramaShow = false;
+    },
+    handleCurrentChange() {
+      this.getPanos();
     },
     submitPano() {
       api.postByPath('/api/v0/tuxun/maps/userAddPanorama',
