@@ -60,7 +60,7 @@ export default {
       window.history.back();
     },
     toReport() {
-      api.getByPath('/api/v0/tuxun/game/report', {content: this.image}).then(res => {
+      api.getByPath('/api/v0/tuxun/game/report', {panoId: this.round.panoId}).then(res => {
         this.$toast('反馈成功');
       });
     },

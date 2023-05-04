@@ -1425,7 +1425,7 @@ export default {
 
 
     toReport() {
-      api.getByPath('/api/v0/tuxun/game/report', {content: this.image}).then(res => {
+      api.getByPath('/api/v0/tuxun/game/report', {panoId: this.panoId}).then(res => {
         this.$toast('反馈成功');
       });
     },
