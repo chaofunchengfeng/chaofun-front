@@ -314,7 +314,7 @@ export default {
       try {
         if (!this.viewer) {
           document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
-          loadScript('https://i.chao-fan.com/streetview/js-tuxun-v1.js').then(() => {
+          loadScript('https://i.chao-fan.com/streetview/js-tuxun-v2.js').then(() => {
             this.viewer = new google.maps.StreetViewPanorama(
                 document.getElementById('viewer'), {
                   fullscreenControl:false,
