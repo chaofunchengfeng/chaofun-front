@@ -104,6 +104,7 @@ const actions = {
       // getInfo(state.token).then(response => {
         // const { data } = response
         // if(!state.userInfo.userName){
+
           api.getUserInfo().then(res=>{
             // console.log('permit',permit);
             if(res.data){
@@ -112,11 +113,13 @@ const actions = {
             }else{
               commit('SET_islogin', false);
             }
+            resolve(res);
           }).catch(() => {
             console.log('catch')
-            Toast('请求失败，服务器负载较高，请稍后再试！');
+            Toast('服务器负载较高或网络缓慢，请稍后再试！');
           });
-          resolve();
+
+
       // }else{
         //   resolve()
         // }
