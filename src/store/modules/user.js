@@ -112,13 +112,12 @@ const actions = {
             }else{
               commit('SET_islogin', false);
             }
-            resolve(res);
           }).catch(() => {
             console.log('catch')
             Toast('请求失败，服务器负载较高，请稍后再试！');
-            resolve();
           });
-        // }else{
+          resolve();
+      // }else{
         //   resolve()
         // }
 
