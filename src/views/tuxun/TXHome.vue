@@ -343,7 +343,7 @@ export default {
             this.viewer.addListener('status_changed', () => {
               console.log(this.viewer.getStatus());
               if (this.viewer.getStatus() && this.viewer.getStatus() !== 'OK') {
-                api.getByPath("/api/v0/tuxun/client/report", {panoId: this.viewer.getPano(), status: this.viewer.getStatus()}).then(res => {
+                api.getByPath("/api/v0/tuxun/client/report", {panoId: this.viewer.getPano(), status: this.viewer.getStatus(), page: 'tuxun_home'}).then(res => {
                 });
               }
             });

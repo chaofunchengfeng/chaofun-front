@@ -113,7 +113,7 @@ export default {
       this.panorama.addListener('status_changed', () => {
         console.log(this.panorama.getStatus());
         if (this.panorama.getStatus() && this.panorama.getStatus() !== 'OK') {
-          api.getByPath("/api/v0/tuxun/client/report", {panoId: this.panorama.getPano(), status: this.panorama.getStatus()}).then(res => {
+          api.getByPath("/api/v0/tuxun/client/report", {panoId: this.panorama.getPano(), status: this.panorama.getStatus(), page: 'tuxun_wonders'}).then(res => {
           });
         }
       });
