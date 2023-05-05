@@ -87,6 +87,13 @@ export default {
                 this.getPanoInfo(this.viewer.getPano());
               }
             });
+            this.viewer.addListener('status_changed', () => {
+              console.log(this.viewer.getStatus());
+              if (this.viewer.getStatus() && this.viewer.getStatus() !== 'OK') {
+                api.getByPath("/api/v0/tuxun/client/report", {panoId: this.viewer.getPano(), status: this.viewer.getStatus()}).then(res => {
+                });
+              }
+            });
             this.setPanoId(this.panos[this.current].panoId);
           });
         } else {
