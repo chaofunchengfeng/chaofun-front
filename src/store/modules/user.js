@@ -3,6 +3,8 @@ import { getToken, setToken, removeToken } from '@/utils/auth';
 import router, { resetRouter } from '@/router';
 import * as api from '../../api/api';
 import Vue from 'vue';
+import { Toast } from 'vant';
+
 import * as permit from './permission';
 
 const state = {
@@ -111,6 +113,10 @@ const actions = {
               commit('SET_islogin', false);
             }
             resolve(res);
+          }).catch(() => {
+            console.log('catch')
+            Toast('请求失败，服务器负载较高，请稍后再试！');
+            resolve();
           });
         // }else{
         //   resolve()
