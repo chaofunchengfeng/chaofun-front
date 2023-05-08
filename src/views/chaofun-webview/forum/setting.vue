@@ -277,7 +277,7 @@ export default {
     toTuxun() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/tuxunAdmin',
+          url: location.origin + 'tuxunAdmin',
           title: '图寻审核',
           showHeader: true
         });
@@ -292,7 +292,7 @@ export default {
     toNotify() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/notify' + '?forumId=' + this.forumId,
+          url: location.origin + '/webview/forum/notify' + '?forumId=' + this.forumId,
           title: '发送通知',
           showHeader: true
         });
@@ -303,10 +303,10 @@ export default {
     toManageTag() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/tag' + '?forumId=' + this.forumId,
+          url: location.origin + '/webview/forum/tag' + '?forumId=' + this.forumId,
           title: '标签管理',
           showHeader: true
-        });      
+        });
 } catch (e) {
         window.open(location.origin + '/webview/forum/tag?forumId=' + this.forumId);
       }
@@ -314,10 +314,10 @@ export default {
     toManageUserTag() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/user_tag' + '?forumId=' + this.forumId,
+          url: location.origin + '/webview/forum/user_tag' + '?forumId=' + this.forumId,
           title: '标签管理',
           showHeader: true
-        });      
+        });
 } catch (e) {
         window.open(location.origin + '/webview/forum/user_tag?forumId=' + this.forumId);
       }
@@ -326,10 +326,10 @@ export default {
     toManageRule() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/rule' + '?forumId=' + this.forumId,
+          url: location.origin + '/webview/forum/rule' + '?forumId=' + this.forumId,
           title: '版块规范管理',
           showHeader: true
-        });      
+        });
 } catch (e) {
         window.open(location.origin + '/webview/forum/rule?forumId=' + this.forumId);
       }
@@ -338,10 +338,10 @@ export default {
     toAnalytics() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/analytics' + '?forumId=' + this.forumId,
+          url: location.origin + '/webview/forum/analytics' + '?forumId=' + this.forumId,
           title: '版块统计',
           showHeader: true
-        });      
+        });
 } catch (e) {
         window.open(location.origin + '/webview/forum/analytics?forumId=' + this.forumId);
       }
@@ -350,7 +350,7 @@ export default {
     toForumLog() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/log?forumId=' + this.forumId,
+          url: location.origin + '/webview/forum/log?forumId=' + this.forumId,
           title: '版块日志',
           showHeader: true
         });
@@ -362,7 +362,7 @@ export default {
     toModManager() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/mod_manager' + '?forumId=' + this.forumId,
+          url: location.origin + '/webview/forum/mod_manager' + '?forumId=' + this.forumId,
           title: '版主管理',
           showHeader: true
         });
@@ -445,7 +445,7 @@ export default {
     height: 100px;
     line-height: 178px;
     text-align: center;
-    
+
   }
   .avatar {
     margin-bottom: 30px;

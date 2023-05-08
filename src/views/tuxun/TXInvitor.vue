@@ -1324,9 +1324,15 @@ export default {
       }
 
       api.getByPath(path, {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
-        if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak') {
-          this.solveGameData(res.data, undefined);
+        if (res.success) {
+          if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak') {
+            this.solveGameData(res.data, undefined);
+          }
+        } else  {
+          this.confirmed = false;
         }
+      }).catch(err => {
+        this.confirmed = false;
       });
     },
 
