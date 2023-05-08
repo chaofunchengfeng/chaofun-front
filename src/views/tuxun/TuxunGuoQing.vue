@@ -22,7 +22,7 @@
     </div>
     <div class="next-round">
       <el-button type="primary" v-if="this.gameId" @click="toGame" round>
-        进入游戏
+        进入
       </el-button>
       <div>
       </div>
