@@ -51,7 +51,8 @@ export default {
       index: -1,
       totalCount: null,
       nation: null,
-      mapsid: undefined
+      mapsid: undefined,
+      headingMap: {},
     };
 
   },
@@ -196,11 +197,72 @@ export default {
                 },
               }
           );
+          this.viewer.registerPanoProvider(this.getCustomPanorama);
+
+          this.viewer.addListener('pano_changed', () => {
+            console.log('pano_changed');
+            if (this.viewer.getPano().length === 27) {
+              this.getPanoInfo(this.viewer.getPano());
+            }
+          });
+          this.viewer.addListener('status_changed', () => {
+            console.log(this.viewer.getStatus());
+            if (this.viewer.getStatus() && this.viewer.getStatus() !== 'OK') {
+              api.getByPath("/api/v0/tuxun/client/report", {panoId: this.viewer.getPano(), status: this.viewer.getStatus(), page: 'tuxun_pano_filter'}).then(res => {
+              });
+            }
+          });
           this.setGoogle(this.panoId);
         });
       } else {
         this.setGoogle(this.panoId);
       }
+    },
+    getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+      zoom = zoom += 1;
+      if (zoom === 1) {
+        return (
+            'https://map.chao-fan.com/bd/thumb/' + pano
+        );
+      }
+      return (
+          'https://mapsv1.bdimg.com/?qt=pdata&sid=' + pano + '&pos=' + tileY + '_' + tileX + '&z=' + zoom
+      );
+    },
+    getCustomPanorama(pano) {
+      console.log(pano);
+      if (pano.length === 27) {
+        return {
+          location: {
+            pano: pano,
+          },
+          links: [],
+          // The text for the copyright control.
+          copyright: 'baidu',
+          // The definition of the tiles for this panorama.
+          tiles: {
+            tileSize: new google.maps.Size(512, 512),
+            worldSize: new google.maps.Size(8192, 4096),
+            // The heading in degrees at the origin of the panorama
+            centerHeading: this.headingMap[pano],
+            getTileUrl: this.getCustomPanoramaTileUrl,
+          },
+        };
+      }
+    },
+    getPanoInfo(pano) {
+      api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
+        this.viewer.setLinks(res.data.links);
+        // this.centerHeading = res.data.heading;
+        this.headingMap[res.data.pano] = res.data.heading;
+        if (res.data.links) {
+          res.data.links.forEach((item) => {
+            this.preloadImage(item.pano);
+            this.headingMap[item.pano] = item.centerHeading;
+          });
+        }
+        // console.log(this.centerHeading);
+      });
     },
     setGoogle(panoId) {
       this.viewer.setPano(panoId);
@@ -208,6 +270,10 @@ export default {
       setTimeout(() => {
         this.viewer.setZoom(0);
       }, 50);
+    },
+    preloadImage(pano) {
+      var img = new Image();
+      img.src = 'https://map.chao-fan.com/bd/thumb/' + pano;
     },
 
     mapReady(e) {
