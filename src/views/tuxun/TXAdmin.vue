@@ -167,6 +167,7 @@ export default {
                   this.totalCount = res.data.totalCount;
                   this.mapsName = res.data.mapsName;
                   this.nation = res.data.nation;
+                  this.headingMap[this.panoId] = res.data.heading;
                   this.setPano();
                 }
             );
@@ -244,7 +245,7 @@ export default {
             tileSize: new google.maps.Size(512, 512),
             worldSize: new google.maps.Size(8192, 4096),
             // The heading in degrees at the origin of the panorama
-            centerHeading: this.headingMap[pano],
+            centerHeading: this.headingMap[pano] ?? 0,
             getTileUrl: this.getCustomPanoramaTileUrl,
           },
         };
