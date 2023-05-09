@@ -23,7 +23,7 @@
             {{item.name}}
           </div>
           <div class="players" v-if="item.pcount">
-            地点: {{item.pcount}}<span v-if="item.pcount >= 5000">+</span>
+            地点: {{item.pcount}}
           </div>
           <div class="players">
             人次: {{item.players}}
