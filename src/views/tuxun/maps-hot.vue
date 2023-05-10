@@ -32,9 +32,9 @@
             难度: {{item.difficulty}}
           </div>
           <div>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary"  round>固定<span style="color: gold">(VIP)</span></el-button>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动<span style="color: gold">(VIP)</span></el-button>
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
           </div>
+          <div class="card-top-right">可移动</div>
         </div>
       </div>
     </div>
@@ -93,23 +93,19 @@ export default {
         tuxunJump('/tuxun/');
       }
     },
-    toMaps(item, type) {
-      api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-      });
-      this.doLoginStatus().then((res) => {
+    toMaps(item){
+      this.doLoginStatus().then(res => {
+        console.log(res);
         if (res) {
-
-          api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
-            if (res.success) {
-              tuxunJump('/tuxun/challenge?challengeId=' + res.data);
+          api.getByPath('/api/v0/tuxun/vip/check').then(res=>{
+            if (res.data) {
+              tuxunJump('/tuxun/maps-start?mapsId=' + item.id);
             } else {
-              if (res.errorCode === 'need_vip') {
-                this.$vip({});
-              }
+              this.$vip();
             }
           });
         }
-});
+      });
     },
     toMapsDetail(item, type) {
       tuxunJump('/tuxun/maps_detail?mapsId=' + item.id );

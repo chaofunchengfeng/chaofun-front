@@ -858,6 +858,7 @@ export default {
                           zoomControl: false,
                           keyboardShortcuts: false,
                           dragging: false,
+                          draggable: false,
                           panControlOptions: {
                             position: google.maps.ControlPosition.BOTTOM_LEFT,
                           },
@@ -1400,13 +1401,11 @@ export default {
       this.doLoginStatus().then((res) => {
         if (res) {
           if (this.gameData.type === 'challenge') {
-            var type = 'noMove';
-            if (this.gameData.move) {
-              type = 'move';
-            }
             api.getByPath('/api/v0/tuxun/challenge/create', {
               'mapsId': this.gameData.mapsId,
-              'type': type
+              'move': this.gameData.move,
+              'pan': this.gameData.pan,
+              'zoom': this.gameData.zoom,
             }).then(res => {
               if (res.success) {
                 tuxunJump('/tuxun/challenge?challengeId=' + res.data);
@@ -1599,6 +1598,7 @@ export default {
       }
 
       if (!round.pan) {
+        console.log('round.pan prevent')
         document.getElementById('viewer').addEventListener('mousemove', function (event) {
           event.preventDefault();
           event.stopPropagation();
@@ -1607,11 +1607,35 @@ export default {
           event.preventDefault();
           event.stopPropagation();
         }, {capture: true});
+        document.getElementById('viewer').addEventListener('touchmove', ev => {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+        }, { capture: true,passive: false });
+        document.getElementById('viewer').addEventListener('touchdown', ev => {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+        }, { capture: true,passive: false });
+        document.getElementById('viewer').addEventListener('pointermove', ev => {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+        }, { capture: true, passive: false });
+        document.getElementById('viewer').addEventListener('pointerdown', ev => {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+        }, { capture: true, passive: false });
       } else {
         document.getElementById('viewer').addEventListener('mousemove', function (event) {
         }, {capture: true});
         document.getElementById('viewer').addEventListener('mousedown', function (event) {
         }, {capture: true});
+        document.getElementById('viewer').addEventListener('touchmove', ev => {
+        }, { capture: true,passive: false });
+        document.getElementById('viewer').addEventListener('touchdown', ev => {
+        }, { capture: true,passive: false });
+        document.getElementById('viewer').addEventListener('pointermove', ev => {
+        }, { capture: true, passive: false });
+        document.getElementById('viewer').addEventListener('pointerdown', ev => {
+        }, { capture: true, passive: false });
       }
 
       // document.getElementById("viewer").style = "height: 100%; width: 100%; pointer-events: none;"

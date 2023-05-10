@@ -161,6 +161,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/maps-start',
+    component: () => import('@/views/tuxun/maps-start'),
+    name: 'maps-start',
+    meta: { title: '开始-图寻'},
+    hidden: true
+  },
+  {
     path: '/maps-new',
     component: () => import('@/views/tuxun/maps-new'),
     name: 'maps-hot',

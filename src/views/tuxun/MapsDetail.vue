@@ -26,8 +26,7 @@
     </div>
 
     <div v-if="mapsData" style="margin-top: 1rem">
-      <el-button style="background-color: unset; color: white" @click.stop="toMaps(mapsData, 'noMove')" type="primary"  round>固定</el-button>
-      <el-button style="background-color: unset; color: white" @click.stop="toMaps(mapsData, 'move')" type="primary" v-if="mapsData.canMove" round>移动</el-button>
+      <el-button style="background-color: unset; color: white; font-size: 20px" @click.stop="toMaps(mapsData)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
     </div>
 
     <div class="rank">
@@ -121,23 +120,19 @@ export default {
         }
       });
     },
-    toMaps(item, type) {
-      api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-      });
-      this.doLoginStatus().then((res) => {
+    toMaps(item){
+      this.doLoginStatus().then(res => {
+        console.log(res);
         if (res) {
-
-          api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
-            if (res.success) {
-              tuxunJump('/tuxun/challenge?challengeId=' + res.data);
+          api.getByPath('/api/v0/tuxun/vip/check').then(res=>{
+            if (res.data) {
+              tuxunJump('/tuxun/maps-start?mapsId=' + item.id);
             } else {
-              if (res.errorCode === 'need_vip') {
-                this.$vip({});
-              }
+              this.$vip();
             }
           });
         }
-});
+      });
     },
     share() {
       var input = document.createElement('input');

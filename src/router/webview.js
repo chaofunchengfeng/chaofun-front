@@ -542,6 +542,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/maps-start',
+    component: () => import('@/views/tuxun/maps-start'),
+    name: 'maps-start',
+    meta: { title: '开始-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/maps_distribute',
     component: () => import('@/views/tuxun/MapsDistribute'),
     name: 'maps_distribute',

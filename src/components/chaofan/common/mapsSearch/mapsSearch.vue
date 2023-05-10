@@ -13,14 +13,17 @@
             <div>
               {{item.name}}
               <div>
-                <span style="font-size: 6px;bottom: 0px; color: grey">(<span v-if="item.pcount">地点: {{item.pcount}} | </span>人次: {{item.players}})</span>
+                <span style="font-size: 6px;bottom: 0px; color: grey">(<span v-if="item.pcount">地点: {{item.pcount}} | </span>人次: {{item.players}} <span v-if="item.canMove"> | 可移动 </span>)</span>
               </div>
             </div>
           </div>
-          <div>
-            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary" round>固定<span v-if="!callBack" style="color: gold">(VIP)</span></el-button>
+          <div v-if="callBack">
+            <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'noMove')" type="primary" round>固定</el-button>
             <el-button style="background-color: unset; color: white" @click.stop="toMaps(item, 'move')" type="primary" v-if="item.canMove" round>移动<span style="color: gold">(VIP)</span></el-button>
             <div v-if="!item.canMove" style="width: 60px"></div>
+          </div>
+          <div v-else>
+            <el-button style="background-color: unset; color: white" @click.stop="toMapsNew(item)" type="primary" round>探索<span  style="color: gold">(VIP)</span></el-button>
           </div>
         </div>
         <div style="margin-top: 1px; width: 100%;height: 1px; background-color: white;margin-bottom: 8px"></div>
@@ -77,6 +80,25 @@ export default {
         this.close();
         this.callBack(item.id, type);
       }
+    },
+    toMapsNew(item){
+      api.getByPath('/api/v0/tuxun/vip/check').then(res=>{
+        if (res.success) {
+          if (res.data) {
+            tuxunJump('/tuxun/maps-start?mapsId=' + item.id);
+          } else {
+            this.$vip();
+          }
+        } else {
+          if (res.errorCode === 'need_login') {
+            this.$login({
+              callBack: () => {
+                this.$store.dispatch('user/getInfo');
+              },
+            });
+          }
+        }
+      });
     },
     close() {
       this.show = false;
