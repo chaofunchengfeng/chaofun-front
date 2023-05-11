@@ -32,7 +32,9 @@
             @change="changeFree"
             v-model="free"
             active-color="#13ce66"
-            inactive-color="#ff4949">
+            inactive-color="#ff4949"
+            :disabled="this.move"
+        >
         </el-switch>
 <!--      </div>-->
 
@@ -86,7 +88,7 @@ export default {
     changeMove() {
       console.log("move")
       if (!this.free) {
-        this.move = false;
+        this.free = true;
         this.$toast('非自由视角下只能为固定模式')
       }
     },
