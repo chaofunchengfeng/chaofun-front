@@ -1623,6 +1623,22 @@ export default {
           ev.preventDefault();
           ev.stopImmediatePropagation();
         }, { capture: true, passive: false });
+
+        document.getElementById('viewer').addEventListener('click', ev => {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+        }, { capture: true, passive: false });
+
+        setTimeout(()=> {
+          let elements = document.getElementsByClassName("gm-compass-turn");
+          elements.forEach(element => {
+            element.addEventListener('click', ev => {
+              ev.preventDefault();
+              ev.stopImmediatePropagation();
+            }, { capture: true, passive: false });
+          })
+        }, 500)
+
       } else {
         document.getElementById('viewer').addEventListener('mousemove', function (event) {
         }, {capture: true});
@@ -1636,6 +1652,13 @@ export default {
         }, { capture: true, passive: false });
         document.getElementById('viewer').addEventListener('pointerdown', ev => {
         }, { capture: true, passive: false });
+        setTimeout(()=> {
+          let elements = document.getElementsByClassName("gm-compass-turn");
+          elements.forEach(element => {
+            element.addEventListener('click', ev => {
+            }, { capture: true, passive: false });
+          })
+        }, 500)
       }
 
       // document.getElementById("viewer").style = "height: 100%; width: 100%; pointer-events: none;"

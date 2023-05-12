@@ -122,6 +122,29 @@
             >切换题库</el-button>
           </div>
         </div>
+        <div style="padding-top: 2rem;" v-if="!this.partyData.gameMove">
+          <div v-if="this.$store.state.user.userInfo.userId === this.partyData.host.userId">
+            <div>
+              自由视角
+            </div>
+            <el-switch
+                @change="changeFree"
+                v-model="free"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                :disabled="this.move"
+            >
+            </el-switch>
+          </div>
+          <div v-else>
+            <div v-if="this.free">
+              自由视角
+            </div>
+            <div v-else>
+              固定视角
+            </div>
+          </div>
+        </div>
         <div v-if="partyData && partyData.gameType !== 'br'" style="padding-top: 2rem; font-size: 16px">
           血量
           <el-input-number v-if="this.$store.state.user.userInfo.userId === this.partyData.host.userId" v-model="health" @change="changeHealth" :min=1000 :max=1000000 :step=1000 />
@@ -156,6 +179,7 @@ export default {
       status: 'wait',
       ws: null,
       partyData: null,
+      free: true,
       health: 6000,
     };
   },
@@ -203,6 +227,13 @@ export default {
         }
       });
     },
+    changeFree() {
+      api.getByPath('/api/v0/tuxun/party/changeFree', {free: this.free}).then(res=>{
+        if (res.success) {
+          this.solvePartyData(res.data);
+        }
+      });
+    },
 
     showMapsSearch()  {
       this.$mapsSearch(
@@ -210,6 +241,7 @@ export default {
               if (mapsType === 'move') {
                 api.getByPath('/api/v0/tuxun/vip/check').then(res => {
                   if (res.data) {
+                    this.free = true;
                     this.changeMaps(mapsId, mapsType);
                   } else {
                     this.$vip();
@@ -309,6 +341,11 @@ export default {
       this.partyData = partyData;
       this.status = this.partyData.status;
       this.health = this.partyData.gameHealth;
+      if (!this.partyData.gamePan && !this.partyData.gameZoom) {
+        this.free = false;
+      } else {
+        this.free = true;
+      }
       if (code === 'start_game') {
         tuxunJump('/tuxun/solo_game?gameId=' + this.partyData.gameId);
       }
