@@ -36,6 +36,26 @@
             :disabled="this.move"
         >
         </el-switch>
+
+
+
+      <div style="color: white; font-size: 18px; padding-top: 1rem">
+        无限时间
+      </div>
+
+      <el-switch
+          v-model="timeInfinity"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+      >
+      </el-switch>
+
+      <div v-if="!timeInfinity" style="padding-top: 1rem; font-size: 16px; color: white">
+        <el-input-number v-model="timeLimitSeconds" :min=10 :max=600 :step=10 />
+        <div>
+          (秒)
+        </div>
+      </div>
 <!--      </div>-->
 
 
@@ -61,6 +81,8 @@ export default {
       mapsData: null,
       move: true,
       free: true,
+      timeInfinity: true,
+      timeLimitSeconds: 60
     }
   },
   created() {
@@ -96,13 +118,17 @@ export default {
     createChallenge() {
       var pan = true;
       var zoom = true;
-
+      var timeLimitMS = null
       if (!this.free) {
         pan = false;
         zoom = false;
       }
 
-      api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': this.mapsId, 'move': this.move, 'pan': pan, 'zoom': zoom}).then(res => {
+      if (!this.timeInfinity) {
+        timeLimitMS = this.timeLimitSeconds * 1000;
+      }
+
+      api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': this.mapsId, 'move': this.move, 'pan': pan, 'zoom': zoom, 'timeLimit': timeLimitMS}).then(res => {
         if (res.success) {
           tuxunJump('/tuxun/challenge?challengeId=' + res.data);
         } else {
