@@ -23,7 +23,7 @@
             inactive-color="#ff4949">
         </el-switch>
       </div>
-<!--      <div v-if="!this.move">-->
+      <div v-if="!this.move">
         <div style="color: white; font-size: 18px; padding-top: 1rem">
           自由视角
         </div>
@@ -36,11 +36,12 @@
             :disabled="this.move"
         >
         </el-switch>
+      </div>
 
 
 
       <div style="color: white; font-size: 18px; padding-top: 1rem">
-        无限时间
+        轮次无限时间
       </div>
 
       <el-switch
