@@ -1406,6 +1406,7 @@ export default {
               'move': this.gameData.move,
               'pan': this.gameData.pan,
               'zoom': this.gameData.zoom,
+              'timeLimit': this.gameData.roundTimePeriod
             }).then(res => {
               if (res.success) {
                 tuxunJump('/tuxun/challenge?challengeId=' + res.data);

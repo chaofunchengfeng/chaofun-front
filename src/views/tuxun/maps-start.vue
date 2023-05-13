@@ -51,7 +51,7 @@
       </el-switch>
 
       <div v-if="!timeInfinity" style="padding-top: 1rem; font-size: 16px; color: white">
-        <el-input-number v-model="timeLimitSeconds" :min=10 :max=600 :step=10 />
+        <el-input-number v-model="timeLimitSeconds" :min=5 :max=600 :step=5 />
         <div>
           (秒)
         </div>
