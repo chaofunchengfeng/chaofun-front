@@ -1057,7 +1057,7 @@ export default {
         if (this.gameData.type === 'team' || this.gameData.type === 'solo' || this.gameData.type === 'solo_match' ) {
           api.getByPath('/api/v0/tuxun/game/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
-        } else if (this.gameData.type === 'daily_challenge') {
+        } else if (this.gameData.type === 'daily_challenge' || this.gameData.type === 'challenge') {
           api.getByPath('/api/v0/tuxun/challenge/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         } else if (this.gameData.type === 'battle_royale') {
