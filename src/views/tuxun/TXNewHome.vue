@@ -15,7 +15,7 @@
         </div>
       </div>
       <div @click="toFirstTournament" class="info">玩家图寻第四届组队赛, 5月14日开赛，欢迎报名～</div>
-      <div class="normal-info ">图寻( https://tuxun.fun )暂无App，网络上的App都是套壳App，请使用浏览器访问图寻</div>
+<!--      <div class="normal-info ">图寻( https://tuxun.fun )暂无App，网络上的App都是套壳App，请使用浏览器访问图寻</div>-->
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
