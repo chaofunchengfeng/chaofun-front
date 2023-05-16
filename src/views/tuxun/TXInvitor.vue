@@ -214,10 +214,16 @@
               <el-button class="result_button" type="primary" @click="challengeAgain" round>再来一局</el-button>
             </div>
             <div v-if="gameData">
-              <el-button class="result_button"  type="primary" @click="replay" round>题目复盘</el-button>
+              <el-button class="result_button"  @click="replay" round>题目复盘</el-button>
             </div>
             <div v-if="gameData.type === 'challenge'">
-              <el-button class="result_button" @click="goMaps" round>回到练习题库首页</el-button>
+              <el-button class="result_button" @click="goMapsDetail" round>查看题库和排行版</el-button>
+            </div>
+            <div v-if="gameData.type === 'challenge'">
+              <el-button class="result_button" @click="goMapsStart" round>回到「探索」</el-button>
+            </div>
+            <div v-if="gameData.type === 'challenge'">
+              <el-button class="result_button" @click="goMaps" round>回到练习题库</el-button>
             </div>
             <div>
               <el-button class="result_button" @click="goHome" round>回到首页</el-button>
@@ -1430,6 +1436,14 @@ export default {
 
     goHome() {
       tuxunJump( '/tuxun/');
+    },
+
+    goMapsDetail() {
+      tuxunJump( '/tuxun/maps_detail?mapsId=' + this.gameData.mapsId);
+    },
+
+    goMapsStart() {
+      tuxunJump( '/tuxun/maps-start?mapsId=' + this.gameData.mapsId);
     },
 
     goMaps() {
