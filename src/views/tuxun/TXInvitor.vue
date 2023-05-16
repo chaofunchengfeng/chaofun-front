@@ -1495,11 +1495,12 @@ export default {
       // 每3秒发送一次心跳
       this.doLoginStatus().then((res) => {
         this.continueSend = true;
+        var interval = 1500;
         this.t = setInterval(() => {
           try {
             if (this.continueSend) {
               this.continueSend = false;
-              api.getByPathLongTimeout('/api/v0/tuxun/solo/joinRandom').then(res => {
+              api.getByPathLongTimeout('/api/v0/tuxun/solo/joinRandom', {interval: interval}).then(res => {
                 if (res.data) {
                   this.notify('您的图寻已匹配到对手，点击开始游戏');
                   tuxunJump( '/tuxun/solo_game?gameId=' + res.data);
@@ -1515,7 +1516,7 @@ export default {
           } catch (e) {
             this.continueSend = true;
           }
-        }, 1500);
+        }, interval);
       });
     },
     showMapsSearch()  {
