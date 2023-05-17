@@ -217,7 +217,7 @@
               <el-button class="result_button"  @click="replay" round>题目复盘</el-button>
             </div>
             <div v-if="gameData.type === 'challenge'">
-              <el-button class="result_button" @click="goMapsDetail" round>查看题库和排行版</el-button>
+              <el-button class="result_button" @click="goMapsDetail" round>查看题库和排行榜</el-button>
             </div>
             <div v-if="gameData.type === 'challenge'">
               <el-button class="result_button" @click="goMapsStart" round>回到「探索」</el-button>
@@ -1502,7 +1502,7 @@ export default {
               this.continueSend = false;
               api.getByPathLongTimeout('/api/v0/tuxun/solo/joinRandom', {interval: interval}).then(res => {
                 if (res.data) {
-                  this.notify('您的图寻已匹配到对手，点击开始游戏');
+                  this.notify('您的图寻已匹配到对手，点击开始对战');
                   tuxunJump( '/tuxun/solo_game?gameId=' + res.data);
                   this.gameId = res.data;
                   this.init();
