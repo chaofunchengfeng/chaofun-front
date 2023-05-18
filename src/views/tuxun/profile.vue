@@ -48,6 +48,12 @@
       </div>
 
       <div>
+        <span>匹配Solo胜率: </span>
+        <span v-if="this.userProfile.soloTimes">{{(this.userProfile.soloWin / this.userProfile.soloTimes * 100).toFixed(2)}} %</span>
+        <span v-else>-</span>
+      </div>
+
+      <div>
         <span>匹配Solo目前连胜:  </span>
         <span>{{this.userProfile.winningStreak}}</span>
       </div>
