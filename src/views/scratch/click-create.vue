@@ -5,12 +5,6 @@
       <div>
         注：点击中问题会按顺序展示，答案会去重以后按字母序展示
       </div>
-<!--      <el-switch-->
-<!--          v-model="hasImage"-->
-<!--          @change="changeHasHint"-->
-<!--          active-color="#13ce66"-->
-<!--          inactive-color="#ff4949">-->
-<!--      </el-switch>-->
     </div>
 
     <table style="width: 100%">
@@ -52,8 +46,6 @@ export default {
   },
   created() {
     this.hasHint = true;
-    this.updatehin;
-    this.hint = this.hasHint;
   },
   methods: {
     shuffle() {
