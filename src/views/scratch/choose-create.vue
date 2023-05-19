@@ -21,9 +21,14 @@
         </div>
         <div @click="createClick" class="click-create" style="padding: 2px 10px 2px 5px; cursor: pointer; border-radius: 4px; margin-left: 1rem; background-color: #9B41F1">
           <div style="text-align: center; font-size: 20px; ">
-            点击
+            点击-文本
           </div>
         </div>
+<!--        <div @click="createClickImg" class="click-create" style="padding: 2px 10px 2px 5px; cursor: pointer; border-radius: 4px; margin-left: 1rem; background-color: #DC3545">-->
+<!--          <div style="text-align: center; font-size: 20px; ">-->
+<!--            点击-图片-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
     <div class="draft-container">
@@ -63,6 +68,9 @@ export default {
     },
     createClick() {
       window.location.href = '/scratch/create?type=click';
+    },
+    createClickImg() {
+      window.location.href = '/scratch/create?type=click-img';
     },
     goHome() {
       window.location.href =  '/scratch/';

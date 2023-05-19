@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'click-create',
+  name: 'click-txt-create',
   data() {
     return {
       chooseIndex: null,
