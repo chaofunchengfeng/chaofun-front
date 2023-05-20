@@ -277,7 +277,7 @@ export default {
     toTuxun() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: location.origin + 'tuxunAdmin',
+          url: location.origin + '/tuxunAdmin',
           title: '图寻审核',
           showHeader: true
         });
