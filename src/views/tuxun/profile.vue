@@ -2,7 +2,7 @@
   <div class="container">
     <div class="top-left">
       <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>
-      <el-button v-else @click="goHome"  round>首页</el-button>
+      <el-button @click="goHome"  round>首页</el-button>
     </div>
     <div style="width: 100%; text-align: center; align-items: center; padding-top: 20px">
         <div @click="toUser(userProfile)" v-if="this.userProfile" class="left">
@@ -19,6 +19,8 @@
       <el-button v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId" @click="$vip()">续费/开通会员</el-button>
       <div style="height: 10px"></div>
       <el-button v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId" @click="changeSetting()">修改用户名/头像</el-button>
+      <div style="height: 10px"></div>
+      <el-button v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId" @click="toHistory()">历史记录</el-button>
     </div>
     <div v-if="this.userProfile" style="padding-left: 20px">
       <div>
@@ -77,7 +79,7 @@
       <div style="font-size: 20px">
         分数走势：
       </div>
-      <v-chart class="chart" :option="option" />
+      <v-chart class="chart" :option="option"/>
     </div>
     <div style="padding-left: 20px; padding-top: 20px; padding-right: 20px">
       <div style="font-size: 20px">
@@ -233,6 +235,9 @@ export default {
       } catch (e) {
         tuxunJump('/tuxun/');
       }
+    },
+    toHistory() {
+      tuxunJump('/tuxun/activities')
     },
   }
 };

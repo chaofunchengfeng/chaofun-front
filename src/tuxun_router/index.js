@@ -113,6 +113,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/activities',
+    component: () => import('@/views/tuxun/activities'),
+    name: 'tuxun-activities',
+    meta: { title: '历史记录'},
+    hidden: true
+  },
+  {
     path: '/pano-create',
     component: () => import('@/views/tuxun/pano-create'),
     name: 'pano-create',

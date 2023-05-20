@@ -263,6 +263,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/activities',
+    component: () => import('@/views/tuxun/activities'),
+    name: 'tuxun-activities',
+    meta: { title: '历史记录'},
+    hidden: true
+  },
+  {
     path: '/tuxun/pano-create',
     component: () => import('@/views/tuxun/pano-create'),
     name: 'pano-create',
