@@ -16,7 +16,17 @@
           <div v-if="item.type === 'solo_match'" class="solo-match" @click="toGame(item)">匹配solo</div>
           <div v-else="item.type === 'solo_match'" class="main-game">积分赛</div>
         </div>
-
+        <div>
+          <div v-if="item.ratingChange >= 0" class="rating-change positive">
+            +{{item.ratingChange}}
+          </div>
+          <div v-else class="rating-change nagative">
+            {{item.ratingChange}}
+          </div>
+        </div>
+        <div class="score">
+          {{item.rating}}
+        </div>
       </div>
     </div>
 
@@ -105,6 +115,26 @@ export default {
       .main-game {
         margin-left: 1rem;
       }
+      .rating-change {
+        margin-left: 1rem;
+      }
+      .positive {
+        color: green;
+      }
+      .nagative {
+        color: red;
+      }
+      .score {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    .list {
+      width: 80%;
     }
   }
 }
