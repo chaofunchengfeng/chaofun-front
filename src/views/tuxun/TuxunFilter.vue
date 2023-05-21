@@ -161,7 +161,7 @@ export default {
       this.getDate();
       api.getByPath('/api/v0/tuxun/challenge/bindDaily', {day: this.getDate(), type: this.type, challengeId: this.challengeId}).then(res => {
         if (res.success) {
-          tuxunJump( '/tuxun/challenge?challengeId=' + res.data);
+          this.$toast("绑定成功！！！");
         }
       });
     },
