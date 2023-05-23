@@ -26,6 +26,7 @@
             <div class="user" v-for="(item, index) in gameData.teams[0].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}} <span v-if="gameData.type === 'team' && item.userId === gameData.host.userId">(房主)</span></div>
+              <div>积分: {{item.rating}}</div>
             </div>
           </div>
         </div>
@@ -39,6 +40,7 @@
             <div class="user" v-for="(item, index) in gameData.teams[1].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}} <span v-if="gameData.type === 'team' && item.userId === gameData.host.userId">(房主)</span></div>
+              <div>积分: {{item.rating}}</div>
             </div>
           </div>
         </div>
@@ -452,7 +454,7 @@ export default {
       image: null,
       round: null,
       confirmed: false,
-      chooseMarker: null,
+      chooseMarker: [],
       showMap: false,
       currentRound: null,
       lastTouchTime: 0,
@@ -1057,9 +1059,21 @@ export default {
 
     click(e) {
       if (!this.confirmed) {
+
         this.lng = e.latlng.wrap().lng;
         this.lat = e.latlng.wrap().lat;
+
         this.addChooseMarker();
+        // 为了避免选择看不到箭头的问题
+        if (Math.abs(e.latlng.lng - this.lng) > 0.01) {
+          var marker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.getOptionUser(this.userId)}).bindTooltip('你选择了',
+              {
+                permanent: true,
+                direction: 'auto'
+              }).addTo(this.map);
+          this.chooseMarker.push(marker);
+        }
+
         if (this.gameData.type === 'team' || this.gameData.type === 'solo' || this.gameData.type === 'solo_match' ) {
           api.getByPath('/api/v0/tuxun/game/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
@@ -1074,25 +1088,33 @@ export default {
     },
 
     removeChooseMarker() {
-      if (this.chooseMarker !== null) {
-        this.chooseMarker.remove();
-        this.chooseMarker = null;
+      if (this.chooseMarker) {
+        this.chooseMarker.forEach(item => {
+          item.remove();
+        });
       }
+      this.chooseMarker = [];
     },
 
-    addChooseMarker() {
-      if (this.chooseMarker) {
-        this.chooseMarker.remove();
-      }
-
+    addClickMarker() {
+      this.removeChooseMarker();
       var marker = L.marker([this.lat, this.lng], {icon: this.getOptionUser(this.userId)}).bindTooltip('你选择了',
           {
             permanent: true,
             direction: 'auto'
           }).addTo(this.map);
-      this.chooseMarker = marker;
+      this.chooseMarker.push(marker);
     },
 
+    addChooseMarker() {
+      this.removeChooseMarker();
+      var marker = L.marker([this.lat, this.lng], {icon: this.getOptionUser(this.userId)}).bindTooltip('你选择了',
+          {
+            permanent: true,
+            direction: 'auto'
+          }).addTo(this.map);
+      this.chooseMarker.push(marker);
+    },
 
     getOptionUser(userId) {
       console.log(userId);

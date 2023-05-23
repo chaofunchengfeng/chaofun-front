@@ -8,7 +8,7 @@
     <div class="nav">
       历史记录
     </div>
-    <div style="color: white">目前只记录积分比赛</div>
+    <div style="color: white">目前只记录积分比赛,点击加粗文字可以查看复盘</div>
     <div class="list">
       <div v-for="(item, index) in list" class="list-item">
         <div> {{moment(item.gmt_create).format('YY年MM月DD日 HH:mm')}}</div>

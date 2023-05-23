@@ -162,7 +162,7 @@ export default {
       mute: false,
       autoRotate: null,
       lastTouchTime: null,
-      chooseMarker: null,
+      chooseMarker: [],
       targetMarker: null,
       targetLine: null,
       panorama: null,
@@ -623,25 +623,24 @@ export default {
 
     removeChooseMarker() {
       if (this.chooseMarker) {
-        this.chooseMarker.remove();
-        this.chooseMarker = null;
+        this.chooseMarker.forEach(item => {
+          item.remove();
+        });
       }
+      this.chooseMarker = [];
     },
 
     addChooseMarker() {
-
-      if (!this.lat) {
+      if (!this.lat && !this.lng) {
         return;
       }
-      if (this.chooseMarker) {
-        this.chooseMarker.remove();
-      }
+      this.removeChooseMarker();
       var marker = L.marker([this.lat, this.lng], {icon: new L.Icon.Default()}).bindTooltip('你选择了',
           {
             permanent: true,
             direction: 'auto'
           }).addTo(this.map);
-      this.chooseMarker = marker;
+      this.chooseMarker.push(marker);
     },
 
     addLine() {
@@ -731,6 +730,16 @@ export default {
           this.lng = e.latlng.wrap().lng;
           this.lat = e.latlng.wrap().lat;
           this.addChooseMarker();
+          //为了避免选择以后没有出现的问题
+          if (Math.abs(e.latlng.lng - this.lng) > 0.01) {
+            var marker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.getOptionUser(this.userId)}).bindTooltip('你选择了',
+                {
+                  permanent: true,
+                  direction: 'auto'
+                }).addTo(this.map);
+            this.chooseMarker.push(marker);
+          }
+
           this.wsSend('{"scope": "tuxun", "data": {"type": "pin", "lat": ' + this.lat + ', "lng": ' + this.lng + '}}');
         }
       } else {
