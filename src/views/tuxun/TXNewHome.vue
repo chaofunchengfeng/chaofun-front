@@ -18,7 +18,6 @@
       </div>
       <div @click="toFirstTournament" class="info"> 图寻玩家第四届个人赛！新地图！等你来战！</div>
       <div class="normal-info ">「在地图出现之前，世界是无限的。」</div>
-      <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
         <div class="line"></div>
@@ -171,6 +170,7 @@
           <!--          </div>-->
         </div>
         <div class="thx">
+          <p v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></p>
           <p>提示：如倒计时不准/卡死/黑屏，可关闭代理，系统时间对齐互联网时间再试</p>
           <p>快捷键：空格-确定选择, 空格-换一个(街景奇观/随机街景)</p>
           <p>
