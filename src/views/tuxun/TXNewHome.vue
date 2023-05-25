@@ -3,9 +3,11 @@
     <div class="game">
       <div class="top">
         <div class="top-left">
-          <img style=" width: 5rem; height: 3rem" :src="imgOrigin + 'biz/1658657631523_45db8dd090dc49af99f2a8a4ace01122.svg'"/>
-          <div style=" color: white">探索真实世界，收集线索，找出自己的位置</div>
-          <div style=" color: white" v-if="$store.state.user.userInfo.userId !== 54242">「炒饭社区」出品</div>
+          <div style="display: flex">
+            <img style=" width: 5rem; height: 3rem" :src="imgOrigin + 'biz/1658657631523_45db8dd090dc49af99f2a8a4ace01122.svg'"/>
+            <div style=" color: white;  display: inline-block; align-self: flex-end; " v-if="$store.state.user.userInfo.userId !== 54242">「炒饭社区」出品</div>
+          </div>
+          <div style=" color: white; padding-top: 5px">探索真实世界，找出自己的位置</div>
         </div>
         <div class="top-right">
           <el-button  style="" @click="toUserHome">个人首页</el-button>
@@ -15,7 +17,7 @@
         </div>
       </div>
       <div @click="toFirstTournament" class="info"> 图寻玩家第四届个人赛！新地图！等你来战！</div>
-<!--      <div class="normal-info ">图寻( https://tuxun.fun )暂无App，网络上的App都是套壳App，请使用浏览器访问图寻</div>-->
+      <div class="normal-info ">「在地图出现之前，世界是无限的。」</div>
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
