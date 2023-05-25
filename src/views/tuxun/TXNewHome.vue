@@ -14,7 +14,7 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div @click="toFirstTournament" class="info"> 玩家第四届组队赛圆满结束</div>
+      <div @click="toFirstTournament" class="info"> 图寻玩家第四届个人赛！新地图！等你来战！</div>
 <!--      <div class="normal-info ">图寻( https://tuxun.fun )暂无App，网络上的App都是套壳App，请使用浏览器访问图寻</div>-->
       <div v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></div>
       <section class="game_entrance">
@@ -293,9 +293,9 @@ export default {
     },
     toFirstTournament() {
       try {
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1259838'});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1261454'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1259838');
+        tuxunOpen('https://choa.fun/p/1261454');
       }
     },
     raiseVIP() {
