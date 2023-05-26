@@ -113,6 +113,20 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/library',
+    component: () => import('@/views/tuxun/tuxun-library'),
+    name: 'tuxun-library',
+    meta: { title: '实验室-图寻'},
+    hidden: true
+  },
+  {
+    path: '/finder',
+    component: () => import('@/views/tuxun/finder'),
+    name: 'tuxun-finder',
+    meta: { title: '炒饭寻景-图寻'},
+    hidden: true
+  },
+  {
     path: '/activities',
     component: () => import('@/views/tuxun/activities'),
     name: 'tuxun-activities',

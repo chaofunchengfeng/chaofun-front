@@ -263,6 +263,20 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/library',
+    component: () => import('@/views/tuxun/tuxun-library'),
+    name: 'tuxun-library',
+    meta: { title: '实验室-图寻'},
+    hidden: true
+  },
+  {
+    path: '/tuxun/finder',
+    component: () => import('@/views/tuxun/finder'),
+    name: 'tuxun-finder',
+    meta: { title: '炒饭寻景-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/activities',
     component: () => import('@/views/tuxun/activities'),
     name: 'tuxun-activities',

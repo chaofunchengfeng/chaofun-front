@@ -93,12 +93,12 @@
         <div class="first_session_head">其他</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage('/tuxun/pano-gallary')">
+          <div class="card" @click="redirectPage('/tuxun/library')">
             <div class="title">
               实验室
             </div>
             <div class="describe">
-              新的模式和功能(开发中
+              新的模式和功能(炒饭寻景，炒饭宇宙)
             </div>
           </div>
 
