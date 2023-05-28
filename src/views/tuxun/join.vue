@@ -28,7 +28,7 @@ export default {
     if (this.$route.query.code) {
       api.getByPath('/api/v0/tuxun/party/join', {joinCode: this.$route.query.code}).then(res=>{
         if (res.success) {
-          tuxunJump('/tuxun/party');
+          tuxunJump('/tuxun/paidui');
         } else if (res.errorCode === 'need_login') {
           this.doLoginStatus().then((res) => {
           });
@@ -43,7 +43,7 @@ export default {
       tuxunJump('/tuxun/');
     },
     goParty() {
-      tuxunJump('/tuxun/party');
+      tuxunJump('/tuxun/paidui');
     },
   }
 };

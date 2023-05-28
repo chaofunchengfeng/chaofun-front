@@ -49,6 +49,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/paidui',
+    component: () => import('@/views/tuxun/party'),
+    name: '派对-图寻',
+    meta: { title: '图寻派对'},
+    hidden: true
+  },
+  {
     path: '/join',
     component: () => import('@/views/tuxun/join'),
     name: '加入派对-图寻',
@@ -124,6 +131,13 @@ export const constantRoutes = [
     component: () => import('@/views/tuxun/finder'),
     name: 'tuxun-finder',
     meta: { title: '炒饭寻景-图寻'},
+    hidden: true
+  },
+  {
+    path: '/finder-upload',
+    component: () => import('@/views/tuxun/finder-upload'),
+    name: 'tuxun-finder-upload',
+    meta: { title: '寻景上传-图寻'},
     hidden: true
   },
   {

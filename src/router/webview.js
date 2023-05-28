@@ -277,6 +277,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/finder-upload',
+    component: () => import('@/views/tuxun/finder-upload'),
+    name: 'tuxun-finder-upload',
+    meta: { title: '寻景上传-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/activities',
     component: () => import('@/views/tuxun/activities'),
     name: 'tuxun-activities',
@@ -410,6 +417,13 @@ routes = [
   },
   {
     path: '/tuxun/party',
+    component: () => import('@/views/tuxun/party'),
+    name: '图寻派对',
+    meta: { title: '图寻派对'},
+    hidden: true
+  },
+  {
+    path: '/tuxun/paidui',
     component: () => import('@/views/tuxun/party'),
     name: '图寻派对',
     meta: { title: '图寻派对'},

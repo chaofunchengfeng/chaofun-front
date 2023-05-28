@@ -615,7 +615,7 @@ export default {
       }
     },
     backParty() {
-      tuxunJump('/tuxun/party');
+      tuxunJump('/tuxun/paidui');
     },
     mapMouseOut() {
       if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
