@@ -4,13 +4,16 @@
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goHome" size="small" round>首页</el-button>
-      <el-button @click="$toast('开发中')" size="small" type="primary" round>投稿</el-button>
+      <el-button @click="finderUpload" size="small" type="primary" round>投稿</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import * as api from '@/api/api';
+import 'viewerjs/dist/viewer.css'
+import { api as viewerApi } from "v-viewer"
+
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import './SmoothWheelZoom';
@@ -54,6 +57,48 @@ export default {
         minZoom: 1,
       }).addTo(map);
       this.map = map;
+      this.getList();
+    },
+    getList() {
+      api.getByPath('/api/v0/finder/list').then(res=>{
+        if (res.success) {
+          for (var i in res.data) {
+            var finder = res.data[i];
+            if (!finder.img) {
+              continue;
+            }
+            var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
+            options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
+            options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
+            var marker = L.marker([finder.lat, finder.lng], {icon: new L.Icon(options)}).bindTooltip(finder.user.userName,
+                {
+                  permanent: true,
+                  direction: 'auto'
+                }).addTo(this.map);
+
+            marker.finder = finder;
+            marker.on('click', function (e) {
+              console.log(e);
+              const $viewer = viewerApi({
+                options: {
+                  toolbar: true,
+                  url: 'data-source',
+                  initialViewIndex: 0
+                },
+                images: [{'src': this.imgOrigin + e.target.finder.img, 'data-source': this.imgOrigin + e.target.finder.img}]
+              })
+
+            }.bind(this));
+          }
+        }
+      });
+    },
+    finderUpload() {
+      api.postByPath('/api/v0/finder/add').then((res) => {
+        if (res.success) {
+          tuxunJump('/tuxun/finder-upload?id=' + res.data.id);
+        }
+      });
     },
     goHome() {
       tuxunJump('/tuxun/')
