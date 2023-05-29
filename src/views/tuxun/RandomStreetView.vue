@@ -96,7 +96,9 @@ export default {
         this.tuxunPid = tuxunPid;
         this.setPano(this.tuxunPid,res.data.panoId);
         // 地图初始化
-        this.marker = { lat, lng };
+        var lat = res.data.lat;
+        var lng = res.data.lng;
+        this.marker = { lat, lng};
         this.$EventBus.$emit('setMapVisible', false);
       });
     },

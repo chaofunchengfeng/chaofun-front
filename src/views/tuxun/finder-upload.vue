@@ -3,11 +3,12 @@
     <div id="map" class="maps"></div>
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack"  round>←返回</el-button>
-<!--      <el-button @click="goHome"  round>首页</el-button>-->
+      <el-button @click="$toast('开发中')"  round>管理投稿</el-button>
     </div>
-    <div class="nav">上传图片</div>
+    <div class="nav">上传投稿</div>
     <div  class="desc">目前只支持上传携带exif信息的图片
-      <p>推荐上传自己拍摄的照片</p>
+      <p>推荐上传自己旅行拍摄的照片（尽量不要是家周边的环境）</p>
+      <p>iOS 通过浏览器上传会抹掉 exif 地理位置, Android 应该同理，可以发送到电脑再上传</p>
 <!--      <p>国内坐标偏移的问题正在解决</p>-->
     </div>
     <div style="margin-top: 2rem">

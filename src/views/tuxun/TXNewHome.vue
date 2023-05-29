@@ -16,7 +16,7 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div @click="toFirstTournament" class="info"> 图寻玩家第四届个人赛！新地图！等你来战！</div>
+      <div @click="toFirstTournament" class="info">  玩家第四届个人solo赛圆满结束！</div>
       <div class="normal-info ">「在地图出现之前，世界是无限的。」</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -295,9 +295,9 @@ export default {
     },
     toFirstTournament() {
       try {
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1261454'});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1261948'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1261454');
+        tuxunOpen('https://choa.fun/p/1261948');
       }
     },
     raiseVIP() {
