@@ -3,7 +3,8 @@
     <div id="map" class="maps"></div>
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
-      <el-button @click="goHome" size="small" round>首页</el-button>
+      <el-button @click="goFinder" v-if="userId" size="small" round>寻景首页</el-button>
+      <el-button @click="goHome" size="small" round>图寻首页</el-button>
       <el-button v-if="!userId" @click="finderUpload" size="small" type="primary" round>投稿</el-button>
     </div>
 
@@ -89,7 +90,7 @@ export default {
             var popup = null;
             if (!this.userId) {
               popup = L.popup()
-                  .setContent('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '">' + finder.user.userName + '</a>')
+                  .setContent('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '" target="_blank">' + finder.user.userName + '</a>')
 
               marker.bindPopup(popup);
               marker.on('mouseover', function (e) {
@@ -135,6 +136,9 @@ export default {
     },
     goHome() {
       tuxunJump('/tuxun/')
+    },
+    goFinder() {
+      tuxunJump('/tuxun/finder')
     },
     goBack() {
       try {

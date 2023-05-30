@@ -89,7 +89,7 @@ export default {
     publish() {
       api.getByPath('/api/v0/finder/publish', {id: this.id}).then(res=>{
         if (res.success) {
-          this.goBack();
+          tuxunJump('/tuxun/finder');
         }
       });
     }
