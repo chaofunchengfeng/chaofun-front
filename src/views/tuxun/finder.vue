@@ -72,6 +72,7 @@ export default {
             // options.iconRetinaUrl = 'https://www.google.com/maps/vt/icon/name=assets/icons/imagery/pano_outside-2-medium.png,assets/icons/imagery/pano_inside-2-medium.png&highlight=129eaf,cbf0f8?scale=2';
             options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
             options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
+            // circleMarker 不好点击
             var marker = L.marker([finder.lat, finder.lng],  {icon: new L.Icon(options)}).addTo(this.map);
 
             marker.finder = finder;
