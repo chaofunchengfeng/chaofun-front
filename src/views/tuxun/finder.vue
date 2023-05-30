@@ -4,7 +4,11 @@
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goHome" size="small" round>首页</el-button>
-      <el-button @click="finderUpload" size="small" type="primary" round>投稿</el-button>
+      <el-button v-if="!userId" @click="finderUpload" size="small" type="primary" round>投稿</el-button>
+    </div>
+
+    <div v-if="userProfile" class="top-info">
+      {{userProfile.userAO.userName}} 的投稿
     </div>
   </div>
 </template>
@@ -25,6 +29,8 @@ export default {
     return {
       history: null,
       map: null,
+      userId: null,
+      userProfile: null,
     }
   },
   mounted() {
@@ -33,6 +39,12 @@ export default {
   methods: {
     init() {
       this.history = history;
+      this.userId = this.$route.query.userId;
+      if (this.userId) {
+        api.getByPath('/api/v0/tuxun/getProfile', {userId: this.userId}).then(res=>{
+          this.userProfile = res.data;
+        });
+      }
       var map = L.map('map', {
         attributionControl: true,
         worldCopyJump: true,
@@ -60,7 +72,7 @@ export default {
       this.getList();
     },
     getList() {
-      api.getByPath('/api/v0/finder/list').then(res=>{
+      api.getByPath('/api/v0/finder/list', {userId: this.userId}).then(res=>{
         if (res.success) {
           for (var i in res.data) {
             var finder = res.data[i];
@@ -68,28 +80,36 @@ export default {
               continue;
             }
             var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
-            // options.iconUrl = 'https://www.google.com/maps/vt/icon/name=assets/icons/imagery/pano_outside-2-medium.png,assets/icons/imagery/pano_inside-2-medium.png&highlight=129eaf,cbf0f8?scale=1';
-            // options.iconRetinaUrl = 'https://www.google.com/maps/vt/icon/name=assets/icons/imagery/pano_outside-2-medium.png,assets/icons/imagery/pano_inside-2-medium.png&highlight=129eaf,cbf0f8?scale=2';
             options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
             options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
             // circleMarker 不好点击
             var marker = L.marker([finder.lat, finder.lng],  {icon: new L.Icon(options)}).addTo(this.map);
 
             marker.finder = finder;
-            marker.bindPopup(finder.user.userName);
-            marker.on('mouseover', function (e) {
-              e.target.openPopup();
-              e.target.clickOpen=false;
-            });
-            marker.on('mouseout', function (e) {
-              if (!e.target.clickOpen) {
-                e.target.closePopup();
-              }
-            });
+            var popup = null;
+            if (!this.userId) {
+              popup = L.popup()
+                  .setContent('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '">' + finder.user.userName + '</a>')
+
+              marker.bindPopup(popup);
+              marker.on('mouseover', function (e) {
+                e.target.openPopup();
+                e.target.clickOpen = false;
+              });
+              marker.on('mouseout', function (e) {
+                if (!e.target.clickOpen) {
+                  setTimeout(() => {
+                    e.target.closePopup();
+                  }, 2000);
+                }
+              });
+            }
             marker.on('click', function (e) {
               console.log(e);
-              e.target.clickOpen=true;
-              e.target.openPopup();
+              if (!this.userId) {
+                e.target.clickOpen = true;
+                e.target.openPopup();
+              }
 
               const $viewer = viewerApi({
                 options: {
@@ -132,6 +152,24 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+
+  .top-info {
+    z-index: 20000;
+    width: 100%;
+    position: absolute;
+    margin: 0 auto;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    pointer-events: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    text-align: center;
+    justify-content: center;
+
+  }
   .maps {
     position: absolute;
     width: 100%;
