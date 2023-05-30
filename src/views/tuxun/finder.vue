@@ -83,7 +83,8 @@ export default {
               console.log(e);
               const $viewer = viewerApi({
                 options: {
-                  toolbar: true,
+                  navbar: false,
+                  toolbar: false,
                   url: 'data-source',
                   initialViewIndex: 0
                 },
