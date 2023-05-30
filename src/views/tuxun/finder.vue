@@ -76,8 +76,21 @@ export default {
             var marker = L.marker([finder.lat, finder.lng],  {icon: new L.Icon(options)}).addTo(this.map);
 
             marker.finder = finder;
+            marker.bindPopup(finder.user.userName);
+            marker.on('mouseover', function (e) {
+              e.target.openPopup();
+              e.target.clickOpen=false;
+            });
+            marker.on('mouseout', function (e) {
+              if (!e.target.clickOpen) {
+                e.target.closePopup();
+              }
+            });
             marker.on('click', function (e) {
               console.log(e);
+              e.target.clickOpen=true;
+              e.target.openPopup();
+
               const $viewer = viewerApi({
                 options: {
                   navbar: false,
