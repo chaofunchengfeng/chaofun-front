@@ -68,13 +68,15 @@ export default {
               continue;
             }
             var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
-            options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
-            options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
-            var marker = L.marker([finder.lat, finder.lng], {icon: new L.Icon(options)}).bindTooltip(finder.user.userName,
-                {
-                  permanent: true,
-                  direction: 'auto'
-                }).addTo(this.map);
+            options.iconUrl = 'https://www.google.com/maps/vt/icon/name=assets/icons/imagery/pano_outside-2-medium.png,assets/icons/imagery/pano_inside-2-medium.png&highlight=129eaf,cbf0f8?scale=1';
+
+            options.iconRetinaUrl = 'https://www.google.com/maps/vt/icon/name=assets/icons/imagery/pano_outside-2-medium.png,assets/icons/imagery/pano_inside-2-medium.png&highlight=129eaf,cbf0f8?scale=2';
+            var marker = L.circleMarker([finder.lat, finder.lng], {
+              radius : 4,
+              weight: 1.5,
+              color  : '#149EAE',
+              opacity: 0.85,
+            }).addTo(this.map);
 
             marker.finder = finder;
             marker.on('click', function (e) {
