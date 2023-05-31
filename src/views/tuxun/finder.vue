@@ -112,6 +112,9 @@ export default {
                 e.target.openPopup();
               }
 
+              api.getByPath('/api/v0/finder/show', {id: e.target.finder.id}).then(res=>{
+              });
+
               const $viewer = viewerApi({
                 options: {
                   navbar: false,
