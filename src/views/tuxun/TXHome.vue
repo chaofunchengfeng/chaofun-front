@@ -467,7 +467,7 @@ export default {
       // console.log(data);
       if (data.data.type === 'tick') {
         this.status = data.data.status;
-        this.onlineNums = data.data.onlineNums;
+        this.onlineNums = data.data.newOnlineNums;
 
         if (this.panoId !== data.data.panoId && data.data.panoId && data.data.panoId !== null) {
           this.showMap = false;

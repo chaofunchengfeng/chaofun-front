@@ -446,7 +446,7 @@ export default {
         this.lastClickUserId = redata.lastClickUserId;
         this.lastGetPriceUserId = redata.lastGetPriceUserId;
         this.participants_text = redata.participants_text;
-        this.onlineNums = redata.onlineNums;
+        this.onlineNums = redata.newOnlineNums;
         // this.clickTimes = redata.clickTimes;
         this.lastGetPriceUserName = redata.lastGetPriceUserName;
         this.newCommet = redata.lastComment;
