@@ -21,8 +21,13 @@ export default {
       gameId: null,
       map: null,
       mapsId: null,
-      history: null
+      history: null,
+      deleteOn: false,
+      markers:[],
     };
+  },
+  created() {
+    window.aFun = this.delete;
   },
   mounted() {
     this.history = history;
@@ -62,8 +67,30 @@ export default {
         }
       });
     },
+
+    delete(id) {
+      this.$confirm('此操作将删除该街景, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        api.getByPath('/api/v0/tuxun/maps/deletePano', {containId: id}).then(res=>{
+          this.get();
+        });
+      }).catch(() => {
+
+      });
+    },
     addMarker(data) {
       var group = [];
+      this.markers.forEach(v => {
+        v.remove();
+      });
+      var shouldFit = true;
+      if (this.markers.length > 0) {
+        shouldFit = false;
+      }
+      this.markers = [];
 
       for (var i in data) {
         var latlng = data[i];
@@ -72,14 +99,22 @@ export default {
         options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
         var marker = L.marker([latlng.lat, latlng.lng], {icon: new L.Icon(options)}).addTo(this.map);
         marker.latlng = latlng;
+        var popup = L.popup({ autoClose: false, closeOnClick: false , autoPan: false})
+            .setContent('<p style="cursor: pointer; color: red" onclick="aFun('+ latlng.containId + ')">删除</p>')
+        .setLatLng([latlng.lat, latlng.lng])
+
+        marker.bindPopup(popup).openPopup();
+
         marker.on('click', function (e) {
-          console.log(e);
           this.toPanorama(e.target.latlng);
         }.bind(this));
+        this.markers.push(marker);
         group.push([latlng.lat, latlng.lng]);
       };
 
-      this.map.fitBounds(group);
+      if (shouldFit) {
+        this.map.fitBounds(group);
+      }
     },
 
     toPanorama(latlng) {

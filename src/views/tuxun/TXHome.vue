@@ -76,7 +76,7 @@
     </div>
     <div class="home">
       <el-button size="mini" @click="toHome" round> 首页 </el-button>
-      <el-button v-if="!this.isMaps && dialogShow" size="mini"  @click="toSend" round> 发弹幕 </el-button>
+<!--      <el-button v-if="!this.isMaps && dialogShow" size="mini"  @click="toSend" round> 发弹幕 </el-button>-->
       <el-button v-if="dialogShow" size="mini"  @click="dialogShow=false" round> 关弹幕 </el-button>
       <el-button size="mini"  @click="toReport" round> 坏题反馈 </el-button>
       <el-button v-if="ISPHONE" @click="reloadPage" size="mini" round>刷新</el-button>
