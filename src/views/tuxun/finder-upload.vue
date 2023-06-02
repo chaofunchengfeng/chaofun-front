@@ -89,7 +89,7 @@ export default {
     publish() {
       api.getByPath('/api/v0/finder/publish', {id: this.id}).then(res=>{
         if (res.success) {
-          tuxunJump('/tuxun/finder');
+          tuxunJump('/tuxun/finder?userId=' + res.data.userId);
         }
       });
     }
