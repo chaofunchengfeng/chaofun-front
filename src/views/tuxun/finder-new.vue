@@ -11,7 +11,6 @@
     <div v-if="userProfile" class="top-info">
       {{userProfile.userAO.userName}} 的投稿
     </div>
-    <div style="z-index: 10000; position: absolute; right: 1.5rem; top: 1.5rem">注: 卡顿的问题正在解决中</div>
   </div>
 </template>
 
