@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     init() {
+
       this.history = history;
       this.userId = this.$route.query.userId;
       if (this.userId) {

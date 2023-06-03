@@ -38,7 +38,13 @@ export default {
   },
   methods: {
     init() {
-
+      this.history = history;
+      this.userId = this.$route.query.userId;
+      if (this.userId) {
+        api.getByPath('/api/v0/tuxun/getProfile', {userId: this.userId}).then(res=>{
+          this.userProfile = res.data;
+        });
+      }
       mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
       var url = 'https://map.chao-fan.com/tile/s2_z{z}_x{x}_y{y}.png';
       var tileSize = 512;
@@ -71,6 +77,7 @@ export default {
         zoom: 2, // starting zoom
         minZoom: 0,
         maxZoom: 18,
+        dragRotate: false,
       }).addControl(new mapboxgl.AttributionControl({
         customAttribution: '华为地图 GS（2022）2885号'
       }));
@@ -95,39 +102,14 @@ export default {
             const marker = new mapboxgl.Marker({color: '#FFD326'})
                 .setLngLat([finder.lng, finder.lat])
                 .addTo(this.map)
-            const popup = new mapboxgl.Popup()
-                .setHTML('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '" target="_blank">' + finder.user.userName + '</a>')
-
-            marker.setPopup(popup);
-            // marker.getElement().addEventListener('mouseover', function (e) {
-            //   pops.forEach(v => {
-            //     if (v.getPopup().isOpen() && !marker.clickOpen) {
-            //       v.togglePopup();
-            //     }
-            //   });
-            //   pops = [];
-            //   if (!marker.getPopup().isOpen()) {
-            //     marker.togglePopup();
-            //     pops.push(marker);
-            //     marker.clickOpen = false;
-            //   }
-            // });
-
-            // marker.getElement().addEventListener('mouseout', function (e) {
-            //   console.log(marker.clickOpen);
-            //   setTimeout(() => {
-            //     if (marker.getPopup().isOpen() && !marker.clickOpen) {
-            //       marker.togglePopup();
-            //     }
-            //   }, 2000)
-            // });
+            if (!this.userId) {
+              const popup = new mapboxgl.Popup()
+                  .setHTML('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '" target="_blank">' + finder.user.userName + '</a>')
+              marker.setPopup(popup);
+            }
 
             marker.finder = finder;
             marker.getElement().addEventListener('click', function (e) {
-              console.log(e);
-              console.log(e.target.finder);
-              console.log(e.finder);
-
               const $viewer = viewerApi({
                 options: {
                   toolbar: true,
