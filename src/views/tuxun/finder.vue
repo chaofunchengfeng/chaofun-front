@@ -19,10 +19,9 @@ import * as api from '@/api/api';
 import 'viewerjs/dist/viewer.css'
 import { api as viewerApi } from "v-viewer"
 
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import './SmoothWheelZoom';
 import {tuxunJump, tuxunOpen} from './common';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl';
 
 export default {
   name: "finder",
@@ -39,7 +38,6 @@ export default {
   },
   methods: {
     init() {
-
       this.history = history;
       this.userId = this.$route.query.userId;
       if (this.userId) {
@@ -47,33 +45,52 @@ export default {
           this.userProfile = res.data;
         });
       }
-      var map = L.map('map', {
-        attributionControl: true,
-        worldCopyJump: true,
-        coordType: 'gcj02',
-        scrollWheelZoom: false, // disable original zoom function
-        smoothWheelZoom: true,  // enable smooth zoom
-        smoothSensitivity: 3,   // zoom speed. default is 1
-        maxBoundsViscosity: 1.0,
-        maxBounds: [[-90, -540], [90, 540]]
-      }).setView([38.8, 106.0], 2);
-      map.scrollWheelZoom = true;
-      map.attributionControl.setPosition('bottomleft');
-      map.zoomControl.setPosition('bottomright');
-      map.attributionControl.setPrefix('华为地图');
-      map.attributionControl.addAttribution('GS（2022）2885号');
+      mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
       var url = 'https://map.chao-fan.com/tile/s2_z{z}_x{x}_y{y}.png';
-      if(this.ISPHONE){
-        url = 'https://map.chao-fan.com/tile/s1_z{z}_x{x}_y{y}.png';
-      }
-      L.tileLayer(url, {
+      var tileSize = 512;
+      // if(this.ISPHONE) {
+      //   url = 'https://map.chao-fan.com/tile/s1_z{z}_x{x}_y{y}.png';
+      //   tileSize = 256;
+      // }
+      const map = new mapboxgl.Map({
+        attributionControl: false,
+        container: 'map', // container ID
+        // style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        style: {
+          "version": 8,
+          "sources": {
+            "raster-tiles": {
+              "type": "raster",
+              "tiles": [url],
+              "tileSize": tileSize
+            }
+          },
+          "layers": [{
+            "id": "simple-tiles",
+            "type": "raster",
+            "source": "raster-tiles",
+            "minZoom": 0,
+            "maxZoom": 18
+          }]
+        },
+        center: [106.0, 38.0],
+        zoom: 2, // starting zoom
+        minZoom: 0,
         maxZoom: 18,
-        minZoom: 1,
-      }).addTo(map);
+        dragRotate: false,
+      }).addControl(new mapboxgl.AttributionControl({
+        customAttribution: '华为地图 GS（2022）2885号'
+      }));
+
+      map.on('load', () => {
+        document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
+      });
+
       this.map = map;
       this.getList();
     },
     getList() {
+      var pops = [];
       api.getByPath('/api/v0/finder/list', {userId: this.userId}).then(res=>{
         if (res.success) {
           for (var i in res.data) {
@@ -81,51 +98,26 @@ export default {
             if (!finder.img) {
               continue;
             }
-            var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
-            options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
-            options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
-            // circleMarker 不好点击
-            var marker = L.marker([finder.lat, finder.lng],  {icon: new L.Icon(options)}).addTo(this.map);
+
+            const marker = new mapboxgl.Marker({color: '#FFD326'})
+                .setLngLat([finder.lng, finder.lat])
+                .addTo(this.map)
+            if (!this.userId) {
+              const popup = new mapboxgl.Popup()
+                  .setHTML('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '" target="_blank">' + finder.user.userName + '</a>')
+              marker.setPopup(popup);
+            }
 
             marker.finder = finder;
-            var popup = null;
-            if (!this.userId) {
-              popup = L.popup()
-                  .setContent('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '" target="_blank">' + finder.user.userName + '</a>')
-
-              marker.bindPopup(popup);
-              marker.on('mouseover', function (e) {
-                e.target.openPopup();
-                e.target.clickOpen = false;
-              });
-              marker.on('mouseout', function (e) {
-                if (!e.target.clickOpen) {
-                  setTimeout(() => {
-                    e.target.closePopup();
-                  }, 2000);
-                }
-              });
-            }
-            marker.on('click', function (e) {
-              console.log(e);
-              if (!this.userId) {
-                e.target.clickOpen = true;
-                e.target.openPopup();
-              }
-
-              api.getByPath('/api/v0/finder/show', {id: e.target.finder.id}).then(res=>{
-              });
-
+            marker.getElement().addEventListener('click', function (e) {
               const $viewer = viewerApi({
                 options: {
-                  navbar: false,
-                  toolbar: false,
+                  toolbar: true,
                   url: 'data-source',
                   initialViewIndex: 0
                 },
-                images: [{'src': this.imgOrigin + e.target.finder.img, 'data-source': this.imgOrigin + e.target.finder.img}]
+                images: [{'src': this.imgOrigin + marker.finder.img, 'data-source': this.imgOrigin + marker.finder.img}]
               })
-
             }.bind(this));
           }
         }
@@ -156,6 +148,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.mapbox-logo{ display: none; } .mapboxgl-ctrl-logo { display: none !important; } .mapbox-improve-map { display: none; } .mapboxgl-ctrl-compass { display: none; }
+.mapboxgl-control-container {
+  display: none !important;
+}
 .container {
   position: absolute;
   width: 100%;
