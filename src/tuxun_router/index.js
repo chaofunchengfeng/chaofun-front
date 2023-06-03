@@ -134,6 +134,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/finder-new',
+    component: () => import('@/views/tuxun/finder-new'),
+    name: 'tuxun-finder-new',
+    meta: { title: '炒饭寻景-图寻'},
+    hidden: true
+  },
+  {
     path: '/finder-upload',
     component: () => import('@/views/tuxun/finder-upload'),
     name: 'tuxun-finder-upload',

@@ -277,6 +277,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/finder-new',
+    component: () => import('@/views/tuxun/finder-new'),
+    name: 'tuxun-finder-new',
+    meta: { title: '炒饭寻景-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/finder-upload',
     component: () => import('@/views/tuxun/finder-upload'),
     name: 'tuxun-finder-upload',
