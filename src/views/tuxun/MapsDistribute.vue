@@ -10,10 +10,11 @@
 
 <script>
 import * as api from '@/api/api';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import './SmoothWheelZoom';
 import {tuxunJump, tuxunOpen} from './common';
+
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl';
 export default {
   name: 'tuxun-maps-distribute',
   data() {
@@ -31,29 +32,46 @@ export default {
   },
   mounted() {
     this.history = history;
-    var map = L.map('map', {
-      attributionControl: true,
-      worldCopyJump: true,
-      coordType: 'gcj02',
-      scrollWheelZoom: false, // disable original zoom function
-      smoothWheelZoom: true,  // enable smooth zoom
-      smoothSensitivity: 3,   // zoom speed. default is 1
-      maxBoundsViscosity: 1.0,
-      maxBounds: [[-90, -540], [90, 540]]
-    }).setView([38.8, 106.0], 2);
-    map.scrollWheelZoom = true;
-    map.attributionControl.setPosition('bottomleft');
-    map.zoomControl.setPosition('bottomright');
-    map.attributionControl.setPrefix('华为地图');
-    map.attributionControl.addAttribution('GS（2022）2885号');
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
     var url = 'https://map.chao-fan.com/tile/s2_z{z}_x{x}_y{y}.png';
-    if(this.ISPHONE){
+    var tileSize = 512;
+    if(this.ISPHONE) {
       url = 'https://map.chao-fan.com/tile/s1_z{z}_x{x}_y{y}.png';
+      tileSize = 256;
     }
-    L.tileLayer(url, {
+    const map = new mapboxgl.Map({
+      attributionControl: false,
+      container: 'map', // container ID
+      // style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      style: {
+        "version": 8,
+        "sources": {
+          "raster-tiles": {
+            "type": "raster",
+            "tiles": [url],
+            "tileSize": tileSize
+          }
+        },
+        "layers": [{
+          "id": "simple-tiles",
+          "type": "raster",
+          "source": "raster-tiles",
+          "minZoom": 0,
+          "maxZoom": 18
+        }]
+      },
+      zoom: 2, // starting zoom
+      minZoom: 0,
       maxZoom: 18,
-      minZoom: 1,
-    }).addTo(map);
+      dragRotate: false,
+    }).addControl(new mapboxgl.AttributionControl({
+      compact: false,
+      customAttribution: '华为地图 GS（2022）2885号'
+    }), 'bottom-left');
+
+    map.on('load', () => {
+      document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
+    });
     this.map = map;
     this.mapsId = this.$route.query.mapsId;
     this.get();
@@ -94,22 +112,22 @@ export default {
 
       for (var i in data) {
         var latlng = data[i];
-        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
-        options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
-        options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
-        var marker = L.marker([latlng.lat, latlng.lng], {icon: new L.Icon(options)}).addTo(this.map);
+        const marker = new mapboxgl.Marker({color: '#FFD326'})
+            .setLngLat([latlng.lng, latlng.lat])
+            .addTo(this.map)
+
         marker.latlng = latlng;
-        var popup = L.popup({ autoClose: false, closeOnClick: false , autoPan: false})
-            .setContent('<p style="cursor: pointer; color: red" onclick="aFun('+ latlng.containId + ')">删除</p>')
-        .setLatLng([latlng.lat, latlng.lng])
+        var popup = new mapboxgl.Popup({ autoClose: false, closeOnClick: false , autoPan: false})
+            .setHTML('<p style="cursor: pointer; color: red" onclick="aFun('+ latlng.containId + ')">删除</p>')
+        // .setLatLng([latlng.lat, latlng.lng]);
 
-        marker.bindPopup(popup).openPopup();
+        marker.setPopup(popup).togglePopup();
 
-        marker.on('click', function (e) {
-          this.toPanorama(e.target.latlng);
+        marker.getElement().addEventListener('click', function (e) {
+          this.toPanorama(marker.latlng);
         }.bind(this));
         this.markers.push(marker);
-        group.push([latlng.lat, latlng.lng]);
+        group.push([latlng.lng, latlng.lat]);
       };
 
       if (shouldFit) {

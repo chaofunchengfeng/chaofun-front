@@ -5,7 +5,7 @@
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goFinder" v-if="userId" size="small" round>寻景首页</el-button>
       <el-button @click="goHome" size="small" round>图寻首页</el-button>
-      <el-button v-if="!userId" @click="finderUpload" size="small" type="primary" round>投稿</el-button>
+      <el-button @click="finderUpload" size="small" type="primary" round>投稿</el-button>
     </div>
 
     <div v-if="userProfile" class="top-info">
@@ -48,10 +48,10 @@ export default {
       mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
       var url = 'https://map.chao-fan.com/tile/s2_z{z}_x{x}_y{y}.png';
       var tileSize = 512;
-      // if(this.ISPHONE) {
-      //   url = 'https://map.chao-fan.com/tile/s1_z{z}_x{x}_y{y}.png';
-      //   tileSize = 256;
-      // }
+      if(this.ISPHONE) {
+        url = 'https://map.chao-fan.com/tile/s1_z{z}_x{x}_y{y}.png';
+        tileSize = 256;
+      }
       const map = new mapboxgl.Map({
         attributionControl: false,
         container: 'map', // container ID
@@ -79,8 +79,9 @@ export default {
         maxZoom: 18,
         dragRotate: false,
       }).addControl(new mapboxgl.AttributionControl({
+        compact: false,
         customAttribution: '华为地图 GS（2022）2885号'
-      }));
+      }), 'bottom-left');
 
       map.on('load', () => {
         document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
@@ -90,7 +91,7 @@ export default {
       this.getList();
     },
     getList() {
-      var pops = [];
+      var group = [];
       api.getByPath('/api/v0/finder/list', {userId: this.userId}).then(res=>{
         if (res.success) {
           for (var i in res.data) {
@@ -119,9 +120,13 @@ export default {
                 images: [{'src': this.imgOrigin + marker.finder.img, 'data-source': this.imgOrigin + marker.finder.img}]
               })
             }.bind(this));
+            group.push([finder.lat, finder.lng]);
           }
         }
       });
+      if (this.userId) {
+        this.maps.fitBounds(group)
+      }
     },
     finderUpload() {
       api.postByPath('/api/v0/finder/add').then((res) => {
