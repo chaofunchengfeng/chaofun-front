@@ -270,6 +270,7 @@ export default {
         }
 
         // TODO: 前端暂时只做jpg检测，其他格式（TIFF, HEIC）后端默认会转成jpg
+        // 后端会自动抹除 exif。
         // if (['image/jpeg'].includes(rawFile.type)) {
         //   const data = await exif(rawFile, this.$createElement);
         //   if (data === false) {
