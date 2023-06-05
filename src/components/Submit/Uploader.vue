@@ -168,7 +168,7 @@ export default {
   // },
   beforeDestroy() {
     // 移除监听上传
-    document.removeEventListener('paste', this.toPaste);    
+    document.removeEventListener('paste', this.toPaste);
   },
   watch: {
     // fileList: {
@@ -226,22 +226,26 @@ export default {
     handleChange(ev) {
       const files = ev.target.files;
       if (!files) {
-return;
-}
+        return;
+      }
       this.uploadFiles(files);
     },
     async uploadFiles(files) {
+      console.log(files)
       if (this.limit && this.fileList.length + files.length > this.limit) {
+        console.log("hhahahah")
         this.onExceed && this.onExceed(files, this.fileList);
         return;
       }
+      console.log("hhahahah2")
       let postFiles = Array.prototype.slice.call(files);
       if (!this.multiple) {
- postFiles = postFiles.slice(0, 1); 
-}
+        postFiles = postFiles.slice(0, 1);
+      }
       if (postFiles.length === 0) {
- return; 
-}
+        console.log("hhahahah3")
+        return;
+      }
 
       // 检测图片
       for (let index = 0; index < postFiles.length; index++) {
@@ -252,32 +256,34 @@ return;
             this.$message.error('图片和视频不能同时上传，并且只支持上传1个视频！', {
               duration: 5000,
             });
+            console.log("hhahahah4")
             return;
           }
           // 视频上传模式
           this.isVideo = true;
           this.handleStart(rawFile);
           if (this.autoUpload) {
-this.upload(rawFile);
-}
+            this.upload(rawFile);
+            console.log("hhahahah5")
+          }
           break;
         }
 
         // TODO: 前端暂时只做jpg检测，其他格式（TIFF, HEIC）后端默认会转成jpg
-        if (['image/jpeg'].includes(rawFile.type)) {
-          const data = await exif(rawFile, this.$createElement);
-          if (data === false) {
-            return;
-          }
-          if (data !== true) {
-            rawFile = data;
-          }
-        }
-       
+        // if (['image/jpeg'].includes(rawFile.type)) {
+        //   const data = await exif(rawFile, this.$createElement);
+        //   if (data === false) {
+        //     return;
+        //   }
+        //   if (data !== true) {
+        //     rawFile = data;
+        //   }
+        // }
+
         this.handleStart(rawFile);
         if (this.autoUpload) {
-this.upload(rawFile);
-}
+          this.upload(rawFile);
+        }
       }
     },
     upload(rawFile) {
@@ -392,7 +398,7 @@ this.upload(rawFile);
         // 内部错误
         console.log(error);
       }
-      
+
       this.handleError(res.errorMessage || '上传错误，请重试！', rawFile);
     },
     handleError(err, rawFile) {
@@ -448,8 +454,8 @@ this.upload(rawFile);
     },
     handleKeydown(e) {
       if (e.target !== e.currentTarget) {
-return;
-}
+        return;
+      }
       if (e.keyCode === 13 || e.keyCode === 32) {
         this.handleClick();
       }
@@ -509,7 +515,7 @@ reqs[uid].abort();
       if (!file) {
         return;
       }
-      
+
       this.uploadFiles([ file ]);
     }
   },
