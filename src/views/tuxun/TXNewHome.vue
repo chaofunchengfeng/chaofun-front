@@ -16,7 +16,8 @@
           <el-button  @click="toRank" >积分排行</el-button>
         </div>
       </div>
-      <div @click="toFirstTournament" class="info">  玩家第四届个人solo赛圆满结束！</div>
+<!--      <div @click="toFirstTournament" class="info">  玩家第四届个人solo赛圆满结束！</div>-->
+      <div class="normal-info ">祝大家高考中考期末考顺利，考出好成绩！！！</div>
       <div class="normal-info ">「在地图出现之前，世界是无限的。」</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
