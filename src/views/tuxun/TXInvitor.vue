@@ -246,10 +246,10 @@
               <el-button class="result_button" type="primary" @click="createNew" round>再来一局</el-button>
             </div>
             <div v-if="gameData">
-              <el-button class="result_button"  type="primary" @click="replay" round>题目复盘</el-button>
+              <el-button class="result_button" @click="replay" round>题目复盘</el-button>
             </div>
             <div>
-              <el-button class="result_button"  @click="goHome" round>回到首页</el-button>
+              <el-button class="result_button" @click="goHome" round>回到首页</el-button>
             </div>
           </div>
         </div>
@@ -282,7 +282,7 @@
               <el-button v-else class="home_button"  type="primary" @click="backParty" round>回到派对</el-button>
             </div>
             <div v-if="gameData">
-              <el-button class="home_button"  type="primary" @click="replay" round>题目复盘</el-button>
+              <el-button class="home_button"   @click="replay" round>题目复盘</el-button>
             </div>
             <div>
               <el-button class="home_button" type="warning" @click="goHome" round>回到首页</el-button>
@@ -302,7 +302,7 @@
               <el-button v-else class="home_button"  type="primary" @click="backParty" round>回到派对</el-button>
             </div>
             <div v-if="gameData">
-              <el-button class="home_button"  type="primary" @click="replay" round>题目复盘</el-button>
+              <el-button class="home_button"   @click="replay" round>题目复盘</el-button>
             </div>
             <div>
               <el-button class="home_button" type="warning" @click="goHome" round>回到首页</el-button>
