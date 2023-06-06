@@ -59,7 +59,7 @@
       </div>
 
       <div v-if="gameData.host && this.$store.state.user.userInfo.userId !== gameData.host.userId && gameData.type !== 'solo_match' && gameData.type !== 'battle_royale' " class="wait_game_start">
-        等待房主开始游戏...
+        等待房主开始比赛...
       </div>
 
       <div v-if="(gameData.type === 'solo' || gameData.type === 'team') && gameData.mapsName " class="wait_game_start">
@@ -99,7 +99,7 @@
         {{gameData.players.length}}
       </div>
       <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'"  class="wait_game_hint">
-        满3人开始游戏, 选手列表：
+        满3人开始比赛, 选手列表：
       </div>
       <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_user">
         <div v-for="(item, index) in gameData.players" :key="index"> {{item.userName }}</div>

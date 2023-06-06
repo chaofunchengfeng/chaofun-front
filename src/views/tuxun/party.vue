@@ -79,7 +79,7 @@
       </div>
 
       <div v-if="partyData.host && $store.state.user.userInfo.userId !== partyData.host.userId && partyData.status === 'ready' " class="wait_game_start">
-        等待房主开始游戏...
+        等待房主开始比赛...
       </div>
 
       <div class="wait_game_start">
