@@ -113,6 +113,8 @@ export default {
       }
       this.markers = [];
 
+      var bounds = new mapboxgl.LngLatBounds();
+
       for (var i in data) {
         var latlng = data[i];
         const marker = new mapboxgl.Marker({color: '#FFD326'})
@@ -133,12 +135,13 @@ export default {
             marker.getPopup().togglePopup();
           }
         }.bind(this));
-        this.markers.push(marker);
-        group.push([latlng.lng, latlng.lat]);
+        bounds.extend([latlng.lng, latlng.lat])
       };
 
+      console.log(group);
+
       if (shouldFit) {
-        this.map.fitBounds(group);
+        this.map.fitBounds(bounds, {padding: {top: 10, bottom:25, left: 15, right: 5}});
       }
     },
 
