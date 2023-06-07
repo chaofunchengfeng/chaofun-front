@@ -4,6 +4,8 @@
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button v-else @click="goHome" size="small" round>首页</el-button>
+      <el-button v-if="manager" @click="changeNormal" size="small" round>回到浏览模式</el-button>
+      <el-button v-else @click="changeManager" size="small" round>开启管理模式</el-button>
     </div>
   </div>
 </template>
@@ -24,6 +26,7 @@ export default {
       mapsId: null,
       history: null,
       deleteOn: false,
+      manager: false,
       markers:[],
     };
   },
@@ -121,10 +124,14 @@ export default {
             .setHTML('<p style="cursor: pointer; color: red" onclick="aFun('+ latlng.containId + ')">删除</p>')
         // .setLatLng([latlng.lat, latlng.lng]);
 
-        marker.setPopup(popup).togglePopup();
+        marker.setPopup(popup);
 
         marker.getElement().addEventListener('click', function (e) {
-          this.toPanorama(marker.latlng);
+          if (!this.manager) {
+            this.toPanorama(marker.latlng);
+          }  else {
+            marker.getPopup().togglePopup();
+          }
         }.bind(this));
         this.markers.push(marker);
         group.push([latlng.lng, latlng.lat]);
@@ -160,6 +167,12 @@ export default {
       } catch (e) {
         tuxunJump('/tuxun/');
       }
+    },
+    changeManager() {
+      this.manager = true;
+    },
+    changeNormal() {
+      this.manager = false;
     },
 
   }
