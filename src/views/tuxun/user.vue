@@ -2,8 +2,8 @@
   <div :class="{normal: 'user',small: 'user-small'}[size]" role="user">
     <el-dropdown trigger="click" @command="handleCommand" placement="top">
       <el-avatar :src="imgOrigin + user.icon" class="avatar"></el-avatar>
-      <el-dropdown-menu slot="dropdown" v-if="enableShowUserTooltip">
-        <el-dropdown-item :disabled="isHost" icon="el-icon-refresh" command="transfer">转移房主</el-dropdown-item>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item v-if="enableShowUserTooltip" :disabled="isHost" icon="el-icon-refresh" command="transfer">转移房主</el-dropdown-item>
         <el-dropdown-item icon="el-icon-user" command="toUser">查看首页</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
