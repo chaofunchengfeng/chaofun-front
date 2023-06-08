@@ -256,6 +256,7 @@ export default {
         if (res.success) {
           this.checkFriend = true;
           this.friend = res.data;
+          this.$toast('添加成功');
         }
       });
     },
