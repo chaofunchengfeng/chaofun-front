@@ -49,6 +49,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/message',
+    component: () => import('@/views/tuxun/message'),
+    name: 'tuxun-message',
+    meta: { title: '图寻消息-通知'},
+    hidden: true
+  },
+  {
     path: '/paidui',
     component: () => import('@/views/tuxun/party'),
     name: '派对-图寻',

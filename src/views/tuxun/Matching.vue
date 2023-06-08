@@ -4,9 +4,11 @@
       <div>
         <circle2 style="width: 100px; height: 100px" class="loading_image" background="#F9BA02"></circle2>
       </div>
+
       <div class="loading_text">
         正在匹配对手中，请稍候...
       </div>
+
       <div class="matching_home_button">
         <el-button class="home_button" type="warning" @click="goHome" round>结束匹配</el-button>
       </div>

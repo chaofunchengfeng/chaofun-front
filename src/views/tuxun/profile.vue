@@ -14,6 +14,10 @@
             图寻会员 <span v-if="vipDue">｜过期时间 {{vipDue}}</span>
           </div>
         </div>
+      <div v-if="!this.userProfile || this.$store.state.user.userInfo.userId !== this.userProfile.userAO.userId">
+        <el-button v-if="checkFriend && !friend" @click="applyFriend" round>添加好友</el-button>
+        <el-button v-if="checkFriend && friend" disabled="true" round>好友</el-button>
+      </div>
       <el-button v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId" @click="logout()">退出登录</el-button>
       <div style="height: 10px"></div>
       <el-button v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId" @click="$vip()">续费/开通会员</el-button>
@@ -132,10 +136,12 @@ export default {
       userId: null,
       userProfile: null,
       endDate: null,
+      checkFriend: false,
       activity: [],
       vipDue: null,
       isVip: false,
       history: null,
+      friend: false,
       option: {
         xAxis: {
           type: 'time',
@@ -163,6 +169,7 @@ export default {
     this.getUserActivity();
     this.getHistory();
     this.checkVip();
+    this.checkFriendFunc();
   },
   methods: {
     async logout() {
@@ -213,6 +220,14 @@ export default {
     changeSetting() {
       tuxunJump('/tuxun/settings');
     },
+    checkFriendFunc() {
+      api.getByPath('/api/v0/tuxun/friend/check', {friend: this.userId}).then(res => {
+        if (res.success) {
+          this.checkFriend = true;
+          this.friend = res.data;
+        }
+      });
+    },
     checkVip() {
       if (this.$store.state.user.userInfo.userId == this.userId) {
         api.getByPath('/api/v0/tuxun/vip/check').then(res=>{
@@ -235,6 +250,14 @@ export default {
       } catch (e) {
         tuxunJump('/tuxun/');
       }
+    },
+    applyFriend() {
+      api.getByPath('/api/v0/tuxun/friend/apply', {friend: this.userId}).then(res => {
+        if (res.success) {
+          this.checkFriend = true;
+          this.friend = res.data;
+        }
+      });
     },
     toHistory() {
       tuxunJump('/tuxun/activities')

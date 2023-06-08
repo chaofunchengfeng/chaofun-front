@@ -1,6 +1,15 @@
 <template>
   <div class="container" :style="{'background-image':'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)),url('+imgOrigin+ this.backgroundImage +')','background-size':'cover','background-position': 'center'}">
     <div class="game">
+      <div class="top-right">
+        <el-button  style="" @click="toUserHome">个人首页</el-button>
+        <div style="height: 5px">
+        </div>
+        <el-button  @click="toMessage" >消息/通知</el-button>
+        <div style="height: 5px">
+        </div>
+        <el-button  @click="toRank" >积分排行</el-button>
+      </div>
       <div class="top">
         <div class="top-left">
           <div style="display: flex">
@@ -9,13 +18,9 @@
           </div>
           <div style=" color: white; padding-top: 5px">探索真实世界，找出自己的位置</div>
         </div>
-        <div class="top-right">
-          <el-button  style="" @click="toUserHome">个人首页</el-button>
-          <div style="height: 10px">
-          </div>
-          <el-button  @click="toRank" >积分排行</el-button>
-        </div>
       </div>
+
+
 <!--      <div @click="toFirstTournament" class="info">  玩家第四届个人solo赛圆满结束！</div>-->
       <div class="normal-info ">祝大家高考中考期末考顺利，考出好成绩！！！</div>
       <div class="normal-info ">「在地图出现之前，世界是无限的。」</div>
@@ -212,6 +217,7 @@ export default {
   data() {
     return {
       times: null,
+      message: 0,
       backgroundImage: 'front/1685265121129_0d103634b42249af91cd5710836c428a_0.jpeg?x-oss-process=image/quality,q_50'
     };
   },
@@ -273,8 +279,18 @@ export default {
     soloMatch() {
       tuxunJump('/tuxun/solo_game');
     },
+    toMessage() {
+      tuxunJump(  '/tuxun/message');
+    },
     toRank() {
       tuxunJump(  '/tuxun/rank');
+    },
+    messsage() {
+      api.getByPath('/api/v0/tuxun/message/check').then(res => {
+        if (res.success) {
+          this.message = res.data;
+        }
+      });
     },
     toUserHome() {
       this.doLoginStatus().then((res) => {
@@ -336,12 +352,18 @@ export default {
   }
 
   .game {
+    position: relative;
     box-sizing: border-box;
     display: block;
     width: 100%;
     padding: 0 2rem;
     margin: 0 auto;
     max-width: 80rem;
+    .top-right {
+      position: absolute;
+      padding-top: 2rem;
+      right: 2rem;
+    }
     .info {
       cursor: pointer;
       color: white;

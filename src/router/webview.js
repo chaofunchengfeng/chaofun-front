@@ -424,6 +424,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/message',
+    component: () => import('@/views/tuxun/message'),
+    name: 'tuxun-message',
+    meta: { title: '图寻消息-通知'},
+    hidden: true
+  },
+  {
     path: '/tuxun/paidui',
     component: () => import('@/views/tuxun/party'),
     name: '图寻派对',
