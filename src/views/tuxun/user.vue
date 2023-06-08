@@ -4,6 +4,7 @@
       <el-avatar :src="imgOrigin + user.icon" class="avatar"></el-avatar>
       <el-dropdown-menu slot="dropdown" v-if="enableShowUserTooltip">
         <el-dropdown-item :disabled="isHost" icon="el-icon-refresh" command="transfer">转移房主</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-user" command="toUser">查看首页</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
     <div class="userName">{{user.userName}} <span v-if="isHost">(房主)</span></div>
@@ -15,8 +16,10 @@
  * User:
  * {"userId":122422,"userName":"潘祖红(pang)","icon":"f58b7f52d7c801ba0806e2125a776a44.png","ups":0,"followers":0,"focused":false,"gmtCreate":null,"gmtModified":null,"focus":0,"desc":null,"userTag":null}
  */
- 
+
 import * as api from '../../api/api';
+import {tuxunJump} from "./common";
+
 export default {
   name: 'tuxun-user',
   props: {
@@ -55,6 +58,8 @@ export default {
         api.getByPath('/api/v0/tuxun/party/changeHost', {userId: this.user.userId}).then(res=>{
           this.pagedata = res.data;
         });
+      } else if (command === 'toUser') {
+        tuxunJump('/tuxun/user/' + this.user.userId);
       }
     }
   }

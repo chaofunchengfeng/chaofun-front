@@ -5,6 +5,9 @@
         <el-button  style="" @click="toUserHome">个人首页</el-button>
         <div style="height: 5px">
         </div>
+        <el-button  @click="toFriend" >我的好友</el-button>
+        <div style="height: 5px">
+        </div>
         <el-button  @click="toMessage" >消息/通知</el-button>
         <div style="height: 5px">
         </div>
@@ -278,6 +281,9 @@ export default {
 
     soloMatch() {
       tuxunJump('/tuxun/solo_game');
+    },
+    toFriend() {
+      tuxunJump(  '/tuxun/friend');
     },
     toMessage() {
       tuxunJump(  '/tuxun/message');
