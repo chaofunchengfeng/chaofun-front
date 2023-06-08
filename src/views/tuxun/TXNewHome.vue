@@ -1,6 +1,7 @@
 <template>
   <div class="container" :style="{'background-image':'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)),url('+imgOrigin+ this.backgroundImage +')','background-size':'cover','background-position': 'center'}">
     <div class="game">
+
       <div class="top-right">
         <el-button  style="" @click="toUserHome">个人首页</el-button>
         <div style="height: 5px">
@@ -8,7 +9,10 @@
         <el-button  @click="toFriend" >我的好友</el-button>
         <div style="height: 5px">
         </div>
-        <el-button  @click="toMessage" >消息/通知</el-button>
+        <el-button  @click="toMessage" style="position: relative" >
+          消息/通知
+          <div v-if="message !== 0" class="point"></div>
+        </el-button>
         <div style="height: 5px">
         </div>
         <el-button  @click="toRank" >积分排行</el-button>
@@ -235,6 +239,7 @@ export default {
       });
     }
     this.getTimesInterval();
+    this.getMessage();
   },
 
   mounted() {
@@ -291,7 +296,7 @@ export default {
     toRank() {
       tuxunJump(  '/tuxun/rank');
     },
-    messsage() {
+    getMessage() {
       api.getByPath('/api/v0/tuxun/message/check').then(res => {
         if (res.success) {
           this.message = res.data;
@@ -346,6 +351,15 @@ export default {
   width: 100%;
   background-color: #18182A;
 
+  .point {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+  }
   .top {
     display: flex;
     justify-content: space-between;
