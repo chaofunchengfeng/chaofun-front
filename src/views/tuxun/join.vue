@@ -9,8 +9,18 @@
         <el-button round @click="goParty">去派对首页</el-button>
       </div>
     </div>
-    <div v-if="!joinCode">
-      
+    <div v-if="!joinCode" class="enter_code">
+      <div class="code_input">
+        <el-input
+            autofocus
+            :autofocus="true"
+            placeholder="派对码"
+            v-model="code"
+            style="text-align: center"
+        >
+        </el-input>
+      </div>
+      <el-button style="margin-top: 1rem" type="primary" @click="joinByCode(code)">加入</el-button>
     </div>
   </div>
 </template>
@@ -24,6 +34,7 @@ export default {
   data() {
     return {
       joinCode: null,
+      code: '',
       disband: false,
     };
   },
@@ -75,5 +86,18 @@ export default {
     margin-top: 5rem;
     font-size: 16px;
   }
+  .enter_code {
+    margin: auto;
+    margin-top: 5rem;
+    width: 30%;
+  }
+}
+//.el-input /deep/ input {text-align:center}
+@media only screen and (max-width: 768px) {
+.game-container {
+  .enter_code {
+    width: 80%;
+  }
+}
 }
 </style>
