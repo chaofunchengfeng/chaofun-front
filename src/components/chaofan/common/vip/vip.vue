@@ -46,17 +46,17 @@
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose==='month'">
-<!--          <div style="color: indianred">-->
-<!--            4月27日18点-5月3日18点 五一活动限时特价-->
-<!--          </div>-->
+          <div style="color: indianred">
+            暑期限时折扣
+          </div>
           <div>
             注：感谢探索者您的支持！
           </div>
         </div>
         <div v-if="choose==='year'">
-<!--          <div style="color: indianred">-->
-<!--            4月27日18点-5月3日18点 五一活动限时特价-->
-<!--          </div>-->
+          <div style="color: indianred">
+            暑期限时折扣
+          </div>
           <div>
             注：冲冲冲！探索者，去征服世界吧！！！
           </div>
