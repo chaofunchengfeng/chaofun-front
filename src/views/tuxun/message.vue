@@ -33,7 +33,7 @@
             <span @click="toUser(item.sender)" class="user-name">
              {{item.sender.userName}}
             </span>
-            请你参加
+            邀请你参加
             <span @click="toParty(item.code)" class="party">派对</span>
           </div>
         </div>
