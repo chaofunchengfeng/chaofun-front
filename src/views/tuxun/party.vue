@@ -7,8 +7,9 @@
     </div>
 
     <div class="disband">
-
-      <el-button class="button" type="success" @click="copyInviterLink" round>分享链接</el-button>
+      <el-button class="button" type="primary" @click="copyInviterLink" round>分享链接</el-button>
+<!--      <el-button class="button" type="primary" @click="inviteFriends" round>邀请好友</el-button>-->
+<!--      <el-button class="button" type="primary" @click="inviteFriends" round>Code加入</el-button>-->
     </div>
 
     <div v-if="partyData" class="prepare">
@@ -388,6 +389,11 @@ export default {
     gotoGame() {
       tuxunJump('/tuxun/solo_game?gameId=' + this.partyData.gameId);
     },
+
+    inviteFriends() {
+
+    },
+
     copyInviterLink() {
       var input = document.createElement('input');
       input.setAttribute('value', 'https://tuxun.fun/join?code=' + this.partyData.joinCode);

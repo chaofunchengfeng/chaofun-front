@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="top-left">
+    <div class="back_home">
       <el-button @click="goHome" round>首页</el-button>
       <el-button @click="openSearch" round>搜索添加</el-button>
     </div>
@@ -16,12 +16,12 @@
     </div>
 
     <div v-if="searchOpen" class="search">
-        <section class="section" style="display: block;overflow:scroll; overscroll-behavior: contain; height: 100%;    scrollbar-width: none;">
+        <section class="section" style="display: block;overflow:scroll; overscroll-behavior: contain; height: 100%;  scrollbar-width: none;">
           <div style="font-size: 20px; color: white; padding-top: 2rem">用户搜索<el-button type="primary" style="margin-left: 10px" @click="closeSearch" round>关闭</el-button></div>
           <el-input v-model="keyword"
                     :autofocus="true"
                     @input="search"
-                    placeholder="搜索用户"
+                    placeholder="搜索用户, 支持uid搜索"
                     style="margin-top: 2rem; max-width: 100%; margin-bottom: 20px"></el-input>
           <div v-for="(item, index) in this.users" class="user" >
             <div @click.stop="openUser(item)" style="display: flex;  justify-content: space-between;">
@@ -78,7 +78,7 @@ export default {
     },
     openSearch() {
       this.searchOpen = true;
-      this.search('');
+      this.search(this.keyword);
     },
     closeSearch() {
       this.searchOpen = false;
@@ -140,12 +140,12 @@ export default {
   width: 100%;
   min-height: 100%;
   background-color: #090723;
-  .top-left {
-    position: absolute;
-    padding-top: 2rem;
-    padding-left: 2rem;
+  .back_home {
+    position: fixed;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    z-index: 500;
   }
-
 }
 div {
   color: white;

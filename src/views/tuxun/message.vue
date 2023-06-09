@@ -101,13 +101,12 @@ export default {
   text-align: center;
   background-color: #090723;
 
-
   .back_home {
-    position: absolute;
+    position: fixed;
     padding-top: 1rem;
     padding-left: 1rem;
+    z-index: 500;
   }
-
   .message_container {
     padding-top: 3rem;
     width: 40%;

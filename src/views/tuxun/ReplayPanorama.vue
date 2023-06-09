@@ -46,10 +46,14 @@ export default {
   },
   methods: {
     get() {
-      api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
-        console.log(res.data);
-        if (res.success) {
-          this.render(res.data.rounds[this.round - 1]);
+      this.doLoginStatus().then((res) => {
+        if (res) {
+          api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
+            console.log(res.data);
+            if (res.success) {
+              this.render(res.data.rounds[this.round - 1]);
+            }
+          });
         }
       });
     },

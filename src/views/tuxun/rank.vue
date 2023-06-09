@@ -127,8 +127,8 @@ export default {
   background-color: #090723;
   .top-left {
     position: absolute;
-    padding-top: 2rem;
-    padding-left: 2rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
   }
 }
 div {

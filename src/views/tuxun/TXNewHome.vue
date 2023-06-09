@@ -31,6 +31,7 @@
 <!--      <div @click="toFirstTournament" class="info">  玩家第四届个人solo赛圆满结束！</div>-->
       <div class="normal-info ">祝大家高考中考期末考顺利，考出好成绩！！！</div>
       <div class="normal-info ">「在地图出现之前，世界是无限的。」</div>
+      <div class="second-info" @click="raiseVIP">图寻暑期折扣，快来开通会员吧～</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
         <div class="line"></div>
@@ -101,6 +102,14 @@
             </div>
             <div class="card-top-right">可移动</div>
           </div>
+<!--          <div class="card" @click="toJoin" >-->
+<!--            <div class="title">-->
+<!--              加入派对-->
+<!--            </div>-->
+<!--            <div class="describe">-->
+<!--              通过Code加入派对-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
 
         <div class="first_session_head">其他</div>
@@ -268,13 +277,19 @@ export default {
       try {
         window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84 + ''});
       } catch (e) {
-        tuxunOpen('https://chao.fan/f/84');
+        tuxunOpen('https://chao.fan/f/753');
       }
     },
 
     toParty() {
       this.doLoginStatus().then((res) => {
         tuxunJump('/tuxun/paidui');
+      });
+    },
+
+    toJoin() {
+      this.doLoginStatus().then((res) => {
+        tuxunJump('/tuxun/join');
       });
     },
 

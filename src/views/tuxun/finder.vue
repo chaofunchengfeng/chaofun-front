@@ -127,6 +127,7 @@ export default {
 
             marker.finder = finder;
             marker.getElement().addEventListener('click', function (e) {
+              this.finderShow(marker.finder.id);
               const $viewer = viewerApi({
                 options: {
                   toolbar: true,
@@ -148,6 +149,12 @@ export default {
       api.postByPath('/api/v0/finder/add').then((res) => {
         if (res.success) {
           tuxunJump('/tuxun/finder-upload?id=' + res.data.id);
+        }
+      });
+    },
+    finderShow(id) {
+      api.getByPath('/api/v0/tuxun/finder/show', {id: id}).then(res => {
+        if (res.success) {
         }
       });
     },

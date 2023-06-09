@@ -3,11 +3,14 @@
     <div class="back_home" @click="goHome">
       <el-button round>首页</el-button>
     </div>
-    <div v-if="disband" class="disband">
+    <div v-if="joinCode && disband" class="disband">
       派对不存在或者已经解散
       <div>
         <el-button round @click="goParty">去派对首页</el-button>
       </div>
+    </div>
+    <div v-if="!joinCode">
+      
     </div>
   </div>
 </template>
@@ -26,19 +29,24 @@ export default {
   },
   mounted() {
     if (this.$route.query.code) {
-      api.getByPath('/api/v0/tuxun/party/join', {joinCode: this.$route.query.code}).then(res=>{
-        if (res.success) {
-          tuxunJump('/tuxun/paidui');
-        } else if (res.errorCode === 'need_login') {
-          this.doLoginStatus().then((res) => {
-          });
-        } else {
-          this.disband = true;
-        }
-      });
+      this.joinCode = this.$route.query.code;
+      this.joinByCode(this.$route.query.code);
     }
   },
   methods: {
+    joinByCode(code) {
+      this.doLoginStatus().then((res) => {
+        if (res) {
+          api.getByPath('/api/v0/tuxun/party/join', {joinCode: code}).then(res => {
+            if (res.success) {
+              tuxunJump('/tuxun/paidui');
+            } else {
+              this.disband = true;
+            }
+          });
+        }
+      });
+    },
     goHome() {
       tuxunJump('/tuxun/');
     },
