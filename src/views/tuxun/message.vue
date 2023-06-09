@@ -3,6 +3,7 @@
     <div class="back_home">
 <!--      <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>-->
       <el-button @click="goHome"  round>首页</el-button>
+      <el-button @click="init"  round>刷新</el-button>
     </div>
 
     <div class="message_container">
@@ -25,6 +26,15 @@
             <div v-else-if="item.solveAction === 'reject'" class="reject">
               已拒绝
             </div>
+          </div>
+        </div>
+        <div v-if="item.type === 'invite_party'" class="invite_party">
+          <div>
+            <span @click="toUser(item.sender)" class="user-name">
+             {{item.sender.userName}}
+            </span>
+            请你参加
+            <span @click="toParty(item.code)" class="party">派对</span>
           </div>
         </div>
       </div>
@@ -72,6 +82,10 @@ export default {
       tuxunJump('/tuxun/')
     },
 
+    toParty(code) {
+      tuxunJump('/tuxun/join?code=' + code);
+    },
+
     rejectApply(messageId) {
       api.getByPath('/api/v0/tuxun/message/rejectFriend', {messageId: messageId}).then(res => {
         if (res.success) {
@@ -113,15 +127,16 @@ export default {
     margin: auto;
   }
 
+  .user-name {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
   .add_friend {
     color: white;
     padding-bottom: 1rem;
     text-align: left;
-    .user-name {
-      font-weight: bold;
-      cursor: pointer;
-      size: 32px;
-    }
+
     .approve {
       color: green;
     }
@@ -129,6 +144,16 @@ export default {
       color: indianred;
     }
   }
+  .invite_party {
+    color: white;
+    padding-bottom: 1rem;
+    text-align: left;
+    .party {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
   .no_message {
     text-align: center;
     color: white;
