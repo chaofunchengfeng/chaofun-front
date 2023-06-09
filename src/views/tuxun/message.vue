@@ -34,7 +34,7 @@
              {{item.sender.userName}}
             </span>
             邀请你参加
-            <span @click="toParty(item.code)" class="party">派对</span>
+            <span @click="toParty(item.data)" class="party">派对</span>
           </div>
         </div>
       </div>

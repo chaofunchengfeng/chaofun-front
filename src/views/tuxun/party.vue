@@ -8,7 +8,8 @@
 
     <div class="disband">
       <el-button class="button" type="primary" @click="copyInviterLink" round>分享链接</el-button>
-<!--      <el-button class="button" type="primary" @click="inviteFriends" round>邀请好友</el-button>-->
+      <div style="height: 10px"></div>
+      <el-button class="button"  @click="inviteFriends" round>邀请好友</el-button>
 <!--      <el-button class="button" type="primary" @click="inviteFriends" round>Code加入</el-button>-->
     </div>
 
@@ -165,6 +166,7 @@
 <!--        </div>-->
 <!--      </div>-->
     </div>
+    <tuxun-invite v-if="openInvite" style="z-index: 2000;" :close="closeInvite" :invite="inviteFriend"></tuxun-invite>
   </div>
 </template>
 
@@ -172,6 +174,7 @@
 import * as api from '../../api/api';
 import {tuxunJump, tuxunOpen} from './common';
 import User from './user.vue';
+import TuxunInvite from './tuxun-invite'
 export default {
   name: 'tuxun-party',
   data() {
@@ -181,11 +184,14 @@ export default {
       ws: null,
       partyData: null,
       free: true,
+      openInvite: false,
+      overflow: null,
       health: 6000,
     };
   },
   components: {
     User,
+    TuxunInvite
   },
   created() {
     if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
@@ -391,7 +397,21 @@ export default {
     },
 
     inviteFriends() {
+      this.openInvite = true;
+      this.overflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    },
+    closeInvite() {
+      this.openInvite = false;
+      document.body.style.overflow = this.overflow;
 
+    },
+    inviteFriend(userId) {
+      api.getByPath('/api/v0/tuxun/message/invite', {code: this.partyData.joinCode, friend: userId}).then(res => {
+        if (res.success) {
+          this.$toast('邀请成功');
+        }
+      });
     },
 
     copyInviterLink() {
@@ -429,7 +449,6 @@ export default {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    z-index: 5000;
   }
   .home_button {
     z-index: 10000;
