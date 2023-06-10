@@ -4,6 +4,15 @@
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goHome" size="small" round>首页</el-button>
+      <el-dropdown trigger="click"  placement="bottom" style="margin-left: 10px">
+
+        <el-button @click="" size="small" round>{{choose}}</el-button>
+        <el-dropdown-menu v-if="gameData" slot="dropdown">
+          <el-dropdown-item @click.native="addMarker(gameData)" v-if="user">你的选择</el-dropdown-item>
+          <el-dropdown-item @click.native="toAll()">全部</el-dropdown-item>
+          <el-dropdown-item v-for="(item, index) in gameData.rounds" @click.native="toRound(item)">第 {{ item.round }}轮</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
     <div style="z-index: 10000; position: absolute; right: 1.5rem; top: 1.5rem">注: 点击黄色针头查看街景</div>
   </div>
@@ -21,7 +30,12 @@ export default {
     return {
       gameId: null,
       history: null,
-
+      gameData: null,
+      markers: [],
+      polylinePaths: [],
+      group: [],
+      choose: '全部',
+      user: null,
       map: null,
     };
   },
@@ -56,78 +70,174 @@ export default {
   },
   methods: {
     get() {
-      api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
-        console.log(res.data);
-        if (res.success) {
-          this.addMarker(res.data);
+      this.doLoginStatus().then((res) => {
+        if (res) {
+          api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
+            if (res.success) {
+              this.gameData = res.data;
+              this.user = this.getUser();
+              this.choose='你的选择';
+              this.addMarker(res.data);
+            }
+          });
         }
       });
     },
     addMarker(gameData) {
-      console.log(gameData.rounds);
-      var group = [];
+      this.markers.forEach((v) => {v.remove()});
+      this.polylinePaths.forEach((v) => {v.remove()});
+      this.markers = [];
+      this.polylinePaths = [];
+      this.group = [];
+
+      console.log('user');
+      console.log(this.user);
+      if (!this.user) {
+        this.choose = '全部';
+        this.toAll();
+        return;
+      }
 
       for (var i in gameData.rounds) {
         var round = gameData.rounds[i];
-        var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
-        options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
-        options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
-        var marker = L.marker([round.lat, round.lng], {icon: new L.Icon(options)}).bindTooltip('第' + round.round + '轮',
-            {
-              permanent: true,
-              direction: 'auto'
-            }).addTo(this.map);
-        marker.round = round;
-        marker.on('click', function (e) {
-          console.log(e);
-          this.toPanorama(gameData.id, e.target.round);
-        }.bind(this));
-        group.push([round.lat, round.lng]);
+        this.drawRoundMarker(round);
       };
 
-      var user = null;
-      if (gameData != null && gameData.player != null && gameData.requestUserId === gameData.player.user.userId) {
-        user = gameData.player;
+      if (this.user) {
+        this.user.guesses.forEach(guess => {
+          var marker = L.marker([guess.lat, guess.lng], {icon: new L.Icon.Default()}).bindTooltip('你的选择',
+              {
+                permanent: true,
+                direction: 'auto'
+              }).addTo(this.map);
+
+          this.markers.push(marker);
+          var latlngs = [
+            [guess.lat, guess.lng],
+            [gameData.rounds[guess.round - 1].lat, gameData.rounds[guess.round - 1].lng],
+          ];
+
+          var polylinePath = new L.Polyline(latlngs, {
+            color: 'blue',
+            weight: 3,
+            opacity: 0.5,
+            smoothFactor: 1
+          });
+
+          polylinePath.addTo(this.map);
+          this.polylinePaths.push(polylinePath);
+
+          this.group.push([guess.lat, guess.lng]);
+        });
       }
 
-      if (gameData.teams && gameData.teams.length >= 1) {
-        gameData.teams.forEach(team => {
+      this.map.fitBounds(this.group);
+    },
+
+    drawRoundMarker(round) {
+      var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
+      options.iconUrl = this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png';
+      options.iconRetinaUrl = this.imgOrigin + 'biz/1662830707508_d7e5c8ce884a4fb692096396a5405f5b_0.png';
+      var marker = L.marker([round.lat, round.lng], {icon: new L.Icon(options)}).bindTooltip('第' + round.round + '轮',
+          {
+            permanent: true,
+            direction: 'auto'
+          }).addTo(this.map);
+      marker.round = round;
+      marker.on('click', function (e) {
+        console.log(e);
+        this.toPanorama(gameData.id, e.target.round);
+      }.bind(this));
+      this.markers.push(marker);
+      this.group.push([round.lat, round.lng]);
+    },
+
+    getUser() {
+      if (this.gameData != null && this.gameData.player != null && this.gameData.requestUserId === this.gameData.player.user.userId) {
+        return this.gameData.player;
+      }
+      var user = null;
+      if (this.gameData.teams && this.gameData.teams.length >= 1) {
+        this.gameData.teams.forEach(team => {
           team.teamUsers.forEach(teamUser => {
-            console.log(teamUser);
-            if (gameData.requestUserId === teamUser.user.userId) {
-              user = teamUser;
+            if (this.gameData.requestUserId === teamUser.user.userId) {
+              user =  teamUser;
             }
           });
         });
       }
-
-      console.log(user);
-
-      user.guesses.forEach(guess => {
-        var marker = L.marker([guess.lat, guess.lng], {icon: new L.Icon.Default()}).bindTooltip('你的选择',
-            {
-              permanent: true,
-              direction: 'auto'
-            }).addTo(this.map);
-
-        var latlngs = [
-          [guess.lat, guess.lng],
-          [gameData.rounds[guess.round - 1].lat, gameData.rounds[guess.round - 1].lng],
-        ];
-
-        this.polylinePath = new L.Polyline(latlngs, {
-          color: 'blue',
-          weight: 3,
-          opacity: 0.5,
-          smoothFactor: 1
-        });
-        this.polylinePath.addTo(this.map);
-
-        group.push([guess.lat, guess.lng]);
-      });
-
-      this.map.fitBounds(group);
+      return user;
     },
+
+
+    toAll() {
+      this.choose = '全部';
+      this.markers.forEach((v) => {v.remove()});
+      this.polylinePaths.forEach((v) => {v.remove()});
+      this.markers = [];
+      this.polylinePaths = [];
+      this.group = [];
+
+      for (var i in this.gameData.rounds) {
+        this.toRound(this.gameData.rounds[i], true);
+      };
+      this.map.fitBounds(this.group);
+    },
+
+    toRound(round, all) {
+      if (!all) {
+        this.choose = '第' + round.round + '轮';
+        this.markers.forEach((v) => {v.remove()});
+        this.polylinePaths.forEach((v) => {v.remove()});
+        this.markers = [];
+        this.polylinePaths = [];
+        this.group = [];;
+      }
+
+      this.drawRoundMarker(round);
+
+      if (this.gameData.teams && this.gameData.teams.length >= 1) {
+        this.gameData.teams.forEach(team => {
+          team.teamUsers.forEach(teamUser => {
+            console.log(teamUser);
+            var name = teamUser.user.userName;
+            if (this.gameData.requestUserId === teamUser.user.userId) {
+              name = '你的选择';
+            }
+            teamUser.guesses.forEach(guess => {
+              if (guess.round !== round.round) {
+                return;
+              }
+              var marker = L.marker([guess.lat, guess.lng], {icon: new L.Icon.Default()}).bindTooltip(name,
+                  {
+                    permanent: true,
+                    direction: 'auto'
+                  }).addTo(this.map);
+
+              var latlngs = [
+                [guess.lat, guess.lng],
+                [round.lat, round.lng],
+              ];
+
+              this.markers.push(marker);
+              var polylinePath = new L.Polyline(latlngs, {
+                color: 'blue',
+                weight: 3,
+                opacity: 0.5,
+                smoothFactor: 1
+              });
+              polylinePath.addTo(this.map);
+              this.polylinePaths.push(polylinePath);
+              this.group.push([guess.lat, guess.lng]);
+            });
+          });
+        });
+      }
+      if (!all) {
+        this.map.fitBounds(this.group);
+      }
+    },
+
     toPanorama(gameId, round) {
       // console.log(round);
       if (!round.source || !round.panoId ) {
