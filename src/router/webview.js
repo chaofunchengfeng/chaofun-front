@@ -256,6 +256,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/photorealistic',
+    component: () => import('@/views/tuxun/photorealistic'),
+    name: 'tuxun-photorealistic',
+    meta: { title: '3D-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/pano-gallary',
     component: () => import('@/views/tuxun/pano-gallary'),
     name: 'pano-gallary',
