@@ -5,8 +5,7 @@
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goHome" size="small" round>首页</el-button>
       <el-dropdown trigger="click"  placement="bottom" style="margin-left: 10px">
-
-        <el-button @click="" size="small" round>{{choose}}</el-button>
+        <el-button icon="el-icon-caret-right" @click="" size="small">{{choose}}</el-button>
         <el-dropdown-menu v-if="gameData" slot="dropdown">
           <el-dropdown-item @click.native="addMarker(gameData)" v-if="user">你的选择</el-dropdown-item>
           <el-dropdown-item @click.native="toAll()">全部</el-dropdown-item>
@@ -146,7 +145,7 @@ export default {
       marker.round = round;
       marker.on('click', function (e) {
         console.log(e);
-        this.toPanorama(gameData.id, e.target.round);
+        this.toPanorama(this.gameData.id, e.target.round);
       }.bind(this));
       this.markers.push(marker);
       this.group.push([round.lat, round.lng]);
@@ -197,7 +196,8 @@ export default {
       this.drawRoundMarker(round);
 
       if (this.gameData.teams && this.gameData.teams.length >= 1) {
-        this.gameData.teams.forEach(team => {
+        for (var i in this.gameData.teams) {
+          var team = this.gameData.teams[i];
           team.teamUsers.forEach(teamUser => {
             console.log(teamUser);
             var name = teamUser.user.userName;
@@ -208,7 +208,8 @@ export default {
               if (guess.round !== round.round) {
                 return;
               }
-              var marker = L.marker([guess.lat, guess.lng], {icon: new L.Icon.Default()}).bindTooltip(name,
+
+              var marker = L.marker([guess.lat, guess.lng], {icon: this.getOptionUser(teamUser.user.userId)}).bindTooltip(name,
                   {
                     permanent: true,
                     direction: 'auto'
@@ -231,7 +232,7 @@ export default {
               this.group.push([guess.lat, guess.lng]);
             });
           });
-        });
+        }
       }
       if (!all) {
         this.map.fitBounds(this.group);
@@ -260,6 +261,28 @@ export default {
         window.history.back();
       } catch (e) {
         tuxunJump('/tuxun/');
+      }
+    },
+    checkInTeams(team, userId) {
+      for (let i = 0; i < team.users.length; i++) {
+        if (team.users[i].userId === userId) {
+          return true;
+        }
+      }
+      return false;
+    },
+    getOptionUser(userId) {
+      if (this.gameData && this.gameData.teams && this.gameData.teams.length === 2) {
+        if (this.checkInTeams(this.gameData.teams[1], userId)) {
+          var options = JSON.parse(JSON.stringify(L.Icon.Default.prototype.options));
+          options.iconUrl = this.imgOrigin + 'front/marker-icon-green.png';
+          options.iconRetinaUrl = this.imgOrigin + 'front/marker-icon-2x-green.png';
+          return new L.Icon(options);
+        } else {
+          return new L.Icon.Default();
+        }
+      } else {
+        return new L.Icon.Default();
       }
     },
 

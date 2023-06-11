@@ -284,6 +284,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/finder-manager',
+    component: () => import('@/views/tuxun/finder-manager'),
+    name: 'tuxun-finder-manager',
+    meta: { title: '投稿管理-寻景'},
+    hidden: true
+  },
+  {
     path: '/tuxun/friend',
     component: () => import('@/views/tuxun/friend'),
     name: 'tuxun-friend',

@@ -3,15 +3,15 @@
     <div id="map" class="maps"></div>
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
-      <el-button @click="goFinder" v-if="userId" size="small" round>寻景首页</el-button>
+      <el-button @click="goFinder" size="small" round>寻景首页</el-button>
       <el-button @click="goHome" size="small" round>图寻首页</el-button>
       <el-button @click="finderUpload" size="small" type="primary" round>投稿</el-button>
-      <el-button @click="toManager" size="small"  round>管理投稿</el-button>
     </div>
 
-    <div v-if="userProfile" class="top-info">
-      {{userProfile.userAO.userName}} 的投稿
+    <div class="top-info top-info-big">
+      管理投稿
     </div>
+
   </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
       history: null,
       map: null,
       userId: null,
+      type: null,
       userProfile: null,
     }
   },
@@ -40,12 +41,6 @@ export default {
   methods: {
     init() {
       this.history = history;
-      this.userId = this.$route.query.userId;
-      if (this.userId) {
-        api.getByPath('/api/v0/tuxun/getProfile', {userId: this.userId}).then(res=>{
-          this.userProfile = res.data;
-        });
-      }
       mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
       var url = 'https://map.chao-fan.com/tile/s2_z{z}_x{x}_y{y}.png';
       var tileSize = 512;
@@ -105,11 +100,20 @@ export default {
       });
 
       this.map = map;
-      this.getList();
+
+      if (this.type === 'manager') {
+        this.doLoginStatus().then((res) => {
+          if (res) {
+            this.getList();
+          }
+        });
+      } else {
+        this.getList();
+      }
     },
     getList() {
       var group = [];
-      api.getByPath('/api/v0/finder/list', {userId: this.userId}).then(res=>{
+      api.getByPath( '/api/v0/finder/listOwn').then(res=>{
         if (res.success) {
           for (var i in res.data) {
             var finder = res.data[i];
@@ -120,23 +124,11 @@ export default {
             const marker = new mapboxgl.Marker({color: '#FFD326'})
                 .setLngLat([finder.lng, finder.lat])
                 .addTo(this.map)
-            if (!this.userId) {
-              const popup = new mapboxgl.Popup()
-                  .setHTML('<a href="https://tuxun.fun/finder?userId=' + finder.user.userId + '" target="_blank">' + finder.user.userName + '</a>')
-              marker.setPopup(popup);
-            }
 
             marker.finder = finder;
             marker.getElement().addEventListener('click', function (e) {
-              this.finderShow(marker.finder.id);
-              const $viewer = viewerApi({
-                options: {
-                  toolbar: true,
-                  url: 'data-source',
-                  initialViewIndex: 0
-                },
-                images: [{'src': this.imgOrigin + marker.finder.img, 'data-source': this.imgOrigin + marker.finder.img}]
-              })
+
+              tuxunJump('/tuxun/finder-upload?type=modify&id=' + marker.finder.id);
             }.bind(this));
             group.push([finder.lat, finder.lng]);
           }
@@ -172,13 +164,6 @@ export default {
         tuxunJump('/tuxun/');
       }
     },
-    toManager() {
-      this.doLoginStatus().then((res) => {
-        if (res) {
-          tuxunJump('/tuxun/finder-manager');
-        }
-      });
-    }
   }
 }
 </script>
@@ -208,7 +193,9 @@ export default {
     user-select:none;
     text-align: center;
     justify-content: center;
-
+  }
+  .top-info-big {
+    font-size: 32px;
   }
   .maps {
     position: absolute;

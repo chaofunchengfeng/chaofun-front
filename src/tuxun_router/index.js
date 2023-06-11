@@ -141,6 +141,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/finder-manager',
+    component: () => import('@/views/tuxun/finder-manager'),
+    name: 'tuxun-finder-manager',
+    meta: { title: '投稿管理-寻景'},
+    hidden: true
+  },
+  {
     path: '/friend',
     component: () => import('@/views/tuxun/friend'),
     name: 'tuxun-friend',
