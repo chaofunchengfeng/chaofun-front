@@ -168,7 +168,7 @@
               讨论区
             </div>
             <div class="describe">
-              全国最好的网络迷踪社区
+              一起来讨论图寻技巧吧
             </div>
           </div>
           <div class="card" @click="toScratch()">
@@ -275,7 +275,7 @@ export default {
     },
     toForum(){
       try {
-        window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84 + ''});
+        window.flutter_inappwebview.callHandler('toAppForum',{forumId: 753 + ''});
       } catch (e) {
         tuxunOpen('https://chao.fan/f/753');
       }
