@@ -172,8 +172,8 @@ export default {
       });
     },
     getRecommendMaps(){
-      api.getByPath('/api/v0/tuxun/maps/listEditorChoose', {count: 3}).then(res=>{
-        this.recommend = res.data.slice(0, 3);
+      api.getByPath('/api/v0/tuxun/maps/listEditorChoose', {count: 6}).then(res=>{
+        this.recommend = res.data.slice(0, 6);
         this.recommend.forEach(function (item) {
           this.addDifficulty(item);
         }.bind(this));
