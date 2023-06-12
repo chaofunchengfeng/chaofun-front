@@ -6,6 +6,7 @@
           <el-button @click="closeInner" style="margin-right: 40px">关闭</el-button>
         </div>
         <div class="ycontainer">
+          <div style="margin-bottom: 20px; font-size: 20px">邀请好友</div>
           <div @click="inviteInner(item.userId)" v-for="(item, index) in friends" class="friend">
             <img :src="imgOrigin+item.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt=""
                  style="width: 40px; height: 40px; border-radius: 100%;margin: 0 5px;">

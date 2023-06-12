@@ -6,6 +6,9 @@
       <el-button @click="init"  round>刷新</el-button>
     </div>
 
+    <div class="nav">
+      消息通知
+    </div>
     <div class="message_container">
       <div v-for="(item, index) in list">
         <div v-if="item.type === 'add_friend'" class="add_friend">
@@ -115,6 +118,15 @@ export default {
   text-align: center;
   background-color: #090723;
 
+  .nav {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    padding-top: 3rem;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+  }
   .back_home {
     position: fixed;
     padding-top: 1rem;
