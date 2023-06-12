@@ -86,22 +86,6 @@ export default {
 
       map.on('load', () => {
         document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
-
-        // map.addLayer(
-        //     {
-        //       id: 'country-boundaries',
-        //       source: {
-        //         type: 'vector',
-        //         url: 'mapbox://mapbox.country-boundaries-v1',
-        //       },
-        //       'source-layer': 'country_boundaries',
-        //       type: 'fill',
-        //       paint: {
-        //         'fill-color': '#d2361e',
-        //         'fill-opacity': 0.4,
-        //       },
-        //     },
-        // );
       });
 
       this.map = map;
@@ -184,10 +168,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mapbox-logo{ display: none; } .mapboxgl-ctrl-logo { display: none !important; } .mapbox-improve-map { display: none; } .mapboxgl-ctrl-compass { display: none; }
-.mapboxgl-control-container {
-  display: none !important;
-}
+
 .container {
   position: absolute;
   width: 100%;

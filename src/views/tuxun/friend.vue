@@ -4,7 +4,10 @@
       <el-button @click="goHome" round>首页</el-button>
       <el-button @click="openSearch" round>搜索添加</el-button>
     </div>
-    <div style=" margin: auto; margin-top: 4rem; width: 640px;max-width: 100%;padding: 10px;">
+    <div class="nav">
+      我的好友
+    </div>
+    <div style=" margin: auto; margin-top: 1rem; width: 640px;max-width: 100%;padding: 10px;">
       <div v-for="(item,index) in friends" :key="index" class="list" @click="toUser(item)">
         <img :src="imgOrigin+item.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt=""
              style="width: 40px; height: 40px; border-radius: 100%;margin: 0 5px;">
@@ -140,6 +143,15 @@ export default {
   width: 100%;
   min-height: 100%;
   background-color: #090723;
+  .nav {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    padding-top: 3rem;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+  }
   .back_home {
     position: fixed;
     padding-top: 1rem;
