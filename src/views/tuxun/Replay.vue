@@ -195,48 +195,55 @@ export default {
 
       this.drawRoundMarker(round);
 
+
       if (this.gameData.teams && this.gameData.teams.length >= 1) {
         for (var i in this.gameData.teams) {
           var team = this.gameData.teams[i];
           team.teamUsers.forEach(teamUser => {
-            console.log(teamUser);
-            var name = teamUser.user.userName;
-            if (this.gameData.requestUserId === teamUser.user.userId) {
-              name = '你的选择';
-            }
-            teamUser.guesses.forEach(guess => {
-              if (guess.round !== round.round) {
-                return;
-              }
-
-              var marker = L.marker([guess.lat, guess.lng], {icon: this.getOptionUser(teamUser.user.userId)}).bindTooltip(name,
-                  {
-                    permanent: true,
-                    direction: 'auto'
-                  }).addTo(this.map);
-
-              var latlngs = [
-                [guess.lat, guess.lng],
-                [round.lat, round.lng],
-              ];
-
-              this.markers.push(marker);
-              var polylinePath = new L.Polyline(latlngs, {
-                color: 'blue',
-                weight: 3,
-                opacity: 0.5,
-                smoothFactor: 1
-              });
-              polylinePath.addTo(this.map);
-              this.polylinePaths.push(polylinePath);
-              this.group.push([guess.lat, guess.lng]);
-            });
+            this.drawUser(teamUser, round);
           });
         }
+      } else if (this.gameData.player) {
+        this.drawUser(this.gameData.player, round);
       }
       if (!all) {
         this.map.fitBounds(this.group);
       }
+    },
+
+    drawUser(user, round) {
+      console.log(user);
+      var name = user.user.userName;
+      if (this.gameData.requestUserId === user.user.userId) {
+        name = '你的选择';
+      }
+      user.guesses.forEach(guess => {
+        if (guess.round !== round.round) {
+          return;
+        }
+
+        var marker = L.marker([guess.lat, guess.lng], {icon: this.getOptionUser(user.user.userId)}).bindTooltip(name,
+            {
+              permanent: true,
+              direction: 'auto'
+            }).addTo(this.map);
+
+        var latlngs = [
+          [guess.lat, guess.lng],
+          [round.lat, round.lng],
+        ];
+
+        this.markers.push(marker);
+        var polylinePath = new L.Polyline(latlngs, {
+          color: 'blue',
+          weight: 3,
+          opacity: 0.5,
+          smoothFactor: 1
+        });
+        polylinePath.addTo(this.map);
+        this.polylinePaths.push(polylinePath);
+        this.group.push([guess.lat, guess.lng]);
+      });
     },
 
     toPanorama(gameId, round) {
