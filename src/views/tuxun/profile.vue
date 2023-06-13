@@ -14,10 +14,15 @@
             图寻会员 <span v-if="vipDue">｜过期时间 {{vipDue}}</span>
           </div>
         </div>
-      <div v-if="!this.userProfile || this.$store.state.user.userInfo.userId !== this.userProfile.userAO.userId">
+      <div v-if="!this.userProfile || this.$store.state.user.userInfo.userId !== this.userProfile.userAO.userId" style="margin-top: 10px">
         <el-button v-if="checkFriend && !friend" @click="applyFriend" round>添加好友</el-button>
         <el-button v-if="checkFriend && friend" disabled="true" round>好友</el-button>
       </div>
+
+      <div v-if="!this.userProfile || this.$store.state.user.userInfo.userId !== this.userProfile.userAO.userId" style="margin-top: 10px">
+        <el-button @click="openReportUserDialog" round>举报用户</el-button>
+      </div>
+
       <el-button v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId" @click="logout()">退出登录</el-button>
       <div style="height: 10px"></div>
       <el-button v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId" @click="$vip()">续费/开通会员</el-button>
@@ -142,6 +147,7 @@ export default {
       isVip: false,
       history: null,
       friend: false,
+      showReport: false,
       option: {
         xAxis: {
           type: 'time',
@@ -263,6 +269,21 @@ export default {
     toHistory() {
       tuxunJump('/tuxun/activities')
     },
+    openReportUserDialog() {
+      this.$confirm( '恶意举报可能会被处以短期封禁处罚', '你确定要举报用户吗？',{
+        confirmButtonText: '确定',
+        callback: action => {
+          if (action == 'confirm') {
+            api.getByPath('/api/v0/tuxun/user/report', {target: this.userId}).then(res => {
+              if (res.success) {
+                this.$toast('举报成功！');
+              }
+            });
+          }
+        }
+      });
+
+    }
   }
 };
 </script>
