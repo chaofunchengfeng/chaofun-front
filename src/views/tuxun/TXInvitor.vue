@@ -282,10 +282,13 @@
               <el-button v-else class="home_button"  type="primary" @click="backParty" round>回到派对</el-button>
             </div>
             <div v-if="gameData">
-              <el-button class="home_button"   @click="replay" round>题目复盘</el-button>
+              <el-button class="home_button" @click="replay" round>题目复盘</el-button>
+            </div>
+            <div v-if="gameData && gameData.type === 'solo_match' && gameData.requestUserId && gameData.playerIds.indexOf(gameData.requestUserId) !== -1">
+              <el-button class="home_button"   @click="toAnotherPlayer" round>对手首页</el-button>
             </div>
             <div>
-              <el-button class="home_button" type="warning" @click="goHome" round>回到首页</el-button>
+              <el-button class="home_button" @click="goHome" round>回到首页</el-button>
             </div>
           </div>
         </div>
@@ -305,7 +308,7 @@
               <el-button class="home_button"   @click="replay" round>题目复盘</el-button>
             </div>
             <div>
-              <el-button class="home_button" type="warning" @click="goHome" round>回到首页</el-button>
+              <el-button class="home_button" @click="goHome" round>回到首页</el-button>
             </div>
           </div>
         </div>
@@ -702,6 +705,14 @@ export default {
       setInterval(() => {
         this.wsSend('{"scope": "heart_beat"}');
       }, 15000);
+    },
+
+    toAnotherPlayer() {
+      this.gameData.players.forEach((user) => {
+        if (user.userId !== this.gameData.requestUserId) {
+          tuxunJump('/tuxun/user/' + user.userId);
+        }
+      });
     },
 
     wsOnMessage(e) {
