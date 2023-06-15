@@ -9,11 +9,11 @@
     </div>
     <div class="tab-container">
       <div class="tab">
-        <div :class="duration!=='all'? 'tab-item': 'tab-item-choose'" @click="changeDuration('all')">所有时间</div>
-        <div :class="duration!=='1year'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1year')">一年</div>
-        <div :class="duration!=='1month'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1month')">一个月</div>
-        <div :class="duration!=='1week'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1week')">一周</div>
         <div :class="duration!=='1day'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1day')">一天</div>
+        <div :class="duration!=='1week'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1week')">一周</div>
+        <div :class="duration!=='1month'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1month')">一个月</div>
+        <div :class="duration!=='1year'? 'tab-item': 'tab-item-choose'" @click="changeDuration('1year')">一年</div>
+        <div :class="duration!=='all'? 'tab-item': 'tab-item-choose'" @click="changeDuration('all')">所有时间</div>
       </div>
     </div>
     <div class="game_entrance">
