@@ -30,7 +30,7 @@
 
 <!--      <div @click="toFirstTournament" class="info">  玩家第四届个人solo赛圆满结束！</div>-->
       <div class="normal-info ">祝大家高考中考期末考顺利，考出好成绩！！！</div>
-      <div class="normal-info ">「在地图出现之前，世界是无限的。」</div>
+      <div class="normal-info ">「让这个世界少一些蛮荒。」</div>
       <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期限时折扣，快来开通/续费会员吧～</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
