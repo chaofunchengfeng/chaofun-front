@@ -12,8 +12,8 @@
     <div v-if="mapsData && mapsData.desc" class="describe">
       {{mapsData.desc}}
     </div>
-    <div v-if="userInfo" class="players">
-      作者: {{userInfo.userName}}
+    <div v-if="userInfo" class="players" style="margin-top: 1rem">
+      作者: <span @click="toUser(userInfo)" style="cursor: pointer; font-weight: bolder "> {{userInfo.userName}} </span>
     </div>
     <div v-if="mapsData && mapsData.pcount" class="players">
       地点: {{mapsData.pcount}}
@@ -191,16 +191,14 @@ export default {
   .describe {
     color: yellow;
     font-size: 1rem;
-    font-weight: 700;
     margin-bottom: 0.25rem;
   }
   .players {
     color: white;
-    font-weight: 700;
     margin-bottom: 0.25rem;
   }
   .rank {
-    padding-top: 3rem;
+    padding-top: 2rem;
     font-size: 16px;
     color: darkgray;
   }
