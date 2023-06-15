@@ -49,7 +49,7 @@ export default {
   name: 'maps-hot',
   data() {
     return {
-      duration: 'all',
+      duration: '1day',
       pagedata: null,
     };
   },
