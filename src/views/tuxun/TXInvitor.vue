@@ -525,7 +525,10 @@ export default {
 
     window.addEventListener(
         'keydown',
+
         (event) => {
+          console.log(event);
+
           if (this.lastRound && !this.lastRound.move && (
                   // Change or remove this condition depending on your requirements.
                   event.key === 'ArrowUp' || // Move forward
@@ -535,8 +538,15 @@ export default {
                       event.key === 'w' ||
                       event.key === 'a' ||
                   event.key === 's' ||
-                  event.key === 'd'
-              ) &&
+                  event.key === 'd' ||
+                  event.key === 'W' ||
+                  event.key === 'A' ||
+                  event.key === 'S' ||
+                  event.key === 'D' ||
+                  event.key === 'Unidentified' ||
+                  event.key === 'CapsLock'
+              )
+              &&
               !event.metaKey &&
               !event.altKey &&
               !event.ctrlKey

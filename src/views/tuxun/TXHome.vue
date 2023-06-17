@@ -206,7 +206,13 @@ export default {
                   event.key === 'w' ||
                   event.key === 'a' ||
                   event.key === 's' ||
-                  event.key === 'd'
+                  event.key === 'd' ||
+                  event.key === 'W' ||
+                  event.key === 'A' ||
+                  event.key === 'S' ||
+                  event.key === 'D' ||
+                  event.key === 'Unidentified' ||
+                  event.key === 'CapsLock'
               ) &&
               !event.metaKey &&
               !event.altKey &&

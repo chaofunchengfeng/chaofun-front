@@ -156,7 +156,7 @@ export default {
   },
   methods:{
     getHotMaps(){
-      api.getByPath('/api/v0/tuxun/maps/list', {duration: 'all', count: 10}).then(res=>{
+      api.getByPath('/api/v0/tuxun/maps/list', {duration: 'all', count: 20}).then(res=>{
         this.pagedata = res.data.slice(0, 9);
         this.pagedata.forEach(function (item) {
           this.addDifficulty(item);
