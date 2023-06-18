@@ -1,23 +1,15 @@
 <template>
 <div class="container">
   <div class="choose-container">
-    <div @click="toPano" class="text-create" style="width: 100%; padding:2rem;margin-top: 2rem; background-color: #DEF5D5">
-      <div style="text-align: center; font-size: 24px; font-weight: bold">
-        街景审核
-      </div>
-      <div>
-        余量: {{restPano}}
-      </div>
-    </div>
+    <el-button @click="toPano" style="margin-top: 1rem">街景审核 {{restPano}}</el-button>
     <div></div>
-    <div @click="toWonders" class="img-create" style="width: 100%; padding:2rem;margin-top: 2rem; background-color: #027BFF">
-      <div style="text-align: center; font-size: 24px; font-weight: bold">
-        街景奇观审核
-      </div>
-      <div>
-        余量: {{restWonders}}
-      </div>
-    </div>
+    <el-button @click="toWonders" style="margin-top: 1rem">街景奇观审核 {{restWonders}}</el-button>
+    <div></div>
+    <el-button style="margin-top: 1rem">用户封禁</el-button>
+<!--    <div>-->
+<!--      <el-input placeholder="uid"></el-input>-->
+<!--      <div>封禁时间</div>-->
+<!--    </div>-->
   </div>
 </div>
 </template>
@@ -57,6 +49,9 @@ export default {
     toWonders() {
       tuxunJump('/tuxun/wonders-filter');
     },
+    toBan() {
+
+    }
   }
 };
 </script>
