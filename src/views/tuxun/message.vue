@@ -45,12 +45,13 @@
           <div>
             你因为 {{item.data}}
             <span v-if="item.banTimeUnit === 'day'">
-              被封禁 {{item.banTime}} 天
+              被封禁 {{item.banTime}} 天，解封时间为 {{moment(item.banUtil).format('YYYY-MM-DD HH:mm')}},
             </span>
 
             <span v-if="item.banTimeUnit === 'forever'">
-              被永久封禁
+              被永久封禁,
             </span>
+            <span> 你仍然可以除淘汰赛积分赛，匹配赛的练习赛等功能 </span>
           </div>
         </div>
 
@@ -63,11 +64,14 @@
 <script>
 import * as api from '../../api/api';
 import {tuxunJump} from "./common";
+import moment from 'moment';
+
 export default {
   name: "message",
   data() {
     return {
       history: null,
+      moment: moment,
       list: []
     }
   },
