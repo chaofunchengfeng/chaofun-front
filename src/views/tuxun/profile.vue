@@ -13,6 +13,10 @@
           <div v-if="isVip">
             图寻会员 <span v-if="vipDue">｜过期时间 {{vipDue}}</span>
           </div>
+
+          <div v-if="ban">
+            封禁中
+          </div>
         </div>
       <div v-if="!this.userProfile || this.$store.state.user.userInfo.userId !== this.userProfile.userAO.userId" style="margin-top: 10px">
         <el-button v-if="checkFriend && !friend" @click="applyFriend" round>添加好友</el-button>
@@ -147,6 +151,7 @@ export default {
       isVip: false,
       history: null,
       friend: false,
+      ban: false,
       showReport: false,
       option: {
         xAxis: {
@@ -175,6 +180,7 @@ export default {
     this.getUserActivity();
     this.getHistory();
     this.checkVip();
+    this.checkBan();
     this.checkFriendFunc();
   },
   methods: {
@@ -183,6 +189,13 @@ export default {
       setTimeout(() => {
         tuxunJump('/tuxun/');
       }, 1000);
+    },
+   checkBan() {
+      api.getByPath('/api/v0/tuxun/user/checkBan', {userId: this.userId}).then(res=>{
+        if (res.data) {
+          this.ban = true;
+        }
+      });
     },
     getUserProfile() {
       api.getByPath('/api/v0/tuxun/getProfile', {userId: this.userId}).then(res=>{

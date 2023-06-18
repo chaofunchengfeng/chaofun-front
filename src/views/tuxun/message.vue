@@ -51,7 +51,7 @@
             <span v-if="item.banTimeUnit === 'forever'">
               被永久封禁,
             </span>
-            <span> 你仍然可以除淘汰赛积分赛，匹配赛的练习赛等功能 </span>
+            <span> 你仍然可以使用除淘汰赛，积分赛，匹配赛的练习赛等功能 </span>
           </div>
         </div>
 
