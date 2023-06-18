@@ -40,6 +40,20 @@
             <span @click="toParty(item.data)" class="party">派对</span>
           </div>
         </div>
+
+        <div v-if="item.type === 'ban'" class="invite_party">
+          <div>
+            你因为 {{item.data}}
+            <span v-if="item.banTimeUnit === 'day'">
+              被封禁 {{item.banTime}} 天
+            </span>
+
+            <span v-if="item.banTimeUnit === 'forever'">
+              被永久封禁
+            </span>
+          </div>
+        </div>
+
       </div>
     </div>
     <div v-if="list.length === 0" class="no_message"> 暂无消息 </div>
