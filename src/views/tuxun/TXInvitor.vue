@@ -1105,6 +1105,21 @@ export default {
           api.getByPath('/api/v0/tuxun/br/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         }
+      } else if (this.gameData.type === 'team') {
+        var marker = L.marker([e.latlng.wrap().lat, e.latlng.wrap().lng], {icon: this.getOptionUser(this.$store.state.user.userInfo.userId), opacity: 0.5}).bindTooltip('你提示了',
+            {
+              permanent: true,
+              direction: 'auto'
+            }).addTo(this.map);
+
+        setTimeout(() => {
+          marker.remove();
+        }, 2000);
+
+        // 这里就是 pin 提醒了
+        api.getByPath('/api/v0/tuxun/game/pin', {gameId: this.gameId, lng: e.latlng.wrap().lng, lat: e.latlng.wrap().lat}).then(res => {
+        });
+
       }
     },
 
@@ -1263,6 +1278,38 @@ export default {
           }
         }
       }
+
+      if (teamUser.user.userId !== this.$store.state.user.userInfo.userId) {
+        var lastPIN = teamUser.pin;
+        console.log(teamUser.pin);
+        if (lastPIN) {
+          var marker = L.marker([lastPIN.lat, lastPIN.lng], {icon: this.getOptionUser(teamUser.user.userId), opacity: 0.5}).bindTooltip(teamUser.user.userName,
+              {
+                permanent: true,
+                direction: 'auto'
+              }).addTo(this.map);
+          this.ranksMarker.push(marker);
+        }
+
+        var hint = teamUser.hint;
+        var lastTime = hint.gmtCreate + 2000 - (new Date().getTime());
+        if (lastTime > 0) {
+          if (hint) {
+            var marker = L.marker([hint.lat, hint.lng], {
+              icon: this.getOptionUser(teamUser.user.userId),
+              opacity: 0.5
+            }).bindTooltip(teamUser.user.userName,
+                {
+                  permanent: true,
+                  direction: 'auto'
+                }).addTo(this.map);
+            setTimeout(() => {
+              marker.remove();
+            }, lastTime);
+          }
+        }
+      }
+
     },
 
     centerView() {
