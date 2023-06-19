@@ -1292,21 +1292,21 @@ export default {
         }
 
         var hint = teamUser.hint;
-        var lastTime = hint.gmtCreate + 2000 - (new Date().getTime());
-        if (lastTime > 0) {
           if (hint) {
-            var marker = L.marker([hint.lat, hint.lng], {
-              icon: this.getOptionUser(teamUser.user.userId),
-              opacity: 0.5
-            }).bindTooltip(teamUser.user.userName,
-                {
-                  permanent: true,
-                  direction: 'auto'
-                }).addTo(this.map);
-            setTimeout(() => {
-              marker.remove();
-            }, lastTime);
-          }
+            var lastTime = hint.gmtCreate + 2000 - (new Date().getTime());
+            if (lastTime > 0) {
+              var marker = L.marker([hint.lat, hint.lng], {
+                icon: this.getOptionUser(teamUser.user.userId),
+                opacity: 0.5
+              }).bindTooltip(teamUser.user.userName,
+                  {
+                    permanent: true,
+                    direction: 'auto'
+                  }).addTo(this.map);
+              setTimeout(() => {
+                marker.remove();
+              }, lastTime);
+            }
         }
       }
 

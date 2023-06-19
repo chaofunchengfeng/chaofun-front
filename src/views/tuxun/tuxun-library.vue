@@ -7,7 +7,7 @@
     <div class="main">
       <div @click="goXJ" class="card">
           <div class="title">炒饭寻景</div>
-          <div class="describe">地图标点分享图片，在线旅游(开发中)</div>
+          <div class="describe">地图标点分享图片，在线旅游</div>
       </div>
       <div @click="goPano" class="card">
         <div class="title">炒饭宇宙</div>
