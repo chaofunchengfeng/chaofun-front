@@ -2,10 +2,10 @@
   <div class="container">
     <div class="back_home">
       <el-button @click="goHome" round>首页</el-button>
-      <el-button type="primary" @click="randomTrain" round>随机</el-button>
+      <el-button @click="randomTrain" round>随机</el-button>
     </div>
     <div class="top-right">
-      <el-button type="primary" @click="goMapMakeHome" round>自建</el-button>
+      <el-button @click="goMapMakeHome" round>自建</el-button>
     </div>
     <div class="nav">
       练习题库<span style="color: gold">(VIP)</span>

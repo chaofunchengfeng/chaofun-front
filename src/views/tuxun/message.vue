@@ -45,7 +45,7 @@
           <div>
             你因为 {{item.data}}
             <span v-if="item.banTimeUnit === 'day'">
-              被封禁 {{item.banTime}} 天，解封时间为 {{moment(item.banUtil).format('YYYY-MM-DD HH:mm')}},
+              被封禁 {{item.banTime}} 天，解封时间为 {{moment(item.banUntil).format('YYYY-MM-DD HH:mm')}},
             </span>
 
             <span v-if="item.banTimeUnit === 'forever'">
