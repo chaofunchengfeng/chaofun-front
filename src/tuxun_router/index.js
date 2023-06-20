@@ -141,6 +141,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/map-maker',
+    component: () => import('@/views/tuxun/map-maker'),
+    name: 'map-maker',
+    meta: { title: '题库制作-图寻'},
+    hidden: true
+  },
+  {
     path: '/finder-manager',
     component: () => import('@/views/tuxun/finder-manager'),
     name: 'tuxun-finder-manager',

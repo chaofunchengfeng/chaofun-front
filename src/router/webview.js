@@ -284,6 +284,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/map-maker',
+    component: () => import('@/views/tuxun/map-maker'),
+    name: 'map-maker',
+    meta: { title: '街景选择-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/finder-manager',
     component: () => import('@/views/tuxun/finder-manager'),
     name: 'tuxun-finder-manager',
