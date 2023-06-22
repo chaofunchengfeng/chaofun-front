@@ -256,7 +256,7 @@ export default {
         console.log(round.panoId);
         tuxunOpen('https://maps.baidu.com/#panoid=' + round.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + round.panoId);
       } else {
-        tuxunJump('/tuxun/replay_pano?gameId=' + gameId + '&round=' + round.round);
+        tuxunOpen('/tuxun/replay_pano?gameId=' + gameId + '&round=' + round.round);
       }
       console.log('123');
     },
