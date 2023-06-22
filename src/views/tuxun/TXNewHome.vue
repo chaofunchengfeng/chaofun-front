@@ -28,8 +28,8 @@
       </div>
 
 
-<!--      <div @click="toFirstTournament" class="info">  玩家第四届个人solo赛圆满结束！</div>-->
-      <div class="normal-info ">祝大家高考中考期末考顺利，考出好成绩！！！</div>
+      <div @click="toFirstTournament" class="info"> 随机题库！随机模式！玩家图寻第五届组队赛周末开赛！</div>
+<!--      <div  class="info "> 随机地图！随机模式！玩家图寻第五届组队赛 ~~~</div>-->
       <div class="normal-info ">「让这个世界少一些蛮荒。」</div>
       <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期限时折扣，快来开通/续费会员吧～</div>
       <section class="game_entrance">
@@ -339,9 +339,9 @@ export default {
     },
     toFirstTournament() {
       try {
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1261948'});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1265610'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1261948');
+        tuxunOpen('https://choa.fun/p/1265610');
       }
     },
     raiseVIP() {

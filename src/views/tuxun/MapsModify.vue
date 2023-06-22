@@ -5,7 +5,7 @@
         <el-form-item>
           <div>
             街景链接:一行一条，支持百度街景和Google街景
-            <a target="_blank" href="https://www.yuque.com/ucun5p/kfw26e/ttqiucknz7sifo5u">点击跳转教程</a>
+            <a target="_blank" href="https://www.yuque.com/chaofun/tuxun/added">点击跳转教程</a>
           </div>
           <div>
             也支持 map-making.app 的 json 字符串, 请直接粘贴
@@ -32,10 +32,11 @@
     <div v-if="mapsData && mapsData.desc" class="describe">
       {{mapsData.desc}}
     </div>
-    <el-button @click="modify" type="primary">修改基础信息</el-button>
+    <el-button @click="modify">修改基础信息</el-button>
     <div style="padding-bottom: 2rem"></div>
-    <el-button @click="toDistribute" type="primary">查看题库分布</el-button>
-    <el-button @click="addPano" type="primary">增加街景</el-button>
+    <el-button @click="toDistribute" >查看题库分布</el-button>
+    <el-button @click="goBaidu">百度地图添加</el-button>
+    <el-button @click="addPano">链接/JSON添加</el-button>
     <div style="color: white">发布题库需要题库中有5个状态为已发布或者待发布状态的街景，当系统检测到题库中有5个Google官方街景，会自动将题库标记为「可移动」</div>
     <div style="color: white">注：异步上传，请刷新查看进度，请勿使用脚本提交</div>
     <div class="list_container">
@@ -55,7 +56,7 @@
         </el-pagination>
       </div>
 
-      <div v-for="(item, index) in panos" :key="index" class="list_item" style="display: flex;justify-content: space-between ">
+      <div v-for="(item, index) in panos" :key="index" class="list_item" style="display: flex;justify-content: space-between; overflow: auto ">
         <div style="display: flex; color: white">
           <div @click="toPano(item)">{{item.panoId}}</div>
           <div v-if="item.status === 'crawling'" class="status" style="color: yellow">准备中</div>
@@ -196,7 +197,9 @@ export default {
     },
     modify() {
       tuxunJump('/tuxun/maps_create?mapsId=' + this.mapsId);
-
+    },
+    goBaidu() {
+      tuxunJump('/tuxun/map-maker?mapsId=' + this.mapsId);
     },
     goBack() {
       try {
@@ -254,6 +257,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .container {
     .list_container {
+      width: 90%;
       max-width: 90%;
       margin: auto;
     }

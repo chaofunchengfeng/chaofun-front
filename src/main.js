@@ -40,6 +40,9 @@ if (process.env.NODE_ENV === 'development') {
   new VConsole();
 }
 
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
+
 // 图片开启懒加载
 import VueLazyload from 'vue-lazyload';
 Vue.use(VueLazyload);
