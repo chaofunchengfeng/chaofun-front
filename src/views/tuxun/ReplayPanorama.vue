@@ -6,6 +6,7 @@
       <el-button v-else @click="goReplay" size="small" round>返回复盘</el-button>
       <el-button @click="goHome" size="small" round>首页</el-button>
       <el-button @click="toReport" size="small"  round> 坏题反馈 </el-button>
+      <el-button v-if="roundData" size="mini"  @click="reset" round> 回到原点</el-button>
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@ export default {
     return {
       gameId: null,
       round: null,
+      roundData: null,
       history: null,
       gameData: null,
       image: null,
@@ -51,7 +53,8 @@ export default {
           api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
             console.log(res.data);
             if (res.success) {
-              this.render(res.data.rounds[this.round - 1]);
+              this.roundData = res.data.rounds[this.round - 1];
+              this.render(this.roundData);
             }
           });
         }
@@ -99,6 +102,9 @@ export default {
       } else {
         this.setGoogle(round.panoId);
       }
+    },
+    reset() {
+      this.setGoogle(this.roundData.panoId);
     },
     setGoogle(panoId) {
       this.viewer.setPano(panoId);
