@@ -44,7 +44,6 @@ export default {
   methods: {
     getPano(x, y) {
       this.$http.get('https://mapsv0.bdimg.com/?qt=qsdata&x=' + x +'&y=' + y + '&radius=1000').then(function (res) {
-        this.panoId = res.data.content.id;
         this.getPanoInfo(this.panoId, true);
       });
     },
@@ -145,6 +144,7 @@ export default {
       }, 50);
     },
     getPanoInfo(pano, set) {
+      this.panoId = pano;
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
         console.log(res);
         this.viewer.setLinks(res.data.links);
@@ -152,9 +152,11 @@ export default {
         this.headingMap[res.data.pano] = res.data.heading;
         if (res.data.links) {
           res.data.links.forEach((item) => {
+            this.preloadImage(item.pano);
             this.headingMap[item.pano] = item.centerHeading;
           });
         }
+
         if (set) {
           this.setGoogle(pano);
         }
@@ -166,6 +168,10 @@ export default {
         this.map.addOverlay(this.marker);
 
       });
+    },
+    preloadImage(pano) {
+      var img = new Image();
+      img.src = 'https://map.chao-fan.com/bd/thumb/' + pano;
     },
     goBack() {
       try {
