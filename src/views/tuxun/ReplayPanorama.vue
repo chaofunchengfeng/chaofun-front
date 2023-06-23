@@ -97,17 +97,35 @@ export default {
                 },
               }
           );
-          this.setGoogle(round.panoId);
+          this.setGoogle(round);
         });
       } else {
-        this.setGoogle(round.panoId);
+        this.setGoogle(round);
       }
     },
     reset() {
-      this.setGoogle(this.roundData.panoId);
+      this.setGoogle(this.roundData);
     },
-    setGoogle(panoId) {
-      this.viewer.setPano(panoId);
+    setGoogle(round) {
+      this.viewer.setPano(round.panoId);
+      if (round.vHeading) {
+        this.viewer.setPov({
+          heading: round.vHeading,
+          pitch: round.vPitch,
+        });
+      } else if (!round.pan) {
+        this.viewer.setPov({
+          heading: 0,
+          pitch: round.vPitch,
+        });
+      }
+
+      if (round.vZoom) {
+        this.viewer.setZoom(round.vZoom);
+      } else {
+        this.viewer.setZoom(0);
+      }
+
       this.viewer.setVisible(true);
       setTimeout(() => {
         this.viewer.setZoom(0);
