@@ -18,6 +18,7 @@
       <div style="height: 1rem">原因：</div>
       <el-radio v-model="reason" label="作弊">作弊</el-radio>
       <el-radio v-model="reason" label="恶意掉分">恶意掉分</el-radio>
+      <el-radio v-model="reason" label="恶意举报">恶意举报</el-radio>
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="hideBanUserShow()">取 消</el-button>
