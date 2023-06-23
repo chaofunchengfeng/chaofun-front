@@ -28,6 +28,7 @@ export default {
       panoId: null,
       panoIds: [],
       saveMarkers: [],
+      headingMap: {},
       marker: null,
       mapsId: null,
       map: null
@@ -44,7 +45,7 @@ export default {
     getPano(x, y) {
       this.$http.get('https://mapsv0.bdimg.com/?qt=qsdata&x=' + x +'&y=' + y + '&radius=1000').then(function (res) {
         this.panoId = res.data.content.id;
-        this.setGoogle(res.data.content.id);
+        this.getPanoInfo(this.panoId, true);
       });
     },
     init() {
@@ -72,7 +73,7 @@ export default {
         this.viewer = new google.maps.StreetViewPanorama(
             document.getElementById('viewer'), {
               fullscreenControl: false,
-              panControl: false,
+              panControl: true,
               addressControl: false,
               imageDateControl: false,
               motionTracking: false,
@@ -92,7 +93,7 @@ export default {
         this.viewer.addListener('pano_changed', () => {
           console.log('pano_changed');
           if (this.viewer.getPano().length === 27) {
-            this.getPanoInfo(this.viewer.getPano());
+            this.getPanoInfo(this.viewer.getPano(), false);
           }
         });
         this.viewer.addListener('status_changed', () => {
@@ -130,7 +131,7 @@ export default {
             tileSize: new google.maps.Size(512, 512),
             worldSize: new google.maps.Size(8192, 4096),
             // The heading in degrees at the origin of the panorama
-            centerHeading: 0,
+            centerHeading: this.headingMap[pano] ?? 0,
             getTileUrl: this.getCustomPanoramaTileUrl,
           },
         };
@@ -143,14 +144,27 @@ export default {
         this.viewer.setZoom(0);
       }, 50);
     },
-    getPanoInfo(pano) {
+    getPanoInfo(pano, set) {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
         console.log(res);
+        this.viewer.setLinks(res.data.links);
+        // this.centerHeading = res.data.heading;
+        this.headingMap[res.data.pano] = res.data.heading;
+        if (res.data.links) {
+          res.data.links.forEach((item) => {
+            this.headingMap[item.pano] = item.centerHeading;
+          });
+        }
+        if (set) {
+          this.setGoogle(pano);
+        }
+
         if (this.saveMarkers.indexOf(this.marker) === -1 && this.marker) {
           this.marker.remove();
         }
         this.marker = new BMapGL.Marker(new BMapGL.Point(res.data.bd09Lng, res.data.bd09Lat));
         this.map.addOverlay(this.marker);
+
       });
     },
     goBack() {
