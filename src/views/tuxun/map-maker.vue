@@ -44,7 +44,7 @@ export default {
   methods: {
     getPano(x, y) {
       this.$http.get('https://mapsv0.bdimg.com/?qt=qsdata&x=' + x +'&y=' + y + '&radius=1000').then(function (res) {
-        this.getPanoInfo(this.panoId, true);
+        this.getPanoInfo(res.data.content.id, true);
       });
     },
     init() {
