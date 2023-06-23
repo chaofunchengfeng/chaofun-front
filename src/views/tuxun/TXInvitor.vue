@@ -546,10 +546,12 @@ export default {
                   event.key === 'Unidentified' ||
                   event.key === 'CapsLock'
               )
-              &&
-              !event.metaKey &&
-              !event.altKey &&
-              !event.ctrlKey
+              // 要移除这些
+              // &&
+              // !event.metaKey &&
+              // !event.altKey &&
+              // !event.ctrlKey &&
+              // !event.shiftKey
           ) {
             event.stopPropagation();
           };
