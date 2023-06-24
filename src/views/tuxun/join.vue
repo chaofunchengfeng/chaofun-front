@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     joinByCode(code) {
+      code = code.replaceAll('https://tuxun.fun/join?code=', '')
       this.doLoginStatus().then((res) => {
         if (res) {
           api.getByPath('/api/v0/tuxun/party/join', {joinCode: code}).then(res => {
