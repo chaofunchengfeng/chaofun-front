@@ -51,7 +51,7 @@ export default {
         if (res) {
           api.getByPath('/api/v0/tuxun/party/join', {joinCode: code}).then(res => {
             if (res.success) {
-              tuxunJump('/tuxun/paidui');
+              tuxunJump('/tuxun/party');
             } else {
               this.disband = true;
             }
@@ -63,7 +63,7 @@ export default {
       tuxunJump('/tuxun/');
     },
     goParty() {
-      tuxunJump('/tuxun/paidui');
+      tuxunJump('/tuxun/party');
     },
   }
 };
