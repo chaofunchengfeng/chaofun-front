@@ -122,9 +122,9 @@ export default {
         map.attributionControl.setPrefix('华为地图');
         map.attributionControl.addAttribution('GS（2022）2885号');
 
-        var url = 'https://map.chao-fan.com/tile/s2_z{z}_x{x}_y{y}.png';
+        var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
         if(this.ISPHONE){
-          url = 'https://map.chao-fan.com/tile/s1_z{z}_x{x}_y{y}.png';
+          url = 'https://map.chao-fan.com/tile230411/s1_z{z}_x{x}_y{y}.jpeg';
         }
         L.tileLayer(url, {
           maxZoom: 18,
@@ -222,8 +222,8 @@ export default {
   }
 }
 .map-position {
-  position: absolute; 
-  right: 20px; 
+  position: absolute;
+  right: 20px;
   bottom: 20px;
   z-index: 5000;
 }
