@@ -96,10 +96,6 @@ export default {
       mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
       var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
       var tileSize = 512;
-      if(this.ISPHONE) {
-        url = 'https://map.chao-fan.com/tile230411/s1_z{z}_x{x}_y{y}.jpeg';
-        tileSize = 256;
-      }
       const map = new mapboxgl.Map({
         attributionControl: false,
         container: 'map', // container ID
