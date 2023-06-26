@@ -1404,6 +1404,9 @@ export default {
       this.confirm();
     },
     confirm() {
+      if (this.confirmed) {
+        return;
+      }
       if (!this.lng) {
         this.$toast('请在地图上选择位置');
         return;
