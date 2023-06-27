@@ -537,7 +537,7 @@ export default {
       }
     }
     .user-profile {
-      margin-top: 1rem;
+      margin-top: 3rem;
       width: 100% !important;
       padding: 15px !important;
     }
