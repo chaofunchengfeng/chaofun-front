@@ -498,7 +498,7 @@ export default {
 }
 
 //PC
-@media screen and (min-device-width: 992px) {
+@media only screen and (min-width: 992px) {
   .solo-data {
     margin-top: 30px;
     text-align: left;
@@ -521,7 +521,7 @@ export default {
 }
 
 //H5,Pad
-@media screen and (max-device-width: 992px) {
+@media only screen and (max-width: 992px) {
   .hidden-div{
     margin-top: 3.5rem;
   }
