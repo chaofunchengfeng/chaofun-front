@@ -5,8 +5,7 @@
       <el-button @click="goHome" round>首页</el-button>
     </div>
     <div class="user-section" style="text-align: center;">
-      <div class="header"
-        v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId">
+      <div class="header" v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId">
         <el-link @click="logout()" :underline="false">
           <svg-icon icon-class="logout" class-name="header-icon" />
           <span class="header-btn">退出登录</span>
@@ -355,22 +354,22 @@ export default {
     color: #A6A6A6;
 
     .header-icon {
-      width: 20px !important;
-      height: 23.6px !important;
+      width: 1.2rem;
+      height: 1.2rem;
       margin-left: 15px;
     }
 
     .header-btn {
       margin-left: 5px;
-      font-size: 22px;
+      font-size: 1.2rem;
       font-weight: 400;
-      // color: rgba(166, 166, 166, 1);
     }
   }
 
   .user-profile {
     background: #CCCCCC21;
     width: fit-content;
+    width: -moz-fit-content;
     text-align: left;
     margin: 50px auto;
     margin-bottom: 20px;
@@ -522,9 +521,26 @@ export default {
 
 //H5,Pad
 @media screen and (max-device-width: 992px) {
-  .user-profile {
-    width: 100% !important;
-    padding: 15px !important;
+  .user-section{
+    .header{
+      margin-top: 3.5rem;
+      .header-icon {
+        width: 1rem;
+        height: 1rem;
+        margin-left: 15px;
+      }
+
+      .header-btn {
+        margin-left: 5px;
+        font-size: 1rem;
+        font-weight: 400;
+      }
+    }
+    .user-profile {
+      margin-top: 1rem;
+      width: 100% !important;
+      padding: 15px !important;
+    }
   }
 
   .nickname {
