@@ -73,7 +73,7 @@
       <table style="margin: 0 auto;text-align: left;">
         <tr>
           <td class="rank-title" style="text-align: center;">总场次</td>
-          <td class="rank-title" style="padding-left: 20px;">分数：</td>
+          <td class="rank-title" style="padding-left: 20px;">积分：</td>
           <td class="rank-num" style="color: #D43030;">{{ this.userProfile.rating || '-' }}</td>
           <td class="rank-title" style="padding-left: 20px;">排名：</td>
           <td class="rank-num" style="color: #C47222;">{{ this.userProfile.rank || '-' }}</td>
