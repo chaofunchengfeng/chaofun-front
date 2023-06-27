@@ -4,6 +4,7 @@
       <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
     </div>
+    <div class="hidden-div"></div>
     <div class="user-section" style="text-align: center;">
       <div class="header" v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId">
         <el-link @click="logout()" :underline="false">
@@ -19,50 +20,52 @@
           <span class="header-btn">历史记录</span>
         </el-link>
       </div>
-      <div v-if="this.userProfile" class="user-profile">
-        <div style="display: flex;">
-          <div class="user-img">
-            <img :src="imgOrigin + this.userProfile.userAO.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="" />
-          </div>
-          <div class="user-info">
-            <div class="nickname">{{ this.userProfile.userAO.userName }}</div>
-            <div class="uid">uid: {{ this.userProfile.userAO.userId }}</div>
-            <div v-if="isVip">
-              <div class="vip">
-                <svg-icon icon-class="vip" class-name="header-icon" />
-                图寻会员
-                <el-button type="warning" size="mini" round
-                  v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
-                  @click="$vip()">续费</el-button>
-              </div>
-              <div v-if="vipDue" class="duetime">过期时间：{{ vipDue }}</div>
+      <div style="display:flex;">
+        <div v-if="this.userProfile" class="user-profile" style="width: auto;">
+          <div style="display: flex;">
+            <div class="user-img">
+              <img :src="imgOrigin + this.userProfile.userAO.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="" />
             </div>
-            <div v-else>
-              <div class="vip-not">
-                <svg-icon icon-class="vip" class-name="header-icon" />
-                普通用户
-                <el-button type="warning" size="mini" round
-                  v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
-                  @click="$vip()">开通会员</el-button>
+            <div class="user-info">
+              <div class="nickname">{{ this.userProfile.userAO.userName }}</div>
+              <div class="uid">uid: {{ this.userProfile.userAO.userId }}</div>
+              <div v-if="isVip">
+                <div class="vip">
+                  <svg-icon icon-class="vip" class-name="header-icon" />
+                  图寻会员
+                  <el-button type="warning" size="mini" round
+                    v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
+                    @click="$vip()">续费</el-button>
+                </div>
+                <div v-if="vipDue" class="duetime">过期时间：{{ vipDue }}</div>
+              </div>
+              <div v-else>
+                <div class="vip-not">
+                  <svg-icon icon-class="vip" class-name="header-icon" />
+                  普通用户
+                  <el-button type="warning" size="mini" round
+                    v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
+                    @click="$vip()">开通会员</el-button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div v-if="ban" class="ban">封禁中</div>
-        <div v-if="!this.userProfile || this.$store.state.user.userInfo.userId !== this.userProfile.userAO.userId"
-          style="margin-top: 10px">
-          <el-link v-if="checkFriend && !friend" @click="applyFriend" :underline="false">
-            <svg-icon icon-class="add-friend" class-name="header-icon" />
-            <span class="header-btn">添加好友</span>
-          </el-link>
-          <el-link v-if="checkFriend && friend" :underline="false" disabled style="color: #0E62C9;">
-            <i class="el-icon-check"></i>
-            <span class="header-btn">已加好友</span>
-          </el-link>
-          <el-link @click="openReportUserDialog" :underline="false" style="margin-left: 15px;">
-            <i class="el-icon-warning-outline"></i>
-            <span class="header-btn">举报用户</span>
-          </el-link>
+          <div v-if="ban" class="ban">封禁中</div>
+          <div v-if="!this.userProfile || this.$store.state.user.userInfo.userId !== this.userProfile.userAO.userId"
+            style="margin-top: 10px">
+            <el-link v-if="checkFriend && !friend" @click="applyFriend" :underline="false">
+              <svg-icon icon-class="add-friend" class-name="header-icon" />
+              <span class="header-btn">添加好友</span>
+            </el-link>
+            <el-link v-if="checkFriend && friend" :underline="false" disabled style="color: #0E62C9;">
+              <i class="el-icon-check"></i>
+              <span class="header-btn">已加好友</span>
+            </el-link>
+            <el-link @click="openReportUserDialog" :underline="false" style="margin-left: 15px;">
+              <i class="el-icon-warning-outline"></i>
+              <span class="header-btn">举报用户</span>
+            </el-link>
+          </div>
         </div>
       </div>
     </div>
@@ -368,8 +371,6 @@ export default {
 
   .user-profile {
     background: #CCCCCC21;
-    width: fit-content;
-    width: -moz-fit-content;
     text-align: left;
     margin: 50px auto;
     margin-bottom: 20px;
@@ -479,7 +480,7 @@ export default {
     .solo-title {
       color: white;
       font-size: 1.3rem;
-      font-weight: 200;
+      font-weight: 400;
       vertical-align: middle;
     }
 
@@ -521,9 +522,11 @@ export default {
 
 //H5,Pad
 @media screen and (max-device-width: 992px) {
+  .hidden-div{
+    margin-top: 3.5rem;
+  }
   .user-section{
     .header{
-      margin-top: 3.5rem;
       .header-icon {
         width: 1rem;
         height: 1rem;
@@ -537,7 +540,7 @@ export default {
       }
     }
     .user-profile {
-      margin-top: 3rem;
+      margin-top: 1rem;
       width: 100% !important;
       padding: 15px !important;
     }
