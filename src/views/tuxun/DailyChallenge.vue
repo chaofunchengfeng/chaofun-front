@@ -154,6 +154,7 @@ export default {
       api.getByPath('/api/v0/tuxun/challenge/getDailyChallengeId', {type: this.type}).then(res => {
         if (res.data) {
           this.challengeId = res.data;
+          this.getTotal();
           this.getRank();
         }
       });
@@ -193,11 +194,17 @@ export default {
       tuxunJump( '/tuxun/challenge?challengeId=' + this.gameData.challengeId);
     },
 
+    getTotal() {
+      api.getByPath('/api/v0/tuxun/challenge/rankTotal', {challengeId: this.challengeId}).then(res=>{
+        if (res.success) {
+          this.total = res.data;
+        }
+      });
+    },
     getRank() {
       api.getByPath('/api/v0/tuxun/challenge/rankNew', {challengeId: this.challengeId}).then(res=>{
         if (res.success) {
           this.rank = res.data.rank;
-          this.total = res.data.total;
         }
       });
     },
