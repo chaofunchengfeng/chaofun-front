@@ -34,10 +34,20 @@
     </div>
 
     <div class="rank_container" v-if="mapsData && this.rank">
-      <el-radio-group v-if="mapsData && mapsData.canMove" v-model="type"  @change="getRank" style="margin-bottom: 10px;">
-        <el-radio-button size="mini" label="noMove">固定</el-radio-button>
-        <el-radio-button size="mini" label="move">移动</el-radio-button>
-      </el-radio-group>
+      <div>
+        <el-radio-group v-if="mapsData && mapsData.canMove" v-model="type"  @change="getRank" style="margin-bottom: 10px;">
+          <el-radio-button size="mini" label="noMove">固定</el-radio-button>
+          <el-radio-button size="mini" label="move">移动</el-radio-button>
+        </el-radio-group>
+      </div>
+
+      <div>
+        <el-radio-group v-model="rankType"  @change="getRank" size="small" style="margin-bottom: 10px;">
+          <el-radio-button size="mini" label="friend">好友</el-radio-button>
+          <el-radio-button size="mini" label="all">全部</el-radio-button>
+        </el-radio-group>
+      </div>
+
       <div @click="toUser(item.user)" v-for="(item,index) in this.rank" :key="index" class="item">
         <div class="left">
           <div class="number">
@@ -68,6 +78,7 @@ export default {
       mapsData: null,
       userInfo: null,
       history: null,
+      rankType: 'friend',
       rank: [],
       type: 'noMove'
     };
@@ -107,7 +118,13 @@ export default {
     },
     getRank() {
       this.rank = [];
-      api.getByPath('/api/v0/tuxun/maps/rank', {mapsId: this.mapsId, type: this.type}).then(res=>{
+
+      var path = '/api/v0/tuxun/maps/rank'
+      if (this.rankType === 'friend') {
+        path = '/api/v0/tuxun/maps/rankFriend';
+      }
+
+      api.getByPath(path, {mapsId: this.mapsId, type: this.type}).then(res => {
         if (res.success) {
           this.rank = res.data;
         }
