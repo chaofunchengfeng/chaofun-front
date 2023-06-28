@@ -58,6 +58,12 @@
         <div class="rank">
           今日挑战排名
         </div>
+        <div>
+          <el-radio-group v-model="rankType"  @change="getRank" style="margin-bottom: 10px;">
+            <el-radio-button size="mini" label="friend">好友</el-radio-button>
+            <el-radio-button size="mini" label="all">全部</el-radio-button>
+          </el-radio-group>
+        </div>
         <div class="rank_container" v-if="this.rank">
           <div @click="toUser(item.user)" v-for="(item,index) in this.rank" :key="index" class="item">
             <div class="left">
@@ -96,6 +102,7 @@ export default {
       dailyChallengePercent: null,
       showBegin: false,
       type: 'china',
+      rankType: 'friend',
       total: null,
 
     };
@@ -131,7 +138,7 @@ export default {
       });
     },
     reload() {
-      // tuxunJump('/tuxun/daily_challenge?type=' + this.type);
+      this.rankType = 'friend';
       this.init();
     },
     init() {
@@ -202,7 +209,11 @@ export default {
       });
     },
     getRank() {
-      api.getByPath('/api/v0/tuxun/challenge/rankNew', {challengeId: this.challengeId}).then(res=>{
+      var path = '/api/v0/tuxun/challenge/rankNew';
+      if (this.rankType === 'friend') {
+        path = '/api/v0/tuxun/challenge/rankFriend';
+      }
+      api.getByPath(path, {challengeId: this.challengeId}).then(res=>{
         if (res.success) {
           this.rank = res.data.rank;
         }
