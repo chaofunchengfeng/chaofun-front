@@ -70,6 +70,7 @@
       </div>
     </div>
     <div class="rank-section" v-if="this.userProfile">
+      <div @click="toDoc" style=" cursor: pointer; font-weight: bolder; margin: 0 auto; width: 100%; padding-bottom: 1rem; text-align: center">7月1日新赛季开始，数据重置</div>
       <table style="margin: 0 auto;text-align: left;">
         <tr>
           <td class="rank-title" style="text-align: center;">总场次</td>
@@ -287,6 +288,9 @@ export default {
           this.friend = res.data;
         }
       });
+    },
+    toDoc() {
+      tuxunOpen('https://www.yuque.com/chaofun/iybzug/ifiw1bdenughdwm7');
     },
     checkVip() {
       if (this.$store.state.user.userInfo.userId == this.userId) {
