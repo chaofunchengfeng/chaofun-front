@@ -291,7 +291,7 @@ export default {
       });
     },
     toDoc() {
-      tuxunOpen('https://www.yuque.com/chaofun/iybzug/ifiw1bdenughdwm7');
+      tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
     },
     checkVip() {
       if (this.$store.state.user.userInfo.userId == this.userId) {

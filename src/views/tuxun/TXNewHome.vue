@@ -28,8 +28,8 @@
       </div>
 
 
-      <div @click="toFirstTournament" class="info"> 玩家第五届组队赛圆满结束!!! </div>
-      <div  class="normal-info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>
+<!--      <div @click="toFirstTournament" class="info"> 玩家第五届组队赛圆满结束!!! </div>-->
+      <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>
 <!--      <div class="normal-info ">「让这个世界少一些蛮荒。」</div>-->
       <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣7月20日结束，快来开通/续费会员吧～</div>
       <section class="game_entrance">
@@ -344,6 +344,9 @@ export default {
         tuxunOpen('https://choa.fun/p/1266427');
       }
     },
+    toDoc() {
+      tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
+    },
     raiseVIP() {
       this.doLoginStatus().then(res=>{
         if(res){
@@ -410,7 +413,7 @@ export default {
       cursor: pointer;
       color: white;
       font-size: medium;
-      padding-top: 8px;
+      padding-top: 16px;
       text-decoration:underline;
     }
     .normal-info {
