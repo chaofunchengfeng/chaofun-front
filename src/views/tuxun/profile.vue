@@ -88,6 +88,7 @@
           <td class="rank-num" style="color: #C47222;">{{ this.userProfile.maxRanking || '-' }}</td>
         </tr>
       </table>
+      <div style="margin: 0 auto; width: 100%; text-align: center;" class="rank-title">上赛季排名: <span class="rank-num" style="color: #C47222;"> {{ this.userProfile.lastRanking || '-' }}</span></div>
     </div>
     <div class="solo-section" v-if="this.userProfile">
       <div class="head">匹配Solo战绩</div>
