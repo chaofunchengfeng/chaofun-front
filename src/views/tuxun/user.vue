@@ -67,8 +67,15 @@ export default {
           this.pagedata = res.data;
         });
       } else if (command === 'kickoff') {
-        api.getByPath('/api/v0/tuxun/party/hostChangeLeave', {userId: this.user.userId}).then(res=>{
-          this.pagedata = res.data;
+        this.$confirm('你确定要踢出TA吗，踢出后TA无法再加入这个派对？', '', {
+          confirmButtonText: '确定',
+          callback: action => {
+            if (action == 'confirm') {
+              api.getByPath('/api/v0/tuxun/party/hostChangeLeave', {userId: this.user.userId}).then(res=>{
+                this.pagedata = res.data;
+              });
+            }
+          }
         });
       }
     }
