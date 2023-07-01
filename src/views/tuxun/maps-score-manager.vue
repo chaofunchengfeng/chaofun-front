@@ -8,8 +8,10 @@
       {{name}} (成绩管理)
     </div>
     <div v-if="mapsData && mapsData.desc" class="describe">
-      提示：点击查看选项
+      提示：点击成绩查看选项
     </div>
+
+    <el-buuton @click="cleanAll">清空所有</el-buuton>
 
     <div class="rank">
       Top100排名
@@ -160,6 +162,20 @@ export default {
       } catch (e) {
         tuxunJump('/tuxun/');
       }
+    },
+    cleanAll() {
+      this.$confirm('你确定要清楚所有成绩吗？', '', {
+        confirmButtonText: '确定',
+        callback: action => {
+          if (action == 'confirm') {
+            api.getByPath('/api/v0/tuxun/maps/cleanScore', {mapsId: this.mapsId}).then(res => {
+              if (res.success) {
+                this.getRank(false);
+              }
+            });
+          }
+        }
+      });
     },
     deleteScore(user) {
       this.$confirm('你确定要删除' + user.userName +  '的成绩吗？', '', {
