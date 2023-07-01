@@ -345,6 +345,14 @@ export default {
       if (partyData === null) {
         return;
       }
+
+      if (code === 'host_change_user_leave') {
+        if (partyData.blockPlayerIds.includes(partyData.requestUserId)) {
+          this.partyData == null;
+          this.$toast('你已被踢出和禁止进入该派对');
+        }
+      }
+
       this.partyData = partyData;
       this.status = this.partyData.status;
       this.health = this.partyData.gameHealth;

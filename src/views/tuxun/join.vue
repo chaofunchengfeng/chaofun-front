@@ -9,6 +9,12 @@
         <el-button round @click="goParty">去派对首页</el-button>
       </div>
     </div>
+    <div v-if="joinCode && block" class="disband">
+      你已经被移除和禁止加入该派对
+      <div>
+        <el-button round @click="goParty">去派对首页</el-button>
+      </div>
+    </div>
     <div v-if="!joinCode" class="enter_code">
       <div class="code_input">
         <el-input
@@ -36,6 +42,8 @@ export default {
       joinCode: null,
       code: '',
       disband: false,
+      block: false,
+
     };
   },
   mounted() {
@@ -52,8 +60,10 @@ export default {
           api.getByPath('/api/v0/tuxun/party/join', {joinCode: code}).then(res => {
             if (res.success) {
               tuxunJump('/tuxun/party');
-            } else {
+            } else if (res.errorCode === 'party_disband') {
               this.disband = true;
+            } else if (res.errorCode === 'party_block') {
+              this.block = true;
             }
           });
         }

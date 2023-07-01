@@ -4,6 +4,8 @@
       <el-avatar :src="imgOrigin + user.icon" class="avatar"></el-avatar>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item v-if="enableShowUserTooltip" :disabled="isHost" icon="el-icon-refresh" command="transfer">转移房主</el-dropdown-item>
+        <el-dropdown-item v-if="enableShowUserTooltip" :disabled="isHost" icon="el-icon-refresh" command="onlooker">强制围观</el-dropdown-item>
+        <el-dropdown-item v-if="enableShowUserTooltip" :disabled="isHost" icon="el-icon-refresh" command="kickoff">踢出派对</el-dropdown-item>
         <el-dropdown-item icon="el-icon-user" command="toUser">查看首页</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -60,6 +62,14 @@ export default {
         });
       } else if (command === 'toUser') {
         tuxunJump('/tuxun/user/' + this.user.userId);
+      } else if (command === 'onlooker') {
+        api.getByPath('/api/v0/tuxun/party/hostChangeOnlooker', {userId: this.user.userId}).then(res=>{
+          this.pagedata = res.data;
+        });
+      } else if (command === 'kickoff') {
+        api.getByPath('/api/v0/tuxun/party/hostChangeLeave', {userId: this.user.userId}).then(res=>{
+          this.pagedata = res.data;
+        });
       }
     }
   }
