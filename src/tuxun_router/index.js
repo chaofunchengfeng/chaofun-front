@@ -217,6 +217,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/maps-score-manager',
+    component: () => import('@/views/tuxun/maps-score-manager'),
+    name: 'maps',
+    meta: { title: '成绩删除-图寻'},
+    hidden: true
+  },
+  {
     path: '/maps-hot',
     component: () => import('@/views/tuxun/maps-hot'),
     name: 'maps-hot',

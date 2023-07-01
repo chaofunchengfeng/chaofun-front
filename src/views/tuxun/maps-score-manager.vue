@@ -2,33 +2,13 @@
   <div class="container">
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>
-      <el-button @click="goHome" round>首页</el-button>
-      <el-button @click="randomTrain" round>随机</el-button>
-      <el-button @click="share" round>分享</el-button>
-      <el-button v-if="this.userId && mapsData && mapsData.userId === this.userId " @click="toManager" round>题库管理</el-button>
-      <el-button v-if="this.userId && mapsData && mapsData.userId === this.userId " @click="toScoreManager" round>成绩管理</el-button>
+      <el-button @click="goMapsHome" round>题库首页</el-button>
     </div>
     <div v-if="name" class="nav">
-      {{name}}
+      {{name}} (成绩管理)
     </div>
     <div v-if="mapsData && mapsData.desc" class="describe">
-      {{mapsData.desc}}
-    </div>
-    <div v-if="userInfo" class="players" style="margin-top: 1rem">
-      作者: <span @click="toUser(userInfo)" style="cursor: pointer; font-weight: bolder "> {{userInfo.userName}} </span>
-    </div>
-    <div v-if="mapsData && mapsData.pcount" class="players">
-      地点: {{mapsData.pcount}}
-    </div>
-    <div v-if="mapsData" class="players">
-      人次: {{mapsData.players}}
-    </div>
-    <div v-if="mapsData && mapsData.difficulty" class="players">
-      难度: {{mapsData.difficulty}}
-    </div>
-
-    <div v-if="mapsData" style="margin-top: 1rem">
-      <el-button style="background-color: unset; color: white; font-size: 20px" @click.stop="toMaps(mapsData)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
+      提示：点击查看选项
     </div>
 
     <div class="rank">
@@ -36,8 +16,9 @@
     </div>
 
     <div class="rank_container" v-if="mapsData && this.rank">
+
       <div>
-        <el-radio-group v-if="mapsData && mapsData.canMove" v-model="type"  @change="getRank" style="margin-bottom: 10px;">
+        <el-radio-group v-if="mapsData && mapsData.canMove" v-model="type"  @change="getRank(true)" style="margin-bottom: 10px;">
           <el-radio-button size="mini" label="noMove">固定</el-radio-button>
           <el-radio-button size="mini" label="move">移动</el-radio-button>
         </el-radio-group>
@@ -50,19 +31,28 @@
         </el-radio-group>
       </div>
 
-      <div @click="toUser(item.user)" v-for="(item,index) in this.rank" :key="index" class="item">
-        <div class="left">
-          <div class="number">
-            {{index + 1}}.
+      <div v-for="(item,index) in this.rank" :key="index">
+        <el-dropdown trigger="click"  placement="bottom" style="margin-left: 10px; width: 100%">
+          <div class="item">
+            <div class="left">
+              <div class="number">
+                {{index + 1}}.
+              </div>
+              <img style="object-fit: cover;" :src="imgOrigin+ item.user.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="">
+              <div class="info">
+                <div class="title">{{item.user.userName}}</div>
+              </div>
+            </div>
+            <div class="right">
+              <p>得分：{{item.score}}</p>
+            </div>
           </div>
-          <img style="object-fit: cover;" :src="imgOrigin+ item.user.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="">
-          <div class="info">
-            <div class="title">{{item.user.userName}}</div>
-          </div>
-        </div>
-        <div class="right">
-          <p>得分：{{item.score}}</p>
-        </div>
+
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="toUser(item.user)">查看首页</el-dropdown-item>
+            <el-dropdown-item @click.native="deleteScore(item.user)">删除成绩</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </div>
   </div>
@@ -72,7 +62,7 @@
 import {tuxunJump, tuxunOpen} from './common';
 import * as api from '@/api/api';
 export default {
-  name: 'MapsDetail',
+  name: 'maps-score-manager',
   data() {
     return {
       mapsId: null,
@@ -90,7 +80,7 @@ export default {
     this.history = history;
     this.mapsId = this.$route.query.mapsId;
     this.getMapsInfo();
-    this.getRank();
+    this.getRank(true);
     this.userId = this.$store.state.user.userInfo.userId;
   },
   methods: {
@@ -126,8 +116,10 @@ export default {
     toScoreManager() {
       tuxunJump('/tuxun/maps-score-manager?mapsId=' + this.mapsData.id);
     },
-    getRank() {
-      this.rank = [];
+    getRank(reset) {
+      if (reset) {
+        this.rank = [];
+      }
       var path = '/api/v0/tuxun/maps/rank'
       if (this.rankType === 'friend') {
         path = '/api/v0/tuxun/maps/rankFriend';
@@ -159,16 +151,6 @@ export default {
         }
       });
     },
-    share() {
-      var input = document.createElement('input');
-      input.setAttribute('value','邀请你来图寻做「' + this.mapsData.name + '」练习题库, 你能找到你在哪吗？ https://tuxun.fun/maps_detail?mapsId=' + this.mapsId);
-      document.body.appendChild(input);
-      input.select();
-      var result = document.execCommand('copy');
-      document.body.removeChild(input);
-      this.$toast('复制练习题库地址成功');
-      return result;
-    },
     toUser(user) {
       tuxunJump( '/tuxun/user/' + user.userId);
     },
@@ -179,13 +161,24 @@ export default {
         tuxunJump('/tuxun/');
       }
     },
-    randomTrain() {
-      api.getByPath('/api/v0/tuxun/maps/randomTrain').then(res => {
-        if (res.success) {
-          tuxunJump('/tuxun/maps_detail?mapsId=' + res.data);
+    deleteScore(user) {
+      this.$confirm('你确定要删除' + user.userName +  '的成绩吗？', '', {
+        confirmButtonText: '确定',
+        callback: action => {
+          if (action == 'confirm') {
+            api.getByPath('/api/v0/tuxun/maps/deleteScore', {mapsId: this.mapsId, userId: user.userId, type: this.type}).then(res => {
+              if (res.success) {
+                this.getRank(false);
+              }
+            });
+          }
         }
       });
-    }
+
+    },
+    goMapsHome() {
+      tuxunJump('/tuxun/maps_detail?mapsId=' + this.mapsId);
+    },
   }
 
 
@@ -235,6 +228,7 @@ export default {
     width: 40%;
 
     .item {
+      color: white;
       display: flex;
       justify-content: space-between;
       padding: 5px;

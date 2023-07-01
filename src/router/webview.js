@@ -647,6 +647,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/maps-score-manager',
+    component: () => import('@/views/tuxun/maps-score-manager'),
+    name: 'maps',
+    meta: { title: '成绩管理-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/publicity',
     component: () => import('@/views/tuxun/publicity'),
     name: '外宣',
