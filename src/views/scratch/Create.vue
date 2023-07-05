@@ -61,6 +61,12 @@
           :has-hint.sync="hasHint"
       ></click-txt-create>
 
+      <click-img-create
+          v-if="type === 'click-img'"
+          :data-form.sync="dataForm"
+          :has-hint.sync="hasHint"
+      ></click-img-create>
+
       <div>
         <el-button type="primary" style="margin-top: 20px" @click="submit">提交测验</el-button>
         <el-button v-if="!modify || status === 'draft'" type="warning" style="margin-top: 20px" @click="saveDraft">保存草稿</el-button>
@@ -76,9 +82,10 @@ import * as api from '../../api/api';
 import ImgCreate from './img-create';
 import TextCreate from './text-create';
 import ClickTxtCreate from './click-txt-create';
+import ClickImgCreate from './click-img-create';
 export default {
   name: 'scratch-create',
-  components: {ImgCreate, TextCreate, ClickTxtCreate},
+  components: {ImgCreate, TextCreate, ClickTxtCreate, ClickImgCreate},
   data() {
     return {
       history: null,
