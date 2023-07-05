@@ -24,7 +24,7 @@
         <div v-if="this.userProfile" class="user-profile" style="width: auto;">
           <div style="display: flex;">
             <div class="user-img">
-              <img :src="imgOrigin + this.userProfile.userAO.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="" />
+              <img :src="imgOrigin + this.userProfile.userAO.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="" style="width: 75px;height: 75px;" />
             </div>
             <div class="user-info">
               <div class="nickname">{{ this.userProfile.userAO.userName }}</div>
