@@ -11,7 +11,7 @@
       提示：点击成绩查看选项
     </div>
 
-    <el-buuton @click="cleanAll">清空所有</el-buuton>
+    <el-button @click="cleanAll">清空所有</el-button>
 
     <div class="rank">
       Top100排名
