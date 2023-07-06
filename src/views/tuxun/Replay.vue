@@ -13,7 +13,7 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <div style="z-index: 10000; position: absolute; right: 1.5rem; top: 1.5rem">注: 点击黄色针头查看街景</div>
+    <div style="z-index: 10000; position: absolute; right: 1.5rem; top: 4rem">注: 点击黄色针头查看街景</div>
   </div>
 </template>
 
