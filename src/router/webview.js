@@ -703,6 +703,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/user-analysis',
+    component: () => import('@/views/tuxun/user-analysis'),
+    name: 'user-analysis',
+    meta: { title: '技术分析-图寻',},
+    hidden: true
+  },
+  {
     path: '/scratch/user/:id',
     component: () => import('@/views/scratch/profile'),
     name: 'scratch-profile',

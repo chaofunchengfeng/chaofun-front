@@ -217,6 +217,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/user-analysis',
+    component: () => import('@/views/tuxun/user-analysis'),
+    name: 'user-analysis',
+    meta: { title: '技术分析-图寻',},
+    hidden: true
+  },
+  {
     path: '/maps-score-manager',
     component: () => import('@/views/tuxun/maps-score-manager'),
     name: 'maps',
