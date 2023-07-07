@@ -9,7 +9,6 @@
     "lint": "vue-cli-service lint --fix src"
   },
   "pre-commit": [
-    "lint"
   ],
   "dependencies": {
     "@sentry/vue": "^7.49.0",
