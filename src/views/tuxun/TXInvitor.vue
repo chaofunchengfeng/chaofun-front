@@ -564,11 +564,6 @@ export default {
     if (devtools.isOpen) {
       this.ODT();
     }
-    // Check if it's open
-    console.log('Is DevTools open:', devtools.isOpen);
-
-    // Check it's orientation, `undefined` if not open
-    console.log('DevTools orientation:', devtools.orientation);
 
     window.addEventListener('devtoolschange', event => {
       if (event.detail.isOpen) {
