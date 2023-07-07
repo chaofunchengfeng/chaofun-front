@@ -57,7 +57,7 @@
           <el-button v-if="ISPHONE && start" size="mini" type="warning" style="margin: auto; text-align: center;" @click="endGame">放弃</el-button>
         </div>
 
-        <div v-if="start && guessInfo && guessInfo.type !== 'click'" class="input" style="height: 100%">
+        <div v-if="start && guessInfo && guessInfo.type !== 'click' && guessInfo.type !== 'click-img'" class="input" style="height: 100%">
           <div v-if="guessInfo">
             猜对：<span style="color: green"> {{this.right}} </span> / {{this.guessInfo.data.answers.length}}
           </div>
@@ -66,7 +66,7 @@
           </el-input>
         </div>
 
-        <div v-if="start && guessInfo && guessInfo.type === 'click'" class="input" style="height: 100%; display: flex; flex-grow: 1">
+        <div v-if="start && guessInfo && guessInfo.type === 'click' || guessInfo.type === 'click-img'" class="input" style="height: 100%; display: flex; flex-grow: 1">
           <div style="display: flex">
             <el-button type="primary" @click="clickPrev">上一个</el-button>
             <el-button type="primary" @click="clickNext">下一个</el-button>
@@ -230,6 +230,26 @@
         </table>
       </div>
 
+      <div v-else-if="guessInfo && guessInfo.type === 'click-img'" class="table">
+        <div class="click-img">
+          <img :src="imgOrigin + guessInfo.data.data[clickIndex].image" />
+        </div>
+        <div class="answer-grid" >
+          <div v-for="(item, index) in shuffleAnswers" :key="index" @click="clickMatch(index)">
+            <div v-if="rightClickIndex === index" class="answer-right">
+              {{item}}
+            </div>
+            <div v-else-if="wrongClickIndex === index"  class="answer-wrong">
+              {{item}}
+            </div>
+            <div v-else  class="answer">
+              {{item}}
+            </div>
+          </div>
+        </div>
+        <div v-if="showClickRight" style="color: green; font-size: 20px; font-weight: bold">✅ 正确</div>
+        <div v-if="showClickWrong" style="color: red; font-size: 20px; font-weight: bold">X 错误</div>
+      </div>
     </section>
     <div v-if="ISPHONE" style="height: 30rem"></div>
     <div v-if="!ISPHONE" style="height: 10rem"></div>
@@ -614,6 +634,16 @@ export default {
       font-size: 24px;
       font-weight: 500;
       margin-bottom: 1rem;
+    }
+    .click-img {
+      width: 40vw;
+      max-width: 100%;
+      height: 40vh;
+      img {
+        width: 100%; height: 100%;
+        //background-color: grey;
+        object-fit: contain;
+      }
     }
     .answer-grid {
       display: flex;

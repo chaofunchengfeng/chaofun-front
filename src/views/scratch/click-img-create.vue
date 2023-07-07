@@ -27,16 +27,6 @@
     <el-button  size="mini" @click="addColumn">加一张</el-button>
     <el-button  size="mini" @click="deleteColumn">删除最后一张</el-button>
     <el-button  size="mini" @click="shuffle">打乱顺序</el-button>
-
-    <div style="padding-top: 20px">幻灯片模式
-      <el-switch
-          v-model="slideshow"
-          @change="changeSlideshow"
-          active-color="#13ce66"
-          inactive-color="#ff4949">
-      </el-switch>
-    </div>
-    <div style="color: grey">注：幻灯片模式为有顺序的分页一张一张的图片，用户在回答时需要回答当前次序的图片</div>
   </div>
 </template>
 

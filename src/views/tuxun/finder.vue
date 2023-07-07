@@ -97,7 +97,7 @@ export default {
               continue;
             }
 
-            const marker = new mapboxgl.Marker({color: '#FFD326'})
+            const marker = new mapboxgl.Marker({color: '#FFD326', scale: 0.7})
                 .setLngLat([finder.lng, finder.lat])
                 .addTo(this.map)
             if (!this.userId) {

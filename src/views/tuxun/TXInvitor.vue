@@ -437,6 +437,8 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import './SmoothWheelZoom';
 import {tuxunJump, tuxunOpen} from './common';
+import devtools from 'devtools-detect'
+
 
 
 export default {
@@ -558,6 +560,21 @@ export default {
         },
         { capture: true },
     );
+
+    if (devtools.isOpen) {
+      this.ODT();
+    }
+    // Check if it's open
+    console.log('Is DevTools open:', devtools.isOpen);
+
+    // Check it's orientation, `undefined` if not open
+    console.log('DevTools orientation:', devtools.orientation);
+
+    window.addEventListener('devtoolschange', event => {
+      if (event.detail.isOpen) {
+        this.ODT();
+      }
+    });
 
   },
   destroyed() {
@@ -750,6 +767,10 @@ export default {
       setTimeout(function () {
         this.map.invalidateSize();
       }.bind(this), 100);
+    },
+    ODT() {
+      api.getByPath('/api/v0/tuxun/UA/ODT', {gameId: this.gameId}).then(res => {
+      });
     },
     solveGameData(data, code) {
       if (!data) {
