@@ -17,7 +17,7 @@
         </el-link>
         <el-link @click="toHistory()" :underline="false">
           <svg-icon icon-class="history" class-name="header-icon" />
-          <span class="header-btn">历史记录</span>
+          <span class="header-btn">比赛历史</span>
         </el-link>
       </div>
       <div style="display:flex;">
@@ -64,6 +64,10 @@
             <el-link @click="openReportUserDialog" :underline="false" style="margin-left: 15px;">
               <i class="el-icon-warning-outline"></i>
               <span class="header-btn">举报用户</span>
+            </el-link>
+            <el-link @click="toHistory()" :underline="false" style="margin-left: 15px;">
+              <svg-icon icon-class="history" class-name="header-icon" />
+              <span class="header-btn">比赛历史</span>
             </el-link>
           </div>
         </div>
@@ -326,7 +330,7 @@ export default {
       });
     },
     toHistory() {
-      tuxunJump('/tuxun/activities');
+      tuxunJump('/tuxun/activities?userId=' + this.userId);
     },
     openReportUserDialog() {
       this.$confirm('恶意举报可能会被处以短期封禁处罚', '你确定要举报用户吗？', {
