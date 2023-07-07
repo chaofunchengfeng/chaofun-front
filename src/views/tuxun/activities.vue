@@ -6,15 +6,15 @@
     </div>
 
     <div class="nav">
-      历史记录
+      比赛历史
     </div>
-    <div style="color: white">目前只记录积分比赛,点击加粗文字可以查看复盘</div>
+    <div style="color: white">目前只记录积分比赛{{isSelf?'':'，他人记录最多展示20条'}}</div>
     <div class="list">
       <div v-for="(item, index) in list" class="list-item">
-        <div> {{moment(item.gmt_create).format('YY年MM月DD日 HH:mm')}}</div>
+        <div> {{moment(item.gmt_create).format(isSelf?'YY年MM月DD日 HH:mm':'YY年MM月DD日')}}</div>
         <div>
           <div v-if="item.type === 'solo_match'" class="solo-match" @click="toGame(item)">匹配solo</div>
-          <div v-else="item.type === 'solo_match'" class="main-game">积分赛</div>
+          <div v-else class="main-game">积分赛</div>
         </div>
         <div>
           <div v-if="item.ratingChange >= 0" class="rating-change positive">
@@ -27,6 +27,7 @@
         <div class="score">
           {{item.rating}}
         </div>
+        <div v-if="item.type === 'solo_match'" class="review"><el-button type="warning" size="mini" round @click="toGame(item)">复盘</el-button></div>
       </div>
     </div>
 
@@ -34,20 +35,28 @@
 </template>
 
 <script>
-import * as api from "../../api/api";
+import * as api from '../../api/api';
 import 'moment/locale/zh-cn';
 import moment from 'moment';
-import {tuxunJump} from "./common";
+import {tuxunJump} from './common';
 
 export default {
-  name: "activities",
+  name: 'activities',
   data() {
     return {
+      userId: null,
+      isSelf: false,
       moment: moment,
       list: []
-    }
+    };
   },
   created() {
+    this.userId = new URL(location.href).searchParams.get('userId');
+    if(!this.userId){
+      //如果没有用户id参数则默认查看自己的历史
+      this.userId = this.$store.state.user.userInfo.userId;
+    }
+    this.isSelf = (this.userId == this.$store.state.user.userInfo.userId);
     this.history = history;
     this.getHistory();
   },
@@ -60,10 +69,10 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('/tuxun/');
     },
     getHistory() {
-      api.getByPath('/api/v0/tuxun/getUserHistory', {userId: this.$store.state.user.userInfo.userId}).then(res=>{
+      api.getByPath('/api/v0/tuxun/getUserHistoryV1', {userId: this.userId}).then(res=>{
         if (res.success) {
           this.list = res.data.slice(0, 100);
         }
@@ -73,7 +82,7 @@ export default {
       tuxunJump('/tuxun/solo_game?gameId=' + item.gameId);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -125,6 +134,9 @@ export default {
         color: red;
       }
       .score {
+        margin-left: 1rem;
+      }
+      .review{
         margin-left: 1rem;
       }
     }
