@@ -256,9 +256,11 @@
           </tr>
           <tr v-for="(item, index) in guessInfo.data.data" :key="index">
             <td v-if="guessInfo.data" style="width: 50%">
-              <div style="text-align: center; width: 150px; height: 150px; margin: auto; padding-top: 5px; padding-bottom: 5px">
-                <img  style="width: 100%; height: 100%;  object-fit: contain;" :src="imgOrigin + guessInfo.data.data[index].image" />
+              <viewer >
+                <div style="text-align: center; width: 150px; height: 150px; margin: auto; padding-top: 5px; padding-bottom: 5px">
+                  <img style="width: 100%; height: 100%;  object-fit: contain;"  :data-source="imgOrigin + guessInfo.data.data[index].image" :src="imgOrigin + guessInfo.data.data[index].image + '?x-oss-process=image/resize,h_150/quality,q_75'" />
               </div>
+              </viewer>
             </td>
             <td style="width: 50%; border: 1px solid black;">
               <div v-if="guessInfo.data.data[index].right" style="text-align: center; color: green">
