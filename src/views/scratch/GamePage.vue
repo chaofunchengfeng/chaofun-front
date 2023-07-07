@@ -49,9 +49,9 @@
     </div>
 
     <div :class="inputClass">
-      <div style="display: flex">
+      <div style="display: flex ">
         <div v-if="start || this.giveUp">
-          <div class="tiktok" style="color: #52B323;  padding-right: 20px; text-align: center; align-items: center">
+          <div class="tiktok" style="color: #52B323;  padding-right: 10px; text-align: center; align-items: center">
             {{timeLeftStr}}
           </div>
           <el-button v-if="ISPHONE && start" size="mini" type="warning" style="margin: auto; text-align: center;" @click="endGame">放弃</el-button>
@@ -66,10 +66,15 @@
           </el-input>
         </div>
 
-        <div v-if="start && guessInfo && guessInfo.type === 'click' || guessInfo.type === 'click-img'" class="input" style="height: 100%; display: flex; flex-grow: 1">
-          <div style="display: flex">
-            <el-button type="primary" @click="clickPrev">上一个</el-button>
-            <el-button type="primary" @click="clickNext">下一个</el-button>
+        <div v-if="start && guessInfo && guessInfo.type === 'click' || guessInfo.type === 'click-img'" class="input" style="height: 100%; display: flex; flex-grow: 10">
+          <div style="display: flex; margin: auto; justify-content: space-between;">
+            <div style="display: block;">
+              <el-button size="small" type="primary" @click="clickPrev">上一个</el-button>
+            </div>
+            <div style=" width: 10px"></div>
+            <div style="display: block">
+              <el-button size="small" type="primary" @click="clickNext">下一个</el-button>
+            </div>
           </div>
           <div style="display: block">
             <div v-if="guessInfo">
@@ -231,9 +236,11 @@
       </div>
 
       <div v-else-if="guessInfo && guessInfo.type === 'click-img'" class="table">
-        <div class="click-img">
-          <img :src="imgOrigin + guessInfo.data.data[clickIndex].image" />
-        </div>
+        <viewer >
+          <div class="click-img">
+            <img :data-source="imgOrigin + guessInfo.data.data[clickIndex].image" :src="imgOrigin + guessInfo.data.data[clickIndex].image" />
+          </div>
+        </viewer>
         <div class="answer-grid" >
           <div v-for="(item, index) in shuffleAnswers" :key="index" @click="clickMatch(index)">
             <div v-if="rightClickIndex === index" class="answer-right">
@@ -617,7 +624,7 @@ export default {
     margin: auto;
     width: 30%;
     .tiktok {
-      font-size: 36px;
+      font-size: 32px;
     }
     .input {
       width: 50%;
