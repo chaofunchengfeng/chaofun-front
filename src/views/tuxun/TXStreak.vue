@@ -58,7 +58,11 @@
     </div>
 
     <div class="rank">
-      排行榜-记录单人最好成绩
+      <div>排行榜-记录单人最好成绩</div>
+      <el-radio-group v-model="player" style="margin-bottom: 30px;">
+        <el-radio-button label="friends">好友</el-radio-button>
+        <el-radio-button label="all">全部</el-radio-button>
+      </el-radio-group>
     </div>
     <div class="rank_container" v-if="this.rank">
       <div @click="toUser(item.user)" v-for="(item,index) in this.rank" :key="index" class="item">
@@ -90,7 +94,13 @@ export default {
     return {
       rank: null,
       type: 'province',
+      player: 'friends'
     };
+  },
+  watch:{
+    player(oldValue,newValue) {
+      this.listRank();
+    }
   },
   mounted() {
     this.type = this.$route.query.type || 'province';
@@ -101,6 +111,7 @@ export default {
       if (this.$route.query.type !== this.type) {
         this.$router.replace({query: {type: this.type}});
       }
+      this.player = 'friends';
       this.rank = null;
       this.listRank();
     },
@@ -110,7 +121,6 @@ export default {
     createNew() {
 
       this.doLoginStatus().then(res => {
-        console.log(res);
         if (res) {
           api.getByPath('/api/v0/tuxun/streak/create', {type: this.type}).then(res => {
             if (res.success) {
@@ -125,7 +135,7 @@ export default {
     },
 
     listRank() {
-      api.getByPath('/api/v0/tuxun/streak/listRank', {type: this.type}).then(res => {
+      api.getByPath('/api/v0/tuxun/streak/listRankV1', {type: this.type, player:this.player}).then(res => {
         this.rank = res.data;
       });
     },
