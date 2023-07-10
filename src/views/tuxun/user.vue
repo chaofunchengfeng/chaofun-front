@@ -34,7 +34,13 @@ export default {
     partyData: {
       type: Object,
       default(){
-        return {};
+        return null;
+      }
+    },
+    teamData: {
+      type: Object,
+      default(){
+        return null;
       }
     },
     size: {
@@ -45,12 +51,20 @@ export default {
   computed: {
     enableShowUserTooltip: {
       get() {
-        return this.$store.state.user.userInfo.userId === this.partyData.host.userId;
+        if (this.partyData) {
+          return this.$store.state.user.userInfo.userId === this.partyData.host.userId;
+        } else {
+          return false;
+        }
       }
     },
     isHost: {
       get() {
-        return this.user.userId === this.partyData.host.userId;
+        if (this.partyData) {
+          return this.user.userId === this.partyData.host.userId;
+        } else {
+          return false;
+        }
       }
     }
   },
