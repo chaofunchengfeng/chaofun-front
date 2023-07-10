@@ -144,7 +144,7 @@
                 血量变化：{{gameData.teams[1].lastRoundResult.healthAfter - gameData.teams[1].lastRoundResult.healthBefore}}
               </div>
             </div>
-            <div class="round_result_block" v-if="gameData.type === 'team'">
+            <div class="round_result_block" v-if="gameData.type === 'team' || gameData.type === 'team_match'">
               队伍1 本轮得分: {{gameData.teams[0].lastRoundResult.score}}
               <div v-if="gameData.teams[0].lastRoundResult.user">
                 最佳队员：{{gameData.teams[0].lastRoundResult.user.userName}}
@@ -153,7 +153,7 @@
                 血量变化：{{gameData.teams[0].lastRoundResult.healthAfter - gameData.teams[0].lastRoundResult.healthBefore}}
               </div>
             </div>
-            <div class="round_result_block" v-if="gameData.type === 'team'">
+            <div class="round_result_block" v-if="gameData.type === 'team' || gameData.type === 'team_match'">
               队伍2 本轮得分: {{gameData.teams[1].lastRoundResult.score}}
               <div v-if="gameData.teams[1].lastRoundResult.user">
                 最佳队员：{{gameData.teams[1].lastRoundResult.user.userName}}
@@ -264,7 +264,7 @@
 
             <el-avatar  v-if="gameData.type !== 'team'" :src="this.imgOrigin + yourTeam.users[0].icon" class="avatar"></el-avatar>
             <div class="userName"  v-if="gameData.type !== 'team'">{{yourTeam.users[0].userName}}</div>
-            <div class="userName"  v-if="gameData.type === 'team'"></div>
+            <div class="userName"  v-if="gameData.type === 'team' || gameData.type === 'team_match'"></div>
             <div v-if="gameData && gameData.type === 'solo_match'">
               <div class="info">
                 <p v-if="yourTeam.ratingChange  && yourTeam.ratingChange > 0" class="desc">积分变化：+{{yourTeam.ratingChange}}</p>
@@ -280,6 +280,9 @@
             <div v-if="gameData && ( gameData.type === 'solo' || gameData.type === 'team')">
               <el-button v-if="!gameData.partyId" class="home_button"  type="primary" @click="again" round>再来一局</el-button>
               <el-button v-else class="home_button"  type="primary" @click="backParty" round>回到派对</el-button>
+            </div>
+            <div v-if="gameData && gameData.type === 'team_match' && gameData.requestUserId && gameData.playerIds.indexOf(gameData.requestUserId) !== -1">
+              <el-button class="home_button"  type="primary" @click="backTeam" round>回到组队</el-button>
             </div>
             <div v-if="gameData">
               <el-button class="home_button" @click="replay" round>题目复盘</el-button>
@@ -315,40 +318,40 @@
 
         <div v-if="gameData && !gameData.player && gameData.type !== 'battle_royale' " class="game_hud">
           <div class="hub_left">
-            <div class="user_title" v-if="gameData.type !== 'team'">
+            <div class="user_title" v-if="gameData.type !== 'team' && gameData.type !== 'team_match'">
               {{gameData.teams[0].users[0].userName}}
             </div>
-            <div class="user_title" v-if="gameData.type === 'team'">
+            <div class="user_title" v-if="gameData.type === 'team' || gameData.type === 'team_match'">
               队伍1
             </div>
             <div class="user_blod_left">
               血量：{{gameData.teams[0].health}}
             </div>
-            <template v-if="gameData.type === 'team'">
+            <div v-if="gameData.type === 'team' || gameData.type === 'team_match'">
               <div class="sub_user_name" v-for="(item, index) in gameData.teams[0].users" :key="index">
                 {{item.userName}}
               </div>
-            </template>
+            </div>
             <div v-if="team1Emoji" class="emoji">
               <img :src="imgOrigin+team1Emoji +'?x-oss-process=image/resize,h_120'"/>
             </div>
           </div>
 
           <div class="hub_right">
-            <div class="user_title" v-if="gameData.type !== 'team'">
+            <div class="user_title" v-if="gameData.type !== 'team' && gameData.type !== 'team_match'">
               {{gameData.teams[1].users[0].userName}}
             </div>
-            <div class="user_title" v-if="gameData.type === 'team'">
+            <div class="user_title" v-if="gameData.type === 'team' || gameData.type === 'team_match'">
               队伍2
             </div>
             <div class="user_blod_right">
               血量：{{gameData.teams[1].health}}
             </div>
-            <template v-if="gameData.type === 'team'">
+            <div v-if="gameData.type === 'team' || gameData.type === 'team_match'">
               <div class="sub_user_name" v-for="(item, index) in gameData.teams[1].users" :key="index">
-                <template >{{item.userName}}</template>
+                {{item.userName}}
               </div>
-            </template>
+            </div>
             <div v-if="this.team2Emoji" class="emoji">
               <img :src="imgOrigin+team2Emoji +'?x-oss-process=image/resize,h_120'"/>
             </div>
@@ -643,6 +646,9 @@ export default {
     },
     backParty() {
       tuxunJump('/tuxun/party');
+    },
+    backTeam() {
+      tuxunJump('/tuxun/team');
     },
     mapMouseOut() {
       if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
@@ -1110,7 +1116,7 @@ export default {
           this.chooseMarker.push(marker);
         }
 
-        if (this.gameData.type === 'team' || this.gameData.type === 'solo' || this.gameData.type === 'solo_match' ) {
+        if (this.gameData.type === 'team' || this.gameData.type === 'team_match' || this.gameData.type === 'solo' || this.gameData.type === 'solo_match' ) {
           api.getByPath('/api/v0/tuxun/game/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         } else if (this.gameData.type === 'daily_challenge' || this.gameData.type === 'challenge') {
@@ -1120,7 +1126,7 @@ export default {
           api.getByPath('/api/v0/tuxun/br/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         }
-      } else if (this.gameData.type === 'team') {
+      } else if (this.gameData.type === 'team' || this.gameData.type === 'team_match') {
         var marker = L.marker([e.latlng.wrap().lat, e.latlng.wrap().lng], {icon: this.getOptionUser(this.$store.state.user.userInfo.userId), opacity: 0.5}).bindTooltip('你提示了',
             {
               permanent: true,
