@@ -465,6 +465,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/team',
+    component: () => import('@/views/tuxun/team'),
+    name: 'tuxun-team',
+    meta: { title: '组队-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/join',
     component: () => import('@/views/tuxun/join'),
     name: '图寻派对',
