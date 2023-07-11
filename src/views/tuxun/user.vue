@@ -9,7 +9,7 @@
         <el-dropdown-item icon="el-icon-user" command="toUser">查看首页</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-    <div class="userName">{{user.userName}} <span v-if="isHost">(房主)</span></div>
+    <div class="userName">{{user.userName}} <span v-if="isHost">(房主)</span> <span v-if="isCaptain">(队长)</span></div>
   </div>
 </template>
 
@@ -62,6 +62,16 @@ export default {
       get() {
         if (this.partyData) {
           return this.user.userId === this.partyData.host.userId;
+        } else {
+          return false;
+        }
+      }
+    },
+
+    isCaptain: {
+      get() {
+        if (this.teamData) {
+          return this.user.userId === this.teamData.captain.userId;
         } else {
           return false;
         }
