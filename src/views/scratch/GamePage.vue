@@ -236,7 +236,7 @@
       </div>
 
       <div v-else-if="guessInfo && guessInfo.type === 'click-img'" class="table">
-        <viewer >
+        <viewer v-if="guessInfo.data.data.length > 0">
           <div class="click-img">
             <img :data-source="imgOrigin + guessInfo.data.data[clickIndex].image" :src="imgOrigin + guessInfo.data.data[clickIndex].image" />
           </div>

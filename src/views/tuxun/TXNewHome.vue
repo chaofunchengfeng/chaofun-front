@@ -77,17 +77,25 @@
             </div>
             <div class="card-top-right">可移动</div>
           </div>
+<!--          <div class="card" @click="redirectPage( '/tuxun/team')">-->
+<!--            <div class="title">-->
+<!--              组队匹配-->
+<!--            </div>-->
+<!--            <div class="describe">-->
+<!--              刺激图寻-->
+<!--            </div>-->
+<!--          </div>-->
           <div class="card" @click="redirectPage( '/tuxun/main_game')">
             <div class="title">
               积分赛
             </div>
             <div class="describe">
-              对战赢取积分/徽章/奖励
+              大房间混战获取积分
             </div>
           </div>
           <div class="card" @click="soloMatch" >
             <div class="title">
-              匹配Solo
+              积分匹配Solo
             </div>
             <div class="describe">
               缘，妙不可言(积分)

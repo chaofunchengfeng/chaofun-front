@@ -3,7 +3,7 @@
     <div class="game_container">
       <div class="back_home">
         <el-button @click="goHome" round>首页</el-button>
-        <el-button v-if="matchTeamData && $store.state.user.userInfo.userId === matchTeamData.captain.userId" @click="disband" round> 解散派对 </el-button>
+        <el-button v-if="matchTeamData && $store.state.user.userInfo.userId === matchTeamData.captain.userId" @click="disband" round> 解散队伍 </el-button>
         <el-button v-else @click="leave" round> 离开队伍 </el-button>
       </div>
 
@@ -15,19 +15,37 @@
       </div>
 
       <div v-if="matchTeamData" class="prepare">
-        <div class="party-name">
-          {{matchTeamData.captain.userName}} 组建的队伍
-        </div>
+
 
         <div v-if="matchTeamData.status !== 'ongoing'">
+
+          <div style="padding-top: 5rem">
+            <div v-if="matchTeamData.status === 'wait_join'">
+              <el-button  @click="startMatch" type="primary" size="small">开始匹配</el-button>
+            </div>
+            <div v-if="matchTeamData.status === 'match'">
+<!--              <el-button  size="small">取消匹配</el-button>-->
+              <div style="padding-top: 1rem">
+                <circle2 style="margin: auto;width: 70px; height: 70px" class="loading_image" background="#F9BA02"></circle2>
+              </div>
+              <div style="padding-top: 1rem">
+                正在匹配对手中，请稍候...
+              </div>
+            </div>
+
+<!--            <div v-if="matchTeamData.status === 'wait_join'">-->
+<!--              <el-button  @click="startMatch" style="font-size: 34px" size="small">取消匹配<el-button>-->
+<!--            </div>-->
+          </div>
+
+          <div class="party-name">
+            {{matchTeamData.captain.userName}} 组建的队伍
+          </div>
+
           <div class="player">
             <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="matchTeamData && matchTeamData.players && matchTeamData.players.length >= 1">
               <User v-for="(item, index) in matchTeamData.players" :key="index" :user="item" :teamData="matchTeamData"/>
             </div>
-          </div>
-
-          <div style="padding-top: 1rem">
-            <el-button @click="startMatch" style="font-size: 34px" type="primary" size="small">开始匹配</el-button>
           </div>
 
         </div>
@@ -39,14 +57,19 @@
 <script>
 import * as api from '../../api/api';
 import User from './user.vue';
+import {tuxunJump} from "./common";
+import Matching from './Matching';
+import {Circle2} from 'vue-loading-spinner';
+
 
 export default {
   name: "team",
   components: {
-    User,
+    User,Matching,Circle2
   },
   data() {
     return {
+      url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
       matchTeamData: null
     }
   },
@@ -54,11 +77,61 @@ export default {
     this.init();
   },
   methods: {
+
     init() {
       api.getByPath('/api/v0/tuxun/matchTeam/get').then(res => {
-        this.matchTeamData = res.data;
+        if (res.success) {
+          this.solveTeamData(res.data, null);
+          this.initWS();
+        }
       });
     },
+
+    solveTeamData(teamData, code) {
+
+      if (!teamData) {
+        return;
+      }
+      this.matchTeamData = teamData;
+      if (code === 'start_game') {
+        tuxunJump('/tuxun/solo_game?gameId=' + this.partyData.gameId);
+      }
+    },
+
+    initWS() {
+      if (this.ws) {
+        this.ws.close();
+      }
+      this.ws = new WebSocket(this.url);
+      this.ws.onopen = this.wsOnOpen;
+      this.ws.onmessage = this.wsOnMessage;
+      this.ws.onclose = this.wsOnClose;
+    },
+
+    wsOnMessage(e) {
+      const data = JSON.parse(e.data);
+      if (data.scope === 'tuxun_team') {
+        this.solveTeamData(data.data.team, data.data.code);
+      }
+    },
+    wsOnClose(e) {
+      setTimeout(function () {
+        this.initWS();
+      }.bind(this), 1000);
+      console.log('wsOnClose');
+    },
+
+    wsOnOpen(e) {
+      console.log('wsOnOpen');
+      // console.log(e);
+      this.wsSend('{"scope": "tuxun", "data": {"type": "subscribe_team", "text": "' + this.matchTeamData.id + '"}}');
+      // 每3秒发送一次心跳
+      setInterval(() => {
+        this.wsSend('{"scope": "heart_beat"}');
+      }, 15000);
+    },
+
+
     goHome() {
       tuxunJump('/tuxun/')
     },
@@ -73,8 +146,8 @@ export default {
 
     startMatch() {
       api.getByPath('/api/v0/tuxun/matchTeam/startMatch', {teamId: this.matchTeamData.id}).then(res => {
+        this.solveTeamData(res.data, null)
       });
-
     },
     disband() {
 
@@ -154,7 +227,7 @@ export default {
       color: white;
     }
     .party-name {
-      padding-top: 5rem;
+      padding-top: 1rem;
       color: white;
       font-size: 20px;
       font-weight: 700;

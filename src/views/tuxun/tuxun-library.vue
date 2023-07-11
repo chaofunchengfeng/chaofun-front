@@ -5,6 +5,10 @@
     </div>
 
     <div class="main">
+      <div @click="goZD" class="card">
+        <div class="title">组队匹配</div>
+        <div class="describe">开发中</div>
+      </div>
       <div @click="goXJ" class="card">
           <div class="title">炒饭寻景</div>
           <div class="describe">地图标点分享图片，在线旅游</div>
@@ -35,6 +39,9 @@ export default {
     },
     goPano() {
       tuxunJump('/tuxun/pano-gallary')
+    },
+    goTeam() {
+      tuxunJump('/tuxun/team')
     },
     goXJ() {
       tuxunJump('/tuxun/finder');
