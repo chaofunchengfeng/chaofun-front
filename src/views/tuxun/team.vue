@@ -92,9 +92,11 @@ export default {
       if (!teamData) {
         return;
       }
+
       this.matchTeamData = teamData;
+
       if (code === 'start_game') {
-        tuxunJump('/tuxun/solo_game?gameId=' + this.partyData.gameId);
+        tuxunJump('/tuxun/solo_game?gameId=' + this.matchTeamData.gameId);
       }
     },
 
@@ -131,6 +133,10 @@ export default {
       }, 15000);
     },
 
+    wsSend(data) {
+      console.log('wsSend: ' + data);
+      this.ws.send(data);
+    },
 
     goHome() {
       tuxunJump('/tuxun/')
@@ -150,7 +156,9 @@ export default {
       });
     },
     disband() {
-
+      api.getByPath('/api/v0/tuxun/matchTeam/disband', {teamId: this.matchTeamData.id}).then(res => {
+        this.goBack();
+      });
     },
     leave() {
 
