@@ -5,7 +5,7 @@
     </div>
 
     <div class="main">
-      <div @click="goZD" class="card">
+      <div @click="goTeam" class="card">
         <div class="title">组队匹配</div>
         <div class="describe">开发中</div>
       </div>
