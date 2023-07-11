@@ -33,9 +33,9 @@
               </div>
             </div>
 
-<!--            <div v-if="matchTeamData.status === 'wait_join'">-->
-<!--              <el-button  @click="startMatch" style="font-size: 34px" size="small">取消匹配<el-button>-->
-<!--            </div>-->
+            <div v-if="matchTeamData.status === 'onging'">
+                <el-button @click="gotoGame" round>正在对局...</el-button>
+            </div>
           </div>
 
           <div class="party-name">
@@ -155,6 +155,11 @@ export default {
     leave() {
 
     },
+
+    gotoGame() {
+      tuxunJump('/tuxun/solo_game?gameId=' + this.matchTeamData.gameId);
+    },
+
     copyInviterLink() {
       var input = document.createElement('input');
       input.setAttribute('value', 'https://tuxun.fun/team?teamId=' + this.matchTeamData.id);
