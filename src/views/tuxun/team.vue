@@ -16,7 +16,6 @@
 
       <div v-if="matchTeamData" class="prepare">
 
-
         <div v-if="matchTeamData.status !== 'ongoing'">
 
           <div style="padding-top: 5rem">
@@ -163,12 +162,12 @@ export default {
     },
     disband() {
       api.getByPath('/api/v0/tuxun/matchTeam/disband', {teamId: this.matchTeamData.id}).then(res => {
-        this.goBack();
+        this.goHome();
       });
     },
     leave() {
       api.getByPath('/api/v0/tuxun/matchTeam/leave', {teamId: this.matchTeamData.id}).then(res => {
-        this.goBack();
+        this.goHome();
       });
     },
 
