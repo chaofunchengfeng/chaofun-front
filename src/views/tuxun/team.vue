@@ -83,6 +83,12 @@ export default {
         if (res.success) {
           this.solveTeamData(res.data, null);
           this.initWS();
+        } else if (res.errorCode == 'need_login') {
+          this.$login({
+            callBack: () => {
+              this.$store.dispatch('user/getInfo');
+            },
+          });
         }
       });
     },
@@ -161,7 +167,9 @@ export default {
       });
     },
     leave() {
-
+      api.getByPath('/api/v0/tuxun/matchTeam/leave', {teamId: this.matchTeamData.id}).then(res => {
+        this.goBack();
+      });
     },
 
     gotoGame() {

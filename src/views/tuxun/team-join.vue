@@ -3,7 +3,7 @@
     <div class="back_home" @click="goHome">
       <el-button round>首页</el-button>
     </div>
-    <div v-if="joinCode && disband" class="disband">
+    <div v-if="disband" class="disband">
       队伍已经解散
       <div>
         <el-button round @click="goTeam">自己组建队伍</el-button>
@@ -29,12 +29,24 @@ export default {
   },
   mounted() {
       this.teamId= this.$route.query.teamId;
-      this.joinById(this.$route.query.code);
+      this.joinById(this.teamId);
   },
   methods: {
     joinById(teamId) {
       api.getByPath('/api/v0/tuxun/matchTeam/join', {teamId: teamId}).then(res => {
-        tuxunJump('/tuxun/team');
+        if (res.success) {
+          tuxunJump('/tuxun/team');
+        } else {
+          if (res.errorCode == 'need_login') {
+            this.$login({
+              callBack: () => {
+                this.$store.dispatch('user/getInfo');
+              },
+            });
+          } else {
+            this.disband = true;
+          }
+        }
       });
     },
     goHome() {
