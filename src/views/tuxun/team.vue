@@ -170,7 +170,7 @@ export default {
 
     copyInviterLink() {
       var input = document.createElement('input');
-      input.setAttribute('value', 'https://tuxun.fun/team?teamId=' + this.matchTeamData.id);
+      input.setAttribute('value', 'https://tuxun.fun/team-join?teamId=' + this.matchTeamData.id);
       document.body.appendChild(input);
       input.select();
       var result = document.execCommand('copy');
