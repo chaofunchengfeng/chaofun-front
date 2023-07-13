@@ -82,7 +82,7 @@
               匹配Solo
             </div>
             <div class="describe">
-              1v1，缘，妙不可言
+              1v1的缘，妙不可言
             </div>
           </div>
           <div class="card" @click="redirectPage( '/tuxun/main_game')">
