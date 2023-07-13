@@ -31,7 +31,7 @@
 <!--      <div @click="toFirstTournament" class="info"> 玩家第五届组队赛圆满结束!!! </div>-->
       <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>
 <!--      <div class="normal-info ">「让这个世界少一些蛮荒。」</div>-->
-      <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣7月20日结束，快来开通/续费会员吧～</div>
+      <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣最后 7 天，快来开通/续费会员吧～</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
         <div class="line"></div>
@@ -65,7 +65,37 @@
           </div>
         </div>
 
-        <div class="first_session_head">多人</div>
+        <div class="first_session_head">多人-积分</div>
+        <div class="line"></div>
+        <div class="grid_main">
+
+<!--          <div class="card" @click="redirectPage( '/tuxun/team')">-->
+<!--            <div class="title">-->
+<!--              组队匹配-->
+<!--            </div>-->
+<!--            <div class="describe">-->
+<!--              刺激图寻-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="card" @click="soloMatch" >
+            <div class="title">
+              匹配Solo
+            </div>
+            <div class="describe">
+              1v1，缘，妙不可言
+            </div>
+          </div>
+          <div class="card" @click="redirectPage( '/tuxun/main_game')">
+            <div class="title">
+              积分赛
+            </div>
+            <div class="describe">
+              多人混战排序，获取积分
+            </div>
+          </div>
+        </div>
+
+        <div class="first_session_head">多人-娱乐</div>
         <div class="line"></div>
         <div class="grid_main">
           <div class="card" @click="redirectPage( '/tuxun/guoqing')">
@@ -77,36 +107,12 @@
             </div>
             <div class="card-top-right">可移动</div>
           </div>
-<!--          <div class="card" @click="redirectPage( '/tuxun/team')">-->
-<!--            <div class="title">-->
-<!--              组队匹配-->
-<!--            </div>-->
-<!--            <div class="describe">-->
-<!--              刺激图寻-->
-<!--            </div>-->
-<!--          </div>-->
-          <div class="card" @click="redirectPage( '/tuxun/main_game')">
-            <div class="title">
-              积分赛
-            </div>
-            <div class="describe">
-              大房间混战获取积分
-            </div>
-          </div>
-          <div class="card" @click="soloMatch" >
-            <div class="title">
-              积分匹配Solo
-            </div>
-            <div class="describe">
-              缘，妙不可言(积分)
-            </div>
-          </div>
           <div class="card" @click="toParty" >
             <div class="title">
               派对
             </div>
             <div class="describe">
-              新版邀请好友对决
+              邀请好友对决
             </div>
             <div class="card-top-right">可移动</div>
           </div>
