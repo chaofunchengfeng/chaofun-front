@@ -14,7 +14,7 @@
         <!--      <el-button class="button" type="primary" @click="inviteFriends" round>Code加入</el-button>-->
       </div>
 
-      <div v-if="matchTeamData" class="prepare">
+      <div v-if="matchTeamData && matchTeamData.status !== 'disband'" class="prepare">
 
         <div v-if="matchTeamData.status !== 'ongoing'">
 
@@ -48,6 +48,12 @@
           </div>
 
         </div>
+      </div>
+      <div v-if="matchTeamData && matchTeamData.status === 'disband'" style="padding-top: 5rem; color: white; font-size: 20px">
+          队伍已经解散
+          <div>
+            <el-button round @click="leaveAndGet">自己组建队伍</el-button>
+          </div>
       </div>
     </div>
   </div>
@@ -102,6 +108,10 @@ export default {
 
       if (code === 'start_game') {
         tuxunJump('/tuxun/solo_game?gameId=' + this.matchTeamData.gameId);
+      }
+
+      if (code === 'party_disband') {
+        this.$toast('队伍已解散');
       }
     },
 
@@ -170,7 +180,11 @@ export default {
         this.goHome();
       });
     },
-
+    leaveAndGet() {
+      api.getByPath('/api/v0/tuxun/matchTeam/leave', {teamId: this.matchTeamData.id}).then(res => {
+        this.init();
+      });
+    },
     gotoGame() {
       tuxunJump('/tuxun/solo_game?gameId=' + this.matchTeamData.gameId);
     },
