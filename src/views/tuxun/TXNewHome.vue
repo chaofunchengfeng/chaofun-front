@@ -248,7 +248,7 @@ export default {
     return {
       times: null,
       message: 0,
-      backgroundImage: 'front/1685265121129_0d103634b42249af91cd5710836c428a_0.jpeg?x-oss-process=image/quality,q_50'
+      backgroundImage: 'front/IMG_2890.JPG?x-oss-process=image/quality,q_50'
     };
   },
   created() {
