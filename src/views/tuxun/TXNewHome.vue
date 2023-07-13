@@ -207,7 +207,6 @@
         </div>
         <div class="thx">
           <p v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></p>
-          <p>首页背景图由 <a target="_blank" href="https://tuxun.fun/user/287685">@茜拉是只鹦鹉</a> 承包，恩施 | <a target="_blank" href="https://tuxun.fun/finder">炒饭寻景</a></p>
           <p>提示：如倒计时不准/卡死/黑屏，可关闭代理，系统时间对齐互联网时间再试</p>
           <p>快捷键：空格-确定选择, 空格-换一个(街景奇观/随机街景)</p>
           <p>
