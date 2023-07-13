@@ -262,8 +262,8 @@
               失败!
             </div>
 
-            <el-avatar  v-if="gameData.type !== 'team'" :src="this.imgOrigin + yourTeam.users[0].icon" class="avatar"></el-avatar>
-            <div class="userName"  v-if="gameData.type !== 'team'">{{yourTeam.users[0].userName}}</div>
+            <el-avatar  v-if="gameData.type !== 'team' && gameData.type !== 'team_match' " :src="this.imgOrigin + yourTeam.users[0].icon" class="avatar"></el-avatar>
+            <div class="userName"  v-if="gameData.type !== 'team' && gameData.type !== 'team_match'">{{yourTeam.users[0].userName}}</div>
             <div class="userName"  v-if="gameData.type === 'team' || gameData.type === 'team_match'"></div>
             <div v-if="gameData && gameData.type === 'solo_match'">
               <div class="info">
@@ -530,7 +530,6 @@ export default {
 
     window.addEventListener(
         'keydown',
-
         (event) => {
           console.log(event);
 
@@ -1446,7 +1445,7 @@ export default {
 
       api.getByPath(path, {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
         if (res.success) {
-          if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak') {
+          if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak' || this.gameData.type === 'challenge' || this.gameData.type === 'daily_challenge') {
             this.solveGameData(res.data, undefined);
           }
         } else  {
