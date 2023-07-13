@@ -143,7 +143,7 @@
               街景奇观
             </div>
             <div class="describe">
-              光怪陆离,怪奇物语
+              光怪陆离，怪奇物语
             </div>
             <div class="card-top-right">可移动</div>
           </div>
@@ -216,7 +216,7 @@
             小建议：尽量使用街景中的信息进行猜测，不借助搜索引擎，才能让你更快成为高手。
           </p>
           <p>
-            特别鸣谢：猫，南山大王cf，网络迷踪版主, GeoGuessr，百度街景，Google街景，MapBox
+            特别鸣谢：猫，南山大王cf，网络迷踪版主，GeoGuessr，百度街景，Google街景，MapBox
           </p>
           <p>
             QQ群：<a target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=BZJNFLZJPZvqrpEYxVMcgH-bUebSrNhD&authKey=sdZNHcR2DYLhy7fUjXZ2T6Cshi%2B86EWKFFnCI5ZsLu9%2BtRj3qNmU1bKUI4IT9lzP&noverify=0&group_code=592940832">592940832</a>
