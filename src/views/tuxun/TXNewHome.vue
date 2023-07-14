@@ -28,9 +28,9 @@
       </div>
 
 
-<!--      <div @click="toFirstTournament" class="info"> 玩家第五届组队赛圆满结束!!! </div>-->
+      <!--      <div @click="toFirstTournament" class="info"> 玩家第五届组队赛圆满结束!!! </div>-->
       <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>
-<!--      <div class="normal-info ">「让这个世界少一些蛮荒。」</div>-->
+      <!--      <div class="normal-info ">「让这个世界少一些蛮荒。」</div>-->
       <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣最后 7 天，快来开通/续费会员吧～</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -69,14 +69,14 @@
         <div class="line"></div>
         <div class="grid_main">
 
-<!--          <div class="card" @click="redirectPage( '/tuxun/team')">-->
-<!--            <div class="title">-->
-<!--              组队匹配-->
-<!--            </div>-->
-<!--            <div class="describe">-->
-<!--              刺激图寻-->
-<!--            </div>-->
-<!--          </div>-->
+          <!--          <div class="card" @click="redirectPage( '/tuxun/team')">-->
+          <!--            <div class="title">-->
+          <!--              组队匹配-->
+          <!--            </div>-->
+          <!--            <div class="describe">-->
+          <!--              刺激图寻-->
+          <!--            </div>-->
+          <!--          </div>-->
           <div class="card" @click="soloMatch" >
             <div class="title">
               匹配Solo
@@ -126,7 +126,7 @@
           </div>
         </div>
 
-        <div class="first_session_head">其他</div>
+        <div class="first_session_head">探索</div>
         <div class="line"></div>
         <div class="grid_main">
           <div class="card" @click="redirectPage('/tuxun/library')">
@@ -169,69 +169,74 @@
           <!--            </div>-->
           <!--            <div class="card-top-right">可移动</div>-->
           <!--          </div>-->
-          <div class="card" @click="toBilibili">
-            <div class="title">
-              直播/视频/教程
-            </div>
-            <div class="describe">
-              看看图寻er们都创作了哪些内容吧
-            </div>
-          </div>
-          <div class="card" @click="toForum()">
-            <div class="title">
-              讨论区
-            </div>
-            <div class="describe">
-              一起来讨论图寻技巧吧
-            </div>
-          </div>
-          <div class="card" @click="toScratch()">
-            <div class="title">
-              炒饭小测验
-            </div>
-            <div class="describe">
-              地理小测验，帮助你玩好图寻
-            </div>
-          </div>
         </div>
-        <div style="display: flex;">
-          <div @click="toDocument" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
-            图寻文档
+
+          <div class="first_session_head">扩展</div>
+          <div class="line"></div>
+          <div class="grid_main">
+            <div class="card" @click="toBilibili">
+              <div class="title">
+                直播/视频/教程
+              </div>
+              <div class="describe">
+                看看图寻er们都创作了哪些内容吧
+              </div>
+            </div>
+            <div class="card" @click="toForum()">
+              <div class="title">
+                讨论区
+              </div>
+              <div class="describe">
+                一起来讨论图寻技巧吧
+              </div>
+            </div>
+            <div class="card" @click="toScratch()">
+              <div class="title">
+                炒饭小测验
+              </div>
+              <div class="describe">
+                地理小测验，帮助你玩好图寻
+              </div>
+            </div>
           </div>
-          <div @click="toUpdate" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
-            更新日志
+          <div style="display: flex;">
+            <div @click="toDocument" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
+              图寻文档
+            </div>
+            <div @click="toUpdate" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
+              更新日志
+            </div>
+            <!--          <div @click="window.location.href = '/tuxun/change_log'" style="color: white;font-size: medium; padding-top: 1rem; text-decoration:underline;">-->
+            <!--            更新日志-->
+            <!--          </div>-->
           </div>
-          <!--          <div @click="window.location.href = '/tuxun/change_log'" style="color: white;font-size: medium; padding-top: 1rem; text-decoration:underline;">-->
-          <!--            更新日志-->
-          <!--          </div>-->
-        </div>
-        <div class="thx">
-          <p v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></p>
-          <p>提示：如倒计时不准/卡死/黑屏，可关闭代理，系统时间对齐互联网时间再试</p>
-          <p>快捷键：空格-确定选择, 空格-换一个(街景奇观/随机街景)</p>
-          <p>
-            积分规则：大原则是按照你和对手在一场比赛中的期望排名来算的，在积分赛中，每局会有额外的2分距离分。如果距离小于1000公里，则加2分，大于则减2分。
-          </p>
-          <p>
-            小建议：尽量使用街景中的信息进行猜测，不借助搜索引擎，才能让你更快成为高手。
-          </p>
-          <p>
-            特别鸣谢：猫，南山大王cf，网络迷踪版主，GeoGuessr，百度街景，Google街景，MapBox
-          </p>
-          <p>
-            QQ群：<a target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=BZJNFLZJPZvqrpEYxVMcgH-bUebSrNhD&authKey=sdZNHcR2DYLhy7fUjXZ2T6Cshi%2B86EWKFFnCI5ZsLu9%2BtRj3qNmU1bKUI4IT9lzP&noverify=0&group_code=592940832">592940832</a>
-          </p>
-          <p>
-            微信公众号：炒饭社区 | 开发者微博：<a target="_blank" href="https://weibo.com/u/3050203537">@此间ZY</a>
-          </p>
-          <p>
-            地图审图号：GS（2022）2885号
-          </p>
-          <p>
-            问题反馈：电话：15058139992，或图寻群, 可能有1个月会员奖励
-          </p>
-          <a target="_blank" href="https://beian.miit.gov.cn/">浙ICP备2022031450号</a>
-        </div>
+          <div class="thx">
+            <p v-if="times" class="times">总轮次数：<span style="font-size: 18px">{{times}}</span></p>
+            <p>提示：如倒计时不准/卡死/黑屏，可关闭代理，系统时间对齐互联网时间再试</p>
+            <p>快捷键：空格-确定选择, 空格-换一个(街景奇观/随机街景)</p>
+            <p>
+              积分规则：大原则是按照你和对手在一场比赛中的期望排名来算的，在积分赛中，每局会有额外的2分距离分。如果距离小于1000公里，则加2分，大于则减2分。
+            </p>
+            <p>
+              小建议：尽量使用街景中的信息进行猜测，不借助搜索引擎，才能让你更快成为高手。
+            </p>
+            <p>
+              特别鸣谢：猫，南山大王cf，网络迷踪版主，GeoGuessr，百度街景，Google街景，MapBox
+            </p>
+            <p>
+              QQ群：<a target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=BZJNFLZJPZvqrpEYxVMcgH-bUebSrNhD&authKey=sdZNHcR2DYLhy7fUjXZ2T6Cshi%2B86EWKFFnCI5ZsLu9%2BtRj3qNmU1bKUI4IT9lzP&noverify=0&group_code=592940832">592940832</a>
+            </p>
+            <p>
+              微信公众号：炒饭社区 | 开发者微博：<a target="_blank" href="https://weibo.com/u/3050203537">@此间ZY</a>
+            </p>
+            <p>
+              地图审图号：GS（2022）2885号
+            </p>
+            <p>
+              问题反馈：电话：15058139992，或图寻群, 可能有1个月会员奖励
+            </p>
+            <a target="_blank" href="https://beian.miit.gov.cn/">浙ICP备2022031450号</a>
+          </div>
       </section>
     </div>
   </div>
