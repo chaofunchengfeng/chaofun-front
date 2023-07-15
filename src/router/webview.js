@@ -381,6 +381,12 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/maps-jupao',
+    component: () => import('@/views/tuxun/maps-jupao'),
+    meta: { title: '修改题库-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun',
     component: () => import('@/views/tuxun/TXNewHome'),
     name: '图寻首页',

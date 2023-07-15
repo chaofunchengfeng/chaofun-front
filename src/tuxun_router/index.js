@@ -116,6 +116,12 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/maps-jupao',
+    component: () => import('@/views/tuxun/maps-jupao'),
+    meta: { title: '修改题库-图寻'},
+    hidden: true
+  },
+  {
     path: '/solo_game',
     component: () => import('@/views/tuxun/TXInvitor'),
     meta: { title: '图寻-Solo'},
