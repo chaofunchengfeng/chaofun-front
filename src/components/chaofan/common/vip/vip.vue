@@ -47,7 +47,7 @@
         </div>
         <div v-if="choose==='month'">
           <div style="color: indianred">
-            暑期限时折扣,7月20日24点结束，最后7天
+            暑期限时折扣,7月20日24点结束，最后5天
           </div>
           <div>
             注：感谢探索者您的支持！
@@ -55,7 +55,7 @@
         </div>
         <div v-if="choose==='year'">
           <div style="color: indianred">
-            暑期限时折扣,7月20日24点结束，最后7天
+            暑期限时折扣,7月20日24点结束，最后5天
           </div>
           <div>
             注：冲冲冲！探索者，去征服世界吧！！！
