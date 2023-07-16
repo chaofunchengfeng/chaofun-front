@@ -24,6 +24,8 @@
       <el-button v-if="history && history.length !== 1" @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
       <el-button type="primary" @click="publish" round>发布</el-button>
+      <el-button @click="exportJson" round>导出</el-button>
+      <el-button v-if="!ISPHONE" @click="toFilter" round>筛选</el-button>
     </div>
 
     <div v-if="name" class="nav">
@@ -103,7 +105,6 @@ export default {
     this.mapsId = this.$route.query.mapsId;
     this.getMapsName();
     this.getPanos();
-    this.getStauts();
 
     setInterval(() => {
       this.getPanos();
@@ -136,6 +137,7 @@ export default {
       api.getByPath('/api/v0/tuxun/maps/listPanoV1', {mapsId: this.mapsId, page: this.current}).then(res=>{
         this.panos = res.data.list;
         this.total = res.data.total;
+        this.getState();
       });
     },
     publish() {
@@ -156,6 +158,12 @@ export default {
     },
     handleCurrentChange() {
       this.getPanos();
+    },
+    exportJson() {
+      window.open(location.origin + '/api/v0/tuxun/maps/export?mapsId=' + this.mapsId,'_self');
+    },
+    toFilter() {
+      tuxunJump('/tuxun/maps-filter?mapsId=' + this.mapsId);
     },
     submitPano() {
       api.postByPath('/api/v0/tuxun/maps/userAddPanorama',

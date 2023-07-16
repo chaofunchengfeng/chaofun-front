@@ -8,7 +8,7 @@
       </div>
 
       <div class="disband">
-        <el-button class="button" type="primary" @click="copyInviterLink" round>分享链接</el-button>
+        <el-button class="button" type="primary" @click="copyInviterLink" round>分享邀请</el-button>
 <!--        <div style="height: 10px"></div>-->
 <!--        <el-button class="button"  @click="inviteFriends" round>邀请好友</el-button>-->
         <!--      <el-button class="button" type="primary" @click="inviteFriends" round>Code加入</el-button>-->
@@ -30,6 +30,8 @@
               <div style="padding-top: 1rem">
                 正在匹配对手中，请稍候...
               </div>
+              <div style="height: 10px"></div>
+              <el-button  @click="cancelMatch" size="small">结束匹配</el-button>
             </div>
 
             <div v-if="matchTeamData.status === 'onging'">
@@ -167,6 +169,11 @@ export default {
 
     startMatch() {
       api.getByPath('/api/v0/tuxun/matchTeam/startMatch', {teamId: this.matchTeamData.id}).then(res => {
+        this.solveTeamData(res.data, null)
+      });
+    },
+    cancelMatch() {
+      api.getByPath('/api/v0/tuxun/matchTeam/cancelMatch', {teamId: this.matchTeamData.id}).then(res => {
         this.solveTeamData(res.data, null)
       });
     },

@@ -116,9 +116,9 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/maps-jupao',
+    path: '/maps-filter',
     component: () => import('@/views/tuxun/maps-jupao'),
-    meta: { title: '修改题库-图寻'},
+    meta: { title: '题库筛选-图寻'},
     hidden: true
   },
   {

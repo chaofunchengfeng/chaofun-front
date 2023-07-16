@@ -23,7 +23,6 @@
     <div class="back_home" >
       <el-button v-if="history && history.length !== 1" @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
-      <el-button @click="" round>导出（{{choose}}）</el-button>
     </div>
 
     <div style="display: flex">
@@ -39,6 +38,7 @@
             街景列表
           </div>
           <div v-if="status" style="font-size: 12px; color: white; padding-bottom: 6px"> (总数: {{status.total ? status.total : 0 }}, 已发布: {{status.publish ? status.publish : 0 }}, 待发布: {{status.ready ? status.ready: 0 }}, 待审核: {{status.wait_check ? status.wait_check: 0 }} 准备中: {{status.crawling ? status.crawling : 0 }}, 准备失败: {{status.crawler_fail ? status.crawler_fail : 0 }})</div>
+          <div style="color: white">快捷键：1 上一个街景，2 下一个街景, 删除键 删除选中街景 </div>
           <div style="width: 100%; justify-items: left; align-content: flex-start">
             <el-pagination
                 background
@@ -53,20 +53,21 @@
 
           <div v-for="(item, index) in panos" :key="index" class="list_item" style="display: flex;justify-content: space-between; overflow: auto;">
             <div style="display: flex; color: white">
-              <div @click="showPano(item)">{{item.panoId}}</div>
+              <div  v-if="chooseIndex === index"  style="color: gold">{{item.panoId}}</div>
+              <div v-else @click="showPano(item, index)">{{item.panoId}}</div>
               <div v-if="item.status === 'crawling'" class="status" style="color: yellow">准备中</div>
               <div v-if="item.status === 'publish'" class="status" style="color: green">已发布</div>
               <div v-if="item.status === 'wait_check'" class="status" style="color: pink">待图寻审核</div>
               <div v-if="item.status === 'crawler_success' || item.status === 'ready'" class="status" style="color: white">待发布</div>
               <div v-if="item.status === 'crawler_fail'" class="status" style="color: red">准备失败</div>
             </div>
-            <div style="color: white" @click="deletePano(item.id)">删除</div>
+            <div style="color: white" @click="deletePano(item)">删除</div>
           </div>
         </div>
       </div>
       <div class="right">
-        <div id="viewer" style="width: 100%; height: 50vh"></div>
-        <div id="map" style="width: 100%; height: 50vh"></div>
+        <div id="viewer" style="width: 100%; height: 70vh"></div>
+        <div id="map" style="width: 100%; height: 30vh"></div>
       </div>
     </div>
   </div>
@@ -88,8 +89,10 @@ export default {
       name: '',
       panos: [],
       mapsId: null,
+      chooseItem: null,
       status: null,
       history: null,
+      chooseIndex: null,
       total: 1000,
       current: 1,
       pageCount: 1,
@@ -97,6 +100,7 @@ export default {
       mapsData: null,
       choose: 0,
       panorama: null,
+      headingMap: {},
       form: {
         applyModReason: '',
       },
@@ -109,14 +113,49 @@ export default {
     this.history = history;
     this.mapsId = this.$route.query.mapsId;
     this.getMapsName();
-    this.getPanos();
-    this.getStauts();
+    this.getPanos(true);
     this.initMap();
     this.initPano();
 
-    setInterval(() => {
-      this.getPanos();
-    }, 10000 );
+    document.onkeydown = function(event){
+      var e = event || window.event || arguments.callee.caller.arguments[0];
+      console.log(e.keyCode);
+      if(e && e.keyCode === 8){
+        console.log('1231231');
+        this.deletePano(this.chooseItem);
+      }
+
+      if (e && e.keyCode === 50) {
+        if (this.chooseItem) {
+          if (this.chooseIndex + 1 < this.panos.length) {
+            this.chooseIndex += 1;
+            this.chooseItem = this.panos[this.chooseIndex];
+            this.showPano(this.chooseItem, this.chooseIndex)
+          } else {
+          }
+        } else if (this.panos.length > 0){
+          this.chooseIndex = 0;
+          this.chooseItem = this.panos[this.chooseIndex];
+          this.showPano(this.chooseItem, this.chooseIndex)
+        }
+
+      }
+
+      if (e && e.keyCode === 49) {
+        if (this.chooseItem) {
+          if (this.chooseIndex !== 0) {
+            this.chooseIndex -= 1;
+            this.chooseItem = this.panos[this.chooseIndex];
+            this.showPano(this.chooseItem, this.chooseIndex)
+          }
+        } else if (this.panos.length > 0){
+          this.chooseIndex = 0;
+          this.chooseItem = this.panos[this.chooseIndex];
+          this.showPano(this.chooseItem, this.chooseIndex)
+        }
+      }
+    }.bind(this);
+
   },
   methods: {
     initMap() {
@@ -157,9 +196,50 @@ export default {
               },
             }
         );
+        this.panorama.registerPanoProvider(this.getCustomPanorama);
+
+        this.viewer.addListener('pano_changed', () => {
+          console.log('pano_changed');
+          if (this.viewer.getPano().length === 27) {
+            this.getPanoInfo(this.viewer.getPano(), false);
+          }
+        });
+
       });
     },
+    getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+      zoom = zoom += 1;
+      if (zoom === 1) {
+        return (
+            'https://map.chao-fan.com/bd/thumb/' + pano
+        );
+      }
+      return (
+          'https://mapsv1.bdimg.com/?qt=pdata&sid=' + pano + '&pos=' + tileY + '_' + tileX + '&z=' + zoom
+      );
 
+    },
+    getCustomPanorama(pano, zoom,tileX,tileY,callback) {
+      console.log('getCustomPanorama');
+      if (pano.length === 27) {
+        return {
+          location: {
+            pano: pano,
+          },
+          links: [],
+          // The text for the copyright control.
+          copyright: 'baidu',
+          // The definition of the tiles for this panorama.
+          tiles: {
+            tileSize: new google.maps.Size(512, 512),
+            worldSize: new google.maps.Size(8192, 4096),
+            // The heading in degrees at the origin of the panorama
+            centerHeading: this.headingMap[pano],
+            getTileUrl: this.getCustomPanoramaTileUrl,
+          },
+        };
+      }
+    },
     goHome() {
       tuxunJump('/tuxun/');
     },
@@ -174,10 +254,25 @@ export default {
         this.status = res.data;
       });
     },
-    getPanos() {
+    getPanos(pageChange) {
       api.getByPath('/api/v0/tuxun/maps/listPanoV1', {mapsId: this.mapsId, page: this.current}).then(res=>{
         this.panos = res.data.list;
         this.total = res.data.total;
+        if (this.chooseIndex !== null) {
+          if (pageChange) {
+            this.chooseIndex = 0;
+            this.chooseItem = this.panos[this.chooseIndex];
+            this.showPano(this.chooseItem, this.chooseIndex)
+          } else {
+            this.chooseItem = this.panos[this.chooseIndex];
+            this.showPano(this.chooseItem, this.chooseIndex);
+          }
+        } else {
+          this.chooseIndex = 0;
+          this.chooseItem = this.panos[this.chooseIndex];
+          this.showPano(this.chooseItem, this.chooseIndex)
+        }
+        this.getStauts();
       });
     },
     publish() {
@@ -190,9 +285,49 @@ export default {
     toDistribute() {
       tuxunJump('/tuxun/maps_distribute?mapsId=' + this.mapsId);
     },
-    showPano(item) {
-      this.panorama.setPano(item.panoId);
-      var marker = L.marker([item.lat, item.lng], {icon: new L.Icon.Default()}).addTo(this.map);
+    getPanoInfo(pano, set) {
+      api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
+        this.viewer.setLinks(res.data.links);
+        // this.centerHeading = res.data.heading;
+        this.headingMap[res.data.pano] = res.data.heading;
+        if (res.data.links) {
+          res.data.links.forEach((item) => {
+            this.preloadImage(item.pano);
+            this.headingMap[item.pano] = item.centerHeading;
+          });
+        }
+        if (set) {
+          this.panorama.setPano(pano);
+          this.panorama.setPov({
+            heading: this.chooseItem.heading,
+            pitch: this.chooseItem.pitch,
+          });
+        }
+        // console.log(this.centerHeading);
+      });
+    },
+    preloadImage(pano) {
+      var img = new Image();
+      img.src = 'https://map.chao-fan.com/bd/thumb/' + pano;
+    },
+    showPano(item, index) {
+      this.chooseItem = item;
+      this.chooseIndex = index;
+      if (item.source === 'baidu_pano') {
+        this.getPanoInfo(item.pano, true);
+      } else {
+        this.panorama.setPano(item.panoId);
+        this.panorama.setPov({
+          heading: item.heading,
+          pitch: item.pitch,
+        });
+      }
+
+      if (this.marker) {
+        this.marker.remove()
+      }
+      this.marker = L.marker([item.lat, item.lng], {icon: new L.Icon.Default()}).addTo(this.map);
+      this.map.setView([item.lat, item.lng], 8);
     },
     addPano() {
       this.submitPanoramaShow = true;
@@ -201,42 +336,12 @@ export default {
       this.submitPanoramaShow = false;
     },
     handleCurrentChange() {
-      this.getPanos();
+      this.getPanos(true);
     },
-    submitPano() {
-      api.postByPath('/api/v0/tuxun/maps/userAddPanorama',
-          {links: this.panoramaSubmitForm.links, mapsId: this.mapsId}).then(res=>{
-        if (res.success) {
-          this.$toast('提交成功, 谢谢你！');
-        }
-        this.panoramaSubmitForm.links = '';
-        this.submitPanoramaShow = false;
+    deletePano(item) {
+      api.getByPath('/api/v0/tuxun/maps/deletePano', {containId: item.id}).then(res=>{
         this.getPanos();
       });
-    },
-    deletePano(id) {
-      this.$confirm('此操作将删除该街景, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        api.getByPath('/api/v0/tuxun/maps/deletePano', {containId: id}).then(res=>{
-          this.getPanos();
-        });
-      }).catch(() => {
-
-      });
-    },
-    toPano(item) {
-      if (item.source === 'baidu_pano') {
-        tuxunOpen('https://maps.baidu.com/#panoid=' + item.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + item.panoId);
-      } else {
-        if (item.panoId.indexOf('AF') === 0) {
-          tuxunOpen('https://www.google.com/maps/@0.0,0.0,3a,75y,90t/data=!3m7!1e1!3m5!1s' + item.panoId +  '!2e10!3e11!7i8192!8i4096');
-        } else {
-          tuxunOpen('https://www.google.com/maps/@?api=1&map_action=pano&pano=' + item.panoId);
-        }
-      }
     },
     toGuid() {
       tuxunOpen('https://www.yuque.com/ucun5p/kfw26e/ttqiucknz7sifo5u');
@@ -274,7 +379,7 @@ export default {
   }
 
   .left {
-    width: 50%;
+    width: 40%;
     .describe {
       color: yellow;
       font-size: 1rem;
@@ -308,7 +413,7 @@ export default {
   .right {
     position: fixed;
     right: 0;
-    width: 50%;
+    width: 60%;
     height: 100vh;
   }
 }
