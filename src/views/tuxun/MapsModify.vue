@@ -39,6 +39,7 @@
     <el-button @click="toDistribute" >查看题库分布</el-button>
     <el-button @click="goBaidu">百度地图添加</el-button>
     <el-button @click="addPano">链接/JSON添加</el-button>
+    <el-button @click="cleanPano">清空题库</el-button>
     <div style="color: white">发布题库需要题库中有5个状态为已发布或者待发布状态的街景，当系统检测到题库中有5个Google官方街景，会自动将题库标记为「可移动」</div>
     <div style="color: white">注：异步上传，请刷新查看进度，请勿使用脚本提交</div>
     <div class="list_container">
@@ -128,7 +129,7 @@ export default {
         this.mapsData = res.data;
       });
     },
-    getStauts() {
+    getState() {
       api.getByPath('/api/v0/tuxun/maps/status', {mapsId: this.mapsId}).then(res=>{
         this.status = res.data;
       });
@@ -187,6 +188,18 @@ export default {
         });
       }).catch(() => {
 
+      });
+    },
+    cleanPano() {
+      this.$confirm('此操作将清空题库, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        api.getByPath('/api/v0/tuxun/maps/cleanPano', {mapsId: this.mapsId}).then(res=>{
+          this.getPanos();
+        });
+      }).catch(() => {
       });
     },
     toPano(item) {
