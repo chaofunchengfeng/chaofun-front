@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>
-      注：多答案的话可以在答案框内用 / 符号分割答案，例如：新疆/新疆省/新疆维吾尔自治区 ，但是在用户答题对以后只会显示第一个「新疆」
-    </div>
+<!--    <div>-->
+<!--      注：多答案的话可以在答案框内用 / 符号分割答案，例如：新疆/新疆省/新疆维吾尔自治区 ，但是在用户答题对以后只会显示第一个「新疆」-->
+<!--    </div>-->
     <div class="grid-main">
       <div v-for="(item, index) in dataForm" :key="index"  class="card" @click="cardClass='card-choose'">
               <el-upload
