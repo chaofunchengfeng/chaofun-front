@@ -23,9 +23,7 @@
     <div class="back_home" >
       <el-button v-if="history && history.length !== 1" @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
-      <el-button type="primary" @click="publish" round>发布</el-button>
-      <el-button @click="exportJson" round>导出</el-button>
-      <el-button v-if="!ISPHONE" @click="toFilter" round>筛选</el-button>
+
     </div>
 
     <div v-if="name" class="nav">
@@ -34,12 +32,15 @@
     <div v-if="mapsData && mapsData.desc" class="describe">
       {{mapsData.desc}}
     </div>
-    <el-button @click="modify">修改基础信息</el-button>
+    <el-button @click="modify" size="small">修改基础信息</el-button>
     <div style="padding-bottom: 2rem"></div>
-    <el-button @click="toDistribute" >查看题库分布</el-button>
-    <el-button @click="goBaidu">百度地图添加</el-button>
-    <el-button @click="addPano">链接/JSON添加</el-button>
-    <el-button @click="cleanPano">清空题库</el-button>
+    <el-button type="primary" @click="publish" size="small">发布</el-button>
+    <el-button @click="exportJson" size="small">导出</el-button>
+    <el-button v-if="!ISPHONE" @click="toFilter" size="small">筛选(只支持PC网页)</el-button>
+    <el-button @click="toDistribute" size="small">查看题库分布</el-button>
+    <el-button @click="goBaidu" size="small">百度地图添加</el-button>
+    <el-button @click="addPano" size="small">链接/JSON添加</el-button>
+    <el-button @click="cleanPano" size="small">清空题库</el-button>
     <div style="color: white">发布题库需要题库中有5个状态为已发布或者待发布状态的街景，当系统检测到题库中有5个Google官方街景，会自动将题库标记为「可移动」</div>
     <div style="color: white">注：异步上传，请刷新查看进度，请勿使用脚本提交</div>
     <div class="list_container">
