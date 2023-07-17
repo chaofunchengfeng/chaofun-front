@@ -19,9 +19,9 @@ export default {
     }
   },
   created() {
-    loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyA7kvcRzI-rJziVKN1fpemEGZt3Z5d4d78&libraries=places').then(() => {
-      this.initAutocomplete();
-    });
+    // loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyA7kvcRzI-rJziVKN1fpemEGZt3Z5d4d78&libraries=places').then(() => {
+    //   this.initAutocomplete();
+    // });
 
     loadScript('https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js').then(() => {
       Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css";
+//@import "https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css";
 
 
 </style>
