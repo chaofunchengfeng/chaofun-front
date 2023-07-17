@@ -201,7 +201,7 @@ export default {
         this.viewer.addListener('pano_changed', () => {
           console.log('pano_changed');
           if (this.viewer.getPano().length === 27) {
-            this.getPanoInfo(this.viewer.getPano(), false);
+            this.getPanoInfo(this.panorama.getPano(), false);
           }
         });
 
@@ -287,7 +287,7 @@ export default {
     },
     getPanoInfo(pano, set) {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
-        this.viewer.setLinks(res.data.links);
+        this.panorama.setLinks(res.data.links);
         // this.centerHeading = res.data.heading;
         this.headingMap[res.data.pano] = res.data.heading;
         if (res.data.links) {
@@ -304,7 +304,7 @@ export default {
           });
         }
         // console.log(this.centerHeading);
-      });
+      })
     },
     preloadImage(pano) {
       var img = new Image();
@@ -314,7 +314,7 @@ export default {
       this.chooseItem = item;
       this.chooseIndex = index;
       if (item.source === 'baidu_pano') {
-        this.getPanoInfo(item.pano, true);
+        this.getPanoInfo(item.panoId, true);
       } else {
         this.panorama.setPano(item.panoId);
         this.panorama.setPov({
