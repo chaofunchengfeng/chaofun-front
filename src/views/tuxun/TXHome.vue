@@ -244,7 +244,7 @@ export default {
       map.attributionControl.setPosition('bottomleft');
       map.attributionControl.setPrefix('华为地图');
       map.attributionControl.addAttribution('GS（2022）2885号');
-      var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
+      var url = 'http://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
       L.tileLayer(url, {
         maxZoom: 18,
         minZoom: 1,
