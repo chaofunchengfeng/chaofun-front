@@ -31,7 +31,7 @@
       <!--      <div @click="toFirstTournament" class="info"> 玩家第五届组队赛圆满结束!!! </div>-->
       <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>
       <!--      <div class="normal-info ">「让这个世界少一些蛮荒。」</div>-->
-      <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣最后 5 天，快来开通/续费会员吧～</div>
+      <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣最后 4 天，快来开通/续费会员吧～</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
         <div class="line"></div>
