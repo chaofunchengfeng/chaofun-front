@@ -244,7 +244,7 @@ export default {
       map.attributionControl.setPosition('bottomleft');
       map.attributionControl.setPrefix('华为地图');
       map.attributionControl.addAttribution('GS（2022）2885号');
-      var url = 'http://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
+      var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
       L.tileLayer(url, {
         maxZoom: 18,
         minZoom: 1,
@@ -317,7 +317,7 @@ export default {
       try {
         if (!this.viewer) {
           document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
-          loadScript('https://i.chao-fan.com/streetview/js-tuxun-v1.js').then(() => {
+          loadScript('https://i.chao-fan.com/streetview/js-tuxun-v3.js').then(() => {
             this.viewer = new google.maps.StreetViewPanorama(
                 document.getElementById('viewer'), {
                   fullscreenControl:false,

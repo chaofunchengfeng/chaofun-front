@@ -36,7 +36,7 @@ export default {
   mounted() {
     this.history = history;
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
-    var url = 'http://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
+    var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
     var tileSize = 512;
     const map = new mapboxgl.Map({
       attributionControl: false,

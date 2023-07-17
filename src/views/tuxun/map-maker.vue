@@ -58,7 +58,6 @@ export default {
 
         map.addTileLayer(new BMapGL.PanoramaCoverageLayer());
 
-
         this.map = map;
         this.map.addEventListener('click', function(e) {
           console.log(e);
@@ -68,7 +67,7 @@ export default {
 
       });
 
-      loadScript('https://i.chao-fan.com/streetview/js-tuxun-v1.js').then(() => {
+      loadScript('https://i.chao-fan.com/streetview/js-tuxun-v3.js').then(() => {
         this.viewer = new google.maps.StreetViewPanorama(
             document.getElementById('viewer'), {
               fullscreenControl: false,
