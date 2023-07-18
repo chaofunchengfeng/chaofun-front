@@ -23,6 +23,7 @@
     <div class="back_home" >
       <el-button v-if="history && history.length !== 1" @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
+      <el-button @click="exportJson" round>导出选中 ({{choose.length}})</el-button>
     </div>
 
     <div style="display: flex">
@@ -38,7 +39,7 @@
             街景列表
           </div>
           <div v-if="status" style="font-size: 12px; color: white; padding-bottom: 6px"> (总数: {{status.total ? status.total : 0 }}, 已发布: {{status.publish ? status.publish : 0 }}, 待发布: {{status.ready ? status.ready: 0 }}, 待审核: {{status.wait_check ? status.wait_check: 0 }} 准备中: {{status.crawling ? status.crawling : 0 }}, 准备失败: {{status.crawler_fail ? status.crawler_fail : 0 }})</div>
-          <div style="color: white">快捷键：1 上一个街景，2 下一个街景, 删除键 删除选中街景 </div>
+          <div style="color: white">快捷键：1 上一个街景，2 下一个街景, 3 选中街景， 删除键 删除选中街景 </div>
           <div style="width: 100%; justify-items: left; align-content: flex-start">
             <el-pagination
                 background
@@ -53,8 +54,14 @@
 
           <div v-for="(item, index) in panos" :key="index" class="list_item" style="display: flex;justify-content: space-between; overflow: auto;">
             <div style="display: flex; color: white">
-              <div  v-if="chooseIndex === index"  style="color: gold">{{item.panoId}}</div>
-              <div v-else @click="showPano(item, index)">{{item.panoId}}</div>
+              <div  v-if="chooseIndex === index"  style="color: gold">
+                <span v-if="choose.indexOf(item.id) !== -1">（已选中）</span>
+                {{item.panoId}}
+              </div>
+              <div v-else @click="showPano(item, index)">
+                <span v-if="choose.indexOf(item.id) !== -1">（已选中）</span>
+                {{item.panoId}}
+              </div>
               <div v-if="item.status === 'crawling'" class="status" style="color: yellow">准备中</div>
               <div v-if="item.status === 'publish'" class="status" style="color: green">已发布</div>
               <div v-if="item.status === 'wait_check'" class="status" style="color: pink">待审核</div>
@@ -98,7 +105,7 @@ export default {
       pageCount: 1,
       submitPanoramaShow: false,
       mapsData: null,
-      choose: 0,
+      choose: [],
       panorama: null,
       headingMap: {},
       form: {
@@ -152,6 +159,18 @@ export default {
           this.chooseIndex = 0;
           this.chooseItem = this.panos[this.chooseIndex];
           this.showPano(this.chooseItem, this.chooseIndex)
+        }
+      }
+
+      if (e && e.keyCode === 51) {
+        if (this.chooseItem) {
+          if (this.choose.indexOf(this.chooseItem.id) === -1) {
+            this.choose.push(this.chooseItem.id);
+            console.log(this.choose)
+          } else {
+            this.choose.splice(this.choose.indexOf(this.chooseItem.id), 1);
+            console.log(this.choose)
+          }
         }
       }
     }.bind(this);
@@ -284,6 +303,13 @@ export default {
     },
     toDistribute() {
       tuxunJump('/tuxun/maps_distribute?mapsId=' + this.mapsId);
+    },
+    exportJson() {
+      if (this.chooseItem.length === 0) {
+        this.$toast('你还没有选择街景');
+      }
+
+      window.open(location.origin + '/api/v0/tuxun/maps/exportWithIds?mapsId=' + this.mapsId + '&ids=' + this.choose.join(',') ,'_self');
     },
     getPanoInfo(pano, set) {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
