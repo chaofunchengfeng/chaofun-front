@@ -108,7 +108,7 @@ export default {
     },
     setGoogle(round) {
       if (round.source === 'tuxun_pano') {
-        this.viewer.setPano(round.sourcePanoId);
+        this.viewer.setPano(round.originPanoId);
       }
       if (round.vHeading) {
         this.viewer.setPov({
