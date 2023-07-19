@@ -1720,6 +1720,7 @@ export default {
     },
 
     getTuxunPanoInfo(pano, set, round) {
+      // 为了避免谷歌容器识别成自己的街景
       var newPanoId = '0_tuxun_pano_prefix' + pano;
       this.tuxunPanos.add(newPanoId);
       api.getByPath('/api/v0/tuxun/mapProxy/getTuxunPanoInfo', {pano: pano}).then(res => {
