@@ -1720,12 +1720,13 @@ export default {
     },
 
     getTuxunPanoInfo(pano, set, round) {
-      this.tuxunPanos.add(pano);
+      var newPanoId = '0_tuxun_pano_prefix' + pano;
+      this.tuxunPanos.add(newPanoId);
       api.getByPath('/api/v0/tuxun/mapProxy/getTuxunPanoInfo', {pano: pano}).then(res => {
-        this.headingMap[pano] = res.data.centerHeading;
-        this.worldSizeMap[pano] = new google.maps.Size(res.data.width, res.data.height);
+        this.headingMap[newPanoId] = res.data.centerHeading;
+        this.worldSizeMap[newPanoId] = new google.maps.Size(res.data.width, res.data.height);
         if (set) {
-          this.setViewer(round)
+          this.setViewer(round, newPanoId)
         }
       });
     },
@@ -1744,6 +1745,7 @@ export default {
     },
 
     getTuxunPanoramaTile(pano, zoom, tileX, tileY) {
+      pano = pano.replace('0_tuxun_pano_prefix', '');
       return (
           'https://tuxun.fun/api/v0/tuxun/mapProxy/imgProxy?panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
       );
@@ -1759,8 +1761,12 @@ export default {
         this.setViewer(round);
       }
     },
-    setViewer(round) {
-      this.viewer.setPano(round.panoId);
+    setViewer(round, panoId) {
+      if (panoId) {
+        this.viewer.setPano(panoId);
+      } else {
+        this.viewer.setPano(round.panoId);
+      }
       if (round.vHeading) {
         this.viewer.setPov({
           heading: round.vHeading,
