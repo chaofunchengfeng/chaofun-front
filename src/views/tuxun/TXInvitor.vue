@@ -917,7 +917,7 @@ export default {
                     this.viewer.addListener('pano_changed', () => {
                       console.log('pano_changed');
                       if (this.viewer.getPano().length === 27) {
-                        this.getPanoInfo(this.viewer.getPano());
+                        this.getBaiduPanoInfo(this.viewer.getPano());
                       }
                     });
                     this.viewer.addListener('status_changed', () => {
@@ -1678,10 +1678,23 @@ export default {
             getTileUrl: this.getCustomPanoramaTileUrl,
           },
         };
+      // } else {
+      //   return {
+      //     location: {
+      //       pano: pano,
+      //     },
+      //     tiles: {
+      //       tileSize: new google.maps.Size(512, 512),
+      //       worldSize: new google.maps.Size(13312, 6656),
+      //       // The heading in degrees at the origin of the panorama
+      //       centerHeading: this.headingMap[pano] ?? 0,
+      //       getTileUrl: this.getCustomPanoramaTileGoogle,
+      //     },
+      //   }
       }
     },
 
-    getPanoInfo(pano) {
+    getBaiduPanoInfo(pano, set, round) {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
         // this.centerHeading = res.data.heading;
         this.headingMap[res.data.pano] = res.data.heading;
@@ -1690,6 +1703,9 @@ export default {
             this.preloadImage(item.pano);
             this.headingMap[item.pano] = item.centerHeading;
           });
+        }
+        if (set) {
+          this.setViewer(round);
         }
         setTimeout(() => {
           this.viewer.setLinks(res.data.links);
@@ -1710,10 +1726,23 @@ export default {
       );
 
     },
+
+    getCustomPanoramaTileGoogle(pano, zoom, tileX, tileY) {
+      return (
+          'http://localhost:8080/api/v0/tuxun/mapProxy/imgProxy?panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
+      );
+    },
+
     setPanoId(round) {
       this.panoId = round.panoId;
+      if (round.source === 'baidu_pano') {
+        this.getBaiduPanoInfo(round.panoId, true, round);
+      } else {
+        this.setViewer(round);
+      }
+    },
+    setViewer(round) {
       this.viewer.setPano(round.panoId);
-
       if (round.vHeading) {
         this.viewer.setPov({
           heading: round.vHeading,
