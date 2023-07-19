@@ -148,7 +148,7 @@ export default {
         console.log(res);
         this.viewer.setLinks(res.data.links);
         // this.centerHeading = res.data.heading;
-        this.headingMap[res.data.pano] = res.data.heading;
+        this.headingMap[res.data.pano] = res.data.centerHeading;
         if (res.data.links) {
           res.data.links.forEach((item) => {
             this.preloadImage(item.pano);

@@ -148,7 +148,7 @@ export default {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
         this.panorama.setLinks(res.data.links);
         // this.centerHeading = res.data.heading;
-        this.headingMap[res.data.pano] = res.data.heading;
+        this.headingMap[res.data.pano] = res.data.centerHeading;
         if (res.data.links) {
           res.data.links.forEach((item) => {
             this.headingMap[item.pano] = item.centerHeading;
@@ -198,7 +198,7 @@ export default {
 
       if (panoId.length === 27) {
         api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: panoId}).then(res => {
-          this.headingMap[res.data.pano] = res.data.heading;
+          this.headingMap[res.data.pano] = res.data.centerHeading;
           if (res.data.links) {
             res.data.links.forEach((item) => {
               this.headingMap[item.pano] = item.centerHeading;

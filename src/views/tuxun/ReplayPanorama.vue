@@ -107,7 +107,9 @@ export default {
       this.setGoogle(this.roundData);
     },
     setGoogle(round) {
-      this.viewer.setPano(round.panoId);
+      if (round.source === 'tuxun_pano') {
+        this.viewer.setPano(round.sourcePanoId);
+      }
       if (round.vHeading) {
         this.viewer.setPov({
           heading: round.vHeading,
