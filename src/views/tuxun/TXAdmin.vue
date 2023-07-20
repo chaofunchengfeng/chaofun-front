@@ -3,8 +3,8 @@
     <div style="position: absolute; width: 100%; height: 100%" id="viewer"></div>
     <div class="confirm">
       剩余 {{totalCount}}
-      <el-button @click="check" style="white-space: pre-line;">加入题库(数字键1)</el-button>
-      <el-button @click="deleteQ"  style="white-space: pre-line;">删除题目(数字键2)</el-button>
+      <el-button @click="check" style="white-space: pre-line;">加入题库(空格键)</el-button>
+      <el-button @click="deleteQ"  style="white-space: pre-line;">删除题目(删除键)</el-button>
       <el-button @click="next"  style="white-space: pre-line;">黑屏刷新</el-button>
     </div>
     <div v-if="this.mapsName" class="info">
@@ -73,14 +73,14 @@ export default {
       // if(e && e.keyCode==37){//左
       //     self.last()
       // }
-      if(e && e.keyCode == 49){//上
+      if(e && e.keyCode == 32){//上
         self.check();
       }
       // if(e && e.keyCode==39){//右
       //     self.next()
       // }
 
-      if(e && e.keyCode == 50){//下
+      if(e && e.keyCode == 8){//下
           self.deleteQ();
       }
     };
