@@ -12,12 +12,12 @@
           </div>
           <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
             <div>
-              <div style="font-size: 20px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">69.99</span>
-              </div>
+<!--              <div style="font-size: 20px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">69.99</span>-->
+<!--              </div>-->
               <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>49.99
+                <span style="font-size: 10px;">￥</span>69.99
               </div>
               <div>
                 一年
@@ -27,12 +27,12 @@
           </div>
           <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
             <div>
-              <div style="font-size: 20px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">9.99</span>
-              </div>
+<!--              <div style="font-size: 20px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">9.99</span>-->
+<!--              </div>-->
               <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>6.99
+                <span style="font-size: 10px;">￥</span>9.99
               </div>
               <div>
                 一个月
@@ -46,17 +46,17 @@
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose==='month'">
-          <div style="color: indianred">
-            暑期限时折扣,7月20日24点结束，最后1天
-          </div>
+<!--          <div style="color: indianred">-->
+<!--            暑期限时折扣,7月20日24点结束，最后1天-->
+<!--          </div>-->
           <div>
             注：感谢探索者您的支持！
           </div>
         </div>
         <div v-if="choose==='year'">
-          <div style="color: indianred">
-            暑期限时折扣,7月20日24点结束，最后1天
-          </div>
+<!--          <div style="color: indianred">-->
+<!--            暑期限时折扣,7月20日24点结束，最后1天-->
+<!--          </div>-->
           <div>
             注：冲冲冲！探索者，去征服世界吧！！！
           </div>

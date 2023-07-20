@@ -129,7 +129,6 @@ export default {
       var e = event || window.event || arguments.callee.caller.arguments[0];
       console.log(e.keyCode);
       if(e && e.keyCode === 8){
-        console.log('1231231');
         this.deletePano(this.chooseItem);
       }
 
