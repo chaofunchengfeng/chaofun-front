@@ -246,7 +246,7 @@ export default {
           location: {
             pano: pano,
           },
-          links: this.linksMap[pano] ?? [],
+          links: [],
           // The text for the copyright control.
           copyright: 'baidu',
           // The definition of the tiles for this panorama.
@@ -314,8 +314,6 @@ export default {
     },
     getPanoInfo(pano, set) {
       api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
-        this.linksMap[res.data.pano] = res.data.links;
-        // this.centerHeading = res.data.heading;
         this.headingMap[res.data.pano] = res.data.centerHeading;
         if (res.data.links) {
           res.data.links.forEach((item) => {
@@ -330,6 +328,10 @@ export default {
             pitch: this.chooseItem.pitch,
           });
         }
+
+        setTimeout(() => {
+          this.viewer.setLinks(res.data.links);
+        }, 100)
         // console.log(this.centerHeading);
       })
     },
