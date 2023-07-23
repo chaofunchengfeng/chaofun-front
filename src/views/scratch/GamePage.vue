@@ -11,7 +11,7 @@
     <div v-if="guessInfo" :class="nameClass">
       {{this.guessInfo.name}}
     </div>
-    <div v-if="guessInfo" style="padding-bottom: 10px;margin: auto; text-align: center; font-size: 16px">
+    <div v-if="guessInfo" class="descClass">
       {{this.guessInfo.desc}}
     </div>
     <div v-if="giveUp || !start">
@@ -617,6 +617,13 @@ export default {
     text-align: center;
     font-size: 32px
   }
+  .descClass {
+    padding-bottom: 10px;
+    margin: auto;
+    text-align: center;
+    font-size: 16px;
+    max-width: 70%;
+  }
   .name-phone-click {
     padding-top: 6rem;
     margin: auto;
@@ -779,6 +786,9 @@ table, th, td {
 
 @media only screen and (max-width: 768px) {
   .container {
+    .descClass {
+      max-width: 90%;
+    }
     .input-container {
       width: 90%;
       .input {
