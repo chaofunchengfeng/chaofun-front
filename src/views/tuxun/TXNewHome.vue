@@ -432,20 +432,20 @@ export default {
       cursor: pointer;
       color: white;
       font-size: medium;
-      padding-top: 1rem;
+      padding-top: 0rem;
       text-decoration:underline;
     }
     .second-info {
       cursor: pointer;
       color: white;
       font-size: medium;
-      padding-top: 16px;
+      padding-top: 2rem;
       text-decoration:underline;
     }
     .normal-info {
       color: white;
       font-size: medium;
-      padding-top: 8px;
+      padding-top: 2rem;
     }
     .times {
       color: white;
