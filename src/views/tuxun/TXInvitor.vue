@@ -134,12 +134,18 @@
           <div class="round_result_center" v-if="!gameData.player && gameData.type !== 'battle_royale'">
             <div class="round_result_block" v-if="gameData.type !== 'team' && gameData.type !== 'team_match'">
               {{gameData.teams[0].users[0].userName}} 本轮得分: {{gameData.teams[0].lastRoundResult.score}}
+              <div v-if="gameData.teams[0].lastRoundResult.distance">
+                距离: {{gameData.teams[0].lastRoundResult.distance.toFixed(3)}} km
+              </div>
               <div>
                 血量变化：{{gameData.teams[0].lastRoundResult.healthAfter - gameData.teams[0].lastRoundResult.healthBefore}}
               </div>
             </div>
             <div class="round_result_block" v-if="gameData.type !== 'team' && gameData.type !== 'team_match'">
               {{gameData.teams[1].users[0].userName}} 本轮得分: {{gameData.teams[1].lastRoundResult.score}}
+              <div v-if="gameData.teams[1].lastRoundResult.distance">
+                距离: {{gameData.teams[1].lastRoundResult.distance.toFixed(3)}} km
+              </div>
               <div>
                 血量变化：{{gameData.teams[1].lastRoundResult.healthAfter - gameData.teams[1].lastRoundResult.healthBefore}}
               </div>
@@ -2143,7 +2149,7 @@ export default {
       .round_result_center {
         div {
           color: white;
-          font-size: 24px;
+          font-size: 18px;
         }
         margin: auto;
         text-align: center;
