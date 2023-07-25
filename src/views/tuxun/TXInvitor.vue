@@ -2187,7 +2187,9 @@ export default {
       height: 100%;
       width: 100%;
       background: #090723;
-      display: flex;
+      overflow: auto;
+      padding-top: 5rem;
+      padding-bottom: 4rem;
       justify-content: center;
       z-index: 5000;
       .info {
