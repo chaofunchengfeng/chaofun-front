@@ -11,7 +11,7 @@
       <p style="font-size: 16px">感谢 @jlin</p> 在小程序样式上做的贡献</div>
     <div style="height: 1px; width: 100%; background-color: black"></div>
     <div style="padding-top: 4px;  border-bottom-width: 1px; border-color: black;" @click="toUser(50777)">
-      <p style="font-size: 16px">感谢 @匿名用户cf</p> 在漏洞发现, Web 帖子评论交互，发帖，管理页面上做出的贡献</div>
+      <p style="font-size: 16px">感谢 @南山大王cf</p> 在漏洞发现, Web 帖子评论交互，发帖，管理页面上做出的贡献</div>
     <div style="height: 1px; width: 100%; background-color: black"></div>
     <div style="padding-top: 4px;" @click="toUser(53906)">
       <p style="font-size: 16px"> 感谢 @猫</p> 在导航栏样式、发帖，评论&工程结构上做的优化</div>
