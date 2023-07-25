@@ -216,7 +216,9 @@ export default {
   .describe {
     color: yellow;
     font-size: 1rem;
-    margin-bottom: 0.25rem;
+    padding-bottom: 0.25rem;
+    margin: auto;
+    max-width: 60%;
   }
   .players {
     color: white;
@@ -304,6 +306,9 @@ export default {
   .container {
     .rank_container {
       width: 90%;
+    }
+    .describe {
+      max-width: 90%;
     }
   }
 }

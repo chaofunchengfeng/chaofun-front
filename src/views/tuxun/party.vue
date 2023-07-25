@@ -20,6 +20,13 @@
 
       <div class="header">
         {{getGameTypeName(partyData.gameType)}}
+        <div style="font-size: 15px">
+          <span>{{partyData.gameMapsName}}</span>
+          <span v-if="!partyData.gameMove"> | 固定街景</span>
+          <span v-if="partyData.gameMove"> | 移动街景</span>
+          <span v-if="partyData.gamePan && partyData.gameZomme"> | 自由视角</span>
+          <span v-if="!partyData.gamePan && !partyData.gameZoom"> | 固定视角</span>
+        </div>
       </div>
 
       <div v-if="partyData.status !== 'ongoing'">
@@ -112,7 +119,7 @@
         </div>
         <div  style="padding-top: 2rem;">
           <div style="font-size: 16px">
-            题库：{{partyData.gameMapsName}}
+            题库：{{partyData.gameMapsName}} - <span v-if="partyData.gameMove"> 移动 </span> <span v-else> 固定 </span>
           </div>
           <div>
             <el-button

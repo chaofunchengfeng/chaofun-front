@@ -121,15 +121,14 @@
         <div id="viewer"  style="width: 100%; height: 100%"></div>
         <img v-if="lastRound && lastRound.source === 'baidu_pano'" style="user-select: none; z-index: 5000; position: absolute; bottom: 10px; margin: auto; width: 100px" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
         <div v-if="showRoundResult" class="round_result">
-          <div class="round_result_top">
-            <div v-if="gameData.type === 'daily_challenge'">每日挑战<span v-if="gameData.mapsId !== 9">(全球)</span><span v-if="gameData.mapsId === 9">(中国)</span> </div>
-            <div v-if="gameData.type === 'challenge'">{{gameData.mapsName}}<span v-if="gameData.move">(移动)</span><span v-if="!gameData.move">(固定)</span></div>
-            <div v-if="gameData.type === 'country_streak'">国家连胜<span v-if="gameData.move">(移动)</span><span v-if="!gameData.move">(固定)</span></div>
-            <div v-if="gameData.type === 'province_streak'">省份连胜</div>
-            第 {{gameData.currentRound}} 轮
-            <div v-if="lastRound.isDamageMultiple"> - {{lastRound.damageMultiple}} 倍伤害</div>
+          <game-header-title :gameData="gameData"></game-header-title>
+          <div class="round_result_round_info">
+            <div> 第 {{gameData.currentRound}} 轮
+              <span v-if="lastRound.isDamageMultiple"> - {{lastRound.damageMultiple}} 倍伤害</span>
+            </div>
             <div v-if="gameData.type === 'battle_royale'"> 淘汰用户 </div>
           </div>
+
 
           <div class="round_result_center" v-if="!gameData.player && gameData.type !== 'battle_royale'">
             <div class="round_result_block" v-if="gameData.type !== 'team' && gameData.type !== 'team_match'">
@@ -266,6 +265,7 @@
         </div>
         <div v-if="showGameEnd && winner && gameData.type !== 'battle_royale'" class="game_result">
           <div class="player">
+            <game-header-title :gameData="gameData"></game-header-title>
             <div v-if="isWin" class="winner_title">
               胜利!
             </div>
@@ -445,6 +445,7 @@ import {getByPathLongTimeout} from '../../api/api';
 import Matching from './Matching';
 import EmojiSender from './EmojiSender';
 import { loadScript } from 'vue-plugin-load-script';
+import GameHeaderTitle from './component/game-header-title';
 
 
 import 'leaflet/dist/leaflet.css';
@@ -457,7 +458,7 @@ import devtools from 'devtools-detect'
 
 export default {
   name: 'TXInvitor',
-  components: {EmojiSender, Matching},
+  components: {EmojiSender, Matching, GameHeaderTitle},
   data() {
     return {
       url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
@@ -1925,12 +1926,12 @@ export default {
     }
     .winner_title {
       color: gold;
-      font-size: 3rem;
+      font-size: 2rem;
       margin-bottom: 1rem;;
     }
     .loser_title {
       color: silver;
-      font-size: 3rem;
+      font-size: 2rem;
       margin-bottom: 1rem;;
     }
     .user {
@@ -2150,6 +2151,10 @@ export default {
         color: white;
         font-size: 24px;
         font-weight: bold;
+      }
+      .round_result_round_info {
+        font-size: 24px;
+        color: white;
       }
       .round_result_center {
         div {
