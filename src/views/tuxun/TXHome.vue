@@ -102,7 +102,6 @@ import './SmoothWheelZoom';
 //   ak: 'aibVGReAhMEtxu4Bj2aHixWprh28AhrT'
 // })
 import {Viewer} from 'photo-sphere-viewer';
-import * as THREE from 'three';
 import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
 import { CompassPlugin} from 'photo-sphere-viewer/dist/plugins/compass';
 import { MarkersPlugin} from 'photo-sphere-viewer/dist/plugins/markers';
@@ -182,7 +181,6 @@ export default {
   created() {
   },
   mounted() {
-    THREE.Cache.enabled = false;
 
     this.initWS();
     this.initMap();
@@ -421,7 +419,9 @@ export default {
       } else {
         this.viewer.setOptions({linksControl: true, clickToGo: true});
       }
-      this.viewer.setVisible(true);
+      if (!this.viewer.getVisible()) {
+        this.viewer.setVisible(true);
+      }
       setTimeout(() => {
         this.viewer.setZoom(0);
       }, 50);

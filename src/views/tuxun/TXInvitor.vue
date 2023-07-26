@@ -430,7 +430,6 @@
 </template>
 
 <script>
-import * as THREE from 'three';
 import * as api from '../../api/api';
 import {Viewer} from 'photo-sphere-viewer';
 import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
@@ -526,7 +525,6 @@ export default {
   },
 
   mounted() {
-    THREE.Cache.enabled = false;
     this.history = history;
     this.userId = this.$store.state.user.userInfo.userId;
     this.gameId = this.$route.query.gameId;
@@ -1866,7 +1864,9 @@ export default {
       } else {
         this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: true, clickToGo: true});
       }
-      this.viewer.setVisible(true);
+      if (!this.viewer.getVisible()) {
+        this.viewer.setVisible(true);
+      }
       setTimeout(() => {
         if (round.vZoom) {
           this.viewer.setZoom(round.vZoom);
