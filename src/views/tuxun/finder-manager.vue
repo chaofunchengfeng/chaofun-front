@@ -131,7 +131,7 @@ export default {
         }
       });
       if (this.userId) {
-        this.maps.fitBounds(group)
+        this.map.fitBounds(group)
       }
     },
     finderUpload() {
