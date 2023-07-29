@@ -51,7 +51,7 @@ export default {
   .loading_text {
     margin-top: 2rem;
     color: white;
-    font-size: 32px;
+    font-size: 28px;
   }
   .content {
     color: white;
