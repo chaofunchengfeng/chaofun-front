@@ -23,7 +23,7 @@
           </div>
         </div>
         <div v-if="loginType=='scan'">
-          <div style="text-align: center">扫码关注「炒饭社区」公众号自动注册/登陆</div>
+          <div style="text-align: center">扫码关注「炒饭社区」公众号自动注册/登录</div>
           <img style="max-width: 100%; margin: auto" v-if="this.ticket" :src="'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' + this.ticket">
         </div>
 
