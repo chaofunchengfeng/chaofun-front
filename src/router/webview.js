@@ -280,6 +280,16 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/pano-demo-2',
+    component: () => import('@/views/tuxun/pano-demo-2'),
+    hidden: true
+  },
+  {
+    path: '/tuxun/pano-demo-3',
+    component: () => import('@/views/tuxun/pano-demo-3'),
+    hidden: true
+  },
+  {
     path: '/tuxun/library',
     component: () => import('@/views/tuxun/tuxun-library'),
     name: 'tuxun-library',

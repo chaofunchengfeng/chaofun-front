@@ -12,8 +12,8 @@ export default {
     return {}
   },
   created() {
-    // loadScript('https://i.chao-fan.com/streetview/js-tuxun-v3.js').then(() => {
-    loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4&v=3.52&libraries=places,drawing&language=en&region=us').then(() => {
+    loadScript('https://i.chao-fan.com/streetview/js-tuxun-v3.js').then(() => {
+    // loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4&v=3.52&libraries=places,drawing&language=en&region=us').then(() => {
       this.viewer = new google.maps.StreetViewPanorama(
           document.getElementById('viewer'), {
             fullscreenControl: false,

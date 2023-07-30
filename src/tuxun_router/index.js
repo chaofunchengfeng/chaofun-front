@@ -152,8 +152,18 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/tuxun/pano-demo-1',
+    path: '/pano-demo-1',
     component: () => import('@/views/tuxun/pano-demo-1'),
+    hidden: true
+  },
+  {
+    path: '/pano-demo-2',
+    component: () => import('@/views/tuxun/pano-demo-2'),
+    hidden: true
+  },
+  {
+    path: '/pano-demo-3',
+    component: () => import('@/views/tuxun/pano-demo-3'),
     hidden: true
   },
   {
