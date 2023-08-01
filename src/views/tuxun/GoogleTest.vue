@@ -9,7 +9,7 @@ export default {
   name: 'GoogleTest',
   mounted() {
     let recaptchaScript = document.createElement('script');
-    recaptchaScript.setAttribute('src', 'https://i.chao-fan.com/streetview/js-tuxun-v3.js?key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4');
+    recaptchaScript.setAttribute('src', 'https://chaofun.oss-cn-hangzhou.aliyuncs.com/st_v1/js_test_v5.js?key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4');
     // recaptchaScript.setAttribute('src', 'https://gac-geo.googlecnapps.cn/maps/api/js?key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4')
     document.head.appendChild(recaptchaScript);
     setTimeout(() => {
