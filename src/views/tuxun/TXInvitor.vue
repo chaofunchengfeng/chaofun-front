@@ -926,13 +926,13 @@ export default {
                           },
                         }
                     );
-                    this.viewer.registerPanoProvider(this.getCustomPanorama);
-                    this.viewer.addListener('pano_changed', () => {
-                      console.log('pano_changed');
-                      if (this.viewer.getPano().length === 27) {
-                        this.getBaiduPanoInfo(this.viewer.getPano());
-                      }
-                    });
+                    // this.viewer.registerPanoProvider(this.getCustomPanorama);
+                    // this.viewer.addListener('pano_changed', () => {
+                    //   console.log('pano_changed');
+                    //   if (this.viewer.getPano().length === 27) {
+                    //     this.getBaiduPanoInfo(this.viewer.getPano());
+                    //   }
+                    // });
                     this.viewer.addListener('status_changed', () => {
                       console.log(this.viewer.getStatus());
                       if (this.viewer.getStatus() && this.viewer.getStatus() !== 'OK') {
@@ -1758,8 +1758,9 @@ export default {
     getTuxunPanoramaTile(pano, zoom, tileX, tileY) {
       pano = pano.replace('0_tuxun_pano_prefix', '');
       return (
-          'https://tuxun.fun/api/v0/tuxun/mapProxy/imgProxy?panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
-      );
+          'https://tuxun.fun/api/v0/tuxun/mapProxy/imgProxyV1?panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
+          // 'https://tuxun.fun/api/v0/tuxun/mapProxy/imgProxy?panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
+    );
     },
 
     setPanoId(round) {
