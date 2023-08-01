@@ -926,13 +926,13 @@ export default {
                           },
                         }
                     );
-                    // this.viewer.registerPanoProvider(this.getCustomPanorama);
-                    // this.viewer.addListener('pano_changed', () => {
-                    //   console.log('pano_changed');
-                    //   if (this.viewer.getPano().length === 27) {
-                    //     this.getBaiduPanoInfo(this.viewer.getPano());
-                    //   }
-                    // });
+                    this.viewer.registerPanoProvider(this.getCustomPanorama);
+                    this.viewer.addListener('pano_changed', () => {
+                      console.log('pano_changed');
+                      if (this.viewer.getPano().length === 27) {
+                        this.getBaiduPanoInfo(this.viewer.getPano());
+                      }
+                    });
                     this.viewer.addListener('status_changed', () => {
                       console.log(this.viewer.getStatus());
                       if (this.viewer.getStatus() && this.viewer.getStatus() !== 'OK') {
