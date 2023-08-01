@@ -34,7 +34,9 @@ export default {
       history: null,
       gameData: null,
       image: null,
-      viewer: null
+      viewer: null,
+      headingMap: {},
+      baiduPanos: new Set(),
     };
   },
   mounted() {
@@ -95,18 +97,101 @@ export default {
                 },
               }
           );
-          this.setGoogle(round);
+
+          this.viewer.registerPanoProvider(this.getCustomPanorama);
+          this.viewer.addListener('pano_changed', () => {
+            console.log('pano_changed');
+            if (this.viewer.getPano().length === 27) {
+              this.getBaiduPanoInfo(this.viewer.getPano());
+            }
+          });
+
+          this.setPanoId(round);
         });
       } else {
-        this.setGoogle(round);
+        this.setPanoId(round);
       }
     },
-    reset() {
-      this.setGoogle(this.roundData);
+
+    getCustomPanorama(pano) {
+      console.log(pano);
+      if (this.baiduPanos.has(pano)) {
+        return {
+          location: {
+            pano: pano,
+          },
+          links: [],
+          // The text for the copyright control.
+          copyright: 'baidu',
+          // The definition of the tiles for this panorama.
+          tiles: {
+            tileSize: new google.maps.Size(512, 512),
+            worldSize: new google.maps.Size(8192, 4096),
+            // The heading in degrees at the origin of the panorama
+            centerHeading: this.headingMap[pano] ?? 0,
+            getTileUrl: this.getCustomPanoramaTileUrl,
+          },
+        };
+      }
     },
-    setGoogle(round) {
-      if (round.source === 'tuxun_pano') {
-        this.viewer.setPano(round.originPanoId);
+
+    getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+      zoom = zoom += 1;
+      if (zoom === 1) {
+        return (
+            'https://map.chao-fan.com/bd/thumb/' + pano
+        );
+      }
+      return (
+          'https://mapsv1.bdimg.com/?qt=pdata&sid=' + pano + '&pos=' + tileY + '_' + tileX + '&z=' + zoom
+      );
+
+    },
+
+    reset() {
+      this.setPanoId(this.roundData);
+    },
+
+    setPanoId(round) {
+      this.panoId = round.panoId;
+      if (round.source === 'baidu_pano') {
+        this.getBaiduPanoInfo(round.panoId, true, round);
+      } else if (round.source === 'tuxun_pano') {
+        this.setViewer(round, round.originPanoId);
+      } else {
+        this.setViewer(round);
+      }
+    },
+
+    getBaiduPanoInfo(pano, set, round) {
+      this.baiduPanos.add(pano);
+      api.getByPath('/api/v0/tuxun/mapProxy/getPanoInfo', {pano: pano}).then(res => {
+        // this.centerHeading = res.data.heading;
+        this.headingMap[res.data.pano] = res.data.centerHeading;
+        if (res.data.links) {
+          res.data.links.forEach((item) => {
+            this.baiduPanos.add(pano);
+            this.preloadImage(item.pano);
+            this.headingMap[item.pano] = item.centerHeading;
+          });
+        }
+        if (set) {
+          this.setViewer(round);
+        }
+        setTimeout(() => {
+          this.viewer.setLinks(res.data.links);
+        }, 100)
+        // console.log(this.centerHeading);
+      });
+    },
+    preloadImage(pano) {
+      var img = new Image();
+      img.src = 'https://map.chao-fan.com/bd/thumb/' + pano;
+    },
+
+    setViewer(round, panoId) {
+      if (panoId) {
+        this.viewer.setPano(panoId);
       } else {
         this.viewer.setPano(round.panoId);
       }
