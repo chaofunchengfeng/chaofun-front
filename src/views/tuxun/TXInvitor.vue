@@ -517,6 +517,7 @@ export default {
       worldSizeMap: {},
       userId: null,
       history: null,
+      registerPanoProvider: false,
       baiduPanos: new Set(),
       tuxunPanos: new Set()
 
@@ -926,7 +927,6 @@ export default {
                           },
                         }
                     );
-                    this.viewer.registerPanoProvider(this.getCustomPanorama);
                     this.viewer.addListener('pano_changed', () => {
                       console.log('pano_changed');
                       if (this.viewer.getPano().length === 27) {
@@ -1764,10 +1764,21 @@ export default {
     },
 
     setPanoId(round) {
+      if (!round) {
+        return;
+      }
       this.panoId = round.panoId;
       if (round.source === 'baidu_pano') {
+        if (!this.registerPanoProvider) {
+          this.viewer.registerPanoProvider(this.getCustomPanorama);
+          this.registerPanoProvider = true;
+        }
         this.getBaiduPanoInfo(round.panoId, true, round);
       } else if (round.source === 'tuxun_pano') {
+        if (!this.registerPanoProvider) {
+          this.viewer.registerPanoProvider(this.getCustomPanorama);
+          this.registerPanoProvider = true;
+        }
         this.getTuxunPanoInfo(round.panoId, true, round);
       } else {
         this.setViewer(round);
