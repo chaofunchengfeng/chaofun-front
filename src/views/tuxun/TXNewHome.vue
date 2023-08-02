@@ -311,14 +311,14 @@ export default {
       try {
         window.flutter_inappwebview.callHandler('toAppForum',{forumId: 753 + ''});
       } catch (e) {
-        tuxunOpen('https://chao.fan/f/753');
+        tuxunOpen('https://choa.fun/f/753');
       }
     },
     toMiZong(){
       try {
         window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84 + ''});
       } catch (e) {
-        tuxunOpen('https://chao.fan/f/84');
+        tuxunOpen('https://choa.fun/f/84');
       }
     },
 
