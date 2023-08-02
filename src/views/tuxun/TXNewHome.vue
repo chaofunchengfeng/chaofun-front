@@ -198,6 +198,14 @@
                 一起来讨论图寻技巧吧
               </div>
             </div>
+            <div class="card" @click="toMiZong()">
+              <div class="title">
+                网络迷踪
+              </div>
+              <div class="describe">
+                一个发图片找地方的交流社区
+              </div>
+            </div>
             <div class="card" @click="toScratch()">
               <div class="title">
                 炒饭小测验
@@ -304,6 +312,13 @@ export default {
         window.flutter_inappwebview.callHandler('toAppForum',{forumId: 753 + ''});
       } catch (e) {
         tuxunOpen('https://chao.fan/f/753');
+      }
+    },
+    toMiZong(){
+      try {
+        window.flutter_inappwebview.callHandler('toAppForum',{forumId: 84 + ''});
+      } catch (e) {
+        tuxunOpen('https://chao.fan/f/84');
       }
     },
 
