@@ -1836,7 +1836,7 @@ export default {
 
         setTimeout(()=> {
           let elements = document.getElementsByClassName("gm-compass-turn");
-          elements.forEach(element => {
+          [...elements].forEach(element => {
             element.addEventListener('click', ev => {
               ev.preventDefault();
               ev.stopImmediatePropagation();
@@ -1859,7 +1859,7 @@ export default {
         }, { capture: true, passive: false });
         setTimeout(()=> {
           let elements = document.getElementsByClassName("gm-compass-turn");
-          elements.forEach(element => {
+          [...elements].forEach(element => {
             element.addEventListener('click', ev => {
             }, { capture: true, passive: false });
           })
