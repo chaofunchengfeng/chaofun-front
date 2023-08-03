@@ -181,6 +181,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/finderV2',
+    component: () => import('@/views/tuxun/finderV2'),
+    hidden: true
+  },
+  {
     path: '/map-maker',
     component: () => import('@/views/tuxun/map-maker'),
     name: 'map-maker',

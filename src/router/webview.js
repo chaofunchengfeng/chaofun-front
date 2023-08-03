@@ -304,6 +304,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/finderV2',
+    component: () => import('@/views/tuxun/finderV2'),
+    name: 'tuxun-finderV2',
+    meta: { title: '炒饭寻景-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/map-maker',
     component: () => import('@/views/tuxun/map-maker'),
     name: 'map-maker',
