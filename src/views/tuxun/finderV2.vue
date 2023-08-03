@@ -23,6 +23,7 @@ import { api as viewerApi } from "v-viewer"
 import { tuxunJump, tuxunOpen } from './common';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
+import markerImgUrl from '../../assets/images/marker-icon-blue.png';
 
 export default {
   name: "finder",
@@ -84,7 +85,7 @@ export default {
         document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
       });
       this.map = map;
-      map.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+      map.loadImage(markerImgUrl,
         (error, image) => {
           if (error) throw error;
           map.addImage('custom-marker', image);
@@ -114,17 +115,17 @@ export default {
         if (res.success) {
           var features=[];
           for (var i in res.data) {
-            var d=res.data[i];
+            var finder=res.data[i];
             features.push({
                   'type': 'Feature',
                   'geometry': {
                     'type': 'Point',
                     'coordinates': [
-                      d.lng, d.lat
+                      finder.lng, finder.lat
                     ]
                   },
                   'properties': {
-                    'finder': d
+                    'finder': finder
                   }
             });
           }
@@ -145,6 +146,7 @@ export default {
               'icon-image': 'custom-marker'
             }
           });
+          group.push([finder.lat, finder.lng]);
         }
       });
       if (this.userId) {
