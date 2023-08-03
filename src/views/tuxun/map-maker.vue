@@ -67,7 +67,7 @@ export default {
 
       });
 
-      loadScript('https://chaofun.oss-cn-hangzhou.aliyuncs.com/st_v1/js_test_v5.js').then(() => {
+      loadScript('https://i.chao-fan.com/st_v1/js_test_v5.js').then(() => {
         this.viewer = new google.maps.StreetViewPanorama(
             document.getElementById('viewer'), {
               fullscreenControl: false,

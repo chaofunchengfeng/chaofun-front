@@ -62,7 +62,7 @@ export default {
         if (!this.viewer) {
           document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
           this.sharePanoId = this.$route.query.pano;
-          loadScript('https://chaofun.oss-cn-hangzhou.aliyuncs.com/st_v1/js_test_v5.js').then(() => {
+          loadScript('https://i.chao-fan.com/st_v1/js_test_v5.js').then(() => {
             this.viewer = new google.maps.StreetViewPanorama(
                 document.getElementById('viewer'), {
                   fullscreenControl:false,
