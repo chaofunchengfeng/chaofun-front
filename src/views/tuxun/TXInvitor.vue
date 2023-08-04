@@ -594,12 +594,7 @@ export default {
 
   methods: {
     init() {
-      var Notification = window.Notification || window.mozNotification || window.webkitNotification;
-      if (Notification) {
-        Notification.requestPermission(function (status) {
-          this.notifyStatus = status;
-        }.bind(this));
-      }
+
       if (this.gameId && this.gameId !== null && this.gameId !== '') {
         this.showMatch = false;
         this.initWS();
@@ -627,6 +622,13 @@ export default {
         this.initWS();
         this.joinGuoqing();
         this.countDown();
+      }
+
+      var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+      if (Notification) {
+        Notification.requestPermission(function (status) {
+          this.notifyStatus = status;
+        }.bind(this));
       }
     },
 
@@ -1584,36 +1586,39 @@ export default {
     },
 
     notify(text) {
-      var Notification = window.Notification || window.mozNotification || window.webkitNotification;
-      if (Notification) {
-        if ('granted' !== this.notifyStatus) {
+      try {
+        var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+        if (Notification) {
+          if ('granted' !== this.notifyStatus) {
+          } else {
+            var notify = new Notification('图寻通知', {
+              dir: 'auto',
+              data: '',
+              lang: 'zh-CN',
+              requireInteraction: false,
+              // tag: ,//实例化的notification的id
+              icon: 'https://i.chao-fan.com/biz/08a2d3a676f4f520cb99910496e48b4e.png?x-oss-process=image/resize,h_80/quality,q_75',//通知的缩略图,//icon 支持ico、png、jpg、jpeg格式
+              body: text
+            });
+            notify.onclick = function (val) {
+              //如果通知消息被点击,通知窗口将被激活
+              window.focus();
+              notify.close();
+            },
+                notify.onshow = function () {
+                  setTimeout(notify.close.bind(notify), 5000);
+                };
+            notify.onerror = function () {
+              console.log('HTML5桌面消息出错！！！');
+            };
+            notify.onclose = function () {
+              console.log('HTML5桌面消息关闭！！！');
+            };
+          }
         } else {
-          var notify = new Notification('图寻通知', {
-            dir: 'auto',
-            data: '',
-            lang: 'zh-CN',
-            requireInteraction: false,
-            // tag: ,//实例化的notification的id
-            icon: 'https://i.chao-fan.com/biz/08a2d3a676f4f520cb99910496e48b4e.png?x-oss-process=image/resize,h_80/quality,q_75',//通知的缩略图,//icon 支持ico、png、jpg、jpeg格式
-            body: text
-          });
-          notify.onclick = function (val) {
-            //如果通知消息被点击,通知窗口将被激活
-            window.focus();
-            notify.close();
-          },
-              notify.onshow = function () {
-                setTimeout(notify.close.bind(notify), 5000);
-              };
-          notify.onerror = function () {
-            console.log('HTML5桌面消息出错！！！');
-          };
-          notify.onclose = function () {
-            console.log('HTML5桌面消息关闭！！！');
-          };
+          console.log('您的浏览器不支持桌面消息');
         }
-      } else {
-        console.log('您的浏览器不支持桌面消息');
+      } catch (e) {
       }
     },
 
