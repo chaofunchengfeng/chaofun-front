@@ -139,6 +139,9 @@ export default {
     },
 
     next() {
+      if (this.viewer) {
+        this.viewer.focus();
+      }
       this.doLoginStatus().then(res => {
         console.log(res);
         if (res) {
