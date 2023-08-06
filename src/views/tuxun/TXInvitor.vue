@@ -898,7 +898,9 @@ export default {
             }
 
             setTimeout(() => {
-              if (this.gameData.centerLat) {
+              if (this.gameData.mapMaxLat !== null) {
+                this.map.fitBounds([[this.gameData.mapMaxLat,this.gameData.mapMaxLng], [this.gameData.mapMinLat, this.gameData.mapMinLng]]);
+              } else if (this.gameData.centerLat) {
                 this.map.setView([this.gameData.centerLat, this.gameData.centerLng], this.gameData.mapZoom);
               } else {
                 this.map.setView([38.8, 106.0], 2);
