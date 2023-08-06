@@ -64,8 +64,6 @@ export default {
     },
     toMaps(item, type) {
       if (!this.callBack) {
-        api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-        });
 
         api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
           if (res.success) {

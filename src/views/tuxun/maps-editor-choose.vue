@@ -85,8 +85,6 @@ export default {
       }
     },
     toMaps(item, type) {
-      api.getByPath('/api/v0/tuxun/game/enterMap', {mapsId: item.id}).then(res => {
-      });
       this.doLoginStatus().then((res) => {
         if (res) {
 
