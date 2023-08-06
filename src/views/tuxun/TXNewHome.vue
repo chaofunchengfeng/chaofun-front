@@ -29,7 +29,7 @@
 
 
       <div class="normal-info ">「大胆拥抱世界」</div>
-<!--            <div @click="toFirstTournament" class="info"> 报名无门槛 初赛决赛双重选拔 图寻第四届个人赛 </div>-->
+            <div @click="toFirstTournament" class="info">  玩家第五届个人赛圆满结束</div>
 <!--      <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>-->
 <!--      <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣最后 1 天，快来开通/续费会员吧～</div>-->
       <section class="game_entrance">
@@ -380,9 +380,9 @@ export default {
     },
     toFirstTournament() {
       try {
-        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1272560'});
+        window.flutter_inappwebview.callHandler('toAppPost', {postId: '1273514'});
       } catch (e) {
-        tuxunOpen('https://choa.fun/p/1272560');
+        tuxunOpen('https://choa.fun/p/1273514');
       }
     },
     toDoc() {
