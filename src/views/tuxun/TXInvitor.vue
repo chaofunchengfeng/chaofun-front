@@ -1877,9 +1877,9 @@ export default {
         scrollwheel = false;
       }
       if (!round.move) {
-        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, addressControl: false, clickToGo: false});
+        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: false, showRoadLabels: false, clickToGo: false});
       } else {
-        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: true, addressControl: false, clickToGo: true});
+        this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: true, showRoadLabels: false, clickToGo: true});
       }
       if (!this.viewer.getVisible()) {
         this.viewer.setVisible(true);
