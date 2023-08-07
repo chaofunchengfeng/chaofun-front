@@ -700,7 +700,7 @@ export default {
           smoothSensitivity: 3,   // zoom speed. default is 1
           maxBoundsViscosity: 1.0,
           maxBounds: [[-90, -540], [90, 540]]
-        }).setView([38.8, 106.0], 2);
+        });
         map.scrollWheelZoom = true;
         map.attributionControl.setPosition('bottomleft');
         map.attributionControl.setPrefix('华为地图');
@@ -899,7 +899,7 @@ export default {
 
             setTimeout(() => {
               if (this.gameData.mapMaxLat !== null) {
-                this.map.fitBounds([[this.gameData.mapMaxLat,this.gameData.mapMaxLng], [this.gameData.mapMinLat, this.gameData.mapMinLng]]);
+                this.map.fitBounds([[this.gameData.mapMaxLat,this.gameData.mapMaxLng], [this.gameData.mapMinLat, this.gameData.mapMinLng]], {padding: [5,5]});
               } else if (this.gameData.centerLat) {
                 this.map.setView([this.gameData.centerLat, this.gameData.centerLng], this.gameData.mapZoom);
               } else {
