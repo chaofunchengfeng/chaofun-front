@@ -893,7 +893,6 @@ export default {
             this.heading = this.lastRound.heading;
             this.headingMap[this.panoId] = this.heading;
 
-            this.fixMap();
             setTimeout(function () {
                 if (!this.viewer) {
                   document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
@@ -985,7 +984,7 @@ export default {
         } else if (this.gameData.centerLat) {
           this.map.setView([this.gameData.centerLat, this.gameData.centerLng], this.gameData.mapZoom);
         } else {
-
+          this.map.setView([0, 0], 1);
         }
       } else if (this.map) {
         this.map.setView([0, 0], 1);
