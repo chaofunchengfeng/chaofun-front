@@ -700,7 +700,7 @@ export default {
           smoothSensitivity: 3,   // zoom speed. default is 1
           maxBoundsViscosity: 1.0,
           maxBounds: [[-90, -540], [90, 540]]
-        });
+        })
         map.scrollWheelZoom = true;
         map.attributionControl.setPosition('bottomleft');
         map.attributionControl.setPrefix('华为地图');
@@ -714,8 +714,9 @@ export default {
 
         this.map = map;
         this.map.on('click', this.click);
-        this.map.invalidateSize();
       }
+      this.map.invalidateSize();
+      this.fixMap();
     },
 
     challengeInit() {
@@ -892,20 +893,7 @@ export default {
             this.heading = this.lastRound.heading;
             this.headingMap[this.panoId] = this.heading;
 
-            var interval = 100;
-            if (!this.map) {
-              interval = 500;
-            }
-
-            setTimeout(() => {
-              if (this.gameData.mapMaxLat !== null) {
-                this.map.fitBounds([[this.gameData.mapMaxLat,this.gameData.mapMaxLng], [this.gameData.mapMinLat, this.gameData.mapMinLng]], {padding: [5,5]});
-              } else if (this.gameData.centerLat) {
-                this.map.setView([this.gameData.centerLat, this.gameData.centerLng], this.gameData.mapZoom);
-              } else {
-                this.map.setView([38.8, 106.0], 2);
-              }
-            },interval);
+            this.fixMap();
             setTimeout(function () {
                 if (!this.viewer) {
                   document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
@@ -987,6 +975,20 @@ export default {
         this.showRoundResult = false;
         // 只有没有结束的时候，采取添加队友，其余的话只添加Ranks
         this.addTeamMarker();
+      }
+    },
+
+    fixMap() {
+      if (this.map && this.gameData) {
+        if (this.gameData.mapMaxLat || this.gameData.mapMinLat) {
+          this.map.fitBounds([[this.gameData.mapMaxLat, this.gameData.mapMaxLng], [this.gameData.mapMinLat, this.gameData.mapMinLng]], {padding: [5, 5]});
+        } else if (this.gameData.centerLat) {
+          this.map.setView([this.gameData.centerLat, this.gameData.centerLng], this.gameData.mapZoom);
+        } else {
+
+        }
+      } else if (this.map) {
+        this.map.setView([0, 0], 1);
       }
     },
 
