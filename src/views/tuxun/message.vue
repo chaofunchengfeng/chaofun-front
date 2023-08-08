@@ -41,6 +41,17 @@
           </div>
         </div>
 
+        <div v-if="item.type === 'invite_team'" class="invite_party">
+          <div>
+            <span @click="toUser(item.sender)" class="user-name">
+             {{item.sender.userName}}
+            </span>
+            邀请你加入队伍
+            <span @click="toParty(item.data)" class="party">队伍</span>
+            一起组队匹配
+          </div>
+        </div>
+
         <div v-if="item.type === 'ban'" class="invite_party">
           <div>
             你因为 {{item.data}}

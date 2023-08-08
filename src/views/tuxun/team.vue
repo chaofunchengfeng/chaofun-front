@@ -9,6 +9,8 @@
 
       <div class="disband">
         <el-button class="button" type="primary" @click="copyInviterLink" round>分享邀请</el-button>
+        <div style="height: 10px"></div>
+        <el-button class="button"  @click="inviteFriends" round>邀请好友</el-button>
 <!--        <div style="height: 10px"></div>-->
 <!--        <el-button class="button"  @click="inviteFriends" round>邀请好友</el-button>-->
         <!--      <el-button class="button" type="primary" @click="inviteFriends" round>Code加入</el-button>-->
@@ -76,6 +78,8 @@ export default {
   },
   data() {
     return {
+      openInvite: false,
+      overflow: null,
       url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
       matchTeamData: null
     }
@@ -205,7 +209,25 @@ export default {
       document.body.removeChild(input);
       this.$toast('复制邀请地址成功');
       return result;
-    }
+    },
+
+    inviteFriends() {
+      this.openInvite = true;
+      this.overflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    },
+    closeInvite() {
+      this.openInvite = false;
+      document.body.style.overflow = this.overflow;
+
+    },
+    inviteFriend(userId) {
+      api.getByPath('/api/v0/tuxun/message/inviteTeam', {code: this.matchTeamData.id, friend: userId}).then(res => {
+        if (res.success) {
+          this.$toast('邀请成功');
+        }
+      });
+    },
   }
 }
 </script>

@@ -7,7 +7,7 @@
     </div>
 
     <div class="disband">
-      <el-button class="button" type="primary" @click="copyInviterLink" round>分享链接</el-button>
+      <el-button class="button" type="primary" @click="copyInviterLink" round>分享邀请</el-button>
       <div style="height: 10px"></div>
       <el-button class="button"  @click="inviteFriends" round>邀请好友</el-button>
 <!--      <el-button class="button" type="primary" @click="inviteFriends" round>Code加入</el-button>-->
