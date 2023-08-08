@@ -1766,7 +1766,7 @@ export default {
     getTuxunPanoramaTile(pano, zoom, tileX, tileY) {
       pano = pano.replace('0_tuxun_pano_prefix', '');
       return (
-          'https://tuxun.fun/api/v0/tuxun/mapProxy/imgProxyV1?panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
+          'https://map.chao-fan.com/api/v0/tuxun/mapProxy/imgProxyV1?cdn_arg_tuxun=true&panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
           // 'https://tuxun.fun/api/v0/tuxun/mapProxy/imgProxy?panoid=' + pano + '&x='+ tileX + '&y=' + tileY + '&zoom=' + zoom
     );
     },

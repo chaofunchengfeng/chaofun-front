@@ -237,7 +237,9 @@ export default {
         scrollWheelZoom: false, // disable original zoom function
         smoothWheelZoom: true,  // enable smooth zoom
         smoothSensitivity: 5,   // zoom speed. default is 1
-        maxBoundsViscosity: 1.0, maxBounds:  [[-90,-540],   [90,540]]}).setView([38.8, 106.0], 2);
+        maxBoundsViscosity: 1.0, maxBounds:  [[-90,-540],   [90,540]]})
+          .setView([0, 0], 1);
+
       map.scrollWheelZoom = true;
       map.attributionControl.setPosition('bottomleft');
       map.attributionControl.setPrefix('华为地图');
