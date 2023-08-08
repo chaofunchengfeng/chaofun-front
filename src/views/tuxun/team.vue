@@ -60,6 +60,7 @@
           </div>
       </div>
     </div>
+    <tuxun-invite v-if="openInvite" style="z-index: 2000;" :close="closeInvite" :invite="inviteFriend"></tuxun-invite>
   </div>
 </template>
 
@@ -69,12 +70,13 @@ import User from './user.vue';
 import {tuxunJump} from "./common";
 import Matching from './Matching';
 import {Circle2} from 'vue-loading-spinner';
+import TuxunInvite from './tuxun-invite'
 
 
 export default {
   name: "team",
   components: {
-    User,Matching,Circle2
+    User,Matching,Circle2,TuxunInvite
   },
   data() {
     return {
