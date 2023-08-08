@@ -224,7 +224,7 @@ export default {
 
     },
     inviteFriend(userId) {
-      api.getByPath('/api/v0/tuxun/message/inviteTeam', {code: this.matchTeamData.id, friend: userId}).then(res => {
+      api.getByPath('/api/v0/tuxun/message/inviteTeam', {teamId: this.matchTeamData.id, friend: userId}).then(res => {
         if (res.success) {
           this.$toast('邀请成功');
         }

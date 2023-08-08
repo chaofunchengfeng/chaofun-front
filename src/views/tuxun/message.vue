@@ -37,7 +37,7 @@
              {{item.sender.userName}}
             </span>
             邀请你参加
-            <span @click="toTeam(item.data)" class="party">派对</span>
+            <span @click="toParty(item.data)" class="party">派对</span>
           </div>
         </div>
 
@@ -47,7 +47,7 @@
              {{item.sender.userName}}
             </span>
             邀请你加入队伍
-            <span @click="toParty(item.data)" class="party">队伍</span>
+            <span @click="toTeam(item.data)" class="party">队伍</span>
             一起组队匹配
           </div>
         </div>
@@ -115,11 +115,11 @@ export default {
     },
 
     toTeam(code) {
-      tuxunJump('/tuxun/team-join?code=' + code);
+      tuxunJump('/tuxun/team-join?teamId=' + code);
     },
 
     toParty(code) {
-      tuxunJump('/tuxun/team-join?teamId=' + code);
+      tuxunJump('/tuxun/join?code=' + code);
     },
 
     rejectApply(messageId) {
