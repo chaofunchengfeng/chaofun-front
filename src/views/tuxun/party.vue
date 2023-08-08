@@ -419,7 +419,6 @@ export default {
     closeInvite() {
       this.openInvite = false;
       document.body.style.overflow = this.overflow;
-
     },
     inviteFriend(userId) {
       api.getByPath('/api/v0/tuxun/message/invite', {code: this.partyData.joinCode, friend: userId}).then(res => {
