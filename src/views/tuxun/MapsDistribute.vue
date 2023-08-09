@@ -155,6 +155,7 @@ export default {
         'layout': {
           'icon-image': 'custom-marker',
           'icon-anchor': 'bottom',
+          'icon-size': 0.7,
           'icon-allow-overlap':true
         }
       });
