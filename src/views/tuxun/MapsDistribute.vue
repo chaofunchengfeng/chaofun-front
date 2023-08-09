@@ -17,6 +17,7 @@ import {tuxunJump, tuxunOpen} from './common';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
+
 export default {
   name: 'tuxun-maps-distribute',
   data() {
@@ -63,6 +64,7 @@ export default {
       minZoom: 0,
       maxZoom: 18,
       dragRotate: false,
+      preferCanvas: true,
     }).addControl(new mapboxgl.AttributionControl({
       compact: false,
       customAttribution: '华为地图 GS（2022）2885号'
@@ -78,7 +80,6 @@ export default {
   methods: {
     get() {
       api.getByPath('/api/v0/tuxun/maps/listSimplePano', {mapsId: this.mapsId}).then(res => {
-        console.log(res.data);
         if (res.success) {
           this.addMarker(res.data);
         }
@@ -109,30 +110,73 @@ export default {
       }
       this.markers = [];
 
+      this.map.loadImage( this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png',
+          (error, image) => {
+            if (error) throw error;
+            this.map.addImage('custom-marker', image);
+          }
+      );
+
+
       var bounds = new mapboxgl.LngLatBounds();
 
+      var features=[];
+      var count =0;
       for (var i in data) {
-        var latlng = data[i];
-        const marker = new mapboxgl.Marker({color: '#FFD326'})
-            .setLngLat([latlng.lng, latlng.lat])
-            .addTo(this.map)
-
-        marker.latlng = latlng;
-        var popup = new mapboxgl.Popup({ autoClose: false, closeOnClick: false , autoPan: false})
-            .setHTML('<p style="cursor: pointer; color: red" onclick="aFun('+ latlng.containId + ')">删除</p>')
-        // .setLatLng([latlng.lat, latlng.lng]);
-
-        marker.setPopup(popup);
-
-        marker.getElement().addEventListener('click', function (e) {
-          if (!this.manager) {
-            this.toPanorama(marker.latlng);
-          }  else {
-            marker.getPopup().togglePopup();
+        var finder=data[i];
+        features.push({
+          'type': 'Feature',
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [
+              finder.lng, finder.lat
+            ]
+          },
+          'properties': {
+            // "marker-symbol": "marker-15",
+            'finder': finder
           }
-        }.bind(this));
-        bounds.extend([latlng.lng, latlng.lat])
-      };
+        });
+        count ++;
+        if (count > 10000) {
+          break;
+        }
+        bounds.extend([finder.lng, finder.lat])
+      }
+
+      this.map.addSource('points', {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': features
+        }
+      });
+
+      // Add a symbol layer
+      this.map.addLayer({
+        'id': 'points',
+        'type': 'symbol',
+        'source': 'points',
+        'layout': {
+          'icon-image': 'custom-marker',
+          'icon-allow-overlap':true
+        }
+      });
+
+
+      this.map.on('click', 'points', (e) => {
+        const finder=eval("(" + e.features[0].properties.finder + ")");
+        const coordinates = e.features[0].geometry.coordinates.slice();
+
+        if (!this.manager) {
+          this.toPanorama(finder);
+        }  else {
+          new mapboxgl.Popup().setLngLat(coordinates)
+              .setHTML('<p style="cursor: pointer; color: red" onclick="aFun('+ finder.containId + ')">删除</p>')
+              .addTo(this.map);
+        }
+
+      });
 
       console.log(group);
 

@@ -24,7 +24,7 @@ import { tuxunJump, tuxunOpen } from './common';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import markerImgUrl from '../../assets/images/marker-icon-blue.png';
-const locations=require('../../assets/AI Generated World (100000 Locations).json');
+// const locations=require('../../assets/tuxun.json');
 
 export default {
   name: "finder",
@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted() {
-    console.log(locations.name)
+    // console.log(locations.name)
     this.init()
   },
   methods: {
@@ -98,7 +98,9 @@ export default {
       map.on('click', 'points', (e) => {
         const finder=eval("(" + e.features[0].properties.finder + ")");
         const coordinates = e.features[0].geometry.coordinates.slice();
-        new mapboxgl.Popup().setLngLat(coordinates).setHTML(`<a href="https://tuxun.fun/finder?userId=${finder.panoId}" target="_blank" >${finder.panoId}</a>`).addTo(map);
+        new mapboxgl.Popup().setLngLat(coordinates)
+            .setHTML('<p style="cursor: pointer; color: red" onclick="aFun('+ latlng.containId + ')">删除</p>')
+            .addTo(map);
         this.finderShow(finder.id);
         const $viewer = viewerApi({
           options: {
@@ -116,6 +118,7 @@ export default {
       api.getByPath('/api/v0/finder/list', { userId: this.userId }).then(res => {
         if (res.success) {
           var features=[];
+          var locations={};
           res.data=locations.customCoordinates
           for (var i in res.data) {
             var finder=res.data[i];

@@ -310,13 +310,13 @@ routes = [
     meta: { title: '炒饭寻景-图寻'},
     hidden: true
   },
-  {
-    path: '/tuxun/finderV2-demo',
-    component: () => import('@/views/tuxun/finderV2-demo'),
-    name: 'tuxun-finderV2-demo',
-    meta: { title: '炒饭寻景-图寻'},
-    hidden: true
-  },
+  // {
+  //   path: '/tuxun/finderV2-demo',
+  //   component: () => import('@/views/tuxun/finderV2-demo'),
+  //   name: 'tuxun-finderV2-demo',
+  //   meta: { title: '炒饭寻景-图寻'},
+  //   hidden: true
+  // },
   {
     path: '/tuxun/map-maker',
     component: () => import('@/views/tuxun/map-maker'),
