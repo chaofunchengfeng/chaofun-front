@@ -3,7 +3,7 @@
     <el-dialog title="发送消息" :visible.sync="sendMessageShow" :append-to-body="true">
       <el-form :model="messageForm">
         <el-form-item>
-          <div>
+          <div style="color: black">
             每天最多发送10条消息, 发送骚扰和敏感信息会被封禁账号。
           </div>
           <el-input style="color: black" v-model="messageForm.text" autocomplete="off"> </el-input>
