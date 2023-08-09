@@ -1,5 +1,20 @@
 <template>
   <div class="container">
+    <el-dialog title="发送消息" :visible.sync="sendMessageShow" :append-to-body="true">
+      <el-form :model="messageForm">
+        <el-form-item>
+          <div>
+            每天最多发送10条消息, 发送骚扰和敏感信息会被封禁账号。
+          </div>
+          <el-input style="color: black" v-model="messageForm.text" autocomplete="off"> </el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="sendMessageShow=false">取 消</el-button>
+        <el-button type="primary" @click="sendMessage()">确 定</el-button>
+      </div>
+    </el-dialog>
+
     <div class="back_home">
       <el-button @click="goHome" round>首页</el-button>
       <el-button @click="openSearch" round>搜索添加</el-button>
@@ -17,6 +32,7 @@
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="toUser(item)">查看首页</el-dropdown-item>
+            <el-dropdown-item @click.native="openSendMessage(item)">发送消息</el-dropdown-item>
             <el-dropdown-item @click.native="deleteFriend(item)">删除好友</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -59,8 +75,10 @@ export default {
     return {
       friends: [],
       searchOpen: false,
+      messageForm: {},
       users: [],
       keyword: '',
+      sendMessageShow: false,
       timer: 0
     };
   },
@@ -101,21 +119,34 @@ export default {
         });
       });
     },
+    openSendMessage(item) {
+      this.messageForm = {}
+      this.messageForm.friend = item.userId;
+      this.sendMessageShow = true;
+    },
+    sendMessage() {
+      api.postByPath('/api/v0/tuxun/friend/sendMessage', {friend: this.messageForm.friend, message: this.messageForm.text}).then(res => {
+        this.messageForm = {}
+        this.sendMessageShow = false;
+      });
+    },
+    cancelSendMessage() {
+      this.messageForm = {}
+    },
     search(keyword) {
       api.getSearchUser({'keyword': keyword, 'pageNum': 1}).then((res) => {
         this.users = res.data.data;
-
       });
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-::v-deep .el-input__inner {
-  background-color: rgba(255, 255, 255, 0.247);
-  color: white;
-}
 .search {
+  ::v-deep .el-input__inner {
+    background-color: rgba(255, 255, 255, 0.247);
+    color: white;
+  }
   position: fixed;
   z-index: 2012;
   height: 100%;

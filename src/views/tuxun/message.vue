@@ -66,6 +66,16 @@
           </div>
         </div>
 
+        <div v-if="item.type === 'friend_message'" class="friend_message">
+          <div>
+            <span @click="toUser(item.sender)" class="user-name">
+             {{item.sender.userName}}
+            </span>
+            给你发消息：{{item.data}}
+          </div>
+        </div>
+
+
       </div>
     </div>
     <div v-if="list.length === 0" class="no_message"> 暂无消息 </div>
@@ -197,6 +207,12 @@ export default {
       font-weight: bold;
       cursor: pointer;
     }
+  }
+
+  .friend_message {
+    color: white;
+    padding-bottom: 1rem;
+    text-align: left;
   }
 
   .no_message {
