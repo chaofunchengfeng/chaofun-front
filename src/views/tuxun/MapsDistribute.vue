@@ -121,7 +121,6 @@ export default {
       var bounds = new mapboxgl.LngLatBounds();
 
       var features=[];
-      var count =0;
       for (var i in data) {
         var finder=data[i];
         features.push({
@@ -137,10 +136,6 @@ export default {
             'finder': finder
           }
         });
-        count ++;
-        if (count > 10000) {
-          break;
-        }
         bounds.extend([finder.lng, finder.lat])
       }
 
@@ -159,6 +154,7 @@ export default {
         'source': 'points',
         'layout': {
           'icon-image': 'custom-marker',
+          'icon-anchor': 'bottom',
           'icon-allow-overlap':true
         }
       });
