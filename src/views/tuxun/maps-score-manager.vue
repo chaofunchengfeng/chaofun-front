@@ -164,7 +164,7 @@ export default {
       }
     },
     cleanAll() {
-      this.$confirm('你确定要清楚所有成绩吗？', '', {
+      this.$confirm('你确定要清除所有成绩吗？', '', {
         confirmButtonText: '确定',
         callback: action => {
           if (action == 'confirm') {

@@ -8,12 +8,18 @@
       我的好友
     </div>
     <div style=" margin: auto; margin-top: 1rem; width: 640px;max-width: 100%;padding: 10px;">
-      <div v-for="(item,index) in friends" :key="index" class="list" @click="toUser(item)">
-        <img :src="imgOrigin+item.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt=""
-             style="width: 40px; height: 40px; border-radius: 100%;margin: 0 5px;">
-        <span style="flex: 1;">{{ item.userName }}</span>
-        <span style="width: 120px;text-align: right;">积分：{{ item.rating }}</span>
-      </div>
+        <el-dropdown v-for="(item,index) in friends" :key="index"  trigger="click"  placement="bottom" style="width: 100%">
+          <div class="list">
+            <img :src="imgOrigin+item.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt=""
+                 style="width: 40px; height: 40px; border-radius: 100%;margin: 0 5px;">
+            <span style="flex: 1;">{{ item.userName }}</span>
+            <span style="width: 120px;text-align: right;">积分：{{ item.rating }}</span>
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="toUser(item)">查看首页</el-dropdown-item>
+            <el-dropdown-item @click.native="deleteFriend(item)">删除好友</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       <div class="footer">
       </div>
     </div>
@@ -85,6 +91,15 @@ export default {
     },
     closeSearch() {
       this.searchOpen = false;
+    },
+    deleteFriend(item) {
+      this.$confirm(`是否确定删除「${item.userName}」的好友吗？`, '提示', {
+        type: 'warning',
+      }).then(() => {
+        api.getByPath('/api/v0/tuxun/friend/delete', {friend: item.userId}).then(res => {
+          this.getFriends();
+        });
+      });
     },
     search(keyword) {
       api.getSearchUser({'keyword': keyword, 'pageNum': 1}).then((res) => {
