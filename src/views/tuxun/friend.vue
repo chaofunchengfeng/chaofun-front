@@ -67,6 +67,9 @@
 import * as api from '@/api/api';
 import {tuxunJump, tuxunOpen} from './common';
 
+import { Dialog } from 'vant';
+
+
 
 export default {
   name: 'tuxunRank',
@@ -111,8 +114,10 @@ export default {
       this.searchOpen = false;
     },
     deleteFriend(item) {
-      this.$confirm(`是否确定删除「${item.userName}」的好友吗？`, '提示', {
-        type: 'warning',
+      Dialog.confirm({
+        title: '删除确认',
+        message: `是否确定删除「${item.userName}」的好友吗？`,
+        messageAlign: 'center'
       }).then(() => {
         api.getByPath('/api/v0/tuxun/friend/delete', {friend: item.userId}).then(res => {
           this.getFriends();
