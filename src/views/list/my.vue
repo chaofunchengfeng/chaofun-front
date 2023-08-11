@@ -32,8 +32,8 @@
 
                   <div class="followers" style="display: flex;margin-left: 10px;"
                        @click.stop="$router.push({name: 'myfbi'})">
-                    <span style="margin-left: 5px;color: orangered;font-weight: bold;">
-                      FBI: {{ userInfo.fbi || "0" }}
+                    <span style="margin-left: -5px;color: orangered;font-weight: bold;">
+                      FBi: {{ userInfo.fbi || "0" }}
                     </span>
                   </div>
 
