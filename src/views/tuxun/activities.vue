@@ -109,7 +109,7 @@ export default {
     padding-top: 3rem;
   }
   .list{
-    width: 30%;
+    width: 60%;
     padding-top: 2rem;
     margin: auto;
     text-align: left;
@@ -146,7 +146,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .container {
     .list {
-      width: 80%;
+      width: 90%;
     }
   }
 }
