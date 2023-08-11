@@ -747,7 +747,7 @@ export default {
       // 每3秒发送一次心跳
       setInterval(() => {
         this.wsSend('{"scope": "heart_beat"}');
-      }, 15000);
+      }, 1000);
     },
 
     toAnotherPlayer() {
