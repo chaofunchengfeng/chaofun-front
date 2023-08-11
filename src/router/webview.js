@@ -298,7 +298,7 @@ routes = [
   },
   {
     path: '/tuxun/finder',
-    component: () => import('@/views/tuxun/finder'),
+    component: () => import('@/views/tuxun/finderV2'),
     name: 'tuxun-finder',
     meta: { title: '炒饭寻景-图寻'},
     hidden: true

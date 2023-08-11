@@ -85,7 +85,7 @@ export default {
         document.getElementsByClassName('mapboxgl-ctrl-logo')[0].style.display = 'none';
       });
       this.map = map;
-      map.loadImage(markerImgUrl,
+      this.map.loadImage( this.imgOrigin + 'biz/1662830770348_9499340182724556af66f2b42846135b_0.png',
         (error, image) => {
           if (error) throw error;
           map.addImage('custom-marker', image);
@@ -96,7 +96,9 @@ export default {
       map.on('click', 'points', (e) => {
         const finder=eval("(" + e.features[0].properties.finder + ")");
         const coordinates = e.features[0].geometry.coordinates.slice();
-        new mapboxgl.Popup().setLngLat(coordinates).setHTML(`<a href="https://tuxun.fun/finder?userId=${finder.user.userId}" target="_blank" >${finder.user.userName}</a>`).addTo(map);
+        if (!this.userId) {
+          new mapboxgl.Popup().setLngLat(coordinates).setHTML(`<a href="https://tuxun.fun/finder?userId=${finder.user.userId}" target="_blank" >${finder.user.userName}</a>`).addTo(map);
+        }
         this.finderShow(finder.id);
         const $viewer = viewerApi({
           options: {
