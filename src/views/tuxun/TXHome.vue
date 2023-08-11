@@ -571,7 +571,9 @@ export default {
       }
     },
     wsOnClose(e) {
-      this.initWS();
+      setTimeout(() => {
+        this.initWS();
+      }, 1000)
       console.log('wsOnClose');
     },
 
