@@ -1468,6 +1468,7 @@ export default {
           }
         } else  {
           this.confirmed = false;
+          this.$toast(res.errorMessage);
         }
       }).catch(err => {
         this.confirmed = false;
