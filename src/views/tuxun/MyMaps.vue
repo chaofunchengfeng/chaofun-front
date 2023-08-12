@@ -15,7 +15,7 @@
           {{item.name}}
         </div>
         <div class="players">
-         数量 {{item.pcount}} ｜ 人次: {{item.players}}
+         数量: {{item.pcount}} ｜ 人次: {{item.players}}
         </div>
         <div>
           <el-button style="background-color: unset; color: white"  type="primary" @click.stop="toMapsModify(item.id)" round>编辑</el-button>
