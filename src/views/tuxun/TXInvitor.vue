@@ -1743,8 +1743,12 @@ export default {
       var newPanoId = '0_tuxun_pano_prefix' + pano;
       this.tuxunPanos.add(newPanoId);
       api.getByPath('/api/v0/tuxun/mapProxy/getTuxunPanoInfo', {pano: pano}).then(res => {
-        this.headingMap[newPanoId] = res.data.centerHeading;
-        this.worldSizeMap[newPanoId] = new google.maps.Size(res.data.width, res.data.height);
+        try {
+          this.headingMap[newPanoId] = res.data.centerHeading;
+          this.worldSizeMap[newPanoId] = new google.maps.Size(res.data.width, res.data.height);
+        } catch (e) {
+          console.log(e);
+        }
         if (set) {
           this.setViewer(round, newPanoId)
         }
