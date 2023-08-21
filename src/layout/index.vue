@@ -51,7 +51,7 @@ import newDialog from './components/dialog/newDialog';
 
 
 console.log('探寻这里的秘密，\n找到自己的最爱，\n成为这里的主人，\n炒饭-新趣、分享、交流');
-console.log('%c我们的网址是: ','color:red', 'https://chao.fan');
+console.log('%c我们的网址是: ','color:red', 'https://choa.fun');
 console.log('%c欢迎参与我们的Web开源: ','color:red', 'https://github.com/www-chao-fun/chaofun-front/');
 if(process.env.NODE_ENV != 'development'){
   console.log = function(text,type = ''){};
