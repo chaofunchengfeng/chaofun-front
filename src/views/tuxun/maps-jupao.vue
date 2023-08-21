@@ -217,9 +217,9 @@ export default {
         );
         this.panorama.registerPanoProvider(this.getCustomPanorama);
 
-        this.viewer.addListener('pano_changed', () => {
+        this.panorama.addListener('pano_changed', () => {
           console.log('pano_changed');
-          if (this.viewer.getPano().length === 27) {
+          if (this.panorama.getPano().length === 27) {
             this.getPanoInfo(this.panorama.getPano(), false);
           }
         });
@@ -236,7 +236,6 @@ export default {
       return (
           'https://mapsv1.bdimg.com/?qt=pdata&sid=' + pano + '&pos=' + tileY + '_' + tileX + '&z=' + zoom
       );
-
     },
     getCustomPanorama(pano, zoom,tileX,tileY,callback) {
       console.log('getCustomPanorama');

@@ -382,6 +382,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/maps-tag-manager',
+    component: () => import('@/views/tuxun/maps-tag-manager'),
+    name: 'maps-tag-manaager',
+    meta: { title: '标签管理-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/wonders',
     component: () => import('@/views/tuxun/wonders'),
     name: 'tuxun-wonders',

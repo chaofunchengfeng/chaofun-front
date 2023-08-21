@@ -297,6 +297,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/maps-tag-manager',
+    component: () => import('@/views/tuxun/maps-tag-manager'),
+    name: 'maps-tag-manaager',
+    meta: { title: '标签管理-图寻'},
+    hidden: true
+  },
+  {
     path: '/daily_challenge',
     component: () => import('@/views/tuxun/DailyChallenge'),
     name: '图寻-每日挑战',
