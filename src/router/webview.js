@@ -389,6 +389,13 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/playground',
+    component: () => import('@/views/tuxun/tuxun-playground'),
+    name: 'playground',
+    meta: { title: '测试-图寻'},
+    hidden: true
+  },
+  {
     path: '/tuxun/wonders',
     component: () => import('@/views/tuxun/wonders'),
     name: 'tuxun-wonders',

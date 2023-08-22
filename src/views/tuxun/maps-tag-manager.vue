@@ -17,11 +17,37 @@
               {{tag.tag}} ({{tag.count}})
             </el-button>
           </div>
+          <div style="display: block; text-align: left; padding-top: 5px">
+            <el-checkbox v-model="all" @change="changeAll">全部</el-checkbox>
+            <el-checkbox v-model="noTag" @change="changeNoTag">无标签</el-checkbox>
+            <el-checkbox v-model="reverse" @change="changeReverse">反选</el-checkbox>
+          </div>
+
+          <div class="tag-title" style="padding-top: 10px">操作选中</div>
+          <div style="text-align: left">
+            <el-button @click="batchAdd=true;inputTag=null;">
+              打标签
+            </el-button>
+            <div v-if="batchAdd" style="padding-bottom: 20px">
+              <el-input v-model="inputTag" placeholder="请输入标签">
+              </el-input>
+              <el-button @click="addTagByFilter">确定</el-button>
+              <el-button @click="batchAdd=false; inputTag = null;">取消</el-button>
+            </div>
+            <el-button @click="cleanTagByFilter">
+              清空标签
+            </el-button>
+            <el-button @click="deleteByFilter">
+              删除街景
+            </el-button>
+          </div>
         </div>
+
         <div class="filter" v-show="type==='choose'">
           <div style="display: flex">
             <div class="tag-title">选中</div>
             <el-button @click="cancelChoose">取消选中</el-button>
+            <el-button @click="deletePano">删除街景</el-button>
           </div>
           <div v-show="type==='choose'" id="viewer"  style="height: 50vh"></div>
           <div class="tag-title">打标签:</div>
@@ -47,6 +73,9 @@ import * as api from '@/api/api';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import { loadScript } from 'vue-plugin-load-script';
+import { Dialog } from 'vant';
+
+
 
 
 export default {
@@ -57,11 +86,15 @@ export default {
       map: null,
       history: null,
       chooseTag: null,
+      batchAdd: false,
       tags: [],
       choosePanoTags: [],
       headingMap: {},
       inputTag: null,
       chooseContainId: null,
+      noTag: false,
+      reverse: false,
+      all: false,
       type: 'filter',
       panoTags: [],
       markers: [],
@@ -72,15 +105,39 @@ export default {
     this.history = history;
     this.checkVip();
     this.mapsId = this.$route.query.mapsId;
+    this.all = true;
     this.init();
   },
   methods: {
     init() {
       this.initMap();
-      this.listTgas();
+      this.listTags();
+    },
+
+    changeAll() {
+      if (this.all) {
+        this.noTag = false;
+        this.chooseTag = null;
+        this.reverse = null;
+      }
       this.filterByTags();
     },
 
+    changeNoTag() {
+      if (this.noTag) {
+        this.all = false;
+        this.chooseTag = null;
+      }
+      this.filterByTags();
+    },
+    changeReverse() {
+      if (this.reverse) {
+        this.all = false;
+      } else if (!this.noTag && !this.chooseTag) {
+        this.all = true;
+      }
+      this.filterByTags();
+    },
     initMap() {
       mapboxgl.accessToken = 'pk.eyJ1IjoiY2lqaWFuenkiLCJhIjoiY2w3b2lobGhyMHJ0NTN2bnZpaDhseWJjaCJ9.wxEifLVemNWxe1GKqmUnPw';
       var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
@@ -135,26 +192,67 @@ export default {
         }
       });
     },
-    listTgas() {
+
+    listTags() {
       api.getByPath('/api/v0/tuxun/maps/listTags', {mapsId: this.mapsId}).then(res => {
         this.tags = res.data;
         if (this.chooseTag && this.tags.indexOf(this.chooseTag) === -1) {
           this.chooseTag = null;
-          this.filterByTags();
         }
+        this.filterByTags();
       });
     },
+
     filterByTags() {
-      api.getByPath('/api/v0/tuxun/maps/filterByTags', {mapsId: this.mapsId, tags: this.chooseTag}).then(res => {
+      api.getByPath('/api/v0/tuxun/maps/filterByTags', {mapsId: this.mapsId, tags: this.chooseTag, reverse: this.reverse, noTag: this.noTag, all: this.all}).then(res => {
         this.addMarker(res.data);
       });
+    },
+
+
+    deleteByFilter() {
+      Dialog.confirm({
+        title: '确认清空选中的街景吗？',
+        // message: `是否确定删除帖子 【${item.postInfo.title}】？`,
+        messageAlign: 'left'
+      }).then(() => {
+        api.getByPath('/api/v0/tuxun/maps/deleteByFilter', {mapsId: this.mapsId, tags: this.chooseTag, reverse: this.reverse, noTag: this.noTag, all: this.all}).then(res => {
+          this.listTags();
+        });
+      })
+    },
+
+    addTagByFilter() {
+      Dialog.confirm({
+        title: '确认给选中的街景打标签吗？',
+        // message: `是否确定删除帖子 【${item.postInfo.title}】？`,
+        messageAlign: 'left'
+      }).then(() => {
+        api.getByPath('/api/v0/tuxun/maps/addTagByFilter', {mapsId: this.mapsId, tags: this.chooseTag, reverse: this.reverse, noTag: this.noTag, all: this.all, tag: this.inputTag}).then(res => {
+          this.listTags();
+        });
+        this.batchAdd = false;
+        this.inputTag = null;
+      })
+    },
+
+    cleanTagByFilter() {
+      Dialog.confirm({
+        title: '确认清空选中的街景的标签吗？',
+        // message: `是否确定删除帖子 【${item.postInfo.title}】？`,
+        messageAlign: 'left'
+      }).then(() => {
+        api.getByPath('/api/v0/tuxun/maps/cleanTagByFilter', {mapsId: this.mapsId, tags: this.chooseTag, reverse: this.reverse, noTag: this.noTag, all: this.all}).then(res => {
+          this.listTags();
+        });
+      })
     },
 
     addInputTag() {
       api.getByPath('/api/v0/tuxun/maps/addTag', {mapsId: this.mapsId, tag: this.inputTag, containId: this.chooseContainId}).then(res => {
         this.inputTag = null
         this.getTag()
-        this.listTgas();
+        this.listTags();
       });
     },
     getTag() {
@@ -162,6 +260,7 @@ export default {
         this.panoTags = res.data;
       });
     },
+
     addMarker(data) {
       var group = [];
       //
@@ -226,17 +325,16 @@ export default {
             'icon-allow-overlap': true
           }
         });
+        this.map.on('click', 'points', (e) => {
+          const finder=eval("(" + e.features[0].properties.finder + ")");
+          const coordinates = e.features[0].geometry.coordinates.slice();
+          this.showChoose(finder);
+        });
       }
 
-      this.map.on('click', 'points', (e) => {
-        const finder=eval("(" + e.features[0].properties.finder + ")");
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        this.showChoose(finder);
-      });
-
-      console.log(group);
-
-      this.map.fitBounds(bounds, {padding: {top: 15, bottom:15, left: 15, right: 15}});
+      if (group && group.length >= 1) {
+        this.map.fitBounds(bounds, {padding: {top: 15, bottom: 15, left: 15, right: 15}});
+      }
     },
 
     goBack() {
@@ -256,6 +354,8 @@ export default {
         this.filterByTags()
       } else {
         this.chooseTag = tag;
+        this.noTag = false;
+        this.all = false;
         this.filterByTags()
       }
     },
@@ -393,7 +493,25 @@ export default {
     },
     cancelChoose(item) {
       this.type = 'filter'
-    }
+      this.chooseContainId = null;
+      this.listTags();
+    },
+    deletePano() {
+      Dialog.confirm({
+        title: '确认清空选中的街景吗？',
+        // message: `是否确定删除帖子 【${item.postInfo.title}】？`,
+        messageAlign: 'left'
+      }).then(() => {
+        api.getByPath('/api/v0/tuxun/maps/deletePano', {containId: this.chooseContainId}).then(res => {
+          this.cancelChoose();
+        });
+      });
+    },
+    cleanTagPanos() {
+
+    },
+    // clean
+
   }
 }
 </script>
@@ -443,6 +561,7 @@ export default {
 
           .tag {
             padding-right: 5px;
+            padding-bottom: 5px;
           }
         }
       }
