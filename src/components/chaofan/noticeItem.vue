@@ -27,7 +27,7 @@
         <span>下的评论</span>
       </div>
       <div class="comment" @click="toDetailComment(items.post.postId,items.comment.id)">
-        <span></span>你说：{{items.comment.text}} <noticeItemImages :imageNames="items.comment.imageNames" /><span></span>
+        <span></span>你说：<span v-html="items.comment.text"></span> <noticeItemImages :imageNames="items.comment.imageNames" /><span></span>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
       </div>
       <div class="comment" @click="toDetailComment(items.post.postId,items.comment.id)">
         <!-- <img :src="imgOrigin+items.sender.icon+'?x-oss-process=image/resize,h_80/quality,q_75'" alt=""> -->
-        <span></span>TA评论说： {{items.comment.text}} <noticeItemImages :imageNames="items.comment.imageNames" /><span></span>
+        <span></span>TA评论说： <span v-html="items.comment.text"></span> <noticeItemImages :imageNames="items.comment.imageNames" /><span></span>
       </div>
     </div>
 
@@ -55,11 +55,11 @@
         <span>回复了你</span>
       </div>
       <div class="comment" style="background: #eee;color: #999;" @click="toDetailComment(items.post.postId,items.parentComment.id)">
-        <span></span>你说：{{items.parentComment.text}} <noticeItemImages :imageNames="items.parentComment.imageNames" /><span></span>
+        <span></span>你说：<span v-html="items.parentComment.text"></span> <noticeItemImages :imageNames="items.parentComment.imageNames" /><span></span>
       </div>
       <div class="comment" style="margin-left: 20px;" @click="toDetailComment(items.post.postId,items.comment.id)">
              <span>
-                 TA回复说：{{items.comment.text}} <noticeItemImages :imageNames="items.comment.imageNames" />
+               TA回复说：<span v-html="items.comment.text"></span> <noticeItemImages :imageNames="items.comment.imageNames" />
              </span>
       </div>
     </div>
@@ -75,7 +75,7 @@
       </div>
       <div class="comment" @click="toDetailComment(items.post.postId,items.comment.id)">
         <!-- <img :src="imgOrigin+items.sender.icon+'?x-oss-process=image/resize,h_80/quality,q_75'" alt=""> -->
-        <span></span>@你说： {{items.comment.text}} <noticeItemImages :imageNames="items.comment.imageNames" /><span></span>
+        <span></span>@你说： <span v-html="items.comment.text"></span> <noticeItemImages :imageNames="items.comment.imageNames" /><span></span>
       </div>
     </div>
 
@@ -96,7 +96,7 @@
       <div class="item">
         <span>你的在帖子  </span>
         <span v-if="items.post" @click="toDetail(items)" class="tiezi_title">【{{ items.post.title.length > 15 ? items.post.title.slice(0, 15) + '...' : items.post.title }}】</span>
-        <span @click="toDetail(items)" class="tiezi_title"> 的评论【{{ items.comment.text.length > 15 ? items.comment.text.slice(0, 15) + '...' :  items.comment.text }}】</span>
+        <span @click="toDetail(items)" class="tiezi_title"> 的评论【<span v-html="items.comment.text.length > 15 ? items.comment.text.slice(0, 15) + '...' :  items.comment.text "></span>】</span>
         <span>已被删除,</span>
         <span v-if="items.reason">删除原因为：</span>
         <span v-if="!items.reason">请阅读炒饭发帖规范和版块规范。</span>
