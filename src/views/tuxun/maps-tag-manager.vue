@@ -332,8 +332,10 @@ export default {
         });
       }
 
-      if (group && group.length >= 1) {
+      try {
         this.map.fitBounds(bounds, {padding: {top: 15, bottom: 15, left: 15, right: 15}});
+      } catch (e) {
+
       }
     },
 

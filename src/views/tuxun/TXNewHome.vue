@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <div class="first_session_head">多人-积分</div>
+        <div class="first_session_head">积分</div>
         <div class="line"></div>
         <div class="grid_main">
 
@@ -95,7 +95,7 @@
           </div>
         </div>
 
-        <div class="first_session_head">多人-娱乐</div>
+        <div class="first_session_head">娱乐</div>
         <div class="line"></div>
         <div class="grid_main">
           <div class="card" @click="redirectPage( '/tuxun/team')">
