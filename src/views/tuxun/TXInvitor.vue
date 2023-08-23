@@ -175,7 +175,7 @@
             </div>
           </div>
 
-          <div class="round_result_center" v-if="gameData.type === 'daily_challenge' || gameData.type === 'challenge' " >
+          <div class="round_result_center" v-if="gameData.type === 'daily_challenge' || gameData.type === 'challenge' || gameData.type === 'infinity' " >
             <div class="round_result_block">
               <div>
                 轮数:  {{gameData.currentRound}} / {{gameData.roundNumber}}
@@ -532,6 +532,7 @@ export default {
     this.challengeId = this.$route.query.challengeId;
     this.streakId = this.$route.query.streakId;
     this.guoqingId = this.$route.query.guoqingId;
+    this.infinityId = this.$route.query.infinityId;
     this.init();
 
     document.onkeydown = function(event){
@@ -594,13 +595,12 @@ export default {
 
   methods: {
     init() {
-
       if (this.gameId && this.gameId !== null && this.gameId !== '') {
         this.showMatch = false;
         this.initWS();
         this.join();
         this.countDown();
-      } else if (!this.challengeId && !this.streakId && !this.guoqingId) {
+      } else if (!this.challengeId && !this.streakId && !this.guoqingId && !this.infinityId) {
         this.showMatch = true;
         this.match();
       } else if (this.challengeId) {
@@ -622,6 +622,10 @@ export default {
         this.initWS();
         this.joinGuoqing();
         this.countDown();
+      } else if (this.infinityId) {
+        this.gameId = this.infinityId;
+        this.initWS();
+        this.getGameInfo();
       }
 
       var Notification = window.Notification || window.mozNotification || window.webkitNotification;
@@ -1453,6 +1457,10 @@ export default {
         path = '/api/v0/tuxun/challenge/guess';
       }
 
+      if (this.gameData.type === 'infinity') {
+        path = '/api/v0/tuxun/infinity/guess';
+      }
+
       if (this.gameData.type === 'battle_royale') {
         path = '/api/v0/tuxun/br/guess';
       }
@@ -1484,11 +1492,20 @@ export default {
           }
         });
       } else {
-        api.getByPath('/api/v0/tuxun/streak/next', {gameId: this.gameId}).then(res => {
-          if (res.success) {
-            this.solveGameData(res.data, undefined);
-          }
-        });
+        if (this.gameData.type === 'infinity') {
+          api.getByPath('/api/v0/tuxun/infinity/next', {gameId: this.gameId}).then(res => {
+            if (res.success) {
+              this.solveGameData(res.data, undefined);
+            }
+          });
+        } else {
+          api.getByPath('/api/v0/tuxun/streak/next', {gameId: this.gameId}).then(res => {
+            if (res.success) {
+              this.solveGameData(res.data, undefined);
+            }
+          });
+        }
+
       }
     },
 

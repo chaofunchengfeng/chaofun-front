@@ -1,6 +1,7 @@
 <template>
   <div class="game_header_title">
     <div v-if="gameData.type === 'solo_match'">匹配Solo</div>
+    <div v-if="gameData.type === 'challenge' || gameData.type === 'infinity'">练习 - {{gameData.mapsName}}</div>
     <div v-if="gameData.type === 'team_match'">组队匹配</div>
     <div v-if="gameData.type === 'solo'">派对 - 1v1对决</div>
     <div v-if="gameData.type === 'team'">派对 - 组队对决</div>
@@ -18,6 +19,7 @@
       <span v-if="!gameData.pan && !gameData.zoom"> | 固定视角</span>
       <span v-if="gameData.type === 'challenge' && gameData.roundTimePeriod"> | {{gameData.roundTimePeriod / 1000}} 秒 </span>
       <span v-if="gameData.type === 'challenge' && !gameData.roundTimePeriod"> | 无限轮次时间 </span>
+      <span v-if="gameData.type === 'infinity'"> | 无限轮次 </span>
     </div>
   </div>
 </template>
