@@ -4,10 +4,25 @@
       <div class="ycontainer">
         <div style="font-size: 32px">续费/开通会员</div>
         <img @click="cancelVip" class="cancel" :src='cancelImg'/>
-        <div style="padding-top: 10px; position: relative; display: flex;  justify-content: space-between;">
+        <div class="vip-plans">
           <div @click="changeTo('student')" :class="{'card': choose !== 'student', 'choose-card': choose === 'student'}">
             <div style="font-size: 16px">
               试用
+            </div>
+          </div>
+          <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
+            <div>
+              <!--              <div style="font-size: 20px;">-->
+              <!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+              <!--                <span style="text-decoration: line-through">9.99</span>-->
+              <!--              </div>-->
+              <div style="font-size: 30px; color: #FF0037">
+                <span style="font-size: 10px;">￥</span>9.99
+              </div>
+              <div>
+                一个月
+              </div>
+              <div style="height: 10px"></div>
             </div>
           </div>
           <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
@@ -25,21 +40,24 @@
               <div style="height: 10px"></div>
             </div>
           </div>
-          <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
+
+
+          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">
             <div>
-<!--              <div style="font-size: 20px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">9.99</span>-->
-<!--              </div>-->
+              <!--              <div style="font-size: 20px;">-->
+              <!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+              <!--                <span style="text-decoration: line-through">69.99</span>-->
+              <!--              </div>-->
               <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>9.99
+                <span style="font-size: 10px;">￥</span>119.99
               </div>
               <div>
-                一个月
+                三年
               </div>
               <div style="height: 10px"></div>
             </div>
           </div>
+
         </div>
         <div v-if="choose==='student'">
           <div>注：15分钟免费会员，可循环使用，建议学生使用</div>
@@ -54,11 +72,13 @@
           </div>
         </div>
         <div v-if="choose==='year'">
-<!--          <div style="color: indianred">-->
-<!--            暑期限时折扣,7月20日24点结束，最后1天-->
-<!--          </div>-->
           <div>
-            注：冲冲冲！探索者，去征服世界吧！！！
+            注：每天只需 0.2 元, 冲冲冲！探索者，去征服世界吧！！！
+          </div>
+        </div>
+        <div v-if="choose==='3year'">
+          <div>
+            注：超值选择，每天低至 0.1 元, 我们的征途是星辰大海！！！！！!
           </div>
         </div>
 
@@ -132,7 +152,7 @@ import * as api from '@/api/api';
        cancelImg: require('@/assets/images/icon/cancel1.png'),
        show: false,
        pay: false,
-       choose: 'year',
+       choose: 'month',
        orderId: null,
        totalTryTimes: null,
        payImageUrl: null,
@@ -178,6 +198,9 @@ import * as api from '@/api/api';
          if (this.choose === 'year') {
            period = '1year';
          }
+         if (this.choose === '3year') {
+           period = '3year';
+         }
          api.getByPath('/api/v0/tuxun/vip/getJSPayUrl', {period: period}).then(res=>{
            if (res.success) {
              this.orderId = res.data.orderId;
@@ -213,7 +236,7 @@ import * as api from '@/api/api';
   justify-content: space-around;
   .ycontainer{
     background: #fff;
-    width: 400px;
+    width: 500px;
     max-width: 90%;
     // height: 350px;
     box-sizing: border-box;
@@ -237,12 +260,26 @@ import * as api from '@/api/api';
       color: #e23d0e;
       margin-bottom: 10px;
     }
+    .vip-plans {
+      display: flex;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .vip-plans::-webkit-scrollbar {
+      display: none;
+    }
+
     .card {
       position: relative;
       display: flex;
-      width: 30%;
+      flex-shrink: 0;
       text-align: center;
+      min-width: 100px;
       height: 100px;
+      margin-right: 10px;
       justify-content: center;
       align-items: center;
       align-content: center;
@@ -253,9 +290,11 @@ import * as api from '@/api/api';
     .choose-card {
       position: relative;
       display: flex;
-      width: 30%;
       text-align: center;
+      flex-shrink: 0;
       height: 100px;
+      width: 100px;
+      margin-right: 10px;
       justify-content: center;
       align-items: center;
       align-content: center;
@@ -415,4 +454,12 @@ iframe{
   width: 350px;
   height: 400px;
 }
+
+  @media only screen and (max-width: 768px) {
+    .ycovers {
+      .ycontainer{
+        width: 400px;
+      }
+    }
+  }
 </style>
