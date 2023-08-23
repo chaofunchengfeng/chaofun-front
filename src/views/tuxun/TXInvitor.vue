@@ -626,6 +626,7 @@ export default {
         this.gameId = this.infinityId;
         this.initWS();
         this.getGameInfo();
+        this.countDown();
       }
 
       var Notification = window.Notification || window.mozNotification || window.webkitNotification;

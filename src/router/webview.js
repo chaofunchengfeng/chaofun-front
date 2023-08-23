@@ -494,7 +494,7 @@ routes = [
     path: '/tuxun/solo_game',
     component: () => import('@/views/tuxun/TXInvitor'),
     name: '图寻邀请PK',
-    meta: { title: '图寻邀请PK'},
+    meta: { title: '图寻对战'},
     hidden: true
   },
   {
@@ -543,7 +543,7 @@ routes = [
     path: '/solo_game',
     component: () => import('@/views/tuxun/TXInvitor'),
     name: '图寻邀请PK',
-    meta: { title: '图寻邀请PK'},
+    meta: { title: '图寻对战'},
     hidden: true
   },
   {
