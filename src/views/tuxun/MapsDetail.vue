@@ -44,7 +44,7 @@
         </el-radio-group>
       </div>
       <div class="rank-desc">
-        只显示经典5轮的结果
+        只记录显示经典5轮的结果
       </div>
       <div>
         <el-radio-group v-model="rankType"  @change="getRank" size="small" style="margin-bottom: 10px;">
