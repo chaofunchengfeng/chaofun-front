@@ -19,6 +19,10 @@
           <svg-icon icon-class="history" class-name="header-icon" />
           <span class="header-btn">比赛历史</span>
         </el-link>
+        <el-link @click="toAnalysis()" :underline="false">
+          <svg-icon icon-class="chart" class-name="header-icon" />
+          <span class="header-btn">技术分析</span>
+        </el-link>
       </div>
       <div style="display:flex;">
         <div v-if="this.userProfile" class="user-profile" style="width: auto;">
@@ -69,6 +73,7 @@
               <svg-icon icon-class="history" class-name="header-icon" />
               <span class="header-btn">比赛历史</span>
             </el-link>
+
           </div>
         </div>
       </div>
@@ -331,6 +336,9 @@ export default {
     },
     toHistory() {
       tuxunJump('/tuxun/activities?userId=' + this.userId);
+    },
+    toAnalysis() {
+      tuxunJump('/tuxun/user-analysis');
     },
     openReportUserDialog() {
       this.$confirm('恶意举报可能会被处以短期封禁处罚', '你确定要举报用户吗？', {
