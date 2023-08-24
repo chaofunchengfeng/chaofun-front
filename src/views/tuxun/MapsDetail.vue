@@ -35,6 +35,7 @@
       Top100排名
     </div>
 
+
     <div class="rank_container" v-if="mapsData && this.rank">
       <div>
         <el-radio-group v-if="mapsData && mapsData.canMove" v-model="type"  @change="getRank" style="margin-bottom: 10px;">
@@ -42,7 +43,9 @@
           <el-radio-button size="mini" label="move">移动</el-radio-button>
         </el-radio-group>
       </div>
-
+      <div class="rank-desc">
+        只显示经典5轮的结果
+      </div>
       <div>
         <el-radio-group v-model="rankType"  @change="getRank" size="small" style="margin-bottom: 10px;">
           <el-radio-button size="mini" label="friend">好友</el-radio-button>
@@ -200,6 +203,10 @@ export default {
   text-align: center;
   background-color: #090723;
 
+  .rank-desc {
+    color: gray;
+    padding-bottom: 10px;
+  }
   .nav {
     color: white;
     font-size: 48px;
