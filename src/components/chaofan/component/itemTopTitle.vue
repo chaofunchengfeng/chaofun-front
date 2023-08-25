@@ -920,4 +920,20 @@ h1 {
   height: 30px;
 }
 
+.el-dropdown-menu{
+  overflow: auto;
+  max-height: 40vh;
+
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 4px;
+    background: #999;
+  }
+}
+
 </style>
