@@ -15,6 +15,21 @@
       </div>
     </div>
 
+    <div class="challenge" v-if="gameData.type === 'infinity'">
+      <div v-if="!ISPHONE" class="map">
+        <div class="name">题库</div>
+        <div class="info">{{getMapsName()}}</div>
+      </div>
+      <div class="round">
+        <div class="name">轮次</div>
+        <div class="info">{{gameData.currentRound}}</div>
+      </div>
+      <div class="score">
+        <div class="name">总分</div>
+        <div class="info">{{gameData.player.totalScore}}</div>
+      </div>
+    </div>
+
     <div class="streak" v-if=" gameData.type === 'country_streak' || gameData.type === 'province_streak'">
       <div class="streak">
         <div class="name">连胜</div>

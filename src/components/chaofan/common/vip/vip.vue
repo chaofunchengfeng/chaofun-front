@@ -44,10 +44,10 @@
 
           <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">
             <div>
-              <!--              <div style="font-size: 20px;">-->
-              <!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-              <!--                <span style="text-decoration: line-through">69.99</span>-->
-              <!--              </div>-->
+<!--              <div style="font-size: 20px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">359.99</span>-->
+<!--              </div>-->
               <div style="font-size: 30px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>119.99
               </div>
