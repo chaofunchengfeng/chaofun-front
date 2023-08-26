@@ -119,6 +119,7 @@
     <div class="game" v-if="status === 'ongoing' || status === 'finish'">
       <div class="im-view">
         <div id="viewer"  style="width: 100%; height: 100%"></div>
+        <round-info :game-data="gameData"></round-info>
         <img v-if="lastRound && lastRound.source === 'baidu_pano'" style="user-select: none; z-index: 5000; position: absolute; bottom: 10px; margin: auto; width: 100px" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
         <div v-if="showRoundResult" class="round_result">
           <game-header-title :gameData="gameData"></game-header-title>
@@ -453,12 +454,13 @@ import L from 'leaflet';
 import './SmoothWheelZoom';
 import {tuxunJump, tuxunOpen} from './common';
 import devtools from 'devtools-detect'
+import RoundInfo from "./component/round-info";
 
 
 
 export default {
   name: 'TXInvitor',
-  components: {EmojiSender, Matching, GameHeaderTitle},
+  components: {RoundInfo, EmojiSender, Matching, GameHeaderTitle},
   data() {
     return {
       url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
@@ -2092,6 +2094,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
+
 
     .top-info {
       z-index: 20000;
