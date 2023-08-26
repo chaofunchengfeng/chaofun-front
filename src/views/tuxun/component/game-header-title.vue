@@ -7,7 +7,6 @@
     <div v-if="gameData.type === 'team'">派对 - 组队对决</div>
     <div v-if="gameData.type === 'battle_royale' && gameData.partyId">派对 - 淘汰赛</div>
     <div v-if="gameData.type === 'battle_royale'">淘汰赛</div>
-    <div v-if="gameData.type === 'challenge'">练习 - {{gameData.mapsName}}</div>
     <div v-if="gameData.type === 'daily_challenge'">每日挑战<span v-if="gameData.mapsId !== 9">(全球)</span><span v-if="gameData.mapsId === 9">(中国)</span> </div>
     <div v-if="gameData.type === 'country_streak'">国家连胜<span v-if="gameData.move">(移动)</span><span v-if="!gameData.move">(固定)</span></div>
     <div v-if="gameData.type === 'province_streak'">省份连胜</div>
