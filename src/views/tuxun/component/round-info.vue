@@ -9,7 +9,7 @@
       <div class="info">{{gameData.currentRound}}/{{gameData.roundNumber}}</div>
     </div>
     <div class="score">
-      <div class="name">得分</div>
+      <div class="name">总分</div>
       <div class="info">{{gameData.player.totalScore}}</div>
     </div>
   </div>
