@@ -396,11 +396,7 @@
         </div>
       </div>
 
-      <div v-if="gameData.type === 'country_streak' || gameData.type === 'province_streak'" :class="[{'topRight': !ISPHONE}, {'topRight-phone': ISPHONE}]">
-        <div :class="[{'topRight-info': !ISPHONE}, {'topRight-info-phone': ISPHONE}]">
-          连胜次数：{{gameData.player.streaks}}
-        </div>
-      </div>
+
 
       <div v-if="showMap && ISPHONE" style="position: absolute; left: 20px; bottom: 20px;z-index: 5000">
         <el-button @click="showMap = false" round>隐藏地图</el-button>
