@@ -186,7 +186,7 @@
               <div>
                 本轮得分: {{gameData.player.lastRoundResult.score}}
               </div>
-              <div>
+              <div v-if="gameData.type !== 'infinity'">
                 总得分:  {{gameData.player.totalScore}}
               </div>
             </div>

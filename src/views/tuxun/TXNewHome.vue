@@ -29,7 +29,7 @@
 
 
       <div class="normal-info">「大胆拥抱世界」</div>
-      <div class="second-info" >提示：请不要在每日挑战和多人竞技中使用搜索引擎检索街景信息</div>
+      <div class="second-info" >提示：请不要在每日挑战和多人竞技中使用搜索引擎检索街景位置后答题</div>
 <!--            <div @click="toFirstTournament" class="info"> 8月17日下午5:30 zi8gzag 做客图寻，与 jupaoqq & H.M 一起百人大派对直播 </div>-->
 <!--      <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>-->
 <!--      <div class="second-info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">图寻暑期折扣最后 1 天，快来开通/续费会员吧～</div>-->
