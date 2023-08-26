@@ -82,6 +82,7 @@ export default {
   }
   .score {
     padding-left: 10px;
+    padding-right: 5px;
     .name {
       font-size: 16px;
     }
