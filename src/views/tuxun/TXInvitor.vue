@@ -194,7 +194,7 @@
             <el-button v-if="gameData.type === 'infinity'" class="result_button"  @click="replay" round>题目复盘</el-button>
           </div>
 
-          <div class="round_result_center" v-if="gameData.type === 'country_streak' || gameData.type === 'province_streak'">
+          <div class="round_result_center" v-if="gameData.type === 'country_streak' || gameData.type === 'province_streak' || gameData.type === 'map_country_streak'">
             <div class="round_result_block">
               <!--              <div>-->
               <!--                本轮得分: {{gameData.player.lastRoundResult.score}}-->
@@ -202,7 +202,7 @@
               <!--              <div v-if="gameData.player.lastRoundResult.distance">-->
               <!--                本轮距离: {{(gameData.player.lastRoundResult.distance / 1000).toFixed(3)}} 千米-->
               <!--              </div>-->
-              <div v-if="gameData.type === 'country_streak'">
+              <div v-if="gameData.type === 'country_streak'  || gameData.type === 'map_country_streak' ">
                 选择国家： {{gameData.player.lastRoundResult.guessPlace}}
               </div>
               <div v-if="gameData.type === 'province_streak'">
@@ -259,6 +259,12 @@
             </div>
             <div v-if="gameData">
               <el-button class="result_button" @click="replay" round>题目复盘</el-button>
+            </div>
+            <div v-if="gameData.type === 'map_country_streak' ">
+              <el-button class="result_button" @click="goMapsStart" round>回到「探索」</el-button>
+            </div>
+            <div v-if=" gameData.type === 'map_country_streak' ">
+              <el-button class="result_button" @click="goMaps" round>回到练习题库</el-button>
             </div>
             <div>
               <el-button class="result_button" @click="goHome" round>回到首页</el-button>
@@ -615,6 +621,8 @@ export default {
         this.showMatch = false;
         this.gameId = this.streakId;
         this.getGameInfo();
+        this.initWS();
+        this.countDown();
       } else if (this.guoqingId) {
         this.showMatch = false;
         this.gameId = this.guoqingId;
@@ -869,7 +877,7 @@ export default {
         }
       }
 
-      if ((this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak') && (code === 'game_end' || data.status === 'finish')) {
+      if ((this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak' || this.gameData.type === 'map_country_streak' ) && (code === 'game_end' || data.status === 'finish')) {
         this.showMap = false;
         this.showStreakGameEnd = true;
       }
@@ -1108,13 +1116,23 @@ export default {
         api.getByPath('/api/v0/tuxun/streak/create', {type: tType}).then(res => {
           tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
         });
-      } else {
+      } else if (this.gameData.type === 'province_streak' ) {
         var tType = 'province';
 
         if (this.gameData.move) {
           tType = 'province_move';
         }
         api.getByPath('/api/v0/tuxun/streak/create', {type: tType}).then(res => {
+          tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
+        });
+      } else if (this.gameData.type === 'map_country_streak' ) {
+        api.getByPath('/api/v0/tuxun/streak/createMapCountryStreak', {
+          'mapsId': this.gameData.mapsId,
+          'move': this.gameData.move,
+          'pan': this.gameData.pan,
+          'zoom': this.gameData.zoom,
+          'timeLimit': this.gameData.roundTimePeriod
+        }).then(res => {
           tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
         });
       }
@@ -1145,6 +1163,9 @@ export default {
           });
         } else if (this.gameData.type === 'battle_royale') {
           api.getByPath('/api/v0/tuxun/br/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
+          });
+        } else if (this.gameData.type === 'map_country_streak') {
+          api.getByPath('/api/v0/tuxun/streak/pin', {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
           });
         }
       } else if (this.gameData.type === 'team' || this.gameData.type === 'team_match') {
@@ -1465,13 +1486,13 @@ export default {
         path = '/api/v0/tuxun/br/guess';
       }
 
-      if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak') {
+      if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak' || this.gameData.type === 'map_country_streak' ) {
         path = '/api/v0/tuxun/streak/guess';
       }
 
       api.getByPath(path, {gameId: this.gameId, lng: this.lng, lat: this.lat}).then(res => {
         if (res.success) {
-          if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak' || this.gameData.type === 'challenge' || this.gameData.type === 'daily_challenge') {
+          if (this.gameData.type === 'country_streak' || this.gameData.type === 'province_streak' || this.gameData.type === 'map_country_streak' ||  this.gameData.type === 'infinity' || this.gameData.type === 'challenge' || this.gameData.type === 'daily_challenge') {
             this.solveGameData(res.data, undefined);
           }
         } else  {

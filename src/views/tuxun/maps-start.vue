@@ -83,6 +83,8 @@
       <el-button @click="createChallenge" type="primary" style="font-size: 20px" round>开始(经典5轮)</el-button>
       <div style="height: 10px"></div>
       <el-button @click="createInfinity" type="primary" style="font-size: 20px" round>开始(无限轮次)</el-button>
+      <div style="height: 10px"></div>
+      <el-button v-if="mapsData && mapsData.countryStreak" @click="createMapStreak" type="primary" style="font-size: 20px" round>开始(国家连胜)</el-button>
     </div>
   </div>
 </template>
@@ -141,6 +143,37 @@ export default {
     createInfinity() {
       this.infinityRound = true;
       this.createChallenge();
+    },
+
+    createMapStreak() {
+      var pan = true;
+      var zoom = true;
+      var timeLimitMS = null
+      if (!this.free) {
+        pan = false;
+        zoom = false;
+      }
+
+      if (!this.timeInfinity) {
+        timeLimitMS = this.timeLimitSeconds * 1000;
+      }
+
+      api.getByPath('/api/v0/tuxun/streak/createMapCountryStreak', {
+        'mapsId': this.mapsId,
+        'move': this.move,
+        'pan': pan,
+        'zoom': zoom,
+        'timeLimit': timeLimitMS,
+      }).then(res => {
+        if (res.success) {
+          console.log(res.data);
+          tuxunJump('/tuxun/solo_game?streakId=' + res.data.id);
+        } else {
+          if (res.errorCode === 'need_vip') {
+            this.$vip({});
+          }
+        }
+      });
     },
 
     createChallenge() {

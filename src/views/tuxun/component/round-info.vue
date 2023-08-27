@@ -30,12 +30,24 @@
       </div>
     </div>
 
-    <div class="streak" v-if=" gameData.type === 'country_streak' || gameData.type === 'province_streak'">
+    <div class="streak-style" v-if=" gameData.type === 'country_streak' || gameData.type === 'province_streak'">
       <div class="streak">
         <div class="name">连胜</div>
         <div class="info">{{gameData.player.streaks}}</div>
       </div>
     </div>
+
+    <div class="streak-style" v-if=" gameData.type === 'map_country_streak'">
+      <div v-if="!ISPHONE" class="map">
+        <div class="name">题库</div>
+        <div class="info">{{getMapsName()}}</div>
+      </div>
+      <div class="streak">
+        <div class="name">连胜</div>
+        <div class="info">{{gameData.player.streaks}}</div>
+      </div>
+    </div>
+
 
   </div>
 </template>
@@ -125,14 +137,33 @@ export default {
       }
     }
   }
-  .streak {
-    padding-left: 10px;
-    padding-right: 10px;
-    .name {
-      font-size: 16px;
+  .streak-style {
+    display: flex;
+    .map {
+      padding-left: 10px;
+
+      .name {
+        font-size: 16px;
+      }
+
+      .info {
+        font-size: 20px;
+      }
+
+      .small-info {
+        font-size: 10px;
+      }
     }
-    .info {
-      font-size: 20px;
+    .streak {
+      padding-left: 10px;
+      padding-right: 10px;
+      .name {
+        font-size: 16px;
+      }
+
+      .info {
+        font-size: 20px;
+      }
     }
   }
 }
