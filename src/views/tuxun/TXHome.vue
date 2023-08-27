@@ -211,10 +211,7 @@ export default {
                   event.key === 'D' ||
                   event.key === 'Unidentified' ||
                   event.key === 'CapsLock'
-              ) &&
-              !event.metaKey &&
-              !event.altKey &&
-              !event.ctrlKey
+              )
           ) {
             event.stopPropagation();
           };

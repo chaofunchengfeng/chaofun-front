@@ -53,7 +53,11 @@ export default {
           api.getByPath('/api/v0/tuxun/solo/get', {gameId: this.gameId}).then(res => {
             console.log(res.data);
             if (res.success) {
-              this.roundData = res.data.rounds[this.round - 1];
+              if (res.data.type === 'infinity') {
+                this.roundData = res.data.rounds[0];
+              } else {
+                this.roundData = res.data.rounds[this.round - 1];
+              }
               this.render(this.roundData);
             }
           });

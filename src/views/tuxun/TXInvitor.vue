@@ -414,7 +414,7 @@
         <el-button size="mini" v-if="gameData && gameData.type !== 'daily_challenge'" @click="toReport" round> 坏题反馈 </el-button>
         <el-button v-if="lastRound && lastRound.move" size="mini"  @click="reset" round> 回到原点</el-button>
         <el-button size="mini" v-if="gameData && !gameData.player && gameData.type != 'battle_royale'"  @click="sendEmoji=true" round> 表情 </el-button>
-        <el-button size="mini" v-if="gameData && (gameData.type ==='country_streak' || gameData.type ==='province_streak')"  @click="skip" round> 换一题 <span>
+        <el-button size="mini" v-if="gameData && (gameData.type ==='country_streak' || gameData.type ==='province_streak' || gameData.type === 'map_country_streak')"  @click="skip" round> 换一题 <span>
           ({{gameData.leftSkipTimes}})
         </span> </el-button>
         <el-button size="mini" v-if="gameData && (gameData.type === 'challenge' || gameData.type ==='country_streak' || gameData.type ==='province_streak')" @click="challengeAgain" round> 重开 </el-button>
