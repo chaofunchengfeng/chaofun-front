@@ -4,11 +4,12 @@ import vipEl from './vip.vue';
 
 const NoticeConstructor = Vue.extend(vipEl)
 
-const vip = (option = {}) => { // 对外调用的方法
+const vip = (scene,option = {}) => { // 对外调用的方法
   const Instance = new NoticeConstructor({
     data: { // 传入组件的data
     //   content: option.text,
     //   duration: option.time || 1500
+      scene: scene,
       callBack: option.callBack
     }
   })

@@ -170,7 +170,7 @@ export default {
           tuxunJump('/tuxun/solo_game?streakId=' + res.data.id);
         } else {
           if (res.errorCode === 'need_vip') {
-            this.$vip({});
+            this.$vip();
           }
         }
       });
@@ -203,7 +203,7 @@ export default {
             tuxunJump('/tuxun/solo_game?infinityId=' + res.data);
           } else {
             if (res.errorCode === 'need_vip') {
-              this.$vip({});
+              this.$vip();
             }
           }
         });
@@ -223,7 +223,7 @@ export default {
             tuxunJump('/tuxun/challenge?challengeId=' + res.data);
           } else {
             if (res.errorCode === 'need_vip') {
-              this.$vip({});
+              this.$vip();
             }
           }
         });

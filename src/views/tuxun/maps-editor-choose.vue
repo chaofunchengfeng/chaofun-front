@@ -93,7 +93,7 @@ export default {
               tuxunJump('/tuxun/challenge?challengeId=' + res.data);
             } else {
               if (res.errorCode === 'need_vip') {
-                this.$vip({});
+                this.$vip();
               }
             }
           });

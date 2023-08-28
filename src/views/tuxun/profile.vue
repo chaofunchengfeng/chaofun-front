@@ -49,7 +49,7 @@
                   普通用户
                   <el-button type="warning" size="mini" round
                     v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
-                    @click="$vip()">开通会员</el-button>
+                    @click="$vip('due')">开通会员</el-button>
                 </div>
               </div>
             </div>

@@ -284,6 +284,7 @@ export default {
     }
     this.getTimesInterval();
     this.getMessage();
+    this.checkShowVip();
   },
 
   mounted() {
@@ -385,13 +386,20 @@ export default {
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
     },
-    raiseVIP() {
+    raiseVIP(scene) {
       this.doLoginStatus().then(res=>{
         if(res){
-          this.$vip();
+          this.$vip(scene);
         }
       });
-    }
+    },
+    checkShowVip() {
+      api.getByPath('/api/v0/tuxun/user/checkShowVip').then(res => {
+        if (res.data) {
+          this.raiseVIP(res.data);
+        }
+      });
+    },
   }
 };
 </script>
