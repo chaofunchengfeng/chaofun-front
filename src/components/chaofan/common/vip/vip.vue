@@ -5,7 +5,7 @@
 
         <div style="font-size: 32px">续费/开通会员</div>
         <div v-if="scene === 'due'" style="color: red">您的会员已过期，是否续费会员</div>
-        <div v-if="scene === 'new'" style="color: red">新朋友，考不考虑会员呢？</div>
+        <div v-if="scene === 'new'" style="color: red">新寻友，考不考虑会员呢？</div>
         <img @click="cancelVip" class="cancel" :src='cancelImg'/>
         <div class="vip-plans">
           <div @click="changeTo('student')" :class="{'card': choose !== 'student', 'choose-card': choose === 'student'}">
@@ -63,7 +63,7 @@
 
         </div>
         <div v-if="choose==='student'">
-          <div>注：15分钟免费会员，可循环使用，建议学生使用</div>
+          <div>注：15分钟免费会员，可循环试用，建议学生使用</div>
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose==='month'">
