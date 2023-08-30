@@ -1498,6 +1498,10 @@ export default {
         } else  {
           this.confirmed = false;
           this.$toast(res.errorMessage);
+
+          if (res.errorCode === 'need_vip') {
+            this.$vip();
+          }
         }
       }).catch(err => {
         this.confirmed = false;
