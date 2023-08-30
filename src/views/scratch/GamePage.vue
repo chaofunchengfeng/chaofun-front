@@ -700,6 +700,10 @@ export default {
         margin: 0 10px 10px 0;
         border-radius: 4px;
         cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
         &:hover {
           outline: 2px solid green;
         }
@@ -712,6 +716,10 @@ export default {
         border-radius: 4px;
         cursor: pointer;
         background-color: red;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
 
       .answer-right {
@@ -722,6 +730,10 @@ export default {
         border-radius: 4px;
         cursor: pointer;
         background-color: green;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
     }
   }
