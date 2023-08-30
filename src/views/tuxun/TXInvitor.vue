@@ -509,6 +509,7 @@ export default {
       isMapSmall: true,
       guoqingId: null,
       mapPin: false,
+      lastTimeConfirm: null,
       obsoleteUsers: [],
       panorama: null,
       dailyChallengeRank: null,
@@ -544,7 +545,11 @@ export default {
       var e = event || window.event || arguments.callee.caller.arguments[0];
       console.log(e.keyCode);
       if(e && e.keyCode === 32){//空格
-        this.keyConfirm();
+        if (this.lastRound && this.lastRound.endTime && this.gameData.status === 'ongoing' && this.gameData.player && this.targetLat) {
+          this.next();
+        } else {
+          this.keyConfirm();
+        }
       }
     }.bind(this);
 
