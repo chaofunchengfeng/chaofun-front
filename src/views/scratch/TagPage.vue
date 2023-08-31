@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       totalTimes: null,
-      sort: 'hot',
+      sort: 'editor',
       tagName: null,
       current: 1,
       list: [],
