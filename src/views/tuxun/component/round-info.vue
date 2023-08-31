@@ -1,7 +1,7 @@
 <template>
   <div class="round-info" v-if="gameData && !gameData.rounds[gameData.rounds.length - 1].endTime">
     <div class="challenge" v-if="gameData.type === 'challenge' || gameData.type === 'daily_challenge'">
-      <div v-if="!ISPHONE" class="map">
+      <div v-if="!ISPHONE && this.gameData.mapsName" class="map">
         <div class="name">题库</div>
         <div class="info">{{getMapsName()}}</div>
       </div>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="challenge" v-if="gameData.type === 'infinity'">
-      <div v-if="!ISPHONE" class="map">
+      <div v-if="!ISPHONE && this.gameData.mapsName" class="map">
         <div class="name">题库</div>
         <div class="info">{{getMapsName()}}</div>
       </div>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="streak-style" v-if=" gameData.type === 'map_country_streak'">
-      <div v-if="!ISPHONE" class="map">
+      <div v-if="!ISPHONE && this.gameData.mapsName" class="map">
         <div class="name">题库</div>
         <div class="info">{{getMapsName()}}</div>
       </div>
