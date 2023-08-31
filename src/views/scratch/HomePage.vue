@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       totalTimes: null,
-      sort: '1day',
+      sort: 'editor',
       showHotTags: false,
       total: 100000,
       current: 1,

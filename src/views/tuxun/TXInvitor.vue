@@ -833,6 +833,8 @@ export default {
 
       if (this.gameData.rounds && this.gameData.rounds.length > 0) {
         this.lastRound = this.gameData.rounds[this.gameData.rounds.length - 1];
+        this.lastRound.source = 'tuxun_pano';
+        this.lastRound.panoId = 'mbpZNvWvVKmHWmMlqy9_bf7gCMkMBjSAOMitI14hLwE'
       }
 
       if (!this.gameData.player  && (code === 'game_end' || data.status === 'finish')) {
@@ -914,7 +916,7 @@ export default {
                 if (!this.viewer) {
                   document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
                   this.sharePanoId = this.$route.query.pano;
-                  loadScript('https://i.chao-fan.com/st_v2/js_test_v5.js').then(() => {
+                  loadScript('https://gac-geo.googlecnapps.cn/maps/api/js?key=AIzaSyDvx5IM2bbHnOb4sY-0aISwH8bAxH7ecS4&v=weekly').then(() => {
                     this.viewer = new google.maps.StreetViewPanorama(
                         document.getElementById('viewer'), {
                           fullscreenControl:false,
@@ -1787,6 +1789,7 @@ export default {
 
     getTuxunPanoInfo(pano, set, round) {
       // 为了避免谷歌容器识别成自己的街景
+      console.log('getTuxunPanoInfo')
       var newPanoId = '0_tuxun_pano_prefix' + pano;
       this.tuxunPanos.add(newPanoId);
       api.getByPath('/api/v0/tuxun/mapProxy/getTuxunPanoInfo', {pano: pano}).then(res => {
@@ -1828,6 +1831,8 @@ export default {
         return;
       }
       this.panoId = round.panoId;
+      console.log('heiheihei')
+      console.log(round)
       if (round.source === 'baidu_pano') {
         if (!this.registerPanoProvider) {
           this.viewer.registerPanoProvider(this.getCustomPanorama);

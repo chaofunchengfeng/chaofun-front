@@ -33,7 +33,7 @@
       <div class="header">
         发布的小测验
       </div>
-      <scratch-list :has-create="false" :has1-day="false" :user-id="parseInt(this.userId)"></scratch-list>
+      <scratch-list :has-create="false" :has-editor-recommend="false" :has1-day="false" :user-id="parseInt(this.userId)"></scratch-list>
     </div>
   </div>
 
