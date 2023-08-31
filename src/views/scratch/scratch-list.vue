@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-radio-group v-model="innerSort" style="margin-bottom: 20px;margin-top: 20px;" @change="changeSort">
-      <el-radio-button v-if="hasEditorRecommend" label="editor">编辑</el-radio-button>
+      <el-radio-button v-if="hasEditorRecommend" label="editor">精选</el-radio-button>
       <el-radio-button v-if="has1Day" label="1day">今日最热</el-radio-button>
       <el-radio-button label="hot">最热</el-radio-button>
       <el-radio-button label="new">最新</el-radio-button>
