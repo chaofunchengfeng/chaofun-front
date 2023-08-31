@@ -833,8 +833,6 @@ export default {
 
       if (this.gameData.rounds && this.gameData.rounds.length > 0) {
         this.lastRound = this.gameData.rounds[this.gameData.rounds.length - 1];
-        this.lastRound.source = 'tuxun_pano';
-        this.lastRound.panoId = 'mbpZNvWvVKmHWmMlqy9_bf7gCMkMBjSAOMitI14hLwE'
       }
 
       if (!this.gameData.player  && (code === 'game_end' || data.status === 'finish')) {
