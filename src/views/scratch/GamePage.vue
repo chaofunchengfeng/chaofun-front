@@ -5,7 +5,7 @@
       <el-button @click="goHome" size="small" round>首页</el-button>
       <el-button @click="share" size="small"  round>分享</el-button>
       <el-button @click="random" size="small"  round>随机下一个</el-button>
-      <el-button v-if="isAdmin" @click="draft" size="small"  round>打回</el-button>
+      <el-button v-if="isAdmin && guessInfo" @click="draft" size="small"  round>打回</el-button>
       <el-button v-if="isAdmin && guessInfo && !guessInfo.editorRecommend" @click="editorRecommend" size="small"  round>精选</el-button>
       <el-button v-if="isAdmin && guessInfo && guessInfo.editorRecommend" @click="cancelEditorRecommend" size="small"  round>取消精选</el-button>
 
@@ -346,7 +346,7 @@ export default {
   },
   methods: {
     checkAdmin() {
-      api.getByPath('/api/v0/user/checkAdmin').then(res => {
+      api.getByPath('/api/v0/scratch/checkAdmin').then(res => {
         this.isAdmin = res.data;
       });
     },
