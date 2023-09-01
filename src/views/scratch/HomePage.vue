@@ -1,14 +1,13 @@
 <template>
   <div class="container">
     <div class="top-info">
-      炒饭小测验
+      炒饭小测验(饭小测)
       <div style="position: absolute; right: 8px; top: 8px">
         <el-button @click="toSelf">个人首页</el-button>
         <div></div>
         <el-button v-if="$store.state.user.islogin" @click="logout">退出登录</el-button>
       </div>
       <div v-if="totalTimes" style="font-size: 16px">做题也可以很快乐</div>
-      <div v-if="totalTimes" style="font-size: 16px">「炒饭社区」出品</div>
       <div v-if="totalTimes" style="font-size: 16px">交流QQ群号: <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=IuAqwN27">594837569</a></div>
       <div v-if="totalTimes" style="font-size: 16px">小测验文档: <a target="_blank" href="https://www.yuque.com/chaofun/scratch">文档地址</a> </div>
       <div v-if="totalTimes" style="font-size: 16px">总测验次数: {{totalTimes}}</div>
