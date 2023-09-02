@@ -8,7 +8,8 @@
           <el-radio v-model="reason" label="作弊">作弊</el-radio>
           <el-radio v-model="reason" label="头像违规">头像违规</el-radio>
           <el-radio v-model="reason" label="用户名违规">用户名违规</el-radio>
-          <div class="buttons">
+          <el-input style="padding-top: 2rem" v-model="more" placeholder="更多(选填)"></el-input>
+          <div  class="buttons">
             <el-button @click="hide">取消</el-button>
             <el-button @click="report" type="primary">确认</el-button>
           </div>
@@ -27,6 +28,7 @@ export default {
     return {
       cancelImg: require('@/assets/images/icon/cancel1.png'),
       userId: null,
+      more: null,
       reason: null,
     }
   },
@@ -47,7 +49,7 @@ export default {
 
     },
     report() {
-      api.getByPath('/api/v0/tuxun/user/report', { target: this.userId, reason: this.reason}).then(res => {
+      api.getByPath('/api/v0/tuxun/user/report', { target: this.userId, reason: this.reason, more: this.more}).then(res => {
         if (res.success) {
           this.$toast('举报成功！');
           this.hide();
@@ -113,6 +115,13 @@ export default {
       padding-top: 3rem;
     }
 
+  }
+}
+@media only screen and (max-width: 768px) {
+  .ycovers {
+    .ycontainer{
+      width: 400px;
+    }
   }
 }
 </style>
