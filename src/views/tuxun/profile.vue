@@ -143,6 +143,7 @@
       </div>
       <calendar-heatmap :locale="this.heatmapLocale" :values="this.activity" :end-date="this.endDate" tooltip-unit="活动" />
     </div>
+    <report-user v-if="showReport" :user-id="userId" @hide="showReport = false"></report-user>
   </div>
 </template>
 
@@ -164,7 +165,7 @@ import {
 } from 'echarts/components';
 import VChart, { THEME_KEY } from 'vue-echarts';
 import { tuxunJump, tuxunOpen } from './common';
-
+import ReportUser from './component/report-user'
 use([
   CanvasRenderer,
   LineChart,
@@ -178,6 +179,7 @@ use([
 export default {
   name: 'tuxun-profile',
   components: {
+    ReportUser,
     CalendarHeatmap,
     VChart
   },
@@ -341,19 +343,7 @@ export default {
       tuxunJump('/tuxun/user-analysis');
     },
     openReportUserDialog() {
-      this.$confirm('恶意举报可能会被处以短期封禁处罚', '你确定要举报用户吗？', {
-        confirmButtonText: '确定',
-        callback: action => {
-          if (action == 'confirm') {
-            api.getByPath('/api/v0/tuxun/user/report', { target: this.userId }).then(res => {
-              if (res.success) {
-                this.$toast('举报成功！');
-              }
-            });
-          }
-        }
-      });
-
+      this.showReport = true;
     }
   }
 };
