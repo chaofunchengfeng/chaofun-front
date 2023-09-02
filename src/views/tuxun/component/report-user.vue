@@ -6,6 +6,8 @@
         <img @click="hide" class="cancel" :src='cancelImg'/>
         <div class="reasons">
           <el-radio v-model="reason" label="作弊">作弊</el-radio>
+          <el-radio v-model="reason" label="恶意掉分">恶意掉分</el-radio>
+          <el-radio v-model="reason" label="私信骚扰">私信骚扰</el-radio>
           <el-radio v-model="reason" label="头像违规">头像违规</el-radio>
           <el-radio v-model="reason" label="用户名违规">用户名违规</el-radio>
           <el-input style="padding-top: 2rem" v-model="more" placeholder="更多(选填)"></el-input>
@@ -49,6 +51,10 @@ export default {
 
     },
     report() {
+      if (!this.reason && !this.more) {
+        this.$toast('请选择或填写原因');
+        return;
+      }
       api.getByPath('/api/v0/tuxun/user/report', { target: this.userId, reason: this.reason, more: this.more}).then(res => {
         if (res.success) {
           this.$toast('举报成功！');

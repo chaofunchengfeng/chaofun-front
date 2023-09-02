@@ -10,6 +10,7 @@
       <el-button @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
     </div>
+    <report-pano v-if="gameData && this.showReport" :maps-id="gameData.mapsId" :pano-id="panoId" @hide="this.showReport = false"></report-pano>
 
     <div class="prepare" v-if="status==='wait_join' || status === 'ready'">
       <div class="header" v-if="gameData.type === 'solo' || gameData.type === 'solo_match'">
@@ -457,12 +458,13 @@ import './SmoothWheelZoom';
 import {tuxunJump, tuxunOpen} from './common';
 import devtools from 'devtools-detect'
 import RoundInfo from "./component/round-info";
+import ReportPano from "./component/report-pano";
 
 
 
 export default {
   name: 'TXInvitor',
-  components: {RoundInfo, EmojiSender, Matching, GameHeaderTitle},
+  components: {ReportPano, RoundInfo, EmojiSender, Matching, GameHeaderTitle},
   data() {
     return {
       url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/v0/tuxun`,
@@ -523,6 +525,7 @@ export default {
       worldSizeMap: {},
       userId: null,
       history: null,
+      showReport: false,
       registerPanoProvider: false,
       baiduPanos: new Set(),
       tuxunPanos: new Set()
@@ -1631,9 +1634,7 @@ export default {
 
 
     toReport() {
-      api.getByPath('/api/v0/tuxun/game/report', {panoId: this.panoId}).then(res => {
-        this.$toast('反馈成功');
-      });
+      this.showReport = true;
     },
 
     notify(text) {

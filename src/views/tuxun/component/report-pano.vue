@@ -5,12 +5,10 @@
         <div style="font-size: 32px">反馈街景</div>
         <img @click="hide" class="cancel" :src='cancelImg'/>
         <div class="reasons">
-          <el-radio v-model="reason" label="作弊">积分作弊</el-radio>
-          <el-radio v-model="reason" label="每日挑战作弊">每日挑战作弊</el-radio>
-          <el-radio v-model="reason" label="恶意掉分">恶意掉分</el-radio>
-          <el-radio v-model="reason" label="私信骚扰">私信骚扰</el-radio>
-          <el-radio v-model="reason" label="头像违规">头像违规</el-radio>
-          <el-radio v-model="reason" label="用户名违规">用户名违规</el-radio>
+          <el-radio v-model="reason" label="质量太差">质量太差</el-radio>
+          <el-radio v-model="reason" label="黑屏">黑屏</el-radio>
+          <el-radio v-model="reason" label="指南针错误">指南针错误</el-radio>
+          <el-radio v-model="reason" label="涉黄涉暴">涉黄涉暴</el-radio>
           <el-input style="padding-top: 2rem" v-model="more" placeholder="更多(选填)"></el-input>
           <div  class="buttons">
             <el-button @click="hide">取消</el-button>
@@ -30,17 +28,20 @@ export default {
   data() {
     return {
       cancelImg: require('@/assets/images/icon/cancel1.png'),
-      userId: null,
-      more: null,
       reason: null,
+      more: null,
     }
   },
   props: {
     show: {
       type: Boolean,
     },
-    userId: {
-      type: Number,
+    panoId: {
+      type: String,
+      default: null,
+    },
+    mapsId: {
+      type: Number ,
       default: null,
     }
   },
@@ -52,13 +53,14 @@ export default {
 
     },
     report() {
-      api.getByPath('/api/v0/tuxun/user/report', { target: this.userId, reason: this.reason, more: this.more}).then(res => {
-        if (res.success) {
-          this.$toast('举报成功！');
-          this.hide();
-        }
+      if (!this.reason && !this.more) {
+        this.$toast('请选择或填写原因');
+        return;
+      }
+      api.getByPath('/api/v0/tuxun/game/report', {panoId: this.panoId, mapsId: this.mapsId, reason: this.reason, more: this.more}).then(res => {
+        this.$toast('反馈成功');
+        this.hide();
       });
-
     },
     hide() {
       this.$emit('hide'); // 触发自定义事件，并传递新的值
@@ -70,7 +72,7 @@ export default {
 <style lang="scss" scoped>
 .ycovers {
   position: fixed;
-  z-index: 2012;
+  z-index: 10012;
   top: 0;
   left: 0;
   right: 0;
