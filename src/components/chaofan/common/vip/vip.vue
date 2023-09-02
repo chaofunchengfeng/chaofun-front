@@ -28,6 +28,21 @@
               <div style="height: 10px"></div>
             </div>
           </div>
+          <div @click="changeTo('3month')" :class="{'card': choose !== '3month', 'choose-card': choose === '3month'}">
+            <div>
+              <!--              <div style="font-size: 20px;">-->
+              <!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+              <!--                <span style="text-decoration: line-through">359.99</span>-->
+              <!--              </div>-->
+              <div style="font-size: 30px; color: #FF0037">
+                <span style="font-size: 10px;">￥</span>26.99
+              </div>
+              <div>
+                三个月
+              </div>
+              <div style="height: 10px"></div>
+            </div>
+          </div>
           <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
             <div>
 <!--              <div style="font-size: 20px;">-->
@@ -45,28 +60,28 @@
           </div>
 
 
-          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">
-            <div>
-<!--              <div style="font-size: 20px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">359.99</span>-->
+<!--          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">-->
+<!--            <div>-->
+<!--&lt;!&ndash;              <div style="font-size: 20px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                <span style="font-size: 10px; text-decoration: none">￥</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span style="text-decoration: line-through">359.99</span>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--              <div style="font-size: 30px; color: #FF0037">-->
+<!--                <span style="font-size: 10px;">￥</span>119.99-->
 <!--              </div>-->
-              <div style="font-size: 30px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>119.99
-              </div>
-              <div>
-                三年
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
+<!--              <div>-->
+<!--                三年-->
+<!--              </div>-->
+<!--              <div style="height: 10px"></div>-->
+<!--            </div>-->
+<!--          </div>-->
 
         </div>
         <div v-if="choose==='student'">
           <div>注：15分钟免费会员，可循环试用，建议学生使用</div>
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
-        <div v-if="choose==='month'">
+        <div v-if="choose==='month' || choose === '3month'">
 <!--          <div style="color: indianred">-->
 <!--            暑期限时折扣,7月20日24点结束，最后1天-->
 <!--          </div>-->
@@ -204,6 +219,9 @@ import * as api from '@/api/api';
          }
          if (this.choose === '3year') {
            period = '3year';
+         }
+         if (this.choose === '3month') {
+           period = '3month';
          }
          api.getByPath('/api/v0/tuxun/vip/getJSPayUrl', {period: period}).then(res=>{
            if (res.success) {
