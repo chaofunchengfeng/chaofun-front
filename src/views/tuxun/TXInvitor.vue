@@ -10,7 +10,6 @@
       <el-button @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
     </div>
-    <report-pano v-if="gameData && showReport" :maps-id="gameData.mapsId" :pano-id="panoId" @hide="showReport = false"></report-pano>
 
     <div class="prepare" v-if="status==='wait_join' || status === 'ready'">
       <div class="header" v-if="gameData.type === 'solo' || gameData.type === 'solo_match'">
@@ -431,6 +430,7 @@
     </div>
     <matching v-if="this.showMatch"/>
     <emoji-sender :gameId="gameData.id" v-if="this.sendEmoji" @hide="hideEmojiSender" style="z-index: 5001"></emoji-sender>
+    <report-pano v-if="gameData && showReport" :maps-id="gameData.mapsId" :pano-id="panoId" @hide="showReport = false"></report-pano>
   </div>
 </template>
 
