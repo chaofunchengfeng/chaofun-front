@@ -5,10 +5,11 @@
         <div style="font-size: 32px">反馈街景</div>
         <img @click="hide" class="cancel" :src='cancelImg'/>
         <div class="reasons">
-          <el-radio v-model="reason" label="质量太差">质量太差</el-radio>
-          <el-radio v-model="reason" label="黑屏">黑屏</el-radio>
-          <el-radio v-model="reason" label="指南针错误">指南针错误</el-radio>
-          <el-radio v-model="reason" label="涉黄涉暴">涉黄涉暴</el-radio>
+          <el-radio class="reason" v-model="reason" label="黑屏">黑屏</el-radio>
+          <el-radio class="reason" v-model="reason" label="画质太差">画质太差</el-radio>
+          <el-radio class="reason" v-model="reason" label="定位错误">定位错误</el-radio>
+          <el-radio class="reason" v-model="reason" label="指南针错误">指南针错误</el-radio>
+          <el-radio class="reason" v-model="reason" label="涉黄涉暴">涉黄涉暴</el-radio>
           <el-input style="padding-top: 2rem" v-model="more" placeholder="更多(选填)"></el-input>
           <div  class="buttons">
             <el-button @click="hide">取消</el-button>
@@ -106,14 +107,9 @@ export default {
       display: flex;
       flex-wrap: wrap;
       font-size: 24px;
-      margin-top: 2rem;
+      margin-top: 1rem;
       .reason {
-        border: 1px solid #c7ccd1;
-        padding: 4px 8px;
-        font-size: 20px;
-        margin: 0 10px 10px 0;
-        border-radius: 4px;
-        cursor: pointer;
+        padding-top: 10px;
       }
     }
     .buttons {

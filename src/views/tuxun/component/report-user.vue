@@ -5,11 +5,11 @@
         <div style="font-size: 32px">举报用户</div>
         <img @click="hide" class="cancel" :src='cancelImg'/>
         <div class="reasons">
-          <el-radio v-model="reason" label="作弊">作弊</el-radio>
-          <el-radio v-model="reason" label="恶意掉分">恶意掉分</el-radio>
-          <el-radio v-model="reason" label="私信骚扰">私信骚扰</el-radio>
-          <el-radio v-model="reason" label="头像违规">头像违规</el-radio>
-          <el-radio v-model="reason" label="用户名违规">用户名违规</el-radio>
+          <el-radio class="reason"  v-model="reason" label="作弊">作弊</el-radio>
+          <el-radio class="reason"  v-model="reason" label="恶意掉分">恶意掉分</el-radio>
+          <el-radio class="reason"  v-model="reason" label="私信骚扰">私信骚扰</el-radio>
+          <el-radio class="reason" v-model="reason" label="头像违规">头像违规</el-radio>
+          <el-radio class="reason" v-model="reason" label="用户名违规">用户名违规</el-radio>
           <el-input style="padding-top: 2rem" v-model="more" placeholder="更多(选填)"></el-input>
           <div  class="buttons">
             <el-button @click="hide">取消</el-button>
@@ -107,14 +107,9 @@ export default {
       display: flex;
       flex-wrap: wrap;
       font-size: 24px;
-      margin-top: 2rem;
+      margin-top: 1rem;
       .reason {
-        border: 1px solid #c7ccd1;
-        padding: 4px 8px;
-        font-size: 20px;
-        margin: 0 10px 10px 0;
-        border-radius: 4px;
-        cursor: pointer;
+        padding-top: 10px;
       }
     }
     .buttons {
