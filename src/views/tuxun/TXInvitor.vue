@@ -352,7 +352,7 @@
               </div>
             </div>
             <div v-if="team1Emoji" class="emoji">
-              <img :src="imgOrigin+team1Emoji +'?x-oss-process=image/resize,h_120'"/>
+              <img class="emoji_img" :src="imgOrigin+team1Emoji +'?x-oss-process=image/resize,h_120'"/>
             </div>
           </div>
 
@@ -372,7 +372,7 @@
               </div>
             </div>
             <div v-if="this.team2Emoji" class="emoji">
-              <img :src="imgOrigin+team2Emoji +'?x-oss-process=image/resize,h_120'"/>
+              <img class="emoji_img" :src="imgOrigin+team2Emoji +'?x-oss-process=image/resize,h_120'"/>
             </div>
           </div>
         </div>
@@ -2390,6 +2390,21 @@ export default {
         color: white;
         -webkit-text-stroke: 1px black;
       }
+      .emoji {
+        margin: auto;
+        width: 80px;
+        height: 80px;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        .emoji_img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
       .sub_user_name {
         text-align: left;
         font-size: 1rem;
@@ -2502,6 +2517,12 @@ export default {
 @media  (any-hover:none) {
   .game_container {
     .game {
+      .game_hud {
+        .emoji {
+            width: 60px;
+            height: 60px;
+        }
+      }
       .bm-view-container {
         width: 40%;
         height: 40%;
