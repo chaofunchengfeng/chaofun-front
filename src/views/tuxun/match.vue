@@ -126,6 +126,7 @@ export default {
                     return;
                   }
                   this.notify('您的图寻已匹配到对手，点击开始对战');
+                  this.showMatch = false;
                   tuxunJump( '/tuxun/solo_game?gameId=' + res.data);
                   this.gameId = res.data;
                   this.init();
