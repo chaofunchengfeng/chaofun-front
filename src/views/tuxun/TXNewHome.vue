@@ -343,7 +343,7 @@ export default {
     },
 
     soloMatch() {
-      tuxunJump('/tuxun/solo_game');
+      tuxunJump('/tuxun/match');
     },
     toFriend() {
       tuxunJump(  '/tuxun/friend');

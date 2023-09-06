@@ -761,7 +761,7 @@ export default {
 
       if (this.gameData.status === 'match_fail') {
         this.$toast('匹配失败，重新匹配！');
-        tuxunJump('/tuxun/solo_game');
+        tuxunJump('/tuxun/match');
         return;
       }
 
@@ -1494,7 +1494,7 @@ export default {
     },
 
     goTuxun() {
-      tuxunJump('/tuxun/solo_game');
+      tuxunJump('/tuxun/match');
     },
 
     toNew() {
