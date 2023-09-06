@@ -486,8 +486,8 @@ routes = [
   {
     path: '/tuxun/daily_challenge',
     component: () => import('@/views/tuxun/DailyChallenge'),
-    name: '图寻每日挑战',
-    meta: { title: '图寻-每日挑战'},
+    name: 'tuxun-daily-challenge',
+    meta: { title: '每日挑战-图寻'},
     hidden: true
   },
   {
@@ -495,6 +495,13 @@ routes = [
     component: () => import('@/views/tuxun/TXInvitor'),
     name: '图寻邀请PK',
     meta: { title: '图寻对战'},
+    hidden: true
+  },
+  {
+    path: '/tuxun/match',
+    component: () => import('@/views/tuxun/match'),
+    name: 'tuxun-match',
+    meta: { title: '图寻匹配'},
     hidden: true
   },
   {

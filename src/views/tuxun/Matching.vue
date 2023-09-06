@@ -10,7 +10,7 @@
       </div>
 
       <div class="matching_home_button">
-        <el-button class="home_button" type="warning" @click="goHome" round>结束匹配</el-button>
+        <el-button class="home_button" type="warning" @click="end" round>结束匹配</el-button>
       </div>
     </div>
   </div>
@@ -25,9 +25,12 @@ export default {
   components: {
     Circle2,
   },
+  props: {
+
+  },
   methods: {
-    goHome() {
-      tuxunJump('/tuxun/');
+    end() {
+      this.$emit('end');
     },
   }
 };

@@ -306,8 +306,15 @@ export const constantRoutes = [
   {
     path: '/daily_challenge',
     component: () => import('@/views/tuxun/DailyChallenge'),
-    name: '图寻-每日挑战',
-    meta: { title: '图寻-每日挑战'},
+    name: 'daily-challenge',
+    meta: { title: '每日挑战-图寻'},
+    hidden: true
+  },
+  {
+    path: '/match',
+    component: () => import('@/views/tuxun/match'),
+    name: '匹配-图寻',
+    meta: { title: '匹配-图寻'},
     hidden: true
   },
   {
