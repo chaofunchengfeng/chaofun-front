@@ -75,6 +75,14 @@
           </div>
         </div>
 
+        <div v-if="item.type === 'new'" class="new">
+          <div>
+            欢迎您来到图寻，需要了解更多信息可以查看
+            <span @click="toDoc(item)" class="doc-link">
+              图寻新手教程
+            </span>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -84,7 +92,7 @@
 
 <script>
 import * as api from '../../api/api';
-import {tuxunJump} from "./common";
+import {tuxunJump, tuxunOpen} from "./common";
 import moment from 'moment';
 
 export default {
@@ -130,6 +138,9 @@ export default {
 
     toParty(code) {
       tuxunJump('/tuxun/join?code=' + code);
+    },
+    toDoc(item) {
+      tuxunOpen(item.data);
     },
 
     rejectApply(messageId) {
@@ -213,6 +224,15 @@ export default {
     color: white;
     padding-bottom: 1rem;
     text-align: left;
+  }
+  .new {
+    color: white;
+    padding-bottom: 1rem;
+    text-align: left;
+    .doc-link {
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
 
   .no_message {
