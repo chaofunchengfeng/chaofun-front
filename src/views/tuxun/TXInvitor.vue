@@ -1593,6 +1593,7 @@ export default {
             });
             notify.onclick = function (val) {
               //如果通知消息被点击,通知窗口将被激活
+              parent.focus();
               window.focus();
               notify.close();
             },

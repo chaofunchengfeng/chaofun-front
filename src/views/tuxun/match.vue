@@ -37,6 +37,9 @@ export default {
   },
   created() {
     this.init();
+    // setTimeout(() => {
+    //   this.notify("123 test");
+    // }, 5000);
   },
   methods: {
     init() {
@@ -88,12 +91,13 @@ export default {
             });
             notify.onclick = function (val) {
               //如果通知消息被点击,通知窗口将被激活
+              parent.focus();
               window.focus();
               notify.close();
             },
-                notify.onshow = function () {
-                  setTimeout(notify.close.bind(notify), 5000);
-                };
+            notify.onshow = function () {
+              setTimeout(notify.close.bind(notify), 5000);
+            };
             notify.onerror = function () {
               console.log('HTML5桌面消息出错！！！');
             };
