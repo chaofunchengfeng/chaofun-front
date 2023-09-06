@@ -46,73 +46,12 @@
         </div>
       </div>
 
-      <div class="start_game" v-if="status === 'ready' && this.gameData.type !== 'solo_match' && this.gameData.type !== 'battle_royale' && this.$store.state.user.userInfo.userId === gameData.host.userId">
-        <el-button class="button" type="primary" round @click="start">开始图寻对决</el-button>
-      </div>
-
-      <div v-if="(gameData.type === 'solo' || gameData.type === 'solo_match') && gameData.status === 'wait_join'" class="wait_game_start">
+      <div v-if="gameData.type === 'solo_match' && gameData.status === 'wait_join'" class="wait_game_start">
         等待其他玩家加入....
       </div>
 
-      <div v-if="(gameData.type === 'team') && gameData.status === 'wait_join'" class="wait_game_start">
-        等待其他玩家加入或队伍至少有一人....
-      </div>
-
-      <div v-if="gameData.host && this.$store.state.user.userInfo.userId !== gameData.host.userId && gameData.type !== 'solo_match' && gameData.type !== 'battle_royale' " class="wait_game_start">
-        等待房主开始比赛...
-      </div>
-
-      <div v-if="(gameData.type === 'solo' || gameData.type === 'team') && gameData.mapsName " class="wait_game_start">
-        <div class="separate-line"></div>
-        <div style="padding-top: 10px; font-size: 24px">设置</div>
-        <div>
-          <div style="font-size: 16px">
-            题库：{{gameData.mapsName}}
-          </div>
-          <div>
-            <el-button
-                v-if="this.$store.state.user.userInfo.userId === this.gameData.host.userId"
-                @click="showMapsSearch('noMove')"
-                type="primary"
-                style="margin-left: 10px"
-                size="small"
-            >切换题库</el-button>
-          </div>
-        </div>
-        <div style="padding-top: 2rem; font-size: 16px">
-          血量
-          <el-input-number v-if="this.$store.state.user.userInfo.userId === this.gameData.host.userId" v-model="health" @change="changeHealth" :min=1000 :max=1000000 :step=1000 />
-          <span v-else> : {{this.health}} </span>
-        </div>
-      </div>
-
-      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_title">
-        淘汰赛-准备中
-      </div>
       <div v-if="(gameData.type === 'solo_match' || gameData.type === 'battle_royale') && gameData.status == 'ready' && gameData.timerStartTime" class="wait_game_start">
         开始倒计时 <span style="color: greenyellow">{{this.gameTimeLeft}}</span> 秒
-      </div>
-      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_start">
-        本次淘汰赛人数
-      </div>
-      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_number">
-        {{gameData.players.length}}
-      </div>
-      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'"  class="wait_game_hint">
-        满3人开始比赛, 选手列表：
-      </div>
-      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_user">
-        <div v-for="(item, index) in gameData.players" :key="index"> {{item.userName }}</div>
-      </div>
-      <div class="invite" v-if="status !== 'ready' && ((gameData.type !== 'battle_royale' && gameData.type !== 'solo_match')  || gameData.type == 'team')">
-        <div class="separate-line"></div>
-        <div class="title" style="padding-top: 10px">
-          邀请链接
-        </div>
-        <div class="body">
-          <input class="invite_input" placeholder readonly :value="origin + this.$route.fullPath" />
-          <el-button class="button" type="success" @click="copyInviterLink" round>复制分享</el-button>
-        </div>
       </div>
     </div>
 
@@ -1700,33 +1639,6 @@ export default {
             this.continueSend = true;
           }
         }, interval);
-      });
-    },
-    showMapsSearch()  {
-      this.$mapsSearch(
-          { callBack: (mapsId, mapsType) => {
-              if (mapsType === 'move') {
-                api.getByPath('/api/v0/tuxun/vip/check').then(res => {
-                  if (res.data) {
-                    this.changeMaps(mapsId, mapsType);
-                  } else {
-                    this.$vip();
-                  }
-                });
-              }
-              this.changeMaps(mapsId, mapsType);
-            }
-          });
-    },
-    changeMaps(mapsId, mapsType) {
-      // this.$mapsSearch();
-      api.getByPath('/api/v0/tuxun/game/changeMapsId', {gameId: this.gameData.id, mapsId: mapsId, type: mapsType}).then(res=>{
-        this.mapsData = res.data;
-      });
-    },
-    changeHealth() {
-      api.getByPath('/api/v0/tuxun/game/changeHealth', {gameId: this.gameData.id, health: this.health}).then(res=>{
-        this.health = this.gameData.health;
       });
     },
     getCustomPanorama(pano) {
