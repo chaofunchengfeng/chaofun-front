@@ -367,7 +367,6 @@
         <el-button @mouseover.native="mapMouseOver" v-if="gameData.status === 'ongoing' && gameData.player && this.targetLat" @click="next" round>下一题</el-button>
       </div>
     </div>
-    <matching v-if="this.showMatch"/>
     <emoji-sender :gameId="gameData.id" v-if="this.sendEmoji" @hide="hideEmojiSender" style="z-index: 5001"></emoji-sender>
     <report-pano v-if="gameData && showReport" :maps-id="gameData.mapsId" :pano-id="panoId" @hide="showReport = false"></report-pano>
   </div>
@@ -436,7 +435,6 @@ export default {
       winTeam: null,
       yourTeam: null,
       isWin: null,
-      showMatch: false,
       challengeId: null,
       sendEmoji: false,
       team1Emoji: null,
@@ -553,8 +551,7 @@ export default {
         this.join();
         this.countDown();
       } else if (!this.challengeId && !this.streakId && !this.guoqingId && !this.infinityId) {
-        this.showMatch = true;
-        this.match();
+        tuxunJump('/tuxun/match');
       } else if (this.challengeId) {
         this.doLoginStatus().then(res => {
           console.log(res);
@@ -1614,34 +1611,6 @@ export default {
       }
     },
 
-    match() {
-      // 每3秒发送一次心跳
-      this.doLoginStatus().then((res) => {
-        this.continueSend = true;
-        var interval = 1500;
-        this.t = setInterval(() => {
-          try {
-            if (this.continueSend) {
-              this.continueSend = false;
-              api.getByPathLongTimeout('/api/v0/tuxun/solo/joinRandom', {interval: interval}).then(res => {
-                if (res.data) {
-                  this.notify('您的图寻已匹配到对手，点击开始对战');
-                  tuxunJump( '/tuxun/solo_game?gameId=' + res.data);
-                  this.gameId = res.data;
-                  this.init();
-                  this.continueSend = false;
-                  clearInterval(this.t);
-                } else {
-                  this.continueSend = true;
-                }
-              });
-            }
-          } catch (e) {
-            this.continueSend = true;
-          }
-        }, interval);
-      });
-    },
     getCustomPanorama(pano) {
       console.log(pano);
       if (this.baiduPanos.has(pano)) {
