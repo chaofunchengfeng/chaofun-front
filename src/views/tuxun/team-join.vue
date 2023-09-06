@@ -2,6 +2,7 @@
   <div class="game-container">
     <div class="back_home" @click="goHome">
       <el-button round>首页</el-button>
+      this.showMatch = true;
     </div>
     <div v-if="disband" class="disband">
       队伍已经解散

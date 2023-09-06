@@ -4,9 +4,9 @@
       <el-button @click="goBack" round>←返回</el-button>
       <el-button @click="goHome" round>首页</el-button>
     </div>
-
-    <matching v-if="this.showMatch" @end="endMatching"/>
-    <div v-else style="margin-top: 5rem">
+    <div class="nav">匹配Solo</div>
+    <matching v-if="this.showMatch" @end="endMatching" style="margin-top: 2rem"/>
+    <div v-else style="margin-top: 2rem">
       <el-button @click="nmMatching">
         开始固定匹配
       </el-button>
@@ -160,5 +160,12 @@ export default {
     padding-left: 1rem;
     z-index: 5000;
   }
+  .nav {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    padding-top: 3rem;
+  }
+
 }
 </style>
