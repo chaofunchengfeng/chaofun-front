@@ -7,6 +7,7 @@
         <el-button v-else @click="leave" round> 离开队伍 </el-button>
       </div>
 
+      <div class="nav">组队匹配</div>
       <div class="disband">
         <el-button class="button" type="primary" @click="copyInviterLink" round>分享邀请</el-button>
         <div style="height: 10px"></div>
@@ -20,7 +21,7 @@
 
         <div v-if="matchTeamData.status !== 'ongoing'">
 
-          <div style="padding-top: 5rem">
+          <div style="padding-top: 2rem">
             <div v-if="matchTeamData.status === 'wait_join'">
               <el-button  @click="startMatch" type="primary" size="small">开始匹配</el-button>
             </div>
@@ -251,6 +252,13 @@ export default {
   min-height: 100%;
   text-align: center;
   background-color: #18182A;
+
+  .nav {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    padding-top: 3rem;
+  }
 
   .disband {
     position: absolute;
