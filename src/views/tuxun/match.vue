@@ -15,6 +15,7 @@
       <div></div>
       <div @click="moveMatching" class="card">
         <div class="title">移动匹配</div>
+        <div class="desc"></div>
       </div>
     </div>
   </div>
