@@ -25,21 +25,19 @@
           <div style="display: flex; flex-flow: row wrap; justify-content: center; width: 100%" v-if="gameData && gameData.teams && gameData.teams.length >= 1">
             <div class="user" v-for="(item, index) in gameData.teams[0].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
-              <div class="userName">{{item.userName}} <span v-if="gameData.type === 'team' && item.userId === gameData.host.userId">(房主)</span></div>
+              <div class="userName">{{item.userName}}</div>
               <div>积分: {{item.rating}}</div>
             </div>
           </div>
         </div>
         <div>
           <img class="vs_img"  :src="this.imgOrigin + 'biz/1658807128256_91c9df63c2d144359005b6f504a96a81.png'"/>
-          <div></div>
-          <el-button @click="swapTeam"  type="primary" v-if="gameData.type==='team'" round>换队伍</el-button>
         </div>
         <div class="player">
           <div style="display: flex; flex-flow: row wrap;  justify-content: center; width: 100%" v-if="gameData && gameData.teams && gameData.teams.length >= 2">
             <div class="user" v-for="(item, index) in gameData.teams[1].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
-              <div class="userName">{{item.userName}} <span v-if="gameData.type === 'team' && item.userId === gameData.host.userId">(房主)</span></div>
+              <div class="userName">{{item.userName}}</div>
               <div>积分: {{item.rating}}</div>
             </div>
           </div>
@@ -478,6 +476,7 @@ export default {
       worldSizeMap: {},
       userId: null,
       history: null,
+      notified: false,
       showReport: false,
       registerPanoProvider: false,
       baiduPanos: new Set(),
@@ -772,6 +771,10 @@ export default {
         this.health = this.gameData.health;
       }
 
+      if (this.gameData.status === 'wait_join' && this.gameData.type === 'solo_match' && !this.notified) {
+        this.notified = true
+        this.notify('您的图寻已匹配到对手，点击开始对战');
+      }
       if (this.gameData.status === 'match_fail') {
         this.$toast('匹配失败，重新匹配！');
         tuxunJump('/tuxun/match');
