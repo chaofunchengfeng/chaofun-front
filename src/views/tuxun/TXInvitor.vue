@@ -50,6 +50,9 @@
         等待其他玩家加入....
       </div>
 
+      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_title">
+        淘汰赛-准备中
+      </div>
       <div v-if="(gameData.type === 'solo_match' || gameData.type === 'battle_royale') && gameData.status == 'ready' && gameData.timerStartTime" class="wait_game_start">
         开始倒计时 <span style="color: greenyellow">{{this.gameTimeLeft}}</span> 秒
       </div>
