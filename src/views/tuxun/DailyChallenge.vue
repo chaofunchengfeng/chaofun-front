@@ -53,7 +53,9 @@
           </div>
           <div class="score" v-if="this.dailyChallengeRank">排名: {{this.dailyChallengeRank}} / {{this.dailyChallengeTotalPlayers}}</div>
           <div class="score" v-if="this.dailyChallengePercent">超过：{{((1 - this.dailyChallengePercent) * 100).toFixed(2)}} % 选手</div>
-          <el-button style="margin-top: 8px" @click="share">分享</el-button>
+          <el-button style="margin-top: 8px" @click="toReplay" round>题目复盘</el-button>
+          <div></div>
+          <el-button style="margin-top: 8px" @click="share" round>分享</el-button>
         </div>
         <div class="rank">
           今日挑战排名
@@ -230,6 +232,9 @@ export default {
       str += date.getMonth() + 1  + '月 '; //获取月份
       str += date.getDate() + '日'; //获取日
       return str;
+    },
+    toReplay() {
+      tuxunJump('/tuxun/replay?gameId=' + this.gameData.id);
     },
     share() {
       // var input = document.createElement('textarea');
