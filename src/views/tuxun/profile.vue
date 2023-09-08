@@ -350,7 +350,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .container {
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
   color: white;
   padding: 1rem;
 

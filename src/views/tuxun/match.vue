@@ -6,14 +6,16 @@
     </div>
     <div class="nav">匹配Solo</div>
     <matching v-if="this.showMatch" @end="endMatching" style="margin-top: 2rem"/>
-    <div v-else style="margin-top: 2rem">
-      <el-button @click="nmMatching">
-        开始固定匹配
-      </el-button>
-      <div style="height: 2rem"></div>
-      <el-button @click="moveMatching">
-        开始移动匹配(beta)
-      </el-button>
+    <div v-else style="margin-top: 1rem">
+
+      <div @click="nmMatching" class="card">
+        <div class="title">固定匹配</div>
+        <div class="desc"></div>
+      </div>
+      <div></div>
+      <div @click="moveMatching" class="card">
+        <div class="title">移动匹配</div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,12 +33,19 @@ export default {
     return {
       showMatch: false,
       notifyStatus: '',
+      from: null,
       path: null,
       t: null,
     }
   },
   created() {
     this.init();
+    this.from = this.$route.query.from;
+    if (this.from === 'move') {
+      this.moveMatching();
+    } else if (this.from === 'noMove') {
+      this.nmMatching();
+    }
     // setTimeout(() => {
     //   this.notify("123 test");
     // }, 5000);
@@ -153,7 +162,7 @@ export default {
   width: 100%;
   min-height: 100%;
   text-align: center;
-  background-color: #18182A;
+  background-color:  $tuxunBackgroundColor;
   .back_home {
     position: absolute;
     padding-top: 1rem;
@@ -165,6 +174,32 @@ export default {
     font-size: 48px;
     font-weight: bold;
     padding-top: 3rem;
+  }
+  .card {
+    //width: content-box;
+    display: inline-block;
+    cursor: pointer;
+    max-width: 90%;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-bottom: 2rem;
+    border-radius: 10px;
+    background-color: rgb(25,26,46, 0.9);
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+
+    }
+    .desc {
+
+    }
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
 }

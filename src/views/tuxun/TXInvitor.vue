@@ -53,6 +53,19 @@
       <div v-if="(gameData.type === 'solo_match' || gameData.type === 'battle_royale') && gameData.status == 'ready' && gameData.timerStartTime" class="wait_game_start">
         开始倒计时 <span style="color: greenyellow">{{this.gameTimeLeft}}</span> 秒
       </div>
+      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_start">
+        本次淘汰赛人数
+      </div>
+      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_number">
+        {{gameData.players.length}}
+      </div>
+      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'"  class="wait_game_hint">
+        满3人开始比赛, 选手列表：
+      </div>
+      <div v-if="gameData.type === 'battle_royale' && gameData.status == 'ready'" class="wait_game_user">
+        <div v-for="(item, index) in gameData.players" :key="index"> {{item.userName }}</div>
+      </div>
+
     </div>
 
     <div class="game" v-if="status === 'ongoing' || status === 'finish'">
@@ -1491,7 +1504,12 @@ export default {
     },
 
     goTuxun() {
-      tuxunJump('/tuxun/match');
+      if (this.gameData.move) {
+        tuxunJump('/tuxun/match?from=move');
+      } else {
+        tuxunJump('/tuxun/match?from=noMove');
+      }
+
     },
 
     toNew() {
@@ -1870,7 +1888,7 @@ export default {
   width: 100%;
   min-height: 100%;
   text-align: center;
-  background-color: #18182A;
+  background-color:  $tuxunBackgroundColor;
   .home_button {
     z-index: 10000;
     margin-top: 2rem;
@@ -2321,7 +2339,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #090723;;
+    background-color:  $tuxunBackgroundColor;;
     font-size: 48px;
     color: white;
     z-index: 10000;

@@ -129,7 +129,7 @@ export default {
 .container {
   width: 100%;
   min-height: 100%;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
   .top-left {
     position: absolute;
     padding-top: 1rem;

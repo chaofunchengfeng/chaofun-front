@@ -523,7 +523,7 @@ export default {
   position: absolute;
   width: 100%;
   text-align: center;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
 
   .back_home {
     z-index: 100;

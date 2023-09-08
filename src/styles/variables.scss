@@ -16,6 +16,7 @@ $border: 1px solid #dee2e6;
 $menuText:#000;
 $menuActiveText:#409EFF;
 $subMenuActiveText:#409EFF; // https://github.com/ElemeFE/element/issues/12951
+$tuxunBackgroundColor: #090723;
 
 // $menuBg:#304156;
 $menuBg:transparent;
@@ -36,6 +37,7 @@ $sideBarWidth: 210px;
   menuActiveText: $menuActiveText;
   subMenuActiveText: $subMenuActiveText;
   menuBg: $menuBg;
+  tuxunBackgroundColor: $tuxunBackgroundColor;
   menuHover: $menuHover;
   subMenuBg: $subMenuBg;
   subMenuHover: $subMenuHover;

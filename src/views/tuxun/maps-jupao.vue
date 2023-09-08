@@ -398,7 +398,7 @@ export default {
   padding-bottom: 10rem;
   min-height: 120%;
   text-align: center;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
   .back_home {
     position: absolute;
     padding-top: 1rem;

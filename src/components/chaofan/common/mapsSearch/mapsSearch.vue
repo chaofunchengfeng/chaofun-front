@@ -117,7 +117,7 @@ export default {
   width: 100%;
   //color: ;
   top: 0;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
   left: 0;
   right: 0;
   display: flex;

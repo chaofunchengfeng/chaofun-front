@@ -284,7 +284,7 @@ export default {
 .container {
   height: 100%;
   width: 100%;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
 
   .main_content {
     height: 100%;

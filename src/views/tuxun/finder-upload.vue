@@ -271,7 +271,7 @@ export default {
   width: 100%;
   min-height: 100%;
   text-align: center;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
   .nav {
     color: white;
     font-size: 48px;
@@ -307,7 +307,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #090723;
+    background-color:  $tuxunBackgroundColor;
     .map {
       width: 100%;
       height: 100%;

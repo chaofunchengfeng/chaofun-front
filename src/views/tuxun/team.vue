@@ -251,7 +251,7 @@ export default {
   width: 100%;
   min-height: 100%;
   text-align: center;
-  background-color: #18182A;
+  background-color:  $tuxunBackgroundColor;
 
   .nav {
     color: white;

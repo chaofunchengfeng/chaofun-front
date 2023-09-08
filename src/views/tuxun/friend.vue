@@ -158,7 +158,7 @@ export default {
   width: 100%;
   //color: ;
   top: 0;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
   left: 0;
   right: 0;
   display: flex;
@@ -193,7 +193,7 @@ export default {
 .container {
   width: 100%;
   min-height: 100%;
-  background-color: #090723;
+  background-color:  $tuxunBackgroundColor;
   .nav {
     color: white;
     font-size: 48px;
