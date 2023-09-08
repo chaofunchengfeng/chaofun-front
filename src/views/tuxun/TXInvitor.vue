@@ -1096,7 +1096,13 @@ export default {
           'zoom': this.gameData.zoom,
           'timeLimit': this.gameData.roundTimePeriod
         }).then(res => {
-          tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
+          if (res.success) {
+            tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
+          } else {
+            if (res.errorCode === 'need_vip') {
+              this.$vip();
+            }
+          }
         });
       }
     },
@@ -1484,6 +1490,10 @@ export default {
           api.getByPath('/api/v0/tuxun/infinity/next', {gameId: this.gameId}).then(res => {
             if (res.success) {
               this.solveGameData(res.data, undefined);
+            } else {
+              if (res.errorCode === 'need_vip') {
+                this.$vip();
+              }
             }
           });
         } else {
@@ -1558,6 +1568,10 @@ export default {
             }).then(res => {
               if (res.success) {
                 tuxunJump('/tuxun/challenge?challengeId=' + res.data);
+              } else {
+                if (res.errorCode === 'need_vip') {
+                  this.$vip();
+                }
               }
             });
           } else {
