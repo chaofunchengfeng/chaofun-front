@@ -5,7 +5,7 @@
       <el-button @click="goHome" round>首页</el-button>
     </div>
     <div class="nav">
-      练习题库-编辑推荐
+      题库-编辑推荐
     </div>
 
     <div class="game_entrance">

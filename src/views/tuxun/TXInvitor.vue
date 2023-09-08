@@ -190,7 +190,7 @@
               <el-button class="result_button" @click="goMapsStart" round>回到「探索」</el-button>
             </div>
             <div v-if="gameData.type === 'challenge'">
-              <el-button class="result_button" @click="goMaps" round>回到练习题库</el-button>
+              <el-button class="result_button" @click="goMaps" round>回到题库</el-button>
             </div>
             <div>
               <el-button class="result_button" @click="goHome" round>回到首页</el-button>
@@ -217,7 +217,7 @@
               <el-button class="result_button" @click="goMapsStart" round>回到「探索」</el-button>
             </div>
             <div v-if=" gameData.type === 'map_country_streak' ">
-              <el-button class="result_button" @click="goMaps" round>回到练习题库</el-button>
+              <el-button class="result_button" @click="goMaps" round>回到题库</el-button>
             </div>
             <div>
               <el-button class="result_button" @click="goHome" round>回到首页</el-button>

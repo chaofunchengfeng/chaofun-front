@@ -164,12 +164,12 @@ export default {
     },
     share() {
       var input = document.createElement('input');
-      input.setAttribute('value','邀请你来图寻做「' + this.mapsData.name + '」练习题库, 你能找到你在哪吗？ https://tuxun.fun/maps_detail?mapsId=' + this.mapsId);
+      input.setAttribute('value','邀请你来图寻做「' + this.mapsData.name + '」题库, 你能找到你在哪吗？ https://tuxun.fun/maps_detail?mapsId=' + this.mapsId);
       document.body.appendChild(input);
       input.select();
       var result = document.execCommand('copy');
       document.body.removeChild(input);
-      this.$toast('复制练习题库地址成功');
+      this.$toast('复制题库地址成功');
       return result;
     },
     toUser(user) {

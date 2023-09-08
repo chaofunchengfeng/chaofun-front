@@ -5,7 +5,7 @@
       <el-button @click="goHome" round>首页</el-button>
     </div>
     <div class="nav">
-      练习题库-最热
+      题库-最热
     </div>
     <div class="tab-container">
       <div class="tab">

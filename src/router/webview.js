@@ -584,15 +584,15 @@ routes = [
   {
     path: '/maps_game',
     component: () => import('@/views/tuxun/TXHome'),
-    name: '练习题库',
-    meta: { title: '练习题库'},
+    name: '题库',
+    meta: { title: '题库'},
     hidden: true
   },
   {
     path: '/tuxun/maps_game',
     component: () => import('@/views/tuxun/TXHome'),
-    name: '练习题库',
-    meta: { title: '练习题库'},
+    name: '题库',
+    meta: { title: '题库'},
     hidden: true
   },
   {
@@ -683,7 +683,7 @@ routes = [
     path: '/tuxun/maps',
     component: () => import('@/views/tuxun/maps'),
     name: 'maps',
-    meta: { title: '练习题库-图寻'},
+    meta: { title: '题库-图寻'},
     hidden: true
   },
   {

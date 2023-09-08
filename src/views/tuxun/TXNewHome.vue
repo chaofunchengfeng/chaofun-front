@@ -58,7 +58,7 @@
           </div>
           <div class="card" @click="redirectPage( '/tuxun/maps')">
             <div class="title">
-              练习题库
+              题库
             </div>
             <div class="describe">
               走遍大江南北
