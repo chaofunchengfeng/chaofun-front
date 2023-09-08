@@ -79,7 +79,7 @@ export default {
       cursor: pointer;
       position: relative;
       border-radius: 1rem;
-      background-color: rgb(25,26,46, 0.9);
+      background-color: #2b2f3a;
       background-position: 50%;
       background-repeat: no-repeat;
       background-size: 100%;

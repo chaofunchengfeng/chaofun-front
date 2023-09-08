@@ -186,13 +186,12 @@ export default {
     padding-right: 4rem;
     padding-bottom: 2rem;
     border-radius: 10px;
-    background-color: rgb(25,26,46, 0.9);
+    background-color: #2b2f3a;
 
     .title {
       font-size: 24px;
       font-weight: bold;
       color: white;
-
     }
     .desc {
 
