@@ -5,12 +5,12 @@
       <el-button @click="goHome" round>首页</el-button>
     </div>
     <div class="nav">匹配Solo</div>
+    <div v-if="tips===0" style="color: white; padding-top: 10px">提示：第一位选手选择后触发倒计时15秒，如果倒计时时间不准，请调整系统时间</div>
+    <div v-if="tips===1" style="color: white; padding-top: 10px">提示：用户初始积分为1500</div>
     <matching v-if="this.showMatch" @end="endMatching" style="margin-top: 2rem"/>
     <div v-else style="margin-top: 1rem">
-
       <div @click="nmMatching" class="card">
         <div class="title">固定匹配</div>
-        <div class="desc"></div>
       </div>
       <div></div>
       <div @click="moveMatching" class="card">
@@ -35,12 +35,14 @@ export default {
       showMatch: false,
       notifyStatus: '',
       from: null,
+      tips: null,
       path: null,
       t: null,
     }
   },
   created() {
     this.init();
+    this.tips =Math.floor(Math.random() * (1 - 0 + 1)) + 0;
     this.from = this.$route.query.from;
     if (this.from === 'move') {
       this.moveMatching();
