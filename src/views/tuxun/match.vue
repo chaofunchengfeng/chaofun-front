@@ -8,6 +8,7 @@
     <div v-if="tips===0" style="color: white; padding-top: 10px">提示：第一位选手选择后触发倒计时15秒，如果倒计时时间不准，请调整系统时间</div>
     <div v-if="tips===1" style="color: white; padding-top: 10px">提示：用户初始积分为1500</div>
     <div v-if="tips===2" style="color: white; padding-top: 10px">提示：移动匹配更适合新人，固定匹配适合有一定基础的用户</div>
+    <div v-if="tips===3" style="color: white; padding-top: 10px">提示：10月1日本赛季结束，开启新赛季</div>
     <matching v-if="this.showMatch" @end="endMatching" style="margin-top: 2rem"/>
     <div v-else style="margin-top: 1rem">
       <div @click="nmMatching" class="card">
@@ -43,7 +44,7 @@ export default {
   },
   created() {
     this.init();
-    this.tips =Math.floor(Math.random() * (3));
+    this.tips =Math.floor(Math.random() * (4));
     this.from = this.$route.query.from;
     if (this.from === 'move') {
       this.moveMatching();
