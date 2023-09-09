@@ -777,7 +777,7 @@ export default {
       }
       if (this.gameData.status === 'match_fail') {
         this.$toast('匹配失败，重新匹配！');
-        tuxunJump('/tuxun/match');
+        this.goTuxun();
         return;
       }
 
