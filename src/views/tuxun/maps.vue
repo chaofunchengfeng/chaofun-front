@@ -84,7 +84,7 @@
           <div class="card-top-right">可移动</div>
         </div>
       </div>
-      <el-button style="margin-top: 1rem" @click="toNew">查看更多最新</el-button>
+      <el-button style="margin-top: 2rem" @click="toNew">查看更多最新</el-button>
 
       <div class="session_head" >热度排序</div>
       <div class="line"></div>
@@ -108,7 +108,7 @@
           <div class="card-top-right">可移动</div>
         </div>
       </div>
-      <el-button style="margin-top: 1rem" @click="toHot">查看更多最热</el-button>
+      <el-button style="margin-top: 2rem" @click="toHot">查看更多最热</el-button>
     </section>
   </div>
 </template>

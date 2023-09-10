@@ -17,7 +17,7 @@
         <div class="players">
          数量: {{item.pcount}} ｜ 人次: {{item.players}}
         </div>
-        <div>
+        <div style="margin-top: 10px;">
           <el-button style="background-color: unset; color: white"  type="primary" @click.stop="toMapsModify(item.id)" round>编辑</el-button>
           <el-button style="background-color: unset; color: white"  v-if="item.publish" type="warning" @click.stop="unPublish(item.id)" round>撤回</el-button>
           <el-button style="background-color: unset; color: white"  v-if="!item.publish" type="primary" @click.stop="publish(item.id)" round>发布</el-button>

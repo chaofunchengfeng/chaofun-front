@@ -211,7 +211,7 @@ export default {
     color: white;
     font-size: 48px;
     font-weight: bold;
-    padding-top: 3rem;
+    padding-top: 5rem;
   }
 
   .back_home {

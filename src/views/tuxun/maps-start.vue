@@ -267,8 +267,9 @@ export default {
   }
   .cover {
     width: 20vw;
-    height: 10vw;
-    object-fit: contain;
+    height: 11.25vw;
+    object-fit: cover;
+    border-radius: 0.5rem;
   }
 }
 

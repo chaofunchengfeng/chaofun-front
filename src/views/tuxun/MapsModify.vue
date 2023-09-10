@@ -29,11 +29,11 @@
     <div v-if="name" class="nav">
       {{this.name}}
     </div>
-    <div v-if="mapsData && mapsData.desc" class="describe">
+    <div v-if="mapsData && mapsData.desc" class="describe" style="padding-bottom: 0.5rem">
       {{mapsData.desc}}
     </div>
     <el-button @click="modify" size="small">修改基础信息</el-button>
-    <div style="padding-bottom: 2rem"></div>
+    <div style="padding-bottom: 0.8rem"></div>
     <el-button type="primary" @click="publish" size="small">发布</el-button>
 
     <el-button @click="toDistribute" size="small">查看题库分布</el-button>
@@ -43,6 +43,7 @@
     <el-button v-if="!ISPHONE" @click="tagManage" size="small">标签管理(PC)</el-button>
     <el-button v-if="!ISPHONE" @click="exportJson" size="small">导出JSON(PC)</el-button>
     <el-button v-if="!ISPHONE" @click="toFilter" size="small">筛选(PC)</el-button>
+    <div style="padding-bottom: 0.5rem"></div>
     <div style="color: white">发布题库需要题库中有5个状态为已发布或者待发布状态的街景，当系统检测到题库中有5个Google官方街景，会自动将题库标记为「可移动」</div>
     <div style="color: white">注：异步上传，请刷新查看进度，请勿使用脚本提交</div>
     <div class="list_container">
