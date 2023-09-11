@@ -162,7 +162,7 @@
         </div>
 
 
-        <div v-if="partyData && partyData.gameType !== 'br'" style="padding-top: 2rem; font-size: 16px">
+        <div v-if="partyData" style="padding-top: 2rem; font-size: 16px">
           倒计时(秒)：<span v-if="this.$store.state.user.userInfo.userId !== this.partyData.host.userId">
           <span v-if='countDown === "first"'>首次确认后 </span>
           <span v-if='countDown === "start"'>轮次开始后 </span>
