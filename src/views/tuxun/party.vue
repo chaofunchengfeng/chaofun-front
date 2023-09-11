@@ -109,7 +109,7 @@
         <div style="padding-top: 10px; font-size: 24px">设置</div>
         <div  style="">
           <div style="font-size: 16px">
-            类型: <span v-if="$store.state.user.userInfo.userId !== partyData.host.userId"> {{getGameTypeName(partyData.gameType)}} </span>
+            类型： <span v-if="$store.state.user.userInfo.userId !== partyData.host.userId"> {{getGameTypeName(partyData.gameType)}} </span>
           </div>
           <div v-if="$store.state.user.userInfo.userId === partyData.host.userId" style="display: flex;   justify-content: center ">
             <div :class="partyData.gameType === 'solo' ? 'choose-type' : 'normal-type'" @click="changeGameType('solo')" >1v1对决</div>
@@ -132,6 +132,15 @@
           </div>
         </div>
         <div style="padding-top: 2rem;" v-if="!this.partyData.gameMove">
+          视角：
+          <span v-if="this.$store.state.user.userInfo.userId !== this.partyData.host.userId">
+            <span v-if="this.free">
+              自由视角
+            </span>
+            <span v-else>
+              固定视角
+            </span>
+          </span>
           <div v-if="this.$store.state.user.userInfo.userId === this.partyData.host.userId">
             <div>
               自由视角
@@ -145,33 +154,26 @@
             >
             </el-switch>
           </div>
-          <div v-else>
-            <div v-if="this.free">
-              自由视角
-            </div>
-            <div v-else>
-              固定视角
-            </div>
-          </div>
         </div>
         <div v-if="partyData && partyData.gameType !== 'br'" style="padding-top: 2rem; font-size: 16px">
-          血量
+          血量：<span v-if="this.$store.state.user.userInfo.userId !== this.partyData.host.userId"> {{this.health}} </span>
+          <div></div>
           <el-input-number v-if="this.$store.state.user.userInfo.userId === this.partyData.host.userId" v-model="health" @change="changeHealth" :min=1000 :max=1000000 :step=1000 />
-          <span v-else> : {{this.health}} </span>
+        </div>
+
+
+        <div v-if="partyData && partyData.gameType !== 'br'" style="padding-top: 2rem; font-size: 16px">
+          倒计时(秒)：<span v-if="this.$store.state.user.userInfo.userId !== this.partyData.host.userId">
+          <span v-if='countDown === "first"'>首次确认后 </span>
+          <span v-if='countDown === "start"'>轮次开始后 </span>
+          {{this.countDownTime}} 秒</span>
+          <div v-if="this.$store.state.user.userInfo.userId === this.partyData.host.userId">
+            <el-radio @change="changeCountDownTime" v-model="countDown" label="first">首次确认后</el-radio>
+            <el-radio @change="changeCountDownTime" v-model="countDown" label="start">轮次开始后</el-radio>
+          </div>
+          <el-input-number v-if="this.$store.state.user.userInfo.userId === this.partyData.host.userId" v-model="countDownTime" @change="changeCountDownTime" :min=5 :max=600 :step= 5 />
         </div>
       </div>
-
-<!--      <div class="invite" v-if="status !== 'ready' && ((partyData.gameType !== 'battle_royale' && partyData.gameType !== 'solo_match')  || partyData.gameType == 'team')">-->
-<!--        <div class="separate-line"></div>-->
-<!--        <div class="title" style="padding-top: 10px">-->
-<!--          邀请链接-->
-<!--        </div>-->
-<!--        <div class="body">-->
-<!--&lt;!&ndash;          <input class="invite_input" placeholder readonly :value="'https://tuxun.fun/join?code=' + partyData.joinCode" >&ndash;&gt;-->
-<!--&lt;!&ndash;          </input>&ndash;&gt;-->
-<!--          <el-button class="button" type="success" @click="copyInviterLink" round>分享链接</el-button>-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
     <tuxun-invite v-if="openInvite" style="z-index: 2000;" :close="closeInvite" :invite="inviteFriend"></tuxun-invite>
   </div>
@@ -193,6 +195,8 @@ export default {
       free: true,
       openInvite: false,
       overflow: null,
+      countDown: 'first',
+      countDownTime: 15,
       health: 6000,
     };
   },
@@ -311,6 +315,13 @@ export default {
         }
       });
     },
+    changeCountDown() {
+      api.getByPath('/api/v0/tuxun/party/changeHealth', {health: this.health}).then(res=>{
+        if (res.success) {
+          this.solvePartyData(res.data);
+        }
+      });
+    },
     changeGameType(type) {
       api.getByPath('/api/v0/tuxun/party/changeType', {type: type}).then(res=>{
         if (res.success) {
@@ -321,6 +332,14 @@ export default {
     changeMaps(mapsId, mapsType) {
       // this.$mapsSearch();
       api.getByPath('/api/v0/tuxun/party/changeMaps', {mapsId: mapsId, type: mapsType}).then(res=>{
+        if (res.success) {
+          this.solvePartyData(res.data);
+        }
+      });
+    },
+
+    changeCountDownTime() {
+      api.getByPath('/api/v0/tuxun/party/changeCountDown', {countDown: this.countDown, roundTimerPeriod: this.countDownTime * 1000}).then(res=>{
         if (res.success) {
           this.solvePartyData(res.data);
         }
@@ -363,6 +382,13 @@ export default {
       this.partyData = partyData;
       this.status = this.partyData.status;
       this.health = this.partyData.gameHealth;
+      if (this.partyData.roundCountDown) {
+        this.countDown = this.partyData.roundCountDown;
+        this.countDownTime = this.partyData.roundTimerPeriod / 1000;
+      } else {
+        this.countDown = "first";
+        this.countDownTime = 15;
+      }
       if (!this.partyData.gamePan && !this.partyData.gameZoom) {
         this.free = false;
       } else {
