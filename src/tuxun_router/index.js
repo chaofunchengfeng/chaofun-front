@@ -124,13 +124,13 @@ export const constantRoutes = [
   {
     path: '/solo_game',
     component: () => import('@/views/tuxun/TXInvitor'),
-    meta: { title: '图寻-Solo'},
+    meta: { title: 'Solo-图寻'},
     hidden: true
   },
   {
     path: '/team_game',
     component: () => import('@/views/tuxun/TXInvitor'),
-    meta: { title: '图寻-组队'},
+    meta: { title: '组队-图寻'},
     hidden: true
   },
   {

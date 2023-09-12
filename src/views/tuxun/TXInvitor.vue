@@ -363,7 +363,7 @@
 
       <div class="home">
         <el-button v-if="history && history.length > 1" size="mini" @click="goBack" round>←返回</el-button>
-        <el-button v-if="gameData.type === 'challenge' || gameData.type === 'battle_royale'" size="mini" @click="goHome" round>首页</el-button>
+        <el-button v-if="gameData.type !== 'daily_challenge'" size="mini" @click="goHome" round>首页</el-button>
         <el-button size="mini" v-if="gameData && gameData.type !== 'daily_challenge'" @click="toReport" round> 坏题反馈 </el-button>
         <el-button v-if="lastRound && lastRound.move" size="mini"  @click="reset" round> 回到原点</el-button>
         <el-button size="mini" v-if="gameData && !gameData.player && gameData.type != 'battle_royale'"  @click="sendEmoji=true" round> 表情 </el-button>
@@ -565,6 +565,7 @@ export default {
         this.initWS();
         this.join();
         this.countDown();
+        document.title = '对战-图寻';
       } else if (!this.challengeId && !this.streakId && !this.guoqingId && !this.infinityId) {
         tuxunJump('/tuxun/match');
       } else if (this.challengeId) {
@@ -576,23 +577,27 @@ export default {
           }
         });
 
+        document.title = '练习-图寻';
       } else if (this.streakId) {
         this.showMatch = false;
         this.gameId = this.streakId;
         this.getGameInfo();
         this.initWS();
         this.countDown();
+        document.title = '连胜-图寻';
       } else if (this.guoqingId) {
         this.showMatch = false;
         this.gameId = this.guoqingId;
         this.initWS();
         this.joinGuoqing();
         this.countDown();
+        document.title = '淘汰赛-图寻';
       } else if (this.infinityId) {
         this.gameId = this.infinityId;
         this.initWS();
         this.getGameInfo();
         this.countDown();
+        document.title = '无限轮次练习-图寻';
       }
 
       var Notification = window.Notification || window.mozNotification || window.webkitNotification;
@@ -658,6 +663,9 @@ export default {
       this.sendEmoji = false;
     },
     reloadPage() {
+      api.getByPath('/api/v0/tuxun//changeHealth', {health: this.health}).then(res=>{
+
+      });
       this.$router.go(this.$router.currentRoute);
     },
     initMap() {
