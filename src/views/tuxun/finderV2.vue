@@ -166,7 +166,7 @@ export default {
       });
     },
     finderShow(id) {
-      api.getByPath('/api/v0/tuxun/finder/show', { id: id }).then(res => {
+      api.getByPath('/api/v0/finder/show', { id: id }).then(res => {
         if (res.success) {
         }
       });
