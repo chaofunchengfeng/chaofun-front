@@ -9,7 +9,6 @@
       比赛历史
     </div>
     <div style="color: white">目前只记录积分比赛{{isSelf?'':'，他人记录最多展示20条'}}</div>
-    <div style="color: white">历史记录升级中，会有部分缺失</div>
     <div class="list">
       <div v-for="(item, index) in list" class="list-item">
         <div> {{moment(item.gmtCreate).format(isSelf?'YY年MM月DD日 HH:mm':'YY年MM月DD日')}}</div>
