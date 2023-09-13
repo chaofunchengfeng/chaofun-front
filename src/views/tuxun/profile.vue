@@ -131,12 +131,12 @@
         </el-col>
       </el-row>
     </div>
-    <div style="padding-left: 20px; padding-top: 20px; padding-right: 20px">
-      <div style="font-size: 20px">
-        分数走势：
-      </div>
-      <v-chart class="chart" :option="option" />
-    </div>
+<!--    <div style="padding-left: 20px; padding-top: 20px; padding-right: 20px">-->
+<!--      <div style="font-size: 20px">-->
+<!--        分数走势：-->
+<!--      </div>-->
+<!--      <v-chart class="chart" :option="option" />-->
+<!--    </div>-->
     <div style="padding-left: 20px; padding-top: 20px; padding-right: 20px">
       <div style="font-size: 20px">
         游戏活跃：
@@ -261,7 +261,7 @@ export default {
       });
     },
     getHistory() {
-      api.getByPath('/api/v0/tuxun/getUserHistory', { userId: this.userId }).then(res => {
+      api.getByPath('/api/v0/tuxun/listOtherRatingLine', { userId: this.userId }).then(res => {
         this.historys = res.data;
         console.log(this.historys);
         var data = [];
@@ -269,7 +269,7 @@ export default {
         this.historys = this.historys.reverse();
         for (let i = 0; i < this.historys.length; i++) {
           var history = this.historys[i];
-          data.push([history['gmt_create'], history['rating']]);
+          data.push([history['gmtCreate'], history['rating']]);
         }
         this.option.series = [{
           data: data,
