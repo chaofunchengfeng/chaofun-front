@@ -9,9 +9,10 @@
       比赛历史
     </div>
     <div style="color: white">目前只记录积分比赛{{isSelf?'':'，他人记录最多展示20条'}}</div>
+    <div style="color: white">历史记录升级中，会有部分缺失</div>
     <div class="list">
       <div v-for="(item, index) in list" class="list-item">
-        <div> {{moment(item.gmt_create).format(isSelf?'YY年MM月DD日 HH:mm':'YY年MM月DD日')}}</div>
+        <div> {{moment(item.gmtCreate).format(isSelf?'YY年MM月DD日 HH:mm':'YY年MM月DD日')}}</div>
         <div>
           <div v-if="item.type === 'solo_match'" class="solo-match" @click="toGame(item)">匹配solo</div>
           <div v-else class="main-game">积分赛</div>
@@ -72,11 +73,20 @@ export default {
       tuxunJump('/tuxun/');
     },
     getHistory() {
-      api.getByPath('/api/v0/tuxun/getUserHistoryV1', {userId: this.userId}).then(res=>{
-        if (res.success) {
-          this.list = res.data.slice(0, 100);
-        }
-      });
+      if (this.isSelf) {
+        api.getByPath('/api/v0/tuxun/history/listSelfRating', {count: 100}).then(res=>{
+          if (res.success) {
+            this.list = res.data.slice(0, 100);
+          }
+        });
+      } else {
+        api.getByPath('/api/v0/tuxun/history/listOtherRating', {userId: this.userId}).then(res=>{
+          if (res.success) {
+            this.list = res.data.slice(0, 100);
+          }
+        });
+      }
+
     },
     toGame(item) {
       tuxunJump('/tuxun/solo_game?gameId=' + item.gameId);
