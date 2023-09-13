@@ -1,5 +1,6 @@
 <template>
   <div v-if="uaResult">
+    <div>实时分析近100场积分赛</div>
     <div>用户名: {{uaResult.userName}}</div>
     <div>uid: {{uaResult.userId}}</div>
     <div>solo 次数: {{uaResult.gameCount}}</div>
