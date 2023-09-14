@@ -11,7 +11,7 @@
     <div v-if="!isSelf" style="color: white">只能查看20挑他人积分比赛记录}}</div>
 
     <div class="list">
-      <el-dropdown  @command="handleCommand" >
+      <el-dropdown v-if="isSelf" @command="handleCommand" >
         <el-button >
           {{choose}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
