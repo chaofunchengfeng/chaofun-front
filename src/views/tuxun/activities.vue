@@ -99,7 +99,7 @@ export default {
     },
     getRating() {
       this.choose="积分"
-      api.getByPath('/api/v0/tuxun/history/listSelfRating', {count: 100}).then(res=>{
+      api.getByPath('/api/v0/tuxun/history/listSelfRating', {count: 200}).then(res=>{
         if (res.success) {
           this.list = res.data.slice(0, 100);
         }
@@ -108,7 +108,7 @@ export default {
 
     getAll() {
       this.choose="全部"
-      api.getByPath('/api/v0/tuxun/history/listSelf', {count: 100}).then(res=>{
+      api.getByPath('/api/v0/tuxun/history/listSelf', {count: 200}).then(res=>{
         if (res.success) {
           this.list = res.data.slice(0, 100);
         }
@@ -117,7 +117,7 @@ export default {
 
     getParty() {
       this.choose="派对"
-      api.getByPath('/api/v0/tuxun/history/listSelfParty', {count: 100}).then(res=>{
+      api.getByPath('/api/v0/tuxun/history/listSelfParty', {count: 200}).then(res=>{
         if (res.success) {
           this.list = res.data.slice(0, 100);
         }
@@ -126,7 +126,7 @@ export default {
 
     getOther() {
       this.choose="其他"
-      api.getByPath('/api/v0/tuxun/history/listSelfOther', {count: 100}).then(res=>{
+      api.getByPath('/api/v0/tuxun/history/listSelfOther', {count: 200}).then(res=>{
         if (res.success) {
           this.list = res.data.slice(0, 100);
         }
@@ -135,7 +135,7 @@ export default {
 
     getMaps() {
       this.choose="题库"
-      api.getByPath('/api/v0/tuxun/history/listSelfMaps', {count: 100}).then(res=>{
+      api.getByPath('/api/v0/tuxun/history/listSelfMaps', {count: 200}).then(res=>{
         if (res.success) {
           this.list = res.data.slice(0, 100);
         }
