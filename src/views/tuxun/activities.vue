@@ -8,15 +8,38 @@
     <div class="nav">
       比赛历史
     </div>
-    <div style="color: white">目前只记录积分比赛{{isSelf?'':'，他人记录最多展示20条'}}</div>
+    <div v-if="!isSelf" style="color: white">只能查看20挑他人积分比赛记录}}</div>
+
     <div class="list">
+      <el-dropdown  @command="handleCommand" >
+        <el-button >
+          {{choose}}<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="getAll">全部</el-dropdown-item>
+          <el-dropdown-item @click.native="getRating">积分</el-dropdown-item>
+          <el-dropdown-item @click.native="getParty">派对</el-dropdown-item>
+          <el-dropdown-item @click.native="getMaps">题库</el-dropdown-item>
+          <el-dropdown-item @click.native="getOther">其他</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div v-for="(item, index) in list" class="list-item">
         <div> {{moment(item.gmtCreate).format(isSelf?'YY年MM月DD日 HH:mm':'YY年MM月DD日')}}</div>
         <div>
           <div v-if="item.type === 'solo_match'" class="solo-match" @click="toGame(item)">匹配solo</div>
-          <div v-else class="main-game">积分赛</div>
+          <div v-if="item.type === 'main_game'" class="main-game">积分赛</div>
+          <div v-if="item.type === 'daily_challenge'"  class="solo-match" @click="toGame(item)">每日挑战</div>
+          <div v-if="item.type === 'infinity'"  class="solo-match" @click="toGame(item)">无限轮次</div>
+          <div v-if="item.type === 'battle_royale'"  class="solo-match" @click="toGame(item)">淘汰赛</div>
+          <div v-if="item.type === 'challenge'"  class="solo-match" @click="toGame(item)">经典五轮</div>
+          <div v-if="item.type === 'team_match'"  class="solo-match" @click="toGame(item)">组队匹配</div>
+          <div v-if="item.type === 'solo'"  class="solo-match" @click="toGame(item)">1V1对决</div>
+          <div v-if="item.type === 'team'"  class="solo-match" @click="toGame(item)">1V1组队对决</div>
+          <div v-if="item.type === 'map_country_streak'"  class="solo-match" @click="toGame(item)">题库国家连胜</div>
+          <div v-if="item.type === 'country_streak'"  class="solo-match" @click="toGame(item)">国家连胜</div>
+          <div v-if="item.type === 'province_streak'"  class="solo-match" @click="toGame(item)">省份连胜</div>
         </div>
-        <div>
+        <div v-if="item.rating">
           <div v-if="item.ratingChange >= 0" class="rating-change positive">
             +{{item.ratingChange}}
           </div>
@@ -24,10 +47,10 @@
             {{item.ratingChange}}
           </div>
         </div>
-        <div class="score">
+        <div v-if="item.rating" class="score">
           {{item.rating}}
         </div>
-        <div v-if="item.type === 'solo_match'" class="review"><el-button type="warning" size="mini" round @click="toGame(item)">复盘</el-button></div>
+        <div v-if="item.type !== 'main_game'" class="review"><el-button type="warning" size="mini" round @click="toGame(item)">复盘</el-button></div>
       </div>
     </div>
 
@@ -46,6 +69,7 @@ export default {
     return {
       userId: null,
       isSelf: false,
+      choose: '全部',
       moment: moment,
       list: []
     };
@@ -71,13 +95,56 @@ export default {
     goHome() {
       tuxunJump('/tuxun/');
     },
+    handleCommand(command) {
+    },
+    getRating() {
+      this.choose="积分"
+      api.getByPath('/api/v0/tuxun/history/listSelfRating', {count: 100}).then(res=>{
+        if (res.success) {
+          this.list = res.data.slice(0, 100);
+        }
+      });
+    },
+
+    getAll() {
+      this.choose="全部"
+      api.getByPath('/api/v0/tuxun/history/listSelf', {count: 100}).then(res=>{
+        if (res.success) {
+          this.list = res.data.slice(0, 100);
+        }
+      });
+    },
+
+    getParty() {
+      this.choose="派对"
+      api.getByPath('/api/v0/tuxun/history/listSelfParty', {count: 100}).then(res=>{
+        if (res.success) {
+          this.list = res.data.slice(0, 100);
+        }
+      });
+    },
+
+    getOther() {
+      this.choose="其他"
+      api.getByPath('/api/v0/tuxun/history/listSelfOther', {count: 100}).then(res=>{
+        if (res.success) {
+          this.list = res.data.slice(0, 100);
+        }
+      });
+    },
+
+    getMaps() {
+      this.choose="题库"
+      api.getByPath('/api/v0/tuxun/history/listSelfMaps', {count: 100}).then(res=>{
+        if (res.success) {
+          this.list = res.data.slice(0, 100);
+        }
+      });
+    },
+
     getHistory() {
       if (this.isSelf) {
-        api.getByPath('/api/v0/tuxun/history/listSelfRating', {count: 100}).then(res=>{
-          if (res.success) {
-            this.list = res.data.slice(0, 100);
-          }
-        });
+        this.getAll();
       } else {
         api.getByPath('/api/v0/tuxun/history/listOtherRating', {userId: this.userId}).then(res=>{
           if (res.success) {
