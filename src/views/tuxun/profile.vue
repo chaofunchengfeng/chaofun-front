@@ -261,7 +261,7 @@ export default {
       });
     },
     getHistory() {
-      api.getByPath('/api/v0/tuxun/history/listOtherRatingLine', { userId: this.userId }).then(res => {
+      api.getByPath('/api/v0/tuxun/history/listUserRatingLine', { userId: this.userId }).then(res => {
         this.historys = res.data;
         console.log(this.historys);
         var data = [];

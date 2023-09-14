@@ -8,7 +8,7 @@
     <div class="nav">
       比赛历史
     </div>
-    <div v-if="!isSelf" style="color: white">只能查看20挑他人积分比赛记录}}</div>
+    <div v-if="!isSelf" style="color: white">只能查看20条他人积分比赛记录</div>
 
     <div class="list">
       <el-dropdown v-if="isSelf" @command="handleCommand" >
@@ -34,7 +34,7 @@
           <div v-if="item.type === 'challenge'"  class="solo-match" @click="toGame(item)">经典五轮</div>
           <div v-if="item.type === 'team_match'"  class="solo-match" @click="toGame(item)">组队匹配</div>
           <div v-if="item.type === 'solo'"  class="solo-match" @click="toGame(item)">1V1对决</div>
-          <div v-if="item.type === 'team'"  class="solo-match" @click="toGame(item)">1V1组队对决</div>
+          <div v-if="item.type === 'team'"  class="solo-match" @click="toGame(item)">组队对决</div>
           <div v-if="item.type === 'map_country_streak'"  class="solo-match" @click="toGame(item)">题库国家连胜</div>
           <div v-if="item.type === 'country_streak'"  class="solo-match" @click="toGame(item)">国家连胜</div>
           <div v-if="item.type === 'province_streak'"  class="solo-match" @click="toGame(item)">省份连胜</div>
@@ -146,7 +146,7 @@ export default {
       if (this.isSelf) {
         this.getAll();
       } else {
-        api.getByPath('/api/v0/tuxun/history/listOtherRating', {userId: this.userId}).then(res=>{
+        api.getByPath('/api/v0/tuxun/history/listUserRating', {userId: this.userId}).then(res=>{
           if (res.success) {
             this.list = res.data.slice(0, 100);
           }
