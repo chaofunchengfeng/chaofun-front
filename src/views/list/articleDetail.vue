@@ -962,7 +962,7 @@ queryChildren (parent, list) {
             let params = {
               parentId: this.replayItem && this.replayItem.id ? this.replayItem.id : '',
               postId: this.params.postId,
-              comment: this.comment,
+              comment: this.comment.replaceAll("\n","\n<p></p>"),
               imageNames: this.images.join(','),
               ats: ats.join(',')
             };
