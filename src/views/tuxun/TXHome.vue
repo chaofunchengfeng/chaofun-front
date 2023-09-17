@@ -43,11 +43,11 @@
 <!--    TODO: 这里有个问题，不能在中间加 v-if 的DIV，一加在 v-if 条件触发的时候（特别是 hide）就会影响 map 的布局，原理未知，-->
 
     <div id="map-container" :class="[{'bm-view-container': !ISPHONE}, {'bm-view-container-phone': ISPHONE && showMap}, {'bm-view-container-phone-hidden': ISPHONE && !showMap}]" @mouseover="mapMouseOver" @mouseout="mapMouseOut">
-      <div v-if="!this.isMapSmall && !ISPHONE">
-        <el-button size="small" @click="mapBig" round>放大</el-button>
-        <el-button size="small" @click="mapSmall" round>缩小</el-button>
-        <el-button size="small" v-if="!mapPin" @click="mapPin = true" round>固定大小</el-button>
-        <el-button size="small" v-if="mapPin" @click="mapPin = false" round>解除固定</el-button>
+      <div v-if="(!this.isMapSmall || touchDevice) && !ISPHONE" style="text-align: left">
+          <el-button v-if="mapSize === 'mid' || mapSize === 'small'"  size="small" @click="touchDevice ? mapBigTouch() : mapBig()" round>放大</el-button>
+          <el-button v-if="mapSize === 'big'" size="small" @click="touchDevice ? mapMidTouch() : mapMid()" round>缩小</el-button>
+          <el-button size="small" v-if="!mapPin && !touchDevice" @click="mapPin = true" round>固定大小</el-button>
+          <el-button size="small" v-if="mapPin && !touchDevice" @click="mapPin = false" round>解除固定</el-button>
       </div>
       <div id="map" :class="[{'bm-view': !ISPHONE}, {'bm-view-phone': ISPHONE}]" ></div>
     </div>
@@ -170,10 +170,13 @@ export default {
       needSmall: false,
       maxMapWidth: '40%',
       maxMapHeight: '60%',
+      mapSize: 'small',
+      oldMapSize: 'mid',
       isMapSmall: true,
       dialogShow: true,
       mapPin: false,
       headingMap: {},
+      touchDevice: false,
       ranks: null,
     };
   },
@@ -181,7 +184,6 @@ export default {
   created() {
   },
   mounted() {
-
     this.initWS();
     this.initMap();
     document.onkeydown = function(event){
@@ -218,6 +220,7 @@ export default {
         },
         { capture: true },
     );
+    this.touchDevice = this.isTouchDevice();
   },
 
   destroyed() {
@@ -226,6 +229,11 @@ export default {
   },
 
   methods: {
+    isTouchDevice() {
+      return (('ontouchstart' in window) ||
+          (navigator.maxTouchPoints > 0) ||
+          (navigator.msMaxTouchPoints > 0));
+    },
     initMap() {
       var map = L.map('map', {
         attributionControl: true,
@@ -253,22 +261,43 @@ export default {
     },
 
     mapBig() {
+      this.mapSize = 'big';
+      this.oldMapSize = 'big';
       this.maxMapWidth = '68%';
       this.maxMapHeight = '85%';
-      this.changeMapBig();
+      this.changeMapSize();
     },
 
-    mapSmall() {
+    mapBigTouch() {
+      this.mapSize = 'big';
+      this.oldMapSize = 'big';
+      this.maxMapWidth = '68%';
+      this.maxMapHeight = '85%';
+      this.changeMapSize();
+    },
+
+    mapMid() {
+      this.mapSize = 'mid';
+      this.oldMapSize = 'mid';
       this.maxMapWidth = '40%';
       this.maxMapHeight = '60%';
-      this.changeMapBig();
+      this.changeMapSize();
     },
-    changeMapBig() {
+    mapMidTouch() {
+      this.mapSize = 'mid';
+      this.oldMapSize = 'mid';
+      this.maxMapWidth = '40%';
+      this.maxMapHeight = '40%';
+      this.changeMapSize();
+    },
+
+    changeMapSize() {
       this.isMapSmall = false;
       this.needSmall = false;
       var element = document.getElementById('map-container');
       element.style.width = this.maxMapWidth;
       element.style.height = this.maxMapHeight;
+      this.mapSize = this.oldMapSize;
       element.style.opacity = 1.0;
       this.map.invalidateSize();
       setTimeout(() => {
@@ -278,7 +307,7 @@ export default {
 
     mapMouseOver() {
       if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
-        this.changeMapBig();
+        this.changeMapSize();
       }
     },
 
@@ -289,13 +318,15 @@ export default {
           if (this.needSmall) {
             this.needSmall = false;
             this.isMapSmall = true;
+            this.oldMapSize = this.mapSize;
+            this.mapSize = 'small';
             var element = document.getElementById('map-container');
             element.style.width = '25%';
             element.style.height = '35%';
             element.style.opacity = 0.7;
             this.map.invalidateSize();
           }
-        }, 750);
+        }, 1000);
       }
     },
 
