@@ -17,9 +17,10 @@
       <span v-if="gameData.move"> | 移动街景</span>
       <span v-if="gameData.pan && gameData.zoom"> | 自由视角</span>
       <span v-if="!gameData.pan && !gameData.zoom"> | 固定视角</span>
+      <span v-if="gameData.type === 'infinity'"> | 无限轮次 </span>
       <span v-if="gameData.type === 'challenge' && gameData.roundTimePeriod"> | {{gameData.roundTimePeriod / 1000}} 秒 </span>
       <span v-if="gameData.type === 'challenge' && !gameData.roundTimePeriod"> | 无限轮次时间 </span>
-      <span v-if="gameData.type === 'infinity'"> | 无限轮次 </span>
+      <span v-if="gameData.blinkTime"> | 眨眼模式 </span>
     </div>
   </div>
 </template>
