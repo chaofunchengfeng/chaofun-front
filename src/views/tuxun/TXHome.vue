@@ -180,6 +180,7 @@ export default {
   },
 
   created() {
+    window.location.href = 'https://new.tuxun.fun/point';
   },
   mounted() {
     this.initWS();
