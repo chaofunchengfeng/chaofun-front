@@ -1910,10 +1910,10 @@ export default {
         this.viewer.setVisible(false);
         setTimeout(() => {
           this.viewer.setVisible(true)
-        }, 2000)
+        }, 1000)
         setTimeout(() => {
           this.viewer.setVisible(false)
-        },  2000 +  round.blinkTime);
+        },  1000 +  round.blinkTime);
       } else {
         if (!this.viewer.getVisible()) {
           this.viewer.setVisible(true);
