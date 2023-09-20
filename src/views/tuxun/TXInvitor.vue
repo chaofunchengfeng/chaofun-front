@@ -936,6 +936,7 @@ export default {
                           },
                         }
                     );
+                    this.viewer.setVisible(true);
                     this.viewer.addListener('pano_changed', () => {
                       console.log('pano_changed');
                       if (this.viewer.getPano().length === 27) {
@@ -1906,18 +1907,19 @@ export default {
         this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: true, showRoadLabels: false, clickToGo: true});
       }
 
-      if (round.blinkTime) {
-        this.viewer.setVisible(false);
+
+      if (!this.viewer.getVisible()) {
+        this.viewer.setVisible(true);
+      }
+
+      if (this.gameData.blinkTime) {
+        document.getElementById('viewer').style.zIndex = -1;
         setTimeout(() => {
-          this.viewer.setVisible(true)
-        }, 1000)
+          document.getElementById('viewer').style.zIndex = null;
+        }, 1500)
         setTimeout(() => {
-          this.viewer.setVisible(false)
-        },  1000 +  round.blinkTime);
-      } else {
-        if (!this.viewer.getVisible()) {
-          this.viewer.setVisible(true);
-        }
+          document.getElementById('viewer').style.zIndex = -1;
+        },  1500 +  this.gameData.blinkTime);
       }
 
       setTimeout(() => {

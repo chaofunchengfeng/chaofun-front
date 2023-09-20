@@ -71,7 +71,7 @@
         </el-switch>
 
         <div v-if="blink" style="padding-top: 1rem; font-size: 16px; color: white">
-          <el-input-number v-model="blinkTime" :min=0.1 :max=2 :step=0.1 />
+          <el-input-number v-model="blinkTime" :min=0.1 :max=3 :step=0.1 />
           <div>
             (秒)
           </div>
@@ -162,7 +162,7 @@ export default {
       }
 
       if (this.blink) {
-        blinkTime = Math.round( this.blinkTime * 100);
+        blinkTime = Math.round( this.blinkTime * 1000);
       }
 
       api.getByPath('/api/v0/tuxun/streak/createMapCountryStreak', {
@@ -199,7 +199,7 @@ export default {
       }
 
       if (this.blink) {
-        blinkTime = Math.round( this.blinkTime * 100);
+        blinkTime = Math.round( this.blinkTime * 1000);
       }
 
       if (this.infinityRound) {
