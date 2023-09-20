@@ -38,6 +38,25 @@
         </el-switch>
       </div>
 
+      <div>
+        <div style="color: white; font-size: 18px; padding-top: 1rem">
+          轮次无限时间
+        </div>
+
+        <el-switch
+            v-model="timeInfinity"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+        >
+        </el-switch>
+
+        <div v-if="!timeInfinity" style="padding-top: 1rem; font-size: 16px; color: white">
+          <el-input-number v-model="timeLimitSeconds" :min=5 :max=600 :step=5 />
+          <div>
+            (秒)
+          </div>
+        </div>
+      </div>
 
       <div>
         <div style="color: white; font-size: 18px; padding-top: 1rem">
@@ -57,30 +76,7 @@
             (秒)
           </div>
         </div>
-
-
       </div>
-
-      <div style="color: white; font-size: 18px; padding-top: 1rem">
-        轮次无限时间
-      </div>
-
-      <el-switch
-          v-model="timeInfinity"
-          active-color="#13ce66"
-          inactive-color="#ff4949"
-      >
-      </el-switch>
-
-
-
-      <div v-if="!timeInfinity" style="padding-top: 1rem; font-size: 16px; color: white">
-        <el-input-number v-model="timeLimitSeconds" :min=5 :max=600 :step=5 />
-        <div>
-          (秒)
-        </div>
-      </div>
-
 
       <div style="padding-top: 2rem">
       </div>
