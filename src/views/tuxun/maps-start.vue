@@ -39,6 +39,27 @@
       </div>
 
 
+      <div>
+        <div style="color: white; font-size: 18px; padding-top: 1rem">
+          眨眼模式
+        </div>
+
+        <el-switch
+            v-model="blink"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+        >
+        </el-switch>
+
+        <div v-if="blink" style="padding-top: 1rem; font-size: 16px; color: white">
+          <el-input-number v-model="blinkTime" :min=0.1 :max=2 :step=0.1 />
+          <div>
+            (秒)
+          </div>
+        </div>
+
+
+      </div>
 
       <div style="color: white; font-size: 18px; padding-top: 1rem">
         轮次无限时间
@@ -51,32 +72,15 @@
       >
       </el-switch>
 
+
+
       <div v-if="!timeInfinity" style="padding-top: 1rem; font-size: 16px; color: white">
         <el-input-number v-model="timeLimitSeconds" :min=5 :max=600 :step=5 />
         <div>
           (秒)
         </div>
       </div>
-<!--      </div>-->
 
-
-<!--      <div style="color: white; font-size: 18px; padding-top: 1rem">-->
-<!--        无限轮次-->
-<!--      </div>-->
-
-<!--      <el-switch-->
-<!--          v-model="infinityRound"-->
-<!--          active-color="#13ce66"-->
-<!--          inactive-color="#ff4949"-->
-<!--      >-->
-<!--      </el-switch>-->
-
-<!--      <div v-if="!infinityRound" style="padding-top: 1rem; font-size: 16px; color: white">-->
-<!--        <el-input-number v-model="rounds" :min=1 :max=100 :step=1 />-->
-<!--        <div>-->
-<!--          轮-->
-<!--        </div>-->
-<!--      </div>-->
 
       <div style="padding-top: 2rem">
       </div>
@@ -104,6 +108,8 @@ export default {
       mapsData: null,
       move: true,
       free: true,
+      blink: false,
+      blinkTime: 0.5,
       rounds: 5,
       infinityRound: false,
       timeInfinity: true,
@@ -149,6 +155,7 @@ export default {
       var pan = true;
       var zoom = true;
       var timeLimitMS = null
+      var blinkTime = null
       if (!this.free) {
         pan = false;
         zoom = false;
@@ -158,12 +165,17 @@ export default {
         timeLimitMS = this.timeLimitSeconds * 1000;
       }
 
+      if (this.blink) {
+        blinkTime = Math.round( this.blinkTime * 100);
+      }
+
       api.getByPath('/api/v0/tuxun/streak/createMapCountryStreak', {
         'mapsId': this.mapsId,
         'move': this.move,
         'pan': pan,
         'zoom': zoom,
         'timeLimit': timeLimitMS,
+        'blinkTime': blinkTime,
       }).then(res => {
         if (res.success) {
           console.log(res.data);
@@ -180,6 +192,7 @@ export default {
       var pan = true;
       var zoom = true;
       var timeLimitMS = null
+      var blinkTime = null
       if (!this.free) {
         pan = false;
         zoom = false;
@@ -189,6 +202,10 @@ export default {
         timeLimitMS = this.timeLimitSeconds * 1000;
       }
 
+      if (this.blink) {
+        blinkTime = Math.round( this.blinkTime * 100);
+      }
+
       if (this.infinityRound) {
         api.getByPath('/api/v0/tuxun/infinity/createGame', {
           'mapsId': this.mapsId,
@@ -196,6 +213,7 @@ export default {
           'pan': pan,
           'zoom': zoom,
           'timeLimit': timeLimitMS,
+          'blinkTime': blinkTime,
           infinityRound: this.infinityRound,
           rounds: this.rounds
         }).then(res => {
@@ -209,13 +227,13 @@ export default {
         });
 
       } else {
-
         api.getByPath('/api/v0/tuxun/challenge/create', {
           'mapsId': this.mapsId,
           'move': this.move,
           'pan': pan,
           'zoom': zoom,
           'timeLimit': timeLimitMS,
+          'blinkTime': blinkTime,
           infinityRound: this.infinityRound,
           rounds: this.rounds
         }).then(res => {

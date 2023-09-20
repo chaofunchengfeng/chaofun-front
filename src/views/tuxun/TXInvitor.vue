@@ -948,6 +948,11 @@ export default {
                         api.getByPath("/api/v0/tuxun/client/report", {panoId: this.viewer.getPano(), status: this.viewer.getStatus(), page: 'tuxun_invitor', gameId: this.gameId}).then(res => {
                         });
                       }
+                      if (this.lastRound.blinkTime) {
+                        setTimeout(() => {
+                          this.viewer.setVisible(false)
+                        }, this.lastRound.blinkTime);
+                      }
                     });
                     this.setPanoId(this.lastRound);
                   });
@@ -1137,7 +1142,8 @@ export default {
           'move': this.gameData.move,
           'pan': this.gameData.pan,
           'zoom': this.gameData.zoom,
-          'timeLimit': this.gameData.roundTimePeriod
+          'timeLimit': this.gameData.roundTimePeriod,
+          'blinkTime': this.gameData.blinkTime
         }).then(res => {
           if (res.success) {
             tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
@@ -1607,7 +1613,8 @@ export default {
               'move': this.gameData.move,
               'pan': this.gameData.pan,
               'zoom': this.gameData.zoom,
-              'timeLimit': this.gameData.roundTimePeriod
+              'timeLimit': this.gameData.roundTimePeriod,
+              'blinkTime': this.gameData.blink
             }).then(res => {
               if (res.success) {
                 tuxunJump('/tuxun/challenge?challengeId=' + res.data);
