@@ -71,7 +71,7 @@
 
     <div class="game" v-if="status === 'ongoing' || status === 'finish'">
       <div class="im-view">
-        <div id="viewer"  style="width: 100%; height: 100%"></div>
+        <div id="viewer"  style="width: 100%; height: 100%; background-color: black"></div>
         <round-info :game-data="gameData"></round-info>
         <img v-if="lastRound && lastRound.source === 'baidu_pano'" style="user-select: none; z-index: 5000; position: absolute; bottom: 10px; margin: auto; width: 100px" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
         <div v-if="showRoundResult" class="round_result">
@@ -948,11 +948,6 @@ export default {
                         api.getByPath("/api/v0/tuxun/client/report", {panoId: this.viewer.getPano(), status: this.viewer.getStatus(), page: 'tuxun_invitor', gameId: this.gameId}).then(res => {
                         });
                       }
-                      if (this.lastRound.blinkTime) {
-                        setTimeout(() => {
-                          this.viewer.setVisible(false)
-                        }, this.lastRound.blinkTime);
-                      }
                     });
                     this.setPanoId(this.lastRound);
                   });
@@ -1614,7 +1609,7 @@ export default {
               'pan': this.gameData.pan,
               'zoom': this.gameData.zoom,
               'timeLimit': this.gameData.roundTimePeriod,
-              'blinkTime': this.gameData.blink
+              'blinkTime': this.gameData.blinkTime
             }).then(res => {
               if (res.success) {
                 tuxunJump('/tuxun/challenge?challengeId=' + res.data);
@@ -1910,9 +1905,21 @@ export default {
       } else {
         this.viewer.setOptions({scrollwheel: scrollwheel, linksControl: true, showRoadLabels: false, clickToGo: true});
       }
-      if (!this.viewer.getVisible()) {
-        this.viewer.setVisible(true);
+
+      if (round.blinkTime) {
+        this.viewer.setVisible(false);
+        setTimeout(() => {
+          this.viewer.setVisible(true)
+        }, 2000)
+        setTimeout(() => {
+          this.viewer.setVisible(false)
+        },  2000 +  round.blinkTime);
+      } else {
+        if (!this.viewer.getVisible()) {
+          this.viewer.setVisible(true);
+        }
       }
+
       setTimeout(() => {
         if (round.vZoom) {
           this.viewer.setZoom(round.vZoom);
