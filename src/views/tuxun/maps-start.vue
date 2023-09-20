@@ -85,6 +85,7 @@
       <el-button @click="createInfinity" type="primary" style="font-size: 20px" round>开始(无限轮次)</el-button>
       <div style="height: 10px"></div>
       <el-button v-if="mapsData && mapsData.countryStreak" @click="createMapStreak" type="primary" style="font-size: 20px" round>开始(国家连胜)</el-button>
+      <div style="margin-bottom: 5rem"></div>
     </div>
   </div>
 </template>

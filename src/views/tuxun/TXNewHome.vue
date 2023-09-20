@@ -88,7 +88,7 @@
             </div>
             <div class="card-top-right">可移动</div>
           </div>
-          <div class="card" @click="redirectPage( '/tuxun/main_game')">
+          <div class="card" @click="redirectPage( 'https://new.tuxun.fun/main_game')">
             <div class="title">
               积分赛
             </div>
