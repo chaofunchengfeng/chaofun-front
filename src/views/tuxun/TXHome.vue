@@ -1,86 +1,5 @@
 <template>
   <div>
-    <el-dialog title="发送弹幕" :visible.sync="dialogVisible" :append-to-body="true">
-      <el-form :model="form"  @submit.native.prevent="send" v-on:submit.prevent="send">
-        <el-form-item label="弹幕:">
-          <el-input id="input" v-model="form.applyModReason" autocomplete="off"> </el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="hide()">取 消</el-button>
-        <el-button type="primary" @click="send()">确 定</el-button>
-      </div>
-    </el-dialog>
-
-    <div id="container" :class="[{'im-view': !ISPHONE}, {'im-view-phone': ISPHONE}]">
-      <div v-show="this.contentType === 'panorama'" id="viewer"  style="width: 100%; height: 100%"></div>
-      <div v-if="status === 'rank'" style="z-index: 500; position: absolute; width: 100%; height: 100%; background: white; opacity: 80%; overflow:auto;">
-        <div style="padding-top: 40px; font-weight: bold; font-size: 20px;">排行榜:</div>
-        <div v-if="this.rank" style="padding-top: 10px; font-weight: bold; font-size: 20px">你的本场次排名:{{this.rank}}</div>
-        <div v-for="(item, index) in this.ranks" class="item" :key="index">
-          <div class="left">
-            <img :src="imgOrigin+item.userAO.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="">
-            <div class="info">
-              <div class="title">{{item.userAO.userName}}</div>
-              <p v-if="item.ratingChange  && item.ratingChange > 0" class="desc">积分变化：+{{item.ratingChange}}, 积分：{{ item.rating }}</p>
-              <p v-if="!item.ratingChange && item.rating" class="desc">积分无变化, 积分：{{ item.rating }}</p>
-              <p v-if="!item.ratingChange && !item.rating" class="desc">积分无变化 (需要有其他人选择才计算积分)</p>
-              <p v-if="item.ratingChange  && item.ratingChange < 0" class="desc">积分变化：{{item.ratingChange}}, 积分：{{ item.rating }}</p>
-            </div>
-          </div>
-          <div class="right">距离
-            <p>{{ (item.distance / 1000.0).toFixed(2) }} 千米</p>
-          </div>
-        </div>
-      </div>
-      <vue-danmaku v-if="dialogShow" :danmus="danmus" use-slot class="danmaku"  style="height:80%; width:100%; position: absolute; pointer-events: none" :speeds="120">
-        <template slot="dm" slot-scope="{ danmu }" >
-          <div class="danmaku-title" style="color: white; font-size: 24px;   -webkit-text-stroke: 0.5px black;">{{ danmu }}</div>
-        </template>
-      </vue-danmaku>
-    </div>
-
-<!--    TODO: 这里有个问题，不能在中间加 v-if 的DIV，一加在 v-if 条件触发的时候（特别是 hide）就会影响 map 的布局，原理未知，-->
-
-    <div id="map-container" :class="[{'bm-view-container': !ISPHONE}, {'bm-view-container-phone': ISPHONE && showMap}, {'bm-view-container-phone-hidden': ISPHONE && !showMap}]" @mouseover="mapMouseOver" @mouseout="mapMouseOut">
-      <div v-if="(!this.isMapSmall || touchDevice) && !ISPHONE" style="text-align: left">
-          <el-button v-if="mapSize === 'mid' || mapSize === 'small'"  size="small" @click="touchDevice ? mapBigTouch() : mapBig()" round>放大</el-button>
-          <el-button v-if="mapSize === 'big'" size="small" @click="touchDevice ? mapMidTouch() : mapMid()" round>缩小</el-button>
-          <el-button size="small" v-if="!mapPin && !touchDevice" @click="mapPin = true" round>固定大小</el-button>
-          <el-button size="small" v-if="mapPin && !touchDevice" @click="mapPin = false" round>解除固定</el-button>
-      </div>
-      <div id="map" :class="[{'bm-view': !ISPHONE}, {'bm-view-phone': ISPHONE}]" ></div>
-    </div>
-    <div  :class="[{'confirm': !ISPHONE}, {'confirm-phone': ISPHONE}]">
-      <el-button @mouseover.native="mapMouseOver" class="not_stop_hover" v-if="confirmed && distance" @click="clickDistance" round>距离 {{ distance.toFixed(2)}} 千米</el-button>
-      <el-button @mouseover.native="mapMouseOver"   class="not_stop_hover" v-if="(showMap || !ISPHONE) && !confirmed && status !== 'rank'"  @click="confirm" round>确定选择</el-button>
-      <el-button @mouseover.native="mapMouseOver"  class="not_stop_hover" v-else-if="!isMaps && confirmed && !distance" @click="centerChoose" round>等待答案</el-button>
-      <el-button @mouseover.native="mapMouseOver"  class="not_stop_hover" v-else-if="!showMap && ISPHONE && confirmed" @click="showMapTrue" round> 打开地图</el-button>
-      <el-button @mouseover.native="mapMouseOver"  class="not_stop_hover" v-else-if="!showMap && ISPHONE" @click="showMapTrue" round>选择地点</el-button>
-    </div>
-
-    <div v-if="showMap && ISPHONE" style="position: absolute; left: 20px; bottom: 20px; z-index: 5003">
-      <el-button @click="showMap = false" round>隐藏地图</el-button>
-    </div>
-
-    <div v-if="!this.isMaps" :class="[{'topRight': !ISPHONE}, {'topRight-phone': ISPHONE}]">
-      <div :class="[{'top-info': !ISPHONE}, {'top-info-phone': ISPHONE}]">
-        在线人数：{{this.onlineNums}}
-      </div>
-      <div v-if="timeLeft &&( this.status === 'wait' || this.status === 'wait_result')" :class="[{'top-info': !ISPHONE}, {'top-info-phone': ISPHONE}]">
-        选择倒计时: {{Math.round(timeLeft)}}
-      </div>
-      <div v-if="timeLeft && this.status === 'rank'" :class="[{'top-info': !ISPHONE}, {'top-info-phone': ISPHONE}]">
-        下一题: {{Math.round(timeLeft)}}
-      </div>
-    </div>
-    <div class="home">
-      <el-button size="mini" @click="toHome" round> 首页 </el-button>
-      <el-button v-if="!this.isMaps && dialogShow" size="mini"  @click="toSend" round> 发弹幕 </el-button>
-      <el-button v-if="dialogShow" size="mini"  @click="dialogShow=false" round> 关弹幕 </el-button>
-      <el-button size="mini"  @click="toReport" round> 坏题反馈 </el-button>
-      <el-button v-if="ISPHONE" @click="reloadPage" size="mini" round>刷新</el-button>
-    </div>
   </div>
 </template>
 
@@ -182,45 +101,6 @@ export default {
   created() {
     window.location.href = 'https://new.tuxun.fun/point';
   },
-  mounted() {
-    this.initWS();
-    this.initMap();
-    document.onkeydown = function(event){
-      var e = event || window.event || arguments.callee.caller.arguments[0];
-      console.log(e.keyCode);
-      if(e && e.keyCode === 32){//空格
-        this.confirm();
-      }
-    }.bind(this);
-
-    window.addEventListener(
-        'keydown',
-        (event) => {
-          if ((
-                  // Change or remove this condition depending on your requirements.
-                  event.key === 'ArrowUp' || // Move forward
-                  event.key === 'ArrowDown' || // Move forward
-                  event.key === 'ArrowLeft' || // Pan left
-                  event.key === 'ArrowRight' ||
-                  event.key === 'w' ||
-                  event.key === 'a' ||
-                  event.key === 's' ||
-                  event.key === 'd' ||
-                  event.key === 'W' ||
-                  event.key === 'A' ||
-                  event.key === 'S' ||
-                  event.key === 'D' ||
-                  event.key === 'Unidentified' ||
-                  event.key === 'CapsLock'
-              )
-          ) {
-            event.stopPropagation();
-          };
-        },
-        { capture: true },
-    );
-    this.touchDevice = this.isTouchDevice();
-  },
 
   destroyed() {
     document.onkeydown = undefined;
@@ -305,13 +185,13 @@ export default {
     },
 
     mapMouseOver() {
-      if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
+      if (!this.isTouchDevice() && document.body.clientWidth > 678 && !this.mapPin) {
         this.changeMapSize();
       }
     },
 
     mapMouseOut() {
-      if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
+      if (!this.isTouchDevice() && document.body.clientWidth > 678 && !this.mapPin) {
         this.needSmall = true;
         setTimeout(() => {
           if (this.needSmall) {
