@@ -332,6 +332,18 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/app',
+    component: () => import('@/views/tuxun/app'),
+    meta: { title: '图寻App'},
+    hidden: true
+  },
+  {
+    path: '/app/update',
+    component: () => import('@/views/tuxun/app-update'),
+    meta: { title: '图寻App更新'},
+    hidden: true
+  },
+  {
     path: '/guoqing_game',
     component: () => import('@/views/tuxun/TXInvitor'),
     name: '图寻-淘汰赛',

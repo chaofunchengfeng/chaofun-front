@@ -1,6 +1,7 @@
 // 导出新组件
 import Cookies from 'js-cookie';
 
+
 import Vue from 'vue';
 // import login from '@/components/chaofan/common/login/login.js'
 
