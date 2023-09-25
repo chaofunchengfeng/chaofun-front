@@ -75,11 +75,6 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/app回T退订',
-    component: () => import('@/views/app/downs'),
-    hidden: true
-  },
-  {
     path: '/userRank',
     component: () => import('@/views/activity/userRank'),
     // name: 'webViewUserRank',
