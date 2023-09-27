@@ -41,7 +41,7 @@
         <div class="first_session_head">单人</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage( '/tuxun/daily_challenge')">
+          <div class="card" @click="redirectPage( 'https://new.tuxun.fun/daily-challenge')">
             <div class="title">
               每日挑战
             </div>

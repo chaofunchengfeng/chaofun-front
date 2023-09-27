@@ -111,17 +111,7 @@ export default {
   },
 
   created() {
-    if (!location.host.includes('tuxun.fun') && !location.host.includes('8099')) {
-      window.location.href = window.location.href.replace(location.host + '/tuxun', 'tuxun.fun');
-    }
-    this.type = this.$route.query.type;
-    if (this.type === 'move' || this.type === 'noMove') {
-      this.type = 'world';
-    }
-    if (!this.type) {
-      this.type = 'china';
-    }
-    this.init();
+    window.location.href = 'https://new.tuxun.fun/daily-challenge';
   },
 
   methods: {
