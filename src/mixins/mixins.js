@@ -21,6 +21,7 @@ export default {
       clientHeight: document.body.clientHeight,
       isiOS: !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
       isAndroid: navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1,
+      tuxunApp: navigator.userAgent.indexOf('Tuxun') > -1,
       scrollHeight: document.body.clientHeight - 0,
       opened: true,
       humanizeTimeFormat: true,

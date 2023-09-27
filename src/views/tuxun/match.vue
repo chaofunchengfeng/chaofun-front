@@ -2,7 +2,7 @@
   <div class="container">
     <div class="back_home">
       <el-button @click="goBack" round>←返回</el-button>
-      <el-button @click="goHome" round>首页</el-button>
+      <el-button v-if="!tuxunApp" @click="goHome" round>首页</el-button>
     </div>
     <div class="nav">匹配Solo</div>
     <div v-if="tips===0" style="color: white; padding-top: 10px">提示：第一位选手选择后触发倒计时15秒，如果倒计时时间不准，请调整系统时间</div>

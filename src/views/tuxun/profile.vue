@@ -2,9 +2,9 @@
   <div class="container">
     <div class="nav">
       <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>
-      <el-button @click="goHome" round>首页</el-button>
+      <el-button v-if="!tuxunApp" @click="goHome"  round>首页</el-button>
     </div>
-    <div class="hidden-div"></div>
+    <div v-if="!tuxunApp" class="hidden-div"></div>
     <div class="user-section" style="text-align: center;">
       <div class="header" v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId">
         <el-link @click="logout()" :underline="false">
@@ -19,7 +19,7 @@
           <svg-icon icon-class="history" class-name="header-icon" />
           <span class="header-btn">比赛历史</span>
         </el-link>
-        <el-link @click="toAnalysis()" :underline="false">
+        <el-link v-if="!tuxunApp" @click="toAnalysis()" :underline="false">
           <svg-icon icon-class="chart" class-name="header-icon" />
           <span class="header-btn">技术分析</span>
         </el-link>
@@ -166,6 +166,7 @@ import {
 import VChart, { THEME_KEY } from 'vue-echarts';
 import { tuxunJump, tuxunOpen } from './common';
 import ReportUser from './component/report-user'
+import tuxun from "../../Tuxun.vue";
 use([
   CanvasRenderer,
   LineChart,
@@ -178,6 +179,11 @@ use([
 
 export default {
   name: 'tuxun-profile',
+  computed: {
+    tuxun() {
+      return tuxun
+    }
+  },
   components: {
     ReportUser,
     CalendarHeatmap,
@@ -185,6 +191,7 @@ export default {
   },
   data() {
     return {
+      app: false,
       userId: null,
       userProfile: null,
       endDate: null,

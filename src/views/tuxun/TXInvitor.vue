@@ -8,7 +8,7 @@
 
     <div v-if="!gameData || (gameData.status !== 'ongoing' && gameData.status !== 'finish')" class="back_home">
       <el-button @click="goBack" round>←返回</el-button>
-      <el-button @click="goHome" round>首页</el-button>
+      <el-button v-if="!tuxunApp" @click="goHome" round>首页</el-button>
     </div>
 
     <div class="prepare" v-if="status==='wait_join' || status === 'ready'">
@@ -193,7 +193,7 @@
               <el-button class="result_button" @click="goMaps" round>回到题库</el-button>
             </div>
             <div>
-              <el-button class="result_button" @click="goHome" round>回到首页</el-button>
+              <el-button v-if="!tuxunApp" class="result_button" @click="goHome" round>回到首页</el-button>
             </div>
           </div>
 
@@ -220,7 +220,7 @@
               <el-button class="result_button" @click="goMaps" round>回到题库</el-button>
             </div>
             <div>
-              <el-button class="result_button" @click="goHome" round>回到首页</el-button>
+              <el-button  v-if="!tuxunApp" class="result_button" @click="goHome" round>回到首页</el-button>
             </div>
           </div>
         </div>
@@ -247,13 +247,13 @@
                   最新积分：{{ yourTeam.finalRating }}
                 </div>
               </div>
-              <el-button class="home_button"  type="primary" @click="goTuxun" round>继续匹配</el-button>
+              <el-button v-if="!tuxunApp" class="home_button"  type="primary" @click="goTuxun" round>继续匹配</el-button>
             </div>
-            <div v-if="gameData && ( gameData.type === 'solo' || gameData.type === 'team')">
+            <div  v-if="!tuxunApp && gameData && ( gameData.type === 'solo' || gameData.type === 'team')">
               <el-button v-if="!gameData.partyId" class="home_button"  type="primary" @click="again" round>再来一局</el-button>
               <el-button v-else class="home_button"  type="primary" @click="backParty" round>回到派对</el-button>
             </div>
-            <div v-if="gameData && gameData.type === 'team_match' && gameData.requestUserId && gameData.playerIds.indexOf(gameData.requestUserId) !== -1">
+            <div v-if="!tuxunApp && gameData && gameData.type === 'team_match' && gameData.requestUserId && gameData.playerIds.indexOf(gameData.requestUserId) !== -1">
               <el-button class="home_button"  type="primary" @click="backTeam" round>回到组队</el-button>
             </div>
             <div v-if="gameData">
@@ -263,7 +263,7 @@
               <el-button class="home_button"   @click="toAnotherPlayer" round>对手首页</el-button>
             </div>
             <div>
-              <el-button class="home_button" @click="goHome" round>回到首页</el-button>
+              <el-button v-if="!tuxunApp" class="home_button" @click="goHome" round>回到首页</el-button>
             </div>
           </div>
         </div>
@@ -283,7 +283,7 @@
               <el-button class="home_button"   @click="replay" round>题目复盘</el-button>
             </div>
             <div>
-              <el-button class="home_button" @click="goHome" round>回到首页</el-button>
+              <el-button v-if="!tuxunApp" class="home_button" @click="goHome" round>回到首页</el-button>
             </div>
           </div>
         </div>
@@ -363,7 +363,7 @@
 
       <div class="home">
         <el-button v-if="history && history.length > 1" size="mini" @click="goBack" round>←返回</el-button>
-        <el-button v-if="gameData.type !== 'daily_challenge'" size="mini" @click="goHome" round>首页</el-button>
+        <el-button v-if="!tuxunApp && gameData.type !== 'daily_challenge'" size="mini" @click="goHome" round>首页</el-button>
         <el-button size="mini" v-if="gameData && gameData.type !== 'daily_challenge'" @click="toReport" round> 坏题反馈 </el-button>
         <el-button v-if="lastRound && lastRound.move" size="mini"  @click="reset" round> 回到原点</el-button>
         <el-button size="mini" v-if="gameData && !gameData.player && gameData.type != 'battle_royale'"  @click="sendEmoji=true" round> 表情 </el-button>

@@ -2,7 +2,7 @@
   <div>
     <div class="game_container">
       <div class="back_home">
-        <el-button @click="goHome" round>首页</el-button>
+        <el-button v-if="!tuxunApp" @click="goHome" round>首页</el-button>
         <el-button v-if="matchTeamData && $store.state.user.userInfo.userId === matchTeamData.captain.userId" @click="disband" round> 解散队伍 </el-button>
         <el-button v-else @click="leave" round> 离开队伍 </el-button>
       </div>

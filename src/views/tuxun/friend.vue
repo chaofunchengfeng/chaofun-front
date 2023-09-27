@@ -16,7 +16,7 @@
     </el-dialog>
 
     <div class="back_home">
-      <el-button @click="goHome" round>首页</el-button>
+      <el-button v-if="!tuxunApp" @click="goHome" round>首页</el-button>
       <el-button @click="openSearch" round>搜索添加</el-button>
     </div>
     <div class="nav">

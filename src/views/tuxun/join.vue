@@ -1,7 +1,7 @@
 <template>
   <div class="game-container">
     <div class="back_home" @click="goHome">
-      <el-button round>首页</el-button>
+      <el-button v-if="!tuxunApp" round>首页</el-button>
     </div>
     <div v-if="joinCode && disband" class="disband">
       派对不存在或者已经解散

@@ -4,7 +4,7 @@
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goFinder" v-if="userId" size="small" round>寻景首页</el-button>
-      <el-button @click="goHome" size="small" round>图寻首页</el-button>
+      <el-button v-if="!tuxunApp" @click="goHome" size="small" round>图寻首页</el-button>
       <el-button @click="finderUpload" size="small" type="primary" round>投稿</el-button>
       <el-button @click="toManager" size="small" round>管理投稿</el-button>
     </div>
