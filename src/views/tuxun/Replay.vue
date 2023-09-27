@@ -3,7 +3,7 @@
     <div id="map" class="maps"></div>
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
-      <el-button @click="goHome" size="small" round>首页</el-button>
+      <el-button v-if="!tuxunApp" @click="goHome" size="small" round>首页</el-button>
       <el-dropdown trigger="click"  placement="bottom" style="margin-left: 10px">
         <el-button icon="el-icon-caret-right" @click="" size="small">{{choose}}</el-button>
         <el-dropdown-menu v-if="gameData" slot="dropdown">

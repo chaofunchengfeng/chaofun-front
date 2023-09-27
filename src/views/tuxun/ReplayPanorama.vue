@@ -4,7 +4,7 @@
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goReplay" size="small" round>返回复盘</el-button>
-      <el-button @click="goHome" size="small" round>首页</el-button>
+      <el-button v-if="!tuxunApp" @click="goHome" size="small" round>首页</el-button>
       <el-button @click="showReport = true" size="small"  round> 坏题反馈 </el-button>
       <el-button v-if="roundData" size="mini"  @click="reset" round> 回到原点</el-button>
     </div>
