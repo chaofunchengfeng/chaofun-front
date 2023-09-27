@@ -3,7 +3,7 @@
     <div class="ycovers">
       <div class="ycontainer">
         <div style="font-size: 32px">续费/开通会员</div>
-        <div style="font-size: 20px; color: #FF0037">中秋国庆长假，图寻会员史低, 买一送一</div>
+        <div style="font-size: 20px; color: #FF0037">国庆中秋长假，图寻会员史低, 买一送一</div>
         <div v-if="scene === 'due'" style="color: red">您的会员已过期，是否续费会员</div>
         <div v-if="scene === 'new'" style="color: red">新寻友，考不考虑会员呢？</div>
         <img @click="cancelVip" class="cancel" :src='cancelImg'/>

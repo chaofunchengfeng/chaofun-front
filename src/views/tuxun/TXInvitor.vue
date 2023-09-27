@@ -2194,6 +2194,7 @@ export default {
       position: absolute;
       width: 100%;
       height: 100%;
+      overflow: auto;
       background: #3D465B;
       display: block;
       align-items: center;
