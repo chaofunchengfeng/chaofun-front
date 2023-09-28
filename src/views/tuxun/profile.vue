@@ -37,7 +37,7 @@
                 <div class="vip">
                   <svg-icon icon-class="vip" class-name="header-icon" />
                   图寻会员
-                  <el-button type="warning" size="mini" round
+                  <el-button v-if="!tuxunApp" type="warning" size="mini" round
                     v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
                     @click="$vip()">续费</el-button>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="vip-not">
                   <svg-icon icon-class="vip" class-name="header-icon" />
                   普通用户
-                  <el-button type="warning" size="mini" round
+                  <el-button v-if="!tuxunApp" type="warning" size="mini" round
                     v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
                     @click="$vip()">开通会员</el-button>
                 </div>
