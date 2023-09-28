@@ -16,7 +16,9 @@
       <el-radio v-model="timeUnit" label="forever">永久</el-radio>
 
       <div style="height: 1rem">原因：</div>
+      <el-radio v-model="reason" label="每日挑战使用小号（作弊）">每日挑战使用小号（作弊）</el-radio>
       <el-radio v-model="reason" label="作弊">作弊</el-radio>
+      <el-radio v-model="reason" label="疑似小号">疑似小号</el-radio>
       <el-radio v-model="reason" label="恶意掉分">恶意掉分</el-radio>
       <el-radio v-model="reason" label="恶意举报">恶意举报</el-radio>
 
