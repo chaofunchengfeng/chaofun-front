@@ -145,7 +145,7 @@
 
     </div>
 
-   <div v-if="payImageUrl" style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 10000; display: flex;   align-items: center; background: rgba(0,0,0,0.5);">
+   <div v-if="payImageUrl" style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 30000; display: flex;   align-items: center; background: rgba(0,0,0,0.5);">
      <div style="background-color: white; margin: auto;">
        <div style="margin: 1rem; text-align: center; align-items: center">
          <img :src="imgOrigin + this.payImageUrl" style="width: 200px; height: 200px">
