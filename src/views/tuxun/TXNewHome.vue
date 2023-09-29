@@ -29,9 +29,11 @@
 
 
 <!--      <div class="normal-info">「大胆拥抱世界」</div>-->
-      <div style="height: 20px"></div>
+      <div style="height: 10px"></div>
+      <div class="info" @click="toFirstTournament">【图寻高校争霸赛】为守护学校光荣而战！</div>
+      <div style="height: 10px"></div>
       <div class="info" @click="toNewSeason">新赛季将于10月1日开始</div>
-      <div style="height: 20px"></div>
+      <div style="height: 10px"></div>
 <!--      <div class="second-info" @click="toFirstTournament">图寻联赛第一轮即将开赛！</div>-->
 <!--      <div class="info" @click="toFirstTournament">玩家第六届组队赛圆满结束~</div>-->
 <!--            <div @click="toFirstTournament" class="info"> 8月17日下午5:30 zi8gzag 做客图寻，与 jupaoqq & H.M 一起百人大派对直播 </div>-->
@@ -389,7 +391,7 @@ export default {
       tuxunOpen('https://www.yuque.com/ucun5p/tuxun');
     },
     toFirstTournament() {
-        tuxunOpen('https://choa.fun/p/1279574');
+        tuxunOpen('https://choa.fun/p/1280277');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');

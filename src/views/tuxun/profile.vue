@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <div class="nav">
-      <el-button v-if="history && history.length > 1" @click="goBack" round>←返回</el-button>
+      <el-button v-if="history && history.length > 1 || tuxunApp" @click="goBack" round>←返回</el-button>
       <el-button v-if="!tuxunApp" @click="goHome"  round>首页</el-button>
     </div>
     <div v-if="!tuxunApp" class="hidden-div"></div>
     <div class="user-section" style="text-align: center;">
       <div class="header" v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId">
-        <el-link @click="logout()" :underline="false">
+        <el-link v-if="!tuxunApp" @click="logout()" :underline="false">
           <svg-icon icon-class="logout" class-name="header-icon" />
           <span class="header-btn">退出登录</span>
         </el-link>
-        <el-link @click="changeSetting()" :underline="false">
+        <el-link v-if="!tuxunApp" @click="changeSetting()" :underline="false">
           <svg-icon icon-class="edit" class-name="header-icon" />
           <span class="header-btn">个人设置</span>
         </el-link>
@@ -37,8 +37,8 @@
                 <div class="vip">
                   <svg-icon icon-class="vip" class-name="header-icon" />
                   图寻会员
-                  <el-button v-if="!tuxunApp" type="warning" size="mini" round
-                    v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
+                  <el-button type="warning" size="mini" round
+                    v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId && !tuxunApp"
                     @click="$vip()">续费</el-button>
                 </div>
                 <div v-if="vipDue" class="duetime">过期时间：{{ vipDue }}</div>
@@ -48,7 +48,7 @@
                   <svg-icon icon-class="vip" class-name="header-icon" />
                   普通用户
                   <el-button v-if="!tuxunApp" type="warning" size="mini" round
-                    v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId"
+                    v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId && !tuxunApp"
                     @click="$vip()">开通会员</el-button>
                 </div>
               </div>
@@ -329,7 +329,14 @@ export default {
     },
     goBack() {
       try {
-        window.history.back();
+        if (history && history.length > 1) {
+          window.history.back();
+        } else {
+          window.TuxunAppJSBridge.postMessage(JSON.stringify({
+            "action": "goHome",
+            "params": {}
+          }));
+        }
       } catch (e) {
         tuxunJump('/tuxun/');
       }
