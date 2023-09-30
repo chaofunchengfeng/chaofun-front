@@ -7,7 +7,7 @@
 
       <div style="display: flex;justify-content: center; align-items: center; padding-top: 4rem">
         <img alt="" src="../chaofun-webview/assets/images/rank.png">
-        <span style="font-size: 18px; color: white">Top 100</span>
+        <span style="font-size: 18px; color: white">Top 200</span>
       </div>
       <div @click="toDoc" style=" cursor: pointer; font-weight: bolder; margin: 0 auto; width: 100%; padding-top: 1rem; text-align: center">7月1日新赛季开始，数据重置</div>
       <div style="display: flex;justify-content: space-around;position: relative;margin-top: 10px;">
