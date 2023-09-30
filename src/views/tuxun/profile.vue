@@ -47,7 +47,7 @@
                 <div class="vip-not">
                   <svg-icon icon-class="vip" class-name="header-icon" />
                   普通用户
-                  <el-button v-if="!tuxunApp" type="warning" size="mini" round
+                  <el-button type="warning" size="mini" round
                     v-if="this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId && !tuxunApp"
                     @click="$vip()">开通会员</el-button>
                 </div>
@@ -93,11 +93,10 @@
             {{ this.userProfile.gameTimes || '-' }}</td>
           <td class="rank-title" style="padding-left: 20px;">最高分：</td>
           <td class="rank-num" style="color: #D43030;">{{ this.userProfile.maxRating || '-' }}</td>
-          <td class="rank-title" style="padding-left: 20px;">最高排名：</td>
-          <td class="rank-num" style="color: #C47222;">{{ this.userProfile.maxRanking || '-' }}</td>
+          <td class="rank-title" style="padding-left: 20px;">上赛季排名：</td>
+          <td class="rank-num" style="color: #C47222;">{{ this.userProfile.lastRanking || '-' }}</td>
         </tr>
       </table>
-      <div style="margin: 0 auto; width: 100%; text-align: center;" class="rank-title">上赛季排名: <span class="rank-num" style="color: #C47222;"> {{ this.userProfile.lastRanking || '-' }}</span></div>
     </div>
     <div class="solo-section" v-if="this.userProfile">
       <div class="head">匹配Solo战绩</div>
