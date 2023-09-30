@@ -8,7 +8,7 @@
     <div class="nav">
       比赛历史
     </div>
-    <div v-if="!isSelf" style="color: white">只能查看20条他人积分比赛记录</div>
+    <div v-if="!isSelf" style="color: white">只能查看20条他人本赛季的积分比赛记录</div>
 
     <div class="list">
       <el-dropdown v-if="isSelf" @command="handleCommand" >
