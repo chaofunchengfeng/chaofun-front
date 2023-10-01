@@ -84,6 +84,12 @@
           </div>
         </div>
 
+        <div v-if="item.type === 'text'" class="text">
+          <div>
+            {{item.data}}
+          </div>
+        </div>
+
       </div>
     </div>
     <div v-if="list.length === 0" class="no_message"> 暂无消息 </div>
@@ -233,6 +239,12 @@ export default {
       font-weight: bold;
       cursor: pointer;
     }
+  }
+
+  .text {
+    color: white;
+    padding-bottom: 1rem;
+    text-align: left;
   }
 
   .no_message {

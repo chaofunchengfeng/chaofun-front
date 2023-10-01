@@ -31,8 +31,8 @@
 <!--      <div class="normal-info">「大胆拥抱世界」</div>-->
       <div style="height: 10px"></div>
       <div class="info" @click="toFirstTournament">【图寻高校争霸赛】为守护学校光荣而战！</div>
-      <div style="height: 10px"></div>
-      <div class="info" @click="toNewSeason">新赛季将于10月1日开始，今天是本赛季最后一天</div>
+<!--      <div style="height: 10px"></div>-->
+<!--      <div class="info" @click="toNewSeason">新赛季将于10月1日开始，今天是本赛季最后一天</div>-->
       <div style="height: 10px"></div>
 <!--      <div class="second-info" @click="toFirstTournament">图寻联赛第一轮即将开赛！</div>-->
 <!--      <div class="info" @click="toFirstTournament">玩家第六届组队赛圆满结束~</div>-->
