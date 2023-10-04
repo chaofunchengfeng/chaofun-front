@@ -526,7 +526,6 @@ export default {
       background-repeat: no-repeat;
       background-size: 100%;
       box-sizing: border-box;
-      box-radius: 1rem;
       flex-direction: column;
       display: flex;
       flex-direction: column;
@@ -534,6 +533,7 @@ export default {
       height: 100%;
       padding: 2rem;
       min-height: 110px;
+      transition: .1s;
       .title {
         font-size: 1.5rem;
         color: white;

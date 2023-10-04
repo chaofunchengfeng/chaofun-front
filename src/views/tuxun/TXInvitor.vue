@@ -411,6 +411,7 @@ import {tuxunJump, tuxunOpen} from './common';
 import devtools from 'devtools-detect'
 import RoundInfo from "./component/round-info";
 import ReportPano from "./component/report-pano";
+import disableDevtool from 'disable-devtool';
 
 
 
@@ -1943,6 +1944,13 @@ export default {
     },
   }
 };
+
+// 防作弊禁用控制台，网址末尾添加 ddtk=0enable-devtools1 参数解除禁用
+disableDevtool({
+  md5: 'c2bc4a27cbe5098b507412fdb1e72624',
+  url: '../nocheating',
+  disableMenu: false,
+});
 </script>
 
 <style lang="scss" scoped>
