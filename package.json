@@ -8,8 +8,7 @@
     "analyzer": "vue-cli-service build --report",
     "lint": "vue-cli-service lint --fix src"
   },
-  "pre-commit": [
-  ],
+  "pre-commit": [],
   "dependencies": {
     "@sentry/vue": "^7.49.0",
     "@toast-ui/editor": "^3.2.1",
@@ -53,7 +52,6 @@
     "showdown": "^1.9.1",
     "sortablejs": "^1.10.2",
     "three": "^0.148.0",
-    "tui-editor": "^1.4.10",
     "v-charts": "^1.19.0",
     "v-viewer": "^1.5.1",
     "vant": "^2.5.5",

@@ -8,6 +8,7 @@
     <div>5k: {{uaResult.score5000}}</div>
     <div>4990: {{uaResult.score4990}}</div>
     <div>平均分: {{uaResult.mean.toFixed(2)}}</div>
+    <div v-if="uaResult.standard">标准差: {{uaResult.standard.toFixed(2)}}</div>
     <div>方差: {{uaResult.variance.toFixed(2)}}</div>
     <div>分数分布：</div>
     <v-chart style="height: 200px; width: 100vw" :option="option"></v-chart>
