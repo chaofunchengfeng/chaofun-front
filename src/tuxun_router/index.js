@@ -407,6 +407,12 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/nocheating',
+    component: () => import('@/views/tuxun/nocheating'),
+    meta: { title: '图寻-禁止作弊'},
+    hidden: true
+  },
+  {
     path: '/settings',
     component: () => import('@/views/list/setting'),
     name: 'setting',

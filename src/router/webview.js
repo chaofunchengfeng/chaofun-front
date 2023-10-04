@@ -596,6 +596,12 @@ routes = [
     hidden: true
   },
   {
+    path: '/tuxun/nocheating',
+    component: () => import('@/views/tuxun/nocheating'),
+    meta: { title: '禁止作弊-图寻'},
+    hidden: true
+  },
+  {
     path: '/scratch/home',
     component: () => import('@/views/scratch/HomePage'),
     name: 'scratch',
