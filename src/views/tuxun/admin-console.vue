@@ -21,6 +21,8 @@
       <el-radio v-model="reason" label="疑似小号">疑似小号</el-radio>
       <el-radio v-model="reason" label="恶意掉分">恶意掉分</el-radio>
       <el-radio v-model="reason" label="恶意举报">恶意举报</el-radio>
+      <el-radio v-model="reason" label="人身攻击">人身攻击</el-radio>
+      <el-radio v-model="reason" label="昵称/头像违规">昵称/头像违规</el-radio>
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="hideBanUserShow()">取 消</el-button>
@@ -47,7 +49,7 @@ export default {
       banUid: '',
       timeUnit: 'day',
       time: null,
-      reason: '作弊'
+      reason: '每日挑战使用小号（作弊）'
 
     };
   },
