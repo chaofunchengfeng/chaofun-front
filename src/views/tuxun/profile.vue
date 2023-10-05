@@ -34,6 +34,7 @@
               <div class="nickname">{{ this.userProfile.userAO.userName }}</div>
               <div class="uid">uid: {{ this.userProfile.userAO.userId }}</div>
               <div class="desc" v-if="userProfile.userAO.desc">签名: {{userProfile.userAO.desc}}</div>
+              <div class="province" v-if="userProfile.userAO.province">地域: {{userProfile.userAO.province}}</div>
               <div v-if="isVip">
                 <div class="vip">
                   <svg-icon icon-class="vip" class-name="header-icon" />
