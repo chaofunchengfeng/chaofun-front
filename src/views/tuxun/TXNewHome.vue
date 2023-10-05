@@ -38,7 +38,7 @@
 <!--      <div class="info" @click="toFirstTournament">玩家第六届组队赛圆满结束~</div>-->
 <!--            <div @click="toFirstTournament" class="info"> 8月17日下午5:30 zi8gzag 做客图寻，与 jupaoqq & H.M 一起百人大派对直播 </div>-->
 <!--      <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>-->
-      <div class="info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">国庆中秋长假，图寻会员史低折扣~</div>
+      <div class="info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">国庆中秋长假，图寻会员史低折扣，最后一天~</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
         <div class="line"></div>
