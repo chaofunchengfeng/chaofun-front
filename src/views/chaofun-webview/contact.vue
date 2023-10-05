@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -20,7 +20,7 @@
 export default {
   name: 'Home',
   components: {
-    
+
   },
   data(){
       return {
@@ -31,7 +31,7 @@ export default {
   created(){
   },
   mounted(){
-      
+
   },
   methods:{
       showImg(){
@@ -39,7 +39,7 @@ export default {
               data: ['https://i.chao-fan.com/biz/10c40905c46e8c9c65d8d95b9fb25bdf.jpg'],
               index: 0
           });
-          
+
       },
       toAdvice(){
         try{
@@ -47,7 +47,7 @@ export default {
         }catch(e){
             this.$toast('请更新版本后尝试');
         }
-        
+
       },
       tot(v){
           if(v == 1){
@@ -90,6 +90,7 @@ export default {
             font-size: 38px;
             font-weight: bold;
             margin: 10px 0 34px;
+            display: flex;
         }
         .desc{
             color: #0E3F37;
