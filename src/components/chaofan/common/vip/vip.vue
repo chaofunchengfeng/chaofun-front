@@ -3,7 +3,6 @@
     <div class="ycovers">
       <div class="ycontainer">
         <div style="font-size: 32px">续费/开通会员</div>
-        <div style="font-size: 20px; color: #FF0037">国庆中秋长假，图寻会员史低, 买一送一</div>
         <div v-if="scene === 'due'" style="color: red">您的会员已过期，是否续费会员</div>
         <div v-if="scene === 'new'" style="color: red">新寻友，考不考虑会员呢？</div>
         <img @click="cancelVip" class="cancel" :src='cancelImg'/>
@@ -15,81 +14,81 @@
           </div>
           <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
             <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">19.98</span>
-              </div>
+<!--              <div style="font-size: 15px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">19.98</span>-->
+<!--              </div>-->
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>9.99
               </div>
               <div>
-                一个月<span style="color: #FF0037">+一个月</span>
+                一个月
               </div>
               <div style="height: 10px"></div>
             </div>
           </div>
-<!--          <div @click="changeTo('3month')" :class="{'card': choose !== '3month', 'choose-card': choose === '3month'}">-->
-<!--            <div>-->
+          <div @click="changeTo('3month')" :class="{'card': choose !== '3month', 'choose-card': choose === '3month'}">
+            <div>
 <!--              <div style="font-size: 15px;">-->
 <!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
 <!--                <span style="text-decoration: line-through">59.94</span>-->
 <!--              </div>-->
-<!--              <div style="font-size: 30px; color: #FF0037">-->
-<!--                <span style="font-size: 10px;">￥</span>26.99-->
-<!--              </div>-->
-<!--              <div>-->
-<!--                三个月<span style="color: #FF0037">+三个月</span>-->
-<!--              </div>-->
-<!--              <div style="height: 10px"></div>-->
-<!--            </div>-->
-<!--          </div>-->
+              <div style="font-size: 30px; color: #FF0037">
+                <span style="font-size: 10px;">￥</span>26.99
+              </div>
+              <div>
+                三个月
+              </div>
+              <div style="height: 10px"></div>
+            </div>
+          </div>
           <div @click="changeTo('6month')" :class="{'card': choose !== '6month', 'choose-card': choose === '6month'}">
             <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">119.88</span>
-              </div>
+<!--              <div style="font-size: 15px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">119.88</span>-->
+<!--              </div>-->
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>44.99
               </div>
               <div>
-                半年<span style="color: #FF0037">+半年</span>
+                半年
               </div>
               <div style="height: 10px"></div>
             </div>
           </div>
           <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
             <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">239.76</span>
-              </div>
+<!--              <div style="font-size: 15px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">239.76</span>-->
+<!--              </div>-->
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>69.99
               </div>
               <div>
-                一年<span style="color: #FF0037">+一年</span>
+                一年
               </div>
               <div style="height: 10px"></div>
             </div>
           </div>
 
 
-          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">
-            <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">719.28</span>
-              </div>
-              <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>119.99
-              </div>
-              <div>
-                三年<span style="color: #FF0037">+三年</span>
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
+<!--          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">-->
+<!--            <div>-->
+<!--&lt;!&ndash;              <div style="font-size: 15px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                <span style="font-size: 10px; text-decoration: none">￥</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span style="text-decoration: line-through">719.28</span>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--              <div style="font-size: 26px; color: #FF0037">-->
+<!--                <span style="font-size: 10px;">￥</span>119.99-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                三年-->
+<!--              </div>-->
+<!--              <div style="height: 10px"></div>-->
+<!--            </div>-->
+<!--          </div>-->
 
         </div>
         <div v-if="choose==='student'">
@@ -97,9 +96,6 @@
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose !== 'student'">
-          <div style="color: #FF0037">
-            限时折扣,10月6日24点结束
-          </div>
           <div>
             注：感谢探索者您的支持！
           </div>

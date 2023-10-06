@@ -31,14 +31,6 @@
 <!--      <div class="normal-info">「大胆拥抱世界」</div>-->
       <div style="height: 20px"></div>
       <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>
-<!--      <div style="height: 10px"></div>-->
-<!--      <div class="info" @click="toNewSeason">新赛季将于10月1日开始，今天是本赛季最后一天</div>-->
-      <div style="height: 20px"></div>
-<!--      <div class="second-info" @click="toFirstTournament">图寻联赛第一轮即将开赛！</div>-->
-<!--      <div class="info" @click="toFirstTournament">玩家第六届组队赛圆满结束~</div>-->
-<!--            <div @click="toFirstTournament" class="info"> 8月17日下午5:30 zi8gzag 做客图寻，与 jupaoqq & H.M 一起百人大派对直播 </div>-->
-<!--      <div @click="toDoc"  class="info "> 7月1日将开启新赛季，所有用户积分重置为1500～</div>-->
-      <div class="info" @click="raiseVIP" v-if="this.$store.state.user.userInfo.userId !== 54242">国庆中秋长假，图寻会员史低折扣，最后一天~</div>
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
         <div class="line"></div>
