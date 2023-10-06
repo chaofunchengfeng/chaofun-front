@@ -33,7 +33,7 @@
 <!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
 <!--                <span style="text-decoration: line-through">59.94</span>-->
 <!--              </div>-->
-              <div style="font-size: 30px; color: #FF0037">
+              <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>26.99
               </div>
               <div>
