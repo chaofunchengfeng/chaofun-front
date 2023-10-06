@@ -30,7 +30,7 @@
 
 <!--      <div class="normal-info">「大胆拥抱世界」</div>-->
       <div style="height: 20px"></div>
-      <div class="info" @click="toFirstTournament">【图寻高校争霸赛】为守护学校光荣而战！</div>
+      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>
 <!--      <div style="height: 10px"></div>-->
 <!--      <div class="info" @click="toNewSeason">新赛季将于10月1日开始，今天是本赛季最后一天</div>-->
       <div style="height: 20px"></div>
@@ -391,7 +391,7 @@ export default {
       tuxunOpen('https://www.yuque.com/ucun5p/tuxun');
     },
     toFirstTournament() {
-        tuxunOpen('https://choa.fun/p/1280277');
+        tuxunOpen('https://choa.fun/p/1281750');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
