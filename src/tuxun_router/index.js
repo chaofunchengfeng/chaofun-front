@@ -63,6 +63,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/social',
+    component: () => import('@/views/tuxun/party'),
+    name: '派对-图寻',
+    meta: { title: '图寻派对'},
+    hidden: true
+  },
+  {
     path: '/team',
     component: () => import('@/views/tuxun/team'),
     name: 'tuxun-team',

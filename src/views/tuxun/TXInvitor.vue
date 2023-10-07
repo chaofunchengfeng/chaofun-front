@@ -670,7 +670,7 @@ export default {
       }
     },
     backParty() {
-      tuxunJump('/tuxun/party');
+      tuxunJump('/tuxun/social');
     },
     backTeam() {
       tuxunJump('/tuxun/team');

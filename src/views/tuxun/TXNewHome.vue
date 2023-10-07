@@ -325,7 +325,7 @@ export default {
 
     toParty() {
       this.doLoginStatus().then((res) => {
-        tuxunJump('/tuxun/party');
+        tuxunJump('/tuxun/social');
       });
     },
 
