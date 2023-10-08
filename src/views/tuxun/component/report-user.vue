@@ -5,7 +5,10 @@
         <div style="font-size: 32px">举报用户</div>
         <img @click="hide" class="cancel" :src='cancelImg'/>
         <div class="reasons">
-          <el-radio class="reason"  v-model="reason" label="作弊">作弊</el-radio>
+          <el-radio class="reason"  v-model="reason" label="积分赛事作弊">积分赛事作弊</el-radio>
+          <el-radio class="reason"  v-model="reason" label="每日挑战作弊">每日挑战作弊</el-radio>
+          <el-radio class="reason"  v-model="reason" label="派对作弊">派对作弊</el-radio>
+          <el-radio class="reason"  v-model="reason" label="炸鱼">炸鱼</el-radio>
           <el-radio class="reason"  v-model="reason" label="恶意掉分">恶意掉分</el-radio>
           <el-radio class="reason"  v-model="reason" label="私信骚扰">私信骚扰</el-radio>
           <el-radio class="reason" v-model="reason" label="头像违规">头像违规</el-radio>
