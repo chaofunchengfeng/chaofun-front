@@ -14,10 +14,10 @@
           </div>
           <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
             <div>
-<!--              <div style="font-size: 15px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">19.98</span>-->
-<!--              </div>-->
+              <div style="font-size: 15px;">
+                <span style="font-size: 10px; text-decoration: none">￥</span>
+                <span style="text-decoration: line-through">15</span>
+              </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>9.99
               </div>
@@ -29,10 +29,10 @@
           </div>
           <div @click="changeTo('3month')" :class="{'card': choose !== '3month', 'choose-card': choose === '3month'}">
             <div>
-<!--              <div style="font-size: 15px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">59.94</span>-->
-<!--              </div>-->
+              <div style="font-size: 15px;">
+                <span style="font-size: 10px; text-decoration: none">￥</span>
+                <span style="text-decoration: line-through">45</span>
+              </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>26.99
               </div>
@@ -44,10 +44,10 @@
           </div>
           <div @click="changeTo('6month')" :class="{'card': choose !== '6month', 'choose-card': choose === '6month'}">
             <div>
-<!--              <div style="font-size: 15px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">119.88</span>-->
-<!--              </div>-->
+              <div style="font-size: 15px;">
+                <span style="font-size: 10px; text-decoration: none">￥</span>
+                <span style="text-decoration: line-through">90</span>
+              </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>44.99
               </div>
@@ -59,10 +59,10 @@
           </div>
           <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
             <div>
-<!--              <div style="font-size: 15px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">239.76</span>-->
-<!--              </div>-->
+              <div style="font-size: 15px;">
+                <span style="font-size: 10px; text-decoration: none">￥</span>
+                <span style="text-decoration: line-through">180</span>
+              </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>69.99
               </div>
