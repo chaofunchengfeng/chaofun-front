@@ -35,7 +35,7 @@
         <div class="first_session_head">单人</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage( 'https://new.tuxun.fun/daily-challenge')">
+          <div class="card" @click="redirectPage( '/tuxun/daily-challenge')">
             <div class="title">
               每日挑战
             </div>
@@ -85,7 +85,7 @@
             </div>
             <div class="card-top-right">可移动</div>
           </div>
-          <div class="card" @click="redirectPage( 'https://new.tuxun.fun/point')">
+          <div class="card" @click="redirectPage( '/tuxun/point')">
             <div class="title">
               积分赛
             </div>
@@ -351,7 +351,7 @@ export default {
       tuxunJump(  '/tuxun/message');
     },
     toRank() {
-      tuxunJump(  'https://new.tuxun.fun/point-rank');
+      tuxunJump(  '/tuxun/point-rank');
     },
     toNewSeason() {
       tuxunJump('https://www.yuque.com/chaofun/tuxun/season');

@@ -299,7 +299,7 @@ export default {
       tuxunJump('/tuxun/');
     },
     changeSetting() {
-      tuxunJump('https://new.tuxun.fun/user/settings');
+      tuxunJump('/tuxun/user/settings');
     },
     checkFriendFunc() {
       api.getByPath('/api/v0/tuxun/friend/check', { friend: this.userId }).then(res => {
