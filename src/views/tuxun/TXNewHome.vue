@@ -23,7 +23,7 @@
             <img style=" width: 5rem; height: 3rem" :src="imgOrigin + 'biz/1658657631523_45db8dd090dc49af99f2a8a4ace01122.svg'"/>
             <div @click="toDocument" style="cursor: pointer; padding-left: 5px; text-decoration: underline; font-size: 16px; color: white;  display: inline-block; align-self: flex-end; ">教程文档</div>
           </div>
-          <div style=" color: white; padding-top: 5px">探索真实世界，找出自己的位置</div>
+          <div style=" color: white; padding-top: 5px">探索真实世界，找到你在的位置</div>
         </div>
       </div>
 
