@@ -351,7 +351,7 @@ export default {
       tuxunJump(  '/tuxun/message');
     },
     toRank() {
-      tuxunJump(  '/tuxun/rank');
+      tuxunJump(  'https://new.tuxun.fun/point-rank');
     },
     toNewSeason() {
       tuxunJump('https://www.yuque.com/chaofun/tuxun/season');
