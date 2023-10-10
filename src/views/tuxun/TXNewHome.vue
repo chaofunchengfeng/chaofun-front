@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="{'background-image':'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)),url('+imgOrigin+ this.backgroundImage +')','background-size':'cover','background-position': 'center'}">
+  <div class="container" :style="{'background-image':'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.3)),url('+imgOrigin+ this.backgroundImage +')','background-size':'cover','background-position': 'center'}">
     <div class="game">
 
       <div class="top-right">
@@ -268,7 +268,7 @@ export default {
     return {
       times: null,
       message: 0,
-      backgroundImage: 'front/IMG_2890.JPG?x-oss-process=image/quality,q_50'
+      backgroundImage: 'front/farfar-peK8iXqGMzQ-unsplash.jpg?x-oss-process=image/quality,q_50'
     };
   },
   created() {
