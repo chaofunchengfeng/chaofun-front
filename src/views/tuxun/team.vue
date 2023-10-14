@@ -7,7 +7,7 @@
         <el-button v-else @click="leave" round> 离开队伍 </el-button>
       </div>
 
-      <div class="nav">组队匹配</div>
+      <div class="nav">匹配</div>
       <div class="disband">
         <el-button class="button" type="primary" @click="copyInviterLink" round>分享邀请</el-button>
         <div style="height: 10px"></div>
