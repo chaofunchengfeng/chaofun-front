@@ -21,6 +21,7 @@
 
         <div v-if="matchTeamData.status !== 'ongoing'">
 
+          <div>提示：可以单人也可以多人的匹配，会根据隐藏分匹配对手</div>
           <div style="padding-top: 2rem">
             <div v-if="matchTeamData.status === 'wait_join'">
               <el-button  @click="startMatch" type="primary" size="small">开始匹配</el-button>

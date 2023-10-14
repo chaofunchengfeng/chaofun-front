@@ -100,10 +100,10 @@
         <div class="grid_main">
           <div class="card" @click="redirectPage( '/tuxun/team')">
             <div class="title">
-              组队匹配
+              匹配
             </div>
             <div class="describe">
-              和朋友合作战胜对手
+              一个人或者和朋友合作挑战对手
             </div>
           </div>
           <div class="card" @click="redirectPage( '/tuxun/guoqing')">
