@@ -13,7 +13,7 @@
             <div>
               {{item.name}}
               <div>
-                <span style="font-size: 6px;bottom: 0px; color: grey">(<span v-if="item.pcount">地点: {{item.pcount}} | </span>人次: {{item.players}} <span v-if="item.canMove"> | 可移动 </span>)</span>
+                <span style="font-size: 12px;bottom: 0px; color: grey">(<span v-if="item.pcount">地点: {{item.pcount}} | </span>人次: {{item.players}} <span v-if="item.canMove"> | 可移动 </span>)</span>
               </div>
             </div>
           </div>
