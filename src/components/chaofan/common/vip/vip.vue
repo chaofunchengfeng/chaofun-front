@@ -170,7 +170,7 @@ import * as api from '@/api/api';
        cancelImg: require('@/assets/images/icon/cancel1.png'),
        show: false,
        pay: false,
-       choose: 'month',
+       choose: 'year',
        orderId: null,
        totalTryTimes: null,
        payImageUrl: null,
