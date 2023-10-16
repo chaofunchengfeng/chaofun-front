@@ -250,7 +250,7 @@ import * as api from '@/api/api';
 <style type='text/scss' lang='scss' scoped>
   .ycovers{
   position: fixed;
-  z-index: 20012;
+  z-index: 2100;
   top: 0;
   left: 0;
   right: 0;
