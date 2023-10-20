@@ -355,7 +355,7 @@ export default {
       tuxunJump('/tuxun/activities?userId=' + this.userId);
     },
     toAnalysis() {
-      tuxunJump('/tuxun/user-analysis');
+      tuxunJump('/tuxun/user/analysis');
     },
     openReportUserDialog() {
       this.showReport = true;
