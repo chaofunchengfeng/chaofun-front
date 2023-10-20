@@ -330,16 +330,16 @@ export default {
     },
     goBack() {
       try {
+        window.TuxunAppJSBridge.postMessage(JSON.stringify({
+          "action": "goHome",
+          "params": {}
+        }));
+      } catch (e) {
         if (history && history.length > 1) {
           window.history.back();
         } else {
-          window.TuxunAppJSBridge.postMessage(JSON.stringify({
-            "action": "goHome",
-            "params": {}
-          }));
+          tuxunJump('/tuxun/');
         }
-      } catch (e) {
-        tuxunJump('/tuxun/');
       }
     },
     applyFriend() {
