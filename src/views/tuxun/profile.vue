@@ -11,7 +11,7 @@
           <svg-icon icon-class="logout" class-name="header-icon" />
           <span class="header-btn">退出登录</span>
         </el-link>
-        <el-link v-if="!tuxunApp" @click="changeSetting()" :underline="false">
+        <el-link @click="changeSetting()" :underline="false">
           <svg-icon icon-class="edit" class-name="header-icon" />
           <span class="header-btn">个人设置</span>
         </el-link>
