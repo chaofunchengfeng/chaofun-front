@@ -243,7 +243,7 @@
               特别鸣谢：猫，南山大王cf，网络迷踪版主，GeoGuessr，百度街景，Google街景，MapBox
             </p>
             <p>
-              QQ群：<a target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=BZJNFLZJPZvqrpEYxVMcgH-bUebSrNhD&authKey=sdZNHcR2DYLhy7fUjXZ2T6Cshi%2B86EWKFFnCI5ZsLu9%2BtRj3qNmU1bKUI4IT9lzP&noverify=0&group_code=943507031">943507031</a>
+              QQ群：<a target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=YRq8jU3MFd-ylHCFC0lcJX9npaG0FRmi&authKey=W3wNh8n8zybypY08JK4g4YCcA0o3GdiwKXFqYCff4Ejan%2BKymBCWUSwjplXsZJva&noverify=0&group_code=943507031">943507031</a>
             </p>
             <p>
               微信公众号：炒饭社区 | 开发者微博：<a target="_blank" href="https://weibo.com/u/3050203537">@此间ZY</a>
