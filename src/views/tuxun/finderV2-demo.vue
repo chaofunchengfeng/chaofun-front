@@ -177,7 +177,7 @@ export default {
       tuxunJump('/tuxun/')
     },
     goFinder() {
-      tuxunJump('/tuxun/finder')
+      tuxunJump('/tuxun/event')
     },
     goBack() {
       try {

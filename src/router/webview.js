@@ -300,21 +300,21 @@ routes = [
     path: '/tuxun/finder',
     component: () => import('@/views/tuxun/finderV2'),
     name: 'tuxun-finder',
-    meta: { title: '炒饭寻景-图寻'},
+    meta: { title: '寻景-图寻'},
     hidden: true
   },
   {
     path: '/tuxun/finderV2',
     component: () => import('@/views/tuxun/finderV2'),
     name: 'tuxun-finderV2',
-    meta: { title: '炒饭寻景-图寻'},
+    meta: { title: '寻景-图寻'},
     hidden: true
   },
   // {
   //   path: '/tuxun/finderV2-demo',
   //   component: () => import('@/views/tuxun/finderV2-demo'),
   //   name: 'tuxun-finderV2-demo',
-  //   meta: { title: '炒饭寻景-图寻'},
+  //   meta: { title: '寻景-图寻'},
   //   hidden: true
   // },
   {
