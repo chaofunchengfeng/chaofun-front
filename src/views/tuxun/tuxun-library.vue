@@ -11,7 +11,7 @@
 <!--      </div>-->
       <div @click="goXJ" class="card">
           <div class="title">寻景</div>
-          <div class="describe">地图标点分享图片，在线旅游</div>
+          <div class="describe">地图标点分享图片，远方，并不远</div>
       </div>
 <!--      <div @click="goPano" class="card">-->
 <!--        <div class="title">炒饭宇宙</div>-->
