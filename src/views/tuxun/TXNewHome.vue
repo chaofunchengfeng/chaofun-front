@@ -30,7 +30,10 @@
 
 <!--      <div class="normal-info">「大胆拥抱世界」</div>-->
       <div style="height: 20px"></div>
+
       <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>
+      <div class="second-info" @click="toSecond">【图寻联赛第二赛季】全新赛制再出发！</div>
+
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
         <div class="line"></div>
@@ -389,7 +392,10 @@ export default {
       tuxunOpen('https://www.yuque.com/ucun5p/tuxun');
     },
     toFirstTournament() {
-        tuxunOpen('https://choa.fun/p/1281750');
+      tuxunOpen('https://choa.fun/p/1281750');
+    },
+    toSecond() {
+      tuxunOpen('https://choa.fun/p/1283808');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
@@ -460,15 +466,14 @@ export default {
       cursor: pointer;
       color: white;
       font-size: medium;
-      padding-top: 0rem;
       text-decoration:underline;
     }
     .second-info {
-      //cursor: pointer;
+      cursor: pointer;
       color: white;
       font-size: medium;
-      padding-top: 5px;
-      //text-decoration:underline;
+      padding-top: 1rem;
+      text-decoration:underline;
     }
     .normal-info {
       color: white;
