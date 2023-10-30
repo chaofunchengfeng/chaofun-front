@@ -101,7 +101,7 @@
               中国匹配
             </div>
             <div class="describe">
-              千里江山图
+              江山如此多娇
             </div>
             <div class="card-top-right-beta">Beta</div>
           </div>
