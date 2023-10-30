@@ -96,7 +96,7 @@
               多人混战排序，获取积分
             </div>
           </div>
-          <div class="card" @click="redirectPage( '/tuxun/china-match')">
+          <div class="card" @click="toChinaMatch">
             <div class="title">
               中国匹配
             </div>
@@ -354,6 +354,10 @@ export default {
       console.log(path);
       tuxunJump(path);
       // window.location.href = path
+    },
+
+    toChinaMatch() {
+      location.href = 'https://tuxun.fun/china-match';
     },
 
     soloMatch() {
