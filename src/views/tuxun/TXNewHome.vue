@@ -154,7 +154,7 @@
               寻景
             </div>
             <div class="describe">
-              寻友自己的地图
+              寻友地图
             </div>
           </div>
 
