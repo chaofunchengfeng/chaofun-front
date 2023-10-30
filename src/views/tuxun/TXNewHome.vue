@@ -96,6 +96,15 @@
               多人混战排序，获取积分
             </div>
           </div>
+          <div class="card" @click="redirectPage( '/tuxun/china-match')">
+            <div class="title">
+              中国匹配
+            </div>
+            <div class="describe">
+              千里江山图
+            </div>
+            <div class="card-top-right-beta">Beta</div>
+          </div>
         </div>
 
         <div class="first_session_head">娱乐</div>
@@ -140,12 +149,12 @@
         <div class="first_session_head">探索</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage('/tuxun/library')">
+          <div class="card" @click="redirectPage('/tuxun/event')">
             <div class="title">
-              实验室
+              寻景
             </div>
             <div class="describe">
-              新的模式和功能
+              寻友自己的生活地图
             </div>
           </div>
 
@@ -559,6 +568,18 @@ export default {
         padding-left: 5px;
         padding-right: 5px;
         background-color: #3590FF;
+      }
+
+      .card-top-right-beta {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: sandybrown;
       }
       &:hover {
         transform: scale(1.03);
