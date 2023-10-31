@@ -53,7 +53,7 @@ export default {
             streetViewControl:true,
           }
       );
-      this.panorama.registerPanoProvider(this.getCustomPanorama);
+      this.panorama.registerPanoProvider(this.getCustomPanorama, {cors: true,}, );
       this.getId();
 
     },

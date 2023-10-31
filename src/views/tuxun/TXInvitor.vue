@@ -1814,13 +1814,13 @@ export default {
       console.log(round)
       if (round.source === 'baidu_pano') {
         if (!this.registerPanoProvider) {
-          this.viewer.registerPanoProvider(this.getCustomPanorama);
+          this.viewer.registerPanoProvider(this.getCustomPanorama,  {cors: true,}, );
           this.registerPanoProvider = true;
         }
         this.getBaiduPanoInfo(round.panoId, true, round);
       } else if (round.source === 'tuxun_pano') {
         if (!this.registerPanoProvider) {
-          this.viewer.registerPanoProvider(this.getCustomPanorama);
+          this.viewer.registerPanoProvider(this.getCustomPanorama,  {cors: true,}, );
           this.registerPanoProvider = true;
         }
         this.getTuxunPanoInfo(round.panoId, true, round);

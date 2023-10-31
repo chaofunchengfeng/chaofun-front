@@ -201,7 +201,7 @@ export default {
                 },
               }
           );
-          this.viewer.registerPanoProvider(this.getCustomPanorama);
+          this.viewer.registerPanoProvider(this.getCustomPanorama, {cors: true,});
 
           this.viewer.addListener('pano_changed', () => {
             console.log('pano_changed');
