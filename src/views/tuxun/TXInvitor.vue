@@ -1579,7 +1579,7 @@ export default {
         }
       } else {
         if (this.gameData.china) {
-          location.href = 'https://tuxun.fun/china-match?from=move'
+          location.href = 'https://tuxun.fun/china-match?from=noMove'
         } else {
           tuxunJump('/tuxun/match?from=noMove');
         }
