@@ -1567,9 +1567,17 @@ export default {
 
     goTuxun() {
       if (this.gameData.move) {
-        tuxunJump('/tuxun/match?from=move');
+        if (this.gameData.china) {
+          location.href = 'https://tuxun.fun/china-match?from=move'
+        } else {
+          tuxunJump('/tuxun/match?from=move');
+        }
       } else {
-        tuxunJump('/tuxun/match?from=noMove');
+        if (this.gameData.china) {
+          location.href = 'https://tuxun.fun/china-match?from=move'
+        } else {
+          tuxunJump('/tuxun/match?from=noMove');
+        }
       }
 
     },
