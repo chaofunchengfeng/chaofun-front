@@ -26,7 +26,8 @@
             <div class="user" v-for="(item, index) in gameData.teams[0].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}}</div>
-              <div>积分: {{item.rating}}</div>
+              <div v-if="!gameData.china">全球积分: {{item.rating}}</div>
+              <div v-if="gameData.china && item.chinaRating">世界积分: {{item.rating}}</div>
             </div>
           </div>
         </div>
@@ -38,7 +39,8 @@
             <div class="user" v-for="(item, index) in gameData.teams[1].users" :key="index">
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}}</div>
-              <div>积分: {{item.rating}}</div>
+              <div v-if="!gameData.china">全球积分: {{item.rating}}</div>
+              <div v-if="gameData.china && item.chinaRating">中国积分: {{item.rating}}</div>
             </div>
           </div>
         </div>
