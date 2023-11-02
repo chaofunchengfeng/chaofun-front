@@ -16,7 +16,7 @@
             <div>
               <div style="font-size: 15px;">
                 <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">180</span>
+                <span style="text-decoration: line-through">240</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>69.99
@@ -31,7 +31,7 @@
             <div>
               <div style="font-size: 15px;">
                 <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">90</span>
+                <span style="text-decoration: line-through">120</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>44.99
@@ -46,7 +46,7 @@
             <div>
               <div style="font-size: 15px;">
                 <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">45</span>
+                <span style="text-decoration: line-through">60</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>26.99
@@ -61,7 +61,7 @@
             <div>
               <div style="font-size: 15px;">
                 <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">15</span>
+                <span style="text-decoration: line-through">20</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
                 <span style="font-size: 10px;">￥</span>9.99
@@ -72,29 +72,15 @@
               <div style="height: 10px"></div>
             </div>
           </div>
-
-<!--          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">-->
-<!--            <div>-->
-<!--&lt;!&ndash;              <div style="font-size: 15px;">&ndash;&gt;-->
-<!--&lt;!&ndash;                <span style="font-size: 10px; text-decoration: none">￥</span>&ndash;&gt;-->
-<!--&lt;!&ndash;                <span style="text-decoration: line-through">719.28</span>&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--              <div style="font-size: 26px; color: #FF0037">-->
-<!--                <span style="font-size: 10px;">￥</span>119.99-->
-<!--              </div>-->
-<!--              <div>-->
-<!--                三年-->
-<!--              </div>-->
-<!--              <div style="height: 10px"></div>-->
-<!--            </div>-->
-<!--          </div>-->
-
         </div>
         <div v-if="choose==='student'">
           <div>注：5分钟免费会员，可循环试用，建议学生使用</div>
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose !== 'student'">
+          <div style="color: #FF0037">
+            限时优惠
+          </div>
           <div>
             注：感谢探索者您的支持！
           </div>
