@@ -118,15 +118,15 @@
               一个人或者和朋友合作挑战对手
             </div>
           </div>
-          <div class="card" @click="redirectPage( '/tuxun/guoqing')">
-            <div class="title">
-              淘汰赛
-            </div>
-            <div class="describe">
-              满3人发车
-            </div>
-            <div class="card-top-right">可移动</div>
-          </div>
+<!--          <div class="card" @click="redirectPage( '/tuxun/guoqing')">-->
+<!--            <div class="title">-->
+<!--              淘汰赛-->
+<!--            </div>-->
+<!--            <div class="describe">-->
+<!--              满3人发车-->
+<!--            </div>-->
+<!--            <div class="card-top-right">可移动</div>-->
+<!--          </div>-->
           <div class="card" @click="toParty" >
             <div class="title">
               派对
