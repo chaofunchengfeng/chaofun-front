@@ -189,7 +189,7 @@
         </div>
       </div>
     </div>
-    <fixedBottom></fixedBottom>
+<!--    <fixedBottom></fixedBottom>-->
   </div>
 </template>
 

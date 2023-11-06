@@ -79,7 +79,7 @@
     >
       <i class="el-icon-refresh"></i>
     </div>
-    <fixedBottom></fixedBottom>
+<!--    <fixedBottom></fixedBottom>-->
   </div>
 </template>
 
