@@ -213,7 +213,7 @@ export default {
     },
     preloadImage(pano) {
       var img = new Image();
-      img.src = 'https://map.chao-fan.com/bd/thumb/' + pano;
+      img.src = 'https://map2.chao-fan.com/bd/thumb/' + pano;
     },
 
     setViewer(round, panoId) {
