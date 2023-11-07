@@ -46,7 +46,6 @@ jobs:
       #   run: |
       #     /usr/bin/ossutil cp -r -f ./dist oss://chaofun-resource -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-hangzhou.aliyuncs.com
 
-
       # - name: Sync html to OSS
       #   env:
       #     ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
