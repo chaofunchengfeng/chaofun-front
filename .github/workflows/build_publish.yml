@@ -44,7 +44,7 @@ jobs:
           ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
           ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
         run: |
-          /usr/bin/ossutil cp -r ./dist oss://chaofun-resource -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-hangzhou.aliyuncs.com
+          /usr/bin/ossutil cp -r -f ./dist oss://chaofun-resource -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-hangzhou.aliyuncs.com
 
 
       # - name: Sync html to OSS
@@ -53,3 +53,12 @@ jobs:
       #     ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
       #   run: |
       #     /usr/bin/ossutil cp -r ./dist/index.html oss://tuxun-front -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-shanghai.aliyuncs.com
+
+      - name: tansfer and release
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: root
+          server: ${{ secrets.SERVER_IP }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+          local_path: './dist/*.html'
+          remote_path: '/root/front/' 
