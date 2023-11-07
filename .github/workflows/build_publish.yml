@@ -32,19 +32,20 @@ jobs:
         run: |
           sudo -v ; curl https://gosspublic.alicdn.com/ossutil/install.sh | sudo bash
 
-      # - name: Delete existing files in OSS
-      #   env:
-      #     ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
-      #     ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
-      #   run: |
-      #     /usr/bin/ossutil rm -rf oss://tuxun-front -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-shanghai.aliyuncs.com
-
       # - name: Sync asstes to OSS
       #   env:
       #     ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
       #     ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
       #   run: |
-      #     /usr/bin/ossutil cp -r ./dist oss://tuxun-front --exclude index.html -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-shanghai.aliyuncs.com
+      #     /usr/bin/ossutil cp -r ./dist oss://tuxun-front --exclude index.html -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-hangzhou.aliyuncs.com
+
+      - name: Sync asstes to OSS
+        env:
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+        run: |
+          /usr/bin/ossutil cp -r ./dist oss://chaofun-resource -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-hangzhou.aliyuncs.com
+
 
       # - name: Sync html to OSS
       #   env:
