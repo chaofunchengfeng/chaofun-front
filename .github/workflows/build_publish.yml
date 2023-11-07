@@ -48,3 +48,4 @@ jobs:
           port: 22
           source: "./dist/*.html"
           target: "/root/front/"
+          strip_components: 1
