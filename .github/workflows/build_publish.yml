@@ -46,6 +46,6 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: "./dist/*.html"
+          source: "dist/*.html"
           target: "/root/front/"
           strip_components: 1
