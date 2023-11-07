@@ -1,0 +1,54 @@
+name: Publish to prod environment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
+
+      - name: Install ossutil
+        run: |
+          sudo -v ; curl https://gosspublic.alicdn.com/ossutil/install.sh | sudo bash
+
+      # - name: Delete existing files in OSS
+      #   env:
+      #     ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+      #     ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+      #   run: |
+      #     /usr/bin/ossutil rm -rf oss://tuxun-front -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-shanghai.aliyuncs.com
+
+      # - name: Sync asstes to OSS
+      #   env:
+      #     ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+      #     ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+      #   run: |
+      #     /usr/bin/ossutil cp -r ./dist oss://tuxun-front --exclude index.html -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-shanghai.aliyuncs.com
+
+      # - name: Sync html to OSS
+      #   env:
+      #     ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+      #     ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+      #   run: |
+      #     /usr/bin/ossutil cp -r ./dist/index.html oss://tuxun-front -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -e oss-cn-shanghai.aliyuncs.com
