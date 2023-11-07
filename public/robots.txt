@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
-Sitemap: https://chao.fan/sitemap_index.xml
-Sitemap: https://chao.fan/chao_fun_sitemap.xml
+Sitemap: https://choa.fun/sitemap_index.xml
+Sitemap: https://choa.fun/chao_fun_sitemap.xml

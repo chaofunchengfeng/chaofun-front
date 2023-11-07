@@ -161,13 +161,13 @@ import * as api from '../../api/api';
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
         if(!this.isWeiXin()){
             // if(this.value=='666666'){
-            //     location.href = 'https://chao.fan/chaofan_test.apk'
+            //     location.href = 'https://choa.fun/chaofan_test.apk'
             // }else{
             //     this.$toast('口令错误');
             // }
 
             // if(isAndroid){
-            //     location.href = 'https://chao.fan/chaofan.apk'
+            //     location.href = 'https://choa.fun/chaofan.apk'
             //     // location.href = `opentest://host`;
             // }else{
             //     location.href = 'https://apps.apple.com/cn/app/%E7%82%92%E9%A5%AD%E8%B6%85fun/id1526950194'

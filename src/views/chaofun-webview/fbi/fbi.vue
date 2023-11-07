@@ -34,7 +34,7 @@
 <!--      <p>  - 图寻邀请新用户Solo, 奖励 100 FBi, 新用户奖励 50 FBi</p>-->
 <!--      <div>-->
 <!--        <p>-->
-<!--          - 邀请用户注册炒饭，其他用户注册成功后，奖励 100 FBi, 邀请链接： https://chao.fan/app?inviter={{this.userInfo.userId}}-->
+<!--          - 邀请用户注册炒饭，其他用户注册成功后，奖励 100 FBi, 邀请链接： https://choa.fun/app?inviter={{this.userInfo.userId}}-->
 <!--        </p>-->
 <!--        <el-button @click="this.copyInviterLink">点击复制链接</el-button>-->
 <!--      </div>-->
@@ -225,7 +225,7 @@ export default {
     },
     copyInviterLink() {
       var input = document.createElement('input');
-      input.setAttribute('value', 'https://chao.fan/app?inviter=' + this.userInfo.userId);
+      input.setAttribute('value', 'https://choa.fun/app?inviter=' + this.userInfo.userId);
       document.body.appendChild(input);
       input.select();
       var result = document.execCommand('copy');
@@ -266,7 +266,7 @@ export default {
     orderCup(type) {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/fbi/order?type=' + type,
+          url: 'https://choa.fun/webview/fbi/order?type=' + type,
           title: '下单',
           showHeader: true
         });

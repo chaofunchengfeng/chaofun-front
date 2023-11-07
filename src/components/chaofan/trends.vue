@@ -387,7 +387,7 @@ import forwardH5 from '../h5/forward';
         });
        }else{
         let picurl = 'https://oss.meibbc.com/gw/img/3380CC9482F74FA89C118FB99F4CE5E7.jpg';
-        let url = 'https://chao.fan/p/' + (data.item.postInfo.sourcePostId || data.item.postInfo.postId);
+        let url = 'https://choa.fun/p/' + (data.item.postInfo.sourcePostId || data.item.postInfo.postId);
         var sharesinastring = 'http://service.weibo.com/share/share.php?title=' + data.item.postInfo.title + '&url=' + url + '（分享来自@炒饭社区）'  + '&content=utf-8&sourceUrl=' + url + '&ralateUid=炒饭社区';
         // window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100');
         window.open(sharesinastring,'_blank');

@@ -893,7 +893,7 @@ queryChildren (parent, list) {
       if(this.forumInfo && this.forumInfo.id){
         this.centerDialogVisible = false;
       }else{
-        location.href = 'https://chao.fan';
+        location.href = 'https://choa.fun';
       }
     },
     close(e){

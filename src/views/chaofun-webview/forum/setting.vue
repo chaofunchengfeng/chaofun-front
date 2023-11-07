@@ -218,7 +218,7 @@ export default {
     toAutoReplaySetting() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/auto_replay' + '?forumId=' + this.forumId,
+          url: 'https://choa.fun/webview/forum/auto_replay' + '?forumId=' + this.forumId,
           title: '自动回复管理',
           showHeader: true
         });
@@ -229,7 +229,7 @@ export default {
     toBan() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/ban_manager' + '?forumId=' + this.forumId,
+          url: 'https://choa.fun/webview/forum/ban_manager' + '?forumId=' + this.forumId,
           title: '用户封禁',
           showHeader: true
         });
@@ -241,7 +241,7 @@ export default {
     toSensitiveWord() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/sensitive_word_manager' + '?forumId=' + this.forumId,
+          url: 'https://choa.fun/webview/forum/sensitive_word_manager' + '?forumId=' + this.forumId,
           title: '敏感词',
           showHeader: true
         });
@@ -253,7 +253,7 @@ export default {
     toManagerBadge() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/badge' + '?forumId=' + this.forumId,
+          url: 'https://choa.fun/webview/forum/badge' + '?forumId=' + this.forumId,
           title: '徽章管理',
           showHeader: true
         });
@@ -265,7 +265,7 @@ export default {
     toTableManager() {
       try {
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/forum/table_manager' + '?forumId=' + this.forumId,
+          url: 'https://choa.fun/webview/forum/table_manager' + '?forumId=' + this.forumId,
           title: '表格管理',
           showHeader: true
         });

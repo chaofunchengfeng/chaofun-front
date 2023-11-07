@@ -14,7 +14,7 @@
       if (this.redirectUrl) {
         this.getUserToken();
       } else {
-        window.location.href = 'https://chao.fan';
+        window.location.href = 'https://choa.fun';
       }
     },
     mounted() {

@@ -1,8 +1,8 @@
 # 前言
-欢迎各位大佬参与 [炒饭](https://chao.fan) Web开源项目，本项目由 Vue 实现，开源协议为 [CPAL 1.0](https://opensource.org/licenses/CPAL-1.0)
+欢迎各位大佬参与 [炒饭](https://choa.fun) Web开源项目，本项目由 Vue 实现，开源协议为 [CPAL 1.0](https://opensource.org/licenses/CPAL-1.0)
 
 # 关于炒饭
-[炒饭](https://chao.fan) 是一个鼓励优质内容的兴趣社区，Slogan是「世界那么大」，愿景是做中国最好的内容社区。
+[炒饭](https://choa.fun) 是一个鼓励优质内容的兴趣社区，Slogan是「世界那么大」，愿景是做中国最好的内容社区。
 
 # 如何参与
 
@@ -41,10 +41,10 @@ npm run dev
 ```
 
 ## 接口
-[后端接口文档](https://chao.fan/swagger-ui/index.html)
+[后端接口文档](https://choa.fun/swagger-ui/index.html)
 
 如有其他疑问，也可添加微信 cijianzy 咨询
 
 # 贡献鸣谢
-请移步 [炒饭鸣谢](https://chao.fan/webview/thx) 
+请移步 [炒饭鸣谢](https://choa.fun/webview/thx) 
 

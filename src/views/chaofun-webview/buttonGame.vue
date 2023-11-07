@@ -247,7 +247,7 @@ export default {
       try {
         // window.flutter_inappwebview.callHandler('toAppIndex', {})
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/all',
+          url: 'https://choa.fun/all',
           title: '炒饭网页首页',
           showHeader: true
         });
@@ -272,7 +272,7 @@ export default {
       try {
         // window.flutter_inappwebview.callHandler('toAppIndex', {})
         window.flutter_inappwebview.callHandler('toViewPage', {
-          url: 'https://chao.fan/webview/fbi',
+          url: 'https://choa.fun/webview/fbi',
           title: '饭币 (FBi)',
           showHeader: true
         });

@@ -15,7 +15,7 @@
           </div>
           <div style="margin:10px 0px;display: flex; align-items: center">
             <div style="align-content: center">链接：</div>
-            <el-input type="textarea" placeholder="链接,一般为 https://chao.fan/ 开头，一般是活动具体的帖子链接"
+            <el-input type="textarea" placeholder="链接,一般为 https://choa.fun/ 开头，一般是活动具体的帖子链接"
                       v-model="addNotifyLink"></el-input>
           </div>
           <div style="margin:10px 0px;display: flex; align-items: center">

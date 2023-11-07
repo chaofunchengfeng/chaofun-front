@@ -739,7 +739,7 @@ export default {
         let picurl =
           'https://oss.meibbc.com/gw/img/3380CC9482F74FA89C118FB99F4CE5E7.jpg';
         let url =
-          'https://chao.fan/p/' + (data.item.sourcePostId || data.item.postId);
+          'https://choa.fun/p/' + (data.item.sourcePostId || data.item.postId);
         var sharesinastring =
           'http://service.weibo.com/share/share.php?title=' +
           data.item.title +

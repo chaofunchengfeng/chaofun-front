@@ -539,7 +539,7 @@ return;
     },
 
     copyCommentLink(item) {
-      const url = 'https://chao.fan/p/' + item.postId + '?commentId=' + item.id;
+      const url = 'https://choa.fun/p/' + item.postId + '?commentId=' + item.id;
       this.copy2Clipboard(url);
       this.$toast('复制链接成功！');
     },

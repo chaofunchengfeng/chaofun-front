@@ -187,7 +187,7 @@ export default {
       window.open(routeData.href + '?commentId=' + commentId, '_blank');
     },
     pastePasswordAndUrl(password) {
-      let str = '红包口令：' + password + '    ' + '红包链接：https://chao.fan/webview/fbi/redPacket?password=' + password;
+      let str = '红包口令：' + password + '    ' + '红包链接：https://choa.fun/webview/fbi/redPacket?password=' + password;
       this.copy(str);
     },
 

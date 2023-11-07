@@ -114,7 +114,7 @@ export default {
       this.copy(this.password);
     },
     pastePasswordAndUrl() {
-      let str = '炒饭红包口令：' + this.password + '    ' + '红包链接：https://chao.fan/webview/fbi/redPacket?password=' + this.password;
+      let str = '炒饭红包口令：' + this.password + '    ' + '红包链接：https://choa.fun/webview/fbi/redPacket?password=' + this.password;
       this.copy(str);
     },
 
