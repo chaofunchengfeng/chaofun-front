@@ -57,21 +57,21 @@
               <div style="height: 10px"></div>
             </div>
           </div>
-          <div @click="changeTo('3month')" :class="{'card': choose !== '3month', 'choose-card': choose === '3month'}">
-            <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">60</span>
-              </div>
-              <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>26.99
-              </div>
-              <div>
-                三个月
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
+<!--          <div @click="changeTo('3month')" :class="{'card': choose !== '3month', 'choose-card': choose === '3month'}">-->
+<!--            <div>-->
+<!--              <div style="font-size: 15px;">-->
+<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
+<!--                <span style="text-decoration: line-through">60</span>-->
+<!--              </div>-->
+<!--              <div style="font-size: 26px; color: #FF0037">-->
+<!--                <span style="font-size: 10px;">￥</span>26.99-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                三个月-->
+<!--              </div>-->
+<!--              <div style="height: 10px"></div>-->
+<!--            </div>-->
+<!--          </div>-->
           <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
             <div>
               <div style="font-size: 15px;">
