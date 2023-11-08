@@ -22,22 +22,7 @@
                 <span style="font-size: 10px;">￥</span>119.99
               </div>
               <div>
-                一年
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
-          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">
-            <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">240</span>
-              </div>
-              <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>69.99
-              </div>
-              <div>
-                一年
+                三年
               </div>
               <div style="height: 10px"></div>
             </div>
