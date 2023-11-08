@@ -38,7 +38,7 @@ export default {
   created() {
     document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
     this.tuxunPid = this.$route.query.id;
-    loadScript('https://i.chao-fan.com/st_v2/js_test_v5.js').then(() => {
+    loadScript('https://i.chao-fan.com/st_v2/js_test_v7.js').then(() => {
       this.init();
     });
   },

@@ -67,7 +67,7 @@ export default {
 
       });
 
-      loadScript('https://i.chao-fan.com/st_v2/js_test_v5.js').then(() => {
+      loadScript('https://i.chao-fan.com/st_v2/js_test_v7.js').then(() => {
         this.viewer = new google.maps.StreetViewPanorama(
             document.getElementById('viewer'), {
               fullscreenControl: false,
