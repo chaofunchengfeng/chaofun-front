@@ -1,65 +1,92 @@
 <template>
   <div>
-    <div v-for="(item,index) in treeData" :key="index" :id="'commentItem_'+item.id" class="comment_item">
+    <div v-for="(item,index) in treeData" :id="'commentItem_'+item.id" :key="index" class="comment_item">
       <div :class="['c_left',{'c_left2':ISPHONE}]">
         <div class="lay">
-          <img v-if="item.vote != 1" @click.stop="doZanComment(1, item)" src="../../assets/images/icon/up.png" alt="" />
-          <img v-if="item.vote == 1" @click.stop="doZanComment(1, item)" src="../../assets/images/icon/up_active.png" alt="" />
+          <img v-if="item.vote != 1" alt="" src="../../assets/images/icon/up.png" @click.stop="doZanComment(1, item)" />
+          <img v-if="item.vote == 1" alt="" src="../../assets/images/icon/up_active.png"
+               @click.stop="doZanComment(1, item)" />
         </div>
         <div class="lay">
           <p>{{ item.ups - item.downs }}</p>
         </div>
         <div class="lay">
-          <img v-if="item.vote != -1" @click.stop="doZanComment(2, item)" src="../../assets/images/icon/down.png" alt="" />
-          <img v-if="item.vote == -1" @click.stop="doZanComment(2, item)" src="../../assets/images/icon/down_active.png" alt="" />
+          <img v-if="item.vote != -1" alt="" src="../../assets/images/icon/down.png"
+               @click.stop="doZanComment(2, item)" />
+          <img v-if="item.vote == -1" alt="" src="../../assets/images/icon/down_active.png"
+               @click.stop="doZanComment(2, item)" />
         </div>
       </div>
       <div class="c_content">
         <div :class="getCommentUserinfoClazz(item)">
-          <img style="object-fit: cover;" :src="imgOrigin+item.userInfo.icon+'?x-oss-process=image/resize,h_40/quality,q_75'" alt="">
-          <span  @click.stop="toUser(item.userInfo)" class="username">{{item.userInfo.userName}}</span>
-          <span v-if="item.userInfo.userTag" title="用户在版块的标签" class="tag">{{item.userInfo.userTag.data}}</span>
-          <span class="time" v-if="humanizeTimeFormat" @click="changeTimeFormat" title="点击切换时间格式">{{moment.duration(moment(item.gmtCreate) - moment()).humanize(true)}}</span>
-          <span class="time" v-else @click="changeTimeFormat" title="点击切换时间格式">{{moment(item.gmtCreate).format('YYYY年MM月DD日 HH:mm:ss')}}</span>
+          <img :src="imgOrigin+item.userInfo.icon+'?x-oss-process=image/resize,h_40/quality,q_75'"
+               alt="" style="object-fit: cover;">
+          <span class="username" @click.stop="toUser(item.userInfo)">{{ item.userInfo.userName }}</span>
+          <span v-if="item.userInfo.userTag" class="tag"
+                title="用户在版块的标签">{{ item.userInfo.userTag.data }}</span>
+          <span v-if="humanizeTimeFormat" class="time" title="点击切换时间格式"
+                @click="changeTimeFormat">{{ moment.duration(moment(item.gmtCreate) - moment()).humanize(true) }}</span>
+          <span v-else class="time" title="点击切换时间格式"
+                @click="changeTimeFormat">{{ moment(item.gmtCreate).format("YYYY年MM月DD日 HH:mm:ss") }}</span>
 
           <!-- <div class="zan_shu" style="display:inline-block;padding-left:20px;"> <span>{{item.ups - item.downs}}个赞</span></div> -->
-          <div v-if="item.forumAdminHighlight" class="zan_shu" style="display:inline-block;padding-left:20px;">版主高亮中</div>
-          <div v-if="ISPHONE&&(!postInfo.disableComment||postInfo.forumAdmin)" @click="toReplay2(item)" class="zan_shu" style="display:inline-block;padding-left:20px;">回复</div>
-          <div v-if="!ISPHONE&&(!postInfo.disableComment||postInfo.forumAdmin)" @click="toReplay(item)" class="zan_shu" style="display:inline-block;padding-left:20px;">回复</div>
-          <div v-if="item.canDeleted" @refreshDelete="refreshDelete" @click="deleteComment(item)" class="to_delete">删除</div>
-          <div v-if="item.forumAdmin&&item.forumAdminHighlight"  @click="unHighlightComment(item)" class="to_delete">取消高亮</div>
-          <div v-if="item.forumAdmin&&!item.forumAdminHighlight"  @click="highlightComment(item)" class="to_delete">设为高亮</div>
+          <div v-if="item.forumAdminHighlight" class="zan_shu" style="display:inline-block;padding-left:20px;">
+            版主高亮中
+          </div>
+          <div v-if="ISPHONE&&(!postInfo.disableComment||postInfo.forumAdmin)" class="zan_shu"
+               style="display:inline-block;padding-left:20px;"
+               @click="toReplay2(item)">回复
+          </div>
+          <div v-if="!ISPHONE&&(!postInfo.disableComment||postInfo.forumAdmin)" class="zan_shu"
+               style="display:inline-block;padding-left:20px;"
+               @click="toReplay(item)">回复
+          </div>
+          <div v-if="item.canDeleted" class="to_delete" @click="deleteComment(item)" @refreshDelete="refreshDelete">
+            删除
+          </div>
+          <div v-if="item.forumAdmin&&item.forumAdminHighlight" class="to_delete" @click="unHighlightComment(item)">
+            取消高亮
+          </div>
+          <div v-if="item.forumAdmin&&!item.forumAdminHighlight" class="to_delete" @click="highlightComment(item)">
+            设为高亮
+          </div>
           <div v-if="isShowCopyCommentLinkTmp" class="to_delete" @click="copyCommentLink(item)">复制链接</div>
-          <div v-if="$store.state.user.islogin&&isShowReportCommentTmp&&userinfo.userId!=item.userInfo.userId" class="to_delete" @click="showReportDialog(item)">
-            <i class="el-icon-warning-outline" style="margin-right: 3px;color:red;"/><span style="color: red;">举报</span>
+          <div v-if="$store.state.user.islogin&&isShowReportCommentTmp&&userinfo.userId!=item.userInfo.userId"
+               class="to_delete" @click="showReportDialog(item)">
+            <i class="el-icon-warning-outline" style="margin-right: 3px;color:red;" /><span
+            style="color: red;">举报</span>
           </div>
         </div>
-        <div class="content" :style="getCommentContentStyle(item)">
+        <div :style="getCommentContentStyle(item)" class="content">
           <p v-if="!item.atUsers" v-html="islink(item.text)"></p>
           <p v-if="item.atUsers" @click="clickComment($event)" v-html="doText(item)"></p>
           <span v-if="item.imageNames" class="comImgs">
-                    <viewer :images="doImgs(item.imageNames)" ref="viewer" style="line-height: 0px" >
+                    <viewer ref="viewer" :images="doImgs(item.imageNames)" style="line-height: 0px">
                         <div v-for="(i,k) in item.imageNames.split(',')" :key="k">
                             <span class="aaa">
 <!--                                【附图】-->
-                              <img  style="opacity:0;width:60px;height:60px" :src="imgOrigin+i+'?x-oss-process=image/resize,h_60/quality,q_75'" :data-source="imgOrigin+i" >
-                              <div :src="imgOrigin+i+'?x-oss-process=image/resize,h_60/quality,q_75'" :data-source="imgOrigin+i" :style="{'background-image':'url('+imgOrigin+i+')','background-size':'cover',width:'60px',height:'60px'}" ></div>
+                              <img :data-source="imgOrigin+i"
+                                   :src="imgOrigin+i+'?x-oss-process=image/resize,h_60/quality,q_75'"
+                                   style="opacity:0;width:60px;height:60px">
+                              <div :data-source="imgOrigin+i"
+                                   :src="imgOrigin+i+'?x-oss-process=image/resize,h_60/quality,q_75'"
+                                   :style="{'background-image':'url('+imgOrigin+i+')','background-size':'cover',width:'60px',height:'60px'}"></div>
                             </span>
                         </div>
                     </viewer>
             <!-- <a v-for="(i,k) in item.imageNames.split(',')" :key="k" :href="imgOrigin+i" target="_blank">【附图】</a> -->
                 </span>
-          <div v-if="item.audio" >
+          <div v-if="item.audio">
             <audio
-                webkit-playsinline="true"
-                x-webkit-airplay="true"
-                playsinline="true"
-                x5-video-player-type="h5"
-                x5-video-orientation="h5"
-                x5-video-player-fullscreen="true"
-                controls
-                :src="imgOrigin+item.audio"
-                alt="">
+              :src="imgOrigin+item.audio"
+              alt=""
+              controls
+              playsinline="true"
+              webkit-playsinline="true"
+              x-webkit-airplay="true"
+              x5-video-orientation="h5"
+              x5-video-player-fullscreen="true"
+              x5-video-player-type="h5">
             </audio>
             <!-- <a v-for="(i,k) in item.imageNames.split(',')" :key="k" :href="imgOrigin+i" target="_blank">【附图】</a> -->
           </div>
@@ -73,52 +100,64 @@
         <!-- {{replayItem}}{{item.id}} -->
         <div v-if="replayItem&&(replayItem.id==item.id)" class="replayInput">
           <div v-show="showAt" class="atuser">
-            <div v-for="(it,ins) in atUsers" :key="ins" @click="chooseAt($event,it)" class="at_item">
+            <div v-for="(it,ins) in atUsers" :key="ins" class="at_item" @click="chooseAt($event,it)">
               {{ it.userName }}
             </div>
           </div>
-          <div v-if="replayItem" @click="cancelReplay" style="padding: 6px 0px;cursor:pointer;float:right;">取消回复</div>
-          <el-input style="font-size:14px;" ref="subCommentInputMark"
-                    v-on:focus="inputFocus" @keyup.native="bindInput"
-                    v-on:blur="inputBlur" type="textarea"
-                    v-model="comment" class="textarea"
+          <div v-if="replayItem" style="padding: 6px 0px;cursor:pointer;float:right;" @click="cancelReplay">取消回复
+          </div>
+          <el-input ref="subCommentInputMark" v-model="comment"
+                    :autosize="{ minRows: 2, maxRows: 4}"
                     :placeholder="replayItem?'我对'+replayItem.userInfo.userName+'说：'+'(Ctrl+V 可粘贴图片)':'发表你的想法'+'(Ctrl+V 可粘贴图片)'"
-                    :autosize="{ minRows: 2, maxRows: 4}">
+                    class="textarea" style="font-size:14px;"
+                    type="textarea" v-on:blur="inputBlur"
+                    v-on:focus="inputFocus"
+                    @keyup.native="bindInput">
           </el-input>
-          <div class="reply_button" v-loading="imagesUploading">
-            <div class="subims" v-if="images.length">
+          <div v-loading="imagesUploading" class="reply_button">
+            <div v-if="images.length" class="subims">
               <a v-for="img in images" :key="img" :href="imgOrigin+img" target="_blank">[附图]</a>
             </div>
-            <el-button style="height:36px;" type="primary" v-if="replayItem&&(replayItem.id==item.id)" @click="toSub" title="快捷键：Ctrl+Enter">回复</el-button>
+            <el-button v-if="replayItem&&(replayItem.id==item.id)" style="height:36px;" title="快捷键：Ctrl+Enter"
+                       type="primary"
+                       @click="toSub">回复
+            </el-button>
             <el-upload
-                class="avatar-uploader"
-                action="/api/upload_image"
-                name="file"
-                :data="filedata"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload"
-                :on-exceed="handleAvatarExceed"
-                :limit="imagesLimit"
-                multiple
-                accept="image/*"
-                style="display:inline-block;"
-                ref="replyImageUpload"
+              ref="replyImageUpload"
+              :before-upload="beforeAvatarUpload"
+              :data="filedata"
+              :limit="imagesLimit"
+              :on-exceed="handleAvatarExceed"
+              :on-success="handleAvatarSuccess"
+              :show-file-list="false"
+              accept="image/*"
+              action="/api/upload_image"
+              class="avatar-uploader"
+              multiple
+              name="file"
+              style="display:inline-block;"
             >
-              <img style="vertical-align:middle;margin-right:10px;cursor:pointer;" src="../../assets/images/icon/choose.png" alt="">
+              <img alt=""
+                   src="../../assets/images/icon/choose.png"
+                   style="vertical-align:middle;margin-right:10px;cursor:pointer;">
             </el-upload>
             <div class="icons">
-              <img @click="showIcons" src="https://i.chao-fan.com/biz/1657171357596_51b6f962c13d4bbb855dc74a716a87d9.png" alt="">
+              <img alt=""
+                   src="https://i.chao-fan.com/biz/1657171357596_51b6f962c13d4bbb855dc74a716a87d9.png"
+                   @click="showIcons">
               <div class="emoji">
-                <span v-for="(item,index) in icons" @click="chooseEmoji(item)" :key="index">{{item}}</span>
+                <span v-for="(item,index) in icons" :key="index" @click="chooseEmoji(item)">{{ item }}</span>
               </div>
             </div>
           </div>
         </div>
         <div v-if="!withoutSubComment&&item.children&&item.children.length">
-          <commentitem ref="subCommentItemMark" :postInfo="{postOwnerUserId:postInfo.postOwnerUserId,isPostOwnerHighlight:postInfo.isPostOwnerHighlight}"
+          <commentitem ref="subCommentItemMark"
                        :is-show-copy-comment-link="isShowCopyCommentLinkTmp"
-                       @rep="rep" @refreshComment="refreshComment" @refreshDelete="refreshDelete" @toReplay2="toReplay2" :showRep="showR" :treeData="item.children"></commentitem>
+                       :postInfo="{postOwnerUserId:postInfo.postOwnerUserId,isPostOwnerHighlight:postInfo.isPostOwnerHighlight}"
+                       :showRep="showR" :treeData="item.children" @refreshComment="refreshComment"
+                       @refreshDelete="refreshDelete"
+                       @rep="rep" @toReplay2="toReplay2"></commentitem>
           <!-- <div  v-for="(item,index) in item.children" :key="index" class="comment_item">
               <div class="c_left">
                   <img @click.stop="doZanComment(1,item)" src="../../assets/images/icon/up.png" alt="">
@@ -144,18 +183,18 @@
 
     </div>
 
-    <report-dialog ref="reportDialogMark" v-if="isShowReportCommentTmp" />
+    <report-dialog v-if="isShowReportCommentTmp" ref="reportDialogMark" />
 
   </div>
 </template>
 
 <script>
-import * as api from '../../api/api';
-import moment from 'moment';
-import reportDialog from '@/components/report/report.vue';
+import * as api from "../../api/api";
+import moment from "moment";
+import reportDialog from "@/components/report/report.vue";
 
 export default {
-  name: 'commentitem',
+  name: "commentitem",
   data() {
     return {
 
@@ -163,11 +202,11 @@ export default {
       moment: moment,
       replayItem: null,
       showR: false,
-      comment: '',
+      comment: "",
       userinfo: this.$store.state.user.userInfo,
       canSub: true,
       icons: [
-        '😀', '😃', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃', '😉', '😊', '😇', '😍', '😘', '🤪', '😝', '👍', '🤝', '🙏', '💪', '👏', '✍️', '💔', '👮‍♂️', '☠️', '👽'
+        "😀", "😃", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "😉", "😊", "😇", "😍", "😘", "🤪", "😝", "👍", "🤝", "🙏", "💪", "👏", "✍️", "💔", "👮‍♂️", "☠️", "👽"
       ],
       images: [],
       filedata: {},
@@ -178,15 +217,15 @@ export default {
       atUsers: [],
       showAt: false,
       canSearch: true,
-      curInput: '',
+      curInput: "",
       ats: [],
-      pointIndex: '',
-      atIndex: '',
-      searchkey: '',
+      pointIndex: "",
+      atIndex: "",
+      searchkey: "",
       atUserName: [],
       __viewer: null,
       isShowCopyCommentLinkTmp: this.isShowCopyCommentLink,
-      isShowReportCommentTmp: this.isShowReportComment,
+      isShowReportCommentTmp: this.isShowReportComment
     };
   },
   props: {
@@ -208,35 +247,35 @@ export default {
     },
     withoutSubComment: {
       type: Boolean,
-      default: false,
+      default: false
     },
     isShowCopyCommentLink: {
       type: Boolean,
-      default: false,
+      default: false
     },
     isShowReportComment: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   components: {
-    reportDialog,
+    reportDialog
   },
   created() {
   },
   mounted() {
     // 监听是否显示操作事件
-    this.$EventBus.$on('isShowCopyCommentLink', (data) => {
+    this.$EventBus.$on("isShowCopyCommentLink", (data) => {
       this.isShowCopyCommentLinkTmp = data;
     });
     // 监听是否显示举报事件
-    this.$EventBus.$on('isShowReportComment', (data) => {
+    this.$EventBus.$on("isShowReportComment", (data) => {
       this.isShowReportCommentTmp = data;
     });
 
   },
   watch: {
-    showRep: function (val) {
+    showRep: function(val) {
       if (val === false) {
         this.replayItem = null;
       }
@@ -255,7 +294,7 @@ export default {
         this.$refs.subCommentInputMark.forEach(element => {
           if (element && element.focused) {
             re = _this;
-            return;
+
           }
 
         });
@@ -267,7 +306,7 @@ export default {
           let re0 = element.getCommentInputFocused();
           if (re0) {
             re = re0;
-            return;
+
           }
         });
       }
@@ -292,47 +331,47 @@ export default {
     getCommentContentStyle(item) {
       let highlightStatus = this.getHighlightStatus(item);
       if (highlightStatus == 3) {
-        return 'background: #FFE1F1;';
+        return "background: #FFE1F1;";
       } else if (highlightStatus == 1) {
-        return 'background: #b2e8d1;';
+        return "background: #b2e8d1;";
       } else if (highlightStatus == 2) {
-        return 'background: #BFDFFF;';
+        return "background: #BFDFFF;";
       }
-      return '';
+      return "";
     },
     getCommentUserinfoClazz(item) {
       let highlightStatus = this.getHighlightStatus(item);
       if (highlightStatus == 3) {
-        return 'user_info_highlight_3';
+        return "user_info_highlight_3";
       } else if (highlightStatus == 1) {
-        return 'user_info_highlight_1';
+        return "user_info_highlight_1";
       } else if (highlightStatus == 2) {
-        return 'user_info_highlight_2';
+        return "user_info_highlight_2";
       }
-      return 'user_info';
+      return "user_info";
     },
-    clickComment: function (event) {
+    clickComment: function(event) {
 
-      if (event.target.nodeName === 'SPAN') {
+      if (event.target.nodeName === "SPAN") {
         // 获取触发事件对象的属性
-        let key = event.target.getAttribute('key');
-        let name = event.target.getAttribute('name');
-        this.toUser({userId: key});
+        let key = event.target.getAttribute("key");
+        let name = event.target.getAttribute("name");
+        this.toUser({ userId: key });
       }
     },
     islink(txtContent) {
       if (!txtContent) {
         return "";
       }
-      var check_www = 'w{3}' + '[^\\s]*';
-      var check_http = '(https|http|ftp|rtsp|mms)://' + '[^(\\，|\\s|(\\u4E00-\\u9FFF)))]*';
+      var check_www = "w{3}" + "[^\\s]*";
+      var check_http = "(https|http|ftp|rtsp|mms)://" + "[^(\\，|\\s|(\\u4E00-\\u9FFF)))]*";
       var strRegex = check_http;
-      var httpReg = new RegExp(strRegex, 'gi');
-      var formatTxtContent = txtContent.replace(httpReg, function (httpText) {
-        if (httpText.search('http') < 0 && httpText.search('HTTP') < 0) {
-          return '<a class="link" href="' + 'http://' + httpText + '" target="_blank">' + httpText + '</a>';
+      var httpReg = new RegExp(strRegex, "gi");
+      var formatTxtContent = txtContent.replace(httpReg, function(httpText) {
+        if (httpText.search("http") < 0 && httpText.search("HTTP") < 0) {
+          return "<a class=\"link\" href=\"" + "http://" + httpText + "\" target=\"_blank\">" + httpText + "</a>";
         } else {
-          return '<a class="link" href="' + httpText + '" target="_blank">' + httpText + '</a>';
+          return "<a class=\"link\" href=\"" + httpText + "\" target=\"_blank\">" + httpText + "</a>";
         }
       });
       return formatTxtContent;
@@ -344,7 +383,7 @@ export default {
         item.atUsers.forEach((it, ins) => {
           let b = it.userName;
           if (m.includes(it.userName)) {
-            m = m.replace('@' + b, '<span key="' + it.userId + '" class="light" style="color:rgba(24, 144, 255,0.8);font-size:14px;">@' + b + '</span>');
+            m = m.replace("@" + b, "<span key=\"" + it.userId + "\" class=\"light\" style=\"color:rgba(24, 144, 255,0.8);font-size:14px;\">@" + b + "</span>");
           }
         });
 
@@ -354,15 +393,15 @@ export default {
     chooseAt(e, it) {
       // this.comment = this.comment+it.userName+' ';
       if (this.searchkey) {
-        this.comment = this.comment.replace('@' + this.searchkey, '@' + it.userName + ' ');
+        this.comment = this.comment.replace("@" + this.searchkey, "@" + it.userName + " ");
       } else {
-        this.comment = this.comment + it.userName + ' ';
+        this.comment = this.comment + it.userName + " ";
       }
-      this.searchkey = '';
+      this.searchkey = "";
       this.showAt = false;
       this.ats.push(it.userId);
-      this.atUserName.push('@' + it.userName);
-      console.log('this.atUserName', this.atUserName);
+      this.atUserName.push("@" + it.userName);
+      console.log("this.atUserName", this.atUserName);
       console.log(this.$(this.curInput));
       this.$(this.curInput).focus();
       // this.curInput
@@ -374,17 +413,17 @@ export default {
       // document.getElementById('')
       let index = e.target.selectionStart;//光标位置
       this.pointIndex = index;
-      if (this.comment[index - 1] != '@') {
+      if (this.comment[index - 1] != "@") {
         this.showAt = false;
       }
-      if (this.comment.includes('@')) {
+      if (this.comment.includes("@")) {
         this.curInput = e.target;
         let s = this.comment.slice(0, index);
 
-        let i = s.lastIndexOf('@');
+        let i = s.lastIndexOf("@");
         // if(index==i){return false}
         let str = this.comment.slice(i + 1, index);
-        let isHave = str.includes(' ');
+        let isHave = str.includes(" ");
         if (!isHave) {
           this.atIndex = i;
           let params = {
@@ -409,9 +448,9 @@ export default {
             });
           }
         }
-        if (e.code == 'Backspace' && this.atUserName.length) {
+        if (e.code == "Backspace" && this.atUserName.length) {
           this.atUserName.forEach((item, ins) => {
-            if (item.includes('@' + str) && item.slice(0, -1) == '@' + str) {
+            if (item.includes("@" + str) && item.slice(0, -1) == "@" + str) {
               this.ats.splice(ins, 1);
               this.atUserName.splice(ins, 1);
               console.log(this.ats, this.atUserName);
@@ -423,7 +462,7 @@ export default {
 
     },
     doImgs(item) {
-      var a = item.split(',');
+      var a = item.split(",");
       a.forEach(it => {
         it = this.imgOrigin + it;
       });
@@ -433,7 +472,7 @@ export default {
       if (res.success) {
         this.imageUrl = URL.createObjectURL(file.raw);
         this.images.push(res.data);
-      } else if (res.errorCode == 'invalid_content') {
+      } else if (res.errorCode == "invalid_content") {
         // this.imageUrl = ''
         this.$toast(res.errorMessage);
       }
@@ -445,7 +484,7 @@ export default {
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 20;
       if (!isLt2M) {
-        this.$message.error('上传图片大小不能超过 20MB!');
+        this.$message.error("上传图片大小不能超过 20MB!");
         return false;
       }
       this.imagesNum++;
@@ -463,43 +502,43 @@ export default {
       this.showIcon = true;
     },
     toReplay2(item) {
-      this.$emit('toReplay2', item);
+      this.$emit("toReplay2", item);
     },
     toReplay(item) {
       //    this.replayItem = null;
       if (this.replayItem === item) {
-return;
-}
+        return;
+      }
       this.images = [];
-      this.$set(this, 'replayItem', item);
+      this.$set(this, "replayItem", item);
       // this.replayItem = item;
-      this.$emit('rep', item, true);
+      this.$emit("rep", item, true);
       this.showR = false;
     },
     cancelReplay() {
       this.replayItem = null;
-      this.$emit('rep', null, false);
+      this.$emit("rep", null, false);
     },
     rep(item, bool) {
       this.replayItem = item;
       this.showR = bool;
     },
     refreshComment(obj) {
-      this.$emit('refreshComment', obj);
+      this.$emit("refreshComment", obj);
     },
     refreshDelete(item) {
-      this.$emit('refreshDelete', item);
+      this.$emit("refreshDelete", item);
     },
     deleteComment(item) {
-      this.$confirm('此操作将删除此评论, 是否继续?', '温馨提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        customClass: 'messageBox',
-        type: 'warning'
+      this.$confirm("此操作将删除此评论, 是否继续?", "温馨提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        customClass: "messageBox",
+        type: "warning"
       }).then(() => {
-        api.deleteComment({commentId: item.id}).then(res => {
+        api.deleteComment({ commentId: item.id }).then(res => {
           if (res.success) {
-            this.$toast('删除成功');
+            this.$toast("删除成功");
             this.refreshDelete(item);
             // this.treeData.splice(index,1);
           }
@@ -509,17 +548,17 @@ return;
 
     },
     highlightComment(item) {
-      api.highlightComment({commentId: item.id}).then(res => {
+      api.highlightComment({ commentId: item.id }).then(res => {
         if (res.success) {
-          this.$toast('高亮成功');
+          this.$toast("高亮成功");
           item.forumAdminHighlight = true;
         }
       });
     },
     unHighlightComment(item) {
-      api.unHighlightComment({commentId: item.id}).then(res => {
+      api.unHighlightComment({ commentId: item.id }).then(res => {
         if (res.success) {
-          this.$toast('取消高亮成功');
+          this.$toast("取消高亮成功");
           item.forumAdminHighlight = false;
         }
       });
@@ -533,22 +572,22 @@ return;
       // });
       this.$refs.reportDialogMark.init({
         dialogVisible: true,
-        type: 'comment',
+        type: "comment",
         reportData: item
       });
     },
 
     copyCommentLink(item) {
-      const url = 'https://choa.fun/p/' + item.postId + '?commentId=' + item.id;
+      const url = "https://choa.fun/p/" + item.postId + "?commentId=" + item.id;
       this.copy2Clipboard(url);
-      this.$toast('复制链接成功！');
+      this.$toast("复制链接成功！");
     },
     copy2Clipboard(content) {
-      let input = document.createElement('input');
-      input.setAttribute('value', content);
+      let input = document.createElement("input");
+      input.setAttribute("value", content);
       document.body.appendChild(input);
       input.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       document.body.removeChild(input);
     },
     toSub() {
@@ -557,7 +596,7 @@ return;
           let comment = this.comment;
           if (res) {
             if (!this.comment && (!this.images || this.images == 0)) {
-              this.$toast('内容为空, 请输入内容');
+              this.$toast("内容为空, 请输入内容");
               return;
             }
             let reg = new RegExp(/@[^(\s)]+/g);
@@ -571,35 +610,35 @@ return;
                   ats.push(this.ats[i]);
                 }
               });
-              console.log('atc', ats);
+              console.log("atc", ats);
               console.log(this.ats);
               console.log(this.atUserName);
             }
             let params = {
-              parentId: this.replayItem && this.replayItem.id ? this.replayItem.id : '',
+              parentId: this.replayItem && this.replayItem.id ? this.replayItem.id : "",
               postId: this.replayItem.postId,
-              comment: this.comment.replaceAll("\n","\n<p></p>"),
-              imageNames: this.images.join(','),
-              ats: ats.join(',')
+              comment: this.comment.replaceAll("\n", "\n<p></p>"),
+              imageNames: this.images.join(","),
+              ats: ats.join(",")
             };
             console.log(this.comment);
             this.canSub = false;
             api.addComments(params).then(res => {
               if (res.success) {
-                this.$toast('评论成功');
+                this.$toast("评论成功");
                 this.images = [];
                 setTimeout(() => {
                   let obj = {
                     parentId: this.replayItem ? this.replayItem.id : 0,
                     text: this.comment,
-                    type: 'text',
+                    type: "text",
                     downs: 0,
                     ups: 0,
                     userInfo: this.userinfo
                   };
-                  this.$emit('refreshComment', res.data);
+                  this.$emit("refreshComment", res.data);
                   this.replayItem = null;
-                  this.comment = '';
+                  this.comment = "";
                   this.canSub = true;
                 }, 1500);
               } else {
@@ -608,16 +647,16 @@ return;
               }
             }).catch(err => {
               this.canSub = true;
-              this.$toast('未知错误');
+              this.$toast("未知错误");
             });
 
           } else {
-            console.log('未登录', res);
+            console.log("未登录", res);
           }
         });
       } else {
-        this.$toast('正在提交评论...');
-        return;
+        this.$toast("正在提交评论...");
+
       }
     },
     doZanComment(v, item) {
@@ -633,7 +672,7 @@ return;
           item.vote = 0;
           item.ups -= 1;
         }
-        api.upvoteComment({commentId: item.id}).then(res => {
+        api.upvoteComment({ commentId: item.id }).then(res => {
         });
       } else {
         // 在我评论的列表里item.vote传的是null
@@ -647,7 +686,7 @@ return;
           item.vote = 0;
           item.ups += 1;
         }
-        api.downvoteComment({commentId: item.id}).then(res => {
+        api.downvoteComment({ commentId: item.id }).then(res => {
 
         });
       }
@@ -662,12 +701,12 @@ return;
       if (!(e.clipboardData && e.clipboardData.items)) {
         return;
       }
-      if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === 'string' && cbd.items[1].kind === 'file' && cbd.types && cbd.types.length === 2 && cbd.types[0] === 'text/plain' && cbd.types[1] === 'Files' && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49) {
+      if (cbd.items && cbd.items.length === 2 && cbd.items[0].kind === "string" && cbd.items[1].kind === "file" && cbd.types && cbd.types.length === 2 && cbd.types[0] === "text/plain" && cbd.types[1] === "Files" && ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49) {
         return;
       }
       // for(var i = 0; i < cbd.items.length; i++) {
       var item = cbd.items[cbd.items.length - 1];
-      if (item.kind == 'file' && (/^image\/[a-z]*$/.test(item.type))) {
+      if (item.kind == "file" && (/^image\/[a-z]*$/.test(item.type))) {
         var blob = item.getAsFile();
         if (blob.size === 0) {
           return;
@@ -677,20 +716,20 @@ return;
       // }
     },
     inputFocus() {
-      document.addEventListener('paste', this.toPaste);
+      document.addEventListener("paste", this.toPaste);
     },
     inputBlur() {
-      document.removeEventListener('paste', this.toPaste);
+      document.removeEventListener("paste", this.toPaste);
     },
     // 修改时间格式
     changeTimeFormat() {
       this.humanizeTimeFormat = !this.humanizeTimeFormat;
-    },
+    }
   }
 };
 </script>
 
-<style lang='scss' scoped type='text/scss'>
+<style lang="scss" scoped type="text/scss">
 ::v-deep .el-loading-spinner {
   top: 10%;
 }
