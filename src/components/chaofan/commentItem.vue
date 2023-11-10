@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="c_content">
-        <div :class="getCommentUserinfoClazz(item)">
+        <div :class="['user_info',{'user_info_highlight_1':item.forumAdminHighlight}]">
           <img :src="imgOrigin+item.userInfo.icon+'?x-oss-process=image/resize,h_40/quality,q_75'"
                alt="" style="object-fit: cover;">
           <span
@@ -316,35 +316,17 @@ export default {
       return re;
     },
 
-    getHighlightStatus(item) {
+    getCommentContentStyle(item) {
       if (item.isJumpHighlight) {
         // 跳转高亮
-        return 3;
+        return "background: #FFE1F1;";
       } else if (item.forumAdminHighlight) {
         // 版主高亮
-        return 1;
-      }
-      return 0;
-
-    },
-    getCommentContentStyle(item) {
-      let highlightStatus = this.getHighlightStatus(item);
-      if (highlightStatus == 3) {
-        return "background: #FFE1F1;";
-      } else if (highlightStatus == 1) {
         return "background: #b2e8d1;";
       }
       return "";
     },
-    getCommentUserinfoClazz(item) {
-      let highlightStatus = this.getHighlightStatus(item);
-      if (highlightStatus == 3) {
-        return "user_info_highlight_3";
-      } else if (highlightStatus == 1) {
-        return "user_info_highlight_1";
-      }
-      return "user_info";
-    },
+
     clickComment: function(event) {
 
       if (event.target.nodeName === "SPAN") {
@@ -813,98 +795,16 @@ export default {
     .user_info_highlight_1 {
       background: #b2e8d1;
 
-      img {
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        border-radius: 50%;
-        margin-right: 2px;
-      }
-
-      .username {
-        color: #1890ff;
-        cursor: pointer;
-        margin-left: 6px;
-        line-height: 24px;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
       .time {
-        padding-left: 15px;
         color: #111;
-        font-size: 12px;
       }
 
       .zan_shu {
         color: #111;
-        cursor: pointer;
-
-        img {
-          width: 24px;
-          height: 24px;
-          margin-right: 4px;
-        }
       }
 
       .tag {
-        font-size: 12px;
         background-color: #DDFFEE;
-        color: #555;
-        margin-left: 5px;
-        padding: 2px 3px;
-        border-radius: 2px;
-      }
-    }
-
-    .user_info_highlight_3 {
-      background: #FFE1F1;
-
-      img {
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        border-radius: 50%;
-        margin-right: 2px;
-      }
-
-      .username {
-        color: #1890ff;
-        cursor: pointer;
-        margin-left: 6px;
-        line-height: 24px;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      .time {
-        padding-left: 15px;
-        color: #555;
-        font-size: 12px;
-      }
-
-      .zan_shu {
-        color: #555;
-        cursor: pointer;
-
-        img {
-          width: 24px;
-          height: 24px;
-          margin-right: 4px;
-        }
-      }
-
-      .tag {
-        font-size: 12px;
-        background-color: #fff1ff;
-        color: #555;
-        margin-left: 5px;
-        padding: 2px 3px;
-        border-radius: 2px;
       }
     }
 
