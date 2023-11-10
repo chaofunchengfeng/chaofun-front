@@ -308,4 +308,12 @@ export default {
     z-index: 500;
   }
 }
+
+@media only screen and (max-width: 679px) {
+  .container {
+    .back_home {
+      margin-top: 1rem;
+    }
+  }
+}
 </style>
