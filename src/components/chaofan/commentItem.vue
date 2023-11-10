@@ -21,7 +21,9 @@
         <div :class="getCommentUserinfoClazz(item)">
           <img :src="imgOrigin+item.userInfo.icon+'?x-oss-process=image/resize,h_40/quality,q_75'"
                alt="" style="object-fit: cover;">
-          <span class="username" @click.stop="toUser(item.userInfo)">{{ item.userInfo.userName }}</span>
+          <span
+            :class="['username',{'postOwnerHighlight':(postInfo.isPostOwnerHighlight && postInfo.postOwnerUserId == item.userInfo.userId)}]"
+            @click.stop="toUser(item.userInfo)">{{ item.userInfo.userName }}</span>
           <span v-if="item.userInfo.userTag" class="tag"
                 title="用户在版块的标签">{{ item.userInfo.userTag.data }}</span>
           <span v-if="humanizeTimeFormat" class="time" title="点击切换时间格式"
@@ -321,9 +323,6 @@ export default {
       } else if (item.forumAdminHighlight) {
         // 版主高亮
         return 1;
-      } else if (this.postInfo.isPostOwnerHighlight && this.postInfo.postOwnerUserId == item.userInfo.userId) {
-        // 楼主高亮
-        return 2;
       }
       return 0;
 
@@ -334,8 +333,6 @@ export default {
         return "background: #FFE1F1;";
       } else if (highlightStatus == 1) {
         return "background: #b2e8d1;";
-      } else if (highlightStatus == 2) {
-        return "background: #BFDFFF;";
       }
       return "";
     },
@@ -345,8 +342,6 @@ export default {
         return "user_info_highlight_3";
       } else if (highlightStatus == 1) {
         return "user_info_highlight_1";
-      } else if (highlightStatus == 2) {
-        return "user_info_highlight_2";
       }
       return "user_info";
     },
@@ -864,55 +859,6 @@ export default {
       }
     }
 
-    .user_info_highlight_2 {
-      background: #BFDFFF;
-
-      img {
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        border-radius: 50%;
-        margin-right: 2px;
-      }
-
-      .username {
-        color: #1890ff;
-        cursor: pointer;
-        margin-left: 6px;
-        line-height: 24px;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      .time {
-        padding-left: 15px;
-        color: #555;
-        font-size: 12px;
-      }
-
-      .zan_shu {
-        color: #555;
-        cursor: pointer;
-
-        img {
-          width: 24px;
-          height: 24px;
-          margin-right: 4px;
-        }
-      }
-
-      .tag {
-        font-size: 12px;
-        background-color: #CCEEFF;
-        color: #555;
-        margin-left: 5px;
-        padding: 2px 3px;
-        border-radius: 2px;
-      }
-    }
-
     .user_info_highlight_3 {
       background: #FFE1F1;
 
@@ -1163,5 +1109,15 @@ export default {
   width: 400px !important;
   max-width: 80vw !important;
   //width: auto !important;
+}
+
+.postOwnerHighlight {
+  font-weight: bold;
+
+  &:after {
+    content: 'OP';
+    color: #ff3e68;
+    padding-left: 5px;
+  }
 }
 </style>

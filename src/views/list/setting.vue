@@ -73,13 +73,13 @@
                 <div class="localSetting" style="display: flex;">
                   <div>
                     <el-checkbox v-model="isStoragePostOwnerCommentHighlight"
-                                 @change="storagePostOwnerCommentHighlightCheckboxChange">保持 “高亮楼主评论” 的状态
+                                 @change="storagePostOwnerCommentHighlightCheckboxChange">保持 “显示楼主” 的状态
                     </el-checkbox>
                   </div>
                   <div class="checkboxTooltip">
                     <el-tooltip placement="right">
-                      <div slot="content">未选中时：<br />不同帖子的 “高亮楼主评论” 的状态是独立的，<br />即每次打开帖子默认为不选中 “高亮楼主评论”<br /><br />
-                        选中时：<br />不同帖子将同步“高亮楼主评论”的状态<br />即：本帖子设置为选中，下次打开其它帖子也为选中
+                      <div slot="content">未选中时：<br />不同帖子的 “显示楼主” 的状态是独立的，<br />即每次打开帖子默认为不选中 “显示楼主”<br /><br />
+                        选中时：<br />不同帖子将同步“显示楼主”的状态<br />即：本帖子设置为选中，下次打开其它帖子也为选中
                       </div>
                       <i class="el-icon-question" style="font-size: 20px; color: #1890ff"></i>
                     </el-tooltip>
