@@ -545,10 +545,10 @@ export default {
 //H5,Pad
 @media only screen and (max-width: 992px) {
   .container {
-    padding-top: 5rem;
+    padding-top: 6rem;
   }
   .nav {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
   .hidden-div{
     margin-top: 3.5rem;
