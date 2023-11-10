@@ -264,7 +264,7 @@ export default {
 @media only screen and (max-width: 679px) {
   .container {
     .back_home {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
   }
 }
