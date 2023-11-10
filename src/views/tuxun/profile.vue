@@ -4,7 +4,6 @@
       <el-button v-if="history && history.length > 1 || tuxunApp" @click="goBack" round>←返回</el-button>
       <el-button v-if="!tuxunApp" @click="goHome"  round>首页</el-button>
     </div>
-    <div v-if="!tuxunApp" class="hidden-div"></div>
     <div class="user-section" style="text-align: center;">
       <div class="header" v-if="this.userProfile && this.$store.state.user.userInfo.userId === this.userProfile.userAO.userId">
         <el-link v-if="!tuxunApp" @click="logout()" :underline="false">
