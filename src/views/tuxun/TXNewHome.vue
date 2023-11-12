@@ -32,7 +32,7 @@
       <div style="height: 20px"></div>
 
       <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>
-      <div class="second-info" @click="toSecond">玩家图寻第六届个人赛周末（11月11日）开赛, 快来报名吧～</div>
+      <div class="second-info" @click="toSecond"> 玩家第六届个人赛圆满结束</div>
 
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -408,7 +408,7 @@ export default {
       tuxunOpen('https://choa.fun/p/1281750');
     },
     toSecond() {
-      tuxunOpen('https://choa.fun/p/1284859');
+      tuxunOpen('https://choa.fun/p/1285263');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
