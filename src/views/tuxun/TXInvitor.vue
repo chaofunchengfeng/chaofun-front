@@ -1575,13 +1575,13 @@ export default {
         if (this.gameData.china) {
           location.href = 'https://tuxun.fun/china-match?from=move'
         } else {
-          tuxunJump('/tuxun/match?from=move');
+          location.href = 'https://tuxun.fun/world-match?from=move'
         }
       } else {
         if (this.gameData.china) {
           location.href = 'https://tuxun.fun/china-match?from=noMove'
         } else {
-          tuxunJump('/tuxun/match?from=noMove');
+          location.href = 'https://tuxun.fun/world-match?from=noMove'
         }
       }
 
