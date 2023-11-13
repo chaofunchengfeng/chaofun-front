@@ -22,24 +22,10 @@
         </div>
 
         <div class="erweimabig">
-          <div class="er_item er_item2">
-            <img src="../../assets/images/app.png" alt="">
-            <p>App下载</p>
-          </div>
           <div class="er_item">
             <img src="../../assets/images/icon/app_mini.png" alt="">
             <p>小程序版</p>
           </div>
-          <div class="er_item">
-            <img src="../../assets/images/erweima2.jpg" alt="">
-            <p>扫码加微信 wwwchaofun 邀请入炒饭用户群</p>
-          </div>
-
-          <div class="er_item">
-            <img src="../../assets/images/erweima3.png" alt="">
-            <p>扫码加入QQ用户群(784495660)</p>
-          </div>
-
         </div>
       </div>
       <div class="">
