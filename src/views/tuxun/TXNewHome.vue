@@ -81,24 +81,16 @@
           <!--          </div>-->
           <div class="card" @click="soloMatch" >
             <div class="title">
-              匹配Solo
+              全球积分
             </div>
             <div class="describe">
-              1v1的缘，妙不可言
+              全球街景的积分比赛
             </div>
             <div class="card-top-right">可移动</div>
           </div>
-          <div class="card" @click="redirectPage( '/tuxun/point')">
-            <div class="title">
-              积分赛
-            </div>
-            <div class="describe">
-              多人混战排序，获取积分
-            </div>
-          </div>
           <div class="card" @click="toChinaMatch">
             <div class="title">
-              中国匹配
+              中国积分
             </div>
             <div class="describe">
               江山如此多娇
@@ -237,6 +229,9 @@
             <div @click="toMall" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
               商店
             </div>
+            <div @click="toApp" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
+              App
+            </div>
             <!--          <div @click="window.location.href = '/tuxun/change_log'" style="color: white;font-size: medium; padding-top: 1rem; text-decoration:underline;">-->
             <!--            更新日志-->
             <!--          </div>-->
@@ -361,7 +356,7 @@ export default {
     },
 
     soloMatch() {
-      tuxunJump('/tuxun/match');
+      location.href = 'https://tuxun.fun/world-match'
     },
     toFriend() {
       tuxunJump(  '/tuxun/friend');
@@ -400,6 +395,9 @@ export default {
     },
     toMall() {
       tuxunOpen('https://tuxun.fun/mall');
+    },
+    toApp() {
+      tuxunOpen('https://tuxun.fun/app');
     },
     toDocument() {
       tuxunOpen('https://www.yuque.com/ucun5p/tuxun');
