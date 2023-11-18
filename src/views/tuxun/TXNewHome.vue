@@ -352,20 +352,20 @@ export default {
     },
 
     toChinaMatch() {
-      location.href = 'https://tuxun.fun/china-match';
+      location.href = 'https://tuxun.fun/china-match?v=1118';
     },
 
     soloMatch() {
-      location.href = 'https://tuxun.fun/world-match'
+      location.href = 'https://tuxun.fun/world-match?v=1118'
     },
     toFriend() {
-      tuxunJump(  '/tuxun/friend');
+      location.href = 'https://tuxun.fun/friend?v=1118'
     },
     toMessage() {
-      tuxunJump(  '/tuxun/message');
+      location.href = 'https://tuxun.fun/message?v=1118'
     },
     toRank() {
-      tuxunJump(  '/tuxun/point-rank');
+      location.href = 'https://tuxun.fun/point-rank?v=1118'
     },
     toNewSeason() {
       tuxunJump('https://www.yuque.com/chaofun/tuxun/season');

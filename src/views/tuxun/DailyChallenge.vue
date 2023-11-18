@@ -28,7 +28,7 @@ export default {
   },
 
   created() {
-    window.location.href = 'https://new.tuxun.fun/daily-challenge';
+    window.location.href = 'https://tuxun.fun/daily-challenge?v=1118';
   },
 
   methods: {

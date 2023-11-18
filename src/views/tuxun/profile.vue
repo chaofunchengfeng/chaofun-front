@@ -351,10 +351,10 @@ export default {
       });
     },
     toHistory() {
-      tuxunJump('/tuxun/activities?userId=' + this.userId);
+      tuxunJump('/tuxun/activities?userId=' + this.userId + '&v=1118');
     },
     toAnalysis() {
-      tuxunJump('/tuxun/user/analysis');
+      tuxunJump('/tuxun/user/analysis?v=1118');
     },
     openReportUserDialog() {
       this.showReport = true;
