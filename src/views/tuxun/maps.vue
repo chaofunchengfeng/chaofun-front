@@ -251,7 +251,7 @@ export default {
       tuxunJump('/tuxun/maps-hot');
     },
     toNew() {
-      tuxunJump('/tuxun/maps-new');
+      tuxunJump('/tuxun/maps-recent');
     }
   },
 };

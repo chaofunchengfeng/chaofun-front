@@ -297,7 +297,7 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/maps-new',
+    path: '/maps-recent',
     component: () => import('@/views/tuxun/maps-new'),
     name: 'maps-hot',
     meta: { title: '最新题库-图寻'},

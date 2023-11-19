@@ -375,7 +375,7 @@ routes = [
     hidden: true
   },
   {
-    path: '/tuxun/maps-new',
+    path: '/tuxun/maps-recent',
     component: () => import('@/views/tuxun/maps-new'),
     name: 'maps-new',
     meta: { title: '最新题库-图寻'},
