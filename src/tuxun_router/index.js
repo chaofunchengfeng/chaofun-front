@@ -304,6 +304,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/tuxunFilter',
+    component: () => import('@/views/tuxun/TuxunFilter'),
+    name: 'tuxunFilter',
+    meta: { title: 'tuxunFilter'},
+    hidden: true
+  },
+  {
     path: '/maps-tag-manager',
     component: () => import('@/views/tuxun/maps-tag-manager'),
     name: 'maps-tag-manaager',
