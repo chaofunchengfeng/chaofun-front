@@ -32,7 +32,7 @@
       <div style="height: 20px"></div>
 
       <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>
-      <div class="second-info"> 如打不开页面或者一直加载中，请尝试清理浏览器缓存或者重装App </div>
+      <div class="second-info" @click="toSecond">【公告】全新的每日挑战！来看看有什么变化吧</div>
 
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -480,11 +480,11 @@ export default {
       text-decoration:underline;
     }
     .second-info {
-      //cursor: pointer;
+      cursor: pointer;
       color: white;
       font-size: medium;
       padding-top: 1rem;
-      //text-decoration:underline;
+      text-decoration:underline;
     }
     .normal-info {
       color: white;
