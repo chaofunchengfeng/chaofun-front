@@ -407,6 +407,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/tuxunAdminOld',
+    component: () => import('@/views/tuxun/admin-console'),
+    name: 'tuxun-admin-console',
+    meta: { title: '图寻-管理'},
+    hidden: true
+  },
+  {
     path: '/admin',
     component: () => import('@/views/tuxun/admin-console'),
     name: 'tuxun-admin-console',
