@@ -406,7 +406,7 @@ export default {
       tuxunOpen('https://choa.fun/p/1281750');
     },
     toSecond() {
-      tuxunOpen('https://choa.fun/p/1285263');
+      tuxunJump('https://www.bilibili.com/video/BV1ma4y1U7TH');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
