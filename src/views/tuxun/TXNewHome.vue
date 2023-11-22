@@ -33,6 +33,8 @@
 
       <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>
       <div class="second-info" @click="toSecond">【公告】全新的每日挑战！来看看有什么变化吧</div>
+      <div class="second-info" @click="toTournament">【图寻联赛第二赛季】联赛第一轮报名帖 </div>
+
 
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -407,6 +409,9 @@ export default {
     },
     toSecond() {
       tuxunJump('https://www.bilibili.com/video/BV1ma4y1U7TH');
+    },
+    toTournament() {
+      tuxunJump('https://choa.fun/p/1286016');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
