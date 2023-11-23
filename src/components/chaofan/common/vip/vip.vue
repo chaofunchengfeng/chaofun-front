@@ -19,7 +19,7 @@
                 <span style="text-decoration: line-through">720</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>119.99
+                <span style="font-size: 10px;">￥</span>120
               </div>
               <div>
                 三年
@@ -34,7 +34,7 @@
                 <span style="text-decoration: line-through">240</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>69.99
+                <span style="font-size: 10px;">￥</span>70
               </div>
               <div>
                 一年
@@ -49,7 +49,7 @@
                 <span style="text-decoration: line-through">120</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>44.99
+                <span style="font-size: 10px;">￥</span>45
               </div>
               <div>
                 半年
@@ -64,7 +64,7 @@
 <!--                <span style="text-decoration: line-through">60</span>-->
 <!--              </div>-->
 <!--              <div style="font-size: 26px; color: #FF0037">-->
-<!--                <span style="font-size: 10px;">￥</span>26.99-->
+<!--                <span style="font-size: 10px;">￥</span>27-->
 <!--              </div>-->
 <!--              <div>-->
 <!--                三个月-->
@@ -79,7 +79,7 @@
                 <span style="text-decoration: line-through">20</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>9.99
+                <span style="font-size: 10px;">￥</span>10
               </div>
               <div>
                 一个月
