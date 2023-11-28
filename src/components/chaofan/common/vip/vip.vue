@@ -217,6 +217,12 @@ import * as api from '@/api/api';
            }
          });
        } else {
+
+         if (this.isiOS && this.tuxunApp) {
+           this.$toast('老版页面暂不支持iOS内购，请在新版内购页购买！');
+           return;
+         }
+
          var period = '1month';
          if (this.choose === 'year') {
            period = '1year';
