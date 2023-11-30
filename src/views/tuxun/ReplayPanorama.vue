@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div id="viewer"  style="position: absolute; width: 100%; height: 100%"></div>
+    <img v-if="roundData.panoId && roundData.panoId.length === 27" style="z-index: 5000; position: absolute; bottom: 10px; left: 10px; width: 100px; cursor: pointer;"  @click="toBaiduPano" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
     <div class="back_home">
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goReplay" size="small" round>返回复盘</el-button>
