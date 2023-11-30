@@ -9,6 +9,7 @@
       <el-button @click="showReport = true" size="small"  round> 坏题反馈 </el-button>
       <el-button v-if="roundData" size="mini"  @click="reset" round> 回到原点</el-button>
     </div>
+    <img v-if="roundData.panoId && roundData.panoId.length === 27" style="z-index: 5000; position: absolute; bottom: 10px; left: 10px; width: 100px; cursor: pointer;"  @click="toBaiduPano" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
     <report-pano v-if="gameData && showReport" :maps-id="gameData.mapsId" :pano-id="panoId" @hide="showReport = false"></report-pano>
   </div>
 </template>
