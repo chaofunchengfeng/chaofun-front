@@ -10,7 +10,7 @@
         <div style="height: 5px">
         </div>
         <el-button  @click="toMessage" style="position: relative" >
-          消息/通知
+          消息通知
           <div v-if="message !== 0" class="point"></div>
         </el-button>
         <div style="height: 5px">
