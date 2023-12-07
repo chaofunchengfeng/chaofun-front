@@ -29,10 +29,10 @@
 
 
 <!--      <div class="normal-info">「大胆拥抱世界」</div>-->
-      <div style="height: 20px"></div>
+<!--      <div style="height: 20px"></div>-->
 
-      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>
-      <div class="second-info" @click="toSecond">【公告】全新的每日挑战！来看看有什么变化吧</div>
+<!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
+      <div class="second-info" @click="toSecond"> 一个新的开始！ 图寻第七届组队赛周日开赛 </div>
       <div class="second-info" @click="toTournament">【图寻联赛第二赛季】联赛第三轮报名帖 </div>
 
 
@@ -408,7 +408,7 @@ export default {
       tuxunOpen('https://choa.fun/p/1281750');
     },
     toSecond() {
-      tuxunJump('https://www.bilibili.com/video/BV1ma4y1U7TH');
+      tuxunJump('https://choa.fun/p/1287389');
     },
     toTournament() {
       tuxunJump('https://choa.fun/p/1287250');
