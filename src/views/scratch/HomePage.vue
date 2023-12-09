@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="top-info">
-      炒饭小测验(饭小测)
+      炒饭小测验
       <div style="position: absolute; right: 8px; top: 8px">
         <el-button @click="toSelf">个人首页</el-button>
         <div></div>
