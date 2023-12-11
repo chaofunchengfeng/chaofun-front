@@ -188,11 +188,15 @@ export default {
         if (this.$store.state.user.islogin) {
           resolve(true);
         } else {
-          this.$login({
-            callBack: () => {
-              this.$store.dispatch('user/getInfo');
-            }
-          });
+          if (location.pathname.includes('/tuxun/')) {
+            window.location.href = 'https://tuxun.fun/user/login?redirect=' + encodeURI(window.location.href);
+          } else {
+            this.$login({
+              callBack: () => {
+                this.$store.dispatch('user/getInfo');
+              }
+            });
+          }
           resolve(false);
         }
       });
