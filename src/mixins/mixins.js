@@ -188,7 +188,7 @@ export default {
         if (this.$store.state.user.islogin) {
           resolve(true);
         } else {
-          if (location.pathname.includes('/tuxun/')) {
+          if (location.pathname.includes('/tuxun/') || location.hostname.includes('tuxun.fun')) {
             window.location.href = 'https://tuxun.fun/user/login?redirect=' + encodeURI(window.location.href);
           } else {
             this.$login({
