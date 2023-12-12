@@ -32,8 +32,8 @@
 <!--      <div style="height: 20px"></div>-->
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
-      <div class="second-info" @click="toSecond"> 一个新的开始！ 图寻第七届组队赛周日开赛 </div>
-      <div class="second-info" @click="toTournament">【图寻联赛第二赛季】联赛第三轮报名帖 </div>
+      <div class="second-info" @click="toSecond"> 玩家第七届组队赛圆满结束</div>
+      <div class="second-info" @click="toTournament">【图寻联赛第二赛季】联赛第四轮报名帖 </div>
 
 
       <section class="game_entrance">
@@ -408,10 +408,10 @@ export default {
       tuxunOpen('https://choa.fun/p/1281750');
     },
     toSecond() {
-      tuxunJump('https://choa.fun/p/1287389');
+      tuxunJump('https://choa.fun/p/1287689');
     },
     toTournament() {
-      tuxunJump('https://choa.fun/p/1287250');
+      tuxunJump('https://choa.fun/p/1287803');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
