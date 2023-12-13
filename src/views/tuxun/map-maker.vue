@@ -195,10 +195,10 @@ export default {
         api.getByPath('/api/v0/tuxun/maps/mapAddPano', {panoIds: this.panoIds.join(","), platform: 'baidu_pano', mapsId: this.mapsId}).then(res => {
           if (res.success) {
             this.$toast('添加成功')
-            setTimeout(()=> {
-              window.history.back();
-            }, 1000);
           }
+          this.panoIds = []
+          this.saveMarkers.forEach((marker) => {marker.remove()});
+          this.saveMarkers = [];
         });
       }
     },
