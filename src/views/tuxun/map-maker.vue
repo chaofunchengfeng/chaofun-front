@@ -194,11 +194,11 @@ export default {
       } else {
         api.getByPath('/api/v0/tuxun/maps/mapAddPano', {panoIds: this.panoIds.join(","), platform: 'baidu_pano', mapsId: this.mapsId}).then(res => {
           if (res.success) {
-            this.$toast('添加成功')
+            this.$toast('添加成功, 清空选择')
+            this.panoIds = []
+            this.saveMarkers.forEach((marker) => {marker.remove()});
+            this.saveMarkers = [];
           }
-          this.panoIds = []
-          this.saveMarkers.forEach((marker) => {marker.remove()});
-          this.saveMarkers = [];
         });
       }
     },
