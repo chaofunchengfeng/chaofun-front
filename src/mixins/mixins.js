@@ -189,7 +189,7 @@ export default {
           resolve(true);
         } else {
           if (location.pathname.includes('/tuxun/') || location.hostname.includes('tuxun.fun')) {
-            window.location.href = 'https://tuxun.fun/user/login?redirect=' + encodeURI(window.location.href);
+            window.location.href = 'https://tuxun.fun/user/login?redirect=' + encodeURIComponent(window.location.href);
           } else {
             this.$login({
               callBack: () => {
