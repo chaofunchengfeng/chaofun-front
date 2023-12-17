@@ -25,6 +25,9 @@
 
           <div class="tag-title" style="padding-top: 10px">操作选中</div>
           <div style="text-align: left">
+            <el-button @click="exportByTags">
+              导出JSON
+            </el-button>
             <el-button @click="batchAdd=true;inputTag=null;">
               打标签
             </el-button>
@@ -207,6 +210,12 @@ export default {
       api.getByPath('/api/v0/tuxun/maps/filterByTags', {mapsId: this.mapsId, tags: this.chooseTag, reverse: this.reverse, noTag: this.noTag, all: this.all}).then(res => {
         this.addMarker(res.data);
       });
+    },
+
+    exportByTags() {
+      window.open(location.origin + '/api/v0/tuxun/maps/exportByTags?mapsId=' + this.mapsId + '&tags=' +
+          this.chooseTag + '&reverse=' + this.reverse + '&noTag=' + this.noTag +
+          '&all=' + this.all,'_self');
     },
 
 
