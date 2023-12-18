@@ -74,6 +74,7 @@
             <div class="describe">
               图片题，新模式
             </div>
+            <div class="card-top-right-beta">Beta</div>
           </div>
         </div>
 
