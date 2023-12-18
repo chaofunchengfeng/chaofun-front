@@ -67,6 +67,14 @@
             </div>
             <div class="card-top-right">可移动</div>
           </div>
+          <div class="card" @click="redirectPage( 'https://tuxun.fun/uncover')">
+            <div class="title">
+              揭图
+            </div>
+            <div class="describe">
+              图片题，新模式
+            </div>
+          </div>
         </div>
 
         <div class="first_session_head">积分</div>
