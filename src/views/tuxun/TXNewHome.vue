@@ -28,12 +28,12 @@
       </div>
 
 
-<!--      <div class="normal-info">「大胆拥抱世界」</div>-->
+      <div class="normal-info">「天气好的时候要去外面玩」</div>
 <!--      <div style="height: 20px"></div>-->
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
       <div class="second-info" @click="toSecond"> 玩家第七届组队赛圆满结束</div>
-      <div class="second-info" @click="toTournament">【图寻联赛第二赛季】联赛第四轮报名帖 </div>
+<!--      <div class="second-info" @click="toTournament">【图寻联赛第二赛季】联赛第四轮报名帖 </div>-->
 
 
       <section class="game_entrance">
@@ -503,7 +503,7 @@ export default {
     .normal-info {
       color: white;
       font-size: medium;
-      padding-top: 2rem;
+      padding-top: 1rem;
     }
     .times {
       color: white;
