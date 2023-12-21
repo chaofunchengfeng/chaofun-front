@@ -6,19 +6,8 @@
             <img src="./rank.png" alt="">
             <span>24 小时版块排名(24小时内帖子获赞)</span>
         </div>
-        <div @click="toUser(item)" v-for="(item,index) in pagedata" :key="index" class="item">
-            <div class="left">
-                <img :src="imgOrigin+item.imageName + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="">
-                <div class="info">
-                    <div class="title">{{item.name}}</div>
-                    <p v-if="item.desc" class="desc">{{item.desc}}</p>
-                </div>
-            </div>
-            <div class="right">
-                <p>第 {{index + 1}} 名</p>
-                <p class="p2" v-if="item.mods !==undefined && item.mods != null  && item.mods.length > 0">版主：{{item.mods[0].userName}}</p>
-            </div>
-        </div>
+      <div>暂不支持</div>
+
     </div>
     <div v-if="!ISPHONE" class="padding"></div>
 
@@ -42,23 +31,10 @@ export default {
   created(){
   },
   mounted(){
-    this.getForumTopUps();
     document.title = '24 小时版块排名';
   },
   methods:{
-    getForumTopUps(){
-        console.log('cijianzy');
-        api.getForumTopUps({'pageSize': 100}).then(res=>{
-            this.pagedata = res.data;
-        });
-    },
-    toUser(item){
-        try {
-            window.flutter_inappwebview.callHandler('toAppForum',{forumId: item.id + ''});
-        } catch (e) {
-            window.open(location.origin + '/f/' + item.id,'_blank');
-        }
-    }
+
   },
 };
 </script>

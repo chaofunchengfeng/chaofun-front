@@ -6,18 +6,7 @@
             <img src="../assets/images/rank.png" alt="">
             <span>24 小时用户排名</span>
         </div>
-        <div @click="toUser(item)" v-for="(item,index) in pagedata" :key="index" class="item">
-            <div class="left">
-                <img :src="imgOrigin+item.icon + '?x-oss-process=image/resize,h_80/quality,q_75'" alt="">
-                <div class="info">
-                    <div class="title">{{item.userName}}</div>
-                    <p v-if="item.desc" class="desc">{{item.desc}}</p>
-                </div>
-            </div>
-            <div class="right">
-                <p>第 {{index + 1}} 名</p>
-            </div>
-        </div>
+      <div>暂不支持</div>
     </div>
     <div v-if="!ISPHONE" class="padding"></div>
 
@@ -41,23 +30,10 @@ export default {
   created(){
   },
   mounted(){
-    this.getTopUps();
     document.title = '24 小时用户排名';
   },
   methods:{
-    getTopUps(){
-        console.log('cijianzy');
-        api.getUserTopUps({'pageSize': 100}).then(res=>{
-            this.pagedata = res.data;
-        });
-    },
-    toUser(item){
-        try {
-            window.flutter_inappwebview.callHandler('toAppUser',{userId: item.userId + ''});
-        } catch (e) {
-          window.open(location.origin + '/user/' + item.userId,'_blank');
-        }
-    }
+
   },
 };
 </script>

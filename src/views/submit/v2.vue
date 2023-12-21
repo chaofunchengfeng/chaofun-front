@@ -267,8 +267,8 @@
                     <router-link to="/help/forumIntro">帮助文档</router-link>
                   </el-col>
                   <el-col :span="12" class="help-item">
-                    <router-link to="/forumRank">24小时版块排名</router-link>
-                    <router-link to="/userRank">24小时用户排名</router-link>
+<!--                    <router-link to="/forumRank">24小时版块排名</router-link>-->
+<!--                    <router-link to="/userRank">24小时用户排名</router-link>-->
                   </el-col>
                 </el-row>
               </el-card>
