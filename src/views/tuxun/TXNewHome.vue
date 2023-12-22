@@ -32,9 +32,9 @@
 <!--      <div style="height: 20px"></div>-->
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
-      <div class="second-info" @click="toSecond"> 玩家第七届组队赛圆满结束</div>
-<!--      <div class="second-info" @click="toTournament">【图寻联赛第二赛季】联赛第四轮报名帖 </div>-->
-
+<!--      <div class="second-info" @click="toSecond"> 玩家第七届组队赛圆满结束</div>-->
+      <div class="second-info" @click="toTournament">积分新赛季将于1月1日开启</div>
+<!---->
 
       <section class="game_entrance">
         <div class="first_session_head">单人</div>
@@ -420,7 +420,7 @@ export default {
       tuxunJump('https://choa.fun/p/1287689');
     },
     toTournament() {
-      tuxunJump('https://choa.fun/p/1287803');
+      tuxunJump('https://www.yuque.com/chaofun/tuxun/season');
     },
     toDoc() {
       tuxunOpen('https://www.yuque.com/chaofun/tuxun/vh943duu6lwuctr9');
