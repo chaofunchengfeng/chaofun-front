@@ -37,7 +37,7 @@
         <div style="display: flex; align-items: center;justify-content: center">
           评分( {{guessInfo.rateCount}} 人评价)：
           <div>
-            <StarRating :read-only="true" :increment="0.01" :rating="guessInfo.rate" :star-size="25"></StarRating>
+            <StarRating :read-only="true" :increment="0.01" :rating="guessInfo.rate ?? 0" :star-size="25"></StarRating>
           </div>
         </div>
       </div>
