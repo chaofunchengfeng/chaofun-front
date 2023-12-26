@@ -38,8 +38,6 @@
                         <div @click="clearsss" class="btnt">重新填写</div>
                     </div>
 
-
-
                     <div class="forums">
                         <h1>我要分享到</h1>
                         <div class="forum_items">
