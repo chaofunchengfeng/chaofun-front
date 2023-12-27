@@ -18,7 +18,7 @@
           <svg-icon icon-class="history" class-name="header-icon" />
           <span class="header-btn">比赛历史</span>
         </el-link>
-        <el-link v-if="!tuxunApp" @click="toAnalysis()" :underline="false">
+        <el-link @click="toAnalysis()" :underline="false">
           <svg-icon icon-class="chart" class-name="header-icon" />
           <span class="header-btn">技术分析</span>
         </el-link>
