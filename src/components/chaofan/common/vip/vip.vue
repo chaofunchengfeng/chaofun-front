@@ -4,7 +4,7 @@
       <div class="ycontainer">
         <div style="font-size: 32px">续费/开通会员</div>
         <div v-if="scene === 'due'" style="color: red">您的会员已过期，是否续费会员</div>
-        <div v-if="scene === 'new'" style="color: red">新寻友，考不考虑会员呢？</div>
+        <div v-if="scene === 'new'" style="color: red">新寻友，考虑会员吗？</div>
         <img @click="cancelVip" class="cancel" :src='cancelImg'/>
         <div class="vip-plans">
           <div @click="changeTo('student')" :class="{'card': choose !== 'student', 'choose-card': choose === 'student'}">
