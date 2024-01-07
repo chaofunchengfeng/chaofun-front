@@ -34,7 +34,7 @@
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
 <!--      <div class="second-info" @click="toSecond"> 玩家第七届组队赛圆满结束</div>-->
       <div class="second-info" @click="toTournament">积分新赛季将于1月1日开启</div>
-      <div class="second-info" @click="toSecond">首届中国赛结束，芙宁娜夺冠！</div>
+      <div class="second-info" @click="raiseVIP">图寻涨价前最后一天，超值优惠中～</div>
 <!---->
 
       <section class="game_entrance">

@@ -363,6 +363,7 @@ export default {
         });
       }
 
+
       this.inputClass = 'input-container';
       this.nameClass = 'name';
       this.start = false;

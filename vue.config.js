@@ -123,6 +123,7 @@ module.exports = {
       //   });
     }
   },
+
   css: {
     extract: {
       filename: `[name].33${Timestamp}.css`,

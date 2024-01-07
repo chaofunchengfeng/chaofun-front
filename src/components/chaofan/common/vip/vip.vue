@@ -5,6 +5,7 @@
         <div style="font-size: 32px">续费/开通会员</div>
         <div v-if="scene === 'due'" style="color: red">您的会员已过期，是否续费会员</div>
         <div v-if="scene === 'new'" style="color: red">新寻友，考虑会员吗？</div>
+
         <img @click="cancelVip" class="cancel" :src='cancelImg'/>
         <div class="vip-plans">
           <div @click="changeTo('student')" :class="{'card': choose !== 'student', 'choose-card': choose === 'student'}">
@@ -93,8 +94,12 @@
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose !== 'student'">
-          <div style="color: #FF0037">
-            限时优惠
+          <div style="color: red">
+            寻友，1月9日0点
+            <a href='https://www.yuque.com/chaofun/tuxun/qflgoioc3dg69zwg'>
+              会涨价
+            </a>
+            ，现在充值享超值优惠～
           </div>
           <div>
             注：感谢探索者您的支持！
