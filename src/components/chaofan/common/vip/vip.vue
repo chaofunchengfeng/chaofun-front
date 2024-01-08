@@ -20,7 +20,7 @@
                 <span style="text-decoration: line-through">720</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>120
+                <span style="font-size: 10px;">￥</span>270
               </div>
               <div>
                 三年
@@ -35,7 +35,7 @@
                 <span style="text-decoration: line-through">240</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>70
+                <span style="font-size: 10px;">￥</span>126
               </div>
               <div>
                 一年
@@ -50,7 +50,7 @@
                 <span style="text-decoration: line-through">120</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>45
+                <span style="font-size: 10px;">￥</span>72
               </div>
               <div>
                 半年
@@ -80,7 +80,7 @@
                 <span style="text-decoration: line-through">20</span>
               </div>
               <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>10
+                <span style="font-size: 10px;">￥</span>15
               </div>
               <div>
                 一个月
@@ -94,13 +94,6 @@
 <!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
         </div>
         <div v-if="choose !== 'student'">
-          <div style="color: red">
-            寻友，1月9日0点
-            <a href='https://www.yuque.com/chaofun/tuxun/qflgoioc3dg69zwg'>
-              会涨价
-            </a>
-            ，现在充值享超值优惠～
-          </div>
           <div>
             注：感谢探索者您的支持！
           </div>
