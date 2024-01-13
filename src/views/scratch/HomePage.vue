@@ -57,6 +57,7 @@ export default {
     };
   },
   created() {
+    window.location.href = 'https://xiaoce.fun'
     if (!location.host.includes('choa.fun') && !location.host.includes('8099')) {
       window.location.href = window.location.href.replace(location.host, 'choa.fun');
     }
