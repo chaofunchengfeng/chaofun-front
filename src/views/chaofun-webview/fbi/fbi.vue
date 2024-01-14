@@ -117,9 +117,9 @@
 <!--      </div>-->
 
       <div @click="orderCup('pillow')" style="padding-top: 20px; width: 50%; display: inline-block">
-        <img style="padding-right: 10px; padding-left: 10px; width: 100%" src="https://i.chao-fan.com/biz/8ac76ef85cc8096adf30863e45a27374.jpg">
+        <img style="padding-right: 10px; padding-left: 10px; width: 100%" src="https://i.chao-fan.com/front/WechatIMG807.jpg">
         <p style="text-align: center">
-          炒饭 抱枕 一个
+          图寻 抱枕 一个
         </p>
         <p style="text-align: center">
           FBi: 2000
