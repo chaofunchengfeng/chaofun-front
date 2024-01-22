@@ -249,7 +249,7 @@
                   最新全球积分：{{ yourTeam.finalRating }}
                 </div>
                 <div v-else>
-                  最新中国积分：{{ yourTeam.chinaRating}}
+                  最新中国积分：{{ yourTeam.finalRating }}
                 </div>
               </div>
               <el-button v-if="!tuxunApp" class="home_button"  type="primary" @click="goTuxun" round>继续匹配</el-button>
