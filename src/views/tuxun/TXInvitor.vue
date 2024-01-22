@@ -27,7 +27,7 @@
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}}</div>
               <div v-if="!gameData.china">全球积分: {{item.rating}}</div>
-              <div v-if="gameData.china && item.chinaRating">世界积分: {{item.rating}}</div>
+              <div v-if="gameData.china && item.chinaRating">中国积分: {{item.chinaRating}}</div>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
               <el-avatar :src="imgOrigin + item.icon" class="avatar"></el-avatar>
               <div class="userName">{{item.userName}}</div>
               <div v-if="!gameData.china">全球积分: {{item.rating}}</div>
-              <div v-if="gameData.china && item.chinaRating">中国积分: {{item.rating}}</div>
+              <div v-if="gameData.china && item.chinaRating">中国积分: {{item.chinaRating}}</div>
             </div>
           </div>
         </div>
