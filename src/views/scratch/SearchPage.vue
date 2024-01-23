@@ -34,6 +34,7 @@ export default {
   },
 
   mounted() {
+    window.location.href = 'https://xiaoce.fun/search';
     this.input();
   },
   methods: {

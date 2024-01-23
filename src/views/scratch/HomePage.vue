@@ -102,7 +102,7 @@ export default {
       });
     },
     gotoSearch() {
-      window.location.href = '/scratch/search';
+      window.location.href = 'https://xiaoce.fun/search';
     },
     toSelf() {
       this.doLoginStatus().then((res) => {
