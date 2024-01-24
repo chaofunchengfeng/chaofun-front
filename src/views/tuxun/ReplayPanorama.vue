@@ -5,7 +5,7 @@
       <el-button v-if="history && history.length > 1" @click="goBack" size="small" round>←返回</el-button>
       <el-button @click="goReplay" size="small" round>返回复盘</el-button>
       <el-button v-if="!tuxunApp" @click="goHome" size="small" round>首页</el-button>
-      <el-button @click="showReport = true" size="small"  round> 坏题反馈 </el-button>
+      <el-button @click="openReport" size="small"  round> 坏题反馈 </el-button>
       <el-button v-if="roundData" size="mini"  @click="reset" round> 回到原点</el-button>
     </div>
     <img v-if="roundData.panoId && roundData.panoId.length === 27" style="z-index: 5000; position: absolute; bottom: 10px; left: 10px; width: 100px; cursor: pointer;"  @click="toBaiduPano" src="https://webmap0.bdimg.com/wolfman/static/pano/images/pano-logo_7969e0c.png">
@@ -78,6 +78,9 @@ export default {
     },
     goHome() {
       tuxunJump('/tuxun/');
+    },
+    openReport() {
+      this.showReport = true;
     },
     goBack() {
       window.history.back();
@@ -175,7 +178,9 @@ export default {
       );
 
     },
-
+    toBaiduPano() {
+      tuxunOpen('https://maps.baidu.com/#panoid=' + this.panoId + '&panotype=street&pitch=0&l=13&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=' + this.panoId);
+    },
     reset() {
       this.setPanoId(this.roundData);
     },
