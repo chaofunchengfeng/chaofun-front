@@ -125,7 +125,7 @@ export default {
       });
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     getMapsName() {
       api.getByPath('/api/v0/tuxun/maps/get', {mapsId: this.mapsId}).then(res=>{
@@ -148,15 +148,15 @@ export default {
     publish() {
       api.getByPathLongTimeout('/api/v0/tuxun/maps/publish', {mapsId: this.mapsId}).then(res=>{
         if (res.success) {
-          tuxunJump('/tuxun/my_maps');
+          tuxunJump('https://tuxun.fun/my_maps');
         }
       });
     },
     toDistribute() {
-      tuxunJump('/tuxun/maps_distribute?mapsId=' + this.mapsId);
+      tuxunJump('https://tuxun.fun/maps_distribute?mapsId=' + this.mapsId);
     },
     tagManage() {
-      tuxunJump('/tuxun/maps-tag-manager?mapsId=' + this.mapsId);
+      tuxunJump('https://tuxun.fun/maps-tag-manager?mapsId=' + this.mapsId);
     },
     addPano() {
       this.submitPanoramaShow = true;
@@ -171,7 +171,7 @@ export default {
       window.open(location.origin + '/api/v0/tuxun/maps/export?mapsId=' + this.mapsId,'_self');
     },
     toFilter() {
-      tuxunJump('/tuxun/maps-filter?mapsId=' + this.mapsId);
+      tuxunJump('https://tuxun.fun/maps-filter?mapsId=' + this.mapsId);
     },
     submitPano() {
       api.postByPath('/api/v0/tuxun/maps/userAddPanorama',
@@ -224,16 +224,16 @@ export default {
       tuxunOpen('https://www.yuque.com/ucun5p/kfw26e/ttqiucknz7sifo5u');
     },
     modify() {
-      tuxunJump('/tuxun/maps_create?mapsId=' + this.mapsId);
+      tuxunJump('https://tuxun.fun/maps_create?mapsId=' + this.mapsId);
     },
     goBaidu() {
-      tuxunJump('/tuxun/map-maker?mapsId=' + this.mapsId);
+      tuxunJump('https://tuxun.fun/map-maker?mapsId=' + this.mapsId);
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
   }

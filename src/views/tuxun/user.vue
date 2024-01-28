@@ -85,7 +85,7 @@ export default {
           this.pagedata = res.data;
         });
       } else if (command === 'toUser') {
-        tuxunJump('/tuxun/user/' + this.user.userId);
+        tuxunJump('https://tuxun.fun/user/' + this.user.userId);
       } else if (command === 'onlooker') {
         api.getByPath('/api/v0/tuxun/party/hostChangeOnlooker', {userId: this.user.userId}).then(res=>{
           this.pagedata = res.data;

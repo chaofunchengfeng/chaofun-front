@@ -176,7 +176,7 @@ export default {
       }).then(res => {
         if (res.success) {
           console.log(res.data);
-          tuxunJump('/tuxun/solo_game?streakId=' + res.data.id);
+          tuxunJump('https://tuxun.fun/solo_game?streakId=' + res.data.id);
         } else {
           if (res.errorCode === 'need_vip') {
             this.$vip();
@@ -215,7 +215,7 @@ export default {
           rounds: this.rounds
         }).then(res => {
           if (res.success) {
-            tuxunJump('/tuxun/solo_game?infinityId=' + res.data);
+            tuxunJump('https://tuxun.fun/solo_game?infinityId=' + res.data);
           } else {
             if (res.errorCode === 'need_vip') {
               this.$vip();
@@ -235,7 +235,7 @@ export default {
           rounds: this.rounds
         }).then(res => {
           if (res.success) {
-            tuxunJump('/tuxun/challenge?challengeId=' + res.data);
+            tuxunJump('https://tuxun.fun/challenge?challengeId=' + res.data);
           } else {
             if (res.errorCode === 'need_vip') {
               this.$vip();
@@ -245,13 +245,13 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
 

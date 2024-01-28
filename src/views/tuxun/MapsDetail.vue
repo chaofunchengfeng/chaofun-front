@@ -121,13 +121,13 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     toManager() {
-      tuxunJump('/tuxun/maps_modify?mapsId=' + this.mapsData.id);
+      tuxunJump('https://tuxun.fun/maps_modify?mapsId=' + this.mapsData.id);
     },
     toScoreManager() {
-      tuxunJump('/tuxun/maps-score-manager?mapsId=' + this.mapsData.id);
+      tuxunJump('https://tuxun.fun/maps-score-manager?mapsId=' + this.mapsData.id);
     },
     getRank() {
       this.rank = [];
@@ -154,7 +154,7 @@ export default {
         if (res) {
           api.getByPath('/api/v0/tuxun/vip/check').then(res=>{
             if (res.data) {
-              tuxunJump('/tuxun/maps-start?mapsId=' + item.id);
+              tuxunJump('https://tuxun.fun/maps-start?mapsId=' + item.id);
             } else {
               this.$vip();
             }
@@ -179,13 +179,13 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     randomTrain() {
       api.getByPath('/api/v0/tuxun/maps/randomTrain').then(res => {
         if (res.success) {
-          tuxunJump('/tuxun/maps_detail?mapsId=' + res.data);
+          tuxunJump('https://tuxun.fun/maps_detail?mapsId=' + res.data);
         }
       });
     }

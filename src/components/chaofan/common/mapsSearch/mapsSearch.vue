@@ -59,14 +59,14 @@ export default {
     toMapsDetail(item) {
       // console.log(this.callBack)
       if (!this.callBack) {
-        tuxunJump('/tuxun/maps_detail?mapsId=' + item.id);
+        tuxunJump('https://tuxun.fun/maps_detail?mapsId=' + item.id);
       }
     },
     toMaps(item, type) {
       if (!this.callBack) {
         api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
           if (res.success) {
-            tuxunJump('/tuxun/challenge?challengeId=' + res.data);
+            tuxunJump('https://tuxun.fun/challenge?challengeId=' + res.data);
           } else {
             if (res.errorCode === 'need_vip') {
               this.$vip();
@@ -82,7 +82,7 @@ export default {
       api.getByPath('/api/v0/tuxun/vip/check').then(res=>{
         if (res.success) {
           if (res.data) {
-            tuxunJump('/tuxun/maps-start?mapsId=' + item.id);
+            tuxunJump('https://tuxun.fun/maps-start?mapsId=' + item.id);
           } else {
             this.$vip();
           }

@@ -36,7 +36,7 @@ export default {
     joinById(teamId) {
       api.getByPath('/api/v0/tuxun/matchTeam/join', {teamId: teamId}).then(res => {
         if (res.success) {
-          tuxunJump('/tuxun/team');
+          tuxunJump('https://tuxun.fun/team');
         } else {
           if (res.errorCode == 'need_login') {
             this.$login({
@@ -51,10 +51,10 @@ export default {
       });
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     goTeam() {
-      tuxunJump('/tuxun/team');
+      tuxunJump('https://tuxun.fun/team');
     },
   }
 };

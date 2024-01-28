@@ -161,17 +161,17 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('https://tuxun.fun/')
     },
     deleteImg() {
       api.getByPath('/api/v0/finder/delete', {id: this.id}).then(res => {
         if (res.success) {
           this.$toast('删除成功');
-          tuxunJump('/tuxun/finder?userId=' + this.$store.state.user.userInfo.userId);
+          tuxunJump('https://tuxun.fun/finder?userId=' + this.$store.state.user.userInfo.userId);
         }
       });
     },
@@ -198,7 +198,7 @@ export default {
     publish() {
       api.getByPath('/api/v0/finder/publish', {id: this.id, lat: this.lat, lng: this.lng}).then(res=>{
         if (res.success) {
-          tuxunJump('/tuxun/finder?userId=' + res.data.userId);
+          tuxunJump('https://tuxun.fun/finder?userId=' + res.data.userId);
         }
       });
     },

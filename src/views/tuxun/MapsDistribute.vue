@@ -199,13 +199,13 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     changeManager() {

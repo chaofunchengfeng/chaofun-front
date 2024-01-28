@@ -103,7 +103,7 @@ export default {
       });
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     setPano(tuxunPid, panoId) {
       this.tuxunPid = tuxunPid;
@@ -122,7 +122,7 @@ export default {
       this.doLoginStatus().then((res) => {
       if (res) {
         if (this.$route.query.id) {
-          tuxunJump('/tuxun/random');
+          tuxunJump('https://tuxun.fun/random');
           return;
         }
         api.getByPath('/api/v0/tuxun/random', {mapsId: this.mapsId}).then(res => {

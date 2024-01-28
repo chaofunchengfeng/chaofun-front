@@ -61,13 +61,13 @@ export default {
   },
   methods: {
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     get() {
@@ -80,7 +80,7 @@ export default {
     addMap() {
       api.getByPath('/api/v0/tuxun/maps/add', {name: this.name, desc: this.desc, cover: this.cover}).then(res => {
         if (res.success) {
-          tuxunJump('/tuxun/maps_modify?mapsId=' + res.data.id);
+          tuxunJump('https://tuxun.fun/maps_modify?mapsId=' + res.data.id);
         } else if (res.errorCode === 'need_vip') {
           this.$vip();
         }

@@ -116,7 +116,7 @@ export default {
       this.listRank();
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     createNew() {
 
@@ -124,7 +124,7 @@ export default {
         if (res) {
           api.getByPath('/api/v0/tuxun/streak/create', {type: this.type}).then(res => {
             if (res.success) {
-              tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
+              tuxunJump('https://tuxun.fun/streak_game?streakId=' + res.data.id);
             } else if (res.errorCode === 'need_vip') {
               this.$vip();
             }

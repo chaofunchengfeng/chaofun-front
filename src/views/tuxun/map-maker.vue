@@ -176,11 +176,11 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('https://tuxun.fun/')
     },
     keep() {
       if (this.panoId) {

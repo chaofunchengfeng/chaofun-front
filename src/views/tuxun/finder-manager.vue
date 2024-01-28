@@ -124,7 +124,7 @@ export default {
             marker.finder = finder;
             marker.getElement().addEventListener('click', function (e) {
 
-              tuxunJump('/tuxun/finder-upload?type=modify&id=' + marker.finder.id);
+              tuxunJump('https://tuxun.fun/finder-upload?type=modify&id=' + marker.finder.id);
             }.bind(this));
             group.push([finder.lat, finder.lng]);
           }

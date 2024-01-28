@@ -163,7 +163,7 @@ export default {
     finderUpload() {
       api.postByPath('/api/v0/finder/add').then((res) => {
         if (res.success) {
-          tuxunJump('/tuxun/finder-upload?id=' + res.data.id);
+          tuxunJump('https://tuxun.fun/finder-upload?id=' + res.data.id);
         }
       });
     },
@@ -174,22 +174,22 @@ export default {
       });
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('https://tuxun.fun/')
     },
     goFinder() {
-      tuxunJump('/tuxun/event')
+      tuxunJump('https://tuxun.fun/event')
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     toManager() {
       this.doLoginStatus().then((res) => {
         if (res) {
-          tuxunJump('/tuxun/finder-manager');
+          tuxunJump('https://tuxun.fun/finder-manager');
         }
       });
     }

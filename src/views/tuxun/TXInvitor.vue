@@ -582,7 +582,7 @@ export default {
         this.countDown();
         document.title = '对战-图寻';
       } else if (!this.challengeId && !this.streakId && !this.guoqingId && !this.infinityId) {
-        tuxunJump('/tuxun/match');
+        tuxunJump('https://tuxun.fun/match');
       } else if (this.challengeId) {
         this.doLoginStatus().then(res => {
           console.log(res);
@@ -675,10 +675,10 @@ export default {
       }
     },
     backParty() {
-      tuxunJump('/tuxun/social');
+      tuxunJump('https://tuxun.fun/social');
     },
     backTeam() {
-      tuxunJump('/tuxun/team');
+      tuxunJump('https://tuxun.fun/team');
     },
     mapMouseOut() {
       if (!window.matchMedia('(hover: none)').matches && document.body.clientWidth > 678 && !this.mapPin) {
@@ -773,7 +773,7 @@ export default {
     toAnotherPlayer() {
       this.gameData.players.forEach((user) => {
         if (user.userId !== this.gameData.requestUserId) {
-          tuxunJump('/tuxun/user/' + user.userId);
+          tuxunJump('https://tuxun.fun/user/' + user.userId);
         }
       });
     },
@@ -1127,7 +1127,7 @@ export default {
           tType = 'country_move';
         }
         api.getByPath('/api/v0/tuxun/streak/create', {type: tType}).then(res => {
-          tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
+          tuxunJump('https://tuxun.fun/streak_game?streakId=' + res.data.id);
         });
       } else if (this.gameData.type === 'province_streak' ) {
         var tType = 'province';
@@ -1136,7 +1136,7 @@ export default {
           tType = 'province_move';
         }
         api.getByPath('/api/v0/tuxun/streak/create', {type: tType}).then(res => {
-          tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
+          tuxunJump('https://tuxun.fun/streak_game?streakId=' + res.data.id);
         });
       } else if (this.gameData.type === 'map_country_streak' ) {
         api.getByPath('/api/v0/tuxun/streak/createMapCountryStreak', {
@@ -1148,7 +1148,7 @@ export default {
           'blinkTime': this.gameData.blinkTime
         }).then(res => {
           if (res.success) {
-            tuxunJump('/tuxun/streak_game?streakId=' + res.data.id);
+            tuxunJump('https://tuxun.fun/streak_game?streakId=' + res.data.id);
           } else {
             if (res.errorCode === 'need_vip') {
               this.$vip();
@@ -1594,7 +1594,7 @@ export default {
       }
       api.getByPath('/api/v0/tuxun/br/get', {type: type}).then(res => {
         if (res.data.gameId) {
-          tuxunJump('/tuxun/guoqing_game?guoqingId=' + res.data.gameId);
+          tuxunJump('https://tuxun.fun/guoqing_game?guoqingId=' + res.data.gameId);
         }
       });
     },

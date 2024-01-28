@@ -75,13 +75,13 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     toMaps(item, type) {
@@ -90,7 +90,7 @@ export default {
 
           api.getByPath('/api/v0/tuxun/challenge/create', {'mapsId': item.id, 'type': type}).then(res => {
             if (res.success) {
-              tuxunJump('/tuxun/challenge?challengeId=' + res.data);
+              tuxunJump('https://tuxun.fun/challenge?challengeId=' + res.data);
             } else {
               if (res.errorCode === 'need_vip') {
                 this.$vip();
@@ -101,7 +101,7 @@ export default {
 });
     },
     toMapsDetail(item, type) {
-      tuxunJump('/tuxun/maps_detail?mapsId=' + item.id );
+      tuxunJump('https://tuxun.fun/maps_detail?mapsId=' + item.id );
     },
   }
 };

@@ -35,16 +35,16 @@ export default {
   },
   methods: {
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('https://tuxun.fun/')
     },
     goPano() {
-      tuxunJump('/tuxun/pano-gallary')
+      tuxunJump('https://tuxun.fun/pano-gallary')
     },
     goTeam() {
-      tuxunJump('/tuxun/team')
+      tuxunJump('https://tuxun.fun/team')
     },
     goXJ() {
-      tuxunJump('/tuxun/event');
+      tuxunJump('https://tuxun.fun/event');
     }
   }
 }

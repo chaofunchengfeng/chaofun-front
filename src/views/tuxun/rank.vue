@@ -112,11 +112,11 @@ export default {
       });
     },
     toUser(item) {
-      tuxunJump('/tuxun/user/' + item.userAO.userId);
+      tuxunJump('https://tuxun.fun/user/' + item.userAO.userId);
     },
 
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
 
     toDoc() {

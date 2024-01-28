@@ -39,7 +39,7 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     init() {
@@ -89,10 +89,10 @@ export default {
       };
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     create() {
-      tuxunJump('/tuxun/pano-create');
+      tuxunJump('https://tuxun.fun/pano-create');
     },
     getId() {
       api.getByPath('/api/v0/pano/preview', {id: this.id}).then(res => {

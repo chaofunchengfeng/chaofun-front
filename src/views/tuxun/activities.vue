@@ -89,11 +89,11 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     handleCommand(command) {
     },
@@ -155,7 +155,7 @@ export default {
 
     },
     toGame(item) {
-      tuxunJump('/tuxun/solo_game?gameId=' + item.gameId);
+      tuxunJump('https://tuxun.fun/solo_game?gameId=' + item.gameId);
     }
   }
 };

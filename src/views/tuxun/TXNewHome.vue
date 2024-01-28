@@ -355,13 +355,13 @@ export default {
 
     toParty() {
       this.doLoginStatus().then((res) => {
-        tuxunJump('/tuxun/social');
+        tuxunJump('https://tuxun.fun/social');
       });
     },
 
     toJoin() {
       this.doLoginStatus().then((res) => {
-        tuxunJump('/tuxun/join');
+        tuxunJump('https://tuxun.fun/join');
       });
     },
 
@@ -400,7 +400,7 @@ export default {
     toUserHome() {
       this.doLoginStatus().then((res) => {
         if (res) {
-          tuxunJump('/tuxun/user/' + this.$store.state.user.userInfo.userId);
+          tuxunJump('https://tuxun.fun/user/' + this.$store.state.user.userInfo.userId);
         }
       });
     },

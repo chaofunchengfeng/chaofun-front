@@ -179,7 +179,7 @@ export default {
       }
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     setSharePano(tuxunPid) {
       api.getByPath('/api/v0/tuxun/wonders/get', {'tuxunPid': this.tuxunPid}).then(res=>{
@@ -222,7 +222,7 @@ export default {
       this.doLoginStatus().then((res) => {
       if (res) {
         if (this.$route.query.id) {
-          tuxunJump('/tuxun/wonders');
+          tuxunJump('https://tuxun.fun/wonders');
           return;
         }
         api.getByPath('/api/v0/tuxun/wonders/random').then(res => {

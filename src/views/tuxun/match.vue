@@ -58,7 +58,7 @@ export default {
     init() {
     },
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('https://tuxun.fun/')
     },
     nmMatching() {
       this.showMatch = true;
@@ -78,7 +78,7 @@ export default {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
     match() {

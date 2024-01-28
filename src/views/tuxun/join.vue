@@ -59,7 +59,7 @@ export default {
         if (res) {
           api.getByPath('/api/v0/tuxun/party/join', {joinCode: code}).then(res => {
             if (res.success) {
-              tuxunJump('/tuxun/social');
+              tuxunJump('https://tuxun.fun/social');
             } else if (res.errorCode === 'party_disband') {
               this.disband = true;
             } else if (res.errorCode === 'party_block') {
@@ -70,10 +70,10 @@ export default {
       });
     },
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun/');
     },
     goParty() {
-      tuxunJump('/tuxun/social');
+      tuxunJump('https://tuxun.fun/social');
     },
   }
 };

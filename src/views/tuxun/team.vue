@@ -117,7 +117,7 @@ export default {
       this.matchTeamData = teamData;
 
       if (code === 'start_game') {
-        tuxunJump('/tuxun/solo_game?gameId=' + this.matchTeamData.gameId);
+        tuxunJump('https://tuxun.fun/solo_game?gameId=' + this.matchTeamData.gameId);
       }
 
       if (code === 'party_disband') {
@@ -164,14 +164,14 @@ export default {
     },
 
     goHome() {
-      tuxunJump('/tuxun/')
+      tuxunJump('https://tuxun.fun/')
     },
 
     goBack() {
       try {
         window.history.back();
       } catch (e) {
-        tuxunJump('/tuxun/');
+        tuxunJump('https://tuxun.fun/');
       }
     },
 
@@ -201,7 +201,7 @@ export default {
       });
     },
     gotoGame() {
-      tuxunJump('/tuxun/solo_game?gameId=' + this.matchTeamData.gameId);
+      tuxunJump('https://tuxun.fun/solo_game?gameId=' + this.matchTeamData.gameId);
     },
 
     copyInviterLink() {
