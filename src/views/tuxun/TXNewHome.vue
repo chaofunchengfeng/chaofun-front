@@ -41,7 +41,7 @@
         <div class="first_session_head">单人</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage( '/tuxun/daily-challenge?v=1118')">
+          <div class="card" @click="redirectPage( 'https://tuxun.fun/daily-challenge?v=1118')">
             <div class="title">
               每日挑战
             </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="card-top-right">可移动</div>
           </div>
-          <div class="card" @click="redirectPage( '/tuxun/maps')">
+          <div class="card" @click="redirectPage( 'https://tuxun.fun/maps')">
             <div class="title">
               题库
             </div>
@@ -153,7 +153,7 @@
         <div class="first_session_head">探索</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage('/tuxun/explain')">
+          <div class="card" @click="redirectPage('https://tuxun.fun/explain')">
             <div class="title">
               图解
             </div>
@@ -161,7 +161,7 @@
               智能推理位置，学习地理知识
             </div>
           </div>
-          <div class="card" @click="redirectPage('/tuxun/event')">
+          <div class="card" @click="redirectPage('https://tuxun.fun/event')">
             <div class="title">
               寻景
             </div>
