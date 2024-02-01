@@ -726,7 +726,7 @@ export default {
         map.attributionControl.setPrefix('华为地图');
         map.attributionControl.addAttribution('GS（2022）2885号');
 
-        var url = 'https://map2.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
+        var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
         L.tileLayer(url, {
           maxZoom: 18,
           minZoom: 1,
@@ -1788,7 +1788,7 @@ export default {
       zoom = zoom += 1;
       if (zoom === 1) {
         return (
-            'https://map2.chao-fan.com/bd/thumb/' + pano
+            'https://map.chao-fan.com/bd/thumb/' + pano
         );
       }
       return (
