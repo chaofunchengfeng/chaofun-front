@@ -33,7 +33,7 @@
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
       <div class="second-info" @click="toSecond">全新赛制，随机题库！ 图寻第八届组队赛</div>
-      <div class="second-info" @click="toFirstTournament">联赛第八轮报名帖 & 季后赛公告</div>
+      <div class="second-info" @click="toFirstTournament">【图寻联赛第二赛季】赛事完赛帖</div>
 <!--      <div class="second-info" @click="raiseVIP">图寻涨价前最后一天，超值优惠中～</div>-->
 <!---->
 
@@ -423,7 +423,7 @@ export default {
       tuxunOpen('https://www.yuque.com/ucun5p/tuxun');
     },
     toFirstTournament() {
-      tuxunOpen('https://choa.fun/p/1292235');
+      tuxunOpen('https://choa.fun/p/1292804');
     },
     toSecond() {
       tuxunJump('https://choa.fun/p/1292554');
