@@ -108,7 +108,7 @@
             <div class="describe">
               江山如此多娇
             </div>
-            <div class="card-top-right-beta">Beta</div>
+<!--            <div class="card-top-right-beta">Beta</div>-->
           </div>
         </div>
 
