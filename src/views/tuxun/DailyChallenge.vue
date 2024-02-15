@@ -141,7 +141,7 @@ export default {
       return str;
     },
     toReplay() {
-      tuxunJump('/tuxun/replay?gameId=' + this.gameData.id);
+      tuxunJump('https://tuxun.fun/replay?gameId=' + this.gameData.id);
     },
     share() {
       // var input = document.createElement('textarea');

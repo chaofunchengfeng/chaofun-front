@@ -1619,7 +1619,7 @@ export default {
     },
 
     replay() {
-      tuxunJump('/tuxun/replay?gameId=' + this.gameId);
+      tuxunJump('https://tuxun.fun/replay?gameId=' + this.gameId);
     },
 
     challengeAgain() {

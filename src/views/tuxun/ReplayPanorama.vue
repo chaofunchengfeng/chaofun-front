@@ -91,7 +91,7 @@ export default {
       });
     },
     goReplay() {
-      tuxunJump('/tuxun/replay?gameId=' + this.gameId);
+      tuxunJump('https://tuxun.fun/replay?gameId=' + this.gameId);
     },
     render(round) {
       console.log(round);
