@@ -248,11 +248,14 @@
             <div @click="toUpdate" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
               更新日志
             </div>
+            <div @click="toApp" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
+              App
+            </div>
             <div @click="toMall" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
               商店
             </div>
-            <div @click="toApp" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
-              App
+            <div @click="toTaobao" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
+              周边
             </div>
             <!--          <div @click="window.location.href = '/tuxun/change_log'" style="color: white;font-size: medium; padding-top: 1rem; text-decoration:underline;">-->
             <!--            更新日志-->
@@ -419,6 +422,9 @@ export default {
     },
     toUpdate() {
       tuxunOpen('https://www.yuque.com/ucun5p/kfw26e/dp7hvxnm7tes88g7');
+    },
+    toTaobao() {
+      tuxunOpen('https://shop179684564.taobao.com/');
     },
     toMall() {
       tuxunOpen('https://tuxun.fun/mall');
