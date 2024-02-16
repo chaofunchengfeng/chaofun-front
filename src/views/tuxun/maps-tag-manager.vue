@@ -77,10 +77,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import { loadScript } from 'vue-plugin-load-script';
 import { Dialog } from 'vant';
-
-
-
-
+import {tuxunJump} from './common';
 export default {
   name: "maps-tag-manager",
   data() {
