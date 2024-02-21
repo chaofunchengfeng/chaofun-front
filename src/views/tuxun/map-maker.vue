@@ -44,10 +44,11 @@ export default {
     document.onkeydown = function(event){
       var e = event || window.event || arguments.callee.caller.arguments[0];
       // 空格键
-      if (e && e.keyCode==32){
+      console.log(e.keyCode);
+      if (e && e.keyCode===32){
         this.keep();
       }
-    };
+    }.bind(this);
 
   },
   methods: {
