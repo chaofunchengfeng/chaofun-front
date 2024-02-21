@@ -40,6 +40,15 @@ export default {
     setTimeout(()=> {
       this.init();
     }, 1000);
+
+    document.onkeydown = function(event){
+      var e = event || window.event || arguments.callee.caller.arguments[0];
+      // 空格键
+      if (e && e.keyCode==32){
+        this.keep();
+      }
+    };
+
   },
   methods: {
     getPano(x, y) {
