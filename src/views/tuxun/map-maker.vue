@@ -5,7 +5,7 @@
       <el-button  @click="saveAndBack" size="small" round>添进题库({{panoIds.length}})</el-button>
     </div>
     <div class="top-right">
-      <el-button  @click="keep" size="small" round>保留</el-button>
+      <el-button  @click="keep" size="small" round>保留(空格)</el-button>
     </div>
     <div id="viewer" class="pano"></div>
     <div id="map" class="maps"></div>
