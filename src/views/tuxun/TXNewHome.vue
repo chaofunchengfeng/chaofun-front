@@ -34,7 +34,7 @@
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
       <div class="second-info" @click="toFirstTournament">第二届图寻高校争霸赛结赛</div>
-      <div class="second-info" @click="toSecond">第二届图寻中国赛圆满结束</div>
+      <div class="second-info" @click="toSecond">中国赛全新赛制！第一届图寻中国组队赛</div>
 <!--      <div class="second-info" @click="toFirstTournament">【图寻联赛第二赛季】赛事完赛帖</div>-->
 <!--      <div class="second-info" @click="raiseVIP">图寻涨价前最后一天，超值优惠中～</div>-->
 <!---->
@@ -439,7 +439,7 @@ export default {
       tuxunOpen('https://choa.fun/p/1296355');
     },
     toSecond() {
-      tuxunJump('https://choa.fun/p/1295658');
+      tuxunJump('https://choa.fun/p/1297041');
     },
     toTournament() {
       tuxunJump('https://www.yuque.com/chaofun/tuxun/season');
