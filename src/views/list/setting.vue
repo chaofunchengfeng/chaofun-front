@@ -44,19 +44,17 @@
                     确定修改
                   </el-button>
                 </div>
-                <div class="title">绑定手机号</div>
-                <div>
-                  <div v-if="!userInfo.phone" style="display:inline-block;padding-left:10px;">
-                    <span style="color:red;">未绑定手机号？</span>
-                    <span style="color:#409eff;text-decoration:underline;cursor:pointer;"
-                          @click="toBindPhone">去绑定</span>
-                  </div>
-                  <div v-else style="color: dodgerblue">
-                    已绑定
-                  </div>
-                </div>
-
-
+<!--                <div class="title">绑定手机号</div>-->
+<!--                <div>-->
+<!--                  <div v-if="!userInfo.phone" style="display:inline-block;padding-left:10px;">-->
+<!--                    <span style="color:red;">未绑定手机号？</span>-->
+<!--                    <span style="color:#409eff;text-decoration:underline;cursor:pointer;"-->
+<!--                          @click="toBindPhone">去绑定</span>-->
+<!--                  </div>-->
+<!--                  <div v-else style="color: dodgerblue">-->
+<!--                    已绑定-->
+<!--                  </div>-->
+<!--                </div>-->
               </el-tab-pane>
 
 
