@@ -84,7 +84,7 @@
           图寻会员 1个月
         </p>
         <p style="text-align: center">
-          FBi: 599
+          FBi: 1500
         </p>
       </div>
 
@@ -152,7 +152,7 @@
           图寻会员 1年
         </p>
         <p style="text-align: center">
-          FBi: 3999
+          FBi: 126000
         </p>
       </div>
 
