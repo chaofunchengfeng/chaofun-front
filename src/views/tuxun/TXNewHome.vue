@@ -155,14 +155,14 @@
         <div class="first_session_head">探索</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage('https://tuxun.fun/explain')">
-            <div class="title">
-              图解
-            </div>
-            <div class="describe">
-              智能推理位置，学习地理知识
-            </div>
-          </div>
+<!--          <div class="card" @click="redirectPage('https://tuxun.fun/explain')">-->
+<!--            <div class="title">-->
+<!--              图解-->
+<!--            </div>-->
+<!--            <div class="describe">-->
+<!--              智能推理位置，学习地理知识-->
+<!--            </div>-->
+<!--          </div>-->
           <div class="card" @click="redirectPage('https://tuxun.fun/event')">
             <div class="title">
               寻景
