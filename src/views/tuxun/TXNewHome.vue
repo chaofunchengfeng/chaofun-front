@@ -303,7 +303,7 @@ export default {
     return {
       times: null,
       message: 0,
-      backgroundImage: 'front/dragon.jpg?x-oss-process=image/quality,q_50'
+      backgroundImage: 'front/niu.jpg?x-oss-process=image/quality,q_50'
     };
   },
   created() {
@@ -312,9 +312,9 @@ export default {
       return;
     }
 
-    if (this.clientWidth && this.clientHeight && this.clientWidth < this.clientHeight && this.clientWidth < 679) {
-      this.backgroundImage = 'front/dragon-mobile.png?x-oss-process=image/quality,q_50'
-    }
+    // if (this.clientWidth && this.clientHeight && this.clientWidth < this.clientHeight && this.clientWidth < 679) {
+    //   this.backgroundImage = 'front/dragon-mobile.png?x-oss-process=image/quality,q_50'
+    // }
 
     var Notification = window.Notification || window.mozNotification || window.webkitNotification;
     if (Notification) {
