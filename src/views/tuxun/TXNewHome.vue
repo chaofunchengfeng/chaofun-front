@@ -29,7 +29,7 @@
 
 
 <!--      <div class="normal-info">「天气好的时候要去外面玩」</div>-->
-      <div class="normal-info">「新年快乐～」</div>
+<!--      <div class="normal-info">「新年快乐～」</div>-->
 <!--      <div style="height: 20px"></div>-->
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
