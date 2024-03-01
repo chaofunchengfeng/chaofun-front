@@ -12,7 +12,7 @@ export default {
   name: 'TuxunNewMap',
   mounted() {
     var map = L.map('map').setView([51.505, -0.09], 3);
-    var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
+    var url = 'https://map.chao-fan.com/tile231207/s2_z{z}_x{x}_y{y}.jpeg';
     L.tileLayer(url, {
       maxZoom: 18,
       minZoom: 0,
