@@ -361,9 +361,9 @@ export default {
     getTuxunVip(period) {
       var fbi = null;
       if (period === '1month') {
-        fbi = 599;
+        fbi = 1500;
       } else if (period === '1year') {
-        fbi = 3999;
+        fbi = 126000;
       }
 
       Dialog.confirm({
