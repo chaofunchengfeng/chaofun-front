@@ -51,13 +51,13 @@ export default {
         // },
 
         {
-          path: '/tuxun',
+          path: 'https://tuxun.fun',
           title: '图寻',
           desc: '网络迷踪/看图找地点',
           showBottom: true
         },
         {
-          path: '/scratch/home',
+          path: 'https://xiaoce.fun',
           title: '小测验',
           desc: '一起来制作和玩耍小测验吧',
           showBottom: true
@@ -123,7 +123,11 @@ export default {
       try {
         window.flutter_inappwebview.callHandler('toViewPage',{url: location.origin + item.path,title:item.title,showHeader: true});
       } catch (e) {
-        window.open(location.origin + item.path);
+        if (item.path.includes("https://")) {
+          window.open(item.path);
+        } else {
+          window.open(location.origin + item.path);
+        }
       }
     },
     toNavigate(){
