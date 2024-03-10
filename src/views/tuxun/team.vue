@@ -74,7 +74,6 @@ import Matching from './Matching';
 import {Circle2} from 'vue-loading-spinner';
 import TuxunInvite from './tuxun-invite'
 
-
 export default {
   name: "team",
   components: {

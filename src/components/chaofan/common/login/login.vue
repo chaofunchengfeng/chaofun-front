@@ -213,7 +213,7 @@ import {deepClone,randomRange} from '@/utils';
       this.loginType = v;
     },
      getTicket() {
-       api.getByPath('/api/v0/user/getLoginTicket').then(res=>{
+       api.getByPath('/api/v0/user/getLoginTicket', {platform: 'tuxun'}).then(res=>{
          if (res.success) {
            this.ticket = res.data;
            this.ticketTimer = setInterval(()=>{
@@ -223,7 +223,7 @@ import {deepClone,randomRange} from '@/utils';
        });
      },
      checkTicketLogin() {
-       api.getByPath('/api/v0/login/loginByPublicAccount', {'ticket': this.ticket}).then(res=>{
+       api.getByPath('/api/v0/login/loginByPublicAccount', {'ticket': this.ticket, platform: 'tuxun'}).then(res=>{
          if (res.data) {
            clearInterval(this.ticketTimer);
            this.getUserInfo();
