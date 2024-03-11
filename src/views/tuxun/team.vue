@@ -200,7 +200,7 @@ export default {
       });
     },
     gotoGame() {
-      tuxunJump('https://tuxun.fun/solo_game?gameId=' + this.matchTeamData.gameId);
+      location.href='https://tuxun.fun/solo/' + this.matchTeamData.gameId;
     },
 
     copyInviterLink() {
