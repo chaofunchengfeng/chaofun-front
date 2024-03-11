@@ -116,7 +116,7 @@ export default {
       this.matchTeamData = teamData;
 
       if (code === 'start_game') {
-        tuxunJump('https://tuxun.fun/solo_game?gameId=' + this.matchTeamData.gameId);
+        this.gotoGame();
       }
 
       if (code === 'party_disband') {
