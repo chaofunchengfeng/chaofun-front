@@ -72,7 +72,7 @@ export default {
       });
     },
     toMapDetail(item) {
-      location.href =  '/tuxun/map/' + item.id;
+      location.href =  '/map/' + item.id;
     },
     deleteMaps(id) {
       this.$confirm('是否确定删除该题库吗？', '提示', {
