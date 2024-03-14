@@ -51,13 +51,13 @@ export default {
         // },
 
         {
-          path: 'https://tuxun.fun',
+          path: '/tuxun',
           title: '图寻',
           desc: '网络迷踪/看图找地点',
           showBottom: true
         },
         {
-          path: 'https://xiaoce.fun',
+          path: '/scratch/home',
           title: '小测验',
           desc: '一起来制作和玩耍小测验吧',
           showBottom: true
