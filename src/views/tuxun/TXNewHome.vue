@@ -241,7 +241,7 @@
               </div>
             </div>
           </div>
-          <div style="display: flex;">
+          <div style="display: flex; flex-wrap: wrap">
             <div @click="toDocument" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
               图寻文档
             </div>
