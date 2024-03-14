@@ -50,7 +50,6 @@
             <div class="describe">
               每天五题，神清气爽
             </div>
-            <div class="card-top-right">可移动</div>
           </div>
           <div class="card" @click="redirectPage( '/tuxun/streak')">
             <div class="title">
@@ -59,7 +58,6 @@
             <div class="describe">
               探索者，坚持到一百题啊！
             </div>
-            <div class="card-top-right">可移动</div>
           </div>
           <div class="card" @click="redirectPage( 'https://tuxun.fun/maps')">
             <div class="title">
@@ -68,7 +66,6 @@
             <div class="describe">
               走遍大江南北
             </div>
-            <div class="card-top-right">可移动</div>
           </div>
           <div class="card" @click="redirectPage( 'https://tuxun.fun/uncover')">
             <div class="title">
@@ -100,7 +97,6 @@
             <div class="describe">
               全球街景的积分比赛
             </div>
-            <div class="card-top-right">可移动</div>
           </div>
           <div class="card" @click="toChinaMatch">
             <div class="title">
@@ -140,7 +136,6 @@
             <div class="describe">
               邀请好友对决
             </div>
-            <div class="card-top-right">可移动</div>
           </div>
           <div class="card" @click="toJoin" >
             <div class="title">
@@ -179,7 +174,6 @@
             <div class="describe">
               光怪陆离，怪奇物语
             </div>
-            <div class="card-top-right">可移动</div>
           </div>
 
           <div class="card" @click="redirectPage( '/tuxun/random')">
@@ -189,7 +183,6 @@
             <div class="describe">
               漫步孤独星球
             </div>
-            <div class="card-top-right">可移动</div>
           </div>
 
 

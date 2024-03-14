@@ -33,7 +33,6 @@
           <div>
             <el-button style="background-color: unset; color: white" @click.stop="toMaps(item)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
           </div>
-          <div class="card-top-right">可移动</div>
         </div>
       </div>
     </div>

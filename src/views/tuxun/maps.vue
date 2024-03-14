@@ -18,7 +18,6 @@
       <div class="line" v-if="recentPagedata && recentPagedata.length >= 1"></div>
       <div class="grid_main" v-if="recentPagedata && recentPagedata.length >= 1">
         <div v-for="(item, index) in recentPagedata" @click.stop="toMapsDetail(item)" :key="index" :style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('+ imgOrigin + (item.cover || 'biz/1659323781589_7d19c33667a54a4dabb0405ee5aec20f.jpeg') + '?x-oss-process=image/resize,h_400)','background-size':'cover'}"  class="card">
-          <div class="card-top-right">可移动</div>
           <div class="title">
             {{item.name}}
           </div>
@@ -34,7 +33,6 @@
           <div>
             <el-button style="background-color: unset; color: white" @click.stop="toMaps(item)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
           </div>
-          <div class="card-top-right">可移动</div>
         </div>
       </div>
 
@@ -57,7 +55,6 @@
           <div>
             <el-button style="background-color: unset; color: white" @click.stop="toMaps(item)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
           </div>
-          <div class="card-top-right">可移动</div>
         </div>
       </div>
 <!--      <el-button style="margin-top: 1rem">查看更多</el-button>-->
@@ -81,7 +78,6 @@
           <div>
             <el-button style="background-color: unset; color: white" @click.stop="toMaps(item)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
           </div>
-          <div class="card-top-right">可移动</div>
         </div>
       </div>
       <el-button style="margin-top: 2rem" @click="toNew">查看更多最新</el-button>
@@ -105,7 +101,6 @@
           <div>
             <el-button style="background-color: unset; color: white" @click.stop="toMaps(item)" type="primary"  round>探索<span style="color: gold">(VIP)</span></el-button>
           </div>
-          <div class="card-top-right">可移动</div>
         </div>
       </div>
       <el-button style="margin-top: 2rem" @click="toHot">查看更多最热</el-button>
