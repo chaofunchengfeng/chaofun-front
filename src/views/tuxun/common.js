@@ -1,6 +1,6 @@
 export function tuxunJump(uri) {
     if (uri.includes('.') || uri.includes('://')) {
-        window.location.href = uri;
+        window.location.assign(uri);
     } else if (location.host.includes('new.tuxun.fun')) {
         window.location.href = uri;
     } else if (location.host.includes('tuxun.fun')) {
