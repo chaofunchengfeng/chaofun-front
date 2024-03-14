@@ -43,7 +43,7 @@
         <div class="first_session_head">单人</div>
         <div class="line"></div>
         <div class="grid_main">
-          <div class="card" @click="redirectPage( 'https://tuxun.fun/daily-challenge?v=1118')">
+          <div class="card" @click="redirectPage( 'https://tuxun.fun/daily-challenge?v=1119')">
             <div class="title">
               每日挑战
             </div>
@@ -382,20 +382,20 @@ export default {
     },
 
     toChinaMatch() {
-      location.href = 'https://tuxun.fun/china-match?v=1118';
+      location.href = 'https://tuxun.fun/china-match?v=1119';
     },
 
     soloMatch() {
-      location.href = 'https://tuxun.fun/world-match?v=1118'
+      location.href = 'https://tuxun.fun/world-match?v=1119'
     },
     toFriend() {
-      location.href = 'https://tuxun.fun/friend?v=1118'
+      location.href = 'https://tuxun.fun/friend?v=1119'
     },
     toMessage() {
-      location.href = 'https://tuxun.fun/message?v=1118'
+      location.href = 'https://tuxun.fun/message?v=1119'
     },
     toRank() {
-      location.href = 'https://tuxun.fun/point-rank?v=1118'
+      location.href = 'https://tuxun.fun/point-rank?v=1119'
     },
     toNewSeason() {
       tuxunJump('https://www.yuque.com/chaofun/tuxun/season');
