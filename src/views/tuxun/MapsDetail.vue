@@ -173,7 +173,7 @@ export default {
       return result;
     },
     toUser(user) {
-      tuxunJump( '/tuxun/user/' + user.userId);
+      tuxunJump( 'https://tuxun/user/' + user.userId);
     },
     goBack() {
       try {

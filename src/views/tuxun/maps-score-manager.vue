@@ -154,7 +154,7 @@ export default {
       });
     },
     toUser(user) {
-      tuxunJump( '/tuxun/user/' + user.userId);
+      tuxunJump( 'https://tuxun.fun/user/' + user.userId);
     },
     goBack() {
       try {

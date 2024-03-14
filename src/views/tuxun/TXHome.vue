@@ -715,7 +715,7 @@ export default {
       });
     },
     toHome() {
-      tuxunJump( '/tuxun/');
+      tuxunJump( 'https://tuxun.fun');
     },
     send() {
       this.dialogVisible = false;

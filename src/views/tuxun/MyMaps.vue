@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     goHome() {
-      tuxunJump('/tuxun/');
+      tuxunJump('https://tuxun.fun');
     },
     toMapsCreate() {
       this.doLoginStatus().then(res => {
