@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="desc">
-      满3人发车，暂时不算积分, 卡倒计时请关注「炒饭社区」公众号反馈
+      满3人发车，暂时不算积分, 卡倒计时请关注「图寻」公众号反馈
     </div>
     <div class="next-round">
       <el-button type="primary" v-if="this.gameId" @click="toGame" round>

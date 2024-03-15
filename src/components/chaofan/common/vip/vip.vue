@@ -135,7 +135,7 @@
         <div @click="confirm" class="ylogin">确定</div>
 <!--        <div>-->
           <div>
-            如支付后未生效，请关注「炒饭社区」公众号反馈
+            如支付后未生效，请关注「图寻」公众号反馈
           </div>
 <!--        </div>-->
       </div>

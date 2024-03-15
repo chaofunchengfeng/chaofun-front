@@ -271,7 +271,7 @@
               QQ群：<a target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=YRq8jU3MFd-ylHCFC0lcJX9npaG0FRmi&authKey=W3wNh8n8zybypY08JK4g4YCcA0o3GdiwKXFqYCff4Ejan%2BKymBCWUSwjplXsZJva&noverify=0&group_code=943507031">943507031</a>
             </p>
             <p>
-              微信公众号：炒饭社区 | 开发者微博：<a target="_blank" href="https://weibo.com/u/3050203537">@此间ZY</a>
+              微信公众号：图寻 | 开发者微博：<a target="_blank" href="https://weibo.com/u/3050203537">@此间ZY</a>
             </p>
             <p>
               地图审图号：GS（2022）2885号
