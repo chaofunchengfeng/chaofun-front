@@ -29,11 +29,11 @@
 
 
 <!--      <div class="normal-info">「天气好的时候要去外面玩」</div>-->
-<!--      <div class="normal-info">「新年快乐～」</div>-->
+      <div class="normal-info">街景服务故障，部分街景会黑屏，正在修复～</div>
 <!--      <div style="height: 20px"></div>-->
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
-      <div class="second-info" @click="toFirstTournament">表情头像框上新</div>
+<!--      <div class="second-info" @click="toFirstTournament">表情头像框上新</div>-->
       <div class="second-info" @click="toSecond">第三届图寻中国个人赛周末开赛~</div>
 <!--      <div class="second-info" @click="toFirstTournament">【图寻联赛第二赛季】赛事完赛帖</div>-->
 <!--      <div class="second-info" @click="raiseVIP">图寻涨价前最后一天，超值优惠中～</div>-->
