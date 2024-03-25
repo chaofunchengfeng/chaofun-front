@@ -199,7 +199,7 @@ export default {
       this.map.invalidateSize();
     },
     initPano() {
-      loadScript('https://i.chao-fan.com/st_v2/js_test_v8.js').then(() => {
+      loadScript('https://i.chao-fan.com/st_v3/js_v11.js').then(() => {
         this.panorama = new google.maps.StreetViewPanorama(
             document.getElementById('viewer'), {
               fullscreenControl: false,

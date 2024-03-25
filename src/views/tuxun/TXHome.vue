@@ -224,7 +224,7 @@ export default {
       try {
         if (!this.viewer) {
           document.head.insertAdjacentHTML('beforeend', '<style>a[href^="http://maps.google.com/maps"]{display:none !important}a[href^="https://maps.google.com/maps"]{display:none !important}.gmnoprint a, .gmnoprint span, .gm-style-cc {display:none;}</style>');
-          loadScript('https://i.chao-fan.com/st_v2/js_test_v8.js').then(() => {
+          loadScript('https://i.chao-fan.com/st_v3/js_v11.js').then(() => {
             this.viewer = new google.maps.StreetViewPanorama(
                 document.getElementById('viewer'), {
                   fullscreenControl:false,
