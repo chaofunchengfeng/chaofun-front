@@ -29,7 +29,7 @@
 
 
 <!--      <div class="normal-info">「天气好的时候要去外面玩」</div>-->
-      <div class="normal-info">街景服务故障，部分街景会黑屏，正在修复～</div>
+<!--      <div class="normal-info">街景服务故障，部分街景会黑屏，正在修复～</div>-->
 <!--      <div style="height: 20px"></div>-->
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
