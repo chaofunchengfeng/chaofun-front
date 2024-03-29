@@ -247,9 +247,9 @@
             <div @click="toMall" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
               商店
             </div>
-            <div @click="toTaobao" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">
-              周边
-            </div>
+<!--            <div @click="toTaobao" style="cursor: pointer; color: white;font-size: medium; padding-top: 1rem; padding-right: 1rem; text-decoration:underline;">-->
+<!--              周边-->
+<!--            </div>-->
             <!--          <div @click="window.location.href = '/tuxun/change_log'" style="color: white;font-size: medium; padding-top: 1rem; text-decoration:underline;">-->
             <!--            更新日志-->
             <!--          </div>-->
