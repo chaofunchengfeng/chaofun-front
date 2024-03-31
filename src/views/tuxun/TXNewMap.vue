@@ -12,7 +12,7 @@ export default {
   name: 'TuxunNewMap',
   mounted() {
     var map = L.map('map').setView([51.505, -0.09], 3);
-    var url = 'https://map.chao-fan.com/tile230411/s2_z{z}_x{x}_y{y}.jpeg';
+    var url = 'https://maprastertile-drcn.dbankcdn.cn/display-service/v1/online-render/getTile/CN.23.04.11.00/{z}/{x}/{y}/?language=zh&p=46&scale=2&mapType=ROADMAP&presetStyleId=standard&key=DAEDANitav6P7Q0lWzCzKkLErbrJG4kS1u%2FCpEe5ZyxW5u0nSkb40bJ%2BYAugRN03fhf0BszLS1rCrzAogRHDZkxaMrloaHPQGO6LNg==';
     L.tileLayer(url, {
       maxZoom: 18,
       minZoom: 0,
