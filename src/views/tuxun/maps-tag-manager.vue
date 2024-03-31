@@ -392,7 +392,7 @@ export default {
     },
     initPano(item) {
       if (!this.panorama) {
-        loadScript('https://i.chao-fan.com/st_v3/js_v11.js').then(() => {
+        loadScript('https://i.chao-fan.com/st_v3/js_v16.js').then(() => {
           this.viewer = new google.maps.StreetViewPanorama(
               document.getElementById('viewer'), {
                 fullscreenControl: false,
