@@ -33,7 +33,7 @@
 <!--      <div style="height: 20px"></div>-->
 
 <!--      <div class="info" @click="toFirstTournament">图寻高校争霸赛圆满收官~</div>-->
-      <div class="second-info" @click="toFirstTournament">表情头像框上新</div>
+<!--      <div class="second-info" @click="toFirstTournament">表情头像框上新</div>-->
       <div class="second-info" @click="toSecond">组队赛回归！第二届图寻中国组队赛清明开赛～</div>
       <div class="second-info" @click="toFirstTournament">低门槛，随机题库！玩家图寻第八届个人赛！</div>
 <!--      <div class="second-info" @click="raiseVIP">图寻涨价前最后一天，超值优惠中～</div>-->
