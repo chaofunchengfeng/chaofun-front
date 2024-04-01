@@ -13,7 +13,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: () => import('@/views/tuxun/TXNewHome'),
-    meta: { title: '图寻 - 探索真实世界，找到你在的位置'},
+    meta: { title: '图寻 - 探索世界，找到你'},
     hidden: true
   },
   {
