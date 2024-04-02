@@ -7,137 +7,10 @@
         <div v-if="scene === 'new'" style="color: red">新寻友，考虑会员吗？</div>
 
         <img @click="cancelVip" class="cancel" :src='cancelImg'/>
-        <div class="vip-plans">
-          <div @click="changeTo('student')" :class="{'card': choose !== 'student', 'choose-card': choose === 'student'}">
-            <div style="font-size: 16px;">
-              试用
-            </div>
-          </div>
-          <div @click="changeTo('3year')" :class="{'card': choose !== '3year', 'choose-card': choose === '3year'}">
-            <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">720</span>
-              </div>
-              <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>270
-              </div>
-              <div>
-                三年
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
-          <div @click="changeTo('year')" :class="{'card': choose !== 'year', 'choose-card': choose === 'year'}">
-            <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">240</span>
-              </div>
-              <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>126
-              </div>
-              <div>
-                一年
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
-          <div @click="changeTo('6month')" :class="{'card': choose !== '6month', 'choose-card': choose === '6month'}">
-            <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">120</span>
-              </div>
-              <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>72
-              </div>
-              <div>
-                半年
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
-<!--          <div @click="changeTo('3month')" :class="{'card': choose !== '3month', 'choose-card': choose === '3month'}">-->
-<!--            <div>-->
-<!--              <div style="font-size: 15px;">-->
-<!--                <span style="font-size: 10px; text-decoration: none">￥</span>-->
-<!--                <span style="text-decoration: line-through">60</span>-->
-<!--              </div>-->
-<!--              <div style="font-size: 26px; color: #FF0037">-->
-<!--                <span style="font-size: 10px;">￥</span>27-->
-<!--              </div>-->
-<!--              <div>-->
-<!--                三个月-->
-<!--              </div>-->
-<!--              <div style="height: 10px"></div>-->
-<!--            </div>-->
-<!--          </div>-->
-          <div @click="changeTo('month')" :class="{'card': choose !== 'month', 'choose-card': choose === 'month'}">
-            <div>
-              <div style="font-size: 15px;">
-                <span style="font-size: 10px; text-decoration: none">￥</span>
-                <span style="text-decoration: line-through">20</span>
-              </div>
-              <div style="font-size: 26px; color: #FF0037">
-                <span style="font-size: 10px;">￥</span>15
-              </div>
-              <div>
-                一个月
-              </div>
-              <div style="height: 10px"></div>
-            </div>
-          </div>
-        </div>
-        <div v-if="choose==='student'">
-          <div>注：15分钟免费会员，可循环试用，建议学生使用</div>
-<!--          <div v-if="this.totalTryTimes !== null">图寻已经被白嫖了 {{this.totalTryTimes}} 次，救救孩子吧</div>-->
-        </div>
-        <div v-if="choose !== 'student'">
-          <div>
-            注：感谢探索者您的支持！
-          </div>
-        </div>
 
-        <div style="padding-top: 10px; font-weight: bold; font-size: 16px">
-          会员权益
+        <div style="width: 100%; text-align: center;">
+          <el-button style="text-align: center; margin: 3rem auto; font-size: 24px" @click="openNewVip">去新版页面开通</el-button>
         </div>
-
-        <div>
-          <div>
-            - 免广告
-          </div>
-          <div>
-            - 所有可移动街景
-          </div>
-          <div>
-            - 题库探索
-          </div>
-          <div>
-            - 街景奇观
-          </div>
-          <div>
-            - 随机街景
-          </div>
-          <div>
-            - 自建题库
-          </div>
-          <div>
-            - 个人首页会员标识
-          </div>
-          <div>
-            - 支持图寻坚持下去
-          </div>
-          <div>
-            - 更多专属权益...
-          </div>
-        </div>
-        <div @click="confirm" class="ylogin">确定</div>
-<!--        <div>-->
-          <div>
-            如支付后未生效，请关注「图寻」公众号反馈
-          </div>
-<!--        </div>-->
       </div>
 
     </div>
@@ -190,6 +63,10 @@ import * as api from '@/api/api';
      console.log(this.scene);
    },
    methods: {
+
+     openNewVip() {
+       window.location.href = 'https://tuxun.fun/vip';
+     },
      cancelVip() {
        this.show = false;
      },
