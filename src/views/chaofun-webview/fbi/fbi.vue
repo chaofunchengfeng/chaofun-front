@@ -152,7 +152,7 @@
           图寻会员 1年
         </p>
         <p style="text-align: center">
-          FBi: 126000
+          FBi: 12600
         </p>
       </div>
 
@@ -363,7 +363,7 @@ export default {
       if (period === '1month') {
         fbi = 1500;
       } else if (period === '1year') {
-        fbi = 126000;
+        fbi = 12600;
       }
 
       Dialog.confirm({
