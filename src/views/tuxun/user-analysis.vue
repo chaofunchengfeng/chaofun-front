@@ -5,6 +5,7 @@
     <div>uid: {{uaResult.userId}}</div>
     <div>solo 次数: {{uaResult.gameCount}}</div>
     <div>总轮次: {{uaResult.roundCount}}</div>
+    <div>平均每局轮次数: {{uaResult.roundCount / uaResult.gameCount}}</div>
     <div>5k: {{uaResult.score5000}}</div>
     <div>4990: {{uaResult.score4990}}</div>
     <div>平均分: {{uaResult.mean.toFixed(2)}}</div>
