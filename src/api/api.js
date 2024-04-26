@@ -848,7 +848,7 @@ export function setPhone(params) {
 /** 发送验证码 */
 export function getCode(params) {
   return request({
-    url: '/api/v0/phone/getCodeV1',
+    url: '/api/v0/phone/getCodeV2',
     method: 'get',
     params
   });
